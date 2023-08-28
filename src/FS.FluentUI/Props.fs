@@ -272,7 +272,7 @@ module button =
         /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
         static member inline secondary = Interop.mkProperty<IButtonProp> "appearance" "secondary"
         /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary' = Interop.mkProperty<IButtonProp> "appearance" "primary"
+        static member inline primary = Interop.mkProperty<IButtonProp> "appearance" "primary"
         /// 'transparent': Removes background and border styling.
         static member inline transparent = Interop.mkProperty<IButtonProp> "appearance" "transparent"
 
@@ -325,7 +325,7 @@ module toggleButton =
         /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
         static member inline secondary = Interop.mkProperty<IToggleButtonProp> "appearance" "secondary"
         /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary' = Interop.mkProperty<IToggleButtonProp> "appearance" "primary"
+        static member inline primary = Interop.mkProperty<IToggleButtonProp> "appearance" "primary"
         /// 'transparent': Removes background and border styling.
         static member inline transparent = Interop.mkProperty<IToggleButtonProp> "appearance" "transparent"
 
@@ -1155,7 +1155,7 @@ module menuButton =
         /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
         static member inline secondary = Interop.mkProperty<IMenuButtonProp> "appearance" "secondary"
         /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary' = Interop.mkProperty<IMenuButtonProp> "appearance" "primary"
+        static member inline primary = Interop.mkProperty<IMenuButtonProp> "appearance" "primary"
         /// 'transparent': Removes background and border styling.
         static member inline transparent = Interop.mkProperty<IMenuButtonProp> "appearance" "transparent"
 
@@ -1712,7 +1712,7 @@ module compoundButton =
         /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
         static member inline secondary = Interop.mkProperty<ICompoundButtonProp> "appearance" "secondary"
         /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary' = Interop.mkProperty<ICompoundButtonProp> "appearance" "primary"
+        static member inline primary = Interop.mkProperty<ICompoundButtonProp> "appearance" "primary"
         /// 'transparent': Removes background and border styling.
         static member inline transparent = Interop.mkProperty<ICompoundButtonProp> "appearance" "transparent"
 
@@ -1773,7 +1773,7 @@ module splitButton =
         /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
         static member inline secondary = Interop.mkProperty<ISplitButtonProp> "appearance" "secondary"
         /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary' = Interop.mkProperty<ISplitButtonProp> "appearance" "primary"
+        static member inline primary = Interop.mkProperty<ISplitButtonProp> "appearance" "primary"
         /// 'transparent': Removes background and border styling.
         static member inline transparent = Interop.mkProperty<ISplitButtonProp> "appearance" "transparent"
 

@@ -168,7 +168,7 @@ let buttonTest =
                 icon.className "Test-classname"
             ]
         )
-        button.appearance.primary'
+        button.appearance.primary
         button.size.large
         button.iconPosition.after
         button.shape.circular
@@ -305,30 +305,26 @@ let MenuTest() =
     ]
 
 [<ReactComponent>]
-let ToggleButtonTest () =
-    let isChecked1, setIsChecked1 = React.useState false
+let ToggleButtons () =
+    let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
-    let isChecked3, setIsChecked3 = React.useState false
-    Fui.stack [
-        stack.horizontal true
-        stack.children [
-            Fui.toggleButton [
-                toggleButton.icon (Fui.icon.checkbox1Filled [])
-                toggleButton.checked' isChecked1
-                toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
-                toggleButton.text "Checked state"
-            ]
-            Fui.toggleButton [
-                toggleButton.checked' isChecked2
-                toggleButton.onClick (fun _ -> setIsChecked2 (isChecked2 |> not))
-                toggleButton.text "Unchecked state"
-            ]
-            Fui.toggleButton [
-                toggleButton.shape.circular
-                toggleButton.checked' isChecked3
-                toggleButton.disabledFocusable true
-                toggleButton.text "Disabled focusable"
-            ]
+    Html.div [
+        Fui.toggleButton [
+            toggleButton.icon (Fui.icon.checkbox1Filled [])
+            toggleButton.checked' isChecked1
+            toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
+            toggleButton.text "Checked state"
+        ]
+        Fui.toggleButton [
+            toggleButton.appearance.primary
+            toggleButton.checked' isChecked2
+            toggleButton.onClick (fun _ -> setIsChecked2 (isChecked2 |> not))
+            toggleButton.text "Unchecked state"
+        ]
+        Fui.toggleButton [
+            toggleButton.shape.circular
+            toggleButton.disabledFocusable true
+            toggleButton.text "Disabled focusable"
         ]
     ]
 
@@ -737,7 +733,7 @@ let compoundClass = Fui.mkMergeStyles [ style.maxWidth 250 ]
 
 let compoundButtonTest =
     Fui.compoundButton [
-        compoundButton.appearance.primary'
+        compoundButton.appearance.primary
         compoundButton.className compoundClass
         compoundButton.text "This should be the main text"
         compoundButton.secondaryContent "This should be the secondary text"
@@ -1484,7 +1480,7 @@ let DialogTest() =
                                 )
                             ]
                             Fui.button [
-                                button.appearance.primary'
+                                button.appearance.primary
                                 button.text "Do Something"
                             ]
                         ]
@@ -1987,7 +1983,7 @@ let alertTest =
                 alert.intent.error
                 alert.action (
                     Fui.button [
-                        button.appearance.primary'
+                        button.appearance.primary
                         button.text "Review"
                         button.icon (Fui.icon.add20Regular [])
                     ]
@@ -2107,7 +2103,7 @@ let DrawerTest() =
                 ]
             ]
             Fui.button [
-                button.appearance.primary'
+                button.appearance.primary
                 button.onClick (fun _ -> setIsOpen (isOpen |> not))
                 button.text "Toggle"
             ]
@@ -2708,7 +2704,7 @@ let mainContent model dispatch =
             Accordion()
             Checkbox()
             avatarTest
-            ToggleButtonTest()
+            ToggleButtons()
             buttonTest
             menuButtonTest
             MenuTest()

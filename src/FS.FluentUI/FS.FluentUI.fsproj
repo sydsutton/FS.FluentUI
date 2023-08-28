@@ -44,7 +44,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react" Version="gte 8.105.2 lt 9.0.0" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
