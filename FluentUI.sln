@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{BF3D10C7-223
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FluentUI", "src\FluentUI\FluentUI.fsproj", "{425CC80A-8C04-453E-B341-6967C581A642}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FluentUI.TestGrounds", "FluentUI.TestGrounds", "{505C4FC0-C1B8-4436-B740-579661D7545A}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "TestGrounds", "src\FluentUI.TestGrounds\src\TestGrounds.fsproj", "{A66AAFEA-9945-4606-8F72-DE1A3FFD425F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,14 @@ Global
 		{425CC80A-8C04-453E-B341-6967C581A642}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{425CC80A-8C04-453E-B341-6967C581A642}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{425CC80A-8C04-453E-B341-6967C581A642}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A66AAFEA-9945-4606-8F72-DE1A3FFD425F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A66AAFEA-9945-4606-8F72-DE1A3FFD425F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A66AAFEA-9945-4606-8F72-DE1A3FFD425F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A66AAFEA-9945-4606-8F72-DE1A3FFD425F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{425CC80A-8C04-453E-B341-6967C581A642} = {BF3D10C7-223C-487A-92B5-796344545A79}
+		{505C4FC0-C1B8-4436-B740-579661D7545A} = {BF3D10C7-223C-487A-92B5-796344545A79}
+		{A66AAFEA-9945-4606-8F72-DE1A3FFD425F} = {505C4FC0-C1B8-4436-B740-579661D7545A}
 	EndGlobalSection
 EndGlobal

@@ -1,0 +1,39 @@
+{
+  "private": true,
+  "scripts": {
+    "prestart": "dotnet tool restore",
+    "start": "dotnet fable watch ./src -o output -s --run webpack-dev-server --mode development",
+    "prebuild": "dotnet tool restore",
+    "build": "dotnet fable ./src && webpack",
+    "test:live": "dotnet fable watch tests --run webpack-dev-server --config ./webpack.tests.js",
+    "build:test": "dotnet fable tests && webpack --config webpack.tests.js",
+    "pretest": "dotnet tool restore",
+    "test": "dotnet fable tests --outDir dist/tests && mocha dist/tests -r esm"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@fluentui/react-components": "^9.30.0",
+    "@fluentui/react-datepicker-compat": "^0.3.5",
+    "@fluentui/react-migration-v8-v9": "^9.4.9",
+    "date-fns": "^2.30.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts2fable": "^0.7.1",
+    "use-sync-external-store": "^1.2.0"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.8.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.3",
+    "mini-css-extract-plugin": "^2.7.6",
+    "remotedev": "^0.2.9",
+    "sass": "^1.66.1",
+    "sass-loader": "^13.3.2",
+    "source-map-loader": "^4.0.1",
+    "style-loader": "^3.3.3",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

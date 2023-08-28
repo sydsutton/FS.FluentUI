@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net7.0</TargetFramework>
+    </PropertyGroup>
+    <ItemGroup>
+        <Compile Include="../../FluentUI/Domain.fs" />
+        <Compile Include="../../FluentUI/Utils.fs" />
+        <Compile Include="../../FluentUI/FelizProps.fs" />
+        <Compile Include="../../FluentUI/Props.fs" />
+        <Compile Include="../../FluentUI/FluentUI.fs" />
+        <Compile Include="../../FluentUI/Icons9.fs" />
+        <Compile Include="../../FluentUI/Icons8.fs" />
+        <Compile Include="../../FluentUI/Icons7.fs" />
+        <Compile Include="../../FluentUI/Icons6.fs" />
+        <Compile Include="../../FluentUI/Icons5.fs" />
+        <Compile Include="../../FluentUI/Icons4.fs" />
+        <Compile Include="../../FluentUI/Icons3.fs" />
+        <Compile Include="../../FluentUI/Icons2.fs" />
+        <Compile Include="../../FluentUI/Icons1.fs" />
+        <Compile Include="../../FluentUI/Icons0.fs" />
+    </ItemGroup>
+    <ItemGroup>
+        <None Include="index.html" />
+		<None Include="..\Package.json" />
+        <Compile Include="TestGrounds.fs" />
+        <Compile Include="Main.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Feliz" Version="2.6.0" />
+        <PackageReference Include="Feliz.UseElmish" Version="2.4.0" />
+    </ItemGroup>
+
+</Project>
