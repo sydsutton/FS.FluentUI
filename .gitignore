@@ -1,0 +1,15 @@
+.ionide
+.fake
+obj/
+bin/
+packages/
+paket-files/
+node_modules/
+release.cmd
+release.sh
+.paket/load/
+deploy
+.vs
+yarn-error.log
+output/
+src/**/*.fs.js*
