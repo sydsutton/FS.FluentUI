@@ -27,24 +27,28 @@ let update msg model =
         },
         Cmd.none
 
-type Station = Station of int
-
 let accordionClass = Fui.mkMergeStyles [ style.fontSize 30 ]
 
 [<ReactComponent>]
 let Accordion () =
-    let openItem, setOpenItem = React.useState [1]
+    let openItems, setOpenItems = React.useState [1]
+
+    let getIcon key =
+        if openItems |> List.contains key then
+            Fui.icon.subtractFilled []
+        else
+            Fui.icon.addFilled []
 
     Fui.accordion [
         accordion.collapsible true
         accordion.className accordionClass
-        accordion.openItems openItem
-        accordion.defaultOpenItems openItem
+        accordion.openItems openItems
+        accordion.defaultOpenItems openItems
         accordion.onToggle (fun (i: ValueProp<int>) ->
-            if openItem |> List.contains i.value then
-                setOpenItem (openItem |> List.except [i.value])
+            if openItems |> List.contains i.value then
+                setOpenItems (openItems |> List.except [i.value])
             else
-            setOpenItem (openItem |> List.append [i.value])
+            setOpenItems (openItems |> List.append [i.value])
         )
         accordion.multiple true
         accordion.children [
@@ -53,12 +57,7 @@ let Accordion () =
                 accordionItem.value 1
                 accordionItem.children [
                     Fui.accordionHeader [
-                        accordionHeader.expandIcon (
-                            if openItem |> List.contains 1 then
-                                Fui.icon.subtractFilled []
-                            else
-                                Fui.icon.addFilled []
-                        )
+                        accordionHeader.expandIcon (getIcon 1)
                         accordionHeader.expandIconPosition.end'
                         accordionHeader.children [
                             Fui.text "Header 1"
@@ -74,12 +73,7 @@ let Accordion () =
                 accordionItem.value 2
                 accordionItem.children [
                     Fui.accordionHeader [
-                        accordionHeader.expandIcon (
-                            if openItem |> List.contains 2 then
-                                Fui.icon.subtractFilled []
-                            else
-                                Fui.icon.addFilled []
-                        )
+                        accordionHeader.expandIcon (getIcon 2)
                         accordionHeader.children [
                             Fui.text "Header 2"
                         ]
@@ -94,12 +88,7 @@ let Accordion () =
                 accordionItem.value 3
                 accordionItem.children [
                     Fui.accordionHeader [
-                        accordionHeader.expandIcon (
-                            if openItem |> List.contains 3 then
-                                Fui.icon.subtractFilled []
-                            else
-                                Fui.icon.addFilled []
-                        )
+                        accordionHeader.expandIcon (getIcon 3)
                         accordionHeader.children [
                             Fui.text "Header 3"
                         ]
@@ -113,34 +102,30 @@ let Accordion () =
     ]
 
 [<ReactComponent>]
-let Checkbox ()=
+let Checkbox () =
     let isChecked1, setIsChecked1 = React.useState Checked
     let isChecked2, setIsChecked2 = React.useState Mixed
 
-    Fui.stack [
-        stack.horizontal true
-        stack.children [
-            Fui.checkbox [
-                // checkbox.label "Hello"
-                checkbox.checked' isChecked1
-                checkbox.onChange (fun i -> setIsChecked1 i)
-                checkbox.size.large
-                checkbox.label (
-                    Fui.text "This is a label"
-                )
-                checkbox.indicator (
-                    Fui.icon.alignStartHorizontalRegular []
-                )
-                checkbox.shape.circular
-                checkbox.labelPosition.before
-            ]
-            Fui.checkbox [
-                checkbox.label "Hello"
-                checkbox.checked' isChecked2
-                checkbox.onChange (fun ev i -> setIsChecked2 i)
-                checkbox.size.medium
-                checkbox.labelPosition.after
-            ]
+    Html.div [
+        Fui.checkbox [
+            checkbox.checked' isChecked1
+            checkbox.onChange (fun i -> setIsChecked1 i)
+            checkbox.size.large
+            checkbox.label (
+                Fui.text "This is a label"
+            )
+            checkbox.indicator (
+                Fui.icon.alignStartHorizontalRegular []
+            )
+            checkbox.shape.circular
+            checkbox.labelPosition.before
+        ]
+        Fui.checkbox [
+            checkbox.label "Hello"
+            checkbox.checked' isChecked2
+            checkbox.onChange (fun ev i -> setIsChecked2 i)
+            checkbox.size.medium
+            checkbox.labelPosition.after
         ]
     ]
 
@@ -187,9 +172,8 @@ let menuButtonTest =
 
 [<ReactComponent>]
 let MenuTest() =
-    let checkedValues, setCheckedValues = React.useState({| edit1 = [||]; edit2 = [||] |})
+    let checkedValues, setCheckedValues = React.useState({| edit = [|"cut"|] |})
     let isOpen, setIsOpen = React.useState false
-    // let CutIcon = Fui.bundleIcon(Fui.icon.cut24Filled [], Fui.icon.cut24Regular []) []//TODO
     Fui.menu [
         menu.checkedValues checkedValues
         menu.open' isOpen
@@ -197,7 +181,7 @@ let MenuTest() =
             positioning.coverTarget true
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
-        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues({| edit1 = d.checkedItems; edit2 = d.checkedItems |}))
+        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues({| edit = d.checkedItems |}))
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
@@ -211,48 +195,24 @@ let MenuTest() =
                 Fui.menuList [
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (Fui.icon.cut24Filled [])
-                        menuItemCheckbox.name "edit1"
-                        menuItemCheckbox.value "cut1"
+                        menuItemCheckbox.name "edit"
+                        menuItemCheckbox.value "cut"
                         menuItemCheckbox.children [
                             Fui.text "Show Menu Bar"
                         ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (Fui.icon.clipboardPasteFilled [])
-                        menuItemCheckbox.name "edit1"
-                        menuItemCheckbox.value "paste1"
+                        menuItemCheckbox.name "edit"
+                        menuItemCheckbox.value "paste"
                         menuItemCheckbox.children [
                             Fui.text "Show Side Bar"
                         ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (Fui.icon.editFilled [])
-                        menuItemCheckbox.name "edit1"
-                        menuItemCheckbox.value "edit1"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Status Bar"
-                        ]
-                    ]
-                    Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.cutFilled  [])
-                        menuItemCheckbox.name "edit2"
-                        menuItemCheckbox.value "cut2"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Menu Bar"
-                        ]
-                    ]
-                    Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.clipboardPasteFilled [])
-                        menuItemCheckbox.name "edit2"
-                        menuItemCheckbox.value "paste2"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Side Bar"
-                        ]
-                    ]
-                    Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.editFilled [])
-                        menuItemCheckbox.name "edit2"
-                        menuItemCheckbox.value "edit2"
+                        menuItemCheckbox.name "edit"
+                        menuItemCheckbox.value "show"
                         menuItemCheckbox.children [
                             Fui.text "Show Status Bar"
                         ]
@@ -270,9 +230,7 @@ let MenuTest() =
                     Fui.menu [
                         menu.children [
                             Fui.menuSplitGroup [
-                                Fui.menuItem [
-                                    menuItem.text "Open"
-                                ]
+                                Fui.menuItem "Open"
                                 Fui.menuTrigger [
                                     menuTrigger.disableButtonEnhancement true
                                     menuTrigger.children (
@@ -285,15 +243,9 @@ let MenuTest() =
                             Fui.menuPopover [
                                 menuPopover.children [
                                     Fui.menuList [
-                                        Fui.menuItem [
-                                            menuItem.text "In Browser"
-                                        ]
-                                        Fui.menuItem [
-                                            menuItem.text "In Desktop App"
-                                        ]
-                                        Fui.menuItem [
-                                            menuItem.text "In Mobile"
-                                        ]
+                                        Fui.menuItem "In Browser"
+                                        Fui.menuItem "In Desktop App"
+                                        Fui.menuItem "In Mobile"
                                     ]
                                 ]
                             ]
@@ -346,33 +298,30 @@ let presenceBadgeTest =
     ]
 
 let counterBadge =
-    Fui.stack [
-        stack.horizontal true
-        stack.children [
-            Fui.counterBadge [
-                counterBadge.count 5
-                counterBadge.appearance.filled
-                counterBadge.color.brand
-            ]
-            Fui.counterBadge [
-                counterBadge.count 5
-                counterBadge.appearance.filled
-                counterBadge.color.danger
-            ]
-            Fui.counterBadge [
-                counterBadge.count 5
-                counterBadge.appearance.filled
-                counterBadge.color.important
-            ]
-            Fui.counterBadge [
-                counterBadge.count 5
-                counterBadge.appearance.filled
-                counterBadge.color.informative
-            ]
-            Fui.counterBadge [
-                counterBadge.count 0
-                counterBadge.dot true
-            ]
+    Html.div [
+        Fui.counterBadge [
+            counterBadge.count 5
+            counterBadge.appearance.filled
+            counterBadge.color.brand
+        ]
+        Fui.counterBadge [
+            counterBadge.count 5
+            counterBadge.appearance.filled
+            counterBadge.color.danger
+        ]
+        Fui.counterBadge [
+            counterBadge.count 5
+            counterBadge.appearance.filled
+            counterBadge.color.important
+        ]
+        Fui.counterBadge [
+            counterBadge.count 5
+            counterBadge.appearance.filled
+            counterBadge.color.informative
+        ]
+        Fui.counterBadge [
+            counterBadge.count 0
+            counterBadge.dot true
         ]
     ]
 
@@ -381,7 +330,7 @@ let linkTest =
         link.appearance.subtle
         link.href "/#"
         link.text "Home link"
-        link.disabledFocusable true
+        link.as'.button
     ]
 
 let divider =
@@ -501,9 +450,8 @@ let UseArrowNavigationGroup () =
         ]
     ]
 
-//TODO get the ref working for popovers
 [<ReactComponent>]
-let PopoverTest ()=
+let PopoverTest () =
     let visible, setVisible = React.useState false
     let target, setTarget = React.useState None
 
@@ -553,62 +501,31 @@ let PopoverTest ()=
         ]
     ]
 
-let buttons = [
-    [
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.aboveStart, "above-start", [style.transform.rotate -90]
-        Fui.icon.arrowStepOutRegular [], tooltip.positioning.above , "above", []
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.aboveEnd , "above-end", [style.transform.scale(-1, -1)]
-    ]
-    [
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.beforeTop , "before-top", [ style.transform.scale(-1, 1); style.marginRight 120]
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.afterTop , "after-top", [ style.marginLeft 120]
-    ]
-    [
-        Fui.icon.arrowStepOutRegular [], tooltip.positioning.before , "before", [ style.transform.rotate -90; style.marginRight 120]
-        Fui.icon.arrowStepOutRegular [], tooltip.positioning.after , "after", [style.transform.rotate 90; style.marginLeft 120]
-    ]
-    [
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.beforeBottom , "before-bottom", [ style.transform.rotate 180; style.marginRight 120]
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.afterBottom , "after-bottom", [style.transform.rotate 180; style.transform.scale(1, -1); style.marginLeft 120]
-    ]
-    [
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.belowStart , "below-start", [ style.transform.rotate 180; style.transform.scale(-1, 1)]
-        Fui.icon.arrowStepOutRegular [], tooltip.positioning.below , "below", [ style.transform.rotate 180]
-        Fui.icon.arrowStepOverRegular [], tooltip.positioning.belowEnd , "below-end", [style.transform.rotate 90]
-    ]
+let tokens = Theme.tokens
+
+let tooltipClass = Fui.mkMergeStyles [
+    style.backgroundColor tokens.colorBrandBackground
+    style.color tokens.colorNeutralForegroundInverted
 ]
 
 let tooltipTest =
-    Fui.stack [
-        stack.horizontal false
-        stack.horizontalAlign.center
-        stack.children [
-            for b in buttons do
-                Fui.stack [
-                    stack.horizontal true
-                    stack.horizontalAlign.center
-                    stack.children [
-                        for icon, position, textToPrint, styles in b do
-                            Fui.tooltip [
-                                tooltip.key textToPrint
-                                tooltip.withArrow false
-                                tooltip.content (
-                                    Fui.text textToPrint
-                                )
-                                tooltip.relationship.label
-                                tooltip.onVisibleChange (fun i -> if i.visible = true then printfn "visible" else printfn "not visible")
-                                position
-                                tooltip.children (
-                                    Fui.button [
-                                        button.size.large
-                                        button.icon icon
-                                        button.style (styles |> List.append [ style.height 70; style.width 70; style.maxWidth 70 ])
-                                    ]
-                                )
-                            ]
-                    ]
-                ]
-        ]
+    Fui.tooltip [
+        tooltip.withArrow true
+        tooltip.content ( //TODO backgroundcolor from class doesn't fill width of tooltip
+            Fui.text [
+                text.className tooltipClass
+                text.text "Example tooltip"
+            ]
+        )
+        tooltip.relationship.label
+        tooltip.children (
+            Fui.button [
+                button.size.large
+                button.icon (
+                    Fui.icon.slideTextRegular []
+                )
+            ]
+        )
     ]
 
 let labelTest =
@@ -623,7 +540,6 @@ let labelTest =
             ]
             Fui.label [
                 label.text "This is a label"
-                // label.required true
                 label.required "**!**"
                 label.weight.semibold
                 label.size.large
@@ -785,7 +701,6 @@ let TextAreaTest () =
         textArea.value value
         textArea.appearance.outline
         textArea.resize.both
-        // textArea.as'.textarea
     ]
 
 [<ReactComponent>]
@@ -2558,8 +2473,6 @@ let UseFocusFindersTest() =
             ]
         ]
     ]
-
-let tokens = Theme.tokens
 
 let dialogClass = Fui.mkMergeStyles [
     style.position.fixedRelativeToWindow

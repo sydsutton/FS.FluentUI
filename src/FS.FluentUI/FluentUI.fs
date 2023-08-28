@@ -200,6 +200,7 @@ type [<Erase>] Fui =
     /// An accordion allows users to toggle the display of content by expanding or collapsing sections.
     static member inline accordion (props: IAccordionProp list) = createElement (import "Accordion" FluentUIv9) props
     static member inline accordionHeader (props: IAccordionHeaderProp list) = createElement (import "AccordionHeader" FluentUIv9) props
+    static member inline accordionHeader (text: string) = createElement (import "AccordionHeader" FluentUIv9) [prop.text text]
     static member inline accordionItem (props: IAccordionItemProp list) = createElement (import "AccordionItem" FluentUIv9) props
     static member inline accordionPanel (props: ReactElement list) = Interop.reactElementWithChildren (import "AccordionPanel" FluentUIv9) props
     static member inline accordionPanel (props: IAccordionPanelProp list) = createElement (import "AccordionPanel" FluentUIv9) props
