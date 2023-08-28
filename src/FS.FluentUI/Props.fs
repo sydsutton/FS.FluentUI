@@ -1629,13 +1629,13 @@ type [<Erase>] input =
     /// (This prop is mutually exclusive with defaultValue.)
     static member inline value (value: string) = Interop.mkProperty<IInputProp> "value" value
     /// Called when the user changes the input's value.
-    static member inline onChange (handler: InputOnChangeData -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Called when the user changes the input's value.
-    static member inline onChange (value: MouseEvent -> InputOnChangeData -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
     /// Called when the user changes the input's value.
-    static member inline onChange (value: KeyboardEvent -> InputOnChangeData -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
     /// Called when the user changes the input's value.
-    static member inline onChange (value: TouchEvent -> InputOnChangeData -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: TouchEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
     /// Placeholder text for the input. If using this instead of a label (which is not recommended), be sure to provide an aria-label for screen reader users.
     static member inline placeholder (value: string) = Interop.mkProperty<IInputProp> "placeholder" value
     /// Whether the input is disabled
@@ -1807,9 +1807,9 @@ type [<Erase>] textArea =
     /// The default value of the Textarea.
     static member inline defaultValue (value: string) = Interop.mkProperty<ITextAreaProp> "defaultValue" value
     /// The default value of the Textarea.
-    static member inline onChange (handler: TextareaOnChangeData -> unit) = Interop.mkProperty<ITextAreaProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<ITextAreaProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// The default value of the Textarea.
-    static member inline onChange (value: KeyboardEvent -> TextareaOnChangeData -> unit) = Interop.mkProperty<ITextAreaProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITextAreaProp> "onChange" (System.Func<_,_,_> value)
     /// The value of the Textarea.
     static member inline value (value: string) = Interop.mkProperty<ITextAreaProp> "value" value
 
@@ -1898,13 +1898,13 @@ type [<Erase>] slider =
     /// @default 1
     static member inline step (value: decimal) = Interop.mkProperty<ISliderProp> "step" value
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (handler: SliderOnChangeData -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: MouseEvent -> SliderOnChangeData -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: MouseEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: TouchEvent -> SliderOnChangeData -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: TouchEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: DragEvent -> SliderOnChangeData -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: DragEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
 
 module slider =
     type [<Erase>] size =
@@ -1982,16 +1982,16 @@ type [<Erase>] radio =
     static member inline value (value: string) = Interop.mkProperty<IRadioProp> "value" value
     /// Callback when this Radio is selected in its group.
     /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (handler: RadioOnChangeData -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when this Radio is selected in its group.
     /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: MouseEvent -> RadioOnChangeData -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when this Radio is selected in its group.
     /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: TouchEvent -> RadioOnChangeData -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: TouchEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when this Radio is selected in its group.
     /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: KeyboardEvent -> RadioOnChangeData -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
 
 module radio =
     type [<Erase>] as' =

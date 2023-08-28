@@ -623,7 +623,7 @@ let inputTest =
                         input.id "passwordId"
                         input.disabled true
                         input.defaultValue "password123"
-                        input.onChange (fun (d: InputOnChangeData) -> printfn "d %A" d.value)
+                        input.onChange (fun (d: ValueProp<string>) -> printfn "d %A" d.value)
                     ]
                 ]
             ]
@@ -638,7 +638,7 @@ let inputTest =
                         input.appearance.outline
                         input.type'.week
                         input.id "weekId"
-                        input.onChange (fun (ev: MouseEvent) (w: InputOnChangeData) -> printfn "w %A" w.value)
+                        input.onChange (fun (ev: MouseEvent) (w: ValueProp<string>) -> printfn "w %A" w.value)
                     ]
                 ]
             ]
@@ -697,7 +697,7 @@ let TextAreaTest () =
     let value, setValue = React.useState "Not past 20 chars"
     Fui.textArea [
         textArea.size.large
-        textArea.onChange (fun (d: TextareaOnChangeData) -> if d.value.Length <= 20 then setValue d.value else setValue value)
+        textArea.onChange (fun (d: ValueProp<string>) -> if d.value.Length <= 20 then setValue d.value else setValue value)
         textArea.value value
         textArea.appearance.outline
         textArea.resize.both
@@ -723,7 +723,7 @@ let SliderTest() =
                 slider.size.medium
                 slider.step 20
                 slider.id id
-                slider.onChange (fun (d: SliderOnChangeData) -> setValue d.value)
+                slider.onChange (fun (d: ValueProp<int>) -> setValue d.value)
             ]
             Fui.button [
                 button.text "Reset"

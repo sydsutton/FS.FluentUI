@@ -140,31 +140,8 @@ module CheckState =
         | U2.Case1 _ -> Mixed
         | U2.Case2 b -> if b then Checked else Unchecked
 
-type InputOnChangeData = {
-    /// Updated input value from the user
-    value: string
-}
-
-type TextareaOnChangeData = {
-    value: string
-}
-
-type SliderOnChangeData = {
-    value: int
-}
-
 type SwitchOnChangeData = {
     ``checked``: bool
-}
-
-type RadioOnChangeData = {
-    /// The value prop of this Radio item.
-    value: string
-}
-
-type RadioGroupOnChangeData = {
-    /// The value of the newly selected Radio item.
-    value: string
 }
 
 type SpinButtonOnChangeData = {
