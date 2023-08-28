@@ -607,7 +607,6 @@ type [<Erase>] stack =
     static member inline wrap (value: bool) = Interop.mkProperty<IStackProp> "wrap" value
     /// This prop was hardcoded in. Please look at official documentation.
     static member inline tokens (value: list<IStackTokensProp>) = Interop.mkProperty<IStackProp> "tokens" (!!value |> createObj |> unbox<IStackTokens>)
-    static member inline styles (properties: #IStyleAttribute list) = Interop.mkProperty<IStackProp> "styles" (!!properties |> createObj)//TODO
     /// Defines if scoped style selectors are enabled for the Stack component, which greatly helps in style recalculation
     /// performance, but requires children of the Stack to be able to accept a className prop (excluding Fragments).
     static member inline enableScopedSelectors (value: bool) = Interop.mkProperty<IStackProp> "enableScopedSelectors" value
@@ -3143,7 +3142,7 @@ type [<Erase>] toaster =
     /// Toast content
     static member inline content (value: ReactElement) = Interop.mkProperty<IToasterProp> "content" value
     /// Additional data that needs to be passed to the toast
-    static member inline data (value: 'T) = Interop.mkProperty<IToasterProp> "data" value //TODO
+    static member inline data (value: obj) = Interop.mkProperty<IToasterProp> "data" value
     /// Reports changes to the Toast lifecycle
     static member inline onStatusChange (handler: (ToastChangeData -> unit) option) =
         match handler with
@@ -5176,29 +5175,7 @@ type [<Erase>] headlessFlatTreeOptions =
     // This refers to a list of ids of checked tree items, or a list of tuples of ids and checked state.
     // Controls the state of the checked tree items.
     // These property is ignored for subtrees.
-    // static member inline checkedItems (value: ('T * CheckState) list ) =
-    //     let parsedValue = value |> List.map (fun _ cs ->
-    //         match cs with
-    //         | Checked -> "true"
-    //         | Unchecked -> "false"
-    //         | Mixed -> "mixed"
-    //     )
-    //     Interop.mkProperty<IHeadlessFlatTreeOptionsProp> "checkedItems" parsedValue
-    // This refers to a list of ids of checked tree items, or a list of tuples of ids and checked state.
-    // Controls the state of the checked tree items.
-    // These property is ignored for subtrees.
     static member inline defaultCheckedItems (value: 'T list) = Interop.mkProperty<IHeadlessFlatTreeOptionsProp> "defaultCheckedItems" value
-    // // This refers to a list of ids of checked tree items, or a list of tuples of ids and checked state.
-    // // Controls the state of the checked tree items.
-    // // These property is ignored for subtrees.
-    // static member inline defaultCheckedItems (value: ('T * CheckState) list ) = //TODO
-    //     let parsedValue = value |> List.map (fun _ cs ->
-    //         match cs with
-    //         | Checked -> "true"
-    //         | Unchecked -> "false"
-    //         | Mixed -> "mixed"
-    //     )
-    //     Interop.mkProperty<IHeadlessFlatTreeOptionsProp> "defaultCheckedItems" parsedValue
 
 module headlessFlatTreeOptions =
     /// This refers to the selection mode of the tree.
