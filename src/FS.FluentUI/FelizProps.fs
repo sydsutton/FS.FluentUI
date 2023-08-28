@@ -10,7 +10,7 @@ open Feliz.Styles
 open System.ComponentModel
 open System
 open Feliz
-open FluentUI
+open FS.FluentUI
 
 /// Represents the native Html properties.
 [<Erase>]

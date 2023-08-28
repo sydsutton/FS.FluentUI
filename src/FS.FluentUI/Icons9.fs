@@ -1,8 +1,8 @@
-namespace FluentUI
+namespace FS.FluentUI
 
 open Fable.Core
 open Fable.Core.JsInterop
-open FluentUI
+open FS.FluentUI
 
 module Fui =
     type [<Erase>] icon =

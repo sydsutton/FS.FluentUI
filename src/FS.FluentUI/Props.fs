@@ -1,4 +1,4 @@
-namespace FluentUI
+namespace FS.FluentUI
 
 open System
 open Browser.Types

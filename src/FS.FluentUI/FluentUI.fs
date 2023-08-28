@@ -1,10 +1,10 @@
-namespace FluentUI
+namespace FS.FluentUI
 
 open Fable.React
 open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
-open FluentUI
+open FS.FluentUI
 open System
 
 

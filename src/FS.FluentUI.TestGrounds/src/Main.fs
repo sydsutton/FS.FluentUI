@@ -3,10 +3,8 @@
 open Feliz
 open Browser.Dom
 open Fable.Core.JsInterop
-
-open Feliz
 open Feliz.UseElmish
-open FluentUI
+open FS.FluentUI
 
 importSideEffects "./styles/global.scss"
 

@@ -2,7 +2,7 @@ module TestGrounds
 
 open Elmish
 open Feliz
-open FluentUI
+open FS.FluentUI
 open Browser.Types
 
 type Msg =
