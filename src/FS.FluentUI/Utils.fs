@@ -124,6 +124,9 @@ type [<Erase>] IDatePickerProp = interface end
 type [<Erase>] ICalendarProp = interface end
 type [<Erase>] ICalendarDayProp = interface end
 type [<Erase>] ICalendarMonthProp = interface end
+type [<Erase>] ICalendarStringsProp = interface end
+type [<Erase>] IDateGridStringsProp = interface end
+type [<Erase>] IDateFormattingProp = interface end
 
 type [<Erase>] IDataGridProp = interface end
 type [<Erase>] IDataGridHeaderProp = interface end
@@ -164,7 +167,6 @@ type [<Erase>] IUseModalAttributesOptionsProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
-type [<AllowNullLiteral; Erase>] ComponentsStyles = interface end
 
 [<RequireQualifiedAccess>]
 type Interop =

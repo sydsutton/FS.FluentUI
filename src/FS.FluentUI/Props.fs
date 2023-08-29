@@ -5298,3 +5298,80 @@ module updateToastOptions =
 
     let toType (updateOptions: IUpdateToastOptionsProp list)=
         !!updateOptions |> createObj |> unbox<UpdateToastOptions>
+
+// -------------------------------------------------------------------------- DateGridStrings --------------------------------------------------------------------------------------
+
+type [<Erase>] dateGridStrings = //TODO figure out how to use these props
+    /// An array of strings for the full names of months.
+    /// The array is 0-based, so months[0] should be the full name of January.
+    static member inline months (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "months" value
+    /// An array of strings for the short names of months.
+    /// The array is 0-based, so shortMonths[0] should be the short name of January.
+    static member inline shortMonths (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortMonths" value
+    /// An array of strings for the full names of days of the week.
+    /// The array is 0-based, so days[0] should be the full name of Sunday.
+    static member inline days (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "days" value
+    /// An array of strings for the initials of the days of the week.
+    /// The array is 0-based, so days[0] should be the initial of Sunday.
+    static member inline shortDays (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortDays" value
+
+// -------------------------------------------------------------------------- CalendarStrings --------------------------------------------------------------------------------------
+
+type [<Erase>] calendarStrings =  //TODO figure out how to use these props
+    /// An array of strings for the full names of months.
+    /// The array is 0-based, so months[0] should be the full name of January.
+    static member inline months (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "months" value
+    /// An array of strings for the short names of months.
+    /// The array is 0-based, so shortMonths[0] should be the short name of January.
+    static member inline shortMonths (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "shortMonths" value
+    /// An array of strings for the full names of days of the week.
+    /// The array is 0-based, so days[0] should be the full name of Sunday.
+    static member inline days (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "days" value
+    /// An array of strings for the initials of the days of the week.
+    /// The array is 0-based, so days[0] should be the initial of Sunday.
+    static member inline shortDays (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "shortDays" value
+    /// String to render for button to direct the user to today's date.
+    static member inline goToToday (value: string) = Interop.mkProperty<ICalendarStringsProp> "goToToday" value
+    /// Aria-label for the "previous month" button in day picker.
+    static member inline prevMonthAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevMonthAriaLabel" value
+    /// Aria-label for the "next month" button in day picker.
+    static member inline nextMonthAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextMonthAriaLabel" value
+    /// Aria-label for the "previous year" button in month picker.
+    static member inline prevYearAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevYearAriaLabel" value
+    /// Aria-label for the "next year" button in month picker.
+    static member inline nextYearAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextYearAriaLabel" value
+    /// Aria-label for the "previous year range" button in year picker.
+    static member inline prevYearRangeAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevYearRangeAriaLabel" value
+    /// Aria-label for the "next year range" button in year picker.
+    static member inline nextYearRangeAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextYearRangeAriaLabel" value
+    /// Aria-label format string for the header button in the month picker. Should have 1 string param, e.g. "`{0}`,
+    /// select to change the year". This aria-label will only be applied if the year picker is enabled; otherwise
+    /// the label will default to the header string, e.g. "2019".
+    static member inline monthPickerHeaderAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "monthPickerHeaderAriaLabel" value
+    /// Aria-label format string for the header button in the year picker.
+    /// Should have 1 string param, e.g. "`{0}`, select to change the month"
+    static member inline yearPickerHeaderAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "yearPickerHeaderAriaLabel" value
+    /// Aria-label for the "close" button.
+    static member inline closeButtonAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "closeButtonAriaLabel" value
+    /// Aria-label format string for the week number header. Should have 1 string param, e.g. "week number `{0}`"
+    static member inline weekNumberFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "weekNumberFormatString" value
+    /// Aria-label format string for the currently selected date. Should have 1 string param, e.g. "Selected date `{0}`"
+    static member inline selectedDateFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "selectedDateFormatString" value
+    /// Aria-label format string for today's date. Should have 1 string param, e.g. "Today's date `{0}`"
+    static member inline todayDateFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "todayDateFormatString" value
+    /// Aria-label for when a date is marked
+    static member inline dayMarkedAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "dayMarkedAriaLabel" value
+
+// -------------------------------------------------------------------------- DateFormatting --------------------------------------------------------------------------------------
+
+type [<Erase>] dateFormatting =  //TODO figure out how to use these props
+    /// Get a localized string for a day.
+    static member inline formatDay (value: DateTime -> string) = Interop.mkProperty<IDateFormattingProp> "formatDay" (System.Func<_,_> value)
+    /// Get a localized string for a month.
+    static member inline formatMonth (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonth" (System.Func<_,_,_> value)
+    /// Get a localized string for a year.
+    static member inline formatYear (value: DateTime -> string) = Interop.mkProperty<IDateFormattingProp> "formatYear" (System.Func<_,_> value)
+    /// Get a localized string for a month, day, and year.
+    static member inline formatMonthDayYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthDayYear" (System.Func<_,_,_> value)
+    /// Get a localized string for a month and year.
+    static member inline formatMonthYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthYear" (System.Func<_,_,_> value)
