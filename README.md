@@ -1,5 +1,6 @@
 # FS.FluentUI
-F# Bindings for Microsoft's FluentUI (React)
+
+### Microsoft's FluentUI (React) made for F#
 
 ## ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
 
@@ -57,6 +58,12 @@ If you don't see a component/ hook in this list.... just wait longer!
 
 I have done my best so far to keep usage of these similar to Typescript usage in the docs. See docs for more usage examples:
 Microsoft Documentation: [Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
+
+### Before sending PR's, please test what you've added in the "TestGrounds". 
+`cd src/FS.FluentUI.TestGrounds`
+`npm install`
+`npm start`
+
 # Installation
 
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
