@@ -18,16 +18,6 @@
         <Compile Include="FelizProps.fs" />
         <Compile Include="Props.fs" />
         <Compile Include="FluentUI.fs" />
-        <Compile Include="Icons9.fs" />
-        <Compile Include="Icons8.fs" />
-        <Compile Include="Icons7.fs" />
-        <Compile Include="Icons6.fs" />
-        <Compile Include="Icons5.fs" />
-        <Compile Include="Icons4.fs" />
-        <Compile Include="Icons3.fs" />
-        <Compile Include="Icons2.fs" />
-        <Compile Include="Icons1.fs" />
-        <Compile Include="Icons0.fs" />
     </ItemGroup>
 
     <ItemGroup>

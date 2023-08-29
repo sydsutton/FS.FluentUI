@@ -10,16 +10,6 @@
         <Compile Include="../../FS.FluentUI/FelizProps.fs" />
         <Compile Include="../../FS.FluentUI/Props.fs" />
         <Compile Include="../../FS.FluentUI/FluentUI.fs" />
-        <Compile Include="../../FS.FluentUI/Icons9.fs" />
-        <Compile Include="../../FS.FluentUI/Icons8.fs" />
-        <Compile Include="../../FS.FluentUI/Icons7.fs" />
-        <Compile Include="../../FS.FluentUI/Icons6.fs" />
-        <Compile Include="../../FS.FluentUI/Icons5.fs" />
-        <Compile Include="../../FS.FluentUI/Icons4.fs" />
-        <Compile Include="../../FS.FluentUI/Icons3.fs" />
-        <Compile Include="../../FS.FluentUI/Icons2.fs" />
-        <Compile Include="../../FS.FluentUI/Icons1.fs" />
-        <Compile Include="../../FS.FluentUI/Icons0.fs" />
     </ItemGroup>
     <ItemGroup>
         <None Include="index.html" />
