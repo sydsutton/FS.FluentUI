@@ -2,32 +2,60 @@
 F# Bindings for Microsoft's FluentUI (React)
 
 ## ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
-Components and functions: 
 
-| Complete Components    |                |                  | Complete Functions / Hooks            | Incomplete |
-| ------------- | -------------  |-------------     |-------------           |------------- |
-| Accordion     | Dropdown       | Tablist          |useArrowNavigationGroup |Breadcrumb |
-| Avatar        | Field          | Text             |useFocusableGroup       |Searchbox |
-| AvatarGroup   | FluentProvider | Textarea         |useId                   | Tag  |
-| Badge         | Image          | Toast            |partitionAvatarGroupItems| InteractionTag |
-| CounterBadge  | Input          |Toolbar           |makeResetStyles         | TagGroup |
-| PresenceBadge | Label          |Tree              |useOverflowMenu         | Rating |
-| Button        | Link           | Tooltip          |DatePicker              | BasicList |
-| CompoundButton| Menu           |Alert (Preview)   |useIsOverflowItemVisible| TeachingCallout |
-| MenuButton    |  MenuList      | Drawer (Preview) |useIsOverflowGroupVisible| Coachmark |
-| SplitButton   | Overflow       |InfoLabel (Preview|createTableColumn       | MessageBar |
-| ToggleButton  | Persona        | Virtualizer (Preview)|useStaticVirtualizerMeasure| PeoplePicker | 
-| Card          | Popover        | VirtualizerScrollView (Preview)|useModalAttributes| Nav |
-| CardFooter    | Portal         | VirtualizerScrollViewDynamic (Preview)|useObservedElement| SwatchColorPicker |
-| CardHeader    | ProgressBar    |DatePicker        |useHeadlessFlatTree_unstable|ColorPicker |
-| CardPreview   | Radio          |                  |useFocusFinders          | TimePicker|
-| Checkbox      | RadioGroup     |                  |useOverflowCount         | bundleIcon|
-| Combobox      | Select         |                  |                         |useToastController| 
-| DataGrid      | Skeleton       |                  |                         |createFluentIcon |
-| Dialog        | Slider         |                  |                         |makeStyles |
-| Divider       | SpinButton     |                  |                         | Table |
-| Divider       | Switch         |                  |                         |
+If you don't see a component/ hook in this list.... just wait longer! 
 
+| Complete Components| Complete Hooks / Functions | Components w/ TODO's or are unstable | Hooks / Functions w/ TODO's  |  Feature-complete but unstable         | Needs help with    |  Upcoming         |
+| ------------- | -------------                   | -------------                        |-------------                 |        -------------                   |-------------       |    -------------  |
+| Accordion     | useArrowNavigationGroup         |        Toast                         |  useToastController          | VirtualizerScrollViewDynamic (Preview) |  bundleIcon        |InteractionTag     |
+| Avatar        |                useId            |                DatePicker            | createFluentIcon             |   useHeadlessFlatTree_unstable         |  makeStyles        |TagGroup           |
+| AvatarGroup   |           useFocusableGroup     |     Table                            |                              |  Virtualizer (Preview)                 |useTableFeatures    | Tag               |
+| Badge         |   partitionAvatarGroupItems     |                                       |                              |  Alert (Preview)                       |                    |   Rating           |
+| CounterBadge  |           useOverflowMenu       |                                       |                              |  Drawer (Preview)                      |                    | BasicList         |
+| PresenceBadge |      useIsOverflowItemVisible   |                                      |                               |InfoLabel (Preview)                     |                    | Breadcrumb         |
+| Button        |   createTableColumn             |                                       |                              | VirtualizerScrollView (Preview)        |                    |    TeachingCallout |
+| CompoundButton|  useStaticVirtualizerMeasure    |                                       |                              |                                        |                      |       Coachmark     |
+| MenuButton    | useModalAttributes              |                                       |                              |                                        |                      |    MessageBar       |
+| SplitButton   |       useObservedElement        |                                       |                              |                                         |                     |    PeoplePicker     |
+| ToggleButton  |           useFocusFinders       |                                       |                              |                                        |                      |     Searchbox       |
+| Card          |         useOverflowCount        |                                       |                              |                                        |                      | makeResetStyles     |
+| CardFooter    |                                 |                                       |                              |                                        |                      |    Nav              |
+| CardHeader    |                                 |                                       |                              |                                        |                      |  SwatchColorPicker  |
+| CardPreview   |                                 |                                       |                              |                                         |                     | ColorPicker         |
+| Checkbox      |                                 |                                       |                               |                                        |                      |  TimePicker         |
+| Combobox      |                                 |                                       ||
+| DataGrid      |                                  |                                      ||
+| Dialog        |                                 |      
+| Divider       |                                 |         
+| Divider       |                                 |          
+| Dropdown      |
+| Tablist       |
+| Field|
+| FluentProvider|
+| Image| 
+| Input| 
+| Label| 
+| Link|  
+| Menu |
+| Overflow| 
+| Persona| 
+| Popover| 
+| Portal |
+| ProgressBar| 
+| Radio | 
+| RadioGroup| 
+| Select| 
+| Skeleton| 
+| Slider| 
+| SpinButton| 
+| Switch| 
+| Text |
+| Textarea| 
+| Toolbar| 
+| Tree| 
+| Tooltip| 
+
+I have done my best so far to keep usage of these similar to Typescript usage in the docs. See docs for more usage examples:
 Microsoft Documentation: [Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
 # Installation
 
