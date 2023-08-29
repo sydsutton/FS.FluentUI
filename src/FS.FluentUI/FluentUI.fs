@@ -314,44 +314,44 @@ type [<Erase>] Fui =
     /// Note: DatePicker is a compat component - its internal architecture does not follow all the principles regular Fluent UI v9 components follow - it is not composed of atomic hooks and it might be more difficult to tweak its appearance and behavior. It however follows Fluent 2 design and uses design tokens, it is production ready and it is stable.
     static member inline datePicker (props: IDatePickerProp list) = createElement (import "DatePicker" DatePickerCompat) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline infoButton (props: IInfoButtonProp list) = createElement (import "InfoButton" InfoButton_unstable) props
+    static member inline infoButton (props: IInfoButtonProp list) = createElement (import "InfoButton" InfoButton_unstable) props
     /// An InfoLabel is a Label with an InfoButton at the end, properly handling layout and accessibility properties. It can be used as a drop-in replacement for Label when an InfoButton is also needed.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline infoLabel (props: IInfoLabelProp list) = createElement (import "InfoLabel" InfoButton_unstable) props
+    static member inline infoLabel (props: IInfoLabelProp list) = createElement (import "InfoLabel" InfoButton_unstable) props
     /// An Alert displays a brief, important message to attract a user's attention without interrupting their current task.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline alert (props: IAlertProp list) = createElement (import "Alert" Alert_unstable) props
+    static member inline alert (props: IAlertProp list) = createElement (import "Alert" Alert_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline virtualizer (props: IVirtualizerProp list) = createElement (import "Virtualizer" Virtualizer_unstable) props
+    static member inline virtualizer (props: IVirtualizerProp list) = createElement (import "Virtualizer" Virtualizer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline virtualizerScrollView (props: IVirtualizerScrollViewProp list) = createElement (import "VirtualizerScrollView" Virtualizer_unstable) props
+    static member inline virtualizerScrollView (props: IVirtualizerScrollViewProp list) = createElement (import "VirtualizerScrollView" Virtualizer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline virtualizerScrollViewDynamic (props: IVirtualizerScrollViewDynamicProp list) = createElement (import "VirtualizerScrollViewDynamic" Virtualizer_unstable) props
+    static member inline virtualizerScrollViewDynamic (props: IVirtualizerScrollViewDynamicProp list) = createElement (import "VirtualizerScrollViewDynamic" Virtualizer_unstable) props
     /// The Drawer gives users a quick entry point to configuration and information. It should be used when retaining context is beneficial to users.
     /// There are three main components to represent a Drawer:
     /// DrawerOverlay: Represents an overlay Drawer. This component renders on top of the whole page. By default blocks the screen and will require users full attention. Uses Dialog component under the hood.
     /// DrawerInline: Represents an inline Drawer. This is rendered within a container and can be placed next to any content.
     /// Drawer: It is a combination of DrawerOverlay and DrawerInline. Used when toggling between the two modes is necessary. Often used for responsiveness.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawer (props: IDrawerProp list) = createElement (import "Drawer" Drawer_unstable) props
+    static member inline drawer (props: IDrawerProp list) = createElement (import "Drawer" Drawer_unstable) props
     /// Represents an overlay Drawer. This component renders on top of the whole page. By default blocks the screen and will require users full attention. Uses Dialog component under the hood.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerOverlay (props: IDrawerOverlayProp list) = createElement (import "DrawerOverlay" Drawer_unstable) props
+    static member inline drawerOverlay (props: IDrawerOverlayProp list) = createElement (import "DrawerOverlay" Drawer_unstable) props
     /// Represents an inline Drawer. This is rendered within a container and can be placed next to any content.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerInline (props: IDrawerInlineProp list) = createElement (import "DrawerInline" Drawer_unstable) props
+    static member inline drawerInline (props: IDrawerInlineProp list) = createElement (import "DrawerInline" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerHeader (props: IDrawerHeaderProp list) = createElement (import "DrawerHeader" Drawer_unstable) props
+    static member inline drawerHeader (props: IDrawerHeaderProp list) = createElement (import "DrawerHeader" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerHeader" Drawer_unstable) props
+    static member inline drawerHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerHeader" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerHeaderTitle (props: IDrawerHeaderTitleProp list) = createElement (import "DrawerHeaderTitle" Drawer_unstable) props
+    static member inline drawerHeaderTitle (props: IDrawerHeaderTitleProp list) = createElement (import "DrawerHeaderTitle" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerHeaderNavigation (props: IDrawerHeaderNavigationProp list) = createElement (import "DrawerHeaderNavigation" Drawer_unstable) props
+    static member inline drawerHeaderNavigation (props: IDrawerHeaderNavigationProp list) = createElement (import "DrawerHeaderNavigation" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerBody" Drawer_unstable) props
+    static member inline drawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerBody" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    [<Obsolete>] static member inline drawerBody (props: IDrawerBodyProp list) = createElement (import "DrawerBody" Drawer_unstable) props
+    static member inline drawerBody (props: IDrawerBodyProp list) = createElement (import "DrawerBody" Drawer_unstable) props
     // Card
     /// A card is a container that holds information and actions related to a single concept or object, like a document or a contact.
     /// Cards can give information prominence and create predictable patterns. While they're very flexible, it's important to use them consistently for particular use cases across experiences.
