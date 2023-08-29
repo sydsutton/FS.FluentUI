@@ -1,6 +1,6 @@
 # FS.FluentUI
 
-### Microsoft's FluentUI (React) made for F#
+### Microsoft's FluentUI V9 (React) made for F#
 
 ## ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
 
