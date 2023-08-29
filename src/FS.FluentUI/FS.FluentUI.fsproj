@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta01</Version>
+        <Version>0.0.1-beta02</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>F# bindings for the FluentUI library.</Description>
         <PackageTags>F# FSharp FS FluentUI</PackageTags>
         <PackageReleaseNotes>
-            - Initial release
+            - Change TargetFramework
         </PackageReleaseNotes>
     </PropertyGroup>
 
