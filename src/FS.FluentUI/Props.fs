@@ -467,8 +467,10 @@ type [<Erase>] checkbox =
         | Checked -> Interop.mkProperty<ICheckboxProp> "defaultChecked" true
         | Unchecked -> Interop.mkProperty<ICheckboxProp> "defaultChecked" false
         | Mixed -> Interop.mkProperty<ICheckboxProp> "defaultChecked" "mixed"
+    /// Callback to be called when the checked state value changes.
     static member inline onChange (value: (CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun _ c -> c |> CheckState.fromData |> value))
-    static member inline onChange (value: (MouseEvent -> CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun ev c -> c |> CheckState.fromData |> value ev ))
+    /// Callback to be called when the checked state value changes.
+    static member inline onChange (value: (Event -> CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun ev c -> c |> CheckState.fromData |> value ev ))
 
 module checkbox =
     type [<Erase>] as' =
@@ -1513,8 +1515,17 @@ type [<Erase>] tooltip =
     static member inline mountNode (value: MountNode) = Interop.mkProperty<ITooltipProp> "mountNode" value
     /// Delay before the tooltip is hidden, in milliseconds.
     static member inline hideDelay (value: int) = Interop.mkProperty<ITooltipProp> "hideDelay" value
+    /// Notification when the visibility of the tooltip is changing.
+    /// **Note**: for backwards compatibility, `event` will be undefined if this was triggered by a keyboard event on
+    /// the document element. Use `data.documentKeyboardEvent` if the keyboard event object is needed.
     static member inline onVisibleChange (handler: OnVisibleChangeData -> unit) = Interop.mkProperty<ITooltipProp> "onVisibleChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Notification when the visibility of the tooltip is changing.
+    /// **Note**: for backwards compatibility, `event` will be undefined if this was triggered by a keyboard event on
+    /// the document element. Use `data.documentKeyboardEvent` if the keyboard event object is needed.
     static member inline onVisibleChange (value: PointerEvent -> OnVisibleChangeData -> unit) = Interop.mkProperty<ITooltipProp> "onVisibleChange" (System.Func<_,_,_> value)
+    /// Notification when the visibility of the tooltip is changing.
+    /// **Note**: for backwards compatibility, `event` will be undefined if this was triggered by a keyboard event on
+    /// the document element. Use `data.documentKeyboardEvent` if the keyboard event object is needed.
     static member inline onVisibleChange (value: FocusEvent -> OnVisibleChangeData -> unit) = Interop.mkProperty<ITooltipProp> "onVisibleChange" (System.Func<_,_,_> value)
     /// Delay before the tooltip is shown, in milliseconds.
     static member inline showDelay (value: int) = Interop.mkProperty<ITooltipProp> "showDelay" value
@@ -1630,11 +1641,7 @@ type [<Erase>] input =
     /// Called when the user changes the input's value.
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Called when the user changes the input's value.
-    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
-    /// Called when the user changes the input's value.
-    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
-    /// Called when the user changes the input's value.
-    static member inline onChange (value: TouchEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> ValueProp<string> -> unit) = Interop.mkProperty<IInputProp> "onChange" (System.Func<_,_,_> value)
     /// Placeholder text for the input. If using this instead of a label (which is not recommended), be sure to provide an aria-label for screen reader users.
     static member inline placeholder (value: string) = Interop.mkProperty<IInputProp> "placeholder" value
     /// Whether the input is disabled
@@ -1899,11 +1906,7 @@ type [<Erase>] slider =
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
     static member inline onChange (handler: ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: MouseEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
-    /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: TouchEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
-    /// Triggers a callback when the value has been changed. This will be called on every individual step.
-    static member inline onChange (value: DragEvent -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
 
 module slider =
     type [<Erase>] size =
@@ -1941,11 +1944,7 @@ type [<Erase>] switch =
     /// Callback to be called when the checked state value changes.
     static member inline onChange (handler: SwitchOnChangeData -> unit) = Interop.mkProperty<ISwitchProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback to be called when the checked state value changes.
-    static member inline onChange (value: MouseEvent -> SwitchOnChangeData -> unit) = Interop.mkProperty<ISwitchProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback to be called when the checked state value changes.
-    static member inline onChange (value: TouchEvent -> SwitchOnChangeData -> unit) = Interop.mkProperty<ISwitchProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback to be called when the checked state value changes.
-    static member inline onChange (value: KeyboardEvent -> SwitchOnChangeData -> unit) = Interop.mkProperty<ISwitchProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> SwitchOnChangeData -> unit) = Interop.mkProperty<ISwitchProp> "onChange" (System.Func<_,_,_> value)
 
 module switch =
     type [<Erase>] as' =
@@ -1984,13 +1983,7 @@ type [<Erase>] radio =
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when this Radio is selected in its group.
     /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback when this Radio is selected in its group.
-    /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: TouchEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback when this Radio is selected in its group.
-    /// Note: onChange is NOT called when this Radio is deselected. Use RadioGroup's onChange event to determine when the selection in the group changes.
-    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioProp> "onChange" (System.Func<_,_,_> value)
 
 module radio =
     type [<Erase>] as' =
@@ -2015,11 +2008,7 @@ type [<Erase>] radioGroup =
     /// Callback when the selected Radio item changes.
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IRadioGroupProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when the selected Radio item changes.
-    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioGroupProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback when the selected Radio item changes.
-    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioGroupProp> "onChange" (System.Func<_,_,_> value)
-    /// Callback when the selected Radio item changes.
-    static member inline onChange (value: TouchEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioGroupProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> ValueProp<string> -> unit) = Interop.mkProperty<IRadioGroupProp> "onChange" (System.Func<_,_,_> value)
     /// Disable all Radio items in this group.
     static member inline disabled (value: bool) = Interop.mkProperty<IRadioGroupProp> "disabled" value
     /// Require a selection in this group. Adds the required prop to all child Radio items.
@@ -2211,7 +2200,12 @@ type [<Erase>] spinButton =
     /// User presses the up/down buttons (on single press or every spin)
     /// User presses the up/down arrow keys (on single press or every spin)
     /// User commits edits to the input text by focusing away (blurring) or pressing enter. Note that this is NOT called for every key press while the user is editing.
-    static member inline onChange (value: TouchEvent -> SpinButtonOnChangeData -> unit) = Interop.mkProperty<ISpinButtonProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: ChangeEvent -> SpinButtonOnChangeData -> unit) = Interop.mkProperty<ISpinButtonProp> "onChange" (System.Func<_,_,_> value)
+    /// Callback for when the committed value changes.
+    /// User presses the up/down buttons (on single press or every spin)
+    /// User presses the up/down arrow keys (on single press or every spin)
+    /// User commits edits to the input text by focusing away (blurring) or pressing enter. Note that this is NOT called for every key press while the user is editing.
+    static member inline onChange (value: FocusEvent -> SpinButtonOnChangeData -> unit) = Interop.mkProperty<ISpinButtonProp> "onChange" (System.Func<_,_,_> value)
     /// How many decimal places the value should be rounded to.
     /// The default is calculated based on the precision of step: i.e. if step = 1, precision = 0. step = 0.0089, precision = 4. step = 300, precision = 2. step = 23.00, precision = 2.
     static member inline precision (value: int) = Interop.mkProperty<ISpinButtonProp> "precision" value
@@ -2302,9 +2296,7 @@ type [<Erase>] select =
     /// Called when the user changes the select element's value by selecting an option.
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<ISelectProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Called when the user changes the select element's value by selecting an option.
-    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ISelectProp> "onChange" (System.Func<_,_,_> value)
-    /// Called when the user changes the select element's value by selecting an option.
-    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ISelectProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> ValueProp<string> -> unit) = Interop.mkProperty<ISelectProp> "onChange" (System.Func<_,_,_> value)
 
 module select =
     type [<Erase>] as' =
@@ -2340,6 +2332,7 @@ type [<Erase>] dropdown =
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onOptionSelect (value: MouseEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
     static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IDropdownProp> "selectedOptions" value
     /// Where the portal children are mounted on DOM
@@ -2429,6 +2422,7 @@ type [<Erase>] listbox =
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onOptionSelect (value: MouseEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
     static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IListboxProp> "selectedOptions" value
 
@@ -2519,6 +2513,7 @@ type [<Erase>] combobox =
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onOptionSelect (value: MouseEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
     static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IComboboxProp> "selectedOptions" value
     /// Where the portal children are mounted on DOM
@@ -2536,7 +2531,7 @@ type [<Erase>] combobox =
     /// Callback when the open/closed state of the dropdown changes
     static member inline onOpenChange (value: (KeyboardEvent -> OpenProp -> unit)) = Interop.mkProperty<IComboboxProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback when the open/closed state of the dropdown changes
-    static member inline onOpenChange (value: (TouchEvent -> OpenProp -> unit)) = Interop.mkProperty<IComboboxProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: (FocusEvent -> OpenProp -> unit)) = Interop.mkProperty<IComboboxProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Sets the open/closed state of the dropdown. Use together with onOpenChange to fully control the dropdown's visibility
     static member inline open' (value: bool) = Interop.mkProperty<IComboboxProp> "open" value
     static member inline freeform (value: bool) = Interop.mkProperty<IComboboxProp> "freeform" value
@@ -2907,12 +2902,20 @@ type [<Erase>] field =
     static member inline hint (value: ReactElement) = Interop.mkProperty<IFieldProp> "hint" value
     /// Additional hint text below the field.
     static member inline hint (value: IReactProperty list) = Interop.mkProperty<IFieldProp> "hint" (!!value |> createObj |> unbox<IReactProperty>)
+    /// WARNING: The Field's child can be a single form control, or a render function that takes the props that should be spread on a form control.
+    /// If trying to use a list of ReactElements, only the first ReactElement will be used as a child.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+                    let child =
+                        match elems |> Seq.length with
+                        | l when l = 1 -> elems
+                        | _ -> elems |> Seq.take 1
+                    Interop.mkProperty<IFieldProp> "children" (Interop.reactApi.Children.toArray child)
     /// The Field's child can be a single form control, or a render function that takes the props that should be spread on a form control.
     /// All form controls in this library can be used directly as children (such as <Input> or <RadioGroup>).
     static member inline children (value: ReactElement) = Interop.mkProperty<IFieldProp> "children" value
     /// The Field's child can be a single form control, or a render function that takes the props that should be spread on a form control.
     /// All form controls in this library can be used directly as children (such as <Input> or <RadioGroup>).
-    static member inline children (value: IReactProperty list -> ReactElement) = Interop.mkProperty<IFieldProp> "children" (System.Func<_,_> value)
+    static member inline children (value: IReactProperty list -> ReactElement) = Interop.mkProperty<IFieldProp> "children" (System.Func<_,_> (fun props -> props |> FieldControlProps.toReactProperties |> value))
     /// Marks the Field as required. If true, an asterisk will be appended to the label, and aria-required will be set on the Field's child.
     static member inline required (value: bool) = Interop.mkProperty<IFieldProp> "required" value
 
@@ -2973,13 +2976,11 @@ type [<Erase>] dialog =
             | _ -> elems |> Seq.take 2
         Interop.mkProperty<IDialogProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
-    /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDialogProp> "inertTrapFocus" value
 
@@ -3143,21 +3144,6 @@ type [<Erase>] toaster =
     static member inline content (value: ReactElement) = Interop.mkProperty<IToasterProp> "content" value
     /// Additional data that needs to be passed to the toast
     static member inline data (value: obj) = Interop.mkProperty<IToasterProp> "data" value
-    /// Reports changes to the Toast lifecycle
-    static member inline onStatusChange (handler: (ToastChangeData -> unit) option) =
-        match handler with
-        | Some handler -> Interop.mkProperty<IToasterProp> "onStatusChange" (System.Func<_,_,_> (fun _ value -> handler value))
-        | None -> Interop.mkProperty<IToasterProp> "onStatusChange" ()
-    /// Reports changes to the Toast lifecycle
-    static member inline onStatusChange (value: (MouseEvent -> ToastChangeData -> unit) option) =
-        match value with
-        | Some value -> Interop.mkProperty<IToasterProp> "onStatusChange" (System.Func<_,_,_> value)
-        | None -> Interop.mkProperty<IToasterProp> "onStatusChange" ()
-    /// Reports changes to the Toast lifecycle
-    static member inline onStatusChange (value: (KeyboardEvent -> ToastChangeData -> unit) option) =
-        match value with
-        | Some value -> Interop.mkProperty<IToasterProp> "onStatusChange" (System.Func<_,_,_> value)
-        | None -> Interop.mkProperty<IToasterProp> "onStatusChange" ()
 
 module toaster =
     type [<Erase>] as' =
@@ -3204,6 +3190,8 @@ type [<Erase>] card =
     static member inline onSelectionChange (value: MouseEvent -> SelectedProp -> unit) = Interop.mkProperty<ICardProp> "onSelectionChange" (System.Func<_,_,_> value)
     /// Callback to be called when the selected state value changes.
     static member inline onSelectionChange (value: KeyboardEvent -> SelectedProp -> unit) = Interop.mkProperty<ICardProp> "onSelectionChange" (System.Func<_,_,_> value)
+    /// Callback to be called when the selected state value changes.
+    static member inline onSelectionChange (value: ChangeEvent -> SelectedProp -> unit) = Interop.mkProperty<ICardProp> "onSelectionChange" (System.Func<_,_,_> value)
 
 module card =
     type [<Erase>] as' =
@@ -3390,9 +3378,7 @@ type [<Erase>] datePicker  =
     /// Called when the user changes the input's value.
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Called when the user changes the input's value.
-    static member inline onChange (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> value)
-    /// Called when the user changes the input's value.
-    static member inline onChange (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: ChangeEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> value)
     /// Element before the input text, within the input border
     static member inline contentBefore (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "contentBefore" value
     /// Element after the input text, within the input border
@@ -3421,7 +3407,7 @@ type [<Erase>] datePicker  =
     /// Whether the DatePicker is open or not
     static member inline open' (value: bool) = Interop.mkProperty<IDatePickerProp> "open" value
     /// Callback to run when the DatePicker's open state changes
-    static member inline onOpenChange (value: OpenProp -> unit) = Interop.mkProperty<IDatePickerProp> "onOpenChange" (System.Func<_,_> value)
+    static member inline onOpenChange (value: bool -> unit) = Interop.mkProperty<IDatePickerProp> "onOpenChange" (System.Func<_,_> value)
     /// Callback to run after the DatePicker's input has been validated
     static member inline onValidationResult (value: DatePickerValidationResultData -> unit) = Interop.mkProperty<IDatePickerProp> "onValidationResult" (System.Func<_,_> value)
     /// Whether the DatePicker should render the popup as inline or in a portal
@@ -3432,7 +3418,7 @@ type [<Erase>] datePicker  =
     /// When the component is controlled, null should be used instead of undefined to avoid controlled vs. uncontrolled ambiguity.
     static member inline value (value: DateTime option) = Interop.mkProperty<IDatePickerProp> "value" value
     /// Optional method to format the chosen date to a string to display in the DatePicker
-    static member inline formatDate (value: DateTime option -> string) = Interop.mkProperty<IDatePickerProp> "formatDate" (System.Func<_,_> value)
+    static member inline formatDate (value: DateTime -> string) = Interop.mkProperty<IDatePickerProp> "formatDate" (System.Func<_,_> value)
     /// Optional method to format the chosen date to a string to display in the DatePicker
     static member inline parseDateFromString (value: string -> DateTime option) = Interop.mkProperty<IDatePickerProp> "parseDateFromString" (System.Func<_,_> value)
     /// Whether the month picker should highlight the current month
@@ -3544,7 +3530,7 @@ type [<Erase>] calendar  =
     /// Callback for when a date is selected
     /// @param date - The date the user selected
     /// @param selectedDateRangeArray - The resultant list of dates that are selected based on the date range type set for the component.
-    static member inline onSelectDate (value: {| date: DateTime; selectedDateRangeArray: array<DateTime> option |} -> unit) = Interop.mkProperty<ICalendarProp> "onSelectDate" (System.Func<_,_> value)
+    static member inline onSelectDate (value: (DateTime * #seq<DateTime> option) -> unit) = Interop.mkProperty<ICalendarProp> "onSelectDate" (System.Func<_,_> value)
     /// Callback for when calendar is closed
     static member inline onDismiss (value: unit -> unit) = Interop.mkProperty<ICalendarProp> "onDismiss" (System.Func<_,_> value)
     /// ID for the calendar
@@ -3690,11 +3676,11 @@ type [<Erase>] calendarMonth  =
     /// Callback issued when a month is selected
     /// @param date - The date the user selected
     /// @param selectedDateRangeArray - The resultant list of dates that are selected based on the date range type set for the component.
-    static member inline onSelectDate (value: {| date: DateTime; selectedDateRangeArray: DateTime array |} -> unit) = Interop.mkProperty<ICalendarMonthProp> "onSelectDate" (System.Func<_,_> value)
+    static member inline onSelectDate (value: (DateTime * #seq<DateTime array>) -> unit) = Interop.mkProperty<ICalendarMonthProp> "onSelectDate" (System.Func<_,_> value)
     /// Callback issued when the year is navigated
     /// @param date - The date that is navigated to
     /// @param focusOnNavigatedDay - Whether to set the focus to the navigated date.
-    static member inline onNavigateDate (value: {| date: DateTime; focusOnNavigatedDay: bool |} -> unit) = Interop.mkProperty<ICalendarMonthProp> "onNavigateDate" (System.Func<_,_> value)
+    static member inline onNavigateDate (value: (DateTime * bool) -> unit) = Interop.mkProperty<ICalendarMonthProp> "onNavigateDate" (System.Func<_,_> value)
     /// Value of today. If unspecified, current time in client machine will be used.
     static member inline today (value: DateTime) = Interop.mkProperty<ICalendarMonthProp> "today" value
     /// Value of today. If unspecified, current time in client machine will be used.
@@ -3803,7 +3789,6 @@ type [<Erase>] dataGrid  =
     static member inline selectedItems (value: #seq<'TKeyType>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     static member inline onSortChange (handler: SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onSortChange (value: MouseEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
-    static member inline onSortChange (value: KeyboardEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
     static member inline onSelectionChange (handler: {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
     static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
@@ -3881,7 +3866,7 @@ module dataGridHeaderCell =
 // -------------------------------------------------------------------------- DataGridBody --------------------------------------------------------------------------------------
 type [<Erase>] dataGridBody =
     inherit FelizProps.prop<IDataGridBodyProp>
-    static member inline children (value: TableRowData<'T, 'TKeyType> -> int -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_,_> value) //TODO
+    static member inline children (value: TableRowData<'T, 'TKeyType> -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_> value)
 
 module dataGridBody =
     type [<Erase>] as' =
@@ -4075,6 +4060,10 @@ type [<Erase>] virtualizer =
     static member inline afterContainer (value: ReactElement) = Interop.mkProperty<IVirtualizerProp> "afterContainer" value
     /// A block place holding whitespace after the end of current DOM children.
     static member inline afterContainer (value: IReactProperty list) = Interop.mkProperty<IVirtualizerProp> "afterContainer" (!!value |> createObj |> unbox<IReactProperty>)
+    /// WARNING: Virtualizer only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerProp> "children" value
+    /// WARNING: Virtualizer only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerProp> "children" (Interop.reactApi.Children.toArray elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -4197,6 +4186,10 @@ module virtualizer =
 // -------------------------------------------------------------------------- VirtualizerScrollView --------------------------------------------------------------------------------------
 type [<Erase>] virtualizerScrollView =
     inherit FelizProps.prop<IVirtualizerScrollViewProp>
+    /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" value
+    /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" (Interop.reactApi.Children.toArray elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -4321,6 +4314,10 @@ module virtualizerScrollView =
 // -------------------------------------------------------------------------- VirtualizerScrollViewDynamic --------------------------------------------------------------------------------------
 type [<Erase>] virtualizerScrollViewDynamic =
     inherit FelizProps.prop<IVirtualizerScrollViewDynamicProp>
+    /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" value
+    /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" (Interop.reactApi.Children.toArray elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -4466,13 +4463,11 @@ type [<Erase>] drawer =
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerProp> "separator" value
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
-    /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
 
 module drawer =
 
@@ -4524,13 +4519,11 @@ type [<Erase>] drawerOverlay =
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "separator" value
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
-    /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
 
 module drawerOverlay =
 

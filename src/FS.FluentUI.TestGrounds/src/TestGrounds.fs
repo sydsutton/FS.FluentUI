@@ -638,7 +638,7 @@ let inputTest =
                         input.appearance.outline
                         input.type'.week
                         input.id "weekId"
-                        input.onChange (fun (ev: MouseEvent) (w: ValueProp<string>) -> printfn "w %A" w.value)
+                        input.onChange (fun (ev: Event) (w: ValueProp<string>) -> printfn "value: %A" w.value)
                     ]
                 ]
             ]
@@ -758,7 +758,7 @@ let RadioGroupTest() =
             Fui.radioGroup [
                 radioGroup.value value
                 radioGroup.ariaLabelledBy labelId
-                radioGroup.onChange (fun (_: MouseEvent) (d: ValueProp<string>) -> setValue d.value)
+                radioGroup.onChange (fun (_: Event) (d: ValueProp<string>) -> setValue d.value)
                 radioGroup.layout.horizontalStacked
                 radioGroup.required true
                 radioGroup.children [
@@ -1305,46 +1305,46 @@ let progressBarTest =
             Fui.field [
                 field.validationMessage "Indeterminate ProgressBar"
                 field.validationState.none
-                field.children [
+                field.children (
                     Fui.progressBar [
                         progressBar.thickness.large
                     ]
-                ]
+                )
             ]
             Fui.field [
                 field.validationMessage (Fui.text "Error progressbar")
                 field.validationMessageIcon (Fui.icon.errorCircleFilled [])
                 field.validationState.error
-                field.children [
+                field.children (
                     Fui.progressBar [
                         progressBar.value 0.25
                         progressBar.color.error
                         progressBar.shape.square
                     ]
-                ]
+                )
             ]
             Fui.field [
                 field.validationMessage (Fui.text "Warning progressbar")
                 field.validationState.warning
                 field.validationMessageIcon (Fui.icon.warningFilled [])
-                field.children [
+                field.children (
                     Fui.progressBar [
                         progressBar.value 0.87
                         progressBar.color.warning
                         progressBar.shape.rounded
                     ]
-                ]
+                )
             ]
             Fui.field [
                 field.validationMessage (Fui.text "Success progressbar")
                 field.validationMessageIcon (Fui.icon.checkmarkCircleFilled [])
                 field.validationState.success
-                field.children [
+                field.children (
                     Fui.progressBar [
                         progressBar.value 1
                         progressBar.color.success
                     ]
-                ]
+                )
             ]
         ]
     ]
@@ -1354,7 +1354,7 @@ let DialogTest() =
     let isOpen, setIsOpen = React.useState false
     Fui.dialog [
         dialog.open' isOpen
-        dialog.onOpenChange (fun (d: DialogOpenChangeData<MouseEvent>) -> setIsOpen d.``open``)
+        dialog.onOpenChange (fun (d: DialogOpenChangeData) -> setIsOpen d.``open``)
         dialog.children [
             Fui.dialogTrigger [
                 dialogTrigger.disableButtonEnhancement true
@@ -1473,7 +1473,6 @@ let ToastTest() =
     Fui.stack [
         stack.children [
             Fui.toaster [
-                toaster.onStatusChange (Some (fun data -> setMounted(data.status = ToastStatus.unmounted)))
                 toaster.toasterId toasterId
             ]
             Fui.button [
@@ -1562,7 +1561,7 @@ let SkeletonTest() =
             Fui.field [
                 field.validationMessage "Wave animation"
                 field.validationState.none
-                field.children [
+                field.children (
                     Fui.skeleton [
                         skeleton.style [ style.width 300 ]
                         skeleton.children [
@@ -1571,12 +1570,12 @@ let SkeletonTest() =
                             ]
                         ]
                     ]
-                ]
+                )
             ]
             Fui.field [
                 field.validationMessage "Pulse animation"
                 field.validationState.none
-                field.children [
+                field.children (
                     Fui.skeleton [
                         skeleton.style [ style.width 300 ]
                         skeleton.children [
@@ -1585,12 +1584,12 @@ let SkeletonTest() =
                             ]
                         ]
                     ]
-                ]
+                )
             ]
             Fui.field [
                 field.validationMessage "Pulse animation"
                 field.validationState.none
-                field.children [
+                field.children (
                     Fui.skeleton [
                         skeleton.children [
                             Fui.skeletonItem [
@@ -1599,9 +1598,20 @@ let SkeletonTest() =
                             ]
                         ]
                     ]
-                ]
+                )
             ]
         ]
+    ]
+
+let fieldPropsTest =
+    Fui.field [
+        field.label "Third party input"
+        field.hint "Use a render function to properly associate the label with the control."
+        field.children (fun props ->
+            Html.input [
+                yield! props
+            ]
+        )
     ]
 
 open System
@@ -1637,7 +1647,7 @@ let DatePickerTest() =
                 match error with
                 | Some e -> field.validationState.error
                 | None -> field.validationState.none
-                field.children [
+                field.children (
                     Fui.datePicker [
                         match firstDayOfWeek with
                         | "Sunday" -> datePicker.firstDayOfWeek.sunday
@@ -1666,13 +1676,10 @@ let DatePickerTest() =
                             ]
                             calendar.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )
                         ]
-                        datePicker.formatDate (fun d ->
-                            match d with
-                            | None -> "Pick a date, dummy!"
-                            | Some d -> sprintf "Custom render: %s" (d.ToShortDateString())
+                        datePicker.formatDate (fun d -> sprintf "Custom render: %s" (d.ToShortDateString())
                         )
                     ]
-                ]
+                )
             ]
             Fui.label [
                 label.text "Select the first day of week"
@@ -1690,6 +1697,7 @@ let DatePickerTest() =
                 dropdown.children (
                     days |> List.map (fun d ->
                         Fui.option [
+                            option.key d
                             option.value d
                             option.children [
                                 Fui.text d
@@ -1869,9 +1877,9 @@ let infoLabelTest =
                         infoLabel.weight.semibold
                     ]
                 )
-                field.children [
+                field.children (
                     Fui.input []
-                ]
+                )
             ]
         ]
     ]
@@ -1896,13 +1904,11 @@ let alertTest =
             Fui.alert [
                 alert.appearance.primary
                 alert.intent.error
-                alert.action (
-                    Fui.button [
-                        button.appearance.primary
-                        button.text "Review"
-                        button.icon (Fui.icon.add20Regular [])
-                    ]
-                )
+                alert.action [
+                    button.appearance.primary
+                    button.text "Review"
+                    button.icon (Fui.icon.add20Regular [])
+                ]
             ]
         ]
     ]
@@ -1995,7 +2001,7 @@ let DrawerTest() =
             Fui.drawerOverlay [
                 drawerOverlay.modalType.nonModal
                 drawerOverlay.open' isOpen
-                drawerOverlay.onOpenChange (fun _ (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
+                drawerOverlay.onOpenChange (fun (_: KeyboardEvent) (data: DialogOpenChangeData) -> setIsOpen data.``open``)
                 drawerOverlay.children [
                     Fui.drawerHeader [
                         Fui.drawerHeaderTitle [
@@ -2254,9 +2260,12 @@ let DataGridTest () =
             Html.ul (
                 items |> List.map (fun i ->
                     Html.li [
-                        Fui.checkbox [
-                            checkbox.label i.File.Label
-                            checkbox.checked' (selectedRows |> Seq.contains i.File.Label)
+                        prop.key i.File.Label
+                        prop.children [
+                            Fui.checkbox [
+                                checkbox.label i.File.Label
+                                checkbox.checked' (selectedRows |> Seq.contains i.File.Label)
+                            ]
                         ]
                     ]
                 )
@@ -2283,7 +2292,7 @@ let DataGridTest () =
                         ]
                     ]
                     Fui.dataGridBody [
-                        dataGridBody.children (fun (trd: TableRowData<Item, int>) _ ->
+                        dataGridBody.children (fun (trd: TableRowData<Item, int>) ->
                             Fui.dataGridRow [
                                 dataGridRow.key trd.rowId
                                 dataGridRow.selectionCell [
@@ -2669,6 +2678,7 @@ let mainContent model dispatch =
             SimpleTableTest()
             UseFocusFindersTest()
             UseModalAttributesOptionsTest()
+            fieldPropsTest
         ]
     ]
 

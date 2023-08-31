@@ -7,6 +7,24 @@ type DataTabster = {
     ``data-tabster``: string
 }
 
+type FieldControlProps = {
+    id: string
+    ``aria-labelledby`` : string
+    ``aria-describedby`` : string
+    ``aria-invalid`` : bool
+    ``aria-required`` : bool
+}
+
+module FieldControlProps =
+    let toReactProperties (props: FieldControlProps): IReactProperty list =
+        [
+            prop.id props.id
+            prop.ariaLabelledBy props.``aria-labelledby``
+            prop.ariaDescribedBy props.``aria-describedby``
+            prop.ariaInvalid props.``aria-invalid``
+            prop.ariaRequired props.``aria-required``
+        ]
+
 type IgnoreKeyDown = {
     Tab: bool
     Escape: bool
@@ -168,10 +186,13 @@ type PartitionAvatarGroupItems<'T> = {
 }
 
 type [<RequireQualifiedAccess>] DialogChange = | ``escapeKeyDown`` | ``backdropClick`` | ``triggerClick``
-type DialogOpenChangeData<'Event> = {
+
+type DialogOpenChangeEvent = | MouseEvent | KeyboardEvent
+
+type DialogOpenChangeData = {
     ``type``: DialogChange
     ``open``: bool
-    event: 'Event
+    event: DialogOpenChangeEvent
 }
 
 type [<RequireQualifiedAccess>] DialogTriggerAction = ``open`` | ``close``
