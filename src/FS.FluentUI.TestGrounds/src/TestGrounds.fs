@@ -194,7 +194,7 @@ let MenuTest() =
             Fui.menuPopover [
                 Fui.menuList [
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.cut24Filled [])
+                        menuItemCheckbox.icon (Fui.icon.cutFilled [ icon.size.``24`` ])
                         menuItemCheckbox.name "edit"
                         menuItemCheckbox.value "cut"
                         menuItemCheckbox.children [
@@ -555,12 +555,13 @@ let labelTest =
         ]
     ]
 
-let iconClass = Fui.mkMergeStyles [ style.color.green; style.fontSize 30 ]
+let iconClass = Fui.mkMergeStyles [ style.color.green ]
 let iconTest =
     Fui.stack [
         stack.horizontal true
         stack.children [
-            Fui.icon.zoomFit24Filled [
+            Fui.icon.zoomFitFilled [
+                icon.size.``48``
                 icon.className iconClass
             ]
         ]
@@ -1907,7 +1908,7 @@ let alertTest =
                 alert.action [
                     button.appearance.primary
                     button.text "Review"
-                    button.icon (Fui.icon.add20Regular [])
+                    button.icon (Fui.icon.addRegular [ icon.primaryFill "orange" ])
                 ]
             ]
         ]
@@ -2010,7 +2011,7 @@ let DrawerTest() =
                                     button.appearance.subtle
                                     button.ariaLabel "subtle"
                                     button.icon (
-                                        Fui.icon.dismiss24Regular []
+                                        Fui.icon.dismissRegular [ icon.size.``48`` ]
                                     )
                                     button.onClick (fun _ -> setIsOpen false)
                                 ]

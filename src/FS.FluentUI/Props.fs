@@ -3943,8 +3943,15 @@ type [<Erase>] icon =
     inherit FelizProps.prop<IIconProp>
     static member inline primaryFill (value: string)= Interop.mkProperty<IIconProp> "primaryFill" value
     static member inline filled (value: bool)= Interop.mkProperty<IIconProp> "filled" value
-    static member inline root (value: IReactProperty list)= Interop.mkProperty<IIconProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline visible (value: IReactProperty list)= Interop.mkProperty<IIconProp> "visible" (!!value |> createObj |> unbox<IReactProperty>)
+
+module icon =
+    type [<Erase>] size =
+        static member inline ``16`` = Interop.mkProperty<IIconProp> "fontSize" 16
+        static member inline ``20`` = Interop.mkProperty<IIconProp> "fontSize" 20
+        static member inline ``24`` = Interop.mkProperty<IIconProp> "fontSize" 24
+        static member inline ``28`` = Interop.mkProperty<IIconProp> "fontSize" 28
+        static member inline ``32`` = Interop.mkProperty<IIconProp> "fontSize" 32
+        static member inline ``48`` = Interop.mkProperty<IIconProp> "fontSize" 48
 
 
 // -------------------------------------------------------------------------- InfoButton --------------------------------------------------------------------------------------
