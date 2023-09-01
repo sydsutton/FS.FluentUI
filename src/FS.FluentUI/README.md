@@ -4,7 +4,7 @@
 
 ## ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
 
-If you don't see a component/ hook in this list.... just wait longer! 
+If you don't see a component/ hook in this list.... just wait longer!
 
 | Complete Components| Complete Hooks / Functions | Components w/ TODO's or are unstable | Hooks / Functions w/ TODO's or are unstable | Needs help with    |  Upcoming         |
 | ------------- | -------------                   | -------------                        |-------------                 | -------------       |    -------------  |
@@ -26,40 +26,40 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Checkbox      |                                 |                                       |                               |                     |  TimePicker         |
 | Combobox      |                                 |                                       ||
 | DataGrid      |                                  |                                      ||
-| Dialog        |                                 |      
-| Divider       |                                 |         
-| Divider       |                                 |          
+| Dialog        |                                 |
+| Divider       |                                 |
+| Divider       |                                 |
 | Dropdown      |
 | Tablist       |
 | Field|
 | FluentProvider|
-| Image| 
-| Input| 
-| Label| 
-| Link|  
+| Image|
+| Input|
+| Label|
+| Link|
 | Menu |
-| Overflow| 
-| Persona| 
-| Popover| 
+| Overflow|
+| Persona|
+| Popover|
 | Portal |
-| ProgressBar| 
-| Radio | 
-| RadioGroup| 
-| Select| 
-| Skeleton| 
-| Slider| 
-| SpinButton| 
-| Switch| 
+| ProgressBar|
+| Radio |
+| RadioGroup|
+| Select|
+| Skeleton|
+| Slider|
+| SpinButton|
+| Switch|
 | Text |
-| Textarea| 
-| Toolbar| 
-| Tree| 
-| Tooltip| 
+| Textarea|
+| Toolbar|
+| Tree|
+| Tooltip|
 
 I have done my best so far to keep usage of these similar to Typescript usage in the docs. See docs for more usage examples:
 Microsoft Documentation: [Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
 
-### Before sending PR's, please test what you've added in the "TestGrounds". 
+### Before sending PR's, please test what you've added in the "TestGrounds".
 `cd src/FS.FluentUI.TestGrounds`
 `npm install`
 `npm start`
@@ -124,5 +124,15 @@ let ToggleButtons () =
             toggleButton.text "Disabled focusable"
         ]
     ]
+
+let root = ReactDOM.createRoot (document.getElementById "feliz-app")
+root.render (
+    Fui.fluentProvider [
+        fluentProvider.theme.webDarkTheme
+        fluentProvider.children [
+            ToggleButtons ()
+        ]
+    ]
+)
 
 ```
