@@ -2,14 +2,14 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta03</Version>
+        <Version>0.0.1-beta04</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>F# bindings for the FluentUI library.</Description>
         <PackageProjectUrl>https://github.com/sydsutton/FS.FluentUI</PackageProjectUrl>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Ensure props that take events align with documentation
+            - Replace sized icons with icon.size prop
         </PackageReleaseNotes>
     </PropertyGroup>
 
