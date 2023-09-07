@@ -7,6 +7,7 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>F# bindings for the FluentUI library.</Description>
         <PackageProjectUrl>https://github.com/sydsutton/FS.FluentUI</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
             - Replace sized icons with icon.size prop
@@ -14,6 +15,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
         <Compile Include="Domain.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="FelizProps.fs" />
