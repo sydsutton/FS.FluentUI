@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>F# bindings for the FluentUI library for migrating from v8 to v9.</Description>
@@ -10,7 +10,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET V8 V9 migration</PackageTags>
         <PackageReleaseNotes>
-            - Initial release
+            - Update FelizProps.fs
         </PackageReleaseNotes>
     </PropertyGroup>
 
