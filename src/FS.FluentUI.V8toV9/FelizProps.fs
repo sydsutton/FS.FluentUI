@@ -973,23 +973,6 @@ type prop<'Property> =
             |> Option.iter handler
         )
 
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the int changed from the `input` element directly when the type of the input is number
-    /// instead of extracting it from the event arguments. Fractional numbers are rounded to the nearest integral value.
-  //  static member inline onChange (handler: int -> unit) =
-  //      Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
-  //          if Feliz.Interop.isTypeofNumber (!!ev.target?value) then
-  //              // round the value to get only integers
-  //              let value : double = !!ev.target?value
-  //              handler (unbox<int> (Math.Round value))
-  //      )
-  //  /// Same as `onChange` that takes an event as input but instead lets you deal with the float changed from the `input` element directly when the input type is a number
-  //  /// instead of extracting it from the event arguments.
-  //  static member inline onChange (handler: float -> unit) =
-  //      Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
-  //          if Feliz.Interop.isTypeofNumber (!!ev.target?value)
-  //          then handler (!!ev.target?value)
-  //      )
-
     /// Same as `onChange` but let's you deal with the `checked` value that has changed from the `input` element directly instead of extracting it from the event arguments.
     static member inline onCheckedChange (handler: bool -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?``checked``))
 
