@@ -7,7 +7,6 @@ open Browser.Types
 open Fable.Core.JsInterop
 open Fable.Core
 open Feliz.Styles
-open System.ComponentModel
 open System
 open Feliz
 open FS.FluentUI.V8toV9
@@ -333,12 +332,12 @@ type prop<'Property> =
     static member inline capture (value: bool) = Interop.mkProperty<'Property> "capture" value
 
     /// This attribute declares the document's character encoding. Must be used in the meta tag.
-    static member inline charset (value: string) = Interop.mkProperty<'Property> "charset" value
+    static member inline charset (value: string) = Interop.mkProperty<'Property> "charSet" value
 
     /// Children of this React element.
     static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<'Property> "children" value
     /// Children of this React element.
-    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray elems)
+    static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray (Array.ofSeq elems))
 
     /// A URL that designates a source document or message for the information quoted. This attribute is intended to
     /// point to information explaining the context or the reference for the quote.
@@ -346,7 +345,7 @@ type prop<'Property> =
 
     /// Specifies a CSS class for this element.
     static member inline className (value: string) = Interop.mkProperty<'Property> "className" value
-    /// Takes a `seq<string>` and joins them using a space to combine the classses into a single class property.
+    /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
     ///
     /// `prop.className [ "one"; "two" ]`
     ///
@@ -355,7 +354,7 @@ type prop<'Property> =
     /// `prop.className "one two"`
     static member inline className (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
 
-    /// Takes a `seq<string>` and joins them using a space to combine the classses into a single class property.
+    /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
     ///
     /// `prop.classes [ "one"; "two" ]` => `prop.className "one two"`
     static member inline classes (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
@@ -817,7 +816,8 @@ type prop<'Property> =
     /// Helps define the language of an element: the language that non-editable elements are
     /// written in, or the language that the editable elements should be written in by the user.
     static member inline lang (value: string) = Interop.mkProperty<'Property> "lang" value
-
+    /// Specifies a user-readable title of the element.
+    static member inline label (value: string) = Interop.mkProperty<'Property> "label" value
     /// Defines the color of the light source for lighting filter primitives.
     static member inline lightingColor (value: string) = Interop.mkProperty<'Property> "lighting-color" value
 
@@ -833,6 +833,9 @@ type prop<'Property> =
     ///
     /// No light is projected outside the cone.
     static member inline limitingConeAngle (value: int) = Interop.mkProperty<'Property> "limitingConeAngle" value
+
+    /// Value of the id attribute of the <c>datalist</c> of autocomplete options
+    static member inline list (value : string) = Interop.mkProperty<'Property> "list" value
 
     /// If true, the browser will automatically seek back to the start upon reaching the end of the video.
     static member inline loop (value: bool) = Interop.mkProperty<'Property> "loop" value
@@ -971,6 +974,24 @@ type prop<'Property> =
             let value : string = !!ev.target?value
             DateParsing.parse value
             |> Option.iter handler
+        )
+
+    /// Same as `onChange` that takes an event as input but instead lets you deal with the int changed from the `input` element directly when the type of the input is number
+    /// instead of extracting it from the event arguments. Fractional numbers are rounded to the nearest integral value.
+    static member inline onChange (handler: int -> unit) =
+        Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
+            // round the value to get only integers
+            let value : double = !!ev.target?valueAsNumber
+            if not (isNullOrUndefined value) && not(Double.IsNaN value) then
+                handler (unbox<int> (Math.Round value))
+        )
+    /// Same as `onChange` that takes an event as input but instead lets you deal with the float changed from the `input` element directly when the input type is a number
+    /// instead of extracting it from the event arguments.
+    static member inline onChange (handler: float -> unit) =
+        Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
+            let value : double = !!ev.target?valueAsNumber
+            if not (isNullOrUndefined value) && not(Double.IsNaN value) then
+                handler (value)
         )
 
     /// Same as `onChange` but let's you deal with the `checked` value that has changed from the `input` element directly instead of extracting it from the event arguments.
@@ -1498,7 +1519,7 @@ type prop<'Property> =
     /// Sets the end index of the selected text.
     ///
     /// When there's no selection, this returns the offset of the character immediately following the current text input cursor position.
-    static member inline selectionEnd (value: int) = Interop.mkProperty<'Property> "selectionStart" value
+    static member inline selectionEnd (value: int) = Interop.mkProperty<'Property> "selectionEnd" value
 
     /// Sets the *visual* size of the control.
     ///
@@ -1522,10 +1543,10 @@ type prop<'Property> =
 
     /// This attribute contains a positive integer indicating the number of consecutive
     /// columns the <col> element spans. If not present, its default value is 1.
-    static member inline spam (value: int) = Interop.mkProperty<'Property> "span" value
+    static member inline span (value: int) = Interop.mkProperty<'Property> "span" value
 
     /// Defines whether the element may be checked for spelling errors.
-    static member inline spellcheck (value: bool) = Interop.mkProperty<'Property> "spellcheck" value
+    static member inline spellcheck (value: bool) = Interop.mkProperty<'Property> "spellcheck" (string value)
 
     /// Controls the ratio of reflection of the specular lighting.
     ///
@@ -1790,7 +1811,7 @@ type prop<'Property> =
         then Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-ddThh:mm"))
         else Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-dd"))
     /// The value of the element, interpreted as a date
-    static member inline value (value: System.DateTime) = prop<'Property>.value(value, includeTime=false)
+    static member inline value (value: System.DateTime) = prop.value(value, includeTime=false)
     /// The value of the element, interpreted as a date, or empty if there is no value.
     static member inline value (value: System.DateTime option, includeTime: bool) =
         match value with
@@ -2372,9 +2393,18 @@ module prop =
         /// points for each interval are defined in the keySplines attribute.
         static member inline spline = Interop.mkProperty<IReactProperty> "calcMode" "spline"
 
+    /// Specifies that new files should be captured by the device
+    [<Erase>]
+    type capture =
+        /// The user-facing camera and/or microphone should be used.
+        static member inline user = Interop.mkProperty<IReactProperty> "capture" "user"
+        ///
+        /// The outward-facing camera and/or microphone should be used
+        static member inline environment = Interop.mkProperty<IReactProperty> "capture" "environment"
+
     [<Erase>]
     type charset =
-        static member inline utf8 = Interop.mkProperty<IReactProperty> "charset" "UTF-8"
+        static member inline utf8 = Interop.mkProperty<IReactProperty> "charSet" "UTF-8"
 
     /// Indicates which coordinate system to use for the contents of the <clipPath> element.
     [<Erase>]
@@ -3275,25 +3305,25 @@ module prop =
     [<Erase>]
     type referrerPolicy =
         /// The Referer header will not be sent.
-        static member inline noReferrer = Interop.mkProperty<IReactProperty> "referrerpolicy" "no-referrer"
+        static member inline noReferrer = Interop.mkProperty<IReactProperty> "referrerPolicy" "no-referrer"
         /// The Referer header will not be sent to origins without TLS (HTTPS).
-        static member inline noReferrerWhenDowngrade = Interop.mkProperty<IReactProperty> "referrerpolicy" "no-referrer-when-downgrade"
+        static member inline noReferrerWhenDowngrade = Interop.mkProperty<IReactProperty> "referrerPolicy" "no-referrer-when-downgrade"
         /// The sent referrer will be limited to the origin of the referring page: its scheme, host, and port.
-        static member inline origin = Interop.mkProperty<IReactProperty> "referrerpolicy" "origin"
+        static member inline origin = Interop.mkProperty<IReactProperty> "referrerPolicy" "origin"
         /// The referrer sent to other origins will be limited to the scheme, the host, and the port.
         /// Navigations on the same origin will still include the path.
-        static member inline originWhenCrossOrigin = Interop.mkProperty<IReactProperty> "referrerpolicy" "origin-when-cross-origin"
+        static member inline originWhenCrossOrigin = Interop.mkProperty<IReactProperty> "referrerPolicy" "origin-when-cross-origin"
         /// A referrer will be sent for same origin, but cross-origin requests will contain no referrer information.
-        static member inline sameOrigin = Interop.mkProperty<IReactProperty> "referrerpolicy" "same-origin"
+        static member inline sameOrigin = Interop.mkProperty<IReactProperty> "referrerPolicy" "same-origin"
         /// Only send the origin of the document as the referrer when the protocol security level stays the same
         /// (e.g. HTTPS→HTTPS), but don't send it to a less secure destination (e.g. HTTPS→HTTP).
-        static member inline strictOrigin = Interop.mkProperty<IReactProperty> "referrerpolicy" "strict-origin"
+        static member inline strictOrigin = Interop.mkProperty<IReactProperty> "referrerPolicy" "strict-origin"
         /// Send a full URL when performing a same-origin request, but only send the origin when the protocol security
         /// level stays the same (e.g.HTTPS→HTTPS), and send no header to a less secure destination (e.g. HTTPS→HTTP).
-        static member inline strictOriginWhenCrossOrigin = Interop.mkProperty<IReactProperty> "referrerpolicy" "strict-origin-when-cross-origin"
+        static member inline strictOriginWhenCrossOrigin = Interop.mkProperty<IReactProperty> "referrerPolicy" "strict-origin-when-cross-origin"
         /// The referrer will include the origin and the path (but not the fragment, password, or username). This value is unsafe,
         /// because it leaks origins and paths from TLS-protected resources to insecure origins.
-        static member inline unsafeUrl = Interop.mkProperty<IReactProperty> "referrerpolicy" "unsafe-url"
+        static member inline unsafeUrl = Interop.mkProperty<IReactProperty> "referrerPolicy" "unsafe-url"
 
     /// Defines the x coordinate of an element’s reference point.
     [<Erase>]
