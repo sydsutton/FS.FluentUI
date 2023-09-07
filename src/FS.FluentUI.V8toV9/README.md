@@ -1,4 +1,4 @@
-# FS.FluentUI
+# FS.FluentUI.V8toV9
 
 ### Migration for Microsoft's FluentUI V8 to V9 (React) made for F#
 
