@@ -2,6 +2,8 @@
 
 ### Migration for Microsoft's FluentUI V8 to V9 (React) made for F#
 
+[![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.V8toV9.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI.V8toV9/)
+
 #### This project leverages V8 to V9 Shims in order to give usage of components like Stack and StackItem in conjunction with FS.FluentUI
 
 ```fsharp
@@ -63,10 +65,10 @@ Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Aj
 cd ./{path to Client}
 
 # when using femto as a global CLI tool
-femto install FS.FluentUI.V8toV9 --version 0.0.1-beta01
+femto install FS.FluentUI.V8toV9
 
 # when using femto as a local CLI tool
-dotnet femto install FS.FluentUI.V8toV9 --version 0.0.1-beta01
+dotnet femto install FS.FluentUI.V8toV9
 ```
 This will install the nuget package and afterwards automatically installs the required npm packages used by this binding.
 
@@ -75,5 +77,5 @@ This will install the nuget package and afterwards automatically installs the re
 You can install the library manually if you want by first installing the nuget package
 ```bash
 cd ./{path to your project}
-dotnet add package FS.FluentUI.V8toV9 --version 0.0.1-beta01
+dotnet add package FS.FluentUI.V8toV9
 ```
