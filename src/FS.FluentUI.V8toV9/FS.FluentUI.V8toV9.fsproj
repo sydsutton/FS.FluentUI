@@ -1,15 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta04</Version>
+        <Version>0.0.1-beta01</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Description>F# bindings for the FluentUI library.</Description>
+        <Description>F# bindings for the FluentUI library for migrating from v8 to v9.</Description>
         <PackageProjectUrl>https://github.com/sydsutton/FS.FluentUI</PackageProjectUrl>
-        <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
+        <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET V8 V9 migration</PackageTags>
         <PackageReleaseNotes>
-            - Replace sized icons with icon.size prop
+            - Initial release
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -17,16 +17,8 @@
         <Compile Include="Domain.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="FelizProps.fs" />
-        <Compile Include="Props.fs" />
         <Compile Include="FluentUI.fs" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <Content Include="*.fsproj; *.fs;" PackagePath="fable\" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Update="FSharp.Core" Version="4.7.2" />
+        <Compile Include="Props.fs" />
     </ItemGroup>
 
     <ItemGroup>
@@ -35,8 +27,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="&gt;= 9.3.0" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gt;= 0.3.5" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.4.13" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

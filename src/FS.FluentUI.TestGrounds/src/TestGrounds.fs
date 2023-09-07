@@ -3,6 +3,7 @@ module TestGrounds
 open Elmish
 open Feliz
 open FS.FluentUI
+open FS.FluentUI.V8toV9
 open Browser.Types
 
 type Msg =

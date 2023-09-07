@@ -5,6 +5,7 @@ open Browser.Dom
 open Fable.Core.JsInterop
 open Feliz.UseElmish
 open FS.FluentUI
+open FS.FluentUI.V8toV9
 
 importSideEffects "./styles/global.scss"
 
@@ -56,7 +57,7 @@ let v8Theme = ({| palette = mediumDarkShadeBlue |} |> unbox<IPartialTheme>)
 
 let brandVarsFromV8Theme =
     match v8Theme.palette with
-    | Some p -> Theme.createBrandVariants (p, None)
+    | Some p -> Fui.createBrandVariants (p, None)
     | None -> brandVariants
 
 [<ReactComponent>]

@@ -136,11 +136,6 @@ type [<Erase>] IDataGridRowProp = interface end
 type [<Erase>] IDataGridCellProp = interface end
 type [<Erase>] IDataGridSelectionCellProp = interface end
 
-type [<Erase>] IStackProp = interface end
-type [<Erase>] IStackItemProp = interface end
-type [<Erase>] IStackTokensProp = interface end
-type [<Erase>] IStackTokens = interface end
-
 type [<Erase>] IDrawerProp = interface end
 type [<Erase>] IDrawerOverlayProp = interface end
 type [<Erase>] IDrawerInlineProp = interface end

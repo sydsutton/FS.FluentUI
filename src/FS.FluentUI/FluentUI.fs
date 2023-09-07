@@ -15,7 +15,7 @@ module FuiHelpers =
 
     let [<Literal>] FluentUIv9 = "@fluentui/react-components"
     let [<Literal>] FluentIcons = "@fluentui/react-icons"
-    let [<Literal>] FluentUIMigration = "@fluentui/react-migration-v8-v9"
+    let [<Literal>] MergeStyles = "@fluentui/merge-styles"
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
 
     let [<Literal>] InfoButton_unstable = "@fluentui/react-infobutton"
@@ -28,7 +28,7 @@ type [<Erase>] Fui =
 //---------------------------------------------------------------- Functions --------------------------------------------------------------------------------
 
     static member inline mergeStyles (displayName:string, styles:IStyleAttribute list) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" "@fluentui/merge-styles"
+        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
 
         !!styles
         |> List.append [ "displayName" ==> displayName ]
@@ -37,7 +37,7 @@ type [<Erase>] Fui =
         |> mergeStyles
 
     static member inline mergeStyles (styles:IStyleAttribute list) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" "@fluentui/merge-styles"
+        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
 
         !!styles
         |> createObj
@@ -45,7 +45,7 @@ type [<Erase>] Fui =
         |> mergeStyles
 
     static member inline mkMergeStyles (styles:list<IStyleAttribute>, ?displayName:string) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" "@fluentui/merge-styles"
+        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
 
         match displayName, styles with
         | None, s -> s
@@ -503,10 +503,6 @@ type [<Erase>] Fui =
     static member inline treeItemLayout (props: ITreeItemLayoutProp list) = createElement (import "TreeItemLayout" FluentUIv9) props
     static member inline treeItemPersonaLayout (props: ITreeItemPersonaLayoutProp list) = createElement (import "TreeItemPersonaLayout" FluentUIv9) props
 
-    // Stack
-    static member inline stack (props: IStackProp list) = createElement (import "StackShim" FluentUIMigration) props
-    static member inline stackItem (props: IStackItemProp list) = createElement (import "StackItemShim" FluentUIMigration) props
-
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 
 type [<Erase>] Theme =
@@ -524,9 +520,6 @@ type [<Erase>] Theme =
     /// @param theme - Theme from which to get the keys to generate the tokens to css variables mapping object
     /// @returns Tokens to css variables mapping object corresponding to the passed theme
     static member inline themeToTokensObject (theme: ITheme): Tokens = import "themeToTokensObject" FluentUIv9
-    /// Creates v9 brand colors from a v8 palette using interpolation
-    /// A v8 palette has nine colors and v9 has sixteen colors.
-    static member inline createBrandVariants (theme: IPalette, interpolation: Interpolation option): BrandVariants = import "createBrandVariants" FluentUIMigration
 
 module Fui =
 
