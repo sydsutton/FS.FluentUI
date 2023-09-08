@@ -24,6 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
+        <Content Include="*.fsproj; **\*.fs" Exclude="**\*.fs.js" PackagePath="fable\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="4.7.2" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Feliz" Version="2.6.0" />
     </ItemGroup>
 
