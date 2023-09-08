@@ -5409,3 +5409,63 @@ module tagGroup =
         static member inline small = Interop.mkProperty<ITagGroupProp> "size" "small"
         static member inline extraSmall = Interop.mkProperty<ITagGroupProp> "size" "extra-small"
         static member inline medium = Interop.mkProperty<ITagGroupProp> "size" "medium"
+
+// -------------------------------------------------------------------------- interactionTag --------------------------------------------------------------------------------------
+type [<Erase>] interactionTag =
+    inherit FelizProps.prop<IInteractionTagProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+module interactionTag =
+    type [<Erase>] as' =
+        static member inline div = Interop.mkProperty<IInteractionTagProp> "as" "div"
+
+    /// A Tag can have filled, outlined or brand experience.
+    type [<Erase>] appearance =
+        static member inline brand = Interop.mkProperty<IInteractionTagProp> "appearance" "brand"
+        static member inline filled = Interop.mkProperty<IInteractionTagProp> "appearance" "filled"
+        static member inline outline = Interop.mkProperty<IInteractionTagProp> "appearance" "outline"
+
+    /// A Tag can have rounded or circular shape.
+    type [<Erase>] shape =
+        static member inline circular = Interop.mkProperty<IInteractionTagProp> "shape" "circular"
+        static member inline rounded = Interop.mkProperty<IInteractionTagProp> "shape" "rounded"
+
+    /// A Tag has three sizes.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IInteractionTagProp> "size" "small"
+        static member inline extraSmall = Interop.mkProperty<IInteractionTagProp> "size" "extra-small"
+        static member inline medium = Interop.mkProperty<IInteractionTagProp> "size" "medium"
+
+// -------------------------------------------------------------------------- InteractionTagPrimary --------------------------------------------------------------------------------------
+type [<Erase>] interactionTagPrimary =
+    inherit FelizProps.prop<IInteractionTagPrimaryProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Slot for an icon or other visual element
+    static member inline media (value:  ReactElement) = Interop.mkProperty<IInteractionTagPrimaryProp> "media" value
+    /// Slot for an icon or other visual element
+    static member inline media (value:  IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "media"  (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline icon (value:  ReactElement) = Interop.mkProperty<IInteractionTagPrimaryProp> "icon" value
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "icon"  (!!value |> createObj |> unbox<IReactProperty>)
+    /// Main text for the InteractionTagPrimary button. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: string) = Interop.mkProperty<IInteractionTagPrimaryProp> "primaryText" value
+    /// Main text for the InteractionTagPrimary button. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: ReactElement) = Interop.mkProperty<IInteractionTagPrimaryProp> "primaryText" value
+    /// Main text for the InteractionTagPrimary button. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "primaryText" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: string) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" value
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: ReactElement) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" value
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Whether the InteractionTag component has a Secondary component that provides an secondary action. If true, the InteractionTagPrimary component will adjust its styles to accommodate the Secondary component.
+    static member inline hasSecondaryAction (value: bool) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" value
+
+module interactionTagPrimary =
+    type [<Erase>] as' =
+        static member inline button = Interop.mkProperty<IInteractionTagPrimaryProp> "as" "button"
+
+// -------------------------------------------------------------------------- InteractionTagSecondary --------------------------------------------------------------------------------------
+type [<Erase>] interactionTagSecondary =
+    inherit FelizProps.prop<IInteractionTagSecondaryProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagSecondaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)

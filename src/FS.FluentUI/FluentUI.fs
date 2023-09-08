@@ -524,6 +524,10 @@ type [<Erase>] Fui =
     static member inline searchBox (props: ISearchBoxProp list) = createElement (import "SearchBox" Searchbox_unstable) props
     static member inline tag (props: ITagProp list) = createElement (import "Tag" Tags_unstable) props
     static member inline tagGroup (props: ITagGroupProp list) = createElement (import "TagGroup" Tags_unstable) props
+    static member inline interactionTag (props: IInteractionTagProp list) = createElement (import "InteractionTag" Tags_unstable) props
+    static member inline interactionTag (props: ReactElement list) = Interop.reactElementWithChildren (import "InteractionTag" Tags_unstable) props
+    static member inline interactionTagPrimary (props: IInteractionTagPrimaryProp list) = createElement (import "InteractionTagPrimary" Tags_unstable) props
+    static member inline interactionTagSecondary (props: IInteractionTagSecondaryProp list) = createElement (import "InteractionTagSecondary" Tags_unstable) props
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 
 type [<Erase>] Theme =

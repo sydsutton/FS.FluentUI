@@ -2868,6 +2868,50 @@ let TagTest () =
         ]
     ]
 
+[<ReactComponent>]
+let InteractionTagTest() =
+    let liked, setLiked = React.useState false
+    Fui.interactionTag [
+        Fui.popover [
+            Fui.popoverTrigger [
+                popoverTrigger.children (
+                    Fui.interactionTagPrimary [
+                        interactionTagPrimary.hasSecondaryAction true
+                        interactionTagPrimary.id "golden-retreiver-primary"
+                        interactionTagPrimary.children [
+                            Fui.text "Golden Retriever"
+                        ]
+                    ]
+                )
+            ]
+            Fui.popoverSurface [
+                Fui.link [
+                    link.href "https://en.wikipedia.org/wiki/Golden_Retriever"
+                    link.text "Find out more on wiki"
+                ]
+                Html.ul [
+                    Html.li "Size: Medium to large-sized dog breed."
+                    Html.li "Coat: Luxurious double coat with a dense, water-repellent outer layer and a soft, dense undercoat."
+                    Html.li "Color: Typically a luscious golden or cream color, with variations in shade."
+                    Html.li "Build: Sturdy and well-proportioned body with a friendly and intelligent expression."
+                ]
+            ]
+        ]
+        Fui.tooltip [
+            tooltip.content (if liked then "unlike" else "like")
+            tooltip.relationship.label
+            tooltip.children (
+                Fui.interactionTagSecondary [
+                    interactionTagSecondary.onClick (fun _ -> setLiked (liked |> not))
+                    interactionTagSecondary.ariaLabelledBy "golden-retriever-primary golden-retriever-secondary"
+                    interactionTagSecondary.id "golden-retriever-secondary"
+                    interactionTagSecondary.children [
+                        if liked then Fui.icon.heartFilled [] else Fui.icon.heartRegular []
+                    ]
+                ]
+            )
+        ]
+    ]
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -2949,6 +2993,7 @@ let mainContent model dispatch =
             BreadcrumbTest()
             SearchBoxTest()
             TagTest()
+            InteractionTagTest()
         ]
     ]
 
