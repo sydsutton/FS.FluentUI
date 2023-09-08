@@ -1,6 +1,6 @@
 # FS.FluentUI
 
-### Microsoft's FluentUI V9 (React) made for F# 
+### Microsoft's FluentUI V9 (React) made for F#
 
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 
@@ -8,6 +8,7 @@
 
 #### Please see ```src/FS.FluentUI.TestGrounds/src/TestGrounds.fs``` for examples of every component
 ```fsharp
+open FS.FluentUI
 
 [<ReactComponent>]
 let ToggleButtons () =
@@ -47,29 +48,29 @@ root.render (
 ## Components / Hooks
 If you don't see a component/ hook in this list.... just wait longer!
 
-| Complete Components| Complete Hooks / Functions | Components w/ TODO's or are unstable | Hooks / Functions w/ TODO's or are unstable | Needs help with    |  Upcoming         |
-| ------------- | -------------                   | -------------                        |-------------                 | -------------       |    -------------  |
-| Accordion     | useArrowNavigationGroup         |        Toast                         |  useToastController          |   bundleIcon        |InteractionTag     |
-| Avatar        |                useId            |                DatePicker            | createFluentIcon             |   makeStyles        |TagGroup           |
-| AvatarGroup   |           useFocusableGroup     |     Table                            | useHeadlessFlatTree_unstable |   useTableFeatures  |  Tag               |
-| Badge         |   partitionAvatarGroupItems     |VirtualizerScrollViewDynamic (Preview) |                              |                    |  Rating           |
-| CounterBadge  |           useOverflowMenu       | Virtualizer (Preview)                |                              |                      |  BasicList         |
-| PresenceBadge |      useIsOverflowItemVisible   |   Alert (Preview)                    |                               |                     | Breadcrumb         |
-| Button        |   createTableColumn             |       Drawer (Preview)               |                              |                      |    TeachingCallout |
-| CompoundButton|  useStaticVirtualizerMeasure    |      InfoLabel (Preview)             |                              |                      |       Coachmark     |
-| MenuButton    | useModalAttributes              |  VirtualizerScrollView (Preview)      |                              |                     |    MessageBar       |
-| SplitButton   |       useObservedElement        |                                       |                              |                     |    PeoplePicker     |
-| ToggleButton  |           useFocusFinders       |                                       |                              |                     |     Searchbox       |
-| Card          |         useOverflowCount        |                                       |                              |                      | makeResetStyles     |
-| CardFooter    |                                 |                                       |                              |                      |    Nav              |
-| CardHeader    |                                 |                                       |                              |                      |  SwatchColorPicker  |
-| CardPreview   |                                 |                                       |                              |                      | ColorPicker         |
-| Checkbox      |                                 |                                       |                               |                     |  TimePicker         |
-| Combobox      |                                 |                                       ||
-| DataGrid      |                                  |                                      ||
-| Dialog        |                                 |
-| Divider       |                                 |
-| Divider       |                                 |
+| Complete Components| Complete Hooks / Functions | Has TODO's or are unstable          |  Upcoming         |
+| ------------- | -------------                   | -------------                        |    -------------  |
+| Accordion     | useArrowNavigationGroup         |        Toast                         |    TimePicker     |
+| Avatar        |                useId            |                DatePicker            |     ColorPicker    |
+| AvatarGroup   |           useFocusableGroup     |     Table                            |   SwatchColorPicker  |
+| Badge         |   partitionAvatarGroupItems     |VirtualizerScrollViewDynamic (Preview) |     Rating           |
+| CounterBadge  |           useOverflowMenu       | Virtualizer (Preview)                |   BasicList         |
+| PresenceBadge |      useIsOverflowItemVisible   |   Alert (Preview)                    |    makeResetStyles   |
+| Button        |   createTableColumn             |       Drawer (Preview)               |   TeachingCallout |
+| CompoundButton|  useStaticVirtualizerMeasure    |      InfoLabel (Preview)             |      Coachmark     |
+| MenuButton    | useModalAttributes              |  VirtualizerScrollView (Preview)      |     MessageBar       |
+| SplitButton   |       useObservedElement        |  InteractionTag (Preview)         |    PeoplePicker     |
+| ToggleButton  |           useFocusFinders       |        TagGroup (Preview)             |                         |
+| Card          |         useOverflowCount        |        Tag (Preview)             |                         |
+| CardFooter    |                                 |         Breadcrumb (Preview)        |                        |
+| CardHeader    |                                 |         Searchbox (Preview)         |                       |
+| CardPreview   |                                 |                                       |                      |
+| Checkbox      |                                 |       useToastController               |                     |
+| Combobox      |                                 |        createFluentIcon               |                        |
+| DataGrid      |                                  |    useHeadlessFlatTree_unstable    |                          |
+| Dialog        |                                 |bundleIcon                           |
+| Divider       |                                 |makeStyles                           |
+| Divider       |                                 |useTableFeatures                     |
 | Dropdown      |
 | Tablist       |
 | Field|
@@ -115,10 +116,10 @@ Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Aj
 cd ./{path to Client}
 
 # when using femto as a global CLI tool
-femto install FS.FluentUI --version 0.0.1-beta04
+femto install FS.FluentUI --version {newest version}
 
 # when using femto as a local CLI tool
-dotnet femto install FS.FluentUI --version 0.0.1-beta04
+dotnet femto install FS.FluentUI --version {newest version}
 ```
 This will install the nuget package and afterwards automatically installs the required npm packages used by this binding.
 
@@ -127,5 +128,5 @@ This will install the nuget package and afterwards automatically installs the re
 You can install the library manually if you want by first installing the nuget package
 ```bash
 cd ./{path to your project}
-dotnet add package FS.FluentUI --version 0.0.1-beta04
+dotnet add package FS.FluentUI --version {newest version}
 ```
