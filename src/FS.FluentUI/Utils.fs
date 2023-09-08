@@ -167,6 +167,8 @@ type [<Erase>] IBreadcrumbButtonProp = interface end
 type [<Erase>] IPartitionBreadcrumbItemsOptionsProp = interface end
 
 type [<Erase>] ISearchBoxProp = interface end
+type [<Erase>] ITagProp = interface end
+type [<Erase>] ITagGroupProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end

@@ -25,6 +25,7 @@ module FuiHelpers =
     let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
+    let [<Literal>] Tags_unstable = "@fluentui/react-tags-preview"
 
 type [<Erase>] Fui =
 
@@ -521,6 +522,8 @@ type [<Erase>] Fui =
         |> partitionBreadcrumbItems
 
     static member inline searchBox (props: ISearchBoxProp list) = createElement (import "SearchBox" Searchbox_unstable) props
+    static member inline tag (props: ITagProp list) = createElement (import "Tag" Tags_unstable) props
+    static member inline tagGroup (props: ITagGroupProp list) = createElement (import "TagGroup" Tags_unstable) props
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 
 type [<Erase>] Theme =

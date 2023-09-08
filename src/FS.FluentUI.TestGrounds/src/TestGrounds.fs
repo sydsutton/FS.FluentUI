@@ -2839,6 +2839,35 @@ let SearchBoxTest() =
         )
     ]
 
+let initialTags = [
+    {| value = "1"; children = "Tag 1" |}
+    {| value = "2"; children = "Tag 2" |}
+    {| value = "3"; children = "Tag 3" |}
+]
+
+[<ReactComponent>]
+let TagTest () =
+    let visibleTags, setVisibleTags = React.useState initialTags
+    Fui.tagGroup [
+        tagGroup.onDismiss (fun data ->
+            setVisibleTags (visibleTags |> List.filter (fun t -> t.value <> data.dismissedTagValue))
+        )
+        tagGroup.ariaLabel "Dismiss example"
+        tagGroup.children [
+            yield! visibleTags |> List.map (fun t ->
+                Fui.tag [
+                    tag.dismissible true
+                    tag.dismissIcon [
+                        prop.ariaLabel "Remove"
+                    ]
+                    tag.value t.value
+                    tag.key t.value
+                    tag.text t.children
+                ]
+            )
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -2919,6 +2948,7 @@ let mainContent model dispatch =
             fieldPropsTest
             BreadcrumbTest()
             SearchBoxTest()
+            TagTest()
         ]
     ]
 

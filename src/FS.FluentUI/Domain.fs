@@ -7,6 +7,10 @@ type DataTabster = {
     ``data-tabster``: string
 }
 
+type TagGroupDismissData = {
+    dismissedTagValue: string
+}
+
 type FieldControlProps = {
     id: string
     ``aria-labelledby`` : string

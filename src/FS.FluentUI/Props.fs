@@ -5341,3 +5341,71 @@ module searchBox =
         static member inline month = Interop.mkProperty<ISearchBoxProp> "type" "month"
         static member inline password = Interop.mkProperty<ISearchBoxProp> "type" "password"
         static member inline week = Interop.mkProperty<ISearchBoxProp> "type" "week"
+
+// -------------------------------------------------------------------------- Tag --------------------------------------------------------------------------------------
+type [<Erase>] tag =
+    inherit FelizProps.prop<ITagProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<ITagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Slot for an icon or other visual element
+    static member inline media (value:  ReactElement) = Interop.mkProperty<ITagProp> "media" value
+    /// Slot for an icon or other visual element
+    static member inline media (value:  IReactProperty list) = Interop.mkProperty<ITagProp> "media"  (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline icon (value:  ReactElement) = Interop.mkProperty<ITagProp> "icon" value
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<ITagProp> "icon"  (!!value |> createObj |> unbox<IReactProperty>)
+    /// Main text for the Tag. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: string) = Interop.mkProperty<ITagProp> "primaryText" value
+    /// Main text for the Tag. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: ReactElement) = Interop.mkProperty<ITagProp> "primaryText" value
+    /// Main text for the Tag. Children of the root slot are automatically rendered here
+    static member inline primaryText (value: IReactProperty list) = Interop.mkProperty<ITagProp> "primaryText" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: string) = Interop.mkProperty<ITagProp> "secondaryText" value
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: ReactElement) = Interop.mkProperty<ITagProp> "secondaryText" value
+    /// Secondary text that describes or complements the main text
+    static member inline secondaryText (value: IReactProperty list) = Interop.mkProperty<ITagProp> "secondaryText" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline dismissIcon (value: ReactElement) = Interop.mkProperty<ITagProp> "dismissIcon" value
+    static member inline dismissIcon (value: IReactProperty list) = Interop.mkProperty<ITagProp> "dismissIcon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// A Tag can be dismissible
+    static member inline dismissible (value: bool) = Interop.mkProperty<ITagProp> "dismissible" value
+
+module tag =
+    type [<Erase>] as' =
+        static member inline button = Interop.mkProperty<ITagProp> "as" "button"
+        static member inline span = Interop.mkProperty<ITagProp> "as" "span"
+
+    /// A Tag can have filled, outlined or brand experience.
+    type [<Erase>] appearance =
+        static member inline brand = Interop.mkProperty<ITagProp> "appearance" "brand"
+        static member inline filled = Interop.mkProperty<ITagProp> "appearance" "filled"
+        static member inline outline = Interop.mkProperty<ITagProp> "appearance" "outline"
+
+    /// A Tag can have rounded or circular shape.
+    type [<Erase>] shape =
+        static member inline circular = Interop.mkProperty<ITagProp> "shape" "circular"
+        static member inline rounded = Interop.mkProperty<ITagProp> "shape" "rounded"
+
+    /// A Tag has three sizes.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ITagProp> "size" "small"
+        static member inline extraSmall = Interop.mkProperty<ITagProp> "size" "extra-small"
+        static member inline medium = Interop.mkProperty<ITagProp> "size" "medium"
+
+
+// -------------------------------------------------------------------------- TagGroup --------------------------------------------------------------------------------------
+type [<Erase>] tagGroup =
+    inherit FelizProps.prop<ITagGroupProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<ITagGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Callback for when a tag is dismissed
+    static member inline onDismiss (handler: TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback for when a tag is dismissed
+    static member inline onDismiss (value: MouseEvent -> TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+    /// Callback for when a tag is dismissed
+    static member inline onDismiss (value: KeyboardEvent -> TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+
+module tagGroup =
+    /// A Tag has three sizes.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ITagGroupProp> "size" "small"
+        static member inline extraSmall = Interop.mkProperty<ITagGroupProp> "size" "extra-small"
+        static member inline medium = Interop.mkProperty<ITagGroupProp> "size" "medium"
