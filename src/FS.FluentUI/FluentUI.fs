@@ -18,10 +18,12 @@ module FuiHelpers =
     let [<Literal>] MergeStyles = "@fluentui/merge-styles"
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
 
+    // Preview components
     let [<Literal>] InfoButton_unstable = "@fluentui/react-infobutton"
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
     let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
+    let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
 
 type [<Erase>] Fui =
 
@@ -102,7 +104,7 @@ type [<Erase>] Fui =
         |> makeResetStyles
 
     [<Hook>]
-    static member inline useOverflowMenu (?id: string option): OverflowMenuOptions = import "useOverflowMenu" FluentUIv9
+    static member inline useOverflowMenu (id: string option): OverflowMenuOptions<'Element> = import "useOverflowMenu" FluentUIv9
 
     /// Number of items that are overflowing
     [<Hook>]
@@ -502,6 +504,20 @@ type [<Erase>] Fui =
     static member inline treeItemLayout (props: ReactElement list) = Interop.reactElementWithChildren (import "TreeItemLayout" FluentUIv9) props
     static member inline treeItemLayout (props: ITreeItemLayoutProp list) = createElement (import "TreeItemLayout" FluentUIv9) props
     static member inline treeItemPersonaLayout (props: ITreeItemPersonaLayoutProp list) = createElement (import "TreeItemPersonaLayout" FluentUIv9) props
+    // Breadcrumb
+    static member inline breadcrumb (props: IBreadcrumbProp list) = createElement (import "Breadcrumb" Breadcrumb_unstable) props
+    static member inline breadcrumb (props: ReactElement list) = Interop.reactElementWithChildren (import "Breadcrumb" Breadcrumb_unstable) props
+    static member inline breadcrumbItem (props: IBreadcrumbItemProp list) = createElement (import "BreadcrumbItem" Breadcrumb_unstable) props
+    static member inline breadcrumbItem (props: ReactElement list) = Interop.reactElementWithChildren (import "BreadcrumbItem" Breadcrumb_unstable) props
+    static member inline breadcrumbButton (props: IBreadcrumbButtonProp list) = createElement (import "BreadcrumbButton" Breadcrumb_unstable) props
+    static member inline breadcrumbDivider (props: IBreadcrumbDividerProp list) = createElement (import "BreadcrumbDivider" Breadcrumb_unstable) props
+    static member inline partitionBreadcrumbItems (options: IPartitionBreadcrumbItemsOptionsProp list): PartitionBreadcrumbItems<'T> =
+        let partitionBreadcrumbItems = import "partitionBreadcrumbItems" Breadcrumb_unstable
+
+        !!options
+        |> createObj
+        |> unbox<PartitionBreadcrumbItemsOptions<'T>>
+        |> partitionBreadcrumbItems
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 

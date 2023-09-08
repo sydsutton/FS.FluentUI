@@ -1731,6 +1731,7 @@ let overflowClass =
         style.resize.horizontal;
         style.border (1, borderStyle.solid, "lightGray");
         style.padding 16
+        style.zIndex 0
     ]
 
 [<ReactComponent>]
@@ -2152,7 +2153,7 @@ let simpleTreeTest =
         ]
     ]
 
-type Column = { ColumnKey: string; Label: string }
+type Column = { Columnkey: string; Label: string }
 type Icon = { Label: string; Icon: ReactElement }
 type Status = { Label: string; Status: IPresenceBadgeProp list }
 type TimeStamp = { Label: string; TimeStamp: int }
@@ -2603,6 +2604,215 @@ let FlatTreeTest() =
         ]
     ]
 
+type ButtonProps = {
+    onClick: MouseEvent -> unit
+    icon: ReactElement
+    disabled: bool
+}
+
+type ButtonItem = {
+    key: int
+    item: string
+    buttonProps: IBreadcrumbButtonProp list
+}
+
+[<ReactComponent>]
+let RenderButton (button: ButtonItem) (isLastItem: bool) =
+    React.fragment [
+        Fui.overflowItem [
+            overflowItem.key (button.key |> string)
+            overflowItem.priority (if isLastItem then button.key else 0)
+            overflowItem.groupId (button.key |> string)
+            overflowItem.children (
+                Fui.breadcrumbItem [
+                    Fui.breadcrumbButton [
+                        yield! button.buttonProps
+                        breadcrumbButton.current isLastItem
+                        breadcrumbButton.text button.item
+                    ]
+                ]
+            )
+        ]
+        if isLastItem |> not then
+            Fui.overflowDivider [
+                overflowDivider.groupId button.key
+                overflowDivider.children (
+                    Fui.breadcrumbDivider [
+                        breadcrumbDivider.custom ("data-group", button.key)
+                    ]
+                )
+            ]
+    ]
+
+[<ReactComponent>]
+let OverflowBreadcrumbButton id item (key: int) =
+    let isVisible = Fui.useIsOverflowItemVisible (id)
+
+    if isVisible then
+        Html.none
+    else
+        Fui.menuItem [
+            yield! (item.buttonProps |> unbox<IMenuItemProp list>)
+            menuItem.text item.item
+            menuItem.key key
+        ]
+
+[<ReactComponent>]
+let ControlledOverflowMenu (props: PartitionBreadcrumbItems<ButtonItem>) =
+    let options = Fui.useOverflowMenu (None) //TODO isOverflowing stays false
+
+    if options.isOverflowing |> not && props.overflowItems.Length = 0 then
+        Html.none
+    else
+    Fui.menu [
+        menu.hasIcons true
+        menu.children [
+            Fui.menuTrigger [
+                menuTrigger.disableButtonEnhancement true
+                menuTrigger.children (
+                    Fui.button [
+                        button.style [ style.alignSelf.center ]
+                        button.appearance.transparent
+                        button.ref options.ref
+                        button.icon (
+                            Fui.icon.moreHorizontalRegular []
+                        )
+                        button.ariaLabel (sprintf "%i more tabs" options.overflowCount)
+                        button.role "tab"
+                    ]
+                )
+            ]
+            Fui.menuPopover [
+                Fui.menuList [
+                    if options.isOverflowing then
+                        yield! props.startDisplayedItems |> Seq.map (fun b ->
+                            OverflowBreadcrumbButton (b.key |> string) b b.key
+                        )
+                    if props.overflowItems.Length <> 0 then
+                        yield! props.overflowItems |> Seq.map (fun b ->
+                            OverflowBreadcrumbButton (b.key |> string) b b.key
+                        )
+                    if options.isOverflowing && props.endDisplayedItems.Length <> 0 then
+                        yield! props.endDisplayedItems |> Seq.map (fun b ->
+                            OverflowBreadcrumbButton (b.key |> string) b b.key
+                        )
+                ]
+            ]
+        ]
+    ]
+
+let stackOverflowClass = Fui.mkMergeStyles [
+    style.backgroundColor tokens.colorNeutralBackground2
+    style.overflow.hidden
+    style.padding 5
+    style.height 50
+    style.minWidth 150
+    style.zIndex 0
+    style.resize.horizontal
+    style.maxWidth 600
+]
+
+let buttonItems = [|
+    {
+        key = 0
+        item = "Item 0"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 0 was clicked")
+            breadcrumbButton.icon Html.none
+        ]
+    }
+    {
+        key = 1
+        item = "Item 1"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 1 was clicked")
+            breadcrumbButton.icon (Fui.icon.calendarMonthRegular [])
+        ]
+    }
+    {
+        key = 2
+        item = "Item 2"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 2 was clicked")
+        ]
+    }
+    {
+        key = 3
+        item = "Item 3"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 3 was clicked")
+        ]
+    }
+    {
+        key = 4
+        item= "Item 4"
+        buttonProps= [
+            breadcrumbButton.onClick (fun _ -> printfn "item 4 was clicked")
+        ]
+    }
+    {
+        key = 5
+        item = "Item 5"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 5 was clicked")
+            breadcrumbButton.icon (Fui.icon.calendarMonthRegular [])
+        ]
+    }
+    {
+        key = 6
+        item = "Item 6"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 6 was clicked")
+            breadcrumbButton.disabled true
+        ]
+    }
+    {
+        key = 7
+        item = "Item 7"
+        buttonProps = [
+            breadcrumbButton.onClick (fun _ -> printfn "item 7 was clicked")
+        ]
+    }
+|]
+
+
+[<ReactComponent>]
+let BreadcrumbTest () =
+    let partitionBreadcrumbItems = Fui.partitionBreadcrumbItems [
+        partitionBreadcrumbItemsOptions.items buttonItems
+        partitionBreadcrumbItemsOptions.maxDisplayedItems 4
+    ]
+
+    let startItems, overflowItems, endItems =
+        partitionBreadcrumbItems.startDisplayedItems,
+        partitionBreadcrumbItems.overflowItems,
+        partitionBreadcrumbItems.endDisplayedItems
+
+    Fui.stack [
+        stack.horizontal true
+        stack.className overflowClass
+        stack.children [
+            Fui.overflow [
+                overflow.children (
+                    Fui.breadcrumb [
+                        yield! startItems |> Array.map (fun b -> RenderButton b false) |> Array.toList
+                        ControlledOverflowMenu partitionBreadcrumbItems
+                        Fui.breadcrumbDivider []
+                        if endItems.Length <> 0 then
+                            yield!
+                                endItems
+                                |> Array.map (fun b ->
+                                    let isLastItem = b.key = buttonItems.Length - 1
+                                    RenderButton b isLastItem
+                                )
+                                |> Array.toList
+                    ]
+                )
+            ]
+        ]
+    ]
+
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -2681,6 +2891,7 @@ let mainContent model dispatch =
             UseFocusFindersTest()
             UseModalAttributesOptionsTest()
             fieldPropsTest
+            BreadcrumbTest()
         ]
     ]
 

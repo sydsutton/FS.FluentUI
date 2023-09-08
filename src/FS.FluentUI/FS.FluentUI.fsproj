@@ -39,6 +39,7 @@
         <NpmDependencies>
             <NpmPackage Name="@fluentui/react-components" Version="&gt;= 9.3.0" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gt;= 0.3.5" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="&gt;= 0.3.8" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

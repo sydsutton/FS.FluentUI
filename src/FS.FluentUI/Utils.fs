@@ -160,6 +160,12 @@ type [<Erase>] IUseFocusableGroupOptionsProp = interface end
 type [<Erase>] IVirtualizerMeasurePropsProp = interface end
 type [<Erase>] IUseModalAttributesOptionsProp = interface end
 
+type [<Erase>] IBreadcrumbProp = interface end
+type [<Erase>] IBreadcrumbItemProp = interface end
+type [<Erase>] IBreadcrumbDividerProp = interface end
+type [<Erase>] IBreadcrumbButtonProp = interface end
+type [<Erase>] IPartitionBreadcrumbItemsOptionsProp = interface end
+
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
 

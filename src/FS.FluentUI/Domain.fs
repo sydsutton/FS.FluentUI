@@ -15,6 +15,18 @@ type FieldControlProps = {
     ``aria-required`` : bool
 }
 
+type PartitionBreadcrumbItemsOptions<'T> = {
+    items: array<'T>
+    maxDisplayedItems: int
+    overflowIndex: int
+}
+
+type PartitionBreadcrumbItems<'T> = {
+    endDisplayedItems: array<'T>
+    overflowItems: array<'T>
+    startDisplayedItems: array<'T>
+}
+
 module FieldControlProps =
     let toReactProperties (props: FieldControlProps): IReactProperty list =
         [
@@ -202,8 +214,8 @@ type FocusProp = {
     focus: unit -> unit
 }
 
-type OverflowMenuOptions = {
-    ref: IRefValue<Browser.Types.HTMLElement option>
+type OverflowMenuOptions<'Element> = {
+    ref: IRefValue<'Element option>
     overflowCount: int
     isOverflowing: bool
 }

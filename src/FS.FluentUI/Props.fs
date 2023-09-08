@@ -3560,6 +3560,12 @@ type [<Erase>] overflowItem  =
 type [<Erase>] overflowDivider  =
     /// Assigns the item to a group, group visibility can be watched.
     static member inline groupId (value: string) = Interop.mkProperty<IOverflowDividerProp> "groupId" value
+    /// Assigns the item to a group, group visibility can be watched.
+    static member inline groupId (value: int) = Interop.mkProperty<IOverflowDividerProp> "groupId" value
+    /// Assigns the item to a group, group visibility can be watched.
+    static member inline groupId (value: float) = Interop.mkProperty<IOverflowDividerProp> "groupId" value
+    /// Assigns the item to a group, group visibility can be watched.
+    static member inline groupId (value: decimal) = Interop.mkProperty<IOverflowDividerProp> "groupId" value
     /// The single child that has overflow item behavior attached.
     static member inline children (value: ReactElement) = Interop.mkProperty<IOverflowDividerProp> "children" value
 
@@ -5175,3 +5181,98 @@ type [<Erase>] dateFormatting =  //TODO figure out how to use these props
     static member inline formatMonthDayYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthDayYear" (System.Func<_,_,_> value)
     /// Get a localized string for a month and year.
     static member inline formatMonthYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthYear" (System.Func<_,_,_> value)
+
+// -------------------------------------------------------------------------- Breadcrumb --------------------------------------------------------------------------------------
+type [<Erase>] breadcrumb =
+    inherit FelizProps.prop<IBreadcrumbProp>
+    /// Root element of the component.
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Ordered list which contains items.
+    static member inline list (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbProp> "list" (!!value |> createObj |> unbox<IReactProperty>)
+
+module breadcrumb =
+    type [<Erase>] as' =
+        static member inline nav = Interop.mkProperty<IBreadcrumbProp> "as" "nav"
+
+    /// Breadcrumb appearance.
+    type [<Erase>] appearance =
+        static member inline transparent = Interop.mkProperty<IBreadcrumbProp> "appearance" "transparent"
+        static member inline subtle = Interop.mkProperty<IBreadcrumbProp> "appearance" "subtle"
+
+    /// Sets the focus behavior for the Breadcrumb.
+    type [<Erase>] focusMode =
+        /// This behaviour will cycle through all elements inside of the Breadcrumb when pressing the Tab key and then release focus after the last inner element.
+        static member inline tab = Interop.mkProperty<IBreadcrumbProp> "focusMode" "tab"
+        /// This behaviour will cycle through all elements inside of the Breadcrumb when pressing the Arrow key.
+        static member inline arrow = Interop.mkProperty<IBreadcrumbProp> "focusMode" "arrow"
+    /// Controls type of the divider.
+    type [<Erase>] dividerType =
+        static member inline chevron = Interop.mkProperty<IBreadcrumbProp> "dividerType" "chevron"
+        static member inline slash = Interop.mkProperty<IBreadcrumbProp> "dividerType" "slash"
+
+    /// Controls size of Breadcrumb items and dividers.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IBreadcrumbProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IBreadcrumbProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IBreadcrumbProp> "size" "large"
+
+// -------------------------------------------------------------------------- BreadcrumbItem --------------------------------------------------------------------------------------
+type [<Erase>] breadcrumbItem =
+    inherit FelizProps.prop<IBreadcrumbItemProp>
+    /// Root element of the component.
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Ordered list which contains items.
+    static member inline list (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbItemProp> "list" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Defines current sate of the BreadcrumbItem.
+    static member inline current (value: bool) = Interop.mkProperty<IBreadcrumbItemProp> "current" value
+
+module breadcrumbItem =
+
+    /// Controls size of Breadcrumb items and dividers.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IBreadcrumbItemProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IBreadcrumbItemProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IBreadcrumbItemProp> "size" "large"
+
+// -------------------------------------------------------------------------- BreadcrumbDivider --------------------------------------------------------------------------------------
+type [<Erase>] breadcrumbDivider =
+    inherit FelizProps.prop<IBreadcrumbDividerProp>
+    /// Root element of the component.
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+// -------------------------------------------------------------------------- BreadcrumbButton --------------------------------------------------------------------------------------
+type [<Erase>] breadcrumbButton =
+    inherit FelizProps.prop<IBreadcrumbButtonProp>
+    /// Root of the component that renders as either a `<button>` tag or an `<a>` tag.
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbButtonProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IBreadcrumbButtonProp> "icon" value
+    /// Defines current sate of BreadcrumbButton.
+    static member inline current (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "current" value
+    static member inline disabled (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "disabled" value
+
+module breadcrumbButton =
+
+    /// Breadcrumb appearance.
+    type [<Erase>] appearance =
+        static member inline transparent = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "transparent"
+        static member inline subtle = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "subtle"
+
+    /// Controls size of Breadcrumb items and dividers.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IBreadcrumbButtonProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IBreadcrumbButtonProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IBreadcrumbButtonProp> "size" "large"
+
+
+// -------------------------------------------------------------------------- PartitionBreadcrumbItemsOptions --------------------------------------------------------------------------------------
+type [<Erase>] partitionBreadcrumbItemsOptions =
+    static member inline items (value: #seq<'T>) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "items" value
+    static member inline maxDisplayedItems (value: int) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "maxDisplayedItems" value
+    static member inline maxDisplayedItems (value: float) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "maxDisplayedItems" value
+    static member inline maxDisplayedItems (value: decimal) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "maxDisplayedItems" value
+    static member inline overflowIndex (value: int) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
+    static member inline overflowIndex (value: float) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
+    static member inline overflowIndex (value: decimal) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
