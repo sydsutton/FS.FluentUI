@@ -11,6 +11,7 @@
     "@fluentui/react-components": "^9.30.0",
     "@fluentui/react-datepicker-compat": "^0.3.5",
     "@fluentui/react-migration-v8-v9": "^9.4.13",
+    "@fluentui/react-search-preview": "^0.1.15",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "use-sync-external-store": "^1.2.0"

@@ -5276,3 +5276,68 @@ type [<Erase>] partitionBreadcrumbItemsOptions =
     static member inline overflowIndex (value: int) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
     static member inline overflowIndex (value: float) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
     static member inline overflowIndex (value: decimal) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
+
+
+// -------------------------------------------------------------------------- Searchbox --------------------------------------------------------------------------------------
+type [<Erase>] searchBox =
+    inherit FelizProps.prop<ISearchBoxProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Hidden input that handles the checkbox's functionality.
+    /// This is the PRIMARY slot: all native properties specified directly on <Input> will be applied to this slot, except className and style, which remain on the root slot.
+    static member inline input (value: ReactElement) = Interop.mkProperty<ISearchBoxProp> "input" value
+    /// Hidden input that handles the checkbox's functionality.
+    /// This is the PRIMARY slot: all native properties specified directly on <Input> will be applied to this slot, except className and style, which remain on the root slot.
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "input" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Element before the input text, within the input border
+    static member inline contentBefore (value: ReactElement) = Interop.mkProperty<ISearchBoxProp> "contentBefore" value
+    /// Element before the input text, within the input border
+    static member inline contentBefore (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "contentBefore" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Element after the input text, within the input border
+    static member inline contentAfter (value: ReactElement) = Interop.mkProperty<ISearchBoxProp> "contentAfter" value
+    /// Element after the input text, within the input border
+    static member inline contentAfter (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "contentAfter" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline dismiss (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "dismiss" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Default value of the input. Provide this if the input should be an uncontrolled component which tracks its current state internally; otherwise, use value.
+    /// (This prop is mutually exclusive with value.)
+    static member inline defaultValue (value: string) = Interop.mkProperty<ISearchBoxProp> "defaultValue" value
+    /// Current value of the input. Provide this if the input is a controlled component where you are maintaining its current state; otherwise, use defaultValue.
+    /// (This prop is mutually exclusive with defaultValue.)
+    static member inline value (value: string) = Interop.mkProperty<ISearchBoxProp> "value" value
+    /// Called when the user changes the input's value.
+    static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<ISearchBoxProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Called when the user changes the input's value.
+    static member inline onChange (value: ChangeEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ISearchBoxProp> "onChange" (System.Func<_,_,_> value)
+
+module searchBox =
+    /// Size of the input (changes the font size and spacing).
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ISearchBoxProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ISearchBoxProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ISearchBoxProp> "size" "large"
+
+    /// Controls the colors and borders of the input.
+    type [<Erase>] appearance =
+        static member inline outline = Interop.mkProperty<ISearchBoxProp> "appearance" "outline"
+        static member inline underline = Interop.mkProperty<ISearchBoxProp> "appearance" "underline"
+        static member inline filledDarker = Interop.mkProperty<ISearchBoxProp> "appearance" "filled-darker"
+        static member inline filledLighter = Interop.mkProperty<ISearchBoxProp> "appearance" "filled-lighter"
+        /// WARNING: 'filled-darker-shadow' and 'filled-lighter-shadow' are deprecated and will be removed in the future.
+        [<Obsolete>] static member inline filledDarkerShadow = Interop.mkProperty<ISearchBoxProp> "appearance" "filled-darker-shadow"
+        /// WARNING: 'filled-darker-shadow' and 'filled-lighter-shadow' are deprecated and will be removed in the future.
+        [<Obsolete>] static member inline filledLighterShadow = Interop.mkProperty<ISearchBoxProp> "appearance" "filled-lighter-shadow"
+
+  /// An input can have different text-based types based on the type of value the user will enter.
+    /// Note that no custom styling is currently applied for alternative types, and some types may activate browser-default styling which does not match the Fluent design language.
+    type [<Erase>] type' =
+        static member inline number = Interop.mkProperty<ISearchBoxProp> "type" "number"
+        static member inline time = Interop.mkProperty<ISearchBoxProp> "type" "time"
+        static member inline text = Interop.mkProperty<ISearchBoxProp> "type" "text"
+        static member inline search = Interop.mkProperty<ISearchBoxProp> "type" "search"
+        static member inline tel = Interop.mkProperty<ISearchBoxProp> "type" "tel"
+        static member inline url = Interop.mkProperty<ISearchBoxProp> "type" "url"
+        static member inline email = Interop.mkProperty<ISearchBoxProp> "type" "email"
+        static member inline date = Interop.mkProperty<ISearchBoxProp> "type" "date"
+        static member inline datetimeLocal = Interop.mkProperty<ISearchBoxProp> "type" "datetime-local"
+        static member inline month = Interop.mkProperty<ISearchBoxProp> "type" "month"
+        static member inline password = Interop.mkProperty<ISearchBoxProp> "type" "password"
+        static member inline week = Interop.mkProperty<ISearchBoxProp> "type" "week"

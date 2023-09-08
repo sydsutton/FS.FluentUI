@@ -2812,6 +2812,32 @@ let BreadcrumbTest () =
         ]
     ]
 
+[<ReactComponent>]
+let SearchBoxTest() =
+    let value, setValue = React.useState ("initial value")
+    let valid, setValid = React.useState true
+    Fui.field [
+        field.label "Controlled SearchBox limiting the value to 20 characters"
+        if valid then field.validationState.none else field.validationState.warning
+        field.validationMessage (if valid then "" else "Input is limited to 20 characters.")
+        field.children (
+            Fui.searchBox [
+                searchBox.value value
+                searchBox.contentBefore (
+                    Fui.icon.searchInfoFilled [
+                        icon.onClick (fun _ -> printfn "Search clicked")
+                    ]
+                )
+                searchBox.onChange (fun (v: ValueProp<string>) ->
+                    if v.value.Length <= 20 then
+                        setValue v.value
+                        setValid true
+                    else
+                        setValid false
+                )
+            ]
+        )
+    ]
 
 let mainContent model dispatch =
 
@@ -2892,6 +2918,7 @@ let mainContent model dispatch =
             UseModalAttributesOptionsTest()
             fieldPropsTest
             BreadcrumbTest()
+            SearchBoxTest()
         ]
     ]
 
