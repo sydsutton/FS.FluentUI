@@ -5459,7 +5459,7 @@ type [<Erase>] interactionTagPrimary =
     /// Secondary text that describes or complements the main text
     static member inline secondaryText (value: IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" (!!value |> createObj |> unbox<IReactProperty>)
     /// Whether the InteractionTag component has a Secondary component that provides an secondary action. If true, the InteractionTagPrimary component will adjust its styles to accommodate the Secondary component.
-    static member inline hasSecondaryAction (value: bool) = Interop.mkProperty<IInteractionTagPrimaryProp> "secondaryText" value
+    static member inline hasSecondaryAction (value: bool) = Interop.mkProperty<IInteractionTagPrimaryProp> "hasSecondaryAction" value
 
 module interactionTagPrimary =
     type [<Erase>] as' =
