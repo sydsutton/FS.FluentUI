@@ -709,7 +709,7 @@ let TextAreaTest () =
 let SliderTest() =
     let id = Fui.useId(None, None)
     let value, setValue = React.useState (100)
-    let valueText : string = sprintf "Current Value: %i" value
+    let valueText = $"Current Value: {value}"
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -784,7 +784,7 @@ let RadioGroupTest() =
             ]
             Fui.text [
                 text.style [ style.width 200 ]
-                text.text (sprintf "Favorite fruit: %s" value)
+                text.text $"Favorite fruit: {value}"
             ]
         ]
     ]
@@ -889,7 +889,7 @@ let SpinButtonTest() =
                         setDisplayValue "null"
                     | Some v ->
                         setValue (Some v)
-                        setDisplayValue (sprintf "$%i" v)
+                        setDisplayValue $"{v}"
                 )
             ]
         ]
@@ -1678,7 +1678,7 @@ let DatePickerTest() =
                             ]
                             calendar.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )
                         ]
-                        datePicker.formatDate (fun d -> sprintf "Custom render: %s" (d.ToShortDateString())
+                        datePicker.formatDate (fun d -> $"Custom render: {(d.ToShortDateString())}"
                         )
                     ]
                 )
@@ -1720,29 +1720,17 @@ let badgeTest =
         badge.shape.square
     ]
 
-let overflowClass =
-    Fui.mkMergeStyles [
-        style.overflow.hidden;
-        style.display.flex;
-        style.flexWrap.nowrap;
-        style.minWidth 200;
-        style.maxWidth 900;
-        style.height 30;
-        style.resize.horizontal;
-        style.border (1, borderStyle.solid, "lightGray");
-        style.padding 16
-        style.zIndex 0
-    ]
 
 [<ReactComponent>]
 let OverflowMenuItem (key: string) (id: string)=
+
     let isVisible = Fui.useIsOverflowItemVisible(id)
     if isVisible then
         Html.none
     else
         Fui.menuItem [
             menuItem.key key
-            menuItem.text (sprintf "Item %A" id)
+            menuItem.text $"Item {id}"
         ]
 
 [<ReactComponent>]
@@ -1764,7 +1752,7 @@ let OverflowMenu itemIds =
                 menuTrigger.children (
                     Fui.menuButton [
                         menuButton.ref options.ref
-                        menuButton.text (sprintf "+%i items" options.overflowCount)
+                        menuButton.text $"+{options.overflowCount} items"
                     ]
                 )
             ]
@@ -1793,7 +1781,7 @@ let OverflowTest ()=
                             overflowItem.id i
                             overflowItem.children (
                                 Fui.button [
-                                    button.text (sprintf "Item %s" i)
+                                    button.text $"Item {i}"
                                 ]
                             )
                         ]
@@ -1960,9 +1948,9 @@ let VirtualizerTest() =
                             style.lineHeight 100
                             style.width (length.percent 100)
                         ]
-                        prop.key (sprintf "test-virtualizer-child-%A" index)
+                        prop.key $"test-virtualizer-child-{index}"
                         prop.children [
-                            Fui.text (sprintf "Node-%A" index)
+                            Fui.text $"Node-{index}"
                         ]
                     ]
                 )
@@ -1991,7 +1979,7 @@ let VirtualizerScrollViewTest() =
                     style.width (length.percent 100)
                     style.height (length.percent 100)
                 ]
-                button.text (sprintf "Node-%A" index)
+                button.text $"Node-{index}"
             ]
         )
     ]
@@ -2415,7 +2403,7 @@ let UseFocusFindersTest() =
                 style.borderRadius 5
             ]
             prop.children [
-                Fui.text.body1Stronger (sprintf "%i focusable elements below" count)
+                Fui.text.body1Stronger $"{count} focusable elements below"
             ]
         ]
         Html.div [
@@ -2677,7 +2665,7 @@ let ControlledOverflowMenu (props: PartitionBreadcrumbItems<ButtonItem>) =
                         button.icon (
                             Fui.icon.moreHorizontalRegular []
                         )
-                        button.ariaLabel (sprintf "%i more tabs" options.overflowCount)
+                        button.ariaLabel $"{options.overflowCount} more tabs"
                         button.role "tab"
                     ]
                 )
