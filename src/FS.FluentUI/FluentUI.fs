@@ -6,6 +6,10 @@ open Fable.Core.JsInterop
 open Feliz
 open FS.FluentUI
 
+module internal Shorthand =
+
+    let expand (style): obj = import "expand" "./inline-style-expand-shorthand/index.js"
+
 [<AutoOpen; System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)>]
 module FuiHelpers =
 
@@ -15,7 +19,6 @@ module FuiHelpers =
 
     let [<Literal>] FluentUIv9 = "@fluentui/react-components"
     let [<Literal>] FluentIcons = "@fluentui/react-icons"
-    let [<Literal>] MergeStyles = "@fluentui/merge-styles"
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
 
     // Preview components
@@ -30,34 +33,6 @@ module FuiHelpers =
 type [<Erase>] Fui =
 
 //---------------------------------------------------------------- Functions --------------------------------------------------------------------------------
-
-    static member inline mergeStyles (displayName:string, styles:IStyleAttribute list) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
-
-        !!styles
-        |> List.append [ "displayName" ==> displayName ]
-        |> createObj
-        |> unbox<ResizeArray<IStyle>>
-        |> mergeStyles
-
-    static member inline mergeStyles (styles:IStyleAttribute list) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
-
-        !!styles
-        |> createObj
-        |> unbox<ResizeArray<IStyle>>
-        |> mergeStyles
-
-    static member inline mkMergeStyles (styles:list<IStyleAttribute>, ?displayName:string) =
-        let mergeStyles : ResizeArray<IStyle> -> string = import "mergeStyles" MergeStyles
-
-        match displayName, styles with
-        | None, s -> s
-        | Some d, s -> s |> List.append [ !!("displayName", d) ]
-        |> unbox<seq<string*obj>>
-        |> createObj
-        |> unbox<ResizeArray<IStyle>>
-        |> mergeStyles
 
     /// A hook that returns the necessary tabster attributes to support arrow key navigation
     /// @param options - Options to configure keyboard navigation
@@ -96,6 +71,38 @@ type [<Erase>] Fui =
     static member inline partitionAvatarGroupItems (options: IPartitionAvatarGroupItemsOptionsProp list): PartitionAvatarGroupItems<'T> =
         let partitionAvatarGroupItems = import "partitionAvatarGroupItems" FluentUIv9
         !!options |> createObj |> partitionAvatarGroupItems
+
+
+    /// The makeStyles function accepts a list<key * value> where each key is a unique identifier in string form and each value is a list of IStyleAttributes.
+    /// The call returns an object with classes mapped to these unique identifiers.
+    ///
+    /// Type annotation on the useStyles function is necessary for using makeStyles.
+    ///
+    /// Example:
+    ///```
+    /// *outside of function*
+    ///type Styles = { root: string }
+    ///let useStyles: unit -> Styles = Fui.makeStyles [ "root", [ style.display.flex; style.flexDirection.row ] ]
+    ///
+    ///*inside of function*
+    ///let styles = useStyles()
+    ///{component}.className styles.root
+    /// ```
+    static member makeStyles (stylesBySlots: list<string * list<IStyleAttribute>>): unit -> 'T =
+        let makeStyles = import "makeStyles" FluentUIv9
+
+        match stylesBySlots with
+        | [] -> fun _ -> {||} |> unbox
+        | stylesBySlots ->
+            [
+                for (name, styles) in stylesBySlots do
+                    // Using hard-coded files from inline-style-expand-shorthand. Otherwise you run into an issue where
+                    // mixed shorthand and longhand properties are applied in an unexpected way due to the rendering order of CSS classes.
+                    name, !!styles |> createObj |> Shorthand.expand
+            ]
+            |> unbox
+            |> createObj
+            |> makeStyles
 
     static member inline makeResetStyles (styles: IStyleAttribute list): unit -> string =
         let makeResetStyles : ResizeArray<IStyle> -> unit -> string = import "makeResetStyles" FluentUIv9
