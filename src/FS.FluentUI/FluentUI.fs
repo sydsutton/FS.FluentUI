@@ -8,7 +8,7 @@ open FS.FluentUI
 
 module internal Shorthand =
 
-    let expand (style): obj = import "expand" "./inline-style-expand-shorthand/index.js"
+    let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"
 
 [<AutoOpen; System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)>]
 module FuiHelpers =
