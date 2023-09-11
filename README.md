@@ -115,10 +115,16 @@ I have done my best so far to keep usage of these similar to Typescript usage in
 ## Styling
 
 Fluent UI React v9 provides design `tokens` for consistent theming.
+❌ style.color.darkBlue
+✅ style.color Theme.tokens.colorBrandForeground1
 
 Although `shorthands` is used extensively throughout the Microsoft [documentation](https://react.fluentui.dev/?path=/docs/concepts-introduction--page), it is not necessary here when using `makeStyles` or `makeResetStyles`; I'm expanding any shorthand styling properties under-the-hood.
 
 `makeStyles` is used to define style permutations in components and is used for style overrides. It returns a React hook that should be called inside a component:
+
+When using single numeric values in `makeStyles` or `makeResetStyles`, specify the value's `length`.
+❌ style.minWidth 200
+✅ style.minWidth (length.px 200)
 
 ```fsharp
 open Feliz
