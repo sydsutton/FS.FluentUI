@@ -7,30 +7,40 @@
 ### ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
 
 #### Please see ```src/FS.FluentUI.TestGrounds/src/TestGrounds.fs``` for examples of every component
+
+#### NOTE: I've created FS.FluentUI.V8toV9 in order to use Stack, StackItem, and createBrandVariants (from V8 theme). See example of Stack below.
+
 ```fsharp
+open Feliz
+open Browser.Dom
 open FS.FluentUI
+open FS.FluentUI.V8toV9
 
 [<ReactComponent>]
 let ToggleButtons () =
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
-    Html.div [
-        Fui.toggleButton [
-            toggleButton.icon (Fui.icon.checkbox1Filled [])
-            toggleButton.checked' isChecked1
-            toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
-            toggleButton.text "Checked state"
-        ]
-        Fui.toggleButton [
-            toggleButton.appearance.primary
-            toggleButton.checked' isChecked2
-            toggleButton.onClick (fun _ -> setIsChecked2 (isChecked2 |> not))
-            toggleButton.text "Unchecked state"
-        ]
-        Fui.toggleButton [
-            toggleButton.shape.circular
-            toggleButton.disabledFocusable true
-            toggleButton.text "Disabled focusable"
+    Fui.stack [
+        stack.horizontal true
+        stack.tokens [ stack.tokens.childrenGap 16 ]
+        stack.children [
+            Fui.toggleButton [
+                toggleButton.icon (Fui.icon.checkbox1Filled [])
+                toggleButton.checked' isChecked1
+                toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
+                toggleButton.text "Checked state"
+            ]
+            Fui.toggleButton [
+                toggleButton.appearance.primary
+                toggleButton.checked' isChecked2
+                toggleButton.onClick (fun _ -> setIsChecked2 (isChecked2 |> not))
+                toggleButton.text "Unchecked state"
+            ]
+            Fui.toggleButton [
+                toggleButton.shape.circular
+                toggleButton.disabledFocusable true
+                toggleButton.text "Disabled focusable"
+            ]
         ]
     ]
 
@@ -45,6 +55,7 @@ root.render (
 )
 
 ```
+
 ## Components / Hooks
 If you don't see a component/ hook in this list.... just wait longer!
 
@@ -55,22 +66,22 @@ If you don't see a component/ hook in this list.... just wait longer!
 | AvatarGroup   |           useFocusableGroup     |     Table                            |   SwatchColorPicker  |
 | Badge         |   partitionAvatarGroupItems     |VirtualizerScrollViewDynamic (Preview) |     Rating           |
 | CounterBadge  |           useOverflowMenu       | Virtualizer (Preview)                |   BasicList         |
-| PresenceBadge |      useIsOverflowItemVisible   |   Alert (Preview)                    |    makeResetStyles   |
+| PresenceBadge |      useIsOverflowItemVisible   |   Alert (Preview)                    |   PeoplePicker       |
 | Button        |   createTableColumn             |       Drawer (Preview)               |   TeachingCallout |
 | CompoundButton|  useStaticVirtualizerMeasure    |      InfoLabel (Preview)             |      Coachmark     |
 | MenuButton    | useModalAttributes              |  VirtualizerScrollView (Preview)      |     MessageBar       |
-| SplitButton   |       useObservedElement        |  InteractionTag (Preview)         |    PeoplePicker     |
+| SplitButton   |       useObservedElement        |  InteractionTag (Preview)         |                          |
 | ToggleButton  |           useFocusFinders       |        TagGroup (Preview)             |                         |
 | Card          |         useOverflowCount        |        Tag (Preview)             |                         |
-| CardFooter    |                                 |         Breadcrumb (Preview)        |                        |
-| CardHeader    |                                 |         Searchbox (Preview)         |                       |
+| CardFooter    |        makeResetStyles          |         Breadcrumb (Preview)        |                        |
+| CardHeader    |      makeStyles                 |         Searchbox (Preview)         |                       |
 | CardPreview   |                                 |                                       |                      |
 | Checkbox      |                                 |       useToastController               |                     |
 | Combobox      |                                 |        createFluentIcon               |                        |
 | DataGrid      |                                  |    useHeadlessFlatTree_unstable    |                          |
 | Dialog        |                                 |bundleIcon                           |
-| Divider       |                                 |makeStyles                           |
-| Divider       |                                 |useTableFeatures                     |
+| Divider       |                                 |useTableFeatures                         |
+| Divider       |                                 |
 | Dropdown      |
 | Tablist       |
 | Field|
@@ -99,7 +110,88 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Tooltip|
 
 I have done my best so far to keep usage of these similar to Typescript usage in the docs. See docs for more usage examples:
-Microsoft Documentation: [Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
+[Microsoft Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
+
+## Styling
+
+Fluent UI React v9 provides design `tokens` for consistent theming.
+
+Although `shorthands` is used extensively throughout the Microsoft [documentation](https://react.fluentui.dev/?path=/docs/concepts-introduction--page), it is not necessary here when using `makeStyles` or `makeResetStyles`; I'm expanding any shorthand styling properties under-the-hood.
+
+`makeStyles` is used to define style permutations in components and is used for style overrides. It returns a React hook that should be called inside a component:
+
+```fsharp
+open Feliz
+open FS.FluentUI
+
+let tokens = Theme.tokens
+
+type Styles = {
+    accordion: string
+    useArrowNavigationGroup: string
+    tooltip: string
+    icon: string
+    compoundButton: string
+}
+
+let useStyles: unit -> Styles = Fui.makeStyles [
+    "accordion", [
+        style.color.red
+        style.backgroundColor.darkGray
+    ]
+    "useArrowNavigationGroup", [
+        style.display.flex
+        style.columnGap 15
+    ]
+    "tooltip", [
+        style.backgroundColor tokens.colorBrandBackground
+        style.color tokens.colorNeutralForegroundInverted
+    ]
+    "icon", [
+        style.color.green
+    ]
+    "compoundButton", [
+        style.width (length.px 150)
+    ]
+]
+
+[ReactComponent]
+let ToolTip () =
+    let styles = useStyles()
+
+    Fui.tooltip [
+        tooltip.className styles.tooltip
+    ...
+```
+The `makeResetStyles` API works similarly to `makeStyles` and is used to generate styles as a single monolithic class to avoid the "CSS rules explosion" problem.
+
+```fsharp
+open Feliz
+open FS.FluentUI
+open FS.FluentUI.V8toV9
+
+let dialogClass = Fui.makeResetStyles [
+    style.position.fixedRelativeToWindow
+    style.top (length.px 200)
+    style.backgroundColor tokens.colorBrandBackground2
+    style.margin (length.auto)
+    style.borderStyle.none
+    style.padding (10, 50)
+    style.boxShadow (5, 5, tokens.shadow16)
+    style.width (length.px 450)
+    style.height (length.px 200)
+    style.zIndex 100
+]
+
+[<ReactComponent>]
+let Dialog () =
+    let isOpen, setIsOpen = React.useState false
+    let dialogClass = dialogClass()
+
+    Fui.stack [
+        stack.className dialogClass
+    ...
+```
 
 ## Contributing
 ### Before sending PR's, please test what you've added in the "TestGrounds".
