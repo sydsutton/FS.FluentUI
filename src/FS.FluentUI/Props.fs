@@ -2207,6 +2207,7 @@ type [<Erase>] option =
     /// The string value of the Option's display text when the Option's children are not a string.
     /// This is used as the Dropdown button's or Combobox input's value when the option is selected, and as the comparison for type-to-find keyboard functionality
     static member inline text (value: string) = Interop.mkProperty<IOptionProp> "text" value
+    static member inline children (value: string) = Interop.mkProperty<IOptionProp> "children" value
 
 module option =
     type [<Erase>] as' =

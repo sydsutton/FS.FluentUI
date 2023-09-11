@@ -1779,9 +1779,7 @@ let DatePickerTest() =
                         Fui.option [
                             option.key d
                             option.value d
-                            option.children [
-                                Fui.text d
-                            ]
+                            option.children d
                         ]
                     )
                 )
