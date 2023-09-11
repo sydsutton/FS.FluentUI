@@ -40,7 +40,6 @@ type Styles = {
     skeletonStack: string
     day: string
     overflow: string
-    dialog: string
     breadcrumb: string
 }
 
@@ -67,7 +66,7 @@ let useStyles: unit -> Styles = Fui.makeStyles [
         style.width (length.px 150)
     ]
     "skeletonStack", [
-        style.backgroundColor "orange"
+        style.backgroundColor tokens.colorBrandForegroundOnLight
         style.padding (length.px 50)
     ]
     "day", [
@@ -84,20 +83,6 @@ let useStyles: unit -> Styles = Fui.makeStyles [
         style.border (1, borderStyle.solid, "lightGray")
         style.padding (length.px 16)
         style.zIndex 0
-    ]
-    "dialog", [
-        style.position.fixedRelativeToWindow
-        style.top (length.px 200)
-        style.backgroundColor tokens.colorBrandBackground2
-        style.margin (length.auto)
-        style.borderStyle.none
-        style.padding (length.px 20)
-        style.boxShadow (5, 5, tokens.shadow16)
-        style.width (length.px 450)
-        style.height (length.px 200)
-        style.display.flex
-        style.flexDirection.column
-        style.zIndex 100
     ]
     "breadcrumb", [
         style.backgroundColor tokens.colorNeutralBackground2
@@ -2551,13 +2536,28 @@ let UseFocusFindersTest() =
         ]
     ]
 
+let dialogClass = Fui.makeResetStyles [
+    style.position.fixedRelativeToWindow
+    style.top (length.px 200)
+    style.backgroundColor tokens.colorBrandBackground2
+    style.margin (length.auto)
+    style.borderStyle.none
+    style.padding (10, 50)
+    style.boxShadow (5, 5, tokens.shadow16)
+    style.width (length.px 450)
+    style.height (length.px 200)
+    style.display.flex
+    style.flexDirection.column
+    style.zIndex 100
+]
+
 [<ReactComponent>]
 let UseModalAttributesOptionsTest() =
     let isOpen, setIsOpen = React.useState false
     let attributes = Fui.useModalAttributes [
         useModalAttributesOptions.trapFocus true
     ]
-    let styles = useStyles()
+    let dialogClass = dialogClass()
 
     let triggerRef = React.useRef<HTMLButtonElement option>(None)
     let dialogRef = React.useRef<HTMLDivElement option>(None)
@@ -2574,7 +2574,7 @@ let UseModalAttributesOptionsTest() =
                 prop.ref dialogRef
                 attributes.modalAttributes
                 prop.role "dialog"
-                prop.className styles.dialog
+                prop.className dialogClass
                 prop.ariaLabel "Example dialog"
                 prop.children [
                     Fui.text.title2 [
@@ -2954,10 +2954,11 @@ let InteractionTagTest() =
             )
         ]
     ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
-    let styles = useStyles()
+
     Fui.stack [
         stack.horizontal false
         stack.tokens [ stack.tokens.childrenGap 16; stack.tokens.padding 32 ]
