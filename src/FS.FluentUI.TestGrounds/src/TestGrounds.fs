@@ -28,12 +28,94 @@ let update msg model =
         },
         Cmd.none
 
-let accordionClass = Fui.mkMergeStyles [ style.fontSize 30 ]
+let tokens = Theme.tokens
+
+type Styles = {
+    accordion: string
+    useArrowNavigationGroup: string
+    tooltip: string
+    icon: string
+    compoundButton: string
+    splitButton: string
+    skeletonStack: string
+    day: string
+    overflow: string
+    dialog: string
+    breadcrumb: string
+}
+
+let useStyles: unit -> Styles = Fui.makeStyles [
+    "accordion", [
+        style.color.red
+        style.backgroundColor.darkGray
+    ]
+    "useArrowNavigationGroup", [
+        style.display.flex
+        style.columnGap 15
+    ]
+    "tooltip", [
+        style.backgroundColor tokens.colorBrandBackground
+        style.color tokens.colorNeutralForegroundInverted
+    ]
+    "icon", [
+        style.color.green
+    ]
+    "compoundButton", [
+        style.width (length.px 150)
+    ]
+    "splitButton", [
+        style.width (length.px 150)
+    ]
+    "skeletonStack", [
+        style.backgroundColor "orange"
+        style.padding (length.px 50)
+    ]
+    "day", [
+        style.border (1, borderStyle.solid, "red")
+    ]
+    "overflow", [
+        style.overflow.hidden
+        style.display.flex
+        style.flexWrap.nowrap
+        style.minWidth (length.px 200)
+        style.maxWidth (length.px 900)
+        style.height (length.px 30)
+        style.resize.horizontal
+        style.border (1, borderStyle.solid, "lightGray")
+        style.padding (length.px 16)
+        style.zIndex 0
+    ]
+    "dialog", [
+        style.position.fixedRelativeToWindow
+        style.top (length.px 200)
+        style.backgroundColor tokens.colorBrandBackground2
+        style.margin (length.auto)
+        style.borderStyle.none
+        style.padding (length.px 20)
+        style.boxShadow (5, 5, tokens.shadow16)
+        style.width (length.px 450)
+        style.height (length.px 200)
+        style.display.flex
+        style.flexDirection.column
+        style.zIndex 100
+    ]
+    "breadcrumb", [
+        style.backgroundColor tokens.colorNeutralBackground2
+        style.overflow.hidden
+        style.padding (length.px 25)
+        style.height (length.px 50)
+        style.minWidth (length.px 150)
+        style.zIndex 0
+        style.resize.horizontal
+        style.maxWidth (length.px 600)
+    ]
+]
 
 [<ReactComponent>]
 let Accordion () =
     let openItems, setOpenItems = React.useState [1]
 
+    let styles = useStyles()
     let getIcon key =
         if openItems |> List.contains key then
             Fui.icon.subtractFilled []
@@ -42,7 +124,7 @@ let Accordion () =
 
     Fui.accordion [
         accordion.collapsible true
-        accordion.className accordionClass
+        accordion.className styles.accordion
         accordion.openItems openItems
         accordion.defaultOpenItems openItems
         accordion.onToggle (fun (i: ValueProp<int>) ->
@@ -394,18 +476,18 @@ let textTest =
         ]
     ]
 
-let containerClass = Fui.mkMergeStyles [ style.display.flex; style.gap 6 ]
-
 [<ReactComponent>]
 let UseArrowNavigationGroup () =
     let keyboardNavAttr = Fui.useArrowNavigationGroup [
         useArrowNavigationGroupOptions.circular true
     ]
 
+    let styles = useStyles()
+
     Html.div [
         prop.ariaLabel "Editor toolbar example"
         prop.role "toolbar"
-        prop.className containerClass
+        prop.className styles.useArrowNavigationGroup
         keyboardNavAttr
         prop.children [
             Fui.button [
@@ -502,19 +584,15 @@ let PopoverTest () =
         ]
     ]
 
-let tokens = Theme.tokens
+[<ReactComponent>]
+let TooltipTest ()=
+    let styles = useStyles()
 
-let tooltipClass = Fui.mkMergeStyles [
-    style.backgroundColor tokens.colorBrandBackground
-    style.color tokens.colorNeutralForegroundInverted
-]
-
-let tooltipTest =
     Fui.tooltip [
         tooltip.withArrow true
         tooltip.content ( //TODO backgroundcolor from class doesn't fill width of tooltip
             Fui.text [
-                text.className tooltipClass
+                text.className styles.tooltip
                 text.text "Example tooltip"
             ]
         )
@@ -556,14 +634,16 @@ let labelTest =
         ]
     ]
 
-let iconClass = Fui.mkMergeStyles [ style.color.green ]
-let iconTest =
+[<ReactComponent>]
+let IconTest() =
+    let styles = useStyles()
+
     Fui.stack [
         stack.horizontal true
         stack.children [
             Fui.icon.zoomFitFilled [
                 icon.size.``48``
-                icon.className iconClass
+                icon.className styles.icon
             ]
         ]
     ]
@@ -647,12 +727,13 @@ let inputTest =
         ]
     ]
 
-let compoundClass = Fui.mkMergeStyles [ style.maxWidth 250 ]
+[<ReactComponent>]
+let CompoundButtonTest() =
+    let styles = useStyles()
 
-let compoundButtonTest =
     Fui.compoundButton [
         compoundButton.appearance.primary
-        compoundButton.className compoundClass
+        compoundButton.className styles.compoundButton
         compoundButton.text "This should be the main text"
         compoundButton.secondaryContent "This should be the secondary text"
         compoundButton.icon (Fui.icon.calendarMonthRegular [])
@@ -660,8 +741,10 @@ let compoundButtonTest =
         compoundButton.as'.button
     ]
 
-let primaryActionClass = Fui.mkMergeStyles [style.width 150 ]
-let splitButtonTest =
+[<ReactComponent>]
+let SplitButtonTest() =
+    let styles = useStyles()
+
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -672,7 +755,7 @@ let splitButtonTest =
                         Fui.splitButton [
                             splitButton.menuButton p
                             splitButton.primaryActionButton [
-                                button.className primaryActionClass
+                                button.className styles.splitButton
                                 button.size.small
                                 button.text "Primary action button"
                             ]
@@ -1547,18 +1630,14 @@ let CardTest () =
         ]
     ]
 
-let useStackClassName  = Fui.mkMergeStyles ([
-    style.paddingTop 150
-    style.backgroundColor "orange"
-    style.paddingBottom 150
-])
 
 [<ReactComponent>]
 let SkeletonTest() =
+    let styles = useStyles()
 
     Fui.stack [
         stack.tokens [ stack.tokens.childrenGap 16 ]
-        stack.className useStackClassName
+        stack.className styles.skeletonStack
         stack.children [
             Fui.field [
                 field.validationMessage "Wave animation"
@@ -1618,10 +1697,9 @@ let fieldPropsTest =
 
 open System
 
-let dayClass = Fui.mkMergeStyles [ style.border (1, borderStyle.solid, "red") ]
-
 [<ReactComponent>]
 let DatePickerTest() =
+    let styles = useStyles()
     let firstDayOfWeek, setFirstDayOfWeek = React.useState ("Sunday")
     let error, setError = React.useState None
 
@@ -1674,7 +1752,7 @@ let DatePickerTest() =
                             calendar.workWeekDays [| DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday |]
                             calendar.isMonthPickerVisible false
                             calendar.calendarDayProps [
-                                calendarDay.className dayClass
+                                calendarDay.className styles.day
                             ]
                             calendar.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )
                         ]
@@ -1769,11 +1847,12 @@ let OverflowMenu itemIds =
 [<ReactComponent>]
 let OverflowTest ()=
     let itemIds = [ "0"; "1"; "2"; "3"; "4"; "5"; "6"; "7"]
+    let styles = useStyles()
 
     Fui.overflow [
         overflow.children (
             Html.div [
-                prop.className overflowClass
+                prop.className styles.overflow
                 prop.children [
                     yield! itemIds |> List.map (fun i ->
                         Fui.overflowItem [
@@ -2474,27 +2553,13 @@ let UseFocusFindersTest() =
         ]
     ]
 
-let dialogClass = Fui.mkMergeStyles [
-    style.position.fixedRelativeToWindow
-    style.top 200
-    style.backgroundColor tokens.colorNeutralBackground1
-    style.padding 10
-    style.margin (length.auto)
-    style.borderStyle.none
-    style.boxShadow (5, 5, tokens.shadow16)
-    style.width 450
-    style.height 200
-    style.display.flex
-    style.flexDirection.column
-    style.zIndex 100
-]
-
 [<ReactComponent>]
 let UseModalAttributesOptionsTest() =
     let isOpen, setIsOpen = React.useState false
     let attributes = Fui.useModalAttributes [
         useModalAttributesOptions.trapFocus true
     ]
+    let styles = useStyles()
 
     let triggerRef = React.useRef<HTMLButtonElement option>(None)
     let dialogRef = React.useRef<HTMLDivElement option>(None)
@@ -2511,7 +2576,7 @@ let UseModalAttributesOptionsTest() =
                 prop.ref dialogRef
                 attributes.modalAttributes
                 prop.role "dialog"
-                prop.className dialogClass
+                prop.className styles.dialog
                 prop.ariaLabel "Example dialog"
                 prop.children [
                     Fui.text.title2 [
@@ -2689,17 +2754,6 @@ let ControlledOverflowMenu (props: PartitionBreadcrumbItems<ButtonItem>) =
         ]
     ]
 
-let stackOverflowClass = Fui.mkMergeStyles [
-    style.backgroundColor tokens.colorNeutralBackground2
-    style.overflow.hidden
-    style.padding 5
-    style.height 50
-    style.minWidth 150
-    style.zIndex 0
-    style.resize.horizontal
-    style.maxWidth 600
-]
-
 let buttonItems = [|
     {
         key = 0
@@ -2766,6 +2820,8 @@ let buttonItems = [|
 
 [<ReactComponent>]
 let BreadcrumbTest () =
+    let styles = useStyles()
+
     let partitionBreadcrumbItems = Fui.partitionBreadcrumbItems [
         partitionBreadcrumbItemsOptions.items buttonItems
         partitionBreadcrumbItemsOptions.maxDisplayedItems 4
@@ -2778,7 +2834,7 @@ let BreadcrumbTest () =
 
     Fui.stack [
         stack.horizontal true
-        stack.className overflowClass
+        stack.className styles.breadcrumb
         stack.children [
             Fui.overflow [
                 overflow.children (
@@ -2903,7 +2959,7 @@ let InteractionTagTest() =
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
-
+    let styles = useStyles()
     Fui.stack [
         stack.horizontal false
         stack.tokens [ stack.tokens.childrenGap 16; stack.tokens.padding 32 ]
@@ -2933,16 +2989,16 @@ let mainContent model dispatch =
             presenceBadgeTest
             counterBadge
             PopoverTest()
-            tooltipTest
+            TooltipTest()
             linkTest
             divider
             textTest
             UseArrowNavigationGroup()
             labelTest
-            iconTest
+            IconTest()
             inputTest
-            compoundButtonTest
-            splitButtonTest
+            CompoundButtonTest()
+            SplitButtonTest()
             TextAreaTest()
             SliderTest()
             SwitchTest()
