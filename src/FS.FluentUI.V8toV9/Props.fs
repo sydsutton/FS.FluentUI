@@ -10,7 +10,7 @@ open FS.FluentUI.V8toV9
 // -------------------------------------------------------------------------- StackItem --------------------------------------------------------------------------------------
 
 type [<Erase>] stackItem =
-    inherit FelizProps.prop<IStackItemProp>
+    inherit FelizProperties.prop<IStackItemProp>
     /// Defines a CSS class name used to style the StackItem.
     static member inline className (value: string) = Interop.mkProperty<IStackItemProp> "className" value
     /// Defines whether the StackItem should be prevented from shrinking. This can be used to prevent a StackItem from shrinking when it is inside of a Stack that has shrinking items.
@@ -63,7 +63,7 @@ module stackItem =
 // -------------------------------------------------------------------------- Stack --------------------------------------------------------------------------------------
 /// No info found
 type [<Erase>] stack =
-    inherit FelizProps.prop<IStackProp>
+    inherit FelizProperties.prop<IStackProp>
     /// Defines how to render the Stack.
     static member inline as' (value: ReactElementType) = Interop.mkProperty<IStackProp> "as" value
     /// Defines whether Stack children should not shrink to fit the available space.

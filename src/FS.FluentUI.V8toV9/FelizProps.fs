@@ -1,4 +1,4 @@
-module FelizProps
+module FelizProperties
 
 // this module contains prop type from https://github.com/Zaid-Ajaj/Feliz/blob/master/Feliz/Properties.fs
 // it has been modified to be restrictive to components
