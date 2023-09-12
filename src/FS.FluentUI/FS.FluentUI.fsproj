@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta10</Version>
+        <Version>0.0.1-beta11</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>F# bindings for the FluentUI library.</Description>
@@ -10,7 +10,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Fix bugs in Fui.datePicker and related types
+            - Change FSharp.Core version to 6.0.1
         </PackageReleaseNotes>
     </PropertyGroup>
 
