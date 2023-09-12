@@ -3233,11 +3233,11 @@ type [<Erase>] datePicker  =
     /// Determines if the DatePicker has a border.
     static member inline borderless (value: bool) = Interop.mkProperty<IDatePickerProp> "borderless" value
     /// <para>Apply additional formatting to dates, for example localized date formatting.
-    /// You can either pass your own DateFormatting type, or use the *default'* type in the DateFormatting module.</para>
+    /// Use Fui.defaultDateFormatting.</para>
     ///
     /// Usage:
-    /// <code>datePicker.dateTimeFormatter { DateFormatting.default' with formatYear = (fun d -> sprintf "%A A.D." d.Year) }</code>
-    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<IDatePickerProp> "dateTimeFormatter" value  //TODO should be a list of props?
+    /// ```datePicker.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = (fun d -> $"Year: {d.Year}") })```
+    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<IDatePickerProp> "dateTimeFormatter" value
     /// Determines if the DatePicker has a border.
     static member inline minDate (value: DateTime) = Interop.mkProperty<IDatePickerProp> "minDate" value
     /// Determines if the DatePicker has a border.
@@ -3441,11 +3441,11 @@ type [<Erase>] calendarDay  =
     /// Whether the calendar should show the week number (weeks 1 to 53) before each week row
     static member inline showWeekNumbers (value: bool) = Interop.mkProperty<ICalendarDayProp> "showWeekNumbers" value
     /// <para>Apply additional formatting to dates, for example localized date formatting.
-    /// You can either pass your own DateFormatting type, or use the *default'* type in the DateFormatting module.</para>
+    /// Use Fui.defaultDateFormatting.</para>
     ///
     /// Usage:
-    /// <code>calendarDay.dateTimeFormatter { DateFormatting.default' with formatYear = (fun d -> sprintf "%A A.D." d.Year) }</code>
-    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<ICalendarDayProp> "dateTimeFormatter" value //TODO should be a list of props?
+    /// ```calendarDay.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = (fun d -> $"Year: {d.Year}") })```
+    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<ICalendarDayProp> "dateTimeFormatter" value
     /// Whether the calendar should show 6 weeks by default.
     static member inline showSixWeeksByDefault (value: bool) = Interop.mkProperty<ICalendarDayProp> "showSixWeeksByDefault" value
     /// If set the Calendar will not allow navigation to or selection of a date earlier than this value.
@@ -3487,11 +3487,11 @@ type [<Erase>] calendarMonth  =
     /// Value of today. If unspecified, current time in client machine will be used.
     static member inline onHeaderSelect (value: unit -> unit) = Interop.mkProperty<ICalendarMonthProp> "onHeaderSelect" (System.Func<_,_> value)
     /// <para>Apply additional formatting to dates, for example localized date formatting.
-    /// You can either pass your own DateFormatting type, or use the *default'* type in the DateFormatting module.</para>
+    /// Use Fui.defaultDateFormatting.</para>
     ///
     /// Usage:
-    /// <code>calendarMonth.dateTimeFormatter { DateFormatting.default' with formatYear = (fun d -> sprintf "%A A.D." d.Year) }</code>
-    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<ICalendarMonthProp> "dateTimeFormatter" value  //TODO should be a list of props?
+    /// ```calendarMonth.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = (fun d -> $"Year: {d.Year}") })```
+    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<ICalendarMonthProp> "dateTimeFormatter" value
     /// If set the Calendar will not allow navigation to or selection of a date earlier than this value.
     static member inline minDate (value: DateTime) = Interop.mkProperty<ICalendarMonthProp> "minDate" value
     /// If set the Calendar will not allow navigation to or selection of a date later than this value.
@@ -5121,20 +5121,6 @@ type [<Erase>] dateGridStrings = //TODO figure out how to use these props
     /// An array of strings for the initials of the days of the week.
     /// The array is 0-based, so days[0] should be the initial of Sunday.
     static member inline shortDays (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortDays" value
-
-// -------------------------------------------------------------------------- DateFormatting --------------------------------------------------------------------------------------
-
-type [<Erase>] dateFormatting =  //TODO figure out how to use these props
-    /// Get a localized string for a day.
-    static member inline formatDay (value: DateTime -> string) = Interop.mkProperty<IDateFormattingProp> "formatDay" (System.Func<_,_> value)
-    /// Get a localized string for a month.
-    static member inline formatMonth (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonth" (System.Func<_,_,_> value)
-    /// Get a localized string for a year.
-    static member inline formatYear (value: DateTime -> string) = Interop.mkProperty<IDateFormattingProp> "formatYear" (System.Func<_,_> value)
-    /// Get a localized string for a month, day, and year.
-    static member inline formatMonthDayYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthDayYear" (System.Func<_,_,_> value)
-    /// Get a localized string for a month and year.
-    static member inline formatMonthYear (value: DateTime -> DateGridStrings -> string) = Interop.mkProperty<IDateFormattingProp> "formatMonthYear" (System.Func<_,_,_> value)
 
 // -------------------------------------------------------------------------- Breadcrumb --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumb =

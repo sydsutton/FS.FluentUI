@@ -524,15 +524,6 @@ type DateFormatting = {
     formatMonthYear: System.DateTime -> DateGridStrings -> string
 }
 
-module DateFormatting =
-    let default' = {
-        formatDay = (fun d -> sprintf "%A" d.Day)
-        formatMonth = (fun d ds -> sprintf "%A" ds.months.[d.Month - 1]) //TODO figure out where this text is being rendered
-        formatYear = (fun d -> sprintf "%A" d.Year)
-        formatMonthDayYear = (fun d ds -> sprintf "%A %A %A" ds.months.[d.Month - 1] d.Day d.Year) //TODO figure out where this text is being rendered
-        formatMonthYear = (fun d ds -> sprintf "%A %A" ds.months.[d.Month - 1] d.Year)
-    }
-
 type CalendarStrings = {
     /// String to render for button to direct the user to today's date.
     goToToday: string

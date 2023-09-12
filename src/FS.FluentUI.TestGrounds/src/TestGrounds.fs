@@ -1730,7 +1730,7 @@ let DatePickerTest() =
                         datePicker.showGoToToday true
                         datePicker.allowTextInput true
                         datePicker.maxDate (DateTime.Today.AddDays(8))
-                        datePicker.dateTimeFormatter DateFormatting.default'
+                        datePicker.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = fun d -> $"Year: {d.Year}"})
                         datePicker.onValidationResult (fun d -> printfn "d %A" d.error) //TODO setting error causes date to not print
                         datePicker.calendar [
                             calendar.dateRangeType.workWeek
