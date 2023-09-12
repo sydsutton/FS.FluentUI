@@ -62,12 +62,12 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Complete Components| Complete Hooks / Functions | Has TODO's or are unstable          |  Upcoming         |
 | ------------- | -------------                   | -------------                        |    -------------  |
 | Accordion     | useArrowNavigationGroup         |        Toast                         |    TimePicker     |
-| Avatar        |                useId            |                DatePicker            |     ColorPicker    |
-| AvatarGroup   |           useFocusableGroup     |     Table                            |   SwatchColorPicker  |
-| Badge         |   partitionAvatarGroupItems     |VirtualizerScrollViewDynamic (Preview) |     Rating           |
-| CounterBadge  |           useOverflowMenu       | Virtualizer (Preview)                |   BasicList         |
-| PresenceBadge |      useIsOverflowItemVisible   |   Alert (Preview)                    |   PeoplePicker       |
-| Button        |   createTableColumn             |       Drawer (Preview)               |   TeachingCallout |
+| Avatar        |                useId            |         Table                      |     ColorPicker    |
+| AvatarGroup   |           useFocusableGroup     |       useToastController           |   SwatchColorPicker  |
+| Badge         |   partitionAvatarGroupItems     |      createFluentIcon              |     Rating           |
+| CounterBadge  |           useOverflowMenu       |   useHeadlessFlatTree_unstable       |   BasicList         |
+| PresenceBadge |      useIsOverflowItemVisible   |     bundleIcon                      |   PeoplePicker       |
+| Button        |   createTableColumn             |      useTableFeatures                |   TeachingCallout |
 | CompoundButton|  useStaticVirtualizerMeasure    |      InfoLabel (Preview)             |      Coachmark     |
 | MenuButton    | useModalAttributes              |  VirtualizerScrollView (Preview)      |     MessageBar       |
 | SplitButton   |       useObservedElement        |  InteractionTag (Preview)         |                          |
@@ -75,12 +75,12 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Card          |         useOverflowCount        |        Tag (Preview)             |                         |
 | CardFooter    |        makeResetStyles          |         Breadcrumb (Preview)        |                        |
 | CardHeader    |      makeStyles                 |         Searchbox (Preview)         |                       |
-| CardPreview   |                                 |                                       |                      |
-| Checkbox      |                                 |       useToastController               |                     |
-| Combobox      |                                 |        createFluentIcon               |                        |
-| DataGrid      |                                  |    useHeadlessFlatTree_unstable    |                          |
-| Dialog        |                                 |bundleIcon                           |
-| Divider       |                                 |useTableFeatures                         |
+| CardPreview   |                                |VirtualizerScrollViewDynamic (Preview)|                      |
+| Checkbox      |                                 |    Virtualizer (Preview)          |                     |
+| Combobox      |                                 |    Alert (Preview)                  |                        |
+| DataGrid      |                                  |      Drawer (Preview)              |                          |
+| Dialog        |                                 |                                    |
+| Divider       |                                 |                                     |
 | Divider       |                                 |
 | Dropdown      |
 | Tablist       |
@@ -108,6 +108,7 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Toolbar|
 | Tree|
 | Tooltip|
+| DatePicker (w/ one small TODO) |
 
 I have done my best so far to keep usage of these similar to Typescript usage in the docs. See docs for more usage examples:
 [Microsoft Docs](https://react.fluentui.dev/?path=/docs/concepts-introduction--page)
@@ -115,7 +116,10 @@ I have done my best so far to keep usage of these similar to Typescript usage in
 ## Styling
 
 Fluent UI React v9 provides design `tokens` for consistent theming.
+Microsoft doesn't suggest using exact colors in Fluent UI code.
+
 ❌ style.color.darkBlue
+
 ✅ style.color Theme.tokens.colorBrandForeground1
 
 Although `shorthands` is used extensively throughout the Microsoft [documentation](https://react.fluentui.dev/?path=/docs/concepts-introduction--page), it is not necessary here when using `makeStyles` or `makeResetStyles`; I'm expanding any shorthand styling properties under-the-hood.
@@ -123,7 +127,9 @@ Although `shorthands` is used extensively throughout the Microsoft [documentatio
 `makeStyles` is used to define style permutations in components and is used for style overrides. It returns a React hook that should be called inside a component:
 
 When using single numeric values in `makeStyles` or `makeResetStyles`, specify the value's `length`.
+
 ❌ style.minWidth 200
+
 ✅ style.minWidth (length.px 200)
 
 ```fsharp
