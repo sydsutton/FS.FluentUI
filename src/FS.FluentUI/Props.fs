@@ -3210,7 +3210,8 @@ type [<Erase>] datePicker  =
     /// Callback to run when the DatePicker's open state changes
     static member inline onOpenChange (value: bool -> unit) = Interop.mkProperty<IDatePickerProp> "onOpenChange" (System.Func<_,_> value)
     /// Callback to run after the DatePicker's input has been validated
-    static member inline onValidationResult (value: DatePickerValidationResultData -> unit) = Interop.mkProperty<IDatePickerProp> "onValidationResult" (System.Func<_,_> value)
+    static member inline onValidationResult (value: DatePickerValidationResultData -> unit) =
+        Interop.mkProperty<IDatePickerProp> "onValidationResult" (System.Func<_,_> (fun error -> error |> DatePickerValidationResultData.fromString |> value))
     /// Whether the DatePicker should render the popup as inline or in a portal
     static member inline inlinePopup (value: bool) = Interop.mkProperty<IDatePickerProp> "inlinePopup" value
     /// Value of today. If unspecified, current time in client machine will be used.

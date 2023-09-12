@@ -485,13 +485,40 @@ type ToastController = {
 
 type DateRangeType = | Day | Week | Month | WorkWeek
 
-
 type [<RequireQualifiedAccess>] DatePickerErrorType = | ``invalid-input`` | ``out-of-bounds`` | ``required-input``
 
 type DatePickerValidationResultData = {
     /// The error found when validating the input.
     error: DatePickerErrorType option
 }
+
+module DatePickerValidationResultData =
+    let fromString (result: {| error: string option |}) =
+        match result.error with
+        | Some "invalid-input" -> { error= Some DatePickerErrorType.``invalid-input`` }
+        | Some "out-of-bounds" -> { error= Some DatePickerErrorType.``out-of-bounds`` }
+        | Some "required-input" -> { error= Some DatePickerErrorType.``required-input`` }
+        | _ -> { error = None }
+
+type DatePickerErrorStrings = {
+    ``invalid-input`` : string
+    ``out-of-bounds`` : string
+    ``required-input``: string
+}
+
+module DatePickerErrorStrings =
+    let default' = {
+        ``invalid-input`` = "Invalid date format"
+        ``out-of-bounds`` = "Date is out of bounds"
+        ``required-input``= "Field is required"
+    }
+
+    let fromErrorTypeOption (error: DatePickerErrorType option) =
+        match error with
+        | Some DatePickerErrorType.``invalid-input`` -> "Invalid date format"
+        | Some DatePickerErrorType.``out-of-bounds`` -> "Date is out of bounds"
+        | Some DatePickerErrorType.``required-input`` -> "Field is required"
+        | _ -> ""
 
 type DateGridStrings = {
     /// An array of strings for the full names of months.

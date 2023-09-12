@@ -1686,7 +1686,7 @@ open System
 let DatePickerTest() =
     let styles = useStyles()
     let firstDayOfWeek, setFirstDayOfWeek = React.useState ("Sunday")
-    let error, setError = React.useState None
+    let error, setError = React.useState (None)
 
     let days = [
         "Sunday";
@@ -1698,32 +1698,33 @@ let DatePickerTest() =
         "Saturday";
     ]
 
+    let validationMessage : string = error |> DatePickerErrorStrings.fromErrorTypeOption
+
+    let selectedFirstDayOfWeek =
+        match firstDayOfWeek with
+        | "Sunday" -> datePicker.firstDayOfWeek.sunday
+        | "Monday" -> datePicker.firstDayOfWeek.monday
+        | "Tuesday" -> datePicker.firstDayOfWeek.tuesday
+        | "Wednesday" -> datePicker.firstDayOfWeek.wednesday
+        | "Thursday" -> datePicker.firstDayOfWeek.thursday
+        | "Friday" -> datePicker.firstDayOfWeek.friday
+        | "Saturday" -> datePicker.firstDayOfWeek.saturday
+        | _ -> datePicker.firstDayOfWeek.sunday
+
     Fui.stack [
         stack.horizontal false
         stack.children [
             Fui.field [
                 field.label "Start Date"
                 field.required true
-                field.validationMessage (
-                    match error with
-                    | Some e -> e
-                    | None -> "No error"
-                )
+                field.validationMessage validationMessage
                 match error with
-                | Some e -> field.validationState.error
                 | None -> field.validationState.none
+                | _ -> field.validationState.error
                 field.children (
                     Fui.datePicker [
-                        match firstDayOfWeek with
-                        | "Sunday" -> datePicker.firstDayOfWeek.sunday
-                        | "Monday" -> datePicker.firstDayOfWeek.monday
-                        | "Tuesday" -> datePicker.firstDayOfWeek.tuesday
-                        | "Wednesday" -> datePicker.firstDayOfWeek.wednesday
-                        | "Thursday" -> datePicker.firstDayOfWeek.thursday
-                        | "Friday" -> datePicker.firstDayOfWeek.friday
-                        | "Saturday" -> datePicker.firstDayOfWeek.saturday
-                        | _ -> datePicker.firstDayOfWeek.sunday
                         datePicker.placeholder "Select a date..."
+                        selectedFirstDayOfWeek
                         datePicker.borderless true
                         datePicker.showWeekNumbers true
                         datePicker.showMonthPickerAsOverlay true
@@ -1731,7 +1732,9 @@ let DatePickerTest() =
                         datePicker.allowTextInput true
                         datePicker.maxDate (DateTime.Today.AddDays(8))
                         datePicker.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = fun d -> $"Year: {d.Year}"})
-                        datePicker.onValidationResult (fun d -> printfn "d %A" d.error) //TODO setting error causes date to not print
+                        //TODO When customizing the formatted date with something other than built-in date functions, it conflicts with onValidationResult and doesn't render the date.
+                        datePicker.formatDate (fun d -> d.ToShortDateString())
+                        datePicker.onValidationResult (fun d -> setError d.error)
                         datePicker.calendar [
                             calendar.dateRangeType.workWeek
                             calendar.workWeekDays [| DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday |]
@@ -1746,6 +1749,7 @@ let DatePickerTest() =
                                 }
                             )
                         ]
+                    ]
                 )
             ]
             Fui.label [
