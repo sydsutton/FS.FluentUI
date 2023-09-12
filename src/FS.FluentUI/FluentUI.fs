@@ -341,6 +341,9 @@ type [<Erase>] Fui =
     /// Picking a date can be tough without context. A date picker (DatePicker) offers a popup control that’s optimized for picking a single date from a calendar view where contextual information like the day of the week or fullness of the calendar is important. You can modify the calendar to provide additional context or to limit available dates.
     /// Note: DatePicker is a compat component - its internal architecture does not follow all the principles regular Fluent UI v9 components follow - it is not composed of atomic hooks and it might be more difficult to tweak its appearance and behavior. It however follows Fluent 2 design and uses design tokens, it is production ready and it is stable.
     static member inline datePicker (props: IDatePickerProp list) = createElement (import "DatePicker" DatePickerCompat) props
+
+    static member inline defaultDatePickerStrings : CalendarStrings = import "defaultDatePickerStrings" DatePickerCompat
+
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
     static member inline infoButton (props: IInfoButtonProp list) = createElement (import "InfoButton" InfoButton_unstable) props
     /// An InfoLabel is a Label with an InfoButton at the end, properly handling layout and accessibility properties. It can be used as a drop-in replacement for Label when an InfoButton is also needed.

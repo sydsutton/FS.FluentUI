@@ -1739,11 +1739,13 @@ let DatePickerTest() =
                             calendar.calendarDayProps [
                                 calendarDay.className styles.day
                             ]
-                            calendar.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )
+                            calendar.strings ({
+                                Fui.defaultDatePickerStrings with
+                                    goToToday = "Pick Today"
+                                    shortDays = [| "T"; "E"; "S"; "T"; "I"; "N"; "G"|]
+                                }
+                            )
                         ]
-                        datePicker.formatDate (fun d -> $"Custom render: {(d.ToShortDateString())}"
-                        )
-                    ]
                 )
             ]
             Fui.label [

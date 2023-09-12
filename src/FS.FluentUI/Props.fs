@@ -3351,10 +3351,10 @@ type [<Erase>] calendar  =
     /// Whether the calendar should show the week number (weeks 1 to 53) before each week row
     static member inline showWeekNumbers (value: bool) = Interop.mkProperty<ICalendarProp> "showWeekNumbers" value
     /// <para>Localized strings to use in the Calendar
-    /// You can either pass your own CalendarStrings type, or use the *default'* type in the CalendarStrings module.</para>
+    /// Use Fui.defaultDatePickerStrings.</para>
     ///
     /// Usage:
-    /// <code>calendar.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )</code>
+    /// ```calendar.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarProp> "strings" value
     /// If set the Calendar will not allow navigation to or selection of a date earlier than this value.
     static member inline minDate (value: DateTime) = Interop.mkProperty<ICalendarProp> "minDate" value
@@ -3423,10 +3423,10 @@ type [<Erase>] calendarDay  =
     /// Additional CSS class(es) to apply to the CalendarDay.
     static member inline className (value: string) = Interop.mkProperty<ICalendarDayProp> "className" value
     /// Localized strings to use in the Calendar
-    /// You can either pass your own CalendarStrings type, or use the *default'* type in the CalendarStrings module.</para>
+    /// Use Fui.defaultDatePickerStrings.</para>
     ///
     /// Usage:
-    /// <code>calendarDay.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )</code>
+    /// ```calendarDay.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarDayProp> "strings" value
     /// The currently navigated date
     static member inline navigatedDate (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "navigatedDate" value
@@ -3464,11 +3464,11 @@ type [<Erase>] calendarDay  =
 type [<Erase>] calendarMonth  =
     /// Optional callback to access the ICalendarMonth interface. Use this instead of ref for accessing the public methods and properties of the component.
     static member inline componentRef (value: IRefValue<FocusProp>) = Interop.mkProperty<ICalendarMonthProp> "componentRef" value
-    /// Localized strings to use in the Calendar
-    /// You can either pass your own CalendarStrings type, or use the *default'* type in the CalendarStrings module.</para>
+    /// <para>Localized strings to use in the Calendar
+    /// Use Fui.defaultDatePickerStrings .</para>
     ///
     /// Usage:
-    /// <code>calendarMonth.strings ( {CalendarStrings.default' with goToToday = "Pick Today"} )</code>
+    /// ```calendarMonth.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarMonthProp> "strings" value
     /// The currently selected date
     static member inline selectedDate (value: DateTime) = Interop.mkProperty<ICalendarMonthProp> "selectedDate" value
@@ -5121,53 +5121,6 @@ type [<Erase>] dateGridStrings = //TODO figure out how to use these props
     /// An array of strings for the initials of the days of the week.
     /// The array is 0-based, so days[0] should be the initial of Sunday.
     static member inline shortDays (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortDays" value
-
-// -------------------------------------------------------------------------- CalendarStrings --------------------------------------------------------------------------------------
-
-type [<Erase>] calendarStrings =  //TODO figure out how to use these props
-    /// An array of strings for the full names of months.
-    /// The array is 0-based, so months[0] should be the full name of January.
-    static member inline months (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "months" value
-    /// An array of strings for the short names of months.
-    /// The array is 0-based, so shortMonths[0] should be the short name of January.
-    static member inline shortMonths (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "shortMonths" value
-    /// An array of strings for the full names of days of the week.
-    /// The array is 0-based, so days[0] should be the full name of Sunday.
-    static member inline days (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "days" value
-    /// An array of strings for the initials of the days of the week.
-    /// The array is 0-based, so days[0] should be the initial of Sunday.
-    static member inline shortDays (value: #seq<string>) = Interop.mkProperty<ICalendarStringsProp> "shortDays" value
-    /// String to render for button to direct the user to today's date.
-    static member inline goToToday (value: string) = Interop.mkProperty<ICalendarStringsProp> "goToToday" value
-    /// Aria-label for the "previous month" button in day picker.
-    static member inline prevMonthAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevMonthAriaLabel" value
-    /// Aria-label for the "next month" button in day picker.
-    static member inline nextMonthAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextMonthAriaLabel" value
-    /// Aria-label for the "previous year" button in month picker.
-    static member inline prevYearAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevYearAriaLabel" value
-    /// Aria-label for the "next year" button in month picker.
-    static member inline nextYearAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextYearAriaLabel" value
-    /// Aria-label for the "previous year range" button in year picker.
-    static member inline prevYearRangeAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "prevYearRangeAriaLabel" value
-    /// Aria-label for the "next year range" button in year picker.
-    static member inline nextYearRangeAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "nextYearRangeAriaLabel" value
-    /// Aria-label format string for the header button in the month picker. Should have 1 string param, e.g. "`{0}`,
-    /// select to change the year". This aria-label will only be applied if the year picker is enabled; otherwise
-    /// the label will default to the header string, e.g. "2019".
-    static member inline monthPickerHeaderAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "monthPickerHeaderAriaLabel" value
-    /// Aria-label format string for the header button in the year picker.
-    /// Should have 1 string param, e.g. "`{0}`, select to change the month"
-    static member inline yearPickerHeaderAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "yearPickerHeaderAriaLabel" value
-    /// Aria-label for the "close" button.
-    static member inline closeButtonAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "closeButtonAriaLabel" value
-    /// Aria-label format string for the week number header. Should have 1 string param, e.g. "week number `{0}`"
-    static member inline weekNumberFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "weekNumberFormatString" value
-    /// Aria-label format string for the currently selected date. Should have 1 string param, e.g. "Selected date `{0}`"
-    static member inline selectedDateFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "selectedDateFormatString" value
-    /// Aria-label format string for today's date. Should have 1 string param, e.g. "Today's date `{0}`"
-    static member inline todayDateFormatString (value: string option) = Interop.mkProperty<ICalendarStringsProp> "todayDateFormatString" value
-    /// Aria-label for when a date is marked
-    static member inline dayMarkedAriaLabel (value: string option) = Interop.mkProperty<ICalendarStringsProp> "dayMarkedAriaLabel" value
 
 // -------------------------------------------------------------------------- DateFormatting --------------------------------------------------------------------------------------
 

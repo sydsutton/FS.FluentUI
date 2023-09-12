@@ -124,7 +124,7 @@ type [<Erase>] IDatePickerProp = interface end
 type [<Erase>] ICalendarProp = interface end
 type [<Erase>] ICalendarDayProp = interface end
 type [<Erase>] ICalendarMonthProp = interface end
-type [<Erase>] ICalendarStringsProp = interface end
+
 type [<Erase>] IDateGridStringsProp = interface end
 type [<Erase>] IDateFormattingProp = interface end
 

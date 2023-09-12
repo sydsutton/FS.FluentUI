@@ -571,29 +571,6 @@ type CalendarStrings = {
     shortDays: string array
 }
 
-module CalendarStrings =
-    let default' = {
-        goToToday = "Go To Today"
-        prevMonthAriaLabel = Some "Previous month"
-        nextMonthAriaLabel = Some "Next month"
-        prevYearAriaLabel = Some "Previous year"
-        nextYearAriaLabel = Some "Next year"
-        prevYearRangeAriaLabel = Some "Previous year range"
-        nextYearRangeAriaLabel = Some "Next year range"
-        monthPickerHeaderAriaLabel = None
-        yearPickerHeaderAriaLabel = None
-        closeButtonAriaLabel = Some "Close"
-        weekNumberFormatString = None
-        selectedDateFormatString = None
-        todayDateFormatString = None
-        dayMarkedAriaLabel = None
-        months = [| "January"; "February"; "March"; "April"; "May"; "June"; "July"; "August"; "September"; "October"; "November"; "December" |]
-        shortMonths = [| "Jan"; "Feb"; "Mar"; "Apr"; "May"; "Jun"; "Jul"; "Aug"; "Sep"; "Oct"; "Nov"; "Dec" |]
-        days = [| "Sunday"; "Monday"; "Tuesday"; "Wednesday"; "Thursday"; "Friday"; "Saturday" |]
-        shortDays = [| "S"; "M"; "T"; "W"; "T"; "F"; "S" |]
-    }
-
-
 // ----------------------------------------------------------------------------- Theme Types ---------------------------------------------------------------------------
 type [<AllowNullLiteral>] StylesClassMapping<'TStyleSet> = interface end
 
