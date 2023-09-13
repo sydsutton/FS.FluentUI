@@ -150,9 +150,12 @@ type [<Erase>] Fui =
     /// Returns visibility state of the group
     [<Hook>]
     static member inline useIsOverflowGroupVisible (id: string): OverflowGroupState = import "useIsOverflowGroupVisible" FluentUIv9
-    static member inline createFluentIcon (displayName: string, width: string, paths: string array): ReactElement = import "createFluentIcon" FluentIcons //TODO Test
+
+    static member private bundle (filledIcon: ReactElement, regularIcon: ReactElement): obj -> ReactElement = import "bundleIcon" FluentIcons
+
     [<Hook>]
-    static member inline bundleIcon (filledIcon: ReactElement, regularIcon: ReactElement): IIconProp list -> ReactElement = import "bundleIcon" FluentIcons //TODO
+    static member inline bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
+        Fui.bundle icons (!!iconProps |> createObj)
 
     /// Helper function to create column definition with defaults
     /// options - column definition options
@@ -199,6 +202,8 @@ type [<Erase>] Fui =
         let dataTabster : DataTabster = name |> useObservedElement
         prop.custom("data-tabster", dataTabster.``data-tabster``)
 
+    static member private useHeadlessFlatTree (props, options): HeadlessFlatTree<'T, 'TEvent> = import "useHeadlessFlatTree_unstable" FluentUIv9
+
     /// this hook provides FlatTree API to manage all required mechanisms to convert a list of items into renderable TreeItems
     /// in multiple scenarios including virtualization.
     /// !!A flat tree is an unofficial spec for tree!!
@@ -207,8 +212,6 @@ type [<Erase>] Fui =
     /// @param props - a list of tree items
     /// @param options - in case control over the internal openItems is required
     [<Hook>]
-    static member inline useHeadlessFlatTree (props, ?options): HeadlessFlatTree<'T, 'TEvent> = import "useHeadlessFlatTree_unstable" FluentUIv9
-
     static member inline useHeadlessFlatTree_unstable (props: IHeadlessTreeItemProp list list, options: IHeadlessFlatTreeOptionsProp list) =
         let props =
             props

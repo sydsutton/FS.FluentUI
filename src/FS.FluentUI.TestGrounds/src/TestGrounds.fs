@@ -240,8 +240,12 @@ let menuButtonTest =
 
 [<ReactComponent>]
 let MenuTest() =
-    let checkedValues, setCheckedValues = React.useState({| edit = [|"cut"|] |})
+    let checkedValues, setCheckedValues = React.useState({| data = [|"add"|] |})
     let isOpen, setIsOpen = React.useState false
+    let AddIcon = Fui.bundleIcon (Bundle.icon.addCircleFilled, Bundle.icon.addCircleRegular)
+    let DataIcon = Fui.bundleIcon (Bundle.icon.dataAreaFilled, Bundle.icon.dataAreaRegular)
+    let FunnelIcon = Fui.bundleIcon (Bundle.icon.dataFunnelFilled, Bundle.icon.dataFunnelRegular)
+
     Fui.menu [
         menu.checkedValues checkedValues
         menu.open' isOpen
@@ -249,7 +253,7 @@ let MenuTest() =
             positioning.coverTarget true
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
-        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues({| edit = d.checkedItems |}))
+        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues({| data = d.checkedItems |}))
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
@@ -262,27 +266,27 @@ let MenuTest() =
             Fui.menuPopover [
                 Fui.menuList [
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.cutFilled [ icon.size.``24`` ])
-                        menuItemCheckbox.name "edit"
-                        menuItemCheckbox.value "cut"
+                        menuItemCheckbox.icon (AddIcon [])
+                        menuItemCheckbox.name "data"
+                        menuItemCheckbox.value "add"
                         menuItemCheckbox.children [
-                            Fui.text "Show Menu Bar"
+                            Fui.text "Add Data"
                         ]
                     ]
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.clipboardPasteFilled [])
-                        menuItemCheckbox.name "edit"
-                        menuItemCheckbox.value "paste"
+                        menuItemCheckbox.icon (DataIcon [])
+                        menuItemCheckbox.name "data"
+                        menuItemCheckbox.value "trends"
                         menuItemCheckbox.children [
-                            Fui.text "Show Side Bar"
+                            Fui.text "Show Trends"
                         ]
                     ]
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (Fui.icon.editFilled [])
-                        menuItemCheckbox.name "edit"
-                        menuItemCheckbox.value "show"
+                        menuItemCheckbox.icon (FunnelIcon [])
+                        menuItemCheckbox.name "data"
+                        menuItemCheckbox.value "filter"
                         menuItemCheckbox.children [
-                            Fui.text "Show Status Bar"
+                            Fui.text "Filter Data"
                         ]
                     ]
                     Fui.menuItemCheckbox [
@@ -326,11 +330,12 @@ let MenuTest() =
 
 [<ReactComponent>]
 let ToggleButtons () =
+    let checkedIcon = Fui.bundleIcon(Bundle.icon.checkbox1Filled, Bundle.icon.checkbox1Regular)
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
     Html.div [
         Fui.toggleButton [
-            toggleButton.icon (Fui.icon.checkbox1Filled [])
+            toggleButton.icon (checkedIcon [])
             toggleButton.checked' isChecked1
             toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
             toggleButton.text "Checked state"

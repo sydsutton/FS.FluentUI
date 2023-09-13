@@ -17,6 +17,7 @@
         <Compile Include="../../FS.FluentUI/FelizProps.fs" />
         <Compile Include="../../FS.FluentUI/Props.fs" />
         <Compile Include="../../FS.FluentUI/FluentUI.fs" />
+        <Compile Include="../../FS.FluentUI/BundleIcons.fs" />
     </ItemGroup>
     <ItemGroup>
         <None Include="index.html" />
