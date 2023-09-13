@@ -2255,7 +2255,7 @@ let items = [
 
 [<ReactComponent>]
 let DataGridTest () =
-    let selectedRows, setSelectedRows = React.useState (Set["Thursday Presentation"])
+    let selectedRows, setSelectedRows = React.useState (["Thursday Presentation"])
 
     let columns = [
         Fui.createTableColumn [
@@ -2341,7 +2341,7 @@ let DataGridTest () =
                 dataGrid.selectionMode.multiselect
                 dataGrid.selectedItems selectedRows
                 dataGrid.getRowId (fun i -> i.File.Label)
-                dataGrid.onSelectionChange (fun (data: {| selectedItems: Set<string> |}) -> setSelectedRows data.selectedItems)
+                dataGrid.onSelectionChange (fun (data: {| selectedItems: list<string> |}) -> setSelectedRows data.selectedItems)
                 dataGrid.children [
                     Fui.dataGridHeader [
                         Fui.dataGridRow [

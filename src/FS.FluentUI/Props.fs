@@ -3597,9 +3597,9 @@ type [<Erase>] dataGrid  =
     static member inline selectedItems (value: #seq<'TKeyType>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     static member inline onSortChange (handler: SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onSortChange (value: MouseEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
-    static member inline onSelectionChange (handler: {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
-    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (handler: {| selectedItems: #seq<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: #seq<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: #seq<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
     /// Options for column resizing
     static member inline columnSizingOptions (value: TableColumnSizingOptions<'TKeyType>) = Interop.mkProperty<IDataGridProp> "columnSizingOptions" value
     /// A callback triggered when a column is resized.
