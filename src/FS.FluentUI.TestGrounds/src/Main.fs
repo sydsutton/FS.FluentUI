@@ -28,51 +28,53 @@ let brandVariants = {
     ``160``= "#EFCEE9"
 }
 
-let mediumDarkShadeBlue = {|
-    themePrimary = "#343677"
-    themeLighterAlt = "#f4f4fa"
-    themeLighter = "#d4d5e9"
-    themeLight = "#b2b4d6"
-    themeTertiary = "#7375ae"
-    themeSecondary = "#454788"
-    themeDarkAlt = "#2f316c"
-    themeDark = "#282a5b"
-    themeDarker = "#1e1f43"
-    neutralLighterAlt = "#faf9f8"
-    neutralLighter = "#f3f2f1"
-    neutralLight = "#edebe9"
-    neutralQuaternaryAlt = "#e1dfdd"
-    neutralQuaternary = "#d0d0d0"
-    neutralTertiaryAlt = "#c8c6c4"
-    neutralTertiary = "#595653"
-    neutralSecondary = "#373532"
-    neutralPrimaryAlt = "#2f2d2b"
-    neutralPrimary = "#000000"
-    neutralDark = "#151413"
-    black = "#0b0a0a"
-    white = "#ffffff"
-|}
+let tokens = Theme.tokens
 
-let v8Theme = ({| palette = mediumDarkShadeBlue |} |> unbox<IPartialTheme>)
-
-let brandVarsFromV8Theme =
-    match v8Theme.palette with
-    | Some p -> Fui.createBrandVariants (p, None)
-    | None -> brandVariants
+type Styles = { example: string; text: string }
+let useStyles: unit -> Styles = Fui.makeStyles [
+    "example", [
+        style.backgroundColor tokens.colorBrandBackground2
+        style.color tokens.colorBrandForeground2
+        style.border(length.px 5, borderStyle.solid, tokens.colorBrandStroke1)
+        style.borderRadius(length.px 5)
+        style.margin(length.px 5)
+        style.width (length.px 350)
+        style.margin(length.auto)
+    ]
+    "text", [
+        style.padding (length.px 5)
+        style.fontSize (length.px 18)
+    ]
+]
 
 [<ReactComponent>]
 let TestGrounds () =
+    let styles = useStyles ()
+    let customTokens = {| colorBrandStroke1 = "#780510"; colorBrandBackground2 = "#fa8072"; colorBrandForeground2 = "#780510" |} |> unbox<Tokens>
+
     let model, dispatch =
         React.useElmish (TestGrounds.init, TestGrounds.update, [||])
 
-    TestGrounds.view model dispatch
-
-let root = ReactDOM.createRoot (document.getElementById "feliz-app")
-root.render (
     Fui.fluentProvider [
-        fluentProvider.theme.customDarkTheme brandVarsFromV8Theme
+        fluentProvider.theme.customDarkTheme brandVariants
         fluentProvider.children [
-            TestGrounds()
+            Fui.fluentProvider [
+                fluentProvider.theme customTokens
+                fluentProvider.children [
+                    Html.div [
+                        prop.className styles.example
+                        prop.children [
+                            Fui.text [
+                                text.className styles.text
+                                text.text "Nested FluentProvider with partial theme"
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+            TestGrounds.view model dispatch
         ]
     ]
-)
+
+let root = ReactDOM.createRoot (document.getElementById "feliz-app")
+root.render (TestGrounds())
