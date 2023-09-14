@@ -5,7 +5,7 @@
         <Version>0.0.1-beta12</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <Description>F# bindings for the FluentUI library.</Description>
+        <Description>V9 of Microsoft's FluentUI library, built for F# in the style of Feliz.</Description>
         <PackageProjectUrl>https://github.com/sydsutton/FS.FluentUI</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
