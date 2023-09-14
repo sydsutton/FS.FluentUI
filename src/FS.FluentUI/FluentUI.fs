@@ -154,7 +154,7 @@ type [<Erase>] Fui =
     static member private bundle (filledIcon: ReactElement, regularIcon: ReactElement): obj -> ReactElement = import "bundleIcon" FluentIcons
 
     [<Hook>]
-    static member inline bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
+    static member bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
         Fui.bundle icons (!!iconProps |> createObj)
 
     /// Helper function to create column definition with defaults
@@ -212,7 +212,7 @@ type [<Erase>] Fui =
     /// @param props - a list of tree items
     /// @param options - in case control over the internal openItems is required
     [<Hook>]
-    static member inline useHeadlessFlatTree_unstable (props: IHeadlessTreeItemProp list list, options: IHeadlessFlatTreeOptionsProp list) =
+    static member useHeadlessFlatTree_unstable (props: IHeadlessTreeItemProp list list, options: IHeadlessFlatTreeOptionsProp list) =
         let props =
             props
             |> List.map (fun p -> !!p |> createObj)
