@@ -242,9 +242,9 @@ let menuButtonTest =
 let MenuTest() =
     let checkedValues, setCheckedValues = React.useState({| data = [|"add"|] |})
     let isOpen, setIsOpen = React.useState false
-    let AddIcon = Fui.bundleIcon (Bundle.icon.addCircleFilled, Bundle.icon.addCircleRegular)
-    let DataIcon = Fui.bundleIcon (Bundle.icon.dataAreaFilled, Bundle.icon.dataAreaRegular)
-    let FunnelIcon = Fui.bundleIcon (Bundle.icon.dataFunnelFilled, Bundle.icon.dataFunnelRegular)
+    let AddIcon = Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
+    let DataIcon = Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
+    let FunnelIcon = Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
 
     Fui.menu [
         menu.checkedValues checkedValues
@@ -330,7 +330,7 @@ let MenuTest() =
 
 [<ReactComponent>]
 let ToggleButtons () =
-    let checkedIcon = Fui.bundleIcon(Bundle.icon.checkbox1Filled, Bundle.icon.checkbox1Regular)
+    let checkedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
     Html.div [
