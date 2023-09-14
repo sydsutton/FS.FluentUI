@@ -2356,7 +2356,7 @@ let DataGridTest () =
                 dataGrid.resizableColumns true
                 dataGrid.columnSizingOptions columnSizingOptions
                 dataGrid.getRowId (fun i -> i.File.Label)
-                dataGrid.onSelectionChange (fun (data: {| selectedItems: list<string> |}) -> setSelectedRows data.selectedItems)
+                dataGrid.onSelectionChange (fun data -> setSelectedRows data.selectedItems)
                 dataGrid.children [
                     Fui.dataGridHeader [
                         Fui.dataGridRow [

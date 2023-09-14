@@ -7,6 +7,8 @@ type DataTabster = {
     ``data-tabster``: string
 }
 
+type OnSelectionChangeData<'T> = { selectedItems : list<'T> }
+
 type TagGroupDismissData = {
     dismissedTagValue: string
 }
