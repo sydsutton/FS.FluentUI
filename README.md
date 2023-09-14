@@ -64,9 +64,9 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Accordion     | useArrowNavigationGroup         |        Toast                         |    TimePicker     |
 | Avatar        |                useId            |         Table                      |     ColorPicker    |
 | AvatarGroup   |           useFocusableGroup     |       useToastController           |   SwatchColorPicker  |
-| Badge         |   partitionAvatarGroupItems     |      createFluentIcon              |     Rating           |
+| Badge         |   partitionAvatarGroupItems     |       Drawer (Preview)             |     Rating           |
 | CounterBadge  |           useOverflowMenu       |   useHeadlessFlatTree_unstable       |   BasicList         |
-| PresenceBadge |      useIsOverflowItemVisible   |     bundleIcon                      |   PeoplePicker       |
+| PresenceBadge |      useIsOverflowItemVisible   |     Alert (Preview)                  |   PeoplePicker       |
 | Button        |   createTableColumn             |      useTableFeatures                |   TeachingCallout |
 | CompoundButton|  useStaticVirtualizerMeasure    |      InfoLabel (Preview)             |      Coachmark     |
 | MenuButton    | useModalAttributes              |  VirtualizerScrollView (Preview)      |     MessageBar       |
@@ -75,10 +75,10 @@ If you don't see a component/ hook in this list.... just wait longer!
 | Card          |         useOverflowCount        |        Tag (Preview)             |                         |
 | CardFooter    |        makeResetStyles          |         Breadcrumb (Preview)        |                        |
 | CardHeader    |      makeStyles                 |         Searchbox (Preview)         |                       |
-| CardPreview   |                                |VirtualizerScrollViewDynamic (Preview)|                      |
+| CardPreview   |      bundleIcon                 |VirtualizerScrollViewDynamic (Preview)|                      |
 | Checkbox      |                                 |    Virtualizer (Preview)          |                     |
-| Combobox      |                                 |    Alert (Preview)                  |                        |
-| DataGrid      |                                  |      Drawer (Preview)              |                          |
+| Combobox      |                                 |                                    |                        |
+| DataGrid      |                                  |                                    |                          |
 | Dialog        |                                 |                                    |
 | Divider       |                                 |                                     |
 | Divider       |                                 |
@@ -118,9 +118,9 @@ I have done my best so far to keep usage of these similar to Typescript usage in
 Fluent UI React v9 provides design `tokens` for consistent theming.
 Microsoft doesn't suggest using exact colors in Fluent UI code.
 
-❌ style.color.darkBlue
+❌ `style.color.darkBlue`
 
-✅ style.color Theme.tokens.colorBrandForeground1
+✅ `style.color Theme.tokens.colorBrandForeground1`
 
 Although `shorthands` is used extensively throughout the Microsoft [documentation](https://react.fluentui.dev/?path=/docs/concepts-introduction--page), it is not necessary here when using `makeStyles` or `makeResetStyles`; I'm expanding any shorthand styling properties under-the-hood.
 
@@ -128,9 +128,9 @@ Although `shorthands` is used extensively throughout the Microsoft [documentatio
 
 When using single numeric values in `makeStyles` or `makeResetStyles`, specify the value's `length`.
 
-❌ style.minWidth 200
+❌ `style.minWidth 200`
 
-✅ style.minWidth (length.px 200)
+✅ `style.minWidth (length.px 200)`
 
 ```fsharp
 open Feliz
@@ -203,6 +203,30 @@ let Dialog () =
     Fui.stack [
         stack.className dialogClass
     ...
+```
+
+## BundleIcon
+You can use the `bundleIcon` method to bundle a filled and unfilled version of an icon which will combine them into one icon.
+
+❌ `let AddIcon = Fui.bundleIcon(Fui.icon.addCircleFilled [], Fui.icon.addCircleRegular [])`
+
+✅ `let AddIcon = Fui.bundleIcon(bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)`
+
+In the following example, the icons are toggled depending on if the button `isChecked`. Some components will toggle between the two icons on-hover, on-click, or not at all. Please see Microsoft's documentation for more examples.
+
+```fsharp
+[<ReactComponent>]
+let ToggleButton () =
+    let isChecked, setIsChecked = React.useState true
+
+    let CheckedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
+
+    Fui.toggleButton [
+        toggleButton.icon (CheckedIcon [])
+        toggleButton.checked' isChecked
+        toggleButton.onClick (fun _ -> setIsChecked (isChecked |> not))
+        toggleButton.text "Button Text"
+    ]
 ```
 
 ## Contributing
