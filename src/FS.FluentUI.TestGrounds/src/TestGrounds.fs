@@ -2257,6 +2257,18 @@ let items = [
 let DataGridTest () =
     let selectedRows, setSelectedRows = React.useState (["Thursday Presentation"])
 
+    let columnSizingOptions = [
+        "file", [
+            tableColumnSizingOptions.minWidth 110
+            tableColumnSizingOptions.defaultWidth 120
+        ]
+        "author", [
+            tableColumnSizingOptions.minWidth 120
+            tableColumnSizingOptions.defaultWidth 180
+            tableColumnSizingOptions.idealWidth 180
+        ]
+    ]
+
     let columns = [
         Fui.createTableColumn [
             createTableColumnOption.columnId "file"
@@ -2338,8 +2350,11 @@ let DataGridTest () =
                 dataGrid.items items
                 dataGrid.columns columns
                 dataGrid.sortable true
+                dataGrid.selectionAppearance.brand
                 dataGrid.selectionMode.multiselect
                 dataGrid.selectedItems selectedRows
+                dataGrid.resizableColumns true
+                dataGrid.columnSizingOptions columnSizingOptions
                 dataGrid.getRowId (fun i -> i.File.Label)
                 dataGrid.onSelectionChange (fun (data: {| selectedItems: list<string> |}) -> setSelectedRows data.selectedItems)
                 dataGrid.children [

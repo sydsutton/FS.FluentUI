@@ -30,6 +30,7 @@ type [<Erase>] ICreateTableColumnOptionProp = interface end
 type [<Erase>] IUseTableFeaturesOptionsProp = interface end
 type [<Erase>] ITableFeaturesStateProp = interface end
 type [<Erase>] ISelectionHookParamProp = interface end
+type [<Erase>] ITableColumnSizingOptionsProp = interface end
 
 type [<Erase>] ILinkProp = interface end
 type [<Erase>] IDividerProp = interface end

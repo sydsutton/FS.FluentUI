@@ -272,13 +272,11 @@ type SortState<'TKeyType> = {
     sortDirection: SortDirection
 }
 
-type TableColumnSizingOptions<'TKeyType> = { //TODO
-    columnId: 'TKeyType
-    width: int
+type TableColumnSizingOptions = {
     minWidth: int
     idealWidth: int
     padding: int
-    defaultWidth: int option
+    defaultWidth: int
 }
 
 type ColumnResizeData<'TKeyType> = {

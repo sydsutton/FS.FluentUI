@@ -3602,7 +3602,21 @@ type [<Erase>] dataGrid  =
     static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: #seq<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
     static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: #seq<'T> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
     /// Options for column resizing
-    static member inline columnSizingOptions (value: TableColumnSizingOptions<'TKeyType>) = Interop.mkProperty<IDataGridProp> "columnSizingOptions" value
+    static member inline columnSizingOptions (value: list<string * ITableColumnSizingOptionsProp list>) =
+        let value =
+            match value with
+            | [] -> {||} |> unbox
+            | value ->
+                [
+                    for (name, sizingOptions) in value do
+                        // Using hard-coded files from inline-style-expand-shorthand. Otherwise you run into an issue where
+                        // mixed shorthand and longhand properties are applied in an unexpected way due to the rendering order of CSS classes.
+                        name, !!sizingOptions |> createObj |> unbox<TableColumnSizingOptions>
+                ]
+                |> unbox
+                |> createObj
+
+        Interop.mkProperty<IDataGridProp> "columnSizingOptions" value
     /// A callback triggered when a column is resized.
     static member inline onColumnResize (handler: ColumnResizeData<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onColumnResize" (System.Func<_,_,_> (fun _ value -> handler value))
     /// A callback triggered when a column is resized.
@@ -5411,3 +5425,18 @@ module interactionTagPrimary =
 type [<Erase>] interactionTagSecondary =
     inherit FelizProps.prop<IInteractionTagSecondaryProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagSecondaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+// -------------------------------------------------------------------------- TableColumnSizingOptions --------------------------------------------------------------------------------------
+type [<Erase>] tableColumnSizingOptions =
+    static member inline minWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" value
+    static member inline minWidth (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" value
+    static member inline minWidth (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" value
+    static member inline idealWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" value
+    static member inline idealWidth (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" value
+    static member inline idealWidth (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" value
+    static member inline padding (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "padding" value
+    static member inline padding (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "padding" value
+    static member inline padding (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "padding" value
+    static member inline defaultWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
+    static member inline defaultWidth (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
+    static member inline defaultWidth (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
