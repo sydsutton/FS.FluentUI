@@ -61,6 +61,7 @@ type [<Erase>] fluentProvider =
     static member inline targetDocument (value: Document) = Interop.mkProperty<IFluentProviderProp> "targetDocument" value
     static member inline children (value: ReactElement list) = Interop.mkProperty<IFluentProviderProp> "children" value
     static member inline theme (value: Tokens) = Interop.mkProperty<IFluentProviderProp> "theme" value
+    static member inline overrides_unstable (value: OverridesContextValue_unstable) = Interop.mkProperty<IFluentProviderProp> "overrides_unstable" value
 
 module fluentProvider =
     type [<Erase>] as' =

@@ -9,6 +9,11 @@ type DataTabster = {
 
 type OnSelectionChangeData<'T> = { selectedItems : list<'T> }
 
+type [<RequireQualifiedAccess>] InputDefaultAppearance = | ``outline`` | ``filled-darker`` | ``filled-lighter``
+type OverridesContextValue_unstable = {
+    inputDefaultAppearance: InputDefaultAppearance
+}
+
 type TagGroupDismissData = {
     dismissedTagValue: string
 }
