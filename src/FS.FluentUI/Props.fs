@@ -983,31 +983,27 @@ type [<Erase>] menu =
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IMenuProp> "mountNode" value
     /// Record of all checked values
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>let checkedItems, setCheckedItems = React.useState({| edit = [| "cut" |]; apply = [| |] |})
-    /// menu.checkedValues checkedItems
-    /// menu.onCheckedValueChange (fun (d:MenuCheckedValueChangeData) -> setCheckedItems({| edit = d.checkedItems; apply = d.checkedItems |}))</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" is the value of one of them.)
-    static member inline checkedValues (value: 'T) = Interop.mkProperty<IMenuProp> "checkedValues" value
+    /// Usage: ```menu.checkedValues [ "data", [| "add" |] ]`` where "data" is "menuItemCheckbox.name" and "add" is "menuItemCheckbox.value"```
+    static member inline checkedValues (value: list<string * string array>) = Interop.mkProperty<IMenuProp> "checkedValues" (!!value |> createObj)
     /// Default values to be checked on mount
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>menu.defaultCheckedValues ({| edit = [| "cut"; "paste" |]; apply = [| |] |})</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" and "paste" are the values of the ones to be checked on mount.)
-    static member inline defaultCheckedValues (value: 'T) = Interop.mkProperty<IMenuProp> "defaultCheckedValues" value
+    /// Usage: ```menu.defaultCheckedValues [ "data", [| "add" |] ]```
+    static member inline defaultCheckedValues (value: list<string * string array>) = Interop.mkProperty<IMenuProp> "defaultCheckedValues" (!!value |> createObj)
     /// States that menu items can contain selectable items and reserve slots for item alignment
     static member inline hasCheckmarks (value: bool) = Interop.mkProperty<IMenuProp> "hasCheckmarks" value
     /// States that menu items can contain icons and reserve slots for item alignment
     static member inline hasIcons (value: bool) = Interop.mkProperty<IMenuProp> "hasIcons" value
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menu.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (handler: (MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuProp> "onCheckedValueChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menu.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (MouseEvent -> MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuProp> "onCheckedValueChange" (System.Func<_,_,_> value)
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menu.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (KeyboardEvent -> MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuProp> "onCheckedValueChange" (System.Func<_,_,_> value)
     /// Can contain two children including MenuTrigger and MenuPopover. Alternatively can only contain MenuPopove if using a custom target.
     static member inline children (value: ReactElement) = Interop.mkProperty<IMenuProp> "children" value
@@ -1072,31 +1068,27 @@ type [<Erase>] menuList =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuListProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Record of all checked values.
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>let checkedItems, setCheckedItems = React.useState({| edit = [| "cut" |]; apply = [| |] |})
-    /// menu.checkedValues checkedItems
-    /// menu.onCheckedValueChange (fun (d:MenuCheckedValueChangeData) -> setCheckedItems({| edit = d.checkedItems; apply = d.checkedItems |}))</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" is the value of one of them.)
-    static member inline checkedValues (value: 'T) = Interop.mkProperty<IMenuListProp> "checkedValues" value
+    /// Usage: ```menuList.checkedValues [ "data", [| "add" |] ]```
+    static member inline checkedValues (value: list<string * string array>) = Interop.mkProperty<IMenuListProp> "checkedValues" (!!value |> createObj)
     /// Default values to be checked on mount.
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>menu.defaultCheckedValues ({| edit = [| "cut"; "paste" |]; apply = [| |] |})</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" and "paste" are the values of the ones to be checked on mount.)
-    static member inline defaultCheckedValues (value: 'T) = Interop.mkProperty<IMenuListProp> "defaultCheckedValues" value
+    /// Usage: ```menuList.defaultCheckedValues [ "data", [| "add" |] ]```
+    static member inline defaultCheckedValues (value: list<string * string array>) = Interop.mkProperty<IMenuListProp> "defaultCheckedValues" (!!value |> createObj)
     /// States that menu items can contain selectable items and reserve slots for item alignment
     static member inline hasCheckmarks (value: bool) = Interop.mkProperty<IMenuListProp> "hasCheckmarks" value
     /// States that menu items can contain icons and reserve slots for item alignment
     static member inline hasIcons (value: bool) = Interop.mkProperty<IMenuListProp> "hasIcons" value
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menuList.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (handler: (MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuListProp> "onCheckedValueChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menuList.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (MouseEvent -> MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuListProp> "onCheckedValueChange" (System.Func<_,_,_> value)
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `menuList.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (KeyboardEvent -> MenuCheckedValueChangeData -> unit)) = Interop.mkProperty<IMenuListProp> "onCheckedValueChange" (System.Func<_,_,_> value)
 
 module menuList =
@@ -2385,27 +2377,23 @@ type [<Erase>] toolbar =
     static member inline vertical (value: bool) = Interop.mkProperty<IToolbarProp> "vertical" value
     /// Record of all checked values.
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>let checkedItems, setCheckedItems = React.useState({| edit = [| "cut" |]; apply = [| |] |})
-    /// toolbar.checkedValues checkedItems
-    /// toolbar.onCheckedValueChange (fun (d:MenuCheckedValueChangeData) -> setCheckedItems({| edit = d.checkedItems; apply = d.checkedItems |}))</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" is the value of one of them.)
-    static member inline checkedValues (value: 'T) = Interop.mkProperty<IToolbarProp> "checkedValues" value
+    /// Usage: ```toolbar.checkedValues [ "data", [| "add" |] ]```
+    static member inline checkedValues (value: list<string * string array>) = Interop.mkProperty<IToolbarProp> "checkedValues" (!!value |> createObj)
     /// Default values to be checked on mount.
     ///
-    /// <para>Usage: You must use an anonymous record, or create your own record type, for this property.</para>
-    ///
-    /// <code>toolbar.defaultCheckedValues ({| edit = [| "cut"; "paste" |]; apply = [| |] |})</code>
-    ///
-    /// ("edit" and "apply" and the names of the different MenuItemCheckboxes. "cut" and "paste" are the values of the ones to be checked on mount.)
-    static member inline defaultCheckedValues (value: 'T) = Interop.mkProperty<IToolbarProp> "defaultCheckedValues" value
+    /// Usage: ```toolbar.defaultCheckedValues [ "data", [| "add" |] ]```
+    static member inline defaultCheckedValues (value: list<string * string array>) = Interop.mkProperty<IToolbarProp> "defaultCheckedValues" (!!value |> createObj)
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, `toolbar.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (handler: (ToolbarCheckedValueChangeData -> unit)) = Interop.mkProperty<IToolbarProp> "onCheckedValueChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `toolbar.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (MouseEvent -> ToolbarCheckedValueChangeData -> unit)) = Interop.mkProperty<IToolbarProp> "onCheckedValueChange" (System.Func<_,_,_> value)
     /// Callback when checked items change for value with a name
+    ///
+    /// If using controlled checked values, use: `toolbar.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))`
     static member inline onCheckedValueChange (value: (KeyboardEvent -> ToolbarCheckedValueChangeData -> unit)) = Interop.mkProperty<IToolbarProp> "onCheckedValueChange" (System.Func<_,_,_> value)
 
 module toolbar =

@@ -240,7 +240,7 @@ let menuButtonTest =
 
 [<ReactComponent>]
 let MenuTest() =
-    let checkedValues, setCheckedValues = React.useState({| data = [|"add"|] |})
+    let checkedValues, setCheckedValues = React.useState([ "data", [| "add" |]; "info", [| "filterInfo" |] ])
     let isOpen, setIsOpen = React.useState false
     let AddIcon = Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
     let DataIcon = Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
@@ -253,7 +253,7 @@ let MenuTest() =
             positioning.coverTarget true
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
-        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues({| data = d.checkedItems |}))
+        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues([ d.name, d.checkedItems ] |> List.append checkedValues))
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
@@ -287,6 +287,31 @@ let MenuTest() =
                         menuItemCheckbox.value "filter"
                         menuItemCheckbox.children [
                             Fui.text "Filter Data"
+                        ]
+                    ]
+                    Fui.menuDivider []
+                    Fui.menuItemCheckbox [
+                        menuItemCheckbox.icon (AddIcon [])
+                        menuItemCheckbox.name "info"
+                        menuItemCheckbox.value "addInfo"
+                        menuItemCheckbox.children [
+                            Fui.text "Add Info"
+                        ]
+                    ]
+                    Fui.menuItemCheckbox [
+                        menuItemCheckbox.icon (DataIcon [])
+                        menuItemCheckbox.name "info"
+                        menuItemCheckbox.value "infoTrends"
+                        menuItemCheckbox.children [
+                            Fui.text "Show Info Trends"
+                        ]
+                    ]
+                    Fui.menuItemCheckbox [
+                        menuItemCheckbox.icon (FunnelIcon [])
+                        menuItemCheckbox.name "info"
+                        menuItemCheckbox.value "filterInfo"
+                        menuItemCheckbox.children [
+                            Fui.text "Filter Info"
                         ]
                     ]
                     Fui.menuItemCheckbox [
@@ -1295,6 +1320,39 @@ let ToolbarTest() =
                         ]
                     ]
                 ]
+            ]
+        ]
+    ]
+
+[<ReactComponent>]
+let ControlledToolbarTest() =
+    let checkedValues, setCheckedValues = React.useState [ "alert", [| "on"; "off" |]]
+
+    let AlertIcon = Fui.bundleIcon(bundleIcon.alertFilled, bundleIcon.alertRegular)
+    let AlertOnIcon = Fui.bundleIcon(bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
+    let AlertOffIcon = Fui.bundleIcon(bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
+
+    Fui.toolbar [
+        toolbar.checkedValues checkedValues
+        toolbar.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))
+        toolbar.children [
+            Fui.toolbarToggleButton [
+                toolbarToggleButton.ariaLabel "Alert"
+                toolbarToggleButton.icon (AlertIcon [])
+                toolbarToggleButton.name "alert"
+                toolbarToggleButton.value "alert"
+            ]
+            Fui.toolbarToggleButton [
+                toolbarToggleButton.ariaLabel "Alert On"
+                toolbarToggleButton.icon (AlertOnIcon [])
+                toolbarToggleButton.name "alert"
+                toolbarToggleButton.value "on"
+            ]
+            Fui.toolbarToggleButton [
+                toolbarToggleButton.ariaLabel "Alert Off"
+                toolbarToggleButton.icon (AlertOffIcon [])
+                toolbarToggleButton.name "alert"
+                toolbarToggleButton.value "off"
             ]
         ]
     ]
@@ -3036,6 +3094,7 @@ let mainContent model dispatch =
             DropdownTest()
             ComboBoxTest()
             ToolbarTest()
+            ControlledToolbarTest()
             avatarGroupTest
             progressBarTest
             DialogTest()
