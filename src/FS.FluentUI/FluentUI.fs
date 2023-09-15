@@ -69,7 +69,7 @@ type [<Erase>] Fui =
     //TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
     //TODO but I'm not sure how to do that.
     [<Hook>]
-    static member inline useToastController (?toasterId: string): ToastController = import "useToastController" FluentUIv9
+    static member inline useToastController (toasterId: string option): ToastController = import "useToastController" FluentUIv9
 
     static member inline partitionAvatarGroupItems (options: IPartitionAvatarGroupItemsOptionsProp list): PartitionAvatarGroupItems<'T> =
         let partitionAvatarGroupItems = import "partitionAvatarGroupItems" FluentUIv9

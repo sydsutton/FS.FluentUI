@@ -1602,7 +1602,7 @@ let ToastTest() =
         updateToastOptions.intent.success
     ]
 
-    let toastController = Fui.useToastController(toasterId)
+    let toastController = Fui.useToastController(Some toasterId)
 
     let notify = fun _ ->
         toastController.dispatchToast(defaultToast(*, Some (dispatchOptions |> dispatchToastOptions.toType)*)) //TODO
