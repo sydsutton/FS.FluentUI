@@ -4249,7 +4249,7 @@ type [<Erase>] virtualizerScrollViewDynamic =
     /// This value should be flipped in RTL implementation (TBD whether automate RTL).
     static member inline reversed (value: bool) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "reversed" value
     /// Virtualizer context can be passed as a prop for extended class use
-    static member inline virtualizerContext (value: VirtualizerContextProps) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "virtualizerContext" value
+    static member inline virtualizerContext (value: IVirtualizerContextProp list) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "virtualizerContext" (!!value |> createObj |> unbox<VirtualizerContextProps>)
     /// Callback for notifying when a flagged index has been rendered
     static member inline onRenderedFlaggedIndex (value: int -> unit) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "onRenderedFlaggedIndex" (System.Func<_,_> value)
     /// Callback for notifying when a flagged index has been rendered
@@ -5466,3 +5466,12 @@ type [<Erase>] offset =
     static member inline mainAxis (value: int) = Interop.mkProperty<IOffsetProp> "mainAxis" value
     static member inline mainAxis (value: decimal) = Interop.mkProperty<IOffsetProp> "mainAxis" value
     static member inline mainAxis (value: float) = Interop.mkProperty<IOffsetProp> "mainAxis" value
+
+// -------------------------------------------------------------------------- VirtualizerContext --------------------------------------------------------------------------------------
+type [<Erase>] virtualizerContextProps =
+    static member inline contextIndex (value: int) = Interop.mkProperty<IVirtualizerContextProp> "contextIndex" value
+    static member inline contextIndex (value: decimal) = Interop.mkProperty<IVirtualizerContextProp> "contextIndex" value
+    static member inline contextIndex (value: float) = Interop.mkProperty<IVirtualizerContextProp> "contextIndex" value
+    static member inline setContextIndex (value: int -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
+    static member inline setContextIndex (value: decimal -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
+    static member inline setContextIndex (value: float -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
