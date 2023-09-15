@@ -495,6 +495,10 @@ let textTest =
 let UseArrowNavigationGroup () =
     let keyboardNavAttr = Fui.useArrowNavigationGroup [
         useArrowNavigationGroupOptions.circular true
+        useArrowNavigationGroupOptions.ignoreDefaultKeydown [
+            ignoreKeyDown.arrowDown true
+            ignoreKeyDown.end' false
+        ]
     ]
 
     let styles = useStyles()

@@ -4839,7 +4839,7 @@ type [<Erase>] useArrowNavigationGroupOptions =
     /// Allow tabbing within the arrow navigation group items.
     static member inline tabbable (value: bool) = Interop.mkProperty<IUseArrowNavigationGroupOptionsProp> "tabbable" value
     /// Tabster should ignore default handling of keydown events
-    static member inline ignoreDefaultKeydown (value: IgnoreKeyDown) = Interop.mkProperty<IUseArrowNavigationGroupOptionsProp> "ignoreDefaultKeydown" value
+    static member inline ignoreDefaultKeydown (value: IIgnoreKeyDownProp list) = Interop.mkProperty<IUseArrowNavigationGroupOptionsProp> "ignoreDefaultKeydown" (!!value |> createObj |> unbox<IgnoreKeyDown>)
     /// The default focusable item in the group will be an element with Focusable.isDefault property.
     /// Note that there is no way in \@fluentui/react-tabster to set default focusable element, and this option is currently for internal testing purposes only.
     static member inline unstable_hasDefault (value: bool) = Interop.mkProperty<IUseArrowNavigationGroupOptionsProp> "unstable_hasDefault" value
@@ -5428,3 +5428,17 @@ type [<Erase>] tableColumnSizingOptions =
     static member inline defaultWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
     static member inline defaultWidth (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
     static member inline defaultWidth (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
+
+
+// -------------------------------------------------------------------------- IgnoreKeyDown --------------------------------------------------------------------------------------
+type [<Erase>] ignoreKeyDown =
+    static member inline tab (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "Tab" value
+    static member inline escape (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "Escape" value
+    static member inline enter (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "Enter" value
+    static member inline arrowUp (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "ArrowUp" value
+    static member inline arrowDown (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "ArrowDown" value
+    static member inline arrowLeft (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "ArrowLeft" value
+    static member inline arrowRight (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "ArrowRight" value
+    static member inline pageUp (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "PageUp" value
+    static member inline pageDown (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "PageDown" value
+    static member inline end' (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "End" value
