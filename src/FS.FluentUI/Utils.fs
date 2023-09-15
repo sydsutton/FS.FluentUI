@@ -176,6 +176,8 @@ type [<Erase>] IInteractionTagPrimaryProp = interface end
 type [<Erase>] IInteractionTagSecondaryProp = interface end
 
 type [<Erase>] IIgnoreKeyDownProp = interface end
+type [<Erase>] IOverflowBoundaryPaddingProp = interface end
+type [<Erase>] IOffsetProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end

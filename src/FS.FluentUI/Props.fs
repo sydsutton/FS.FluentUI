@@ -4722,7 +4722,7 @@ type [<Erase>] positioning =
     /// Lets you displace a positioned element from its reference element.
     /// This can be useful if you need to apply some margin between them or if you need to fine tune the
     /// position according to some custom logic.
-    static member inline offset (value: OffsetObject) = Interop.mkProperty<IPositioningProp> "offset" value
+    static member inline offset (value: IOffsetProp list) = Interop.mkProperty<IPositioningProp> "offset" (!!value |> createObj |> unbox<OffsetObject>)
     /// Lets you displace a positioned element from its reference element.
     /// This can be useful if you need to apply some margin between them or if you need to fine tune the
     /// position according to some custom logic.
@@ -4745,7 +4745,7 @@ type [<Erase>] positioning =
     static member inline overflowBoundary (value: (Element array) option) = Interop.mkProperty<IPositioningProp> "overflowBoundary" value
     /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
-    static member inline overflowBoundaryPadding (value: OverflowBoundaryPadding) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" value
+    static member inline overflowBoundaryPadding (value: IOverflowBoundaryPaddingProp list) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" (!!value |> createObj |> unbox<OverflowBoundaryPadding>)
     /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
     static member inline overflowBoundaryPadding (value: int) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" value
@@ -5443,3 +5443,27 @@ type [<Erase>] ignoreKeyDown =
     static member inline pageUp (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "PageUp" value
     static member inline pageDown (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "PageDown" value
     static member inline end' (value: bool) = Interop.mkProperty<IIgnoreKeyDownProp> "End" value
+
+// -------------------------------------------------------------------------- OverflowBoundaryPadding --------------------------------------------------------------------------------------
+type [<Erase>] overflowBoundaryPadding =
+    static member inline top (value: int) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "top" value
+    static member inline top (value: float) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "top" value
+    static member inline top (value: decimal) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "top" value
+    static member inline end' (value: int) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "end" value
+    static member inline end' (value: float) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "end" value
+    static member inline end' (value: decimal) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "end" value
+    static member inline bottom (value: int) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "bottom" value
+    static member inline bottom (value: float) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "bottom" value
+    static member inline bottom (value: decimal) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "bottom" value
+    static member inline start (value: int) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "start" value
+    static member inline start (value: float) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "start" value
+    static member inline start (value: decimal) = Interop.mkProperty<IOverflowBoundaryPaddingProp> "start" value
+
+// -------------------------------------------------------------------------- Offset --------------------------------------------------------------------------------------
+type [<Erase>] offset =
+    static member inline crossAxis (value: int) = Interop.mkProperty<IOffsetProp> "crossAxis" value
+    static member inline crossAxis (value: decimal) = Interop.mkProperty<IOffsetProp> "crossAxis" value
+    static member inline crossAxis (value: float) = Interop.mkProperty<IOffsetProp> "crossAxis" value
+    static member inline mainAxis (value: int) = Interop.mkProperty<IOffsetProp> "mainAxis" value
+    static member inline mainAxis (value: decimal) = Interop.mkProperty<IOffsetProp> "mainAxis" value
+    static member inline mainAxis (value: float) = Interop.mkProperty<IOffsetProp> "mainAxis" value

@@ -569,6 +569,9 @@ let PopoverTest () =
                     positioning.align.start
                     positioning.target target
                     positioning.coverTarget true
+                    positioning.offset [
+                        offset.crossAxis 25
+                    ]
                 ]
                 popover.onOpenChange (fun (data: OpenProp) -> if data.``open`` = false then setVisible false)
                 popover.children [
@@ -1154,10 +1157,10 @@ let ComboBoxTest() =
                 combobox.ariaLabelledBy "comboBoxId"
                 combobox.multiselect true
                 combobox.positioning [
-                    positioning.offset {
-                        crossAxis = Some 50
-                        mainAxis = 50
-                    }
+                    positioning.offset [
+                        offset.crossAxis 50
+                        offset.mainAxis 50
+                    ]
                 ]
                 combobox.defaultSelectedOptions seletedOptions
                 combobox.placeholder "Select one or more animals"
@@ -1877,7 +1880,9 @@ let OverflowMenu itemIds =
     Fui.menu [
         // menu.positioning.afterBottom
         menu.positioning [
-            positioning.offset { crossAxis = Some 30; mainAxis = 35 }
+            positioning.offset [
+                offset.crossAxis 30
+                offset.mainAxis 35 ]
         ]
         // menu.positioning.alignCenter
         menu.children [
