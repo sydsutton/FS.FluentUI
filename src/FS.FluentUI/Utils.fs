@@ -182,6 +182,8 @@ type [<Erase>] IOffsetProp = interface end
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
 
+type [<AllowNullLiteral; Erase>] BundleIcon = interface end
+
 [<RequireQualifiedAccess>]
 type Interop =
     static member inline mkProperty<'ControlProperty> (key:string) (value:obj) : 'ControlProperty = unbox (key, value)

@@ -151,7 +151,7 @@ type [<Erase>] Fui =
     [<Hook>]
     static member inline useIsOverflowGroupVisible (id: string): OverflowGroupState = import "useIsOverflowGroupVisible" FluentUIv9
 
-    static member private bundle (filledIcon: ReactElement, regularIcon: ReactElement): obj -> ReactElement = import "bundleIcon" FluentIcons
+    static member private bundle (filledIcon: BundleIcon, regularIcon: BundleIcon): obj -> ReactElement = import "bundleIcon" FluentIcons
 
     [<Hook>]
     static member bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
