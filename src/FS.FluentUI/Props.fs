@@ -59,7 +59,6 @@ type [<Erase>] fluentProvider =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IFluentProviderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline applyStylesToPortals (value: bool) = Interop.mkProperty<IFluentProviderProp> "applyStylesToPortals" value
     static member inline targetDocument (value: Document) = Interop.mkProperty<IFluentProviderProp> "targetDocument" value
-    static member inline children (value: ReactElement list) = Interop.mkProperty<IFluentProviderProp> "children" value
     static member inline theme (value: Tokens) = Interop.mkProperty<IFluentProviderProp> "theme" value
     static member inline overrides_unstable (value: OverridesContextValue_unstable) = Interop.mkProperty<IFluentProviderProp> "overrides_unstable" value
 
