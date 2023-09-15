@@ -10,7 +10,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Change anon. record or domain type parameters & add BundleIcon type
+            - Change anon. record or domain type parameters and add BundleIcon type
         </PackageReleaseNotes>
     </PropertyGroup>
 
