@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta12</Version>
+        <Version>1.0.0-prerelease-001</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Description>V9 of Microsoft's FluentUI library, built for F# in the style of Feliz.</Description>
@@ -10,7 +10,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Add ability to bundleIcons, theme with custom Tokens, and fix dataGrid.onSelectionChange bug
+            - Change anon. record or domain type parameters & add BundleIcon type
         </PackageReleaseNotes>
     </PropertyGroup>
 
