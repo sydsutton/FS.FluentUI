@@ -4,9 +4,10 @@
 
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 
-### ⚠️This repo is in beta. Some components/ functions are incomplete. Please feel free to send PR's and messages in order to get this library as close to 100% as possible!⚠️
+### Some components/ functions are incomplete or still considered `Preview Components` and/or `unstable` by Microsoft. Please feel free to send PR's in order to get this library as close to 100% as possible!
 
-#### NOTE: I've created FS.FluentUI.V8toV9 in order to use Stack, StackItem, and createBrandVariants (from V8 theme). See example of Stack below.
+## FS.FluentUI.V8toV9
+I've created FS.FluentUI.V8toV9 in order to use Stack, StackItem, and createBrandVariants (from V8 theme). See example of a Stack component usage below.
 
 #### IMPORTANT: Place a `Fui.fluentProvider` at the root of your app and pass the theme in as a prop. You can use pre-determined themes, or create your own `BrandVariants` or `Tokens` to use for your theme. See `src/TestGrounds/src/Main.fs` for specific examples. `BrandVariants` can be generated and copied over from Microsoft's [Theme Designer](https://react.fluentui.dev/?path=/docs/themedesigner--page). Simply pick your "Key color value", choose your theme, click `Export`, and convert the TS `BrandVariants` into something more F#.
 
@@ -60,12 +61,11 @@ If you don't see a component/ hook in this list.... just wait longer!
 
 #### Please see ```src/FS.FluentUI.TestGrounds/src``` for examples of every component
 
-
 | Complete Components| Complete Hooks / Functions | Has TODO's or are unstable          |  Upcoming         |
 | ------------- | -------------                   | -------------                        |    -------------  |
-| Accordion     | useArrowNavigationGroup         |        Toast                         |    TimePicker     |
-| Avatar        |                useId            |         Table                      |     ColorPicker    |
-| AvatarGroup   |           useFocusableGroup     |       useToastController           |   SwatchColorPicker  |
+| Accordion     | useArrowNavigationGroup         |  Toast (Complete with some TODO's)  |    TimePicker     |
+| Avatar        |                useId            |  Table  (Use DataGrid for now)      |     ColorPicker    |
+| AvatarGroup   |           useFocusableGroup     |  useToastController  (Complete with some TODO's) |   SwatchColorPicker  |
 | Badge         |   partitionAvatarGroupItems     |       Drawer (Preview)             |     Rating           |
 | CounterBadge  |           useOverflowMenu       |   useHeadlessFlatTree_unstable       |   BasicList         |
 | PresenceBadge |      useIsOverflowItemVisible   |     Alert (Preview)                  |   PeoplePicker       |
@@ -224,7 +224,7 @@ let ToggleButton () =
     let CheckedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
 
     Fui.toggleButton [
-        toggleButton.icon (CheckedIcon [])
+        toggleButton.icon (CheckedIcon [ icon.style [ style.color.green ] ])
         toggleButton.checked' isChecked
         toggleButton.onClick (fun _ -> setIsChecked (isChecked |> not))
         toggleButton.text "Button Text"
@@ -232,6 +232,7 @@ let ToggleButton () =
 ```
 
 ## Contributing
+
 ### Before sending PR's, please test what you've added in the "TestGrounds".
 ```bash
 cd src/FS.FluentUI.TestGrounds

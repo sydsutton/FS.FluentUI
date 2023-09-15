@@ -153,6 +153,12 @@ type [<Erase>] Fui =
 
     static member private bundle (filledIcon: BundleIcon, regularIcon: BundleIcon): obj -> ReactElement = import "bundleIcon" FluentIcons
 
+    /// The `bundleIcon` hook bundles a `filled` and `unfilled` version of an icon and combines them into one icon.
+    /// You can also add additional styles to the bundled icon after the hook call.
+    ///
+    /// `let AddIcon = Fui.bundleIcon(bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)`
+    ///
+    /// `{component}.icon (AddIcon [ icon.style [ style.color.yellow ] ])`
     [<Hook>]
     static member bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
         Fui.bundle icons (!!iconProps |> createObj)
