@@ -969,9 +969,9 @@ module menuButton =
 
     /// A button supports different sizes.
     type [<Erase>] size =
-        static member inline small = Interop.mkProperty<IButtonProp> "size" "small"
-        static member inline medium = Interop.mkProperty<IButtonProp> "size" "medium"
-        static member inline large = Interop.mkProperty<IButtonProp> "size" "large"
+        static member inline small = Interop.mkProperty<IMenuButtonProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IMenuButtonProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IMenuButtonProp> "size" "large"
 
 // -------------------------------------------------------------------------- Menu --------------------------------------------------------------------------------------
 
