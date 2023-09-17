@@ -41,6 +41,8 @@ type Styles = {
     day: string
     overflow: string
     breadcrumb: string
+    portalContainer: string
+    portal: string
 }
 
 let useStyles: unit -> Styles = Fui.makeStyles [
@@ -94,13 +96,21 @@ let useStyles: unit -> Styles = Fui.makeStyles [
         style.resize.horizontal
         style.maxWidth (length.px 600)
     ]
+    "portalContainer", [
+        style.border(3, borderStyle.dashed, "gray")
+        style.padding (length.px 5)
+    ]
+    "portal", [
+        style.backgroundColor tokens.colorPaletteYellowBackground3
+        style.border(3, borderStyle.dashed, "gray")
+        style.padding (length.px 5)
+    ]
 ]
 
 [<ReactComponent>]
 let Accordion () =
     let openItems, setOpenItems = React.useState [1]
 
-    let styles = useStyles()
     let getIcon key =
         if openItems |> List.contains key then
             Fui.icon.subtractFilled []
@@ -1848,6 +1858,32 @@ let DatePickerTest() =
         ]
     ]
 
+[<ReactComponent>]
+let Portal () =
+    let styles = useStyles()
+    let rootElement, setRootElement = React.useState(None)
+    Html.div [
+        Html.div [
+            prop.className styles.portalContainer
+            prop.style [ style.overflow.hidden ]
+            prop.children [
+                Fui.text "Clipping parent container"
+                Fui.portal [
+                    portal.mountNode rootElement
+                    portal.children [
+                        Html.div [
+                            prop.className styles.portal
+                            prop.text "Portal content"
+                        ]
+                    ]
+                ]
+            ]
+        ]
+        Html.div [
+            prop.ref (fun e -> setRootElement (Some e))
+        ]
+    ]
+
 let badgeTest =
     Fui.badge [
         badge.size.extraLarge
@@ -3134,6 +3170,7 @@ let mainContent model dispatch =
             SearchBoxTest()
             TagTest()
             InteractionTagTest()
+            Portal ()
         ]
     ]
 

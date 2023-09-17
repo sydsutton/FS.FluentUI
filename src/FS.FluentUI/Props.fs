@@ -1823,7 +1823,7 @@ type [<Erase>] portal =
     static member inline children (value: ReactElement list) = Interop.mkProperty<IPortalProp> "children" value
     /// Where the portal children are mounted on DOM
     /// Default: a new element on document.body without any styling
-    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IPortalProp> "mountNode" value
+    static member inline mountNode (value: Element option) = Interop.mkProperty<IPortalProp> "mountNode" value
     /// Where the portal children are mounted on DOM
     /// Default: a new element on document.body without any styling
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IPortalProp> "mountNode" value
