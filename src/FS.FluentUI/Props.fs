@@ -73,28 +73,19 @@ module fluentProvider =
     type [<Erase>] theme =
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createDarkTheme (brand: BrandVariants): ITheme = import "createDarkTheme" "@fluentui/react-components"
+        static member inline createDarkTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createDarkTheme" "@fluentui/react-components" brand)
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createLightTheme (brand: BrandVariants): ITheme = import "createLightTheme" "@fluentui/react-components"
-        static member inline createHighContrastTheme (): ITheme = import "createHighContrastTheme" "@fluentui/react-components"
+        static member inline createLightTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createLightTheme" "@fluentui/react-components" brand)
+        static member inline createHighContrastTheme () = Interop.mkProperty<IFluentProviderProp> "theme" (import "createHighContrastTheme" "@fluentui/react-components" ())
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createTeamsDarkTheme (brand: BrandVariants): ITheme = import "createTeamsDarkTheme" "@fluentui/react-components"
-        static member inline teamsLight = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsLightTheme" "@fluentui/react-components")
-        static member inline teamsDark = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsDarkTheme" "@fluentui/react-components")
-        static member inline teamsHighContrast =Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsHighContrastTheme" "@fluentui/react-components")
-        static member inline webLight = Interop.mkProperty<IFluentProviderProp> "theme" (import "webLightTheme" "@fluentui/react-components")
-        static member inline webDark = Interop.mkProperty<IFluentProviderProp> "theme" (import "webDarkTheme" "@fluentui/react-components")
-        /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
-        /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline customDarkTheme (value: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (theme.createDarkTheme value)
-        /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
-        /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline customLightTheme (value: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (theme.createLightTheme value)
-        /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
-        /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline customTeamsDarkTheme (value: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (theme.createTeamsDarkTheme value)
+        static member inline createTeamsDarkTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createTeamsDarkTheme" "@fluentui/react-components" brand)
+        static member inline teamsLightTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsLightTheme" "@fluentui/react-components")
+        static member inline teamsDarkTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsDarkTheme" "@fluentui/react-components")
+        static member inline teamsHighContrastTheme =Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsHighContrastTheme" "@fluentui/react-components")
+        static member inline webLightTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "webLightTheme" "@fluentui/react-components")
+        static member inline webDarkTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "webDarkTheme" "@fluentui/react-components")
 
 // -------------------------------------------------------------------------- Avatar --------------------------------------------------------------------------------------
 type [<Erase>] avatar =
