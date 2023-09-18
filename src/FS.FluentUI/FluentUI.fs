@@ -201,13 +201,6 @@ type [<Erase>] Fui =
         let dataTabster : DataTabster = name |> useObservedElement
         prop.custom("data-tabster", dataTabster.``data-tabster``)
 
-    /// The useObservedElement hook assigns a name to an element and should be used alongside useFocusObserved that will actually return the imperative method to focus the element.
-    [<Hook>]
-    static member inline useObservedElement (name: string array): IReactProperty =
-        let useObservedElement = import "useObservedElement" FluentUIv9
-        let dataTabster : DataTabster = name |> useObservedElement
-        prop.custom("data-tabster", dataTabster.``data-tabster``)
-
     static member private useHeadlessFlatTree (props, options): HeadlessFlatTree<'T, 'TEvent> = import "useHeadlessFlatTree_unstable" FluentUIv9
 
     /// this hook provides FlatTree API to manage all required mechanisms to convert a list of items into renderable TreeItems
