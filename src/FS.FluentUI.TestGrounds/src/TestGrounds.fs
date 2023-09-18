@@ -119,7 +119,6 @@ let Accordion () =
 
     Fui.accordion [
         accordion.collapsible true
-        accordion.className styles.accordion
         accordion.openItems openItems
         accordion.defaultOpenItems openItems
         accordion.onToggle (fun (i: ValueProp<int>) ->
@@ -263,7 +262,9 @@ let MenuTest() =
             positioning.coverTarget true
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
-        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) -> setCheckedValues([ d.name, d.checkedItems ] |> List.append checkedValues))
+        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) ->
+            setCheckedValues([ d.name, d.checkedItems ] |> List.append checkedValues)
+        )
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
@@ -616,17 +617,11 @@ let PopoverTest () =
         ]
     ]
 
-[<ReactComponent>]
-let TooltipTest ()=
-    let styles = useStyles()
-
+let tooltipTest =
     Fui.tooltip [
         tooltip.withArrow true
-        tooltip.content ( //TODO backgroundcolor from class doesn't fill width of tooltip
-            Fui.text [
-                text.className styles.tooltip
-                text.text "Example tooltip"
-            ]
+        tooltip.content (
+            Fui.text "Example tooltip"
         )
         tooltip.relationship.label
         tooltip.children (
@@ -690,19 +685,21 @@ let inputTest =
                     Fui.label [
                         label.htmlFor "emailId"
                         label.text "Email input"
+                        label.required true
                     ]
                     Fui.input [
                         input.type'.email
                         input.id "emailId"
                         input.value "lol@lol.com"
+                        input.onChange (fun (v: ValueProp<string>) -> printfn "%s" v.value)
                         input.contentBefore (
                             Fui.icon.albumAddFilled []
                         )
-                        input.size.large
-                        input.appearance.filledDarkerShadow
                         input.contentAfter (
                             Fui.icon.airplaneRegular []
                         )
+                        input.size.large
+                        input.appearance.outline
                     ]
                 ]
             ]
@@ -1057,6 +1054,77 @@ let personaTest =
         ]
     ]
 
+let optionGroup =
+    Fui.optionGroup [
+        optionGroup.label "People"
+        optionGroup.children [
+            Fui.option [
+                option.text "Katri Athokas"
+                option.children [
+                    Fui.persona [
+                        persona.avatar [
+                            avatar.color.colorful
+                            avatar.ariaHidden true
+                        ]
+                        persona.name "Katri Athokas"
+                        persona.presence [
+                            presenceBadge.status.available
+                        ]
+                        persona.secondaryText "Available"
+                    ]
+                ]
+            ]
+            Fui.option [
+                option.text "Elvia Atkins"
+                option.children [
+                    Fui.persona [
+                        persona.avatar [
+                            avatar.color.colorful
+                            avatar.ariaHidden true
+                        ]
+                        persona.name "Elvia Atkins"
+                        persona.presence [
+                            presenceBadge.status.busy
+                        ]
+                        persona.secondaryText "Busy"
+                    ]
+                ]
+            ]
+            Fui.option [
+                option.text "Cameron Evans"
+                option.children [
+                    Fui.persona [
+                        persona.avatar [
+                            avatar.color.colorful
+                            avatar.ariaHidden true
+                        ]
+                        persona.name "Cameron Evans"
+                        persona.presence [
+                            presenceBadge.status.away
+                        ]
+                        persona.secondaryText "Away"
+                    ]
+                ]
+            ]
+            Fui.option [
+                option.text "Wanda Howard"
+                option.children [
+                    Fui.persona [
+                        persona.avatar [
+                            avatar.color.colorful
+                            avatar.ariaHidden true
+                        ]
+                        persona.name "Wanda Howard"
+                        persona.presence [
+                            presenceBadge.status.outOfOffice
+                        ]
+                        persona.secondaryText "Out of Office"
+                    ]
+                ]
+            ]
+        ]
+    ]
+
 [<ReactComponent>]
 let DropdownTest() =
     let selected, setSelected = React.useState("Katri Athokas")
@@ -1077,77 +1145,7 @@ let DropdownTest() =
                         setSelected t
                     | None -> ()
                 )
-                dropdown.children [
-                    Fui.optionGroup [
-                        optionGroup.label "People"
-                        optionGroup.children [
-                            Fui.option [
-                                option.text "Katri Athokas"
-                                option.children [
-                                    Fui.persona [
-                                        persona.avatar [
-                                            avatar.color.colorful
-                                            avatar.ariaHidden true
-                                        ]
-                                        persona.name "Katri Athokas"
-                                        persona.presence [
-                                            presenceBadge.status.available
-                                        ]
-                                        persona.secondaryText "Available"
-                                    ]
-                                ]
-                            ]
-                            Fui.option [
-                                option.text "Elvia Atkins"
-                                option.children [
-                                    Fui.persona [
-                                        persona.avatar [
-                                            avatar.color.colorful
-                                            avatar.ariaHidden true
-                                        ]
-                                        persona.name "Elvia Atkins"
-                                        persona.presence [
-                                            presenceBadge.status.busy
-                                        ]
-                                        persona.secondaryText "Busy"
-                                    ]
-                                ]
-                            ]
-                            Fui.option [
-                                option.text "Cameron Evans"
-                                option.children [
-                                    Fui.persona [
-                                        persona.avatar [
-                                            avatar.color.colorful
-                                            avatar.ariaHidden true
-                                        ]
-                                        persona.name "Cameron Evans"
-                                        persona.presence [
-                                            presenceBadge.status.away
-                                        ]
-                                        persona.secondaryText "Away"
-                                    ]
-                                ]
-                            ]
-                            Fui.option [
-                                option.text "Wanda Howard"
-                                option.children [
-                                    Fui.persona [
-                                        persona.avatar [
-                                            avatar.color.colorful
-                                            avatar.ariaHidden true
-                                        ]
-                                        persona.name "Wanda Howard"
-                                        persona.presence [
-                                            presenceBadge.status.outOfOffice
-                                        ]
-                                        persona.secondaryText "Out of Office"
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
+                dropdown.children [ optionGroup ]
             ]
         ]
     ]
@@ -1175,7 +1173,7 @@ let ComboBoxTest() =
                 combobox.defaultSelectedOptions seletedOptions
                 combobox.placeholder "Select one or more animals"
                 combobox.onOptionSelect (fun (d: OptionOnSelectData) -> setSelectedOptions d.selectedOptions)
-                // combobox.positioning.beforeBottom
+                combobox.positioning.afterTop
                 combobox.children (
                     options |> List.map (fun (o: string) ->
                         Fui.option [
@@ -1555,79 +1553,56 @@ let DialogTest() =
         ]
     ]
 
-let defaultToast =
-    Fui.toast [
-        toast.appearance.inverted
-        toast.children [
-            Fui.toastTitle [
-                toastTitle.action (
-                    Fui.link [
-                        link.text "Undo"
-                    ]
-                )
-                toastTitle.text "Email sent"
-            ]
-            Fui.toastBody [
-                toastBody.subtitle "This is a subtitle"
-                toastBody.text "This toast never closes"
-            ]
-            Fui.toastFooter [
-                Fui.link [
-                    link.text "Action1"
-                ]
-                Fui.link [
-                    link.text "Action2"
-                ]
-            ]
-        ]
-    ]
-
 //TODO Fable is transpiling the tuple passed to toastController.dispatchToast into a JS array, which is not what the function expects.
 //TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
 //TODO but I'm not sure how to do that.
 [<ReactComponent>]
 let ToastTest() =
-    let toastId = Fui.useId (Some "toast", None)
     let toasterId = Fui.useId (Some "toaster", None)
-
-    let mounted, setMounted = React.useState true
-
-    let dispatchOptions = [
-        dispatchToastOptions.toastId toastId
-        dispatchToastOptions.intent.warning
-        dispatchToastOptions.timeout  -1
-        dispatchToastOptions.onStatusChange  (fun data -> setMounted(data.status = ToastStatus.unmounted))
-    ]
-
-    let updateOptions = [
-        updateToastOptions.toastId toastId
-        updateToastOptions.content (
-            Fui.toast [
-                Fui.toastTitle [
-                    toastTitle.text "This toast will close soon"
-                ]
-            ]
-        )
-        updateToastOptions.timeout 2000
-        updateToastOptions.intent.success
-    ]
 
     let toastController = Fui.useToastController(Some toasterId)
 
     let notify = fun _ ->
-        toastController.dispatchToast(defaultToast(*, Some (dispatchOptions |> dispatchToastOptions.toType)*)) //TODO
-        setMounted false
-
-    let update = fun _ -> toastController.updateToast(updateOptions |> updateToastOptions.toType) //TODO
+        toastController.dispatchToast(
+            Fui.toast [
+                toast.appearance.inverted
+                toast.children [
+                    Fui.toastTitle [
+                        toastTitle.action (
+                            Fui.link [
+                                link.text "Undo"
+                            ]
+                        )
+                        toastTitle.text "Email sent"
+                    ]
+                    Fui.toastBody [
+                        toastBody.subtitle "This is a subtitle"
+                        toastBody.text "This toast never closes"
+                    ]
+                    Fui.toastFooter [
+                        Fui.link [
+                            link.text "Action1"
+                        ]
+                        Fui.link [
+                            link.text "Action2"
+                        ]
+                    ]
+                ]
+            ]
+        )
 
     Fui.stack [
         stack.children [
             Fui.toaster [
                 toaster.toasterId toasterId
+                toaster.timeout 5000
+                toaster.intent.success
+                toaster.pauseOnHover true
+                toaster.limit 1
             ]
             Fui.button [
-                button.onClick (fun _ -> if mounted then notify() else update())
-                button.text (if mounted then "Open Toast" else "Update Toast")
+                button.onClick (fun _ -> notify())
+                button.text "Open Toast"
             ]
         ]
     ]
@@ -1764,7 +1739,6 @@ open System
 
 [<ReactComponent>]
 let DatePickerTest() =
-    let styles = useStyles()
     let firstDayOfWeek, setFirstDayOfWeek = React.useState ("Sunday")
     let error, setError = React.useState (None)
 
@@ -1819,9 +1793,6 @@ let DatePickerTest() =
                             calendar.dateRangeType.workWeek
                             calendar.workWeekDays [| DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday |]
                             calendar.isMonthPickerVisible false
-                            calendar.calendarDayProps [
-                                calendarDay.className styles.day
-                            ]
                             calendar.strings ({
                                 Fui.defaultDatePickerStrings with
                                     goToToday = "Pick Today"
@@ -1920,7 +1891,6 @@ let OverflowMenu itemIds =
                 offset.crossAxis 30
                 offset.mainAxis 35 ]
         ]
-        // menu.positioning.alignCenter
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
@@ -2106,7 +2076,6 @@ let VirtualizerTest() =
                 virtualizer.virtualizerLength vLength
                 virtualizer.bufferItems bufferItems
                 virtualizer.bufferSize bufferSize
-                // virtualizer.reversed true // TODO causes re-renders?
                 virtualizer.before (
                     Fui.icon.bedFilled []
                 )
@@ -2714,7 +2683,7 @@ let UseModalAttributesOptionsTest() =
                         text.text "Example dialog"
                     ]
                     Html.div [
-                        Fui.text "This is a dialog for example purposes - ⚠️DO NOT USE THIS CODE⚠️"
+                        Fui.text "This is a dialog for example purposes"
                     ]
                     Html.div [
                         Fui.button [
@@ -2990,6 +2959,7 @@ let BreadcrumbTest () =
 let SearchBoxTest() =
     let value, setValue = React.useState ("initial value")
     let valid, setValid = React.useState true
+
     Fui.field [
         field.label "Controlled SearchBox limiting the value to 20 characters"
         if valid then field.validationState.none else field.validationState.warning
@@ -3045,6 +3015,7 @@ let TagTest () =
 [<ReactComponent>]
 let InteractionTagTest() =
     let liked, setLiked = React.useState false
+
     Fui.interactionTag [
         Fui.popover [
             Fui.popoverTrigger [
@@ -3120,7 +3091,7 @@ let mainContent model dispatch =
             presenceBadgeTest
             counterBadge
             PopoverTest()
-            TooltipTest()
+            tooltipTest
             linkTest
             divider
             textTest
