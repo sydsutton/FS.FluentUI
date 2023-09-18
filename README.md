@@ -8,7 +8,7 @@
 
 Some components/ functions are incomplete or still considered `Preview Components` and/or `unstable` by Microsoft. Please feel free to send PR's in order to get this library as close to 100% as possible!
 
-Place a `Fui.fluentProvider` at the root of your app and pass the theme in as a prop. You can use pre-determined themes, or create your own `BrandVariants` or `Tokens` to use for your theme. See `src/TestGrounds/src/Main.fs` for specific examples. `BrandVariants` can be generated and copied over from Microsoft's [Theme Designer](https://react.fluentui.dev/?path=/docs/themedesigner--page). Simply pick your "Key color value", choose your theme, click `Export`, and convert the TS `BrandVariants` into something more F#.
+Place a `Fui.fluentProvider` at the root of your app and pass the theme in as a prop. You can use pre-determined themes, or create your own `BrandVariants` or `Tokens` to use for your theme. See the [wiki](https://github.com/sydsutton/FS.FluentUI/wiki/FluentProvider---BrandVariants) for specific examples.
 
 ```fsharp
 open Feliz
