@@ -5,8 +5,17 @@
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 
 ### Please see all component examples in the [FS.FluentUI Wiki](https://github.com/sydsutton/FS.FluentUI/wiki)
+## Overview
+Fluent UI React Components is a set of UI components and utilities resulting from an effort to converge the set of React based component libraries in production today: @fluentui/react and @fluentui/react-northstar.
 
-Some components/ functions are incomplete or still considered `Preview Components` and/or `unstable` by Microsoft. Please feel free to send PR's in order to get this library as close to 100% as possible!
+Each component is designed to adhere to the following standards:
+* **Customizable**: Fluent-styled components by default, but easy to integrate your own brand and theme
+* **Performance**: Optimized for render performance
+* **Bundle size**: Refactored and slimmed down components that allow you to include the packages and dependencies you need
+* **Accessibility**: WCAG 2.1 compliant and tested by trusted testers
+* **Design to Code**: Stay up to date with Fluent Design Language changes via Design Tokens
+  
+**NOTE:** Some components/ functions are incomplete or still considered `Preview Components` and/or `unstable` by Microsoft. Please feel free to send PR's in order to get this library as close to 100% as possible!
 
 Place a `Fui.fluentProvider` at the root of your app and pass the theme in as a prop. You can use pre-determined themes, or create your own `BrandVariants` or `Tokens` to use for your theme. See the [wiki](https://github.com/sydsutton/FS.FluentUI/wiki/FluentProvider---BrandVariants) for specific examples.
 
