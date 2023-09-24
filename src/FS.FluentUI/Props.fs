@@ -3555,7 +3555,7 @@ type [<Erase>] overflowDivider  =
 type [<Erase>] dataGrid  =
     inherit FelizProps.prop<IDataGridProp>
     /// Render all table elements as divs instead of semantic table elements Using divs no longer uses display: table layout but display: flex
-    static member inline root (value: IReactProperty) = Interop.mkProperty<IDataGridProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IDataGridProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Render all table elements as divs instead of semantic table elements Using divs no longer uses display: table layout but display: flex
     static member inline noNativeElements (value: bool) = Interop.mkProperty<IDataGridProp> "noNativeElements" value
     /// Whether the table is sortable
@@ -3563,7 +3563,10 @@ type [<Erase>] dataGrid  =
     static member items (value: #seq<'T>) = Interop.mkProperty<IDataGridProp> "items" (value |> Seq.toArray)
     /// Table columns
     static member inline columns (value: #seq<TableColumnDefinition<'T, 'TKeyType>>) = Interop.mkProperty<IDataGridProp> "columns" (value |> Seq.toArray)
-    static member inline getRowId (value: 'T -> 'TKeyType) = Interop.mkProperty<IDataGridProp> "getRowId" (System.Func<_,_> value) //TODO
+    static member inline getRowId (value: 'T -> string) = Interop.mkProperty<IDataGridProp> "getRowId" (System.Func<_,_> value)
+    static member inline getRowId (value: 'T -> int) = Interop.mkProperty<IDataGridProp> "getRowId" (System.Func<_,_> value)
+    static member inline getRowId (value: 'T -> float) = Interop.mkProperty<IDataGridProp> "getRowId" (System.Func<_,_> value)
+    static member inline getRowId (value: 'T -> decimal) = Interop.mkProperty<IDataGridProp> "getRowId" (System.Func<_,_> value)
     static member inline subtleSelection (value: bool) = Interop.mkProperty<IDataGridProp> "subtleSelection" value
     /// Enables column resizing
     static member inline resizableColumns (value: bool) = Interop.mkProperty<IDataGridProp> "resizableColumns" value
@@ -3572,14 +3575,35 @@ type [<Erase>] dataGrid  =
     /// Used in uncontrolled mode to set initial sort column and direction on mount
     static member inline defaultSortState (value: SortState<'TKeyType>) = Interop.mkProperty<IDataGridProp> "defaultSortState" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSelectedItems (value: #seq<'TKeyType>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    static member inline defaultSelectedItems (value: Set<string>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    /// Used in uncontrolled mode to set initial sort column and direction on mount
+    static member inline defaultSelectedItems (value: Set<int>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    /// Used in uncontrolled mode to set initial sort column and direction on mount
+    static member inline defaultSelectedItems (value: Set<float>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    /// Used in uncontrolled mode to set initial sort column and direction on mount
+    static member inline defaultSelectedItems (value: Set<decimal>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used to control selected items
-    static member inline selectedItems (value: #seq<'TKeyType>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    static member inline selectedItems (value: Set<string>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    /// Used to control selected items
+    static member inline selectedItems (value: Set<int>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    /// Used to control selected items
+    static member inline selectedItems (value: Set<decimal>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    /// Used to control selected items
+    static member inline selectedItems (value: Set<float>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     static member inline onSortChange (handler: SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onSortChange (value: MouseEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
-    static member inline onSelectionChange (handler: OnSelectionChangeData<'T> -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<'T> -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
-    static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<'T> -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (handler: {| selectedItems: Set<string> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: {| selectedItems: seq<string> |}) -> handler {| selectedItems = value.selectedItems |> Set.ofSeq |}))
+    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<string> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<string> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<string> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<string> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (handler: {| selectedItems: Set<int> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: {| selectedItems: seq<int> |}) -> handler {| selectedItems = value.selectedItems |> Set.ofSeq |}))
+    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<int> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<int> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<int> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<int> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (handler: {| selectedItems: Set<float> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: {| selectedItems: seq<float> |}) -> handler {| selectedItems = value.selectedItems |> Set.ofSeq |}))
+    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<float> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<float> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<float> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<float> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (handler: {| selectedItems: Set<decimal> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: {| selectedItems: seq<decimal> |}) -> handler {| selectedItems = value.selectedItems |> Set.ofSeq |}))
+    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<decimal> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<decimal> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
+    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<decimal> |} -> unit) = Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: {| selectedItems: seq<decimal> |}) -> {| selectedItems = v.selectedItems |> Set.ofSeq |} |> value e))
     /// Options for column resizing
     static member inline columnSizingOptions (value: list<string * ITableColumnSizingOptionsProp list>) =
         let value =
