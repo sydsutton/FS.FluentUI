@@ -415,6 +415,7 @@ type [<Erase>] accordionPanel =
 // -------------------------------------------------------------------------- Checkbox --------------------------------------------------------------------------------------
 
 type [<Erase>] checkbox =
+    inherit FelizProps.prop<ICheckboxProp>
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
@@ -493,6 +494,7 @@ module checkbox =
 // -------------------------------------------------------------------------- Badge --------------------------------------------------------------------------------------
 
 type [<Erase>] badge =
+    inherit FelizProps.prop<IBadgeProp>
     static member inline root (value:  IReactProperty list) = Interop.mkProperty<IBadgeProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IBadgeProp> "icon" value
     static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IBadgeProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
@@ -542,6 +544,7 @@ module badge =
 // -------------------------------------------------------------------------- CounterBadge --------------------------------------------------------------------------------------
 
 type [<Erase>] counterBadge =
+    inherit FelizProps.prop<ICounterBadgeProp>
     /// Value displayed by the Badge
     static member inline count (value: int) = Interop.mkProperty<ICounterBadgeProp> "count" value
     /// Value displayed by the Badge
@@ -598,6 +601,7 @@ module counterBadge =
 // -------------------------------------------------------------------------- PresenceBadge --------------------------------------------------------------------------------------
 
 type [<Erase>] presenceBadge =
+    inherit FelizProps.prop<IPresenceBadgeProp>
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IPresenceBadgeProp> "icon" value
     /// Modifies the display to indicate that the user is out of office. This can be combined with any status to display an out-of-office version of that status
     static member inline outOfOffice (value: bool) = Interop.mkProperty<IPresenceBadgeProp> "outOfOffice" value
@@ -649,6 +653,7 @@ module table =
 
 /// No info found
 type [<Erase>] tableHeader =
+    inherit FelizProps.prop<ITableHeaderProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableHeaderProp> "root"  (!!value |> createObj |> unbox<IReactProperty>)
     static member inline children (value: ReactElement list) = Interop.mkProperty<ITableHeaderProp> "children" value
 
@@ -739,6 +744,7 @@ type [<Erase>] tableCellActions =
 // -------------------------------------------------------------------------- TableSelectionCell --------------------------------------------------------------------------------------
 
 type [<Erase>] tableSelectionCell =
+    inherit FelizProps.prop<ITableSelectionCellProp>
     /// Selection indicator if selection type is checkbox
     static member inline checkboxIndicator (value: ReactElement) = Interop.mkProperty<ITableSelectionCellProp> "checkboxIndicator" value
     /// Selection indicator if selection type is checkbox
@@ -1285,6 +1291,7 @@ module popoverSurface =
 
 // -------------------------------------------------------------------------- Tooltip --------------------------------------------------------------------------------------
 type [<Erase>] tooltip =
+    inherit FelizProps.prop<ITooltipProp>
     /// The text or JSX content of the tooltip.
     static member inline content (value: string) = Interop.mkProperty<ITooltipProp> "content" value
     /// The text or JSX content of the tooltip.
