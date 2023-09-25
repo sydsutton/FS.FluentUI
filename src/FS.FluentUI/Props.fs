@@ -439,8 +439,6 @@ type [<Erase>] checkbox =
     /// The checkbox, with the checkmark icon as its child when checked.
     static member inline indicator (value: IReactProperty list) = Interop.mkProperty<ICheckboxProp> "indicator" (!!value |> createObj |> unbox<IReactProperty>)
     /// The controlled value for the checkbox.
-    static member inline checked' (value: string) = Interop.mkProperty<ICheckboxProp> "checked" value
-    /// The controlled value for the checkbox.
     static member inline checked' (value: bool) = Interop.mkProperty<ICheckboxProp> "checked" value
     /// The controlled value for the checkbox.
     static member inline checked' (value: CheckState) =
@@ -452,17 +450,19 @@ type [<Erase>] checkbox =
     /// Whether the checkbox should be rendered as checked by default.
     static member inline defaultChecked (value: bool) = Interop.mkProperty<ICheckboxProp> "defaultChecked" value
     /// Whether the checkbox should be rendered as checked by default.
-    static member inline defaultChecked (value: string) = Interop.mkProperty<ICheckboxProp> "defaultChecked" value
-    /// Whether the checkbox should be rendered as checked by default.
     static member inline defaultChecked (value: CheckState) =
         match value with
         | Checked -> Interop.mkProperty<ICheckboxProp> "defaultChecked" true
         | Unchecked -> Interop.mkProperty<ICheckboxProp> "defaultChecked" false
         | Mixed -> Interop.mkProperty<ICheckboxProp> "defaultChecked" "mixed"
     /// Callback to be called when the checked state value changes.
-    static member inline onChange (value: (CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun _ c -> c |> CheckState.fromData |> value))
+    static member inline onChange (handler: (CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun _ c -> c |> CheckState.fromData |> handler))
     /// Callback to be called when the checked state value changes.
     static member inline onChange (value: (Event -> CheckState -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun ev c -> c |> CheckState.fromData |> value ev ))
+    /// Callback to be called when the checked state value changes.
+    static member inline onChange (handler: (bool -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun _ c -> c |> Checkbox.toBool |> handler))
+    /// Callback to be called when the checked state value changes.
+    static member inline onChange (value: (Event -> bool -> unit)) = Interop.mkProperty<ICheckboxProp> "onChange" (System.Func<_,_,_> (fun ev c -> c |> Checkbox.toBool |> value ev ))
 
 module checkbox =
     type [<Erase>] as' =

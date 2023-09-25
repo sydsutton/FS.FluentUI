@@ -179,6 +179,12 @@ module CheckState =
         | U2.Case1 _ -> Mixed
         | U2.Case2 b -> if b then Checked else Unchecked
 
+module Checkbox =
+    let toBool (arg: {| ``checked``: U2<string, bool> |}) =
+        match arg.``checked`` with
+        | U2.Case1 _ -> true
+        | U2.Case2 b -> b
+
 type SwitchOnChangeData = {
     ``checked``: bool
 }

@@ -180,7 +180,7 @@ let Accordion () =
 
 [<ReactComponent>]
 let Checkbox () =
-    let isChecked1, setIsChecked1 = React.useState Checked
+    let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState Mixed
 
     Html.div [
