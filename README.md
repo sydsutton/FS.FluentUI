@@ -4,6 +4,8 @@
 
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 
+![DataGridGif](https://github.com/sydsutton/FS.FluentUI/assets/83406605/e98ec82f-b0b1-4ae3-ba3e-ea0a94b462ab)
+
 ### Please see all component examples in the [FS.FluentUI Wiki](https://github.com/sydsutton/FS.FluentUI/wiki)
 ## Overview
 Fluent UI React Components is a set of UI components and utilities resulting from an effort to converge the set of React based component libraries in production today: @fluentui/react and @fluentui/react-northstar.
