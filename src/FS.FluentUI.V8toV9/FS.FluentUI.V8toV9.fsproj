@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.5</Version>
+        <Version>1.0.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET V8 V9 migration</PackageTags>
         <PackageReleaseNotes>
-            - - Generate documentation file for XML descriptions
+            - Update npm dependency
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -39,7 +39,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.4.13" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.4.17" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
