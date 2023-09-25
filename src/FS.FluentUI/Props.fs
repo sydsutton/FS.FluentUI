@@ -754,7 +754,6 @@ type [<Erase>] tableSelectionCell =
     /// Selection indicator if selection type is radio
     static member inline radioIndicator (value: IRadioProp list) = Interop.mkProperty<ITableSelectionCellProp> "radioIndicator" (!!value |> createObj |> unbox<IRadioProp>)
     static member inline checked' (value: bool) = Interop.mkProperty<ITableSelectionCellProp> "checked" value
-    static member inline checked' (value: string) = Interop.mkProperty<ITableSelectionCellProp> "checked" value
     static member inline checked' (value: CheckState) =
         match value with
         | Checked -> Interop.mkProperty<ITableSelectionCellProp> "checked" true
@@ -3763,11 +3762,14 @@ type [<Erase>] dataGridSelectionCell =
     inherit FelizProps.prop<IDataGridSelectionCellProp>
     /// Selection indicator if selection type is checkbox
     static member inline checkboxIndicator (value: ReactElement)= Interop.mkProperty<IDataGridSelectionCellProp> "checkboxIndicator" value
+    /// Selection indicator if selection type is checkbox
+    static member inline checkboxIndicator (value: ICheckboxProp list) = Interop.mkProperty<IDataGridSelectionCellProp> "checkboxIndicator" (!!value |> createObj |> unbox<ICheckboxProp>)
     /// Selection indicator if selection type is radio
     static member inline radioIndicator (value: ReactElement)= Interop.mkProperty<IDataGridSelectionCellProp> "radioIndicator" value
+    /// Selection indicator if selection type is radio
+    static member inline radioIndicator (value: IRadioProp list) = Interop.mkProperty<IDataGridSelectionCellProp> "radioIndicator" (!!value |> createObj |> unbox<IRadioProp>)
     /// Only visible when checked or the parent row is hovered/focused
     static member inline subtle (value: bool)= Interop.mkProperty<IDataGridSelectionCellProp> "subtle" value
-    static member inline checked' (value: string) = Interop.mkProperty<IDataGridSelectionCellProp> "checked" value
     static member inline checked' (value: bool) = Interop.mkProperty<IDataGridSelectionCellProp> "checked" value
     static member inline checked' (value: CheckState) =
         match value with
