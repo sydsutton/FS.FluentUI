@@ -275,6 +275,11 @@ type AnnounceOptions = {
 
 //-------------------------------------------------------------------------- DataGrid / Table Types ---------------------------------------------------------------
 
+type TempSeq<'T> = { selectedItems: seq<'T> }
+
+module TempSeq =
+    let mkOnChangeData (v: TempSeq<'T>)=
+        {| selectedItems = v.selectedItems |> Set.ofSeq |}
 
 type [<RequireQualifiedAccess>] SortDirection = | ``ascending`` | ``descending``
 
