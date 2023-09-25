@@ -2327,7 +2327,7 @@ let items = [
 
 [<ReactComponent>]
 let DataGridTest () =
-    let selectedRows, setSelectedRows = React.useState (Set[ ])
+    let selectedRows, setSelectedRows = React.useState ([ ])
     let sortState, setSortState = React.useState ({ sortColumn = (Some "file"); sortDirection = SortDirection.ascending })
 
     let columnSizingOptions = [
@@ -2413,7 +2413,7 @@ let DataGridTest () =
                         prop.children [
                             Fui.checkbox [
                                 checkbox.label i.File.Label
-                                checkbox.checked' (selectedRows |> Set.contains i.File.Label)
+                                checkbox.checked' (selectedRows |> List.contains i.File.Label)
                             ]
                         ]
                     ]
@@ -2425,13 +2425,13 @@ let DataGridTest () =
                 dataGrid.sortable true
                 dataGrid.selectionAppearance.brand
                 dataGrid.selectionMode.multiselect
-                dataGrid.selectedItems selectedRows
+                dataGrid.selectedItems (selectedRows: list<string>)
                 dataGrid.sortState sortState
                 dataGrid.onSortChange (fun s -> setSortState s)
                 dataGrid.resizableColumns true
                 dataGrid.columnSizingOptions columnSizingOptions
                 dataGrid.getRowId (fun (i: Item) -> i.File.Label)
-                dataGrid.onSelectionChange (fun (data: {| selectedItems: Set<string> |}) -> setSelectedRows data.selectedItems)
+                dataGrid.onSelectionChange (fun (data: OnSelectionChangeData<string>) -> setSelectedRows data.selectedItems)
                 dataGrid.children [
                     Fui.dataGridHeader [
                         Fui.dataGridRow [

@@ -277,9 +277,10 @@ type AnnounceOptions = {
 
 type TempSeq<'T> = { selectedItems: seq<'T> }
 
+type OnSelectionChangeData<'T> = { selectedItems: list<'T> }
 module TempSeq =
     let mkOnChangeData (v: TempSeq<'T>)=
-        {| selectedItems = v.selectedItems |> Set.ofSeq |}
+        { selectedItems = v.selectedItems |> List.ofSeq }
 
 type [<RequireQualifiedAccess>] SortDirection = | ``ascending`` | ``descending``
 

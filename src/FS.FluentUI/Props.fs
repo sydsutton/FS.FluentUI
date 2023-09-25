@@ -3584,46 +3584,46 @@ type [<Erase>] dataGrid  =
     /// Used in uncontrolled mode to set initial sort column and direction on mount
     static member inline defaultSortState (value: SortState<'TKeyType>) = Interop.mkProperty<IDataGridProp> "defaultSortState" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSelectedItems (value: Set<string>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    static member inline defaultSelectedItems (value: list<string>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSelectedItems (value: Set<int>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    static member inline defaultSelectedItems (value: list<int>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSelectedItems (value: Set<float>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    static member inline defaultSelectedItems (value: list<float>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSelectedItems (value: Set<decimal>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
+    static member inline defaultSelectedItems (value: list<decimal>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used to control selected items
-    static member inline selectedItems (value: Set<string>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    static member inline selectedItems (value: list<string>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     /// Used to control selected items
-    static member inline selectedItems (value: Set<int>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    static member inline selectedItems (value: list<int>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     /// Used to control selected items
-    static member inline selectedItems (value: Set<decimal>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    static member inline selectedItems (value: list<decimal>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     /// Used to control selected items
-    static member inline selectedItems (value: Set<float>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
+    static member inline selectedItems (value: list<float>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     static member inline onSortChange (handler: SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onSortChange (value: MouseEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
-    static member inline onSelectionChange (handler: {| selectedItems: Set<string> |} -> unit) =
+    static member inline onSelectionChange (handler: OnSelectionChangeData<string> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: TempSeq<string>) -> handler (TempSeq.mkOnChangeData value)))
-    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<string> |} -> unit) =
+    static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<string> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<string>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<string> |} -> unit) =
+    static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<string> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<string>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (handler: {| selectedItems: Set<int> |} -> unit) =
+    static member inline onSelectionChange (handler: OnSelectionChangeData<int> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: TempSeq<int>) -> handler (TempSeq.mkOnChangeData value)))
-    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<int> |} -> unit) =
+    static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<int> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<int>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<int> |} -> unit) =
+    static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<int> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<int>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (handler: {| selectedItems: Set<float> |} -> unit) =
+    static member inline onSelectionChange (handler: OnSelectionChangeData<float> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: TempSeq<float>) -> handler (TempSeq.mkOnChangeData value)))
-    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<float> |} -> unit) =
+    static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<float> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<float>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<float> |} -> unit) =
+    static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<float> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<float>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (handler: {| selectedItems: Set<decimal> |} -> unit) =
+    static member inline onSelectionChange (handler: OnSelectionChangeData<decimal> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: TempSeq<decimal>) -> handler (TempSeq.mkOnChangeData value)))
-    static member inline onSelectionChange (value: MouseEvent -> {| selectedItems: Set<decimal> |} -> unit) =
+    static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<decimal> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<decimal>) -> (TempSeq.mkOnChangeData v) |> value e))
-    static member inline onSelectionChange (value: KeyboardEvent -> {| selectedItems: Set<decimal> |} -> unit) =
+    static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<decimal> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<decimal>) -> (TempSeq.mkOnChangeData v) |> value e))
     /// Options for column resizing
     static member inline columnSizingOptions (value: list<string * ITableColumnSizingOptionsProp list>) =
