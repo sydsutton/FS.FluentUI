@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.0.0-prerelease-003</Version>
+        <Version>1.0.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Generate documentation file for XML descriptions
+            - Fix DataGrid bugs and update npm dependencies
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -40,11 +40,11 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="&gt;= 9.3.0" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gt;= 0.3.5" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="&gt;= 0.3.8" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-search-preview" Version="&gt;= 0.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-tags-preview" Version="&gt;= 0.2.8" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="&gt;= 9.32.1" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gt;= 0.3.13" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="&gt;= 1.0.3" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-search-preview" Version="&gt;= 0.1.19" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-tags-preview" Version="&gt;= 0.2.12" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
