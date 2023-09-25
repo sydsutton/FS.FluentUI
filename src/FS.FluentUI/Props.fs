@@ -3331,11 +3331,12 @@ type [<Erase>] calendar  =
     static member inline showGoToToday (value: bool) = Interop.mkProperty<ICalendarProp> "showGoToToday" value
     /// Whether the calendar should show the week number (weeks 1 to 53) before each week row
     static member inline showWeekNumbers (value: bool) = Interop.mkProperty<ICalendarProp> "showWeekNumbers" value
-    /// <para>Localized strings to use in the Calendar
-    /// Use Fui.defaultDatePickerStrings.</para>
+    /// Localized strings to use in the Calendar.
+    ///
+    /// Use Fui.defaultDatePickerStrings.
     ///
     /// Usage:
-    /// ```calendar.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
+    /// `calendar.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )`
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarProp> "strings" value
     /// If set the Calendar will not allow navigation to or selection of a date earlier than this value.
     static member inline minDate (value: DateTime) = Interop.mkProperty<ICalendarProp> "minDate" value
@@ -3403,11 +3404,12 @@ type [<Erase>] calendarDay  =
     static member inline componentRef (value: IRefValue<FocusProp>) = Interop.mkProperty<ICalendarDayProp> "componentRef" value
     /// Additional CSS class(es) to apply to the CalendarDay.
     static member inline className (value: string) = Interop.mkProperty<ICalendarDayProp> "className" value
-    /// Localized strings to use in the Calendar
-    /// Use Fui.defaultDatePickerStrings.</para>
+    /// Localized strings to use in the Calendar.
+    ///
+    /// Use Fui.defaultDatePickerStrings.
     ///
     /// Usage:
-    /// ```calendarDay.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
+    /// `calendarDay.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )`
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarDayProp> "strings" value
     /// The currently navigated date
     static member inline navigatedDate (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "navigatedDate" value
@@ -3445,11 +3447,12 @@ type [<Erase>] calendarDay  =
 type [<Erase>] calendarMonth  =
     /// Optional callback to access the ICalendarMonth interface. Use this instead of ref for accessing the public methods and properties of the component.
     static member inline componentRef (value: IRefValue<FocusProp>) = Interop.mkProperty<ICalendarMonthProp> "componentRef" value
-    /// <para>Localized strings to use in the Calendar
-    /// Use Fui.defaultDatePickerStrings .</para>
+    /// Localized strings to use in the Calendar.
+    ///
+    /// Use Fui.defaultDatePickerStrings.
     ///
     /// Usage:
-    /// ```calendarMonth.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )```
+    /// `calendarMonth.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )`
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarMonthProp> "strings" value
     /// The currently selected date
     static member inline selectedDate (value: DateTime) = Interop.mkProperty<ICalendarMonthProp> "selectedDate" value
@@ -5124,22 +5127,6 @@ module updateToastOptions =
 
     let toType (updateOptions: IUpdateToastOptionsProp list)=
         !!updateOptions |> createObj |> unbox<UpdateToastOptions>
-
-// -------------------------------------------------------------------------- DateGridStrings --------------------------------------------------------------------------------------
-
-type [<Erase>] dateGridStrings = //TODO figure out how to use these props
-    /// An array of strings for the full names of months.
-    /// The array is 0-based, so months[0] should be the full name of January.
-    static member inline months (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "months" value
-    /// An array of strings for the short names of months.
-    /// The array is 0-based, so shortMonths[0] should be the short name of January.
-    static member inline shortMonths (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortMonths" value
-    /// An array of strings for the full names of days of the week.
-    /// The array is 0-based, so days[0] should be the full name of Sunday.
-    static member inline days (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "days" value
-    /// An array of strings for the initials of the days of the week.
-    /// The array is 0-based, so days[0] should be the initial of Sunday.
-    static member inline shortDays (value: #seq<string>) = Interop.mkProperty<IDateGridStringsProp> "shortDays" value
 
 // -------------------------------------------------------------------------- Breadcrumb --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumb =
