@@ -68,7 +68,6 @@ type [<Erase>] Fui =
     //TODO Fable is transpiling the tuple passed to toastController.dispatchToast into a JS array, which is not what the function expects.
     //TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
     //TODO but I'm not sure how to do that.
-    [<Hook>]
     static member inline useToastController (toasterId: string option): ToastController = import "useToastController" FluentUIv9
 
     static member inline partitionAvatarGroupItems (options: IPartitionAvatarGroupItemsOptionsProp list): PartitionAvatarGroupItems<'T> =
@@ -159,14 +158,12 @@ type [<Erase>] Fui =
     /// `let AddIcon = Fui.bundleIcon(bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)`
     ///
     /// `{component}.icon (AddIcon [ icon.style [ style.color.yellow ] ])`
-    [<Hook>]
     static member bundleIcon (icons) (iconProps: IIconProp list): ReactElement =
         Fui.bundle icons (!!iconProps |> createObj)
 
     /// Helper function to create column definition with defaults
     /// options - column definition options
     /// Returns - column definition with defaults
-    [<Hook>]
     static member inline createTableColumn (options: ICreateTableColumnOptionProp list): TableColumnDefinition<'T, 'TKeyType> =
         let createTableColumn = import "createTableColumn" FluentUIv9
         !!options |> createObj |> createTableColumn

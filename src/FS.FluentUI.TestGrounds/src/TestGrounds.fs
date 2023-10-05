@@ -7,24 +7,24 @@ open FS.FluentUI.V8toV9
 open Browser.Types
 
 type Msg =
-    | DisableAll
+    | ChangeEmail of string
 
 type Model = {
-    Disabled: bool
+    Email: string
 }
 
 let init () =
     {
-        Disabled = false
+        Email = ""
     },
     Cmd.none
 
 let update msg model =
     match msg with
-    | DisableAll ->
+    | ChangeEmail e ->
         {
             model with
-                Disabled = not model.Disabled
+                Email = e
         },
         Cmd.none
 
@@ -247,13 +247,14 @@ let menuButtonTest =
         menuButton.text "This is a menu button"
     ]
 
+let AddIcon = Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
+let DataIcon = Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
+let FunnelIcon = Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
+
 [<ReactComponent>]
 let MenuTest() =
     let checkedValues, setCheckedValues = React.useState([ "data", [| "add" |]; "info", [| "filterInfo" |] ])
     let isOpen, setIsOpen = React.useState false
-    let AddIcon = Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
-    let DataIcon = Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
-    let FunnelIcon = Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
 
     Fui.menu [
         menu.checkedValues checkedValues
@@ -364,14 +365,15 @@ let MenuTest() =
         ]
     ]
 
+let CheckedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
+
 [<ReactComponent>]
 let ToggleButtons () =
-    let checkedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
     Html.div [
         Fui.toggleButton [
-            toggleButton.icon (checkedIcon [])
+            toggleButton.icon (CheckedIcon [])
             toggleButton.checked' isChecked1
             toggleButton.onClick (fun _ -> setIsChecked1 (isChecked1 |> not))
             toggleButton.text "Checked state"
@@ -675,7 +677,7 @@ let IconTest() =
         ]
     ]
 
-let inputTest =
+let inputTest model dispatch =
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -690,8 +692,8 @@ let inputTest =
                     Fui.input [
                         input.type'.email
                         input.id "emailId"
-                        input.value "lol@lol.com"
-                        input.onChange (fun (v: ValueProp<string>) -> printfn "%s" v.value)
+                        input.value model.Email
+                        input.onChange (fun (v: ValueProp<string>) -> ChangeEmail v.value |> dispatch)
                         input.contentBefore (
                             Fui.icon.albumAddFilled []
                         )
@@ -1339,13 +1341,14 @@ let ToolbarTest() =
         ]
     ]
 
+let AlertIcon = Fui.bundleIcon(bundleIcon.alertFilled, bundleIcon.alertRegular)
+let AlertOnIcon = Fui.bundleIcon(bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
+let AlertOffIcon = Fui.bundleIcon(bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
+
 [<ReactComponent>]
 let ControlledToolbarTest() =
     let checkedValues, setCheckedValues = React.useState [ "alert", [| "on"; "off" |]]
 
-    let AlertIcon = Fui.bundleIcon(bundleIcon.alertFilled, bundleIcon.alertRegular)
-    let AlertOnIcon = Fui.bundleIcon(bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
-    let AlertOffIcon = Fui.bundleIcon(bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
 
     Fui.toolbar [
         toolbar.checkedValues checkedValues
@@ -3098,7 +3101,7 @@ let mainContent model dispatch =
             UseArrowNavigationGroup()
             labelTest
             IconTest()
-            inputTest
+            inputTest model dispatch
             CompoundButtonTest()
             SplitButtonTest()
             TextAreaTest()
