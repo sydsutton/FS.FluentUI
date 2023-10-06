@@ -40,11 +40,10 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="&gt;= 9.32.1" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gt;= 0.3.13" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="&gt;= 1.0.3" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-search-preview" Version="&gt;= 0.1.19" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-tags-preview" Version="&gt;= 0.2.12" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="&gte;= 9.34.1" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="&gte;= 0.3.13" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="&gte;= 1.0.3" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-search-preview" Version="&gte;= 0.1.19" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

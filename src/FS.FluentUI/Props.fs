@@ -5339,6 +5339,8 @@ type [<Erase>] tag =
     static member inline dismissIcon (value: IReactProperty list) = Interop.mkProperty<ITagProp> "dismissIcon" (!!value |> createObj |> unbox<IReactProperty>)
     /// A Tag can be dismissible
     static member inline dismissible (value: bool) = Interop.mkProperty<ITagProp> "dismissible" value
+    /// Unique value identifying the tag within a TagGroup
+    static member inline value (value: string) = Interop.mkProperty<ITagProp> "value" value
 
 module tag =
     type [<Erase>] as' =
@@ -5368,11 +5370,11 @@ type [<Erase>] tagGroup =
     inherit FelizProps.prop<ITagGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITagGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Callback for when a tag is dismissed
-    static member inline onDismiss (handler: TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onDismiss (handler: ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback for when a tag is dismissed
-    static member inline onDismiss (value: MouseEvent -> TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+    static member inline onDismiss (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
     /// Callback for when a tag is dismissed
-    static member inline onDismiss (value: KeyboardEvent -> TagGroupDismissData -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+    static member inline onDismiss (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
 
 module tagGroup =
     /// A Tag has three sizes.
@@ -5385,6 +5387,8 @@ module tagGroup =
 type [<Erase>] interactionTag =
     inherit FelizProps.prop<IInteractionTagProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Unique value identifying the tag within a TagGroup
+    static member inline value (value: string) = Interop.mkProperty<IInteractionTagProp> "value" value
 
 module interactionTag =
     type [<Erase>] as' =

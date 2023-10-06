@@ -2997,8 +2997,8 @@ let initialTags = [
 let TagTest () =
     let visibleTags, setVisibleTags = React.useState initialTags
     Fui.tagGroup [
-        tagGroup.onDismiss (fun data ->
-            setVisibleTags (visibleTags |> List.filter (fun t -> t.value <> data.dismissedTagValue))
+        tagGroup.onDismiss (fun (data: ValueProp<string>) ->
+            setVisibleTags (visibleTags |> List.filter (fun t -> t.value <> data.value))
         )
         tagGroup.ariaLabel "Dismiss example"
         tagGroup.children [
