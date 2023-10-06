@@ -3731,7 +3731,7 @@ type [<Erase>] dataGridRow =
     /// Removes the bottom border of the dataGridRow. Doing this keeps the height of the border but changes the color to transparent.
     ///
     /// *This is a custom property that is not in the Microsoft documentation.*
-    static member inline noBottomBorder = Interop.mkProperty<IDataGridRowProp> "style" (createObj ["border-bottom-color", "transparent"])
+    static member inline noBottomBorder = Interop.mkProperty<IDataGridRowProp> "style" (createObj ["borderBottomColor", "transparent"])
 
 module dataGridRow =
     type [<Erase>] as' =
