@@ -2451,6 +2451,7 @@ let DataGridTest () =
                     Fui.dataGridBody [
                         dataGridBody.children (fun (trd: TableRowData<Item, int>) ->
                             Fui.dataGridRow [
+                                dataGridRow.noBottomBorder
                                 dataGridRow.key trd.rowId
                                 dataGridRow.selectionCell [
                                     tableSelectionCell.ariaLabel "Select row"

@@ -3728,6 +3728,10 @@ type [<Erase>] dataGridRow =
     /// When selection is enabled on the DataGrid, all rows will render the selection cell.
     static member inline selectionCell (value: ITableSelectionCellProp list) = Interop.mkProperty<IDataGridRowProp> "selectionCell" (!!value |> createObj |> unbox<ITableSelectionCellProp>)
     static member inline children (value: TableColumnDefinition<'T, 'TKeyType> -> DataGridContextValue -> ReactElement) = Interop.mkProperty<IDataGridRowProp> "children" (System.Func<_,_,_> value)
+    /// Removes the bottom border of the dataGridRow. Doing this keeps the height of the border but changes the color to transparent.
+    ///
+    /// *This is a custom property that is not in the Microsoft documentation.*
+    static member inline noBottomBorder = Interop.mkProperty<IDataGridRowProp> "style" (createObj ["border-bottom-color", "transparent"])
 
 module dataGridRow =
     type [<Erase>] as' =
