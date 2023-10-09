@@ -175,6 +175,12 @@ type [<Erase>] IInteractionTagProp = interface end
 type [<Erase>] IInteractionTagPrimaryProp = interface end
 type [<Erase>] IInteractionTagSecondaryProp = interface end
 
+type [<Erase>] IMessageBarProp = interface end
+type [<Erase>] IMessageBarBodyProp = interface end
+type [<Erase>] IMessageBarTitleProp = interface end
+type [<Erase>] IMessageBarActionsProp = interface end
+type [<Erase>] IMessageBarGroupProp = interface end
+
 type [<Erase>] IIgnoreKeyDownProp = interface end
 type [<Erase>] IOverflowBoundaryPaddingProp = interface end
 type [<Erase>] IOffsetProp = interface end

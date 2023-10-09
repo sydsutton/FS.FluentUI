@@ -44,6 +44,7 @@
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.3.13" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="gte 1.0.3" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-search-preview" Version="gte 0.1.19" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-message-bar-preview" Version="gte 0.1.1" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

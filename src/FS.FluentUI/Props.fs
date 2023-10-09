@@ -5506,3 +5506,55 @@ type [<Erase>] virtualizerContextProps =
     static member inline setContextIndex (value: int -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
     static member inline setContextIndex (value: decimal -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
     static member inline setContextIndex (value: float -> unit) = Interop.mkProperty<IVirtualizerContextProp> "setContextIndex" (System.Func<_,_> value)
+
+// -------------------------------------------------------------------------- MessageBar --------------------------------------------------------------------------------------
+type [<Erase>] messageBar =
+    inherit FelizProps.prop<IMessageBarProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline icon (value:  ReactElement) = Interop.mkProperty<IMessageBarProp> "icon" value
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IMessageBarProp> "icon"  (!!value |> createObj |> unbox<IReactProperty>)
+
+module messageBar =
+    type [<Erase>] as' =
+        static member inline div = Interop.mkProperty<IMessageBarProp> "as"  "div"
+    type [<Erase>] layout =
+        static member inline multiline = Interop.mkProperty<IMessageBarProp> "layout"  "multiline"
+        static member inline singleline = Interop.mkProperty<IMessageBarProp> "layout"  "singleline"
+        static member inline auto = Interop.mkProperty<IMessageBarProp> "layout"  "auto"
+    /// Default designs announcement presets
+    type [<Erase>] intent =
+        static member inline info = Interop.mkProperty<IMessageBarProp> "intent"  "info"
+        static member inline success = Interop.mkProperty<IMessageBarProp> "intent"  "success"
+        static member inline warning = Interop.mkProperty<IMessageBarProp> "intent"  "warning"
+        static member inline error = Interop.mkProperty<IMessageBarProp> "intent"  "error"
+    /// See https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions
+    type [<Erase>] politeness =
+        static member inline assertive = Interop.mkProperty<IMessageBarProp> "politeness"  "assertive"
+        static member inline polite = Interop.mkProperty<IMessageBarProp> "politeness"  "polite"
+
+// -------------------------------------------------------------------------- MessageBarBody --------------------------------------------------------------------------------------
+type [<Erase>] messageBarBody =
+    inherit FelizProps.prop<IMessageBarBodyProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarBodyProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+// -------------------------------------------------------------------------- MessageBarTitle --------------------------------------------------------------------------------------
+type [<Erase>] messageBarTitle =
+    inherit FelizProps.prop<IMessageBarTitleProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarTitleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+// -------------------------------------------------------------------------- MessageBarActions --------------------------------------------------------------------------------------
+type [<Erase>] messageBarActions =
+    inherit FelizProps.prop<IMessageBarActionsProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarActionsProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Generally the 'Dismiss' button for the MessageBar
+    static member inline containerAction (value: ReactElement) = Interop.mkProperty<IMessageBarActionsProp> "containerAction" value
+    /// Generally the 'Dismiss' button for the MessageBar
+    static member inline containerAction (value: IReactProperty list) = Interop.mkProperty<IMessageBarActionsProp> "containerAction" (!!value |> createObj |> unbox<IReactProperty>)
+
+// -------------------------------------------------------------------------- MessageBarGroup --------------------------------------------------------------------------------------
+type [<Erase>] messageBarGroup = FelizProps.prop<IMessageBarGroupProp>
+
+module messageBarGroup =
+    type [<Erase>] animate =
+        static member inline exitOnly = Interop.mkProperty<IMessageBarGroupProp> "animate" "exit-only"
+        static member inline both = Interop.mkProperty<IMessageBarGroupProp> "animate" "both"

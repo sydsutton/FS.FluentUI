@@ -3062,6 +3062,58 @@ let InteractionTagTest() =
         ]
     ]
 
+[<ReactComponent>]
+let MessageBarTest() =
+    let intentIndex, setIntentIndex = React.useState 0
+    let messageIntents, setMessageIntents = React.useState []
+    let intents = [ messageBar.intent.error; messageBar.intent.info; messageBar.intent.success; messageBar.intent.warning ]
+
+    Html.div [
+        prop.style [ style.width 600; style.height 200; style.overflowY.scroll ]
+        prop.children [
+            Fui.button [
+                button.onClick (fun _ ->
+                    let index = if intentIndex = 3 then 0 else intentIndex + 1
+                    setMessageIntents (intents.[intentIndex]::messageIntents)
+                    setIntentIndex index
+                )
+                button.text "Notify"
+            ]
+            Fui.messageBarGroup [
+                messageBarGroup.animate.both
+                messageBarGroup.children [
+                    yield! messageIntents |> List.mapi (fun index intent ->
+                        Fui.messageBar [
+                            messageBar.layout.multiline
+                            messageBar.politeness.assertive
+                            intent
+                            messageBar.children [
+                                Fui.messageBarBody [
+                                    Fui.messageBarTitle "Descriptive title"
+                                    Fui.link [
+                                        link.text "Link"
+                                    ]
+                                    Fui.text "Message providing information to the user with actionable"
+                                ]
+                                Fui.messageBarActions [
+                                    messageBarActions.containerAction (
+                                        Fui.button [
+                                            button.onClick (fun _ -> setMessageIntents (messageIntents |> List.except [messageIntents.[index]]))
+                                            button.appearance.transparent
+                                            button.icon (
+                                                Fui.icon.dismissRegular []
+                                            )
+                                        ]
+                                    )
+                                ]
+                            ]
+                        ]
+                    )
+                ]
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3146,6 +3198,7 @@ let mainContent model dispatch =
             TagTest()
             InteractionTagTest()
             Portal ()
+            MessageBarTest()
         ]
     ]
 
