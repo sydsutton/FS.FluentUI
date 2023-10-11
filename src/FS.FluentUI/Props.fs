@@ -1169,6 +1169,7 @@ type [<Erase>] menuPopover =
 type [<Erase>] menuTrigger =
     static member inline children (value: ReactElement) = Interop.mkProperty<IMenuTriggerProp> "children" value
     static member inline children (value: MenuTriggerChildProps -> ReactElement) = Interop.mkProperty<IMenuTriggerProp> "children" (System.Func<_,_> value)
+    /// Disables internal trigger mechanism that ensures a child provided will be a compliant ARIA button. Default: false
     static member inline disableButtonEnhancement (value: bool) = Interop.mkProperty<IMenuTriggerProp> "disableButtonEnhancement" value
 
 // -------------------------------------------------------------------------- MenuSplitGroup --------------------------------------------------------------------------------------
