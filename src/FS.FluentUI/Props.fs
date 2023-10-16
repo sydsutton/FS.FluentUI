@@ -5200,6 +5200,8 @@ type [<Erase>] breadcrumbItem =
 
 module breadcrumbItem =
 
+    type [<Erase>] as' =
+        static member inline li = Interop.mkProperty<IBreadcrumbItemProp> "as" "li"
     /// Controls size of Breadcrumb items and dividers.
     type [<Erase>] size =
         static member inline small = Interop.mkProperty<IBreadcrumbItemProp> "size" "small"
@@ -5212,6 +5214,9 @@ type [<Erase>] breadcrumbDivider =
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
+module breadcrumbDivider =
+    type [<Erase>] as' =
+        static member inline li = Interop.mkProperty<IBreadcrumbDividerProp> "as" "li"
 // -------------------------------------------------------------------------- BreadcrumbButton --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumbButton =
     inherit FelizProps.prop<IBreadcrumbButtonProp>
@@ -5223,9 +5228,18 @@ type [<Erase>] breadcrumbButton =
     static member inline icon (value: ReactElement) = Interop.mkProperty<IBreadcrumbButtonProp> "icon" value
     /// Defines current sate of BreadcrumbButton.
     static member inline current (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "current" value
-    static member inline disabled (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "disabled" value
+    /// When set, allows the button to be focusable even when it has been disabled.
+    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
+    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    /// When set, allows the button to be focusable even when it has been disabled.
+    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
+    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    static member inline disabledFocusable (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "disabledFocusable" value
 
 module breadcrumbButton =
+    type [<Erase>] as' =
+        static member inline a = Interop.mkProperty<IBreadcrumbButtonProp> "as" "a"
+        static member inline button = Interop.mkProperty<IBreadcrumbButtonProp> "as" "button"
 
     /// Breadcrumb appearance.
     type [<Erase>] appearance =
