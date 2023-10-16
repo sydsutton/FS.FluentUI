@@ -32,8 +32,21 @@ module FuiHelpers =
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
 
-type [<Erase>] Fui =
+// Added because I need the classNames going into mergeClasses to stay as a tuple.
+//TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
+[<RequireQualifiedAccess>]
+type [<Erase>] JSTuple =
+    static member inline from2ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1]"
+    static member inline from3ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2]"
+    static member inline from4ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3]"
+    static member inline from5ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4]"
+    static member inline from6ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4], $0[5]"
+    static member inline from7ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4], $0[5], $0[6]"
+    static member inline from8ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4], $0[5], $0[6], $0[7]"
+    static member inline from9ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4], $0[5], $0[6], $0[7], $0[8]"
+    static member inline from10ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3], $0[4], $0[5], $0[6], $0[7], $0[8], $0[9]"
 
+type [<Erase>] Fui =
 //---------------------------------------------------------------- Functions --------------------------------------------------------------------------------
 
     /// A hook that returns the necessary tabster attributes to support arrow key navigation
@@ -216,6 +229,27 @@ type [<Erase>] Fui =
         let options = !!options |> createObj
 
         Fui.useHeadlessFlatTree(props, options) //Created this helper function because Fable will transpile tuples into JS arrays otherwise
+
+    static member inline mergeClasses (classNames: string list): string =
+        //I have to use an array. Any other seq adds incorrect compiled JS.
+        // I just want a list passed in as the param instead of an array in order to stay consistent with most of this project.
+        let classNamesArray = classNames |> Array.ofList
+
+        match classNamesArray.Length with
+        | 0 -> ""
+        | 1 -> classNamesArray.[0]
+        | 2 -> JSTuple.from2ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 3 -> JSTuple.from3ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 4 -> JSTuple.from4ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 5 -> JSTuple.from5ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 6 -> JSTuple.from6ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 7 -> JSTuple.from7ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 8 -> JSTuple.from8ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 9 -> JSTuple.from9ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | 10 -> JSTuple.from10ClassNames classNamesArray |> import "mergeClasses" FluentUIv9
+        | _ -> printfn $"You tried merging {classNames.Length} classNames. Please try merging 10 classNames or less."; ""
+
+
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props

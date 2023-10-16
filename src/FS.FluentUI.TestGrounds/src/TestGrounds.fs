@@ -43,6 +43,9 @@ type Styles = {
     breadcrumb: string
     portalContainer: string
     portal: string
+    backgroundColor: string
+    yellowText: string
+    borderRadius: string
 }
 
 let useStyles: unit -> Styles = Fui.makeStyles [
@@ -104,6 +107,13 @@ let useStyles: unit -> Styles = Fui.makeStyles [
         style.backgroundColor tokens.colorPaletteYellowBackground3
         style.border(3, borderStyle.dashed, "gray")
         style.padding (length.px 5)
+    ]
+    "backgroundColor", [
+        style.backgroundColor "red"
+    ]
+    "yellowText", [ style.color "yellow" ]
+    "borderRadius", [
+        style.borderRadius (20, 5, 20, 5)
     ]
 ]
 
@@ -3115,6 +3125,17 @@ let MessageBarTest() =
         ]
     ]
 
+[<ReactComponent>]
+let MergeClassesTest isYellow =
+    let styles = useStyles()
+
+    Html.div [
+        prop.className (Fui.mergeClasses [ styles.backgroundColor; styles.borderRadius; (if isYellow then styles.yellowText else ""); "testSize" ])
+        prop.children [
+            Fui.text "Merge Classes Div"
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3137,6 +3158,8 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            MergeClassesTest true
+            MergeClassesTest false
             Accordion()
             Checkbox()
             avatarTest
