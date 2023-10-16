@@ -3159,6 +3159,10 @@ type [<Erase>] datePicker  =
     /// This is the "primary" slot, so native props specified directly on the <Input> will go here (except className and style, which go to the root slot).
     /// The top-level ref will also go here.
     static member inline input (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "input" value
+    /// The actual <input> element. type="text" will be automatically applied unless overridden.
+    /// This is the "primary" slot, so native props specified directly on the <Input> will go here (except className and style, which go to the root slot).
+    /// The top-level ref will also go here.
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "input" (!!value |> createObj |> unbox<IReactProperty>)
     /// WARNING: DatePicker doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "children" value
     /// WARNING: DatePicker doesn't support children. Using this prop will cause runtime errors.
@@ -3174,6 +3178,10 @@ type [<Erase>] datePicker  =
     static member inline calendar (value: ICalendarProp list) = Interop.mkProperty<IDatePickerProp> "calendar" (!!value |> createObj |> unbox<ICalendarProp>)
     static member inline popupSurface (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "popupSurface" value
     static member inline popupSurface (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "popupSurface" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDatePickerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDatePickerProp> "mountNode" value
     /// Callback issued when a date is selected
     static member inline onSelectDate (value: DateTime option -> unit) = Interop.mkProperty<IDatePickerProp> "onSelectDate" (System.Func<_,_> value)
     /// Whether or not the Input of the DatePicker is underlined.
@@ -3210,6 +3218,13 @@ type [<Erase>] datePicker  =
     static member inline formatDate (value: DateTime -> string) = Interop.mkProperty<IDatePickerProp> "formatDate" (System.Func<_,_> value)
     /// Optional method to format the chosen date to a string to display in the DatePicker
     static member inline parseDateFromString (value: string -> DateTime option) = Interop.mkProperty<IDatePickerProp> "parseDateFromString" (System.Func<_,_> value)
+    /// Localized strings to use in the Calendar.
+    ///
+    /// Use Fui.defaultDatePickerStrings.
+    ///
+    /// Usage:
+    /// `datePicker.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )`
+    static member inline strings (value: CalendarStrings) = Interop.mkProperty<IDatePickerProp> "strings" value
     /// Whether the month picker should highlight the current month
     static member inline highlightCurrentMonth (value: bool) = Interop.mkProperty<IDatePickerProp> "highlightCurrentMonth" value
     /// Whether the month picker should highlight the selected month
