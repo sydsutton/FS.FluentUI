@@ -31,7 +31,6 @@ module FuiHelpers =
     let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
-    let [<Literal>] MessageBar_unstable = "@fluentui/react-message-bar-preview"
 
 type [<Erase>] Fui =
 
@@ -561,16 +560,20 @@ type [<Erase>] Fui =
     static member inline interactionTagPrimary (props: IInteractionTagPrimaryProp list) = createElement (import "InteractionTagPrimary" FluentUIv9) props
     static member inline interactionTagSecondary (props: IInteractionTagSecondaryProp list) = createElement (import "InteractionTagSecondary" FluentUIv9) props
     // MessageBar
-    static member inline messageBar (props: IMessageBarProp list) = createElement (import "MessageBar" MessageBar_unstable) props
-    static member inline messageBar (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBar" MessageBar_unstable) props
-    static member inline messageBarBody (props: IMessageBarBodyProp list) = createElement (import "MessageBarBody" MessageBar_unstable) props
-    static member inline messageBarBody (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarBody" MessageBar_unstable) props
-    static member inline messageBarTitle (props: IMessageBarTitleProp list) = createElement (import "MessageBarTitle" MessageBar_unstable) props
-    static member inline messageBarTitle (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarTitle" MessageBar_unstable) props
-    static member inline messageBarTitle (text: string) = createElement (import "MessageBarTitle" MessageBar_unstable) [ prop.text text ]
-    static member inline messageBarActions (props: IMessageBarActionsProp list) = createElement (import "MessageBarActions" MessageBar_unstable) props
-    static member inline messageBarGroup (props: IMessageBarGroupProp list) = createElement (import "MessageBarGroup" MessageBar_unstable) props
-    static member inline messageBarGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarGroup" MessageBar_unstable) props
+    /// Communicates important information about the state of the entire application or surface. For example, the status of a page, panel, dialog or card.
+    /// The information shouldn't require someone to take immediate action, but should persist until the user performs one of the required actions.
+    static member inline messageBar (props: IMessageBarProp list) = createElement (import "MessageBar" FluentUIv9) props
+    /// Communicates important information about the state of the entire application or surface. For example, the status of a page, panel, dialog or card.
+    /// The information shouldn't require someone to take immediate action, but should persist until the user performs one of the required actions.
+    static member inline messageBar (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBar" FluentUIv9) props
+    static member inline messageBarBody (props: IMessageBarBodyProp list) = createElement (import "MessageBarBody" FluentUIv9) props
+    static member inline messageBarBody (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarBody" FluentUIv9) props
+    static member inline messageBarTitle (props: IMessageBarTitleProp list) = createElement (import "MessageBarTitle" FluentUIv9) props
+    static member inline messageBarTitle (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarTitle" FluentUIv9) props
+    static member inline messageBarTitle (text: string) = createElement (import "MessageBarTitle" FluentUIv9) [ prop.text text ]
+    static member inline messageBarActions (props: IMessageBarActionsProp list) = createElement (import "MessageBarActions" FluentUIv9) props
+    static member inline messageBarGroup (props: IMessageBarGroupProp list) = createElement (import "MessageBarGroup" FluentUIv9) props
+    static member inline messageBarGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarGroup" FluentUIv9) props
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 

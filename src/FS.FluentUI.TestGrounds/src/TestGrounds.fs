@@ -3084,6 +3084,7 @@ let MessageBarTest() =
                 messageBarGroup.children [
                     yield! messageIntents |> List.mapi (fun index intent ->
                         Fui.messageBar [
+                            messageBar.shape.square
                             messageBar.layout.multiline
                             messageBar.politeness.assertive
                             intent
