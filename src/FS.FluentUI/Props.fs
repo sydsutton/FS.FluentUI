@@ -3836,6 +3836,8 @@ type [<Erase>] infoButton =
     static member inline info (value: ReactElement)= Interop.mkProperty<IInfoButtonProp> "info" value
     /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: IPopoverSurfaceProp list)= Interop.mkProperty<IInfoButtonProp> "info" (!!value |> createObj |> unbox<IPopoverSurfaceProp>)
+    /// Whether the InfoButton should be rendered inline or on a Portal.
+    static member inline inline' (value: bool)= Interop.mkProperty<IInfoButtonProp> "inline" value
 
 module infoButton =
     type [<Erase>] as' =
