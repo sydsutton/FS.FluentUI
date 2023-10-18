@@ -1566,16 +1566,16 @@ let DialogTest() =
         ]
     ]
 
-//TODO Fable is transpiling the tuple passed to toastController.dispatchToast into a JS array, which is not what the function expects.
-//TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
-//TODO but I'm not sure how to do that.
 [<ReactComponent>]
 let ToastTest() =
+    let unmounted, setUnmounted = React.useState true
+    let toastId = Fui.useId (Some "toast", None)
     let toasterId = Fui.useId (Some "toaster", None)
 
     let toastController = Fui.useToastController(Some toasterId)
 
     let notify = fun _ ->
+        setUnmounted false
         toastController.dispatchToast(
             Fui.toast [
                 toast.appearance.inverted
@@ -1601,21 +1601,35 @@ let ToastTest() =
                         ]
                     ]
                 ]
+            ], [
+                dispatchToastOptions.timeout -1
+                dispatchToastOptions.toastId toastId
+                dispatchToastOptions.intent.error
             ]
         )
+
+    let update = fun _ ->
+        toastController.updateToast [
+            updateToastOptions.timeout 2000
+            updateToastOptions.toastId toastId
+            updateToastOptions.content (
+                Fui.toast [
+                    Fui.toastTitle [
+                        toastTitle.text "This toast will close soon"
+                    ]
+                ]
+            )
+            updateToastOptions.intent.success
+        ]
 
     Fui.stack [
         stack.children [
             Fui.toaster [
                 toaster.toasterId toasterId
-                toaster.timeout 5000
-                toaster.intent.success
-                toaster.pauseOnHover true
-                toaster.limit 1
             ]
             Fui.button [
-                button.onClick (fun _ -> notify())
-                button.text "Open Toast"
+                button.onClick (fun _ -> if unmounted then notify() else update())
+                button.text (if unmounted then "Open Toast" else "Update toast")
             ]
         ]
     ]

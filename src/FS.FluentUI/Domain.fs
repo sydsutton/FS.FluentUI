@@ -481,18 +481,18 @@ type UpdateToastOptions = {
     onStatusChange: ToastChangeHandler option
 }
 
-//TODO Fable is transpiling the tuple passed to toastController.dispatchToast into a JS array, which is not what the function expects.
-//TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
-//TODO but I'm not sure how to do that.
+type [<Erase>] IUpdateToastOptionsProp = interface end
+type [<Erase>] IDispatchToastOptionsProp = interface end
+
 type ToastController = {
-    /// When dispatching toast, only pass the ReactElement that you want the toast content to be.
-    /// In the Microsoft docs, DispatchToastOptions is passed as a second parameter, but instead, dynamically style the <code>Fui.toaster</code>.
-    /// i.e.- <code>if mounted then toaster.intent.success else toaster.intent.error</code>
-    dispatchToast: ReactElement (*-> DispatchToastOptions option*) -> unit
+    dispatchToast: ReactElement * IDispatchToastOptionsProp list -> unit
+    /// Takes a `toastId`
     dismissToast: string -> unit
     dismissAllToasts: unit -> unit
-    updateToast: UpdateToastOptions -> unit
+    updateToast: IUpdateToastOptionsProp list -> unit
+    /// Takes a `toastId`
     pauseToast: string -> unit
+    /// Takes a `toastId`
     playToast: string -> unit
 }
 

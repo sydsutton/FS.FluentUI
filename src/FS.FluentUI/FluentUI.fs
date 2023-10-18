@@ -36,6 +36,7 @@ module FuiHelpers =
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
 [<RequireQualifiedAccess>]
 type [<Erase>] JSTuple =
+    static member inline from2Args (args: 'T) = emitJsExpr args "$0[0], $0[1]"
     static member inline from2ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1]"
     static member inline from3ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2]"
     static member inline from4ClassNames (names: string array) = emitJsExpr names "$0[0], $0[1], $0[2], $0[3]"
@@ -77,10 +78,21 @@ type [<Erase>] Fui =
     [<Hook>]
     static member inline useId (prefix: string option, providedId: string option): string = import "useId" FluentUIv9
 
-    //TODO Fable is transpiling the tuple passed to toastController.dispatchToast into a JS array, which is not what the function expects.
-    //TODO I have a feeling I need to pass the tuple to dispatchToast using partial application so that it doesn't have the chance to turn it into an array,
-    //TODO but I'm not sure how to do that.
-    static member inline useToastController (toasterId: string option): ToastController = import "useToastController" FluentUIv9
+    /// If an id is provided all imperative methods control that specific toaster
+    /// Returns Imperative methods to control toasts
+    static member inline useToastController (toasterId: string option): ToastController =
+        let controller : ToastController = toasterId |> import "useToastController" FluentUIv9
+
+        {
+            dispatchToast = fun (element, options) ->
+                let args = element, (!!options |> createObj |> unbox<DispatchToastOptions>)
+                args |> JSTuple.from2Args |> controller.dispatchToast
+            dismissToast = fun props -> controller.dismissToast props
+            dismissAllToasts = fun props -> controller.dismissAllToasts props
+            updateToast = fun props -> !!props |> createObj |> unbox |> controller.updateToast
+            pauseToast = fun props -> controller.pauseToast props
+            playToast = fun props -> controller.playToast props
+        }
 
     static member inline partitionAvatarGroupItems (options: IPartitionAvatarGroupItemsOptionsProp list): PartitionAvatarGroupItems<'T> =
         let partitionAvatarGroupItems = import "partitionAvatarGroupItems" FluentUIv9

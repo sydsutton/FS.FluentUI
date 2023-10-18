@@ -5110,9 +5110,6 @@ module dispatchToastOptions =
         static member inline error = Interop.mkProperty<IDispatchToastOptionsProp> "intent" "error"
         static member inline warning = Interop.mkProperty<IDispatchToastOptionsProp> "intent" "warning"
 
-    let toType (dispatchOptions: IDispatchToastOptionsProp list)=
-        !!dispatchOptions |> createObj |> unbox<DispatchToastOptions>
-
 // -------------------------------------------------------------------------- UpdateToastOptions --------------------------------------------------------------------------------------
 
 type [<Erase>] updateToastOptions =
@@ -5167,9 +5164,6 @@ module updateToastOptions =
         static member inline success = Interop.mkProperty<IUpdateToastOptionsProp> "intent" "success"
         static member inline error = Interop.mkProperty<IUpdateToastOptionsProp> "intent" "error"
         static member inline warning = Interop.mkProperty<IUpdateToastOptionsProp> "intent" "warning"
-
-    let toType (updateOptions: IUpdateToastOptionsProp list)=
-        !!updateOptions |> createObj |> unbox<UpdateToastOptions>
 
 // -------------------------------------------------------------------------- Breadcrumb --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumb =
