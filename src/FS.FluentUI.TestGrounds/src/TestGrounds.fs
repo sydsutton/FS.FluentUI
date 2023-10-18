@@ -3144,7 +3144,7 @@ let MergeClassesTest isYellow =
     let styles = useStyles()
 
     Html.div [
-        prop.className (Fui.mergeClasses [ styles.backgroundColor; styles.borderRadius; (if isYellow then styles.yellowText else ""); "testSize" ])
+        prop.className (Fui.mergeClasses (styles.backgroundColor, styles.borderRadius, (if isYellow then styles.yellowText else ""), "testSize" ))
         prop.children [
             Fui.text "Merge Classes Div"
         ]
