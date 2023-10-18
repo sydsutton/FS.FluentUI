@@ -471,6 +471,7 @@ type [<Erase>] Fui =
     /// The Fluent UI Toast component uses an imperative API. Once a Toaster has been rendered, you can use the useToastController hook to get access to imperative methods to dispatch a Toast. The Toast component itself is simply a layout component.
     static member inline toast (props: IToastProp list) = createElement (import "Toast" FluentUIv9) props
     static member inline toastTitle (props: IToastTitleProp list) = createElement (import "ToastTitle" FluentUIv9) props
+    static member inline toastTitle (text: string) = createElement (import "ToastTitle" FluentUIv9) [ prop.text text ]
     static member inline toastBody (props: IToastBodyProp list) = createElement (import "ToastBody" FluentUIv9) props
     static member inline toastFooter (props: ReactElement list) = Interop.reactElementWithChildren (import "ToastFooter" FluentUIv9) props
     static member inline toastFooter (props: IToastFooterProp list) = createElement (import "ToastFooter" FluentUIv9) props
@@ -482,6 +483,7 @@ type [<Erase>] Fui =
     static member inline dialogSurface (props: ReactElement list) = Interop.reactElementWithChildren (import "DialogSurface" FluentUIv9) props
     static member inline dialogSurface (props: IDialogSurfaceProp list) = createElement (import "DialogSurface" FluentUIv9) props
     static member inline dialogTitle (props: IDialogTitleProp list) = createElement (import "DialogTitle" FluentUIv9) props
+    static member inline dialogTitle (text: string) = createElement (import "DialogTitle" FluentUIv9) [ prop.text text ]
     static member inline dialogActions (props: IDialogActionsProp list) = createElement (import "DialogActions" FluentUIv9) props
     static member inline dialogBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DialogBody" FluentUIv9) props
     static member inline dialogBody (props: IDialogBodyProp list) = createElement (import "DialogBody" FluentUIv9) props
