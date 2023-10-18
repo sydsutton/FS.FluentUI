@@ -1626,6 +1626,11 @@ let ToastTest() =
         stack.children [
             Fui.toaster [
                 toaster.toasterId toasterId
+                toaster.offset [
+                    toastOffset.horizontal 300
+                    toastOffset.vertical 400
+                ]
+                toaster.shortcuts { focus = fun d -> d.ctrlKey && d.key = "m" }
             ]
             Fui.button [
                 button.onClick (fun _ -> if unmounted then notify() else update())

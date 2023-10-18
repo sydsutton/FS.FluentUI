@@ -2906,8 +2906,7 @@ type [<Erase>] toaster =
     inherit FelizProps.prop<IToasterProp>
 
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToasterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline offset (value: ToastOffset) = Interop.mkProperty<IToasterProp> "offset" value
-    static member inline toastId (value: 'TId) = Interop.mkProperty<IToasterProp> "toastId" value
+    static member inline offset (value: IToastOffsetProp list) = Interop.mkProperty<IToasterProp> "offset" (!!value |> createObj |> unbox<ToastOffset>)
     static member inline toasterId (value: string) = Interop.mkProperty<IToasterProp> "toasterId" value
     static member inline toasterId (value: string option) = Interop.mkProperty<IToasterProp> "toasterId" value
     static member inline limit (value: int) = Interop.mkProperty<IToasterProp> "limit" value
@@ -2922,16 +2921,22 @@ type [<Erase>] toaster =
     static member inline priority (value: decimal) = Interop.mkProperty<IToasterProp> "priority" value
     /// Auto dismiss timeout in milliseconds
     static member inline timeout (value: int) = Interop.mkProperty<IToasterProp> "timeout" value
+    /// Auto dismiss timeout in milliseconds
+    static member inline timeout (value: float) = Interop.mkProperty<IToasterProp> "timeout" value
+    /// Auto dismiss timeout in milliseconds
+    static member inline timeout (value: decimal) = Interop.mkProperty<IToasterProp> "timeout" value
     /// Toast timeout pauses while focus is on another window
     static member inline pauseOnWindowBlur (value: bool) = Interop.mkProperty<IToasterProp> "pauseOnWindowBlur" value
     /// Toast timeout pauses while user cursor is on the toast
     static member inline pauseOnHover (value: bool) = Interop.mkProperty<IToasterProp> "pauseOnHover" value
     /// User override API for aria-live narration for toasts
     static member inline announce (value: string -> AnnounceOptions -> unit) = Interop.mkProperty<IToasterProp> "announce" (System.Func<_,_,_> value)
-    /// Toast content
-    static member inline content (value: ReactElement) = Interop.mkProperty<IToasterProp> "content" value
     /// Additional data that needs to be passed to the toast
     static member inline data (value: obj) = Interop.mkProperty<IToasterProp> "data" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IToasterProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IToasterProp> "mountNode" value
 
 module toaster =
     type [<Erase>] as' =
@@ -2954,6 +2959,15 @@ module toaster =
     type [<Erase>] politeness =
         static member inline assertive = Interop.mkProperty<IToasterProp> "politeness" "assertive"
         static member inline polite = Interop.mkProperty<IToasterProp> "politeness" "polite"
+
+// -------------------------------------------------------------------------- ToastOffset --------------------------------------------------------------------------------------
+type [<Erase>] toastOffset =
+    static member inline horizontal (value: int) = Interop.mkProperty<IToastOffsetProp> "horizontal" value
+    static member inline horizontal (value: float) = Interop.mkProperty<IToastOffsetProp> "horizontal" value
+    static member inline horizontal (value: decimal) = Interop.mkProperty<IToastOffsetProp> "horizontal" value
+    static member inline vertical (value: int) = Interop.mkProperty<IToastOffsetProp> "vertical" value
+    static member inline vertical (value: float) = Interop.mkProperty<IToastOffsetProp> "vertical" value
+    static member inline vertical (value: decimal) = Interop.mkProperty<IToastOffsetProp> "vertical" value
 
 // -------------------------------------------------------------------------- Card --------------------------------------------------------------------------------------
 type [<Erase>] card =

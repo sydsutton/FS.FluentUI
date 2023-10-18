@@ -113,6 +113,7 @@ type [<Erase>] IToastTitleProp = interface end
 type [<Erase>] IToastBodyProp = interface end
 type [<Erase>] IToastFooterProp = interface end
 type [<Erase>] IToasterProp = interface end
+type [<Erase>] IToastOffsetProp = interface end
 
 type [<Erase>] ICardProp = interface end
 type [<Erase>] ICardFooterProp = interface end

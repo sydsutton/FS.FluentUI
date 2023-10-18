@@ -164,7 +164,7 @@ type OnVisibleChangeData = {
 
 type MountNode = {
     element: Browser.Types.HTMLElement option
-    className: string option
+    className: string
 }
 
 type ChangeEvent = {
@@ -358,23 +358,10 @@ type ToasterShortcuts = {
     focus: Browser.Types.KeyboardEvent -> bool
 }
 
-// export declare type ToastOffset = Partial<Record<ToastPosition, ToastOffsetObject>> | ToastOffsetObject; //TODO
-
-// declare interface ToastOffsetObject { //TODO
-//     horizontal?: number;
-//     vertical?: number;
-// }
-
-type ToastOffset = { //TODO see above
-    horizontal: int option
-    vertical: int option
+type ToastOffset = {
+    horizontal: int
+    vertical: int
 }
-
-module ToastOffset =
-    let none = {
-        horizontal = None
-        vertical = None
-    }
 
 type [<RequireQualifiedAccess>] ToastPosition = ``top-end`` | ``top-start`` | ``bottom-end`` | ``bottom-start``
 
