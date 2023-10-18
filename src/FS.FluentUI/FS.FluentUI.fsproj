@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.1.0</Version>
+        <Version>1.2.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,13 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            Remove @fluentui/react-tags-preview package and update @fluentui/react-components package
+            - Add MessageBar components and properties
+            - Add mergeClasses function
+            - Fix bugs in Toaster/ useToastController
+            - Update @fluentui/react-components
+            - Update @fluentui/react-datepicker-compat
+            - Update @fluentui/react-search-preview
+            - Update @fluentui/react-breadcrumb-preview
         </PackageReleaseNotes>
     </PropertyGroup>
 
