@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 1.2.0 (10-18-2023)
+
+* Add MessageBar components and properties
+* Add mergeClasses function
+* Fix bugs in Toaster/ useToastController
+* Update @fluentui/react-components to 9.35.0
+* Update @fluentui/react-datepicker-compat to 0.3.13
+* Update @fluentui/react-search-preview to 0.1.28
+* Update @fluentui/react-breadcrumb-preview to 1.2.3
+
 ### 1.1.0 (10-6-2023)
 
 * Remove `@fluentui/react-tags-preview` package and update `@fluentui/react-components`
