@@ -5292,6 +5292,10 @@ type [<Erase>] partitionBreadcrumbItemsOptions =
 // -------------------------------------------------------------------------- Searchbox --------------------------------------------------------------------------------------
 type [<Erase>] searchBox =
     inherit FelizProps.prop<ISearchBoxProp>
+    /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
+    [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
+    /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ICheckboxProp> "children" (Interop.reactApi.Children.toArray elems)
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Hidden input that handles the checkbox's functionality.
     /// This is the PRIMARY slot: all native properties specified directly on <Input> will be applied to this slot, except className and style, which remain on the root slot.
@@ -5308,6 +5312,7 @@ type [<Erase>] searchBox =
     /// Element after the input text, within the input border
     static member inline contentAfter (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "contentAfter" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline dismiss (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "dismiss" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline dismiss (value: ReactElement) = Interop.mkProperty<ISearchBoxProp> "dismiss" value
     /// Default value of the input. Provide this if the input should be an uncontrolled component which tracks its current state internally; otherwise, use value.
     /// (This prop is mutually exclusive with value.)
     static member inline defaultValue (value: string) = Interop.mkProperty<ISearchBoxProp> "defaultValue" value
