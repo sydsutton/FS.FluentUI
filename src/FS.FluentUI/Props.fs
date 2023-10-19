@@ -3348,7 +3348,7 @@ type [<Erase>] calendar  =
     /// Callback for when a date is selected
     /// @param date - The date the user selected
     /// @param selectedDateRangeArray - The resultant list of dates that are selected based on the date range type set for the component.
-    static member inline onSelectDate (value: (DateTime * #seq<DateTime> option) -> unit) = Interop.mkProperty<ICalendarProp> "onSelectDate" (System.Func<_,_> value)
+    static member inline onSelectDate (value: (DateTime -> DateTime array -> unit)) = Interop.mkProperty<ICalendarProp> "onSelectDate" (System.Func<_,_,_> value)
     /// Callback for when calendar is closed
     static member inline onDismiss (value: unit -> unit) = Interop.mkProperty<ICalendarProp> "onDismiss" (System.Func<_,_> value)
     /// ID for the calendar
@@ -3374,29 +3374,38 @@ type [<Erase>] calendar  =
     /// Usage:
     /// `calendar.strings ( { Fui.defaultDatePickerStrings with goToToday = "Pick Today" } )`
     static member inline strings (value: CalendarStrings) = Interop.mkProperty<ICalendarProp> "strings" value
+    /// <para>Apply additional formatting to dates, for example localized date formatting.
+    /// Use Fui.defaultDateFormatting.</para>
+    ///
+    /// Usage:
+    /// ```calendarDay.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = (fun d -> $"Year: {d.Year}") })```
+    static member inline dateTimeFormatter (value: DateFormatting) = Interop.mkProperty<ICalendarProp> "dateTimeFormatter" value
     /// If set the Calendar will not allow navigation to or selection of a date earlier than this value.
     static member inline minDate (value: DateTime) = Interop.mkProperty<ICalendarProp> "minDate" value
     /// If set the Calendar will not allow navigation to or selection of a date later than this value.
     static member inline maxDate (value: DateTime) = Interop.mkProperty<ICalendarProp> "maxDate" value
     /// If set the Calendar will not allow selection of dates in this array.
-    static member inline restrictedDates (value: DateTime array) = Interop.mkProperty<ICalendarProp> "restrictedDates" value
+    static member inline restrictedDates (value: DateTime list) = Interop.mkProperty<ICalendarProp> "restrictedDates" (value |> List.toArray)
     /// Whether the calendar should show 6 weeks by default.
     static member inline showSixWeeksByDefault (value: bool) = Interop.mkProperty<ICalendarProp> "showSixWeeksByDefault" value
     /// The days that are selectable when `dateRangeType` is `WorkWeek`.
     /// If `dateRangeType` is not `WorkWeek` this property does nothing.
     /// @default [Monday,Tuesday,Wednesday,Thursday,Friday]
-    static member inline workWeekDays (value: System.DayOfWeek array) =
-        let daysToInts = value |> Array.map (fun d ->
-            match d with
-            | DayOfWeek.Sunday -> 0
-            | DayOfWeek.Monday -> 1
-            | DayOfWeek.Tuesday -> 2
-            | DayOfWeek.Wednesday -> 3
-            | DayOfWeek.Thursday -> 4
-            | DayOfWeek.Friday -> 5
-            | DayOfWeek.Saturday -> 6
-            | _ -> 0
-        )
+    static member inline workWeekDays (value: System.DayOfWeek list) =
+        let daysToInts =
+            value
+            |> List.map (fun d ->
+                match d with
+                | DayOfWeek.Sunday -> 0
+                | DayOfWeek.Monday -> 1
+                | DayOfWeek.Tuesday -> 2
+                | DayOfWeek.Wednesday -> 3
+                | DayOfWeek.Thursday -> 4
+                | DayOfWeek.Friday -> 5
+                | DayOfWeek.Saturday -> 6
+                | _ -> 0
+            )
+            |> List.toArray
         Interop.mkProperty<ICalendarProp> "workWeekDays" daysToInts
     /// Whether the month picker should highlight the current month
     static member inline highlightCurrentMonth (value: bool) = Interop.mkProperty<ICalendarProp> "highlightCurrentMonth" value
@@ -3452,7 +3461,7 @@ type [<Erase>] calendarDay  =
     /// Callback issued when a date in the calendar is navigated
     /// @param date - The date that is navigated to
     /// @param focusOnNavigatedDay - Whether to set the focus to the navigated date.
-    static member inline onNavigateDate (value: DateTime * bool -> unit) = Interop.mkProperty<ICalendarDayProp> "onNavigateDate" value
+    static member inline onNavigateDate (value: (DateTime -> bool -> unit)) = Interop.mkProperty<ICalendarDayProp> "onNavigateDate" (System.Func<_,_,_> value)
     /// Callback issued when calendar day is closed
     static member inline onDismiss (value: unit -> unit) = Interop.mkProperty<ICalendarDayProp> "onDismiss" (System.Func<_,_> value)
     /// Callback function when the header is selected
@@ -3472,12 +3481,88 @@ type [<Erase>] calendarDay  =
     /// If set the Calendar will not allow navigation to or selection of a date later than this value.
     static member inline maxDate (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "maxDate" value
     /// If set the Calendar will not allow selection of dates in this array.
-    static member inline restrictedDates (value: DateTime array) = Interop.mkProperty<ICalendarDayProp> "restrictedDates" value
+    static member inline restrictedDates (value: DateTime list) = Interop.mkProperty<ICalendarDayProp> "restrictedDates" (value |> List.toArray)
     /// Whether the close button should be shown or not
     static member inline showCloseButton (value: bool) = Interop.mkProperty<ICalendarDayProp> "showCloseButton" value
     /// Allows all dates and buttons to be focused, including disabled ones
     static member inline allFocusable (value: bool) = Interop.mkProperty<ICalendarDayProp> "allFocusable" value
+    /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
+    static member inline daysToSelectInDayView (value: int) = Interop.mkProperty<ICalendarDayProp> "daysToSelectInDayView" value
+    /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
+    static member inline daysToSelectInDayView (value: float) = Interop.mkProperty<ICalendarDayProp> "daysToSelectInDayView" value
+    /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
+    static member inline daysToSelectInDayView (value: decimal) = Interop.mkProperty<ICalendarDayProp> "daysToSelectInDayView" value
+    /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
+    static member inline today (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "today" value
+    /// The days that are selectable when `dateRangeType` is `WorkWeek`.
+    /// If `dateRangeType` is not `WorkWeek` this property does nothing.
+    /// @default [Monday,Tuesday,Wednesday,Thursday,Friday]
+    static member inline workWeekDays (value: System.DayOfWeek list) =
+        let daysToInts =
+            value
+            |> List.map (fun d ->
+                match d with
+                | DayOfWeek.Sunday -> 0
+                | DayOfWeek.Monday -> 1
+                | DayOfWeek.Tuesday -> 2
+                | DayOfWeek.Wednesday -> 3
+                | DayOfWeek.Thursday -> 4
+                | DayOfWeek.Friday -> 5
+                | DayOfWeek.Saturday -> 6
+                | _ -> 0
+            )
+            |> List.toArray
+        Interop.mkProperty<ICalendarDayProp> "workWeekDays" daysToInts
+    /// Which days in the generated grid should be marked.
+    static member inline markedDays (value: DateTime list) = Interop.mkProperty<ICalendarDayProp> "markedDays" (value |> List.toArray)
+    /// The currently selected date
+    static member inline selectedDate (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "selectedDate" value
+    /// How many weeks to show by default. If not provided, will show enough weeks to display the current month, between 4 and 6 depending
+    static member inline weeksToShow (value: int) = Interop.mkProperty<ICalendarDayProp> "weeksToShow" value
+    /// How many weeks to show by default. If not provided, will show enough weeks to display the current month, between 4 and 6 depending
+    static member inline weeksToShow (value: float) = Interop.mkProperty<ICalendarDayProp> "weeksToShow" value
+    /// How many weeks to show by default. If not provided, will show enough weeks to display the current month, between 4 and 6 depending
+    static member inline weeksToShow (value: decimal) = Interop.mkProperty<ICalendarDayProp> "weeksToShow" value
+    /// The ID of the control that labels this one
+    static member inline labelledBy (value: string) = Interop.mkProperty<ICalendarDayProp> "labelledBy" value
+    /// Whether to show days outside the selected month with lighter styles
+    static member inline lightenDaysOutsideNavigatedMonth (value: bool) = Interop.mkProperty<ICalendarDayProp> "lightenDaysOutsideNavigatedMonth" value
+    /// How many weeks to show by default. If not provided, will show enough weeks to display the current month, between 4 and 6 depending
+    static member inline customDayCellRef (value: (HTMLElement option -> DateTime -> CalendarDayGridStyles -> unit)) = Interop.mkProperty<ICalendarDayProp> "customDayCellRef" (System.Func<_,_,_,_> value)
+    /// Optional callback function to mark specific days with a small symbol. Fires when the date range changes, gives the starting and ending displayed dates and expects the list of which days in between should be marked.
+    static member inline getMarkedDays (value: (DateTime -> DateTime -> DateTime array)) = Interop.mkProperty<ICalendarDayProp> "getMarkedDays" (System.Func<_,_,_> value)
 
+module calendarDay =
+    /// The date range type indicating how many days should be selected as the user selects days
+    /// @default DateRangeType.Day
+    type [<Erase>] dateRangeType =
+        static member inline day = Interop.mkProperty<ICalendarDayProp> "dateRangeType" 0
+        static member inline week = Interop.mkProperty<ICalendarDayProp> "dateRangeType" 1
+        static member inline month = Interop.mkProperty<ICalendarDayProp> "dateRangeType" 2
+        static member inline workWeek = Interop.mkProperty<ICalendarDayProp> "dateRangeType" 3
+
+    /// The first day of the week for your locale.
+    /// @default DayOfWeek.Sunday
+    type [<Erase>] firstDayOfWeek =
+        static member inline sunday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 0
+        static member inline monday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 1
+        static member inline tuesday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 2
+        static member inline wednesday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 3
+        static member inline thursday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 4
+        static member inline friday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 5
+        static member inline saturday = Interop.mkProperty<ICalendarDayProp> "firstDayOfWeek" 6
+
+    /// Defines when the first week of the year should start.
+    /// @default FirstWeekOfYear.FirstDay
+    type [<Erase>] firstWeekOfYear =
+        static member inline firstDay = Interop.mkProperty<ICalendarDayProp> "firstWeekOfYear" 0
+        static member inline firstFullWeek = Interop.mkProperty<ICalendarDayProp> "firstWeekOfYear" 1
+        static member inline firstFourDayWeek = Interop.mkProperty<ICalendarDayProp> "firstWeekOfYear" 2
+
+    /// The cardinal directions for animation to occur during transitions, either horizontal or veritcal
+    type [<Erase>] animationDirection =
+        static member inline horizontal = Interop.mkProperty<ICalendarDayProp> "animationDirection" 0
+        static member inline vertical = Interop.mkProperty<ICalendarDayProp> "animationDirection" 1
 
 // -------------------------------------------------------------------------- CalendarMonth --------------------------------------------------------------------------------------
 type [<Erase>] calendarMonth  =
@@ -3497,11 +3582,11 @@ type [<Erase>] calendarMonth  =
     /// Callback issued when a month is selected
     /// @param date - The date the user selected
     /// @param selectedDateRangeArray - The resultant list of dates that are selected based on the date range type set for the component.
-    static member inline onSelectDate (value: (DateTime * #seq<DateTime array>) -> unit) = Interop.mkProperty<ICalendarMonthProp> "onSelectDate" (System.Func<_,_> value)
+    static member inline onSelectDate (value: (DateTime -> DateTime array -> unit)) = Interop.mkProperty<ICalendarMonthProp> "onSelectDate" (System.Func<_,_,_> value)
     /// Callback issued when the year is navigated
     /// @param date - The date that is navigated to
     /// @param focusOnNavigatedDay - Whether to set the focus to the navigated date.
-    static member inline onNavigateDate (value: (DateTime * bool) -> unit) = Interop.mkProperty<ICalendarMonthProp> "onNavigateDate" (System.Func<_,_> value)
+    static member inline onNavigateDate (value: (DateTime -> bool -> unit)) = Interop.mkProperty<ICalendarMonthProp> "onNavigateDate" (System.Func<_,_,_> value)
     /// Value of today. If unspecified, current time in client machine will be used.
     static member inline today (value: DateTime) = Interop.mkProperty<ICalendarMonthProp> "today" value
     /// Value of today. If unspecified, current time in client machine will be used.

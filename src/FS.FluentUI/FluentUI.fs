@@ -23,6 +23,7 @@ module FuiHelpers =
     let [<Literal>] FluentUIv9 = "@fluentui/react-components"
     let [<Literal>] FluentIcons = "@fluentui/react-icons"
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
+    let [<Literal>] CalendarCompat = "@fluentui/react-calendar-compat"
 
     // Preview components
     let [<Literal>] InfoButton_unstable = "@fluentui/react-infobutton"
@@ -294,8 +295,90 @@ type [<Erase>] Fui =
     /// **NOTE: If using conditional classNames, wrap the condition in parenthesis**.
     static member inline mergeClasses (v1: string, v2: string, v3: string, v4: string, v5: string, v6: string, v7: string, v8: string, v9: string, v10: string): string =
         JSTuple.from10Args (v1, v2, v3, v4, v5, v6, v7, v8, v9, v10) |> import "mergeClasses" FluentUIv9
-
-
+    /// Returns a date offset from the given date by the specified number of days.
+    /// date - The origin date
+    /// days - The number of days to offset. 'days' can be negative.
+    static member inline addDays (date: System.DateTime, days: int): System.DateTime = import "addDays" CalendarCompat
+    /// Returns a date offset from the given date by the specified number of months.
+    /// The method tries to preserve the day-of-month; however, if the new month does not have enough days to contain the original day-of-month, we'll use the last day of the new month.
+    /// date - The origin date
+    /// months - The number of months to offset. 'months' can be negative.
+    static member inline addMonths (date: System.DateTime, months: int): System.DateTime = import "addMonths" CalendarCompat
+    /// Returns a date offset from the given date by the specified number of weeks.
+    /// date - The origin date
+    /// weeks - The number of weeks to offset. 'weeks' can be negative.
+    static member inline addWeeks (date: System.DateTime, weeks: int): System.DateTime = import "addWeeks" CalendarCompat
+    /// Returns a date offset from the given date by the specified number of years.
+    /// The method tries to preserve the day-of-month; however, if the new month does not have enough days to contain the original day-of-month, we'll use the last day of the new month.
+    /// date - The origin date
+    /// years - The number of years to offset. 'years' can be negative.
+    static member inline addYears (date: System.DateTime, years: int): System.DateTime = import "addYears" CalendarCompat
+    /// Returns a date that is a copy of the given date, aside from the month changing to the given month.
+    /// The method tries to preserve the day-of-month; however, if the new month does not have enough days to contain the original day-of-month, we'll use the last day of the new month.
+    /// date - The origin date
+    /// month - The 0-based index of the month to set on the date.
+    static member inline setMonth (date: System.DateTime, month: int): System.DateTime = import "setMonth" CalendarCompat
+    /// Checks whether the specified date is in the given date range.
+    /// @param date - The origin date
+    /// @param dateRange - An array of dates to do the lookup on
+    static member inline isInDateRangeArray (date: System.DateTime, dateRange: System.DateTime array): bool = import "isInDateRangeArray" CalendarCompat
+    /// Returns a date that is the first day of the year of the provided date.
+    /// date - The origin date
+    static member inline getYearStart (date: System.DateTime): System.DateTime = import "getYearStart" CalendarCompat
+    /// Returns a date that is the last day of the year of the provided date.
+    /// date - The origin date
+    static member inline getYearEnd (date: System.DateTime): System.DateTime = import "getYearEnd" CalendarCompat
+    /// Returns the week number for a date. Week numbers are 1 - 52 (53) in a year
+    /// navigatedDate - A date to find the week number for.
+    /// firstDayOfWeek - The first day of the week (0-6, Sunday = 0)
+    /// firstWeekOfYear - The first week of the year (1-2)
+    static member inline getWeekNumbersInMonth (weeksInMonth: int, firstDayOfWeek: System.DayOfWeek, firstWeekOfYear: FirstWeekOfYear, navigatedDate: System.DateTime): int =
+        let firstWeekOfYear =
+            match firstWeekOfYear with
+            | FirstDay -> 0
+            | FirstFullWeek -> 1
+            | FirstFourDayWeek -> 2
+        (weeksInMonth, firstDayOfWeek, firstWeekOfYear, navigatedDate) |> JSTuple.from4Args |> import "getWeekNumbersInMonth" CalendarCompat
+    /// Returns the week number for a date. Week numbers are 1 - 52 (53) in a year
+    /// date - A date to find the week number for.
+    /// firstDayOfWeek - The first day of the week (0-6, Sunday = 0)
+    /// firstWeekOfYear - The first week of the year (1-2)
+    static member inline getWeekNumber (date: System.DateTime, firstDayOfWeek: System.DayOfWeek, firstWeekOfYear: FirstWeekOfYear): int =
+        let firstWeekOfYear =
+            match firstWeekOfYear with
+            | FirstDay -> 0
+            | FirstFullWeek -> 1
+            | FirstFourDayWeek -> 2
+        (date, firstDayOfWeek, firstWeekOfYear) |> JSTuple.from3Args |> import "getWeekNumber" CalendarCompat
+    /// Gets the date for the first day of the week based on the given date assuming the specified first day of the week.
+    /// date - The date to find the beginning of the week date for.
+    static member inline getStartDateOfWeek (date: System.DateTime, firstDayOfWeek: System.DayOfWeek): System.DateTime = import "getStartDateOfWeek" CalendarCompat
+    /// Returns a date that is the first day of the month of the provided date.
+    /// date - The origin date
+    static member inline getMonthStart (date: System.DateTime): System.DateTime = import "getMonthStart" CalendarCompat
+    /// Returns a date that is the last day of the month of the provided date.
+    /// date - The origin date
+    static member inline getMonthEnd (date: System.DateTime): System.DateTime = import "getMonthEnd" CalendarCompat
+    /// Gets the date for the last day of the week based on the given date assuming the specified first day of the week.
+    /// date - The date to find the beginning of the week date for.
+    static member inline getEndDateOfWeek (date: System.DateTime, firstDayOfWeek: System.DayOfWeek): System.DateTime = import "getEndDateOfWeek" CalendarCompat
+    /// Gets the date for the last day of the week based on the given date assuming the specified first day of the week.
+    /// date - The date to find the beginning of the week date for.
+    static member inline getDateRangeArray (date: System.DateTime, dateRangeType: DateRangeType, firstDayOfWeek: System.DayOfWeek, workWeekDays: System.DayOfWeek array, daysToSelectInDayView: int): System.DateTime array =
+        let dateRangeType =
+            match dateRangeType with
+            | Day -> 0
+            | Week -> 1
+            | Month -> 2
+            | WorkWeek -> 3
+        (date, dateRangeType, firstDayOfWeek, workWeekDays, daysToSelectInDayView) |> JSTuple.from5Args |> import "getDateRangeArray" CalendarCompat
+    /// Compares two dates, and returns true if the two dates (not accounting for time-of-day) are equal.
+    static member inline compareDates (date1: System.DateTime, date2: System.DateTime): bool = import "compareDates" CalendarCompat
+    /// Compare the date parts of two dates
+    /// date1 - The first date to compare
+    /// date2 - The second date to compare
+    /// Returns A negative value if date1 is earlier than date2, 0 if the dates are equal, or a positive value if date1 is later than date2.
+    static member inline compareDatePart (date1: System.DateTime, date2: System.DateTime): int = import "compareDatePart" CalendarCompat
 
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
@@ -657,6 +740,9 @@ type [<Erase>] Fui =
     static member inline messageBarActions (props: IMessageBarActionsProp list) = createElement (import "MessageBarActions" FluentUIv9) props
     static member inline messageBarGroup (props: IMessageBarGroupProp list) = createElement (import "MessageBarGroup" FluentUIv9) props
     static member inline messageBarGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "MessageBarGroup" FluentUIv9) props
+
+    // Calendar
+    static member inline calendar (props: ICalendarProp list) = createElement (import "Calendar" CalendarCompat) props
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 

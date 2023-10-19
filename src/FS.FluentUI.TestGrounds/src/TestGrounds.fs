@@ -1823,7 +1823,7 @@ let DatePickerTest() =
                         datePicker.onValidationResult (fun d -> setError d.error)
                         datePicker.calendar [
                             calendar.dateRangeType.workWeek
-                            calendar.workWeekDays [| DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday |]
+                            calendar.workWeekDays [ DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday ]
                             calendar.isMonthPickerVisible false
                             calendar.strings ({
                                 Fui.defaultDatePickerStrings with
@@ -3155,6 +3155,37 @@ let MergeClassesTest isYellow =
         ]
     ]
 
+[<ReactComponent>]
+let CalendarTest () =
+    let date, setDate = React.useState DateTime.Today
+    Fui.calendar [
+        calendar.showGoToToday true
+        calendar.onSelectDate (fun d _ -> setDate d)
+        calendar.value date
+        calendar.highlightSelectedMonth true
+        calendar.restrictedDates [ DateTime.Today; DateTime.Today.AddDays(1)]
+        calendar.strings ({ Fui.defaultDatePickerStrings with goToToday = "Pick Me!"})
+        calendar.calendarDayProps [
+            calendarDay.firstDayOfWeek.saturday
+            calendarDay.getMarkedDays (fun sd _ -> [|
+                    Fui.addDays(sd, 3)
+                    Fui.addDays(sd, 4)
+                |]
+            )
+            calendarDay.customDayCellRef (fun element dt classNames ->
+                match element with
+                | Some el ->
+                    el.title <- $"Custom title from customDayCellRef: {dt.ToString()}"
+                    // Disables Saturdays and Sundays
+                    if dt.DayOfWeek = DayOfWeek.Sunday || dt.DayOfWeek = DayOfWeek.Saturday then
+                        el.classList.add(classNames.dayOutsideBounds.Split(" "))
+                    else
+                        ()
+                | None -> ()
+            )
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3242,6 +3273,7 @@ let mainContent model dispatch =
             InteractionTagTest()
             Portal ()
             MessageBarTest()
+            CalendarTest()
         ]
     ]
 

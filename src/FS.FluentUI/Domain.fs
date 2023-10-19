@@ -591,6 +591,38 @@ type CalendarStrings = {
     shortDays: string array
 }
 
+type CalendarDayGridStyles = {
+    /// The style for the root div
+    wrapper: string
+    /// The style for the table containing the grid
+    table: string
+    /// The style to apply to the grid cells for days
+    dayCell: string
+    /// The style to apply to grid cells for days in the selected range
+    daySelected: string
+    /// The style to apply to row around weeks
+    weekRow: string
+    /// The style to apply to the column headers above the weeks
+    weekDayLabelCell: string
+    /// The style to apply to grid cells for week numbers
+    weekNumberCell: string
+    /// The style to apply to individual days that are outside the min/max date range
+    dayOutsideBounds: string
+    /// The style to apply to individual days that are outside the current month
+    dayOutsideNavigatedMonth: string
+    /// The style to apply to the button element within the day cells
+    dayButton: string
+    /// The style to apply to the individual button element that matches the "today" parameter
+    dayIsToday: string
+    /// The style applied to the first placeholder week used during transitions
+    firstTransitionWeek: string
+    /// The style applied to the last placeholder week used during transitions
+    lastTransitionWeek: string
+    /// The style applied to the marker on days to mark as important
+    dayMarker: string
+}
+
+type  FirstWeekOfYear = | FirstDay  | FirstFullWeek | FirstFourDayWeek
 // ----------------------------------------------------------------------------- Theme Types ---------------------------------------------------------------------------
 type [<AllowNullLiteral>] StylesClassMapping<'TStyleSet> = interface end
 
