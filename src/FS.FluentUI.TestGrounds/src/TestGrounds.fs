@@ -2363,15 +2363,10 @@ let DataGridTest () =
     let sortState, setSortState = React.useState ({ sortColumn = (Some "file"); sortDirection = SortDirection.ascending })
 
     let columnSizingOptions = [
-        "file", [
-            tableColumnSizingOptions.minWidth 110
-            tableColumnSizingOptions.defaultWidth 120
-        ]
-        "author", [
-            tableColumnSizingOptions.minWidth 120
-            tableColumnSizingOptions.defaultWidth 180
-            tableColumnSizingOptions.idealWidth 180
-        ]
+        tableColumnSizingOptions.staticColumnWidth ("file", 200)
+        tableColumnSizingOptions.staticColumnWidth ("lastUpdate", 120)
+        tableColumnSizingOptions.staticColumnWidth ("lastUpdated", 200)
+        tableColumnSizingOptions.staticColumnWidth ("author", 150)
     ]
 
     let columns = [

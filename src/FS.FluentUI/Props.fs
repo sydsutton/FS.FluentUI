@@ -5589,7 +5589,72 @@ type [<Erase>] tableColumnSizingOptions =
     static member inline defaultWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
     static member inline defaultWidth (value: float) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
     static member inline defaultWidth (value: decimal) = Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" value
-
+    /// Using this property is the same as setting the minWidth, defaultWidth, and idealWidth to all be the same number.
+    /// This is a custom helper property to make setting columns widths easier and more user friendly.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    ///
+    /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
+    static member inline staticColumnWidth (columnId: string, columnWidth: int) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" columnWidth
+        ]
+    /// Using this property is the same as setting the minWidth, defaultWidth, and idealWidth to all be the same number.
+    /// This is a custom helper property to make setting columns widths easier and more user friendly.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    ///
+    /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
+    static member inline staticColumnWidth (columnId: string, columnWidth: float) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" columnWidth
+        ]
+    /// Using this property is the same as setting the minWidth, defaultWidth, and idealWidth to all be the same number.
+    /// This is a custom helper property to make setting columns widths easier and more user friendly.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    ///
+    /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
+    static member inline staticColumnWidth (columnId: string, columnWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" columnWidth
+        ]
+    /// Used to set the minWidth, defaultWidth, and idealWidth of the specified column.
+    /// This is a custom helper property to make setting columns widths easier.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    static member inline resizeableColumnWidth (columnId: string, minWidth: int, defaultWidth: int, idealWidth: int) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" idealWidth
+        ]
+    /// Used to set the minWidth, defaultWidth, and idealWidth of the specified column.
+    /// This is a custom helper property to make setting columns widths easier.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    static member inline resizeableColumnWidth (columnId: string, minWidth: float, defaultWidth: float, idealWidth: float) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" idealWidth
+        ]
+    /// Used to set the minWidth, defaultWidth, and idealWidth of the specified column.
+    /// This is a custom helper property to make setting columns widths easier.
+    ///
+    /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
+    static member inline resizeableColumnWidth (columnId: string, minWidth: decimal, defaultWidth: decimal, idealWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+        columnId, [
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
+            Interop.mkProperty<ITableColumnSizingOptionsProp> "idealWidth" idealWidth
+        ]
 
 // -------------------------------------------------------------------------- IgnoreKeyDown --------------------------------------------------------------------------------------
 type [<Erase>] ignoreKeyDown =
