@@ -26,7 +26,6 @@ module FuiHelpers =
     let [<Literal>] CalendarCompat = "@fluentui/react-calendar-compat"
 
     // Preview components
-    let [<Literal>] InfoButton_unstable = "@fluentui/react-infobutton"
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
     let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
@@ -508,11 +507,11 @@ type [<Erase>] Fui =
     static member inline defaultDatePickerStrings : CalendarStrings = import "defaultDatePickerStrings" DatePickerCompat
     static member defaultDateFormatting : DateFormatting = DateFormat.default'
 
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline infoButton (props: IInfoButtonProp list) = createElement (import "InfoButton" InfoButton_unstable) props
+    /// As of 10/23/23, this component is not in Microsoft's documentation but is completely usable.
+    /// This could be used in place of an InfoLabel component where no label is needed?
+    static member inline infoButton (props: IInfoButtonProp list) = createElement (import "InfoButton" "@fluentui/react-infobutton") props
     /// An InfoLabel is a Label with an InfoButton at the end, properly handling layout and accessibility properties. It can be used as a drop-in replacement for Label when an InfoButton is also needed.
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline infoLabel (props: IInfoLabelProp list) = createElement (import "InfoLabel" InfoButton_unstable) props
+    static member inline infoLabel (props: IInfoLabelProp list) = createElement (import "InfoLabel" FluentUIv9) props
     /// An Alert displays a brief, important message to attract a user's attention without interrupting their current task.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
     static member inline alert (props: IAlertProp list) = createElement (import "Alert" Alert_unstable) props

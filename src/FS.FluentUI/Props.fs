@@ -3932,6 +3932,8 @@ type [<Erase>] infoButton =
     /// The Popover element that wraps the info and root slots. Use this slot to pass props to the Popover.
     static member inline popover (value: IPopoverProp list)= Interop.mkProperty<IInfoButtonProp> "popover" (!!value |> createObj |> unbox<IPopoverProp>)
     /// The information to be displayed in the PopoverSurface when the button is pressed.
+    static member inline info (value: string)= Interop.mkProperty<IInfoButtonProp> "info" value
+    /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: ReactElement)= Interop.mkProperty<IInfoButtonProp> "info" value
     /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: IPopoverSurfaceProp list)= Interop.mkProperty<IInfoButtonProp> "info" (!!value |> createObj |> unbox<IPopoverSurfaceProp>)
@@ -3967,6 +3969,8 @@ type [<Erase>] infoLabel =
     static member inline infoButton (value: IInfoButtonProp list)= Interop.mkProperty<IInfoLabelProp> "infoButton" (!!value |> createObj |> unbox<IInfoButtonProp>)
     /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: string)= Interop.mkProperty<IInfoLabelProp> "info" value
+    /// The information to be displayed in the PopoverSurface when the button is pressed.
+    static member inline info (value: ReactElement)= Interop.mkProperty<IInfoLabelProp> "info" value
     /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: IPopoverSurfaceProp list)= Interop.mkProperty<IInfoLabelProp> "info" (!!value |> createObj |> unbox<IPopoverSurfaceProp>)
 

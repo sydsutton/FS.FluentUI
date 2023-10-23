@@ -2017,10 +2017,6 @@ let InfoButtonTest() =
     Html.div [
         prop.ariaOwns (if isOpen then infobuttonInfoId else "")
         prop.children [
-            Fui.label [
-                label.size.large
-                label.text "This is a large infoButton"
-            ]
             Fui.infoButton [
                 infoButton.size.large
                 infoButton.info [
@@ -2028,7 +2024,7 @@ let InfoButtonTest() =
                     popoverSurface.text "This is example information for an InfoButton."
                 ]
                 infoButton.popover [
-                    popover.onOpenChange (fun (d: OpenProp) -> setIsOpen d.``open``)
+                    popover.onOpenChange (fun (d: OpenProp) -> printfn $"infoButton popover open? {d.``open``}"; setIsOpen d.``open``)
                 ]
             ]
         ]
@@ -2041,9 +2037,22 @@ let infoLabelTest =
             Fui.field [
                 field.label (
                     Fui.infoLabel [
-                        infoLabel.info "Example info"
+                        infoLabel.infoButton [
+                            infoButton.size.small
+                            infoButton.popover [
+                                popover.positioning [
+                                    positioning.offset [
+                                        offset.mainAxis 200
+                                    ]
+                                ]
+                            ]
+                        ]
                         infoLabel.text "Field with info label"
                         infoLabel.weight.semibold
+                        infoLabel.info [
+                            popoverSurface.text "This is info about something"
+                            popoverSurface.id "popoverSurfaceId"
+                        ]
                     ]
                 )
                 field.children (
