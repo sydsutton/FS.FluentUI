@@ -1,6 +1,14 @@
 Release Notes
 =========
 
+### 1.3.0 (10-23-2023)
+
+* Add Calendar component and properties
+* Add date/calendar functions (addDays, addWeeks, getWeekNumber, etc..)
+* Add custom `tableColumnSizingOptions` helper functions
+* Update @fluentui/react-components
+* Add @fluentui/react-calendar-compat
+
 ### 1.2.0 (10-18-2023)
 
 * Add MessageBar components and properties
