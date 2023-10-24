@@ -2369,7 +2369,7 @@ let items = [
 [<ReactComponent>]
 let DataGridTest () =
     let selectedRows, setSelectedRows = React.useState ([ ])
-    let sortState, setSortState = React.useState ({ sortColumn = (Some "file"); sortDirection = SortDirection.ascending })
+    let sortState, setSortState = React.useState((None, SortDirection.ascending))
 
     let columnSizingOptions = [
         tableColumnSizingOptions.staticColumnWidth ("file", 200)

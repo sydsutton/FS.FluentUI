@@ -3695,9 +3695,10 @@ type [<Erase>] dataGrid  =
     /// Enables column resizing
     static member inline resizableColumns (value: bool) = Interop.mkProperty<IDataGridProp> "resizableColumns" value
     /// Used to control sorting
-    static member inline sortState (value: SortState<'TKeyType>) = Interop.mkProperty<IDataGridProp> "sortState" value
+    // static member inline sortState (value: SortState<'TKeyType>) = Interop.mkProperty<IDataGridProp> "sortState" value
+    static member inline sortState (sortColumn: 'TKeyType option, sortDirection: SortDirection) = Interop.mkProperty<IDataGridProp> "sortState" {| sortColumn = sortColumn; sortDirection = sortDirection |}
     /// Used in uncontrolled mode to set initial sort column and direction on mount
-    static member inline defaultSortState (value: SortState<'TKeyType>) = Interop.mkProperty<IDataGridProp> "defaultSortState" value
+    static member inline defaultSortState (sortColumn: 'TKeyType option, sortDirection: SortDirection) = Interop.mkProperty<IDataGridProp> "defaultSortState" {| sortColumn = sortColumn; sortDirection = sortDirection |}
     /// Used in uncontrolled mode to set initial sort column and direction on mount
     static member inline defaultSelectedItems (value: list<string>) = Interop.mkProperty<IDataGridProp> "defaultSelectedItems" value
     /// Used in uncontrolled mode to set initial sort column and direction on mount
@@ -3714,8 +3715,12 @@ type [<Erase>] dataGrid  =
     static member inline selectedItems (value: list<decimal>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
     /// Used to control selected items
     static member inline selectedItems (value: list<float>) = Interop.mkProperty<IDataGridProp> "selectedItems" value
-    static member inline onSortChange (handler: SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    static member inline onSortChange (value: MouseEvent -> SortState<'TKeyType> -> unit) = Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> value)
+    static member inline onSortChange (handler: 'TKeyType option * SortDirection -> unit) =
+        let newValue = (fun _ (sortState: {| sortColumn: 'TKeyType option; sortDirection: SortDirection |}) -> (sortState.sortColumn, sortState.sortDirection) |> handler)
+        Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> newValue)
+    static member inline onSortChange (value: MouseEvent -> ('TKeyType option * SortDirection) -> unit) =
+        let newValue = (fun (ev: MouseEvent) (sortState: {| sortColumn: 'TKeyType option; sortDirection: SortDirection |}) -> (sortState.sortColumn, sortState.sortDirection) |> value ev)
+        Interop.mkProperty<IDataGridProp> "onSortChange" (System.Func<_,_,_> newValue)
     static member inline onSelectionChange (handler: OnSelectionChangeData<string> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun _ (value: TempSeq<string>) -> handler (TempSeq.mkOnChangeData value)))
     static member inline onSelectionChange (value: MouseEvent -> OnSelectionChangeData<string> -> unit) =
@@ -3741,7 +3746,7 @@ type [<Erase>] dataGrid  =
     static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<decimal> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<decimal>) -> (TempSeq.mkOnChangeData v) |> value e))
     /// Options for column resizing
-    static member inline columnSizingOptions (value: list<string * ITableColumnSizingOptionsProp list>) =
+    static member inline columnSizingOptions (value: list<'TKeyType * ITableColumnSizingOptionsProp list>) =
         let value =
             match value with
             | [] -> {||} |> unbox
@@ -3799,6 +3804,7 @@ module dataGrid =
     type [<Erase>] selectionMode =
         static member inline multiselect = Interop.mkProperty<IDataGridProp> "selectionMode" "multiselect"
         static member inline single = Interop.mkProperty<IDataGridProp> "selectionMode" "single"
+
 
 // -------------------------------------------------------------------------- DataGridHeader --------------------------------------------------------------------------------------
 type [<Erase>] dataGridHeader = FelizProps.prop<IDataGridHeaderProp>
@@ -5599,7 +5605,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: int) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: 'TKeyType, columnWidth: int) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5611,7 +5617,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: float) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: 'TKeyType, columnWidth: float) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5623,7 +5629,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: 'TKeyType, columnWidth: decimal) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5633,7 +5639,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: int, defaultWidth: int, idealWidth: int) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: 'TKeyType, minWidth: int, defaultWidth: int, idealWidth: int) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
@@ -5643,7 +5649,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: float, defaultWidth: float, idealWidth: float) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: 'TKeyType, minWidth: float, defaultWidth: float, idealWidth: float) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
@@ -5653,7 +5659,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: decimal, defaultWidth: decimal, idealWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: 'TKeyType, minWidth: decimal, defaultWidth: decimal, idealWidth: decimal) : 'TKeyType * ITableColumnSizingOptionsProp list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
