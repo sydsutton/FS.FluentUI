@@ -212,7 +212,7 @@ type PartitionAvatarGroupItems<'T> = {
     overflowItems: array<'T>
 }
 
-type [<RequireQualifiedAccess>] DialogChange = | ``escapeKeyDown`` | ``backdropClick`` | ``triggerClick``
+type [<RequireQualifiedAccess>] DialogChange = | escapeKeyDown | backdropClick | triggerClick
 
 type DialogOpenChangeEvent = | MouseEvent | KeyboardEvent
 
@@ -222,7 +222,7 @@ type DialogOpenChangeData = {
     event: DialogOpenChangeEvent
 }
 
-type [<RequireQualifiedAccess>] DialogTriggerAction = ``open`` | ``close``
+type [<RequireQualifiedAccess>] DialogTriggerAction = ``open`` | close
 
 
 type FocusProp = {
@@ -259,7 +259,7 @@ type MutableRefObject<'T> = {
     current: 'T
 }
 
-type [<RequireQualifiedAccess>] ScrollBehavior = ``auto`` | ``instant`` | ``smooth``
+type [<RequireQualifiedAccess>] ScrollBehavior = auto | instant | smooth
 
 type ScrollToInterface = {
     scrollTo: int -> ScrollBehavior -> (int -> unit) -> unit
@@ -267,7 +267,7 @@ type ScrollToInterface = {
     currentIndex: RefObject<int> option
 }
 
-type [<RequireQualifiedAccess>] AriaLivePoliteness = ``polite`` | ``assertive``
+type [<RequireQualifiedAccess>] AriaLivePoliteness = polite | assertive
 
 type AnnounceOptions = {
     politeness: AriaLivePoliteness
@@ -314,9 +314,9 @@ type TableColumnDefinition<'T, 'TKeyType> = {
 }
 
 
-type [<RequireQualifiedAccess>] DataGridFocusMode = ``none`` | ``cell`` | ``row_unstable`` | ``composite``
+type [<RequireQualifiedAccess>] DataGridFocusMode = none | cell | ``row_unstable`` | composite
 
-type [<RequireQualifiedAccess>] Appearance = ``brand`` | ``neutral`` | ``none``
+type [<RequireQualifiedAccess>] Appearance = brand | neutral | none
 
 type TableRowProps = {
     /// A table row can have different variants. These appearances are
@@ -360,11 +360,11 @@ type ToastOffset = {
 
 type [<RequireQualifiedAccess>] ToastPosition = ``top-end`` | ``top-start`` | ``bottom-end`` | ``bottom-start``
 
-type [<RequireQualifiedAccess>] ToastPoliteness = ``assertive`` | ``polite``
+type [<RequireQualifiedAccess>] ToastPoliteness = assertive | polite
 
-type [<RequireQualifiedAccess>] ToastIntent = ``info`` | ``success`` | ``error`` | ``warning``
+type [<RequireQualifiedAccess>] ToastIntent = info | success | error | warning
 
-type [<RequireQualifiedAccess>] ToastStatus = ``queued`` | ``visible`` | ``dismissed`` | ``unmounted``
+type [<RequireQualifiedAccess>] ToastStatus = queued | visible | dismissed | unmounted
 
 type DispatchToastOptions = {
     /// Uniquely identifies a toast, used for update and dismiss operations
@@ -504,11 +504,6 @@ type DatePickerErrorStrings = {
 }
 
 module DatePickerErrorStrings =
-    let default' = {
-        ``invalid-input`` = "Invalid date format"
-        ``out-of-bounds`` = "Date is out of bounds"
-        ``required-input``= "Field is required"
-    }
 
     let fromErrorTypeOption (error: DatePickerErrorType option) =
         match error with
