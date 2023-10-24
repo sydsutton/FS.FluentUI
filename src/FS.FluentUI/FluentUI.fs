@@ -10,9 +10,6 @@ module internal Shorthand =
 
     let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"
 
-module internal DateFormat =
-    let default': DateFormatting = import "DEFAULT_DATE_FORMATTING" "./DateFormatting.js"
-
 [<AutoOpen; System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)>]
 module FuiHelpers =
 
@@ -505,7 +502,7 @@ type [<Erase>] Fui =
     static member inline datePicker (props: IDatePickerProp list) = createElement (import "DatePicker" DatePickerCompat) props
 
     static member inline defaultDatePickerStrings : CalendarStrings = import "defaultDatePickerStrings" DatePickerCompat
-    static member defaultDateFormatting : DateFormatting = DateFormat.default'
+    static member defaultDateFormatting : DateFormatting = import "DEFAULT_DATE_FORMATTING" CalendarCompat
 
     /// As of 10/23/23, this component is not in Microsoft's documentation but is completely usable.
     /// This could be used in place of an InfoLabel component where no label is needed?
