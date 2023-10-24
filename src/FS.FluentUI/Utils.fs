@@ -2,7 +2,8 @@ namespace FS.FluentUI
 
 open Fable.Core
 
-type [<Erase>] IFluentProviderProp = interface end
+// not needed since there is IProp<fluentProvider>
+// type [<Erase>] IFluentProviderProp = interface end
 type [<Erase>] IAvatarProp = interface end
 type [<Erase>] IButtonProp = interface end
 type [<Erase>] IToggleButtonProp = interface end
@@ -190,6 +191,9 @@ type [<AllowNullLiteral; Erase>] ITheme = interface end
 
 type [<AllowNullLiteral; Erase>] BundleIcon = interface end
 
+[<Erase>]
+type IProp<'Control> = interface end
+
 [<RequireQualifiedAccess>]
 type Interop =
-    static member inline mkProperty<'ControlProperty> (key:string) (value:obj) : 'ControlProperty = unbox (key, value)
+    static member inline mkProperty<'Control> (key:string) (value:obj) : IProp<'Control> = unbox (key, value)

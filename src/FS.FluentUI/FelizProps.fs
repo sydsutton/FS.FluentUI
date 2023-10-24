@@ -1,4 +1,5 @@
-module FelizProps
+// extensions must be under main namespace to available for user by default
+namespace FS.FluentUI
 
 // this module contains prop type from https://github.com/Zaid-Ajaj/Feliz/blob/master/Feliz/Properties.fs
 // it has been modified to be restrictive to components
@@ -13,2006 +14,2011 @@ open FS.FluentUI
 
 /// Represents the native Html properties.
 [<Erase>]
-type prop<'Property> =
-    /// List of types the server accepts, typically a file type.
-    static member inline accept (value: string) = Interop.mkProperty<'Property> "accept" value
-
-    /// List of supported charsets.
-    static member inline acceptCharset (value: string) = Interop.mkProperty<'Property> "acceptCharset" value
-
-    /// Defines a keyboard shortcut to activate or add focus to the element.
-    static member inline accessKey (value: string) = Interop.mkProperty<'Property> "accessKey" value
-
-    /// The URI of a program that processes the information submitted via the form.
-    static member inline action (value: string) = Interop.mkProperty<'Property> "action" value
-
-    /// Alternative text in case an image can't be displayed.
-    static member inline alt (value: string) = Interop.mkProperty<'Property> "alt" value
-
-    /// Controls the amplitude of the gamma function of a component transfer element when
-    /// its type attribute is gamma.
-    static member inline amplitude (value: float) = Interop.mkProperty<'Property> "amplitude" value
-    /// Controls the amplitude of the gamma function of a component transfer element when
-    /// its type attribute is gamma.
-    static member inline amplitude (value: int) = Interop.mkProperty<'Property> "amplitude" value
-
-    /// Identifies the currently active descendant of a `composite` widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-activedescendant
-    static member inline ariaActiveDescendant (id: string) = Interop.mkProperty<'Property> "aria-activedescendant" id
-
-    /// Indicates whether assistive technologies will present all, or only parts
-    /// of, the changed region based on the change notifications defined by the
-    /// `aria-relevant` attribute.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-atomic
-    static member inline ariaAtomic (value: bool) = Interop.mkProperty<'Property> "aria-atomic" value
-
-    /// Indicates whether an element, and its subtree, are currently being
-    /// updated.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-busy
-    static member inline ariaBusy (value: bool) = Interop.mkProperty<'Property> "aria-busy" value
-
-    /// Indicates the current "checked" state of checkboxes, radio buttons, and
-    /// other widgets. See related `aria-pressed` and `aria-selected`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-checked
-    static member inline ariaChecked (value: bool) = Interop.mkProperty<'Property> "aria-checked" value
-
-    /// Identifies the element (or elements) whose contents or presence are
-    /// controlled by the current element. See related `aria-owns`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-controls
-    static member inline ariaControls ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-controls" (String.concat " " ids)
-
-    /// Specifies a URI referencing content that describes the object. See
-    /// related `aria-describedby`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-describedat
-    static member inline ariaDescribedAt (uri: string) = Interop.mkProperty<'Property> "aria-describedat" uri
-
-    /// Identifies the element (or elements) that describes the object. See
-    /// related `aria-describedat` and `aria-labelledby`.
-    ///
-    /// The `aria-labelledby` attribute is similar to `aria-describedby` in that
-    /// both reference other elements to calculate a text alternative, but a
-    /// label should be concise, where a description is intended to provide more
-    /// verbose information.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-describedby
-    static member inline ariaDescribedBy ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-describedby" (String.concat " " ids)
-
-    /// Indicates that the element is perceivable but disabled, so it is not
-    /// editable or otherwise operable. See related `aria-hidden` and
-    /// `aria-readonly`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-disabled
-    static member inline ariaDisabled (value: bool) = Interop.mkProperty<'Property> "aria-disabled" value
-
-    /// Indicates what functions can be performed when the dragged object is
-    /// released on the drop target. This allows assistive technologies to
-    /// convey the possible drag options available to users, including whether a
-    /// pop-up menu of choices is provided by the application. Typically, drop
-    /// effect functions can only be provided once an object has been grabbed
-    /// for a drag operation as the drop effect functions available are
-    /// dependent on the object being dragged.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-dropeffect
-    static member inline ariaDropEffect ([<System.ParamArray>] values: AriaDropEffect []) = Interop.mkProperty<'Property> "aria-dropeffect" (values |> unbox<string []> |> String.concat " ")
-
-    /// Indicates whether the element, or another grouping element it controls,
-    /// is currently expanded or collapsed.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-expanded
-    static member inline ariaExpanded (value: bool) = Interop.mkProperty<'Property> "aria-expanded" value
-
-    /// Identifies the next element (or elements) in an alternate reading order
-    /// of content which, at the user's discretion, allows assistive technology
-    /// to override the general default of reading in document source order.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-flowto
-    static member inline ariaFlowTo ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-flowto" (String.concat " " ids)
-
-    /// Indicates an element's "grabbed" state in a drag-and-drop operation.
-    ///
-    /// When it is set to true it has been selected for dragging, false
-    /// indicates that the element can be grabbed for a drag-and-drop operation,
-    /// but is not currently grabbed, and undefined (or no value) indicates the
-    /// element cannot be grabbed (default).
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-grabbed
-    static member inline ariaGrabbed (value: bool) = Interop.mkProperty<'Property> "aria-grabbed" value
-
-    /// Indicates that the element has a popup context menu or sub-level menu.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-haspopup
-    static member inline ariaHasPopup (value: bool) = Interop.mkProperty<'Property> "aria-haspopup" value
-
-    /// Indicates that the element and all of its descendants are not visible or
-    /// perceivable to any user as implemented by the author. See related
-    /// `aria-disabled`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-hidden
-    static member inline ariaHidden (value: bool) = Interop.mkProperty<'Property> "aria-hidden" value
-
-    /// Indicates the entered value does not conform to the format expected by
-    /// the application.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-invalid
-    static member inline ariaInvalid (value: bool) = Interop.mkProperty<'Property> "aria-invalid" value
-
-    /// Defines a string value that labels the current element. See related
-    /// `aria-labelledby`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-label
-    static member inline ariaLabel (value: string) = Interop.mkProperty<'Property> "aria-label" value
-
-    /// Defines the hierarchical level of an element within a structure.
-    ///
-    /// This can be applied inside trees to tree items, to headings inside a
-    /// document, to nested grids, nested tablists and to other structural items
-    /// that may appear inside a container or participate in an ownership
-    /// hierarchy. The value for `aria-level` is an integer greater than or
-    /// equal to 1.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-level
-    static member inline ariaLevel (value: int) = Interop.mkProperty<'Property> "aria-level" value
-
-    /// Identifies the element (or elements) that labels the current element.
-    /// See related `aria-label` and `aria-describedby`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-labelledby
-    static member inline ariaLabelledBy ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-labelledby" (String.concat " " ids)
-
-    /// Indicates whether a text box accepts multiple lines of input or only a
-    /// single line.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-multiline
-    static member inline ariaMultiLine (value: bool) = Interop.mkProperty<'Property> "aria-multiline" value
-
-    /// Indicates that the user may select more than one item from the current
-    /// selectable descendants.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-multiselectable
-    static member inline ariaMultiSelectable (value: bool) = Interop.mkProperty<'Property> "aria-multiselectable" value
-
-    /// Identifies an element (or elements) in order to define a visual,
-    /// functional, or contextual parent/child relationship between DOM elements
-    /// where the DOM hierarchy cannot be used to represent the relationship.
-    /// See related `aria-controls`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-owns
-    static member inline ariaOwns ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-owns" (String.concat " " ids)
-
-    /// Indicates the current "pressed" state of toggle buttons. See related
-    /// `aria-checked` and `aria-selected`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-pressed
-    static member inline ariaPressed (value: bool) = Interop.mkProperty<'Property> "aria-pressed" value
-
-    /// Defines an element's number or position in the current set of listitems
-    /// or treeitems. Not required if all elements in the set are present in the
-    /// DOM. See related `aria-setsize`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-posinset
-    static member inline ariaPosInSet (value: int) = Interop.mkProperty<'Property> "aria-posinset" value
-
-    /// Indicates that the element is not editable, but is otherwise operable.
-    /// See related `aria-disabled`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-readonly
-    static member inline ariaReadOnly (value: bool) = Interop.mkProperty<'Property> "aria-readonly" value
-
-    /// Indicates what user agent change notifications (additions, removals,
-    /// etc.) assistive technologies will receive within a live region. See
-    /// related `aria-atomic`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-relevant
-    static member inline ariaRelevant ([<System.ParamArray>] values: AriaRelevant []) = Interop.mkProperty<'Property> "aria-relevant" (values |> unbox<string []> |> String.concat " ")
-
-    /// Indicates that user input is required on the element before a form may
-    /// be submitted.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-required
-    static member inline ariaRequired (value: bool) = Interop.mkProperty<'Property> "aria-required" value
-
-    /// Indicates the current "selected" state of various widgets. See related
-    /// `aria-checked` and `aria-pressed`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-selected
-    static member inline ariaSelected (value: bool) = Interop.mkProperty<'Property> "aria-selected" value
-
-    /// Defines the maximum allowed value for a range widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemax
-    static member inline ariaValueMax (value: float) = Interop.mkProperty<'Property> "aria-valuemax" value
-    /// Defines the maximum allowed value for a range widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemax
-    static member inline ariaValueMax (value: int) = Interop.mkProperty<'Property> "aria-valuemax" value
-
-    /// Defines the minimum allowed value for a range widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemin
-    static member inline ariaValueMin (value: float) = Interop.mkProperty<'Property> "aria-valuemin" value
-    /// Defines the minimum allowed value for a range widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemin
-    static member inline ariaValueMin (value: int) = Interop.mkProperty<'Property> "aria-valuemin" value
-
-    /// Defines the current value for a range widget. See related
-    /// `aria-valuetext`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuenow
-    static member inline ariaValueNow (value: float) = Interop.mkProperty<'Property> "aria-valuenow" value
-    /// Defines the current value for a range widget. See related
-    /// `aria-valuetext`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuenow
-    static member inline ariaValueNow (value: int) = Interop.mkProperty<'Property> "aria-valuenow" value
-
-    /// Defines the human readable text alternative of `aria-valuenow` for a
-    /// range widget.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuetext
-    static member inline ariaValueText (value: string) = Interop.mkProperty<'Property> "aria-valuetext" value
-
-    /// Defines the number of items in the current set of listitems or
-    /// treeitems. Not required if all elements in the set are present in the
-    /// DOM. See related `aria-posinset`.
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-setsize
-    static member inline ariaSetSize (value: int) = Interop.mkProperty<'Property> "aria-setsize" value
-
-    /// Indicates that the script should be executed asynchronously.
-    static member inline async (value: bool) = Interop.mkProperty<'Property> "async" value
-
-    /// Indicates the name of the CSS property or attribute of the target element
-    /// that is going to be changed during an animation.
-    static member inline attributeName (value: string) = Interop.mkProperty<'Property> "attributeName" value
-
-    /// Indicates whether controls in this form can by default have their values
-    /// automatically completed by the browser.
-    static member inline autoComplete (value: string) = Interop.mkProperty<'Property> "autoComplete" value
-
-    /// The element should be automatically focused after the page loaded.
-    static member inline autoFocus (value: bool) = Interop.mkProperty<'Property> "autoFocus" value
-
-    /// The audio or video should play as soon as possible.
-    static member inline autoPlay (value: bool) = Interop.mkProperty<'Property> "autoPlay" value
-
-    /// Specifies the direction angle for the light source on the XY plane (clockwise),
-    /// in degrees from the x axis.
-    static member inline azimuth (value: float) = Interop.mkProperty<'Property> "azimuth" value
-    /// Specifies the direction angle for the light source on the XY plane (clockwise),
-    /// in degrees from the x axis.
-    static member inline azimuth (value: int) = Interop.mkProperty<'Property> "azimuth" value
-
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (value: float) = Interop.mkProperty<'Property> "baseFrequency" value
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (value: int) = Interop.mkProperty<'Property> "baseFrequency" value
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (horizontal: float, vertical: float) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (horizontal: float, vertical: int) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (horizontal: int, vertical: float) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
-    /// Represents the base frequency parameter for the noise function of the
-    /// <feTurbulence> filter primitive.
-    static member inline baseFrequency (horizontal: int, vertical: int) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
-
-    /// Defines when an animation should begin or when an element should be discarded.
-    static member inline begin' (value: string) = Interop.mkProperty<'Property> "begin" value
-
-    /// Shifts the range of the filter. After applying the kernelMatrix of the <feConvolveMatrix>
-    /// element to the input image to yield a number and applied the divisor attribute, the bias
-    /// attribute is added to each component. This allows representation of values that would
-    /// otherwise be clamped to 0 or 1.
-    static member inline bias (value: float) = Interop.mkProperty<'Property> "bias" value
-    /// Shifts the range of the filter. After applying the kernelMatrix of the <feConvolveMatrix>
-    /// element to the input image to yield a number and applied the divisor attribute, the bias
-    /// attribute is added to each component. This allows representation of values that would
-    /// otherwise be clamped to 0 or 1.
-    static member inline bias (value: int) = Interop.mkProperty<'Property> "bias" value
-
-    /// Specifies a relative offset value for an attribute that will be modified during an animation.
-    static member inline by (value: float) = Interop.mkProperty<'Property> "by" value
-    /// Specifies a relative offset value for an attribute that will be modified during an animation.
-    static member inline by (value: int) = Interop.mkProperty<'Property> "by" value
-    /// Specifies a relative offset value for an attribute that will be modified during an animation.
-    static member inline by (value: string) = Interop.mkProperty<'Property> "by" value
-
-    static member inline capture (value: bool) = Interop.mkProperty<'Property> "capture" value
-
-    /// This attribute declares the document's character encoding. Must be used in the meta tag.
-    static member inline charset (value: string) = Interop.mkProperty<'Property> "charSet" value
-
-    /// Children of this React element.
-    static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<'Property> "children" value
-    /// Children of this React element.
-    static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray (Array.ofSeq elems))
-
-    /// A URL that designates a source document or message for the information quoted. This attribute is intended to
-    /// point to information explaining the context or the reference for the quote.
-    static member inline cite (value: string) = Interop.mkProperty<'Property> "cite" value
-
-    /// Specifies a CSS class for this element.
-    static member inline className (value: string) = Interop.mkProperty<'Property> "className" value
-    /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
-    ///
-    /// `prop.className [ "one"; "two" ]`
-    ///
-    /// is the same as
-    ///
-    /// `prop.className "one two"`
-    static member inline className (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
-
-    /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
-    ///
-    /// `prop.classes [ "one"; "two" ]` => `prop.className "one two"`
-    static member inline classes (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
-
-    /// Defines the number of columns in a textarea.
-    static member inline cols (value: int) = Interop.mkProperty<'Property> "cols" value
-
-    /// Defines the number of columns a cell should span.
-    static member inline colSpan (value: int) = Interop.mkProperty<'Property> "colSpan" value
-
-    /// A value associated with http-equiv or name depending on the context.
-    static member inline content (value: string) = Interop.mkProperty<'Property> "content" value
-
-    /// Indicates whether the element's content is editable.
-    static member inline contentEditable (value: bool) = Interop.mkProperty<'Property> "contentEditable" value
-
-    /// If true, the browser will offer controls to allow the user to control video playback,
-    /// including volume, seeking, and pause/resume playback.
-    static member inline controls (value: bool) = Interop.mkProperty<'Property> "controls" value
-
-    /// Create a custom prop
-    ///
-    /// You generally shouldn't need to use this, if you notice a core React/Html attribute missing please submit an issue.
-    static member inline custom (key: string, value: 't) = Interop.mkProperty<'Property> key value
-
-    /// The SVG cx attribute define the x-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cx (value: float) = Interop.mkProperty<'Property> "cx" value
-    /// The SVG cx attribute define the x-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cx (value: ICssUnit) = Interop.mkProperty<'Property> "cx" value
-    /// The SVG cx attribute define the x-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cx (value: int) = Interop.mkProperty<'Property> "cx" value
-
-    /// The SVG cy attribute define the y-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cy (value: float) = Interop.mkProperty<'Property> "cy" value
-    /// The SVG cy attribute define the y-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cy (value: ICssUnit) = Interop.mkProperty<'Property> "cy" value
-    /// The SVG cy attribute define the y-axis coordinate of a center point.
-    ///
-    /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
-    static member inline cy (value: int) = Interop.mkProperty<'Property> "cy" value
-
-    /// Defines a SVG path to be drawn.
-    static member inline d (path: seq<char * (float list list)>) =
-        PropHelpers.createSvgPathFloat path
-        |> Interop.mkProperty<'Property> "d"
-    /// Defines a SVG path to be drawn.
-    static member inline d (path: seq<char * (int list list)>) =
-        PropHelpers.createSvgPathInt path
-        |> Interop.mkProperty<'Property> "d"
-    /// Defines a SVG path to be drawn.
-    static member inline d (path: string) = Interop.mkProperty<'Property> "d" path
-
-    /// Sets the inner Html content of the element.
-    static member inline dangerouslySetInnerHTML (content: string) = Interop.mkProperty<'Property> "dangerouslySetInnerHTML" (createObj [ "__html" ==> content ])
-
-    /// This attribute indicates the time and/or date of the element.
-    static member inline dateTime (value: string) = Interop.mkProperty<'Property> "dateTime" value
-
-    /// Sets the DOM defaultChecked value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultChecked (value: bool) = Interop.mkProperty<'Property> "defaultChecked" value
-
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: bool) = Interop.mkProperty<'Property> "defaultValue" value
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: float) = Interop.mkProperty<'Property> "defaultValue" value
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: int) = Interop.mkProperty<'Property> "defaultValue" value
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: string) = Interop.mkProperty<'Property> "defaultValue" value
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: seq<float>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: seq<int>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
-    /// Sets the DOM defaultValue value when initially rendered.
-    ///
-    /// Typically only used with uncontrolled components.
-    static member inline defaultValue (value: seq<string>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
-
-    /// Indicates to a browser that the script is meant to be executed after the document
-    /// has been parsed, but before firing DOMContentLoaded.
-    ///
-    /// Scripts with the defer attribute will prevent the DOMContentLoaded event from
-    /// firing until the script has loaded and finished evaluating.
-    ///
-    /// This attribute must not be used if the src attribute is absent (i.e. for inline scripts),
-    /// in this case it would have no effect.
-    static member inline defer (value: bool) = Interop.mkProperty<'Property> "defer" value
-
-    /// Represents the kd value in the Phong lighting model.
-    ///
-    /// In SVG, this can be any non-negative number.
-    static member inline diffuseConstant (value: float) = Interop.mkProperty<'Property> "diffuseConstant" value
-    /// Represents the kd value in the Phong lighting model.
-    ///
-    /// In SVG, this can be any non-negative number.
-    static member inline diffuseConstant (value: int) = Interop.mkProperty<'Property> "diffuseConstant" value
-
-    /// Sets the directionality of the element.
-    static member inline dirName (value: string) = Interop.mkProperty<'Property> "dirName" value
-
-    /// Indicates whether the user can interact with the element.
-    static member inline disabled (value: bool) = Interop.mkProperty<'Property> "disabled" value
-
-    /// Specifies the value by which the resulting number of applying the kernelMatrix
-    /// of a <feConvolveMatrix> element to the input image color value is divided to
-    /// yield the destination color value.
-    ///
-    /// A divisor that is the sum of all the matrix values tends to have an evening
-    /// effect on the overall color intensity of the result.
-    static member inline divisor (value: float) = Interop.mkProperty<'Property> "divisor" value
-    /// Specifies the value by which the resulting number of applying the kernelMatrix
-    /// of a <feConvolveMatrix> element to the input image color value is divided to
-    /// yield the destination color value.
-    ///
-    /// A divisor that is the sum of all the matrix values tends to have an evening
-    /// effect on the overall color intensity of the result.
-    static member inline divisor (value: int) = Interop.mkProperty<'Property> "divisor" value
-
-    /// This attribute, if present, indicates that the author intends the hyperlink to be used for downloading a resource.
-    static member inline download (value: bool) = Interop.mkProperty<'Property> "download" value
-
-    /// This attribute, if present, indicates that the author intends the hyperlink to be used for downloading a resource.
-    /// The value specifies the default file name for use in labeling the resource in a local file system.
-    static member inline download (value: string) = Interop.mkProperty<'Property> "download" value
-
-    /// Indicates whether the the element can be dragged.
-    static member inline draggable (value: bool) = Interop.mkProperty<'Property> "draggable" value
-
-    /// SVG attribute to indicate a shift along the x-axis on the position of an element or its content.
-    static member inline dx (value: float) = Interop.mkProperty<'Property> "dx" value
-    /// SVG attribute to indicate a shift along the x-axis on the position of an element or its content.
-    static member inline dx (value: int) = Interop.mkProperty<'Property> "dx" value
-
-    /// SVG attribute to indicate a shift along the y-axis on the position of an element or its content.
-    static member inline dy (value: float) = Interop.mkProperty<'Property> "dy" value
-    /// SVG attribute to indicate a shift along the y-axis on the position of an element or its content.
-    static member inline dy (value: int) = Interop.mkProperty<'Property> "dy" value
-
-    /// SVG attribute that specifies the direction angle for the light source from the XY plane towards
-    /// the Z-axis, in degrees.
-    ///
-    /// Note that the positive Z-axis points towards the viewer of the content.
-    static member inline elevation (value: float) = Interop.mkProperty<'Property> "elevation" value
-    /// SVG attribute that specifies the direction angle for the light source from the XY plane towards
-    /// the Z-axis, in degrees.
-    ///
-    /// Note that the positive Z-axis points towards the viewer of the content.
-    static member inline elevation (value: int) = Interop.mkProperty<'Property> "elevation" value
-
-    /// Defines an end value for the animation that can constrain the active duration.
-    static member inline end' (value: string) = Interop.mkProperty<'Property> "end" value
-    /// Defines an end value for the animation that can constrain the active duration.
-    static member inline end' (values: seq<string>) = Interop.mkProperty<'Property> "end" (String.concat ";" values)
-
-    /// Defines the exponent of the gamma function.
-    static member inline exponent (value: float) = Interop.mkProperty<'Property> "exponent" value
-    /// Defines the exponent of the gamma function.
-    static member inline exponent (value: int) = Interop.mkProperty<'Property> "exponent" value
-
-    /// Defines the files that will be uploaded when using an input element of the file type.
-    static member inline files (value: FileList) = Interop.mkProperty<'Property> "files" value
-
-    /// SVG attribute to define the opacity of the paint server (color, gradient, pattern, etc) applied to a shape.
-    static member inline fillOpacity (value: float) = Interop.mkProperty<'Property> "fillOpacity" value
-    /// SVG attribute to define the opacity of the paint server (color, gradient, pattern, etc) applied to a shape.
-    static member inline fillOpacity (value: int) = Interop.mkProperty<'Property> "fillOpacity" value
-
-    /// SVG attribute to define the size of the font from baseline to baseline when multiple
-    /// lines of text are set solid in a multiline layout environment.
-    static member inline fontSize (value: float) = Interop.mkProperty<'Property> "fontSize" value
-    /// SVG attribute to define the size of the font from baseline to baseline when multiple
-    /// lines of text are set solid in a multiline layout environment.
-    static member inline fontSize (value: int) = Interop.mkProperty<'Property> "fontSize" value
-
-    /// A space-separated list of other elements’ ids, indicating that those elements contributed input
-    /// values to (or otherwise affected) the calculation.
-    static member inline for' (value: string) = Interop.mkProperty<'Property> "for" value
-    /// A space-separated list of other elements’ ids, indicating that those elements contributed input
-    /// values to (or otherwise affected) the calculation.
-    static member inline for' (ids: #seq<string>) = Interop.mkProperty<'Property> "for" (ids |> String.concat " ")
-
-    /// The <form> element to associate the <meter> element with (its form owner). The value of this
-    /// attribute must be the id of a <form> in the same document. If this attribute is not set, the
-    /// <button> is associated with its ancestor <form> element, if any. This attribute is only used
-    /// if the <meter> element is being used as a form-associated element, such as one displaying a
-    /// range corresponding to an <input type="number">.
-    static member inline form (value: string) = Interop.mkProperty<'Property> "form" value
-
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (value: float) = Interop.mkProperty<'Property> "from" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (values: seq<float>) = Interop.mkProperty<'Property> "from" (values |> unbox<seq<string>> |> String.concat " ")
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (value: int) = Interop.mkProperty<'Property> "from" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (values: seq<int>) = Interop.mkProperty<'Property> "from" (values |> unbox<seq<string>> |> String.concat " ")
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (value: string) = Interop.mkProperty<'Property> "from" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline from (values: seq<string>) = Interop.mkProperty<'Property> "from" (values |> String.concat " ")
-
-    /// Defines the radius of the focal point for the radial gradient.
-    static member inline fr (value: float) = Interop.mkProperty<'Property> "fr" value
-    /// Defines the radius of the focal point for the radial gradient.
-    static member inline fr (value: int) = Interop.mkProperty<'Property> "fr" value
-    /// Defines the radius of the focal point for the radial gradient.
-    static member inline fr (value: ICssUnit) = Interop.mkProperty<'Property> "fr" value
-
-    /// Defines the x-axis coordinate of the focal point for a radial gradient.
-    static member inline fx (value: float) = Interop.mkProperty<'Property> "fx" value
-    /// Defines the x-axis coordinate of the focal point for a radial gradient.
-    static member inline fx (value: int) = Interop.mkProperty<'Property> "fx" value
-    /// Defines the x-axis coordinate of the focal point for a radial gradient.
-    static member inline fx (value: ICssUnit) = Interop.mkProperty<'Property> "fx" value
-
-    /// Defines the y-axis coordinate of the focal point for a radial gradient.
-    static member inline fy (value: float) = Interop.mkProperty<'Property> "fy" value
-    /// Defines the y-axis coordinate of the focal point for a radial gradient.
-    static member inline fy (value: int) = Interop.mkProperty<'Property> "fy" value
-    /// Defines the y-axis coordinate of the focal point for a radial gradient.
-    static member inline fy (value: ICssUnit) = Interop.mkProperty<'Property> "fy" value
-
-    /// Defines an optional additional transformation from the gradient coordinate system
-    /// onto the target coordinate system (i.e., userSpaceOnUse or objectBoundingBox).
-    ///
-    /// This allows for things such as skewing the gradient. This additional transformation
-    /// matrix is post-multiplied to (i.e., inserted to the right of) any previously defined
-    /// transformations, including the implicit transformation necessary to convert from object
-    /// bounding box units to user space.
-    static member inline gradientTransform (transform: ITransformProperty) =
-        Interop.mkProperty<'Property> "gradientTransform" (unbox<string> transform)
-    /// Defines optional additional transformation(s) from the gradient coordinate system
-    /// onto the target coordinate system (i.e., userSpaceOnUse or objectBoundingBox).
-    ///
-    /// This allows for things such as skewing the gradient. This additional transformation
-    /// matrix is post-multiplied to (i.e., inserted to the right of) any previously defined
-    /// transformations, including the implicit transformation necessary to convert from object
-    /// bounding box units to user space.
-    static member inline gradientTransform (transforms: seq<ITransformProperty>) =
-        Interop.mkProperty<'Property> "gradientTransform" (unbox<seq<string>> transforms |> String.concat " ")
-
-    /// Prevents rendering of given element, while keeping child elements, e.g. script elements, active.
-    static member inline hidden (value: bool) = Interop.mkProperty<'Property> "hidden" value
-
-    /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline height (value: float) = Interop.mkProperty<'Property> "height" value
-    /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline height (value: ICssUnit) = Interop.mkProperty<'Property> "height" value
-    /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline height (value: int) = Interop.mkProperty<'Property> "height" value
-
-    /// The lower numeric bound of the high end of the measured range. This must be less than the
-    /// maximum value (max attribute), and it also must be greater than the low value and minimum
-    /// value (low attribute and min attribute, respectively), if any are specified. If unspecified,
-    /// or if greater than the maximum value, the high value is equal to the maximum value.
-    static member inline high (value: float) = Interop.mkProperty<'Property> "high" value
-    /// The lower numeric bound of the high end of the measured range. This must be less than the
-    /// maximum value (max attribute), and it also must be greater than the low value and minimum
-    /// value (low attribute and min attribute, respectively), if any are specified. If unspecified,
-    /// or if greater than the maximum value, the high value is equal to the maximum value.
-    static member inline high (value: int) = Interop.mkProperty<'Property> "high" value
-
-    /// The URL of a linked resource.
-    static member inline href (value: string) = Interop.mkProperty<'Property> "href" value
-
-    /// Indicates the language of the linked resource. Allowed values are determined by BCP47.
-    ///
-    /// Use this attribute only if the href attribute is present.
-    static member inline hrefLang (value: string) = Interop.mkProperty<'Property> "hreflang" value
-
-    static member inline htmlFor (value: string) = Interop.mkProperty<'Property> "htmlFor" value
-
-    /// Often used with CSS to style a specific element. The value of this attribute must be unique.
-    static member inline id (value: int) = Interop.mkProperty<'Property> "id" (unbox<string> value)
-    /// Often used with CSS to style a specific element. The value of this attribute must be unique.
-    static member inline id (value: string) = Interop.mkProperty<'Property> "id" value
-
-    /// Alias for `dangerouslySetInnerHTML`, sets the inner Html content of the element.
-    static member inline innerHtml (content: string) = Interop.mkProperty<'Property> "dangerouslySetInnerHTML" (createObj [ "__html" ==> content ])
-
-    /// Contains inline metadata that a user agent can use to verify that a fetched resource
-    /// has been delivered free of unexpected manipulation.
-    static member inline integrity (value: string) = Interop.mkProperty<'Property> "integrity" value
-
-    /// Defines the intercept of the linear function of color component transfers when the type
-    /// attribute is set to linear.
-    static member inline intercept (value: float) = Interop.mkProperty<'Property> "intercept" value
-    /// Defines the intercept of the linear function of color component transfers when the type
-    /// attribute is set to linear.
-    static member inline intercept (value: int) = Interop.mkProperty<'Property> "intercept" value
-
-    /// Sets the checked attribute for an element.
-    static member inline isChecked (value: bool) = Interop.mkProperty<'Property> "checked" value
-
-    /// Sets the open attribute for an element.
-    static member inline isOpen (value: bool) = Interop.mkProperty<'Property> "open" value
-
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k1 (value: float) = Interop.mkProperty<'Property> "k1" value
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k1 (value: int) = Interop.mkProperty<'Property> "k1" value
-
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k2 (value: float) = Interop.mkProperty<'Property> "k2" value
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k2 (value: int) = Interop.mkProperty<'Property> "k2" value
-
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k3 (value: float) = Interop.mkProperty<'Property> "k3" value
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k3 (value: int) = Interop.mkProperty<'Property> "k3" value
-
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k4 (value: float) = Interop.mkProperty<'Property> "k4" value
-    /// Defines one of the values to be used within the the arithmetic operation of the
-    /// <feComposite> filter primitive.
-    static member inline k4 (value: int) = Interop.mkProperty<'Property> "k4" value
-
-    /// Defines the list of numbers that make up the kernel matrix for the
-    /// <feConvolveMatrix> element.
-    static member inline kernelMatrix (values: seq<float>) = Interop.mkProperty<'Property> "kernelMatrix" (values |> unbox<seq<string>> |> String.concat " ")
-    /// Defines the list of numbers that make up the kernel matrix for the
-    /// <feConvolveMatrix> element.
-    static member inline kernelMatrix (values: seq<int>) = Interop.mkProperty<'Property> "kernelMatrix" (values |> unbox<seq<string>>  |> String.concat " ")
-
-    /// A special string attribute you need to include when creating arrays of elements.
-    /// Keys help React identify which items have changed, are added, or are removed.
-    /// Keys should be given to the elements inside an array to give the elements a stable identity.
-    ///
-    /// Keys only need to be unique among sibling elements in the same array. They don’t need to
-    /// be unique across the whole application or even a single component.
-    static member inline key (value: System.Guid) = Interop.mkProperty<'Property> "key" (unbox<string> value)
-    /// A special string attribute you need to include when creating arrays of elements. Keys help
-    /// React identify which items have changed, are added, or are removed. Keys should be given
-    /// to the elements inside an array to give the elements a stable identity.
-    ///
-    /// Keys only need to be unique among sibling elements in the same array. They don’t need to
-    /// be unique across the whole application or even a single component.
-    static member inline key (value: int) = Interop.mkProperty<'Property> "key" value
-    /// A special string attribute you need to include when creating arrays of elements. Keys
-    /// help React identify which
-    /// items have changed, are added, or are removed. Keys should be given to the elements
-    /// inside an array to give the elements a stable identity.
-    ///
-    /// Keys only need to be unique among sibling elements in the same array. They don’t need to
-    /// be unique across the whole application or even a single component.
-    static member inline key (value: string) = Interop.mkProperty<'Property> "key" value
-
-    /// Indicates the simple duration of an animation.
-    static member inline keyPoints (values: seq<float>) =
-        Interop.mkProperty<'Property> "keyPoints" (values |> unbox<seq<string>>  |> String.concat ";")
-
-    /// Indicates the simple duration of an animation.
-    ///
-    /// Each control point description is a set of four values: x1 y1 x2 y2, describing the Bézier
-    /// control points for one time segment.
-    ///
-    /// The keyTimes values that define the associated segment are the Bézier "anchor points",
-    /// and the keySplines values are the control points. Thus, there must be one fewer sets of
-    /// control points than there are keyTimes.
-    ///
-    /// The values of x1 y1 x2 y2 must all be in the range 0 to 1.
-    static member inline keySplines (values: seq<float * float * float * float>) =
-        PropHelpers.createKeySplines(values)
-        |> Interop.mkProperty<'Property> "keySplines"
-
-    /// Indicates the simple duration of an animation.
-    static member inline keyTimes (values: seq<float>) =
-        Interop.mkProperty<'Property> "keyTimes" (values |> unbox<seq<string>> |> String.concat ";")
-
-    /// Helps define the language of an element: the language that non-editable elements are
-    /// written in, or the language that the editable elements should be written in by the user.
-    static member inline lang (value: string) = Interop.mkProperty<'Property> "lang" value
-    /// Specifies a user-readable title of the element.
-    static member inline label (value: string) = Interop.mkProperty<'Property> "label" value
-    /// Defines the color of the light source for lighting filter primitives.
-    static member inline lightingColor (value: string) = Interop.mkProperty<'Property> "lighting-color" value
-
-    /// Represents the angle in degrees between the spot light axis (i.e. the axis between the
-    /// light source and the point to which it is pointing at) and the spot light cone. So it
-    /// defines a limiting cone which restricts the region where the light is projected.
-    ///
-    /// No light is projected outside the cone.
-    static member inline limitingConeAngle (value: float) = Interop.mkProperty<'Property> "limitingConeAngle" value
-    /// Represents the angle in degrees between the spot light axis (i.e. the axis between the
-    /// light source and the point to which it is pointing at) and the spot light cone. So it
-    /// defines a limiting cone which restricts the region where the light is projected.
-    ///
-    /// No light is projected outside the cone.
-    static member inline limitingConeAngle (value: int) = Interop.mkProperty<'Property> "limitingConeAngle" value
-
-    /// Value of the id attribute of the <c>datalist</c> of autocomplete options
-    static member inline list (value : string) = Interop.mkProperty<'Property> "list" value
-
-    /// If true, the browser will automatically seek back to the start upon reaching the end of the video.
-    static member inline loop (value: bool) = Interop.mkProperty<'Property> "loop" value
-
-    /// The upper numeric bound of the low end of the measured range. This must be greater than
-    /// the minimum value (min attribute), and it also must be less than the high value and
-    /// maximum value (high attribute and max attribute, respectively), if any are specified.
-    /// If unspecified, or if less than the minimum value, the low value is equal to the minimum value.
-    static member inline low (value: float) = Interop.mkProperty<'Property> "low" value
-    /// The upper numeric bound of the low end of the measured range. This must be greater than
-    /// the minimum value (min attribute), and it also must be less than the high value and
-    /// maximum value (high attribute and max attribute, respectively), if any are specified.
-    /// If unspecified, or if less than the minimum value, the low value is equal to the minimum value.
-    static member inline low (value: int) = Interop.mkProperty<'Property> "low" value
-    /// Indicates the maximum value allowed.
-    static member inline max (value: float) = Interop.mkProperty<'Property> "max" value
-    /// Indicates the maximum value allowed.
-    static member inline max (value: int) = Interop.mkProperty<'Property> "max" value
-    /// Indicates the maximum value allowed.
-    static member inline max (value: DateTime) = Interop.mkProperty<'Property> "max" (value.ToString("yyyy-MM-dd"))
-
-    /// Defines the maximum number of characters allowed in the element.
-    static member inline maxLength (value: int) = Interop.mkProperty<'Property> "maxLength" value
-
-    /// This attribute specifies the media that the linked resource applies to.
-    /// Its value must be a media type / media query. This attribute is mainly useful
-    /// when linking to external stylesheets — it allows the user agent to pick the
-    /// best adapted one for the device it runs on.
-    ///
-    /// In HTML 4, this can only be a simple white-space-separated list of media
-    /// description literals, i.e., media types and groups, where defined and allowed
-    /// as values for this attribute, such as print, screen, aural, braille. HTML5
-    /// extended this to any kind of media queries, which are a superset of the allowed
-    /// values of HTML 4.
-    ///
-    /// Browsers not supporting CSS3 Media Queries won't necessarily recognize the adequate
-    /// link; do not forget to set fallback links, the restricted set of media queries
-    /// defined in HTML 4.
-    static member inline media (value: string) = Interop.mkProperty<'Property> "media" value
-
-    /// Defines which HTTP method to use when submitting the form. Can be GET (default) or POST.
-    static member inline method (value: string) = Interop.mkProperty<'Property> "method" value
-
-    /// Indicates the minimum value allowed.
-    static member inline min (value: float) = Interop.mkProperty<'Property> "min" value
-    /// Indicates the minimum value allowed.
-    static member inline min (value: int) = Interop.mkProperty<'Property> "min" value
-    /// Indicates the minimum value allowed.
-    static member inline min (value: DateTime) = Interop.mkProperty<'Property> "min" (value.ToString("yyyy-MM-dd"))
-
-    /// Defines the minimum number of characters allowed in the element.
-    static member inline minLength (value: int) = Interop.mkProperty<'Property> "minLength" value
-
-    /// Indicates whether multiple values can be entered in an input of the type email or file.
-    static member inline multiple (value: bool) = Interop.mkProperty<'Property> "multiple" value
-
-    /// Indicates whether the audio will be initially silenced on page load.
-    static member inline muted (value: bool) = Interop.mkProperty<'Property> "muted" value
-
-    /// Name of the element.
-    ///
-    /// For example used by the server to identify the fields in form submits.
-    static member inline name (value: string) = Interop.mkProperty<'Property> "name" value
-
-    /// This Boolean attribute is set to indicate that the script should not be executed in
-    /// browsers that support ES2015 modules — in effect, this can be used to serve fallback
-    /// scripts to older browsers that do not support modular JavaScript code.
-    static member inline nomodule (value: bool) = Interop.mkProperty<'Property> "nomodule" value
-
-    /// A cryptographic nonce (number used once) to whitelist scripts in a script-src
-    /// Content-Security-Policy. The server must generate a unique nonce value each time
-    /// it transmits a policy. It is critical to provide a nonce that cannot be guessed
-    /// as bypassing a resource's policy is otherwise trivial.
-    static member inline nonce (value: string) = Interop.mkProperty<'Property> "nonce" value
-
-    /// Defines the number of octaves for the noise function of the <feTurbulence> primitive.
-    static member inline numOctaves (value: int) = Interop.mkProperty<'Property> "numOctaves" value
-
-    /// SVG attribute to define where the gradient color will begin or end.
-    static member inline offset (value: float) = Interop.mkProperty<'Property> "offset" value
-    /// SVG attribute to define where the gradient color will begin or end.
-    static member inline offset (value: ICssUnit) = Interop.mkProperty<'Property> "offset" value
-    /// SVG attribute to define where the gradient color will begin or end.
-    static member inline offset (value: int) = Interop.mkProperty<'Property> "offset" value
-
-    /// Fires when a media event is aborted.
-    static member inline onAbort (handler: Event -> unit) = Interop.mkProperty<'Property> "onAbort" handler
-
-    /// Fires when animation is aborted.
-    static member inline onAnimationCancel (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationCancel" handler
-
-    /// Fires when animation ends.
-    static member inline onAnimationEnd (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationEnd" handler
-
-    /// Fires when animation iterates.
-    static member inline onAnimationIteration (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationIteration" handler
-
-    /// Fires when animation starts.
-    static member inline onAnimationStart (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationStart" handler
-
-    /// Fires the moment that the element loses focus.
-    static member inline onBlur (handler: FocusEvent -> unit) = Interop.mkProperty<'Property> "onBlur" handler
-
-    /// Fires when a user dismisses the current open dialog
-    static member inline onCancel (handler: Event -> unit) = Interop.mkProperty<'Property> "onCancel" handler
-
-    /// Fires when a file is ready to start playing (when it has buffered enough to begin).
-    static member inline onCanPlay (handler: Event -> unit) = Interop.mkProperty<'Property> "onCanPlay" handler
-
-    /// Fires when a file can be played all the way to the end without pausing for buffering
-    static member inline onCanPlayThrough (handler: Event -> unit) = Interop.mkProperty<'Property> "onCanPlayThrough" handler
-
-    /// Same as `onChange` that takes an event as input but instead let's you deal with the `checked` value changed from the `input` element
-    /// directly when it is defined as a checkbox with `prop.inputType.checkbox`.
-    static member inline onChange (handler: bool -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?``checked``))
-    /// Fires the moment when the value of the element is changed
-    static member inline onChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onChange" handler
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the selected file directly from the `input` element when it is defined as a checkbox with `prop.type'.file`.
-    static member inline onChange (handler: File -> unit) =
-        let fileHandler (ev: Event) : unit =
-            let files : FileList = ev?target?files
-            if not (isNullOrUndefined files) && files.length > 0 then handler (files.item 0)
-        Interop.mkProperty<'Property> "onChange" fileHandler
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the selected files directly from the `input` element when it is defined as a checkbox with `prop.type'.file` and `prop.multiple true`.
-    static member inline onChange (handler: File list -> unit) =
-        let fileHandler (ev: Event) : unit =
-            let fileList : FileList = ev?target?files
-            if not (isNullOrUndefined fileList) then handler [ for i in 0 .. fileList.length - 1 -> fileList.item i ]
-        Interop.mkProperty<'Property> "onChange" fileHandler
-    /// Same as `onChange` that takes an event as input but instead let's you deal with the text changed from the `input` element directly
-    /// instead of extracting it from the event arguments.
-    static member inline onChange (handler: string -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?value))
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the DateTime changed from the `input` element as if it was a DateTime instance when using input.type.date since the used format either be yyyy-MM-dd or yyyy-MM-ddTHH:mm
-    static member inline onChange (handler: DateTime -> unit) =
-        Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
-            let value : string = !!ev.target?value
-            DateParsing.parse value
-            |> Option.iter handler
-        )
-
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the int changed from the `input` element directly when the type of the input is number
-    /// instead of extracting it from the event arguments. Fractional numbers are rounded to the nearest integral value.
-    static member inline onChange (handler: int -> unit) =
-        Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
-            // round the value to get only integers
-            let value : double = !!ev.target?valueAsNumber
-            if not (isNullOrUndefined value) && not(Double.IsNaN value) then
-                handler (unbox<int> (Math.Round value))
-        )
-    /// Same as `onChange` that takes an event as input but instead lets you deal with the float changed from the `input` element directly when the input type is a number
-    /// instead of extracting it from the event arguments.
-    static member inline onChange (handler: float -> unit) =
-        Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
-            let value : double = !!ev.target?valueAsNumber
-            if not (isNullOrUndefined value) && not(Double.IsNaN value) then
-                handler (value)
-        )
-
-    /// Same as `onChange` but let's you deal with the `checked` value that has changed from the `input` element directly instead of extracting it from the event arguments.
-    static member inline onCheckedChange (handler: bool -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?``checked``))
-
-    /// Fires on a mouse click on the element.
-    static member inline onClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onClick" handler
-
-    /// Fires when composition ends.
-    static member inline onCompositionEnd (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionEnd" handler
-
-    /// Fires when composition starts.
-    static member inline onCompositionStart (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionStart" handler
-
-    /// Fires when composition changes.
-    static member inline onCompositionUpdate (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionUpdate" handler
-
-    /// Fires when a context menu is triggered.
-    static member inline onContextMenu (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onContextMenu" handler
-
-    /// Fires when a TextTrack has changed the currently displaying cues.
-    static member inline onCueChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onCueChange" handler
-
-        /// Fires when the user copies the content of an element.
-    static member inline onCopy (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onCopy" handler
-
-    /// Fires when the user cuts the content of an element.
-    static member inline onCut (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onCut" handler
-
-    /// Fires when a mouse is double clicked on the element.
-    [<Obsolete "Use prop.onDoubleClick instead">]
-    static member inline onDblClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onDoubleClick" handler
-
-    /// Fires when a mouse is double clicked on the element.
-    static member inline onDoubleClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onDoubleClick" handler
-
-    /// Fires when an element is dragged.
-    static member inline onDrag (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDrag" handler
-
-    /// Fires when the a drag operation has ended.
-    static member inline onDragEnd (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragEnd" handler
-
-    /// Fires when an element has been dragged to a valid drop target.
-    static member inline onDragEnter (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragEnter" handler
-
-    static member inline onDragExit (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragExit" handler
-
-    /// Fires when an element leaves a valid drop target.
-    static member inline onDragLeave (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragLeave" handler
-
-    /// Fires when an element is being dragged over a valid drop target.
-    static member inline onDragOver (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragOver" handler
-
-    /// Fires when the a drag operation has begun.
-    static member inline onDragStart (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragStart" handler
-
-    /// Fires when dragged element is being dropped.
-    static member inline onDrop (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDrop" handler
-
-    /// Fires when the length of the media changes.
-    static member inline onDurationChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onDurationChange" handler
-
-    /// Fires when something bad happens and the file is suddenly unavailable (like unexpectedly disconnects).
-    static member inline onEmptied (handler: Event -> unit) = Interop.mkProperty<'Property> "onEmptied" handler
-
-    static member inline onEncrypted (handler: Event -> unit) = Interop.mkProperty<'Property> "onEncrypted" handler
-
-    /// Fires when the media has reached the end (a useful event for messages like "thanks for listening").
-    static member inline onEnded (handler: Event -> unit) = Interop.mkProperty<'Property> "onEnded" handler
-
-    /// Fires when an error occurs.
-    static member inline onError (handler: Event -> unit) = Interop.mkProperty<'Property> "onError" handler
-
-    /// Fires when an error occurs.
-    static member inline onError (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onError" handler
-
-    /// Fires the moment when the element gets focus.
-    static member inline onFocus (handler: FocusEvent -> unit) = Interop.mkProperty<'Property> "onFocus" handler
-
-    /// Fires when an element captures a pointer.
-    static member inline onGotPointerCapture (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onGotPointerCapture" handler
-
-    /// Fires when an element gets user input.
-    static member inline onInput (handler: Event -> unit) = Interop.mkProperty<'Property> "onInput" handler
-
-    /// Fires when a submittable element has been checked for validaty and doesn't satisfy its constraints.
-    static member inline onInvalid (handler: Event -> unit) = Interop.mkProperty<'Property> "onInvalid" handler
-
-    /// Fires when a user presses a key.
-    static member inline onKeyDown (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyDown" handler
-
-    /// Fires when a user presses a key.
-    static member inline onKeyDown (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
-        PropHelpers.createOnKey(key, handler)
-        |> Interop.mkProperty<'Property> "onKeyDown"
-
-    /// Fires when a user presses a key.
-    static member inline onKeyPress (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyPress" handler
-
-    /// Fires when a user presses a key.
-    static member inline onKeyPress (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
-        PropHelpers.createOnKey(key, handler)
-        |> Interop.mkProperty<'Property> "onKeyPress"
-
-    /// Fires when a user releases a key.
-    static member inline onKeyUp (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyUp" handler
-
-    /// Fires when a user releases a key.
-    static member inline onKeyUp (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
-        PropHelpers.createOnKey(key, handler)
-        |> Interop.mkProperty<'Property> "onKeyUp"
-
-    /// Fires after the page is finished loading.
-    static member inline onLoad (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoad" handler
-
-    /// Fires when media data is loaded.
-    static member inline onLoadedData (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadedData" handler
-
-    /// Fires when meta data (like dimensions and duration) are loaded.
-    static member inline onLoadedMetadata (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadedMetadata" handler
-
-    /// Fires when a request has completed, irrespective of its success.
-    static member inline onLoadEnd (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadEnd" handler
-
-    /// Fires when the file begins to load before anything is actually loaded.
-    static member inline onLoadStart (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadStart" handler
-
-    /// Fires when a captured pointer is released.
-    static member inline onLostPointerCapture (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onLostPointerCapture" handler
-
-    /// Fires when a mouse button is pressed down on an element.
-    static member inline onMouseDown (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseDown" handler
-
-    /// Fires when a pointer enters an element.
-    static member inline onMouseEnter (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseEnter" handler
-
-    /// Fires when a pointer leaves an element.
-    static member inline onMouseLeave (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseLeave" handler
-
-    /// Fires when the mouse pointer is moving while it is over an element.
-    static member inline onMouseMove (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseMove" handler
-
-    /// Fires when the mouse pointer moves out of an element.
-    static member inline onMouseOut (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseOut" handler
-
-    /// Fires when the mouse pointer moves over an element.
-    static member inline onMouseOver (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseOver" handler
-
-    /// Fires when a mouse button is released while it is over an element.
-    static member inline onMouseUp (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseUp" handler
-
-    /// Fires when the user pastes some content in an element.
-    static member inline onPaste (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onPaste" handler
-
-    /// Fires when the media is paused either by the user or programmatically.
-    static member inline onPause (handler: Event -> unit) = Interop.mkProperty<'Property> "onPause" handler
-
-    /// Fires when the media is ready to start playing.
-    static member inline onPlay (handler: Event -> unit) = Interop.mkProperty<'Property> "onPlay" handler
-
-    /// Fires when the media actually has started playing
-    static member inline onPlaying (handler: Event -> unit) = Interop.mkProperty<'Property> "onPlaying" handler
-
-    /// Fires when there are no more pointer events.
-    static member inline onPointerCancel (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerCancel" handler
-
-    /// Fires when a pointer becomes active.
-    static member inline onPointerDown (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerDown" handler
-
-    /// Fires when a pointer is moved into an elements boundaries or one of its descendants.
-    static member inline onPointerEnter (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerEnter" handler
-
-    /// Fires when a pointer is moved out of an elements boundaries.
-    static member inline onPointerLeave (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerLeave" handler
-
-    /// Fires when a pointer moves.
-    static member inline onPointerMove (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerMove" handler
-
-    /// Fires when a pointer is no longer in an elements boundaries, such as moving it, or after a `pointerUp` or `pointerCancel` event.
-    static member inline onPointerOut (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerOut" handler
-
-    /// Fires when a pointer is moved into an elements boundaries.
-    static member inline onPointerOver (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerOver" handler
-
-    /// Fires when a pointer is no longer active.
-    static member inline onPointerUp (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerUp" handler
-
-    /// Fires when the browser is in the process of getting the media data.
-    static member inline onProgress (handler: Event -> unit) = Interop.mkProperty<'Property> "onProgress" handler
-
-    /// Fires when the playback rate changes (like when a user switches to a slow motion or fast forward mode).
-    static member inline onRateChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onRateChange" handler
-
-    /// Fires when the Reset button in a form is clicked.
-    static member inline onReset (handler: Event -> unit) = Interop.mkProperty<'Property> "onReset" handler
-
-    /// Fires when the window has been resized.
-    static member inline onResize (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onResize" handler
-
-    /// Fires when an element's scrollbar is being scrolled.
-    static member inline onScroll (handler: Event -> unit) = Interop.mkProperty<'Property> "onScroll" handler
-
-    /// Fires when the seeking attribute is set to false indicating that seeking has ended.
-    static member inline onSeeked (handler: Event -> unit) = Interop.mkProperty<'Property> "onSeeked" handler
-
-    /// Fires when the seeking attribute is set to true indicating that seeking is active.
-    static member inline onSeeking (handler: Event -> unit) = Interop.mkProperty<'Property> "onSeeking" handler
-
-    /// Fires after some text has been selected in an element.
-    static member inline onSelect (handler: Event -> unit) = Interop.mkProperty<'Property> "onSelect" handler
-
-    /// Fires after some text has been selected in the user interface.
-    static member inline onSelect (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onSelect" handler
-
-    /// Fires when the browser is unable to fetch the media data for whatever reason.
-    static member inline onStalled (handler: Event -> unit) = Interop.mkProperty<'Property> "onStalled" handler
-
-    /// Fires when fetching the media data is stopped before it is completely loaded for whatever reason.
-    static member inline onSuspend (handler: Event -> unit) = Interop.mkProperty<'Property> "onSuspend" handler
-
-    /// Fires when a form is submitted.
-    static member inline onSubmit (handler: Event -> unit) = Interop.mkProperty<'Property> "onSubmit" handler
-
-    /// Same as `onChange` but let's you deal with the text changed from the `input` element directly
-    /// instead of extracting it from the event arguments.
-    static member inline onTextChange (handler: string -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?value))
-
-    /// Fires when the playing position has changed (like when the user fast forwards to a different point in the media).
-    static member inline onTimeUpdate (handler: Event -> unit) = Interop.mkProperty<'Property> "onTimeUpdate" handler
-
-    static member inline onTouchCancel (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchCancel" handler
-
-    static member inline onTouchEnd (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchEnd" handler
-
-    static member inline onTouchMove (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchMove" handler
-
-    static member inline onTouchStart (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchStart" handler
-
-    static member inline onTransitionEnd (handler: TransitionEvent -> unit) = Interop.mkProperty<'Property> "onTransitionEnd" handler
-
-    /// Fires when the volume is changed which (includes setting the volume to "mute").
-    static member inline onVolumeChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onVolumeChange" handler
-
-    /// Fires when the media has paused but is expected to resume (like when the media pauses to buffer more data).
-    static member inline onWaiting (handler: Event -> unit) = Interop.mkProperty<'Property> "onWaiting" handler
-
-    /// Fires when the mouse wheel rolls up or down over an element.
-    static member inline onWheel (handler: WheelEvent -> unit) = Interop.mkProperty<'Property> "onWheel" handler
-
-    /// This attribute indicates the optimal numeric value. It must be within the range (as defined by the min
-    /// attribute and max attribute). When used with the low attribute and high attribute, it gives an indication
-    /// where along the range is considered preferable. For example, if it is between the min attribute and the
-    /// low attribute, then the lower range is considered preferred.
-    static member inline optimum (value: float) = Interop.mkProperty<'Property> "optimum" value
-    /// This attribute indicates the optimal numeric value. It must be within the range (as defined by the min
-    /// attribute and max attribute). When used with the low attribute and high attribute, it gives an indication
-    /// where along the range is considered preferable. For example, if it is between the min attribute and the
-    /// low attribute, then the lower range is considered preferred.
-    static member inline optimum (value: int) = Interop.mkProperty<'Property> "optimum" value
-
-    /// Indicates the minimum value allowed.
-    static member inline order (value: int) = Interop.mkProperty<'Property> "order" value
-    /// Indicates the minimum value allowed.
-    static member inline order (values: seq<int>) = Interop.mkProperty<'Property> "order" (values |> unbox<seq<string>> |> String.concat " ")
-
-    /// Represents the ideal vertical position of the overline.
-    ///
-    /// The overline position is expressed in the font's coordinate system.
-    static member inline overlinePosition (value: float) = Interop.mkProperty<'Property> "overline-position" value
-    /// Represents the ideal vertical position of the overline.
-    ///
-    /// The overline position is expressed in the font's coordinate system.
-    static member inline overlinePosition (value: int) = Interop.mkProperty<'Property> "overline-position" value
-
-    /// Represents the ideal thickness of the overline.
-    ///
-    /// The overline thickness is expressed in the font's coordinate system.
-    static member inline overlineThickness (value: float) = Interop.mkProperty<'Property> "overline-thickness" value
-    /// Represents the ideal thickness of the overline.
-    ///
-    /// The overline thickness is expressed in the font's coordinate system.
-    static member inline overlineThickness (value: int) = Interop.mkProperty<'Property> "overline-thickness" value
-
-    /// It either defines a text path along which the characters of a text are rendered, or a motion
-    /// path along which a referenced element is animated.
-    static member inline path (path: seq<char * (float list list)>) =
-        PropHelpers.createSvgPathFloat path
-        |> Interop.mkProperty<'Property> "path"
-    /// It either defines a text path along which the characters of a text are rendered, or a motion
-    /// path along which a referenced element is animated.
-    static member inline path (path: seq<char * (int list list)>) =
-        PropHelpers.createSvgPathInt path
-        |> Interop.mkProperty<'Property> "path"
-    /// It either defines a text path along which the characters of a text are rendered, or a motion
-    /// path along which a referenced element is animated.
-    static member inline path (path: string) = Interop.mkProperty<'Property> "path" path
-    /// The part global attribute contains a space-separated list of the part names of the element.
-    /// Part names allows CSS to select and style specific elements in a shadow tree
-    static member inline part(value: string) = Interop.mkProperty<'Property> "part" value
-    /// The part global attribute contains a space-separated list of the part names of the element.
-    /// Part names allows CSS to select and style specific elements in a shadow tree
-    static member inline part(values: #seq<string>) = Interop.mkProperty<'Property> "part" (String.concat " " values)
-    /// Specifies a total length for the path, in user units.
-    ///
-    /// This value is then used to calibrate the browser's distance calculations with those of the
-    /// author, by scaling all distance computations using the ratio pathLength/(computed value of
-    /// path length).
-    ///
-    /// This can affect the actual rendered lengths of paths; including text paths, animation paths,
-    /// and various stroke operations. Basically, all computations that require the length of the path.
-    static member inline pathLength (value: int) = Interop.mkProperty<'Property> "pathLength" value
-
-    /// Sets the input field allowed input.
-    ///
-    /// This attribute only applies when the value of the type attribute is text, search, tel, url or email.
-    static member inline pattern (value: System.Text.RegularExpressions.Regex) = Interop.mkProperty<'Property> "pattern" value
-
-    /// Defines a list of transform definitions that are applied to a pattern tile.
-    static member inline patternTransform (transform: ITransformProperty) =
-        Interop.mkProperty<'Property> "patternTransform" (unbox<string> transform)
-    /// Defines a list of transform definitions that are applied to a pattern tile.
-    static member inline patternTransform (transforms: seq<ITransformProperty>) =
-        Interop.mkProperty<'Property> "patternTransform" (unbox<seq<string>> transforms |> String.concat " ")
-
-    /// Provides a hint to the user of what can be entered in the field.
-    static member inline placeholder (value: string) = Interop.mkProperty<'Property> "placeholder" value
-
-    /// Indicating that the video is to be played "inline", that is within the element's playback area.
-    ///
-    /// Note that the absence of this attribute does not imply that the video will always be played in fullscreen.
-    static member inline playsInline (value: bool) = Interop.mkProperty<'Property> "playsInline" value
-
-    /// Contains a space-separated list of URLs to which, when the hyperlink is followed,
-    /// POST requests with the body PING will be sent by the browser (in the background).
-    ///
-    /// Typically used for tracking.
-    static member inline ping (value: string) = Interop.mkProperty<'Property> "ping" value
-    /// Contains a space-separated list of URLs to which, when the hyperlink is followed,
-    /// POST requests with the body PING will be sent by the browser (in the background).
-    ///
-    /// Typically used for tracking.
-    static member inline ping (urls: #seq<string>) = Interop.mkProperty<'Property> "ping" (urls |> String.concat " ")
-
-    /// Defines a list of points.
-    ///
-    /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
-    /// the user coordinate system.
-    static member inline points (coordinates: seq<float * float>) =
-        PropHelpers.createPointsFloat(coordinates)
-        |> Interop.mkProperty<'Property> "points"
-    /// Defines a list of points.
-    ///
-    /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
-    /// the user coordinate system.
-    static member inline points (coordinates: seq<int * int>) =
-        PropHelpers.createPointsInt(coordinates)
-        |> Interop.mkProperty<'Property> "points"
-    /// Defines a list of points.
-    ///
-    /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
-    /// the user coordinate system.
-    static member inline points (coordinates: string) = Interop.mkProperty<'Property> "points"
-
-    /// Represents the x location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing.
-    static member inline pointsAtX (value: float) = Interop.mkProperty<'Property> "pointsAtX" value
-    /// Represents the x location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing.
-    static member inline pointsAtX (value: int) = Interop.mkProperty<'Property> "pointsAtX" value
-
-    /// Represents the y location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing.
-    static member inline pointsAtY (value: float) = Interop.mkProperty<'Property> "pointsAtY" value
-    /// Represents the y location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing.
-    static member inline pointsAtY (value: int) = Interop.mkProperty<'Property> "pointsAtY" value
-
-    /// Represents the y location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing, assuming that,
-    /// in the initial local coordinate system, the positive z-axis comes out towards the person
-    /// viewing the content and assuming that one unit along the z-axis equals one unit in x and y.
-    static member inline pointsAtZ (value: float) = Interop.mkProperty<'Property> "pointsAtZ" value
-    /// Represents the y location in the coordinate system established by attribute primitiveUnits
-    /// on the <filter> element of the point at which the light source is pointing, assuming that,
-    /// in the initial local coordinate system, the positive z-axis comes out towards the person
-    /// viewing the content and assuming that one unit along the z-axis equals one unit in x and y.
-    static member inline pointsAtZ (value: int) = Interop.mkProperty<'Property> "pointsAtZ" value
-
-    /// Indicates how a <feConvolveMatrix> element handles alpha transparency.
-    static member inline preserveAlpha (value: bool) = Interop.mkProperty<'Property> "preserveAlpha" value
-
-    /// A URL for an image to be shown while the video is downloading. If this attribute isn't specified, nothing
-    /// is displayed until the first frame is available, then the first frame is shown as the poster frame.
-    static member inline poster (value: string) = Interop.mkProperty<'Property> "poster" value
-
-    /// SVG attribute to define the radius of a circle.
-    static member inline r (value: float) = Interop.mkProperty<'Property> "r" value
-    /// SVG attribute to define the radius of a circle.
-    static member inline r (value: ICssUnit) = Interop.mkProperty<'Property> "r" value
-    /// SVG attribute to define the radius of a circle.
-    static member inline r (value: int) = Interop.mkProperty<'Property> "r" value
-
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (value: float) = Interop.mkProperty<'Property> "radius" value
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (value: int) = Interop.mkProperty<'Property> "radius" value
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (xRadius: float, yRadius: float) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (xRadius: float, yRadius: int) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (xRadius: int, yRadius: float) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
-    /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
-    static member inline radius (xRadius: int, yRadius: int) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
-
-    /// Indicates whether the element can be edited.
-    static member inline readOnly (value: bool) = Interop.mkProperty<'Property> "readOnly" value
-
-    /// Used to reference a DOM element or class component from within a parent component.
-    static member inline ref (handler: Element -> unit) = Interop.mkProperty<'Property> "ref" handler
-    /// Used to reference a DOM element or class component from within a parent component.
-    static member inline ref (ref: IRefValue<#HTMLElement option>) = Interop.mkProperty<'Property> "ref" ref
-
-    /// For anchors containing the href attribute, this attribute specifies the relationship
-    /// of the target object to the link object. The value is a space-separated list of link
-    /// types values. The values and their semantics will be registered by some authority that
-    /// might have meaning to the document author. The default relationship, if no other is
-    /// given, is void.
-    ///
-    /// Use this attribute only if the href attribute is present.
-    static member inline rel (value: string) = Interop.mkProperty<'Property> "rel" value
-
-    /// Indicates whether this element is required to fill out or not.
-    static member inline required (value: bool) = Interop.mkProperty<'Property> "required" value
-
-    /// Defines the assigned name for this filter primitive.
-    ///
-    /// If supplied, then graphics that result from processing this filter primitive can be
-    /// referenced by an in attribute on a subsequent filter primitive within the same
-    /// <filter> element.
-    ///
-    /// If no value is provided, the output will only be available for re-use as the implicit
-    /// input into the next filter primitive if that filter primitive provides no value for
-    /// its in attribute.
-    static member inline result (value: string) = Interop.mkProperty<'Property> "result" value
-
-    /// Sets the aria role
-    ///
-    /// https://www.w3.org/WAI/PF/aria-1.1/roles
-    static member inline role ([<System.ParamArray>] roles: string []) = Interop.mkProperty<'Property> "role" (String.concat " " roles)
-
-    /// Defines the number of rows in a text area.
-    static member inline rows (value: int) = Interop.mkProperty<'Property> "rows" value
-
-    /// Defines the number of rows a table cell should span over.
-    static member inline rowSpan (value: int) = Interop.mkProperty<'Property> "rowSpan" value
-
-    /// The SVG rx attribute defines a radius on the x-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline rx (value: float) = Interop.mkProperty<'Property> "rx" value
-    /// The SVG rx attribute defines a radius on the x-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline rx (value: ICssUnit) = Interop.mkProperty<'Property> "rx" value
-    /// The SVG rx attribute defines a radius on the x-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline rx (value: int) = Interop.mkProperty<'Property> "rx" value
-
-    /// The SVG ry attribute defines a radius on the y-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline ry (value: float) = Interop.mkProperty<'Property> "ry" value
-    /// The SVG ry attribute defines a radius on the y-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline ry (value: ICssUnit) = Interop.mkProperty<'Property> "ry" value
-    /// The SVG ry attribute defines a radius on the y-axis.
-    ///
-    /// Two elements are using this attribute: <ellipse>, and <rect>
-    static member inline ry (value: int) = Interop.mkProperty<'Property> "ry" value
-
-    /// Applies extra restrictions to the content in the frame.
-    ///
-    /// The value of the attribute can either be empty to apply all restrictions,
-    /// or space-separated tokens to lift particular restrictions
-    static member inline sandbox (values: #seq<string>) = Interop.mkProperty<'Property> "sandbox" (values |> String.concat " ")
-
-    /// Defines the displacement scale factor to be used on a <feDisplacementMap> filter primitive.
-    ///
-    /// The amount is expressed in the coordinate system established by the primitiveUnits attribute
-    /// on the <filter> element.
-    static member inline scale (value: float) = Interop.mkProperty<'Property> "scale" value
-    /// Defines the displacement scale factor to be used on a <feDisplacementMap> filter primitive.
-    ///
-    /// The amount is expressed in the coordinate system established by the primitiveUnits attribute
-    /// on the <filter> element.
-    static member inline scale (value: int) = Interop.mkProperty<'Property> "scale" value
-
-    /// Defines the cells that the header (defined in the <th>) element relates to. It may have the following values:
-    ///
-    ///  - row: The header relates to all cells of the row it belongs to.
-    ///  - col: The header relates to all cells of the column it belongs to.
-    ///  - rowgroup: The header belongs to a rowgroup and relates to all of its cells. These cells can be placed to the right or the left of the header, depending on the value of the dir attribute in the <table> element.
-    ///  - colgroup: The header belongs to a colgroup and relates to all of its cells.
-    /// If the scope attribute is not specified, or its value is not row, col, or rowgroup, or colgroup, then browsers automatically select the set of cells to which the header cell applies.
-    static member inline scope (value: string) = Interop.mkProperty<'Property> "scope" value
-
-    /// Represents the starting number for the pseudo random number generator of the <feTurbulence>
-    /// filter primitive.
-    static member inline seed (value: float) = Interop.mkProperty<'Property> "seed" value
-    /// Represents the starting number for the pseudo random number generator of the <feTurbulence>
-    /// filter primitive.
-    static member inline seed (value: int) = Interop.mkProperty<'Property> "seed" value
-
-    /// Defines a value which will be selected on page load.
-    static member inline selected (value: bool) = Interop.mkProperty<'Property> "selected" value
-
-    /// Sets the beginning index of the selected text.
-    ///
-    /// When nothing is selected, this returns the position of the text input cursor (caret) inside of the <input> element.
-    static member inline selectionStart (value: int) = Interop.mkProperty<'Property> "selectionStart" value
-
-    /// Sets the end index of the selected text.
-    ///
-    /// When there's no selection, this returns the offset of the character immediately following the current text input cursor position.
-    static member inline selectionEnd (value: int) = Interop.mkProperty<'Property> "selectionEnd" value
-
-    /// Sets the *visual* size of the control.
-    ///
-    /// The value is in pixels unless the value of type is text or password, in which case, it is the number of characters.
-    ///
-    /// This attribute only applies when type is set to text, search, tel, url, email, or password.
-    static member inline size (value: int) = Interop.mkProperty<'Property> "size" value
-
-    /// Defines the sizes of the icons for visual media contained in the resource.
-    /// It must be present only if the rel contains a value of icon or a non-standard
-    /// type such as Apple's apple-touch-icon.
-    ///
-    /// It may have the following values:
-    ///
-    /// `any`, meaning that the icon can be scaled to any size as it is in a vector
-    /// format, like image/svg+xml.
-    ///
-    /// A white-space separated list of sizes, each in the format `<width in pixels>x<height in pixels>`
-    /// or `<width in pixels>X<height in pixels>`. Each of these sizes must be contained in the resource.
-    static member inline sizes (value: string) = Interop.mkProperty<'Property> "sizes" value
-
-    /// This attribute contains a positive integer indicating the number of consecutive
-    /// columns the <col> element spans. If not present, its default value is 1.
-    static member inline span (value: int) = Interop.mkProperty<'Property> "span" value
-
-    /// Defines whether the element may be checked for spelling errors.
-    static member inline spellcheck (value: bool) = Interop.mkProperty<'Property> "spellcheck" (string value)
-
-    /// Controls the ratio of reflection of the specular lighting.
-    ///
-    /// It represents the ks value in the Phong lighting model. The bigger the value the stronger the reflection.
-    static member inline specularConstant (value: float) = Interop.mkProperty<'Property> "specularConstant" value
-    /// Controls the ratio of reflection of the specular lighting.
-    ///
-    /// It represents the ks value in the Phong lighting model. The bigger the value the stronger the reflection.
-    static member inline specularConstant (value: int) = Interop.mkProperty<'Property> "specularConstant" value
-
-    /// For <feSpecularLighting>, specularExponent defines the exponent value for the specular term.
-    ///
-    /// For <feSpotLight>, specularExponent defines the exponent value controlling the focus for the light source.
-    static member inline specularExponent (value: float) = Interop.mkProperty<'Property> "specularExponent" value
-    /// For <feSpecularLighting>, specularExponent defines the exponent value for the specular term.
-    ///
-    /// For <feSpotLight>, specularExponent defines the exponent value controlling the focus for the light source.
-    static member inline specularExponent (value: int) = Interop.mkProperty<'Property> "specularExponent" value
-
-    /// The URL of the embeddable content.
-    static member inline src (value: string) = Interop.mkProperty<'Property> "src" value
-
-    /// Language of the track text data. It must be a valid BCP 47 language tag.
-    ///
-    /// If the kind attribute is set to subtitles, then srclang must be defined.
-    static member inline srcLang (value: string) = Interop.mkProperty<'Property> "srclang" value
-
-    /// One or more responsive image candidates.
-    static member inline srcset (value: string) = Interop.mkProperty<'Property> "srcset" value
-
-    /// Defines the first number if other than 1.
-    static member inline start (value: string) = Interop.mkProperty<'Property> "start" value
-
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (value: float) = Interop.mkProperty<'Property> "stdDeviation" value
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (value: int) = Interop.mkProperty<'Property> "stdDeviation" value
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (xAxis: float, yAxis: float) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (xAxis: float, yAxis: int) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (xAxis: int, yAxis: float) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
-    /// Defines the standard deviation for the blur operation.
-    static member inline stdDeviation (xAxis: int, yAxis: int) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
-
-    /// Indicates the stepping interval.
-    static member inline step (value: float) = Interop.mkProperty<'Property> "step" value
-    /// Indicates the stepping interval.
-    static member inline step (value: int) = Interop.mkProperty<'Property> "step" value
-    /// The slot global attribute assigns a slot in a shadow DOM shadow tree to an element: An element with a slot attribute is assigned to the slot created by the slot element whose name attribute's value matches that slot attribute's value.
-    static member inline slot(value: string) = Interop.mkProperty<'Property> "slot" value
-    /// SVG attribute to indicate what color to use at a gradient stop.
-    static member inline stopColor (value: string) = Interop.mkProperty<'Property> "stopColor" value
-
-    /// SVG attribute to define the opacity of a given color gradient stop.
-    static member inline stopOpacity (value: float) = Interop.mkProperty<'Property> "stopOpacity" value
-    /// SVG attribute to define the opacity of a given color gradient stop.
-    static member inline stopOpacity (value: int) = Interop.mkProperty<'Property> "stopOpacity" value
-
-    /// Represents the ideal vertical position of the strikethrough.
-    ///
-    /// The strikethrough position is expressed in the font's coordinate system.
-    static member inline strikethroughPosition (value: float) = Interop.mkProperty<'Property> "strikethrough-position" value
-    /// Represents the ideal vertical position of the strikethrough.
-    ///
-    /// The strikethrough position is expressed in the font's coordinate system.
-    static member inline strikethroughPosition (value: int) = Interop.mkProperty<'Property> "strikethrough-position" value
-
-    /// Represents the ideal vertical position of the strikethrough.
-    ///
-    /// The strikethrough position is expressed in the font's coordinate system.
-    static member inline strikethroughThickness (value: float) = Interop.mkProperty<'Property> "strikethrough-thickness" value
-    /// Represents the ideal thickness of the strikethrough.
-    ///
-    /// The strikethrough thickness is expressed in the font's coordinate system.
-    static member inline strikethroughThickness (value: int) = Interop.mkProperty<'Property> "strikethrough-thickness" value
-
-    /// SVG attribute to define the color (or any SVG paint servers like gradients or patterns) used to paint the outline of the shape.
-    static member inline stroke (color: string) = Interop.mkProperty<'Property> "stroke" color
-
-    /// SVG attribute to define the width of the stroke to be applied to the shape.
-    static member inline strokeWidth (value: float) = Interop.mkProperty<'Property> "strokeWidth" value
-    /// SVG attribute to define the width of the stroke to be applied to the shape.
-    static member inline strokeWidth (value: ICssUnit) = Interop.mkProperty<'Property> "strokeWidth" value
-    /// SVG attribute to define the width of the stroke to be applied to the shape.
-    static member inline strokeWidth (value: int) = Interop.mkProperty<'Property> "strokeWidth" value
-
-    static member inline style (properties: #IStyleAttribute list) = Interop.mkProperty<'Property> "style" (createObj !!properties)
-
-    /// Represents the height of the surface for a light filter primitive.
-    static member inline surfaceScale (value: float) = Interop.mkProperty<'Property> "surfaceScale" value
-    /// Represents the height of the surface for a light filter primitive.
-    static member inline surfaceScale (value: int) = Interop.mkProperty<'Property> "surfaceScale" value
-
-    /// Represents a list of supported language tags.
-    ///
-    /// This list is matched against the language defined in the user preferences.
-    static member inline systemLanguage (value: string) = Interop.mkProperty<'Property> "systemLanguage" value
-
-    /// The `tabindex` global attribute indicates that its element can be focused,
-    /// and where it participates in sequential keyboard navigation (usually with the Tab key, hence the name).
-    static member inline tabIndex (index: int) = Interop.mkProperty<'Property> "tabIndex" index
-
-    /// Controls browser behavior when opening a link.
-    static member inline target (frameName: string) = Interop.mkProperty<'Property> "target" frameName
-
-    /// Determines the positioning in horizontal direction of the convolution matrix relative to a
-    /// given target pixel in the input image.
-    ///
-    /// The leftmost column of the matrix is column number zero.
-    ///
-    /// The value must be such that:
-    ///
-    /// 0 <= targetX < orderX.
-    static member inline targetX (index: int) = Interop.mkProperty<'Property> "targetX" index
-
-    /// Determines the positioning in vertical direction of the convolution matrix relative to a
-    /// given target pixel in the input image.
-    ///
-    /// The topmost row of the matrix is row number zero.
-    ///
-    /// The value must be such that:
-    ///
-    /// 0 <= targetY < orderY.
-    static member inline targetY (index: int) = Interop.mkProperty<'Property> "targetY" index
-
-    /// A shorthand for using prop.custom("data-testid", value). Useful for referencing elements when testing React code.
-    static member inline testId(value: string) = Interop.mkProperty<'Property> "data-testid" value
-
-    /// Defines the text content of the element. Alias for `children [ Html.text value ]`
-    static member inline text (value: float) = Interop.mkProperty<'Property> "children" value
-    /// Defines the text content of the element. Alias for `children [ Html.text value ]`
-    static member inline text (value: int) = Interop.mkProperty<'Property> "children" value
-    /// Defines the text content of the element. Alias for `children [ Html.text value ]`
-    static member inline text (value: string) = Interop.mkProperty<'Property> "children" value
-
-    /// Defines the text content of the element. Alias for `children [ Html.text (sprintf ...) ]`
-    static member inline textf fmt = Printf.kprintf prop.text fmt
-
-    /// Specifies the width of the space into which the text will draw.
-    ///
-    /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
-    /// specified by the lengthAdjust attribute.
-    static member inline textLength (value: float) = Interop.mkProperty<'Property> "textLength" value
-    /// Specifies the width of the space into which the text will draw.
-    ///
-    /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
-    /// specified by the lengthAdjust attribute.
-    static member inline textLength (value: ICssUnit) = Interop.mkProperty<'Property> "textLength" value
-    /// Specifies the width of the space into which the text will draw.
-    ///
-    /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
-    /// specified by the lengthAdjust attribute.
-    static member inline textLength (value: int) = Interop.mkProperty<'Property> "textLength" value
-
-    /// The title global attribute contains text representing advisory information related to the element it belongs to.
-    static member inline title (value: string) = Interop.mkProperty<'Property> "title" value
-
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (value: float) = Interop.mkProperty<'Property> "to" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (values: seq<float>) = Interop.mkProperty<'Property> "to" (values |> unbox<seq<string>> |> String.concat " ")
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (value: int) = Interop.mkProperty<'Property> "to" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (values: seq<int>) = Interop.mkProperty<'Property> "to" (values |> unbox<seq<string>> |> String.concat " ")
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (value: string) = Interop.mkProperty<'Property> "to" value
-    /// Indicates the initial value of the attribute that will be modified during the animation.
-    ///
-    /// When used with the `to` attribute, the animation will change the modified attribute from
-    /// the from value to the to value.
-    ///
-    /// When used with the `by` attribute, the animation will change the attribute relatively
-    /// from the from value by the value specified in by.
-    static member inline to' (values: seq<string>) = Interop.mkProperty<'Property> "to" (values |> String.concat " ")
-
-    /// Defines a list of transform definitions that are applied to an element and the element's children.
-    static member inline transform (transform: ITransformProperty) =
-        Interop.mkProperty<'Property> "transform" (unbox<string> transform)
-    /// Defines a list of transform definitions that are applied to an element and the element's children.
-    static member inline transform (transforms: seq<ITransformProperty>) =
-        let unitList = [ "px" ; "deg" ]
-        let removeUnits (s : string) =
-            List.fold (fun (ins:string) toReplace -> ins.Replace(toReplace,"")) s unitList
-        Interop.mkProperty<'Property> "transform" (unbox<seq<string>> transforms |> Seq.map removeUnits |> String.concat " ")
-
-    /// Sets the `type` attribute for the element.
-    static member inline type' (value: string) = Interop.mkProperty<'Property> "type" value
-
-    /// Represents the ideal vertical position of the underline.
-    ///
-    /// The underline position is expressed in the font's coordinate system.
-    static member inline underlinePosition (value: float) = Interop.mkProperty<'Property> "underline-position" value
-    /// Represents the ideal vertical position of the underline.
-    ///
-    /// The underline position is expressed in the font's coordinate system.
-    static member inline underlinePosition (value: int) = Interop.mkProperty<'Property> "underline-position" value
-
-    /// Represents the ideal thickness of the underline.
-    ///
-    /// The underline thickness is expressed in the font's coordinate system.
-    static member inline underlineThickness (value: float) = Interop.mkProperty<'Property> "underline-thickness" value
-    /// Represents the ideal thickness of the underline.
-    ///
-    /// The underline thickness is expressed in the font's coordinate system.
-    static member inline underlineThickness (value: int) = Interop.mkProperty<'Property> "underline-thickness" value
-
-    /// A hash-name reference to a <map> element; that is a '#' followed by the value of a name of a map element.
-    static member inline usemap (value: string) = Interop.mkProperty<'Property> "usemap" value
-
-    /// Sets the value of a React controlled component.
-    static member inline value (value: bool) = Interop.mkProperty<'Property> "value" value
-    /// Sets the value of a React controlled component.
-    static member inline value (value: float) = Interop.mkProperty<'Property> "value" value
-    /// Sets the value of a React controlled component.
-    static member inline value (value: System.Guid) = Interop.mkProperty<'Property> "value" (unbox<string> value)
-    /// Sets the value of a React controlled component.
-    static member inline value (value: int) = Interop.mkProperty<'Property> "value" value
-    /// Sets the value of a React controlled component.
-    static member inline value (value: string) = Interop.mkProperty<'Property> "value" value
-    /// Sets the value of a React controlled component.
-    static member inline value (value: seq<float>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
-    /// Sets the value of a React controlled component.
-    static member inline value (value: seq<int>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
-    /// Sets the value of a React controlled component.
-    static member inline value (value: seq<string>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
-    /// The value of the element, interpreted as a date
-    static member inline value (value: System.DateTime, includeTime: bool) =
-        if includeTime
-        then Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-ddThh:mm"))
-        else Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-dd"))
-    /// The value of the element, interpreted as a date
-    static member inline value (value: System.DateTime) = prop.value(value, includeTime=false)
-    /// The value of the element, interpreted as a date, or empty if there is no value.
-    static member inline value (value: System.DateTime option, includeTime: bool) =
-        match value with
-        | None -> Interop.mkProperty<'Property> "value" ""
-        | Some date ->
+type prop<'Property> = interface end
+
+[<Erase; AutoOpen>]
+module propExtensions =
+    type prop<'Property> with
+
+        /// List of types the server accepts, typically a file type.
+        static member inline accept (value: string) = Interop.mkProperty<'Property> "accept" value
+
+        /// List of supported charsets.
+        static member inline acceptCharset (value: string) = Interop.mkProperty<'Property> "acceptCharset" value
+
+        /// Defines a keyboard shortcut to activate or add focus to the element.
+        static member inline accessKey (value: string) = Interop.mkProperty<'Property> "accessKey" value
+
+        /// The URI of a program that processes the information submitted via the form.
+        static member inline action (value: string) = Interop.mkProperty<'Property> "action" value
+
+        /// Alternative text in case an image can't be displayed.
+        static member inline alt (value: string) = Interop.mkProperty<'Property> "alt" value
+
+        /// Controls the amplitude of the gamma function of a component transfer element when
+        /// its type attribute is gamma.
+        static member inline amplitude (value: float) = Interop.mkProperty<'Property> "amplitude" value
+        /// Controls the amplitude of the gamma function of a component transfer element when
+        /// its type attribute is gamma.
+        static member inline amplitude (value: int) = Interop.mkProperty<'Property> "amplitude" value
+
+        /// Identifies the currently active descendant of a `composite` widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-activedescendant
+        static member inline ariaActiveDescendant (id: string) = Interop.mkProperty<'Property> "aria-activedescendant" id
+
+        /// Indicates whether assistive technologies will present all, or only parts
+        /// of, the changed region based on the change notifications defined by the
+        /// `aria-relevant` attribute.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-atomic
+        static member inline ariaAtomic (value: bool) = Interop.mkProperty<'Property> "aria-atomic" value
+
+        /// Indicates whether an element, and its subtree, are currently being
+        /// updated.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-busy
+        static member inline ariaBusy (value: bool) = Interop.mkProperty<'Property> "aria-busy" value
+
+        /// Indicates the current "checked" state of checkboxes, radio buttons, and
+        /// other widgets. See related `aria-pressed` and `aria-selected`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-checked
+        static member inline ariaChecked (value: bool) = Interop.mkProperty<'Property> "aria-checked" value
+
+        /// Identifies the element (or elements) whose contents or presence are
+        /// controlled by the current element. See related `aria-owns`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-controls
+        static member inline ariaControls ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-controls" (String.concat " " ids)
+
+        /// Specifies a URI referencing content that describes the object. See
+        /// related `aria-describedby`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-describedat
+        static member inline ariaDescribedAt (uri: string) = Interop.mkProperty<'Property> "aria-describedat" uri
+
+        /// Identifies the element (or elements) that describes the object. See
+        /// related `aria-describedat` and `aria-labelledby`.
+        ///
+        /// The `aria-labelledby` attribute is similar to `aria-describedby` in that
+        /// both reference other elements to calculate a text alternative, but a
+        /// label should be concise, where a description is intended to provide more
+        /// verbose information.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-describedby
+        static member inline ariaDescribedBy ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-describedby" (String.concat " " ids)
+
+        /// Indicates that the element is perceivable but disabled, so it is not
+        /// editable or otherwise operable. See related `aria-hidden` and
+        /// `aria-readonly`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-disabled
+        static member inline ariaDisabled (value: bool) = Interop.mkProperty<'Property> "aria-disabled" value
+
+        /// Indicates what functions can be performed when the dragged object is
+        /// released on the drop target. This allows assistive technologies to
+        /// convey the possible drag options available to users, including whether a
+        /// pop-up menu of choices is provided by the application. Typically, drop
+        /// effect functions can only be provided once an object has been grabbed
+        /// for a drag operation as the drop effect functions available are
+        /// dependent on the object being dragged.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-dropeffect
+        static member inline ariaDropEffect ([<System.ParamArray>] values: AriaDropEffect []) = Interop.mkProperty<'Property> "aria-dropeffect" (values |> unbox<string []> |> String.concat " ")
+
+        /// Indicates whether the element, or another grouping element it controls,
+        /// is currently expanded or collapsed.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-expanded
+        static member inline ariaExpanded (value: bool) = Interop.mkProperty<'Property> "aria-expanded" value
+
+        /// Identifies the next element (or elements) in an alternate reading order
+        /// of content which, at the user's discretion, allows assistive technology
+        /// to override the general default of reading in document source order.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-flowto
+        static member inline ariaFlowTo ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-flowto" (String.concat " " ids)
+
+        /// Indicates an element's "grabbed" state in a drag-and-drop operation.
+        ///
+        /// When it is set to true it has been selected for dragging, false
+        /// indicates that the element can be grabbed for a drag-and-drop operation,
+        /// but is not currently grabbed, and undefined (or no value) indicates the
+        /// element cannot be grabbed (default).
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-grabbed
+        static member inline ariaGrabbed (value: bool) = Interop.mkProperty<'Property> "aria-grabbed" value
+
+        /// Indicates that the element has a popup context menu or sub-level menu.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-haspopup
+        static member inline ariaHasPopup (value: bool) = Interop.mkProperty<'Property> "aria-haspopup" value
+
+        /// Indicates that the element and all of its descendants are not visible or
+        /// perceivable to any user as implemented by the author. See related
+        /// `aria-disabled`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-hidden
+        static member inline ariaHidden (value: bool) = Interop.mkProperty<'Property> "aria-hidden" value
+
+        /// Indicates the entered value does not conform to the format expected by
+        /// the application.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-invalid
+        static member inline ariaInvalid (value: bool) = Interop.mkProperty<'Property> "aria-invalid" value
+
+        /// Defines a string value that labels the current element. See related
+        /// `aria-labelledby`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-label
+        static member inline ariaLabel (value: string) = Interop.mkProperty<'Property> "aria-label" value
+
+        /// Defines the hierarchical level of an element within a structure.
+        ///
+        /// This can be applied inside trees to tree items, to headings inside a
+        /// document, to nested grids, nested tablists and to other structural items
+        /// that may appear inside a container or participate in an ownership
+        /// hierarchy. The value for `aria-level` is an integer greater than or
+        /// equal to 1.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-level
+        static member inline ariaLevel (value: int) = Interop.mkProperty<'Property> "aria-level" value
+
+        /// Identifies the element (or elements) that labels the current element.
+        /// See related `aria-label` and `aria-describedby`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-labelledby
+        static member inline ariaLabelledBy ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-labelledby" (String.concat " " ids)
+
+        /// Indicates whether a text box accepts multiple lines of input or only a
+        /// single line.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-multiline
+        static member inline ariaMultiLine (value: bool) = Interop.mkProperty<'Property> "aria-multiline" value
+
+        /// Indicates that the user may select more than one item from the current
+        /// selectable descendants.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-multiselectable
+        static member inline ariaMultiSelectable (value: bool) = Interop.mkProperty<'Property> "aria-multiselectable" value
+
+        /// Identifies an element (or elements) in order to define a visual,
+        /// functional, or contextual parent/child relationship between DOM elements
+        /// where the DOM hierarchy cannot be used to represent the relationship.
+        /// See related `aria-controls`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-owns
+        static member inline ariaOwns ([<System.ParamArray>] ids: string []) = Interop.mkProperty<'Property> "aria-owns" (String.concat " " ids)
+
+        /// Indicates the current "pressed" state of toggle buttons. See related
+        /// `aria-checked` and `aria-selected`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-pressed
+        static member inline ariaPressed (value: bool) = Interop.mkProperty<'Property> "aria-pressed" value
+
+        /// Defines an element's number or position in the current set of listitems
+        /// or treeitems. Not required if all elements in the set are present in the
+        /// DOM. See related `aria-setsize`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-posinset
+        static member inline ariaPosInSet (value: int) = Interop.mkProperty<'Property> "aria-posinset" value
+
+        /// Indicates that the element is not editable, but is otherwise operable.
+        /// See related `aria-disabled`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-readonly
+        static member inline ariaReadOnly (value: bool) = Interop.mkProperty<'Property> "aria-readonly" value
+
+        /// Indicates what user agent change notifications (additions, removals,
+        /// etc.) assistive technologies will receive within a live region. See
+        /// related `aria-atomic`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-relevant
+        static member inline ariaRelevant ([<System.ParamArray>] values: AriaRelevant []) = Interop.mkProperty<'Property> "aria-relevant" (values |> unbox<string []> |> String.concat " ")
+
+        /// Indicates that user input is required on the element before a form may
+        /// be submitted.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-required
+        static member inline ariaRequired (value: bool) = Interop.mkProperty<'Property> "aria-required" value
+
+        /// Indicates the current "selected" state of various widgets. See related
+        /// `aria-checked` and `aria-pressed`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-selected
+        static member inline ariaSelected (value: bool) = Interop.mkProperty<'Property> "aria-selected" value
+
+        /// Defines the maximum allowed value for a range widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemax
+        static member inline ariaValueMax (value: float) = Interop.mkProperty<'Property> "aria-valuemax" value
+        /// Defines the maximum allowed value for a range widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemax
+        static member inline ariaValueMax (value: int) = Interop.mkProperty<'Property> "aria-valuemax" value
+
+        /// Defines the minimum allowed value for a range widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemin
+        static member inline ariaValueMin (value: float) = Interop.mkProperty<'Property> "aria-valuemin" value
+        /// Defines the minimum allowed value for a range widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuemin
+        static member inline ariaValueMin (value: int) = Interop.mkProperty<'Property> "aria-valuemin" value
+
+        /// Defines the current value for a range widget. See related
+        /// `aria-valuetext`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuenow
+        static member inline ariaValueNow (value: float) = Interop.mkProperty<'Property> "aria-valuenow" value
+        /// Defines the current value for a range widget. See related
+        /// `aria-valuetext`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuenow
+        static member inline ariaValueNow (value: int) = Interop.mkProperty<'Property> "aria-valuenow" value
+
+        /// Defines the human readable text alternative of `aria-valuenow` for a
+        /// range widget.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-valuetext
+        static member inline ariaValueText (value: string) = Interop.mkProperty<'Property> "aria-valuetext" value
+
+        /// Defines the number of items in the current set of listitems or
+        /// treeitems. Not required if all elements in the set are present in the
+        /// DOM. See related `aria-posinset`.
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/states_and_properties#aria-setsize
+        static member inline ariaSetSize (value: int) = Interop.mkProperty<'Property> "aria-setsize" value
+
+        /// Indicates that the script should be executed asynchronously.
+        static member inline async (value: bool) = Interop.mkProperty<'Property> "async" value
+
+        /// Indicates the name of the CSS property or attribute of the target element
+        /// that is going to be changed during an animation.
+        static member inline attributeName (value: string) = Interop.mkProperty<'Property> "attributeName" value
+
+        /// Indicates whether controls in this form can by default have their values
+        /// automatically completed by the browser.
+        static member inline autoComplete (value: string) = Interop.mkProperty<'Property> "autoComplete" value
+
+        /// The element should be automatically focused after the page loaded.
+        static member inline autoFocus (value: bool) = Interop.mkProperty<'Property> "autoFocus" value
+
+        /// The audio or video should play as soon as possible.
+        static member inline autoPlay (value: bool) = Interop.mkProperty<'Property> "autoPlay" value
+
+        /// Specifies the direction angle for the light source on the XY plane (clockwise),
+        /// in degrees from the x axis.
+        static member inline azimuth (value: float) = Interop.mkProperty<'Property> "azimuth" value
+        /// Specifies the direction angle for the light source on the XY plane (clockwise),
+        /// in degrees from the x axis.
+        static member inline azimuth (value: int) = Interop.mkProperty<'Property> "azimuth" value
+
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (value: float) = Interop.mkProperty<'Property> "baseFrequency" value
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (value: int) = Interop.mkProperty<'Property> "baseFrequency" value
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (horizontal: float, vertical: float) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (horizontal: float, vertical: int) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (horizontal: int, vertical: float) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
+        /// Represents the base frequency parameter for the noise function of the
+        /// <feTurbulence> filter primitive.
+        static member inline baseFrequency (horizontal: int, vertical: int) = Interop.mkProperty<'Property> "baseFrequency" (unbox<string> horizontal  + "," + unbox<string> vertical)
+
+        /// Defines when an animation should begin or when an element should be discarded.
+        static member inline begin' (value: string) = Interop.mkProperty<'Property> "begin" value
+
+        /// Shifts the range of the filter. After applying the kernelMatrix of the <feConvolveMatrix>
+        /// element to the input image to yield a number and applied the divisor attribute, the bias
+        /// attribute is added to each component. This allows representation of values that would
+        /// otherwise be clamped to 0 or 1.
+        static member inline bias (value: float) = Interop.mkProperty<'Property> "bias" value
+        /// Shifts the range of the filter. After applying the kernelMatrix of the <feConvolveMatrix>
+        /// element to the input image to yield a number and applied the divisor attribute, the bias
+        /// attribute is added to each component. This allows representation of values that would
+        /// otherwise be clamped to 0 or 1.
+        static member inline bias (value: int) = Interop.mkProperty<'Property> "bias" value
+
+        /// Specifies a relative offset value for an attribute that will be modified during an animation.
+        static member inline by (value: float) = Interop.mkProperty<'Property> "by" value
+        /// Specifies a relative offset value for an attribute that will be modified during an animation.
+        static member inline by (value: int) = Interop.mkProperty<'Property> "by" value
+        /// Specifies a relative offset value for an attribute that will be modified during an animation.
+        static member inline by (value: string) = Interop.mkProperty<'Property> "by" value
+
+        static member inline capture (value: bool) = Interop.mkProperty<'Property> "capture" value
+
+        /// This attribute declares the document's character encoding. Must be used in the meta tag.
+        static member inline charset (value: string) = Interop.mkProperty<'Property> "charSet" value
+
+        /// Children of this React element.
+        static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<'Property> "children" value
+        /// Children of this React element.
+        static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray (Array.ofSeq elems))
+
+        /// A URL that designates a source document or message for the information quoted. This attribute is intended to
+        /// point to information explaining the context or the reference for the quote.
+        static member inline cite (value: string) = Interop.mkProperty<'Property> "cite" value
+
+        /// Specifies a CSS class for this element.
+        static member inline className (value: string) = Interop.mkProperty<'Property> "className" value
+        /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
+        ///
+        /// `prop.className [ "one"; "two" ]`
+        ///
+        /// is the same as
+        ///
+        /// `prop.className "one two"`
+        static member inline className (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
+
+        /// Takes a `seq<string>` and joins them using a space to combine the classes into a single class property.
+        ///
+        /// `prop.classes [ "one"; "two" ]` => `prop.className "one two"`
+        static member inline classes (names: seq<string>) = Interop.mkProperty<'Property> "className" (String.concat " " names)
+
+        /// Defines the number of columns in a textarea.
+        static member inline cols (value: int) = Interop.mkProperty<'Property> "cols" value
+
+        /// Defines the number of columns a cell should span.
+        static member inline colSpan (value: int) = Interop.mkProperty<'Property> "colSpan" value
+
+        /// A value associated with http-equiv or name depending on the context.
+        static member inline content (value: string) = Interop.mkProperty<'Property> "content" value
+
+        /// Indicates whether the element's content is editable.
+        static member inline contentEditable (value: bool) = Interop.mkProperty<'Property> "contentEditable" value
+
+        /// If true, the browser will offer controls to allow the user to control video playback,
+        /// including volume, seeking, and pause/resume playback.
+        static member inline controls (value: bool) = Interop.mkProperty<'Property> "controls" value
+
+        /// Create a custom prop
+        ///
+        /// You generally shouldn't need to use this, if you notice a core React/Html attribute missing please submit an issue.
+        static member inline custom (key: string, value: 't) = Interop.mkProperty<'Property> key value
+
+        /// The SVG cx attribute define the x-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cx (value: float) = Interop.mkProperty<'Property> "cx" value
+        /// The SVG cx attribute define the x-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cx (value: ICssUnit) = Interop.mkProperty<'Property> "cx" value
+        /// The SVG cx attribute define the x-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cx (value: int) = Interop.mkProperty<'Property> "cx" value
+
+        /// The SVG cy attribute define the y-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cy (value: float) = Interop.mkProperty<'Property> "cy" value
+        /// The SVG cy attribute define the y-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cy (value: ICssUnit) = Interop.mkProperty<'Property> "cy" value
+        /// The SVG cy attribute define the y-axis coordinate of a center point.
+        ///
+        /// Three elements are using this attribute: <circle>, <ellipse>, and <radialGradient>
+        static member inline cy (value: int) = Interop.mkProperty<'Property> "cy" value
+
+        /// Defines a SVG path to be drawn.
+        static member inline d (path: seq<char * (float list list)>) =
+            PropHelpers.createSvgPathFloat path
+            |> Interop.mkProperty<'Property> "d"
+        /// Defines a SVG path to be drawn.
+        static member inline d (path: seq<char * (int list list)>) =
+            PropHelpers.createSvgPathInt path
+            |> Interop.mkProperty<'Property> "d"
+        /// Defines a SVG path to be drawn.
+        static member inline d (path: string) = Interop.mkProperty<'Property> "d" path
+
+        /// Sets the inner Html content of the element.
+        static member inline dangerouslySetInnerHTML (content: string) = Interop.mkProperty<'Property> "dangerouslySetInnerHTML" (createObj [ "__html" ==> content ])
+
+        /// This attribute indicates the time and/or date of the element.
+        static member inline dateTime (value: string) = Interop.mkProperty<'Property> "dateTime" value
+
+        /// Sets the DOM defaultChecked value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultChecked (value: bool) = Interop.mkProperty<'Property> "defaultChecked" value
+
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: bool) = Interop.mkProperty<'Property> "defaultValue" value
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: float) = Interop.mkProperty<'Property> "defaultValue" value
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: int) = Interop.mkProperty<'Property> "defaultValue" value
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: string) = Interop.mkProperty<'Property> "defaultValue" value
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: seq<float>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: seq<int>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
+        /// Sets the DOM defaultValue value when initially rendered.
+        ///
+        /// Typically only used with uncontrolled components.
+        static member inline defaultValue (value: seq<string>) = Interop.mkProperty<'Property> "defaultValue" (ResizeArray value)
+
+        /// Indicates to a browser that the script is meant to be executed after the document
+        /// has been parsed, but before firing DOMContentLoaded.
+        ///
+        /// Scripts with the defer attribute will prevent the DOMContentLoaded event from
+        /// firing until the script has loaded and finished evaluating.
+        ///
+        /// This attribute must not be used if the src attribute is absent (i.e. for inline scripts),
+        /// in this case it would have no effect.
+        static member inline defer (value: bool) = Interop.mkProperty<'Property> "defer" value
+
+        /// Represents the kd value in the Phong lighting model.
+        ///
+        /// In SVG, this can be any non-negative number.
+        static member inline diffuseConstant (value: float) = Interop.mkProperty<'Property> "diffuseConstant" value
+        /// Represents the kd value in the Phong lighting model.
+        ///
+        /// In SVG, this can be any non-negative number.
+        static member inline diffuseConstant (value: int) = Interop.mkProperty<'Property> "diffuseConstant" value
+
+        /// Sets the directionality of the element.
+        static member inline dirName (value: string) = Interop.mkProperty<'Property> "dirName" value
+
+        /// Indicates whether the user can interact with the element.
+        static member inline disabled (value: bool) = Interop.mkProperty<'Property> "disabled" value
+
+        /// Specifies the value by which the resulting number of applying the kernelMatrix
+        /// of a <feConvolveMatrix> element to the input image color value is divided to
+        /// yield the destination color value.
+        ///
+        /// A divisor that is the sum of all the matrix values tends to have an evening
+        /// effect on the overall color intensity of the result.
+        static member inline divisor (value: float) = Interop.mkProperty<'Property> "divisor" value
+        /// Specifies the value by which the resulting number of applying the kernelMatrix
+        /// of a <feConvolveMatrix> element to the input image color value is divided to
+        /// yield the destination color value.
+        ///
+        /// A divisor that is the sum of all the matrix values tends to have an evening
+        /// effect on the overall color intensity of the result.
+        static member inline divisor (value: int) = Interop.mkProperty<'Property> "divisor" value
+
+        /// This attribute, if present, indicates that the author intends the hyperlink to be used for downloading a resource.
+        static member inline download (value: bool) = Interop.mkProperty<'Property> "download" value
+
+        /// This attribute, if present, indicates that the author intends the hyperlink to be used for downloading a resource.
+        /// The value specifies the default file name for use in labeling the resource in a local file system.
+        static member inline download (value: string) = Interop.mkProperty<'Property> "download" value
+
+        /// Indicates whether the the element can be dragged.
+        static member inline draggable (value: bool) = Interop.mkProperty<'Property> "draggable" value
+
+        /// SVG attribute to indicate a shift along the x-axis on the position of an element or its content.
+        static member inline dx (value: float) = Interop.mkProperty<'Property> "dx" value
+        /// SVG attribute to indicate a shift along the x-axis on the position of an element or its content.
+        static member inline dx (value: int) = Interop.mkProperty<'Property> "dx" value
+
+        /// SVG attribute to indicate a shift along the y-axis on the position of an element or its content.
+        static member inline dy (value: float) = Interop.mkProperty<'Property> "dy" value
+        /// SVG attribute to indicate a shift along the y-axis on the position of an element or its content.
+        static member inline dy (value: int) = Interop.mkProperty<'Property> "dy" value
+
+        /// SVG attribute that specifies the direction angle for the light source from the XY plane towards
+        /// the Z-axis, in degrees.
+        ///
+        /// Note that the positive Z-axis points towards the viewer of the content.
+        static member inline elevation (value: float) = Interop.mkProperty<'Property> "elevation" value
+        /// SVG attribute that specifies the direction angle for the light source from the XY plane towards
+        /// the Z-axis, in degrees.
+        ///
+        /// Note that the positive Z-axis points towards the viewer of the content.
+        static member inline elevation (value: int) = Interop.mkProperty<'Property> "elevation" value
+
+        /// Defines an end value for the animation that can constrain the active duration.
+        static member inline end' (value: string) = Interop.mkProperty<'Property> "end" value
+        /// Defines an end value for the animation that can constrain the active duration.
+        static member inline end' (values: seq<string>) = Interop.mkProperty<'Property> "end" (String.concat ";" values)
+
+        /// Defines the exponent of the gamma function.
+        static member inline exponent (value: float) = Interop.mkProperty<'Property> "exponent" value
+        /// Defines the exponent of the gamma function.
+        static member inline exponent (value: int) = Interop.mkProperty<'Property> "exponent" value
+
+        /// Defines the files that will be uploaded when using an input element of the file type.
+        static member inline files (value: FileList) = Interop.mkProperty<'Property> "files" value
+
+        /// SVG attribute to define the opacity of the paint server (color, gradient, pattern, etc) applied to a shape.
+        static member inline fillOpacity (value: float) = Interop.mkProperty<'Property> "fillOpacity" value
+        /// SVG attribute to define the opacity of the paint server (color, gradient, pattern, etc) applied to a shape.
+        static member inline fillOpacity (value: int) = Interop.mkProperty<'Property> "fillOpacity" value
+
+        /// SVG attribute to define the size of the font from baseline to baseline when multiple
+        /// lines of text are set solid in a multiline layout environment.
+        static member inline fontSize (value: float) = Interop.mkProperty<'Property> "fontSize" value
+        /// SVG attribute to define the size of the font from baseline to baseline when multiple
+        /// lines of text are set solid in a multiline layout environment.
+        static member inline fontSize (value: int) = Interop.mkProperty<'Property> "fontSize" value
+
+        /// A space-separated list of other elements’ ids, indicating that those elements contributed input
+        /// values to (or otherwise affected) the calculation.
+        static member inline for' (value: string) = Interop.mkProperty<'Property> "for" value
+        /// A space-separated list of other elements’ ids, indicating that those elements contributed input
+        /// values to (or otherwise affected) the calculation.
+        static member inline for' (ids: #seq<string>) = Interop.mkProperty<'Property> "for" (ids |> String.concat " ")
+
+        /// The <form> element to associate the <meter> element with (its form owner). The value of this
+        /// attribute must be the id of a <form> in the same document. If this attribute is not set, the
+        /// <button> is associated with its ancestor <form> element, if any. This attribute is only used
+        /// if the <meter> element is being used as a form-associated element, such as one displaying a
+        /// range corresponding to an <input type="number">.
+        static member inline form (value: string) = Interop.mkProperty<'Property> "form" value
+
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (value: float) = Interop.mkProperty<'Property> "from" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (values: seq<float>) = Interop.mkProperty<'Property> "from" (values |> unbox<seq<string>> |> String.concat " ")
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (value: int) = Interop.mkProperty<'Property> "from" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (values: seq<int>) = Interop.mkProperty<'Property> "from" (values |> unbox<seq<string>> |> String.concat " ")
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (value: string) = Interop.mkProperty<'Property> "from" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline from (values: seq<string>) = Interop.mkProperty<'Property> "from" (values |> String.concat " ")
+
+        /// Defines the radius of the focal point for the radial gradient.
+        static member inline fr (value: float) = Interop.mkProperty<'Property> "fr" value
+        /// Defines the radius of the focal point for the radial gradient.
+        static member inline fr (value: int) = Interop.mkProperty<'Property> "fr" value
+        /// Defines the radius of the focal point for the radial gradient.
+        static member inline fr (value: ICssUnit) = Interop.mkProperty<'Property> "fr" value
+
+        /// Defines the x-axis coordinate of the focal point for a radial gradient.
+        static member inline fx (value: float) = Interop.mkProperty<'Property> "fx" value
+        /// Defines the x-axis coordinate of the focal point for a radial gradient.
+        static member inline fx (value: int) = Interop.mkProperty<'Property> "fx" value
+        /// Defines the x-axis coordinate of the focal point for a radial gradient.
+        static member inline fx (value: ICssUnit) = Interop.mkProperty<'Property> "fx" value
+
+        /// Defines the y-axis coordinate of the focal point for a radial gradient.
+        static member inline fy (value: float) = Interop.mkProperty<'Property> "fy" value
+        /// Defines the y-axis coordinate of the focal point for a radial gradient.
+        static member inline fy (value: int) = Interop.mkProperty<'Property> "fy" value
+        /// Defines the y-axis coordinate of the focal point for a radial gradient.
+        static member inline fy (value: ICssUnit) = Interop.mkProperty<'Property> "fy" value
+
+        /// Defines an optional additional transformation from the gradient coordinate system
+        /// onto the target coordinate system (i.e., userSpaceOnUse or objectBoundingBox).
+        ///
+        /// This allows for things such as skewing the gradient. This additional transformation
+        /// matrix is post-multiplied to (i.e., inserted to the right of) any previously defined
+        /// transformations, including the implicit transformation necessary to convert from object
+        /// bounding box units to user space.
+        static member inline gradientTransform (transform: ITransformProperty) =
+            Interop.mkProperty<'Property> "gradientTransform" (unbox<string> transform)
+        /// Defines optional additional transformation(s) from the gradient coordinate system
+        /// onto the target coordinate system (i.e., userSpaceOnUse or objectBoundingBox).
+        ///
+        /// This allows for things such as skewing the gradient. This additional transformation
+        /// matrix is post-multiplied to (i.e., inserted to the right of) any previously defined
+        /// transformations, including the implicit transformation necessary to convert from object
+        /// bounding box units to user space.
+        static member inline gradientTransform (transforms: seq<ITransformProperty>) =
+            Interop.mkProperty<'Property> "gradientTransform" (unbox<seq<string>> transforms |> String.concat " ")
+
+        /// Prevents rendering of given element, while keeping child elements, e.g. script elements, active.
+        static member inline hidden (value: bool) = Interop.mkProperty<'Property> "hidden" value
+
+        /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline height (value: float) = Interop.mkProperty<'Property> "height" value
+        /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline height (value: ICssUnit) = Interop.mkProperty<'Property> "height" value
+        /// Specifies the height of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline height (value: int) = Interop.mkProperty<'Property> "height" value
+
+        /// The lower numeric bound of the high end of the measured range. This must be less than the
+        /// maximum value (max attribute), and it also must be greater than the low value and minimum
+        /// value (low attribute and min attribute, respectively), if any are specified. If unspecified,
+        /// or if greater than the maximum value, the high value is equal to the maximum value.
+        static member inline high (value: float) = Interop.mkProperty<'Property> "high" value
+        /// The lower numeric bound of the high end of the measured range. This must be less than the
+        /// maximum value (max attribute), and it also must be greater than the low value and minimum
+        /// value (low attribute and min attribute, respectively), if any are specified. If unspecified,
+        /// or if greater than the maximum value, the high value is equal to the maximum value.
+        static member inline high (value: int) = Interop.mkProperty<'Property> "high" value
+
+        /// The URL of a linked resource.
+        static member inline href (value: string) = Interop.mkProperty<'Property> "href" value
+
+        /// Indicates the language of the linked resource. Allowed values are determined by BCP47.
+        ///
+        /// Use this attribute only if the href attribute is present.
+        static member inline hrefLang (value: string) = Interop.mkProperty<'Property> "hreflang" value
+
+        static member inline htmlFor (value: string) = Interop.mkProperty<'Property> "htmlFor" value
+
+        /// Often used with CSS to style a specific element. The value of this attribute must be unique.
+        static member inline id (value: int) = Interop.mkProperty<'Property> "id" (unbox<string> value)
+        /// Often used with CSS to style a specific element. The value of this attribute must be unique.
+        static member inline id (value: string) = Interop.mkProperty<'Property> "id" value
+
+        /// Alias for `dangerouslySetInnerHTML`, sets the inner Html content of the element.
+        static member inline innerHtml (content: string) = Interop.mkProperty<'Property> "dangerouslySetInnerHTML" (createObj [ "__html" ==> content ])
+
+        /// Contains inline metadata that a user agent can use to verify that a fetched resource
+        /// has been delivered free of unexpected manipulation.
+        static member inline integrity (value: string) = Interop.mkProperty<'Property> "integrity" value
+
+        /// Defines the intercept of the linear function of color component transfers when the type
+        /// attribute is set to linear.
+        static member inline intercept (value: float) = Interop.mkProperty<'Property> "intercept" value
+        /// Defines the intercept of the linear function of color component transfers when the type
+        /// attribute is set to linear.
+        static member inline intercept (value: int) = Interop.mkProperty<'Property> "intercept" value
+
+        /// Sets the checked attribute for an element.
+        static member inline isChecked (value: bool) = Interop.mkProperty<'Property> "checked" value
+
+        /// Sets the open attribute for an element.
+        static member inline isOpen (value: bool) = Interop.mkProperty<'Property> "open" value
+
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k1 (value: float) = Interop.mkProperty<'Property> "k1" value
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k1 (value: int) = Interop.mkProperty<'Property> "k1" value
+
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k2 (value: float) = Interop.mkProperty<'Property> "k2" value
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k2 (value: int) = Interop.mkProperty<'Property> "k2" value
+
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k3 (value: float) = Interop.mkProperty<'Property> "k3" value
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k3 (value: int) = Interop.mkProperty<'Property> "k3" value
+
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k4 (value: float) = Interop.mkProperty<'Property> "k4" value
+        /// Defines one of the values to be used within the the arithmetic operation of the
+        /// <feComposite> filter primitive.
+        static member inline k4 (value: int) = Interop.mkProperty<'Property> "k4" value
+
+        /// Defines the list of numbers that make up the kernel matrix for the
+        /// <feConvolveMatrix> element.
+        static member inline kernelMatrix (values: seq<float>) = Interop.mkProperty<'Property> "kernelMatrix" (values |> unbox<seq<string>> |> String.concat " ")
+        /// Defines the list of numbers that make up the kernel matrix for the
+        /// <feConvolveMatrix> element.
+        static member inline kernelMatrix (values: seq<int>) = Interop.mkProperty<'Property> "kernelMatrix" (values |> unbox<seq<string>>  |> String.concat " ")
+
+        /// A special string attribute you need to include when creating arrays of elements.
+        /// Keys help React identify which items have changed, are added, or are removed.
+        /// Keys should be given to the elements inside an array to give the elements a stable identity.
+        ///
+        /// Keys only need to be unique among sibling elements in the same array. They don’t need to
+        /// be unique across the whole application or even a single component.
+        static member inline key (value: System.Guid) = Interop.mkProperty<'Property> "key" (unbox<string> value)
+        /// A special string attribute you need to include when creating arrays of elements. Keys help
+        /// React identify which items have changed, are added, or are removed. Keys should be given
+        /// to the elements inside an array to give the elements a stable identity.
+        ///
+        /// Keys only need to be unique among sibling elements in the same array. They don’t need to
+        /// be unique across the whole application or even a single component.
+        static member inline key (value: int) = Interop.mkProperty<'Property> "key" value
+        /// A special string attribute you need to include when creating arrays of elements. Keys
+        /// help React identify which
+        /// items have changed, are added, or are removed. Keys should be given to the elements
+        /// inside an array to give the elements a stable identity.
+        ///
+        /// Keys only need to be unique among sibling elements in the same array. They don’t need to
+        /// be unique across the whole application or even a single component.
+        static member inline key (value: string) = Interop.mkProperty<'Property> "key" value
+
+        /// Indicates the simple duration of an animation.
+        static member inline keyPoints (values: seq<float>) =
+            Interop.mkProperty<'Property> "keyPoints" (values |> unbox<seq<string>>  |> String.concat ";")
+
+        /// Indicates the simple duration of an animation.
+        ///
+        /// Each control point description is a set of four values: x1 y1 x2 y2, describing the Bézier
+        /// control points for one time segment.
+        ///
+        /// The keyTimes values that define the associated segment are the Bézier "anchor points",
+        /// and the keySplines values are the control points. Thus, there must be one fewer sets of
+        /// control points than there are keyTimes.
+        ///
+        /// The values of x1 y1 x2 y2 must all be in the range 0 to 1.
+        static member inline keySplines (values: seq<float * float * float * float>) =
+            PropHelpers.createKeySplines(values)
+            |> Interop.mkProperty<'Property> "keySplines"
+
+        /// Indicates the simple duration of an animation.
+        static member inline keyTimes (values: seq<float>) =
+            Interop.mkProperty<'Property> "keyTimes" (values |> unbox<seq<string>> |> String.concat ";")
+
+        /// Helps define the language of an element: the language that non-editable elements are
+        /// written in, or the language that the editable elements should be written in by the user.
+        static member inline lang (value: string) = Interop.mkProperty<'Property> "lang" value
+        /// Specifies a user-readable title of the element.
+        static member inline label (value: string) = Interop.mkProperty<'Property> "label" value
+        /// Defines the color of the light source for lighting filter primitives.
+        static member inline lightingColor (value: string) = Interop.mkProperty<'Property> "lighting-color" value
+
+        /// Represents the angle in degrees between the spot light axis (i.e. the axis between the
+        /// light source and the point to which it is pointing at) and the spot light cone. So it
+        /// defines a limiting cone which restricts the region where the light is projected.
+        ///
+        /// No light is projected outside the cone.
+        static member inline limitingConeAngle (value: float) = Interop.mkProperty<'Property> "limitingConeAngle" value
+        /// Represents the angle in degrees between the spot light axis (i.e. the axis between the
+        /// light source and the point to which it is pointing at) and the spot light cone. So it
+        /// defines a limiting cone which restricts the region where the light is projected.
+        ///
+        /// No light is projected outside the cone.
+        static member inline limitingConeAngle (value: int) = Interop.mkProperty<'Property> "limitingConeAngle" value
+
+        /// Value of the id attribute of the <c>datalist</c> of autocomplete options
+        static member inline list (value : string) = Interop.mkProperty<'Property> "list" value
+
+        /// If true, the browser will automatically seek back to the start upon reaching the end of the video.
+        static member inline loop (value: bool) = Interop.mkProperty<'Property> "loop" value
+
+        /// The upper numeric bound of the low end of the measured range. This must be greater than
+        /// the minimum value (min attribute), and it also must be less than the high value and
+        /// maximum value (high attribute and max attribute, respectively), if any are specified.
+        /// If unspecified, or if less than the minimum value, the low value is equal to the minimum value.
+        static member inline low (value: float) = Interop.mkProperty<'Property> "low" value
+        /// The upper numeric bound of the low end of the measured range. This must be greater than
+        /// the minimum value (min attribute), and it also must be less than the high value and
+        /// maximum value (high attribute and max attribute, respectively), if any are specified.
+        /// If unspecified, or if less than the minimum value, the low value is equal to the minimum value.
+        static member inline low (value: int) = Interop.mkProperty<'Property> "low" value
+        /// Indicates the maximum value allowed.
+        static member inline max (value: float) = Interop.mkProperty<'Property> "max" value
+        /// Indicates the maximum value allowed.
+        static member inline max (value: int) = Interop.mkProperty<'Property> "max" value
+        /// Indicates the maximum value allowed.
+        static member inline max (value: DateTime) = Interop.mkProperty<'Property> "max" (value.ToString("yyyy-MM-dd"))
+
+        /// Defines the maximum number of characters allowed in the element.
+        static member inline maxLength (value: int) = Interop.mkProperty<'Property> "maxLength" value
+
+        /// This attribute specifies the media that the linked resource applies to.
+        /// Its value must be a media type / media query. This attribute is mainly useful
+        /// when linking to external stylesheets — it allows the user agent to pick the
+        /// best adapted one for the device it runs on.
+        ///
+        /// In HTML 4, this can only be a simple white-space-separated list of media
+        /// description literals, i.e., media types and groups, where defined and allowed
+        /// as values for this attribute, such as print, screen, aural, braille. HTML5
+        /// extended this to any kind of media queries, which are a superset of the allowed
+        /// values of HTML 4.
+        ///
+        /// Browsers not supporting CSS3 Media Queries won't necessarily recognize the adequate
+        /// link; do not forget to set fallback links, the restricted set of media queries
+        /// defined in HTML 4.
+        static member inline media (value: string) = Interop.mkProperty<'Property> "media" value
+
+        /// Defines which HTTP method to use when submitting the form. Can be GET (default) or POST.
+        static member inline method (value: string) = Interop.mkProperty<'Property> "method" value
+
+        /// Indicates the minimum value allowed.
+        static member inline min (value: float) = Interop.mkProperty<'Property> "min" value
+        /// Indicates the minimum value allowed.
+        static member inline min (value: int) = Interop.mkProperty<'Property> "min" value
+        /// Indicates the minimum value allowed.
+        static member inline min (value: DateTime) = Interop.mkProperty<'Property> "min" (value.ToString("yyyy-MM-dd"))
+
+        /// Defines the minimum number of characters allowed in the element.
+        static member inline minLength (value: int) = Interop.mkProperty<'Property> "minLength" value
+
+        /// Indicates whether multiple values can be entered in an input of the type email or file.
+        static member inline multiple (value: bool) = Interop.mkProperty<'Property> "multiple" value
+
+        /// Indicates whether the audio will be initially silenced on page load.
+        static member inline muted (value: bool) = Interop.mkProperty<'Property> "muted" value
+
+        /// Name of the element.
+        ///
+        /// For example used by the server to identify the fields in form submits.
+        static member inline name (value: string) = Interop.mkProperty<'Property> "name" value
+
+        /// This Boolean attribute is set to indicate that the script should not be executed in
+        /// browsers that support ES2015 modules — in effect, this can be used to serve fallback
+        /// scripts to older browsers that do not support modular JavaScript code.
+        static member inline nomodule (value: bool) = Interop.mkProperty<'Property> "nomodule" value
+
+        /// A cryptographic nonce (number used once) to whitelist scripts in a script-src
+        /// Content-Security-Policy. The server must generate a unique nonce value each time
+        /// it transmits a policy. It is critical to provide a nonce that cannot be guessed
+        /// as bypassing a resource's policy is otherwise trivial.
+        static member inline nonce (value: string) = Interop.mkProperty<'Property> "nonce" value
+
+        /// Defines the number of octaves for the noise function of the <feTurbulence> primitive.
+        static member inline numOctaves (value: int) = Interop.mkProperty<'Property> "numOctaves" value
+
+        /// SVG attribute to define where the gradient color will begin or end.
+        static member inline offset (value: float) = Interop.mkProperty<'Property> "offset" value
+        /// SVG attribute to define where the gradient color will begin or end.
+        static member inline offset (value: ICssUnit) = Interop.mkProperty<'Property> "offset" value
+        /// SVG attribute to define where the gradient color will begin or end.
+        static member inline offset (value: int) = Interop.mkProperty<'Property> "offset" value
+
+        /// Fires when a media event is aborted.
+        static member inline onAbort (handler: Event -> unit) = Interop.mkProperty<'Property> "onAbort" handler
+
+        /// Fires when animation is aborted.
+        static member inline onAnimationCancel (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationCancel" handler
+
+        /// Fires when animation ends.
+        static member inline onAnimationEnd (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationEnd" handler
+
+        /// Fires when animation iterates.
+        static member inline onAnimationIteration (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationIteration" handler
+
+        /// Fires when animation starts.
+        static member inline onAnimationStart (handler: AnimationEvent -> unit) = Interop.mkProperty<'Property> "onAnimationStart" handler
+
+        /// Fires the moment that the element loses focus.
+        static member inline onBlur (handler: FocusEvent -> unit) = Interop.mkProperty<'Property> "onBlur" handler
+
+        /// Fires when a user dismisses the current open dialog
+        static member inline onCancel (handler: Event -> unit) = Interop.mkProperty<'Property> "onCancel" handler
+
+        /// Fires when a file is ready to start playing (when it has buffered enough to begin).
+        static member inline onCanPlay (handler: Event -> unit) = Interop.mkProperty<'Property> "onCanPlay" handler
+
+        /// Fires when a file can be played all the way to the end without pausing for buffering
+        static member inline onCanPlayThrough (handler: Event -> unit) = Interop.mkProperty<'Property> "onCanPlayThrough" handler
+
+        /// Same as `onChange` that takes an event as input but instead let's you deal with the `checked` value changed from the `input` element
+        /// directly when it is defined as a checkbox with `prop.inputType.checkbox`.
+        static member inline onChange (handler: bool -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?``checked``))
+        /// Fires the moment when the value of the element is changed
+        static member inline onChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onChange" handler
+        /// Same as `onChange` that takes an event as input but instead lets you deal with the selected file directly from the `input` element when it is defined as a checkbox with `prop.type'.file`.
+        static member inline onChange (handler: File -> unit) =
+            let fileHandler (ev: Event) : unit =
+                let files : FileList = ev?target?files
+                if not (isNullOrUndefined files) && files.length > 0 then handler (files.item 0)
+            Interop.mkProperty<'Property> "onChange" fileHandler
+        /// Same as `onChange` that takes an event as input but instead lets you deal with the selected files directly from the `input` element when it is defined as a checkbox with `prop.type'.file` and `prop.multiple true`.
+        static member inline onChange (handler: File list -> unit) =
+            let fileHandler (ev: Event) : unit =
+                let fileList : FileList = ev?target?files
+                if not (isNullOrUndefined fileList) then handler [ for i in 0 .. fileList.length - 1 -> fileList.item i ]
+            Interop.mkProperty<'Property> "onChange" fileHandler
+        /// Same as `onChange` that takes an event as input but instead let's you deal with the text changed from the `input` element directly
+        /// instead of extracting it from the event arguments.
+        static member inline onChange (handler: string -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?value))
+        /// Same as `onChange` that takes an event as input but instead lets you deal with the DateTime changed from the `input` element as if it was a DateTime instance when using input.type.date since the used format either be yyyy-MM-dd or yyyy-MM-ddTHH:mm
+        static member inline onChange (handler: DateTime -> unit) =
+            Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
+                let value : string = !!ev.target?value
+                DateParsing.parse value
+                |> Option.iter handler
+            )
+
+        /// Same as `onChange` that takes an event as input but instead lets you deal with the int changed from the `input` element directly when the type of the input is number
+        /// instead of extracting it from the event arguments. Fractional numbers are rounded to the nearest integral value.
+        static member inline onChange (handler: int -> unit) =
+            Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
+                // round the value to get only integers
+                let value : double = !!ev.target?valueAsNumber
+                if not (isNullOrUndefined value) && not(Double.IsNaN value) then
+                    handler (unbox<int> (Math.Round value))
+            )
+        /// Same as `onChange` that takes an event as input but instead lets you deal with the float changed from the `input` element directly when the input type is a number
+        /// instead of extracting it from the event arguments.
+        static member inline onChange (handler: float -> unit) =
+            Interop.mkProperty<'Property> "onChange" (fun (ev: Event) ->
+                let value : double = !!ev.target?valueAsNumber
+                if not (isNullOrUndefined value) && not(Double.IsNaN value) then
+                    handler (value)
+            )
+
+        /// Same as `onChange` but let's you deal with the `checked` value that has changed from the `input` element directly instead of extracting it from the event arguments.
+        static member inline onCheckedChange (handler: bool -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?``checked``))
+
+        /// Fires on a mouse click on the element.
+        static member inline onClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onClick" handler
+
+        /// Fires when composition ends.
+        static member inline onCompositionEnd (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionEnd" handler
+
+        /// Fires when composition starts.
+        static member inline onCompositionStart (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionStart" handler
+
+        /// Fires when composition changes.
+        static member inline onCompositionUpdate (handler: CompositionEvent -> unit) = Interop.mkProperty<'Property> "onCompositionUpdate" handler
+
+        /// Fires when a context menu is triggered.
+        static member inline onContextMenu (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onContextMenu" handler
+
+        /// Fires when a TextTrack has changed the currently displaying cues.
+        static member inline onCueChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onCueChange" handler
+
+            /// Fires when the user copies the content of an element.
+        static member inline onCopy (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onCopy" handler
+
+        /// Fires when the user cuts the content of an element.
+        static member inline onCut (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onCut" handler
+
+        /// Fires when a mouse is double clicked on the element.
+        [<Obsolete "Use prop.onDoubleClick instead">]
+        static member inline onDblClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onDoubleClick" handler
+
+        /// Fires when a mouse is double clicked on the element.
+        static member inline onDoubleClick (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onDoubleClick" handler
+
+        /// Fires when an element is dragged.
+        static member inline onDrag (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDrag" handler
+
+        /// Fires when the a drag operation has ended.
+        static member inline onDragEnd (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragEnd" handler
+
+        /// Fires when an element has been dragged to a valid drop target.
+        static member inline onDragEnter (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragEnter" handler
+
+        static member inline onDragExit (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragExit" handler
+
+        /// Fires when an element leaves a valid drop target.
+        static member inline onDragLeave (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragLeave" handler
+
+        /// Fires when an element is being dragged over a valid drop target.
+        static member inline onDragOver (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragOver" handler
+
+        /// Fires when the a drag operation has begun.
+        static member inline onDragStart (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDragStart" handler
+
+        /// Fires when dragged element is being dropped.
+        static member inline onDrop (handler: DragEvent -> unit) = Interop.mkProperty<'Property> "onDrop" handler
+
+        /// Fires when the length of the media changes.
+        static member inline onDurationChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onDurationChange" handler
+
+        /// Fires when something bad happens and the file is suddenly unavailable (like unexpectedly disconnects).
+        static member inline onEmptied (handler: Event -> unit) = Interop.mkProperty<'Property> "onEmptied" handler
+
+        static member inline onEncrypted (handler: Event -> unit) = Interop.mkProperty<'Property> "onEncrypted" handler
+
+        /// Fires when the media has reached the end (a useful event for messages like "thanks for listening").
+        static member inline onEnded (handler: Event -> unit) = Interop.mkProperty<'Property> "onEnded" handler
+
+        /// Fires when an error occurs.
+        static member inline onError (handler: Event -> unit) = Interop.mkProperty<'Property> "onError" handler
+
+        /// Fires when an error occurs.
+        static member inline onError (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onError" handler
+
+        /// Fires the moment when the element gets focus.
+        static member inline onFocus (handler: FocusEvent -> unit) = Interop.mkProperty<'Property> "onFocus" handler
+
+        /// Fires when an element captures a pointer.
+        static member inline onGotPointerCapture (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onGotPointerCapture" handler
+
+        /// Fires when an element gets user input.
+        static member inline onInput (handler: Event -> unit) = Interop.mkProperty<'Property> "onInput" handler
+
+        /// Fires when a submittable element has been checked for validaty and doesn't satisfy its constraints.
+        static member inline onInvalid (handler: Event -> unit) = Interop.mkProperty<'Property> "onInvalid" handler
+
+        /// Fires when a user presses a key.
+        static member inline onKeyDown (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyDown" handler
+
+        /// Fires when a user presses a key.
+        static member inline onKeyDown (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
+            PropHelpers.createOnKey(key, handler)
+            |> Interop.mkProperty<'Property> "onKeyDown"
+
+        /// Fires when a user presses a key.
+        static member inline onKeyPress (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyPress" handler
+
+        /// Fires when a user presses a key.
+        static member inline onKeyPress (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
+            PropHelpers.createOnKey(key, handler)
+            |> Interop.mkProperty<'Property> "onKeyPress"
+
+        /// Fires when a user releases a key.
+        static member inline onKeyUp (handler: KeyboardEvent -> unit) = Interop.mkProperty<'Property> "onKeyUp" handler
+
+        /// Fires when a user releases a key.
+        static member inline onKeyUp (key: IKeyboardKey, handler: KeyboardEvent -> unit) =
+            PropHelpers.createOnKey(key, handler)
+            |> Interop.mkProperty<'Property> "onKeyUp"
+
+        /// Fires after the page is finished loading.
+        static member inline onLoad (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoad" handler
+
+        /// Fires when media data is loaded.
+        static member inline onLoadedData (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadedData" handler
+
+        /// Fires when meta data (like dimensions and duration) are loaded.
+        static member inline onLoadedMetadata (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadedMetadata" handler
+
+        /// Fires when a request has completed, irrespective of its success.
+        static member inline onLoadEnd (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadEnd" handler
+
+        /// Fires when the file begins to load before anything is actually loaded.
+        static member inline onLoadStart (handler: Event -> unit) = Interop.mkProperty<'Property> "onLoadStart" handler
+
+        /// Fires when a captured pointer is released.
+        static member inline onLostPointerCapture (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onLostPointerCapture" handler
+
+        /// Fires when a mouse button is pressed down on an element.
+        static member inline onMouseDown (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseDown" handler
+
+        /// Fires when a pointer enters an element.
+        static member inline onMouseEnter (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseEnter" handler
+
+        /// Fires when a pointer leaves an element.
+        static member inline onMouseLeave (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseLeave" handler
+
+        /// Fires when the mouse pointer is moving while it is over an element.
+        static member inline onMouseMove (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseMove" handler
+
+        /// Fires when the mouse pointer moves out of an element.
+        static member inline onMouseOut (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseOut" handler
+
+        /// Fires when the mouse pointer moves over an element.
+        static member inline onMouseOver (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseOver" handler
+
+        /// Fires when a mouse button is released while it is over an element.
+        static member inline onMouseUp (handler: MouseEvent -> unit) = Interop.mkProperty<'Property> "onMouseUp" handler
+
+        /// Fires when the user pastes some content in an element.
+        static member inline onPaste (handler: ClipboardEvent -> unit) = Interop.mkProperty<'Property> "onPaste" handler
+
+        /// Fires when the media is paused either by the user or programmatically.
+        static member inline onPause (handler: Event -> unit) = Interop.mkProperty<'Property> "onPause" handler
+
+        /// Fires when the media is ready to start playing.
+        static member inline onPlay (handler: Event -> unit) = Interop.mkProperty<'Property> "onPlay" handler
+
+        /// Fires when the media actually has started playing
+        static member inline onPlaying (handler: Event -> unit) = Interop.mkProperty<'Property> "onPlaying" handler
+
+        /// Fires when there are no more pointer events.
+        static member inline onPointerCancel (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerCancel" handler
+
+        /// Fires when a pointer becomes active.
+        static member inline onPointerDown (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerDown" handler
+
+        /// Fires when a pointer is moved into an elements boundaries or one of its descendants.
+        static member inline onPointerEnter (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerEnter" handler
+
+        /// Fires when a pointer is moved out of an elements boundaries.
+        static member inline onPointerLeave (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerLeave" handler
+
+        /// Fires when a pointer moves.
+        static member inline onPointerMove (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerMove" handler
+
+        /// Fires when a pointer is no longer in an elements boundaries, such as moving it, or after a `pointerUp` or `pointerCancel` event.
+        static member inline onPointerOut (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerOut" handler
+
+        /// Fires when a pointer is moved into an elements boundaries.
+        static member inline onPointerOver (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerOver" handler
+
+        /// Fires when a pointer is no longer active.
+        static member inline onPointerUp (handler: PointerEvent -> unit) = Interop.mkProperty<'Property> "onPointerUp" handler
+
+        /// Fires when the browser is in the process of getting the media data.
+        static member inline onProgress (handler: Event -> unit) = Interop.mkProperty<'Property> "onProgress" handler
+
+        /// Fires when the playback rate changes (like when a user switches to a slow motion or fast forward mode).
+        static member inline onRateChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onRateChange" handler
+
+        /// Fires when the Reset button in a form is clicked.
+        static member inline onReset (handler: Event -> unit) = Interop.mkProperty<'Property> "onReset" handler
+
+        /// Fires when the window has been resized.
+        static member inline onResize (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onResize" handler
+
+        /// Fires when an element's scrollbar is being scrolled.
+        static member inline onScroll (handler: Event -> unit) = Interop.mkProperty<'Property> "onScroll" handler
+
+        /// Fires when the seeking attribute is set to false indicating that seeking has ended.
+        static member inline onSeeked (handler: Event -> unit) = Interop.mkProperty<'Property> "onSeeked" handler
+
+        /// Fires when the seeking attribute is set to true indicating that seeking is active.
+        static member inline onSeeking (handler: Event -> unit) = Interop.mkProperty<'Property> "onSeeking" handler
+
+        /// Fires after some text has been selected in an element.
+        static member inline onSelect (handler: Event -> unit) = Interop.mkProperty<'Property> "onSelect" handler
+
+        /// Fires after some text has been selected in the user interface.
+        static member inline onSelect (handler: UIEvent -> unit) = Interop.mkProperty<'Property> "onSelect" handler
+
+        /// Fires when the browser is unable to fetch the media data for whatever reason.
+        static member inline onStalled (handler: Event -> unit) = Interop.mkProperty<'Property> "onStalled" handler
+
+        /// Fires when fetching the media data is stopped before it is completely loaded for whatever reason.
+        static member inline onSuspend (handler: Event -> unit) = Interop.mkProperty<'Property> "onSuspend" handler
+
+        /// Fires when a form is submitted.
+        static member inline onSubmit (handler: Event -> unit) = Interop.mkProperty<'Property> "onSubmit" handler
+
+        /// Same as `onChange` but let's you deal with the text changed from the `input` element directly
+        /// instead of extracting it from the event arguments.
+        static member inline onTextChange (handler: string -> unit) = Interop.mkProperty<'Property> "onChange" (fun (ev: Event) -> handler (!!ev.target?value))
+
+        /// Fires when the playing position has changed (like when the user fast forwards to a different point in the media).
+        static member inline onTimeUpdate (handler: Event -> unit) = Interop.mkProperty<'Property> "onTimeUpdate" handler
+
+        static member inline onTouchCancel (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchCancel" handler
+
+        static member inline onTouchEnd (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchEnd" handler
+
+        static member inline onTouchMove (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchMove" handler
+
+        static member inline onTouchStart (handler: TouchEvent -> unit) = Interop.mkProperty<'Property> "onTouchStart" handler
+
+        static member inline onTransitionEnd (handler: TransitionEvent -> unit) = Interop.mkProperty<'Property> "onTransitionEnd" handler
+
+        /// Fires when the volume is changed which (includes setting the volume to "mute").
+        static member inline onVolumeChange (handler: Event -> unit) = Interop.mkProperty<'Property> "onVolumeChange" handler
+
+        /// Fires when the media has paused but is expected to resume (like when the media pauses to buffer more data).
+        static member inline onWaiting (handler: Event -> unit) = Interop.mkProperty<'Property> "onWaiting" handler
+
+        /// Fires when the mouse wheel rolls up or down over an element.
+        static member inline onWheel (handler: WheelEvent -> unit) = Interop.mkProperty<'Property> "onWheel" handler
+
+        /// This attribute indicates the optimal numeric value. It must be within the range (as defined by the min
+        /// attribute and max attribute). When used with the low attribute and high attribute, it gives an indication
+        /// where along the range is considered preferable. For example, if it is between the min attribute and the
+        /// low attribute, then the lower range is considered preferred.
+        static member inline optimum (value: float) = Interop.mkProperty<'Property> "optimum" value
+        /// This attribute indicates the optimal numeric value. It must be within the range (as defined by the min
+        /// attribute and max attribute). When used with the low attribute and high attribute, it gives an indication
+        /// where along the range is considered preferable. For example, if it is between the min attribute and the
+        /// low attribute, then the lower range is considered preferred.
+        static member inline optimum (value: int) = Interop.mkProperty<'Property> "optimum" value
+
+        /// Indicates the minimum value allowed.
+        static member inline order (value: int) = Interop.mkProperty<'Property> "order" value
+        /// Indicates the minimum value allowed.
+        static member inline order (values: seq<int>) = Interop.mkProperty<'Property> "order" (values |> unbox<seq<string>> |> String.concat " ")
+
+        /// Represents the ideal vertical position of the overline.
+        ///
+        /// The overline position is expressed in the font's coordinate system.
+        static member inline overlinePosition (value: float) = Interop.mkProperty<'Property> "overline-position" value
+        /// Represents the ideal vertical position of the overline.
+        ///
+        /// The overline position is expressed in the font's coordinate system.
+        static member inline overlinePosition (value: int) = Interop.mkProperty<'Property> "overline-position" value
+
+        /// Represents the ideal thickness of the overline.
+        ///
+        /// The overline thickness is expressed in the font's coordinate system.
+        static member inline overlineThickness (value: float) = Interop.mkProperty<'Property> "overline-thickness" value
+        /// Represents the ideal thickness of the overline.
+        ///
+        /// The overline thickness is expressed in the font's coordinate system.
+        static member inline overlineThickness (value: int) = Interop.mkProperty<'Property> "overline-thickness" value
+
+        /// It either defines a text path along which the characters of a text are rendered, or a motion
+        /// path along which a referenced element is animated.
+        static member inline path (path: seq<char * (float list list)>) =
+            PropHelpers.createSvgPathFloat path
+            |> Interop.mkProperty<'Property> "path"
+        /// It either defines a text path along which the characters of a text are rendered, or a motion
+        /// path along which a referenced element is animated.
+        static member inline path (path: seq<char * (int list list)>) =
+            PropHelpers.createSvgPathInt path
+            |> Interop.mkProperty<'Property> "path"
+        /// It either defines a text path along which the characters of a text are rendered, or a motion
+        /// path along which a referenced element is animated.
+        static member inline path (path: string) = Interop.mkProperty<'Property> "path" path
+        /// The part global attribute contains a space-separated list of the part names of the element.
+        /// Part names allows CSS to select and style specific elements in a shadow tree
+        static member inline part(value: string) = Interop.mkProperty<'Property> "part" value
+        /// The part global attribute contains a space-separated list of the part names of the element.
+        /// Part names allows CSS to select and style specific elements in a shadow tree
+        static member inline part(values: #seq<string>) = Interop.mkProperty<'Property> "part" (String.concat " " values)
+        /// Specifies a total length for the path, in user units.
+        ///
+        /// This value is then used to calibrate the browser's distance calculations with those of the
+        /// author, by scaling all distance computations using the ratio pathLength/(computed value of
+        /// path length).
+        ///
+        /// This can affect the actual rendered lengths of paths; including text paths, animation paths,
+        /// and various stroke operations. Basically, all computations that require the length of the path.
+        static member inline pathLength (value: int) = Interop.mkProperty<'Property> "pathLength" value
+
+        /// Sets the input field allowed input.
+        ///
+        /// This attribute only applies when the value of the type attribute is text, search, tel, url or email.
+        static member inline pattern (value: System.Text.RegularExpressions.Regex) = Interop.mkProperty<'Property> "pattern" value
+
+        /// Defines a list of transform definitions that are applied to a pattern tile.
+        static member inline patternTransform (transform: ITransformProperty) =
+            Interop.mkProperty<'Property> "patternTransform" (unbox<string> transform)
+        /// Defines a list of transform definitions that are applied to a pattern tile.
+        static member inline patternTransform (transforms: seq<ITransformProperty>) =
+            Interop.mkProperty<'Property> "patternTransform" (unbox<seq<string>> transforms |> String.concat " ")
+
+        /// Provides a hint to the user of what can be entered in the field.
+        static member inline placeholder (value: string) = Interop.mkProperty<'Property> "placeholder" value
+
+        /// Indicating that the video is to be played "inline", that is within the element's playback area.
+        ///
+        /// Note that the absence of this attribute does not imply that the video will always be played in fullscreen.
+        static member inline playsInline (value: bool) = Interop.mkProperty<'Property> "playsInline" value
+
+        /// Contains a space-separated list of URLs to which, when the hyperlink is followed,
+        /// POST requests with the body PING will be sent by the browser (in the background).
+        ///
+        /// Typically used for tracking.
+        static member inline ping (value: string) = Interop.mkProperty<'Property> "ping" value
+        /// Contains a space-separated list of URLs to which, when the hyperlink is followed,
+        /// POST requests with the body PING will be sent by the browser (in the background).
+        ///
+        /// Typically used for tracking.
+        static member inline ping (urls: #seq<string>) = Interop.mkProperty<'Property> "ping" (urls |> String.concat " ")
+
+        /// Defines a list of points.
+        ///
+        /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
+        /// the user coordinate system.
+        static member inline points (coordinates: seq<float * float>) =
+            PropHelpers.createPointsFloat(coordinates)
+            |> Interop.mkProperty<'Property> "points"
+        /// Defines a list of points.
+        ///
+        /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
+        /// the user coordinate system.
+        static member inline points (coordinates: seq<int * int>) =
+            PropHelpers.createPointsInt(coordinates)
+            |> Interop.mkProperty<'Property> "points"
+        /// Defines a list of points.
+        ///
+        /// Each point is defined by a pair of numbers representing a X and a Y coordinate in
+        /// the user coordinate system.
+        static member inline points (coordinates: string) = Interop.mkProperty<'Property> "points"
+
+        /// Represents the x location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing.
+        static member inline pointsAtX (value: float) = Interop.mkProperty<'Property> "pointsAtX" value
+        /// Represents the x location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing.
+        static member inline pointsAtX (value: int) = Interop.mkProperty<'Property> "pointsAtX" value
+
+        /// Represents the y location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing.
+        static member inline pointsAtY (value: float) = Interop.mkProperty<'Property> "pointsAtY" value
+        /// Represents the y location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing.
+        static member inline pointsAtY (value: int) = Interop.mkProperty<'Property> "pointsAtY" value
+
+        /// Represents the y location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing, assuming that,
+        /// in the initial local coordinate system, the positive z-axis comes out towards the person
+        /// viewing the content and assuming that one unit along the z-axis equals one unit in x and y.
+        static member inline pointsAtZ (value: float) = Interop.mkProperty<'Property> "pointsAtZ" value
+        /// Represents the y location in the coordinate system established by attribute primitiveUnits
+        /// on the <filter> element of the point at which the light source is pointing, assuming that,
+        /// in the initial local coordinate system, the positive z-axis comes out towards the person
+        /// viewing the content and assuming that one unit along the z-axis equals one unit in x and y.
+        static member inline pointsAtZ (value: int) = Interop.mkProperty<'Property> "pointsAtZ" value
+
+        /// Indicates how a <feConvolveMatrix> element handles alpha transparency.
+        static member inline preserveAlpha (value: bool) = Interop.mkProperty<'Property> "preserveAlpha" value
+
+        /// A URL for an image to be shown while the video is downloading. If this attribute isn't specified, nothing
+        /// is displayed until the first frame is available, then the first frame is shown as the poster frame.
+        static member inline poster (value: string) = Interop.mkProperty<'Property> "poster" value
+
+        /// SVG attribute to define the radius of a circle.
+        static member inline r (value: float) = Interop.mkProperty<'Property> "r" value
+        /// SVG attribute to define the radius of a circle.
+        static member inline r (value: ICssUnit) = Interop.mkProperty<'Property> "r" value
+        /// SVG attribute to define the radius of a circle.
+        static member inline r (value: int) = Interop.mkProperty<'Property> "r" value
+
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (value: float) = Interop.mkProperty<'Property> "radius" value
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (value: int) = Interop.mkProperty<'Property> "radius" value
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (xRadius: float, yRadius: float) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (xRadius: float, yRadius: int) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (xRadius: int, yRadius: float) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
+        /// Represents the radius (or radii) for the operation on a given <feMorphology> filter primitive.
+        static member inline radius (xRadius: int, yRadius: int) = Interop.mkProperty<'Property> "radius" (unbox<string> xRadius  + "," + unbox<string> yRadius)
+
+        /// Indicates whether the element can be edited.
+        static member inline readOnly (value: bool) = Interop.mkProperty<'Property> "readOnly" value
+
+        /// Used to reference a DOM element or class component from within a parent component.
+        static member inline ref (handler: Element -> unit) = Interop.mkProperty<'Property> "ref" handler
+        /// Used to reference a DOM element or class component from within a parent component.
+        static member inline ref (ref: IRefValue<#HTMLElement option>) = Interop.mkProperty<'Property> "ref" ref
+
+        /// For anchors containing the href attribute, this attribute specifies the relationship
+        /// of the target object to the link object. The value is a space-separated list of link
+        /// types values. The values and their semantics will be registered by some authority that
+        /// might have meaning to the document author. The default relationship, if no other is
+        /// given, is void.
+        ///
+        /// Use this attribute only if the href attribute is present.
+        static member inline rel (value: string) = Interop.mkProperty<'Property> "rel" value
+
+        /// Indicates whether this element is required to fill out or not.
+        static member inline required (value: bool) = Interop.mkProperty<'Property> "required" value
+
+        /// Defines the assigned name for this filter primitive.
+        ///
+        /// If supplied, then graphics that result from processing this filter primitive can be
+        /// referenced by an in attribute on a subsequent filter primitive within the same
+        /// <filter> element.
+        ///
+        /// If no value is provided, the output will only be available for re-use as the implicit
+        /// input into the next filter primitive if that filter primitive provides no value for
+        /// its in attribute.
+        static member inline result (value: string) = Interop.mkProperty<'Property> "result" value
+
+        /// Sets the aria role
+        ///
+        /// https://www.w3.org/WAI/PF/aria-1.1/roles
+        static member inline role ([<System.ParamArray>] roles: string []) = Interop.mkProperty<'Property> "role" (String.concat " " roles)
+
+        /// Defines the number of rows in a text area.
+        static member inline rows (value: int) = Interop.mkProperty<'Property> "rows" value
+
+        /// Defines the number of rows a table cell should span over.
+        static member inline rowSpan (value: int) = Interop.mkProperty<'Property> "rowSpan" value
+
+        /// The SVG rx attribute defines a radius on the x-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline rx (value: float) = Interop.mkProperty<'Property> "rx" value
+        /// The SVG rx attribute defines a radius on the x-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline rx (value: ICssUnit) = Interop.mkProperty<'Property> "rx" value
+        /// The SVG rx attribute defines a radius on the x-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline rx (value: int) = Interop.mkProperty<'Property> "rx" value
+
+        /// The SVG ry attribute defines a radius on the y-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline ry (value: float) = Interop.mkProperty<'Property> "ry" value
+        /// The SVG ry attribute defines a radius on the y-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline ry (value: ICssUnit) = Interop.mkProperty<'Property> "ry" value
+        /// The SVG ry attribute defines a radius on the y-axis.
+        ///
+        /// Two elements are using this attribute: <ellipse>, and <rect>
+        static member inline ry (value: int) = Interop.mkProperty<'Property> "ry" value
+
+        /// Applies extra restrictions to the content in the frame.
+        ///
+        /// The value of the attribute can either be empty to apply all restrictions,
+        /// or space-separated tokens to lift particular restrictions
+        static member inline sandbox (values: #seq<string>) = Interop.mkProperty<'Property> "sandbox" (values |> String.concat " ")
+
+        /// Defines the displacement scale factor to be used on a <feDisplacementMap> filter primitive.
+        ///
+        /// The amount is expressed in the coordinate system established by the primitiveUnits attribute
+        /// on the <filter> element.
+        static member inline scale (value: float) = Interop.mkProperty<'Property> "scale" value
+        /// Defines the displacement scale factor to be used on a <feDisplacementMap> filter primitive.
+        ///
+        /// The amount is expressed in the coordinate system established by the primitiveUnits attribute
+        /// on the <filter> element.
+        static member inline scale (value: int) = Interop.mkProperty<'Property> "scale" value
+
+        /// Defines the cells that the header (defined in the <th>) element relates to. It may have the following values:
+        ///
+        ///  - row: The header relates to all cells of the row it belongs to.
+        ///  - col: The header relates to all cells of the column it belongs to.
+        ///  - rowgroup: The header belongs to a rowgroup and relates to all of its cells. These cells can be placed to the right or the left of the header, depending on the value of the dir attribute in the <table> element.
+        ///  - colgroup: The header belongs to a colgroup and relates to all of its cells.
+        /// If the scope attribute is not specified, or its value is not row, col, or rowgroup, or colgroup, then browsers automatically select the set of cells to which the header cell applies.
+        static member inline scope (value: string) = Interop.mkProperty<'Property> "scope" value
+
+        /// Represents the starting number for the pseudo random number generator of the <feTurbulence>
+        /// filter primitive.
+        static member inline seed (value: float) = Interop.mkProperty<'Property> "seed" value
+        /// Represents the starting number for the pseudo random number generator of the <feTurbulence>
+        /// filter primitive.
+        static member inline seed (value: int) = Interop.mkProperty<'Property> "seed" value
+
+        /// Defines a value which will be selected on page load.
+        static member inline selected (value: bool) = Interop.mkProperty<'Property> "selected" value
+
+        /// Sets the beginning index of the selected text.
+        ///
+        /// When nothing is selected, this returns the position of the text input cursor (caret) inside of the <input> element.
+        static member inline selectionStart (value: int) = Interop.mkProperty<'Property> "selectionStart" value
+
+        /// Sets the end index of the selected text.
+        ///
+        /// When there's no selection, this returns the offset of the character immediately following the current text input cursor position.
+        static member inline selectionEnd (value: int) = Interop.mkProperty<'Property> "selectionEnd" value
+
+        /// Sets the *visual* size of the control.
+        ///
+        /// The value is in pixels unless the value of type is text or password, in which case, it is the number of characters.
+        ///
+        /// This attribute only applies when type is set to text, search, tel, url, email, or password.
+        static member inline size (value: int) = Interop.mkProperty<'Property> "size" value
+
+        /// Defines the sizes of the icons for visual media contained in the resource.
+        /// It must be present only if the rel contains a value of icon or a non-standard
+        /// type such as Apple's apple-touch-icon.
+        ///
+        /// It may have the following values:
+        ///
+        /// `any`, meaning that the icon can be scaled to any size as it is in a vector
+        /// format, like image/svg+xml.
+        ///
+        /// A white-space separated list of sizes, each in the format `<width in pixels>x<height in pixels>`
+        /// or `<width in pixels>X<height in pixels>`. Each of these sizes must be contained in the resource.
+        static member inline sizes (value: string) = Interop.mkProperty<'Property> "sizes" value
+
+        /// This attribute contains a positive integer indicating the number of consecutive
+        /// columns the <col> element spans. If not present, its default value is 1.
+        static member inline span (value: int) = Interop.mkProperty<'Property> "span" value
+
+        /// Defines whether the element may be checked for spelling errors.
+        static member inline spellcheck (value: bool) = Interop.mkProperty<'Property> "spellcheck" (string value)
+
+        /// Controls the ratio of reflection of the specular lighting.
+        ///
+        /// It represents the ks value in the Phong lighting model. The bigger the value the stronger the reflection.
+        static member inline specularConstant (value: float) = Interop.mkProperty<'Property> "specularConstant" value
+        /// Controls the ratio of reflection of the specular lighting.
+        ///
+        /// It represents the ks value in the Phong lighting model. The bigger the value the stronger the reflection.
+        static member inline specularConstant (value: int) = Interop.mkProperty<'Property> "specularConstant" value
+
+        /// For <feSpecularLighting>, specularExponent defines the exponent value for the specular term.
+        ///
+        /// For <feSpotLight>, specularExponent defines the exponent value controlling the focus for the light source.
+        static member inline specularExponent (value: float) = Interop.mkProperty<'Property> "specularExponent" value
+        /// For <feSpecularLighting>, specularExponent defines the exponent value for the specular term.
+        ///
+        /// For <feSpotLight>, specularExponent defines the exponent value controlling the focus for the light source.
+        static member inline specularExponent (value: int) = Interop.mkProperty<'Property> "specularExponent" value
+
+        /// The URL of the embeddable content.
+        static member inline src (value: string) = Interop.mkProperty<'Property> "src" value
+
+        /// Language of the track text data. It must be a valid BCP 47 language tag.
+        ///
+        /// If the kind attribute is set to subtitles, then srclang must be defined.
+        static member inline srcLang (value: string) = Interop.mkProperty<'Property> "srclang" value
+
+        /// One or more responsive image candidates.
+        static member inline srcset (value: string) = Interop.mkProperty<'Property> "srcset" value
+
+        /// Defines the first number if other than 1.
+        static member inline start (value: string) = Interop.mkProperty<'Property> "start" value
+
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (value: float) = Interop.mkProperty<'Property> "stdDeviation" value
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (value: int) = Interop.mkProperty<'Property> "stdDeviation" value
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (xAxis: float, yAxis: float) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (xAxis: float, yAxis: int) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (xAxis: int, yAxis: float) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
+        /// Defines the standard deviation for the blur operation.
+        static member inline stdDeviation (xAxis: int, yAxis: int) = Interop.mkProperty<'Property> "stdDeviation" (unbox<string> xAxis  + "," + unbox<string> yAxis)
+
+        /// Indicates the stepping interval.
+        static member inline step (value: float) = Interop.mkProperty<'Property> "step" value
+        /// Indicates the stepping interval.
+        static member inline step (value: int) = Interop.mkProperty<'Property> "step" value
+        /// The slot global attribute assigns a slot in a shadow DOM shadow tree to an element: An element with a slot attribute is assigned to the slot created by the slot element whose name attribute's value matches that slot attribute's value.
+        static member inline slot(value: string) = Interop.mkProperty<'Property> "slot" value
+        /// SVG attribute to indicate what color to use at a gradient stop.
+        static member inline stopColor (value: string) = Interop.mkProperty<'Property> "stopColor" value
+
+        /// SVG attribute to define the opacity of a given color gradient stop.
+        static member inline stopOpacity (value: float) = Interop.mkProperty<'Property> "stopOpacity" value
+        /// SVG attribute to define the opacity of a given color gradient stop.
+        static member inline stopOpacity (value: int) = Interop.mkProperty<'Property> "stopOpacity" value
+
+        /// Represents the ideal vertical position of the strikethrough.
+        ///
+        /// The strikethrough position is expressed in the font's coordinate system.
+        static member inline strikethroughPosition (value: float) = Interop.mkProperty<'Property> "strikethrough-position" value
+        /// Represents the ideal vertical position of the strikethrough.
+        ///
+        /// The strikethrough position is expressed in the font's coordinate system.
+        static member inline strikethroughPosition (value: int) = Interop.mkProperty<'Property> "strikethrough-position" value
+
+        /// Represents the ideal vertical position of the strikethrough.
+        ///
+        /// The strikethrough position is expressed in the font's coordinate system.
+        static member inline strikethroughThickness (value: float) = Interop.mkProperty<'Property> "strikethrough-thickness" value
+        /// Represents the ideal thickness of the strikethrough.
+        ///
+        /// The strikethrough thickness is expressed in the font's coordinate system.
+        static member inline strikethroughThickness (value: int) = Interop.mkProperty<'Property> "strikethrough-thickness" value
+
+        /// SVG attribute to define the color (or any SVG paint servers like gradients or patterns) used to paint the outline of the shape.
+        static member inline stroke (color: string) = Interop.mkProperty<'Property> "stroke" color
+
+        /// SVG attribute to define the width of the stroke to be applied to the shape.
+        static member inline strokeWidth (value: float) = Interop.mkProperty<'Property> "strokeWidth" value
+        /// SVG attribute to define the width of the stroke to be applied to the shape.
+        static member inline strokeWidth (value: ICssUnit) = Interop.mkProperty<'Property> "strokeWidth" value
+        /// SVG attribute to define the width of the stroke to be applied to the shape.
+        static member inline strokeWidth (value: int) = Interop.mkProperty<'Property> "strokeWidth" value
+
+        static member inline style (properties: #IStyleAttribute list) = Interop.mkProperty<'Property> "style" (createObj !!properties)
+
+        /// Represents the height of the surface for a light filter primitive.
+        static member inline surfaceScale (value: float) = Interop.mkProperty<'Property> "surfaceScale" value
+        /// Represents the height of the surface for a light filter primitive.
+        static member inline surfaceScale (value: int) = Interop.mkProperty<'Property> "surfaceScale" value
+
+        /// Represents a list of supported language tags.
+        ///
+        /// This list is matched against the language defined in the user preferences.
+        static member inline systemLanguage (value: string) = Interop.mkProperty<'Property> "systemLanguage" value
+
+        /// The `tabindex` global attribute indicates that its element can be focused,
+        /// and where it participates in sequential keyboard navigation (usually with the Tab key, hence the name).
+        static member inline tabIndex (index: int) = Interop.mkProperty<'Property> "tabIndex" index
+
+        /// Controls browser behavior when opening a link.
+        static member inline target (frameName: string) = Interop.mkProperty<'Property> "target" frameName
+
+        /// Determines the positioning in horizontal direction of the convolution matrix relative to a
+        /// given target pixel in the input image.
+        ///
+        /// The leftmost column of the matrix is column number zero.
+        ///
+        /// The value must be such that:
+        ///
+        /// 0 <= targetX < orderX.
+        static member inline targetX (index: int) = Interop.mkProperty<'Property> "targetX" index
+
+        /// Determines the positioning in vertical direction of the convolution matrix relative to a
+        /// given target pixel in the input image.
+        ///
+        /// The topmost row of the matrix is row number zero.
+        ///
+        /// The value must be such that:
+        ///
+        /// 0 <= targetY < orderY.
+        static member inline targetY (index: int) = Interop.mkProperty<'Property> "targetY" index
+
+        /// A shorthand for using prop.custom("data-testid", value). Useful for referencing elements when testing React code.
+        static member inline testId(value: string) = Interop.mkProperty<'Property> "data-testid" value
+
+        /// Defines the text content of the element. Alias for `children [ Html.text value ]`
+        static member inline text (value: float) = Interop.mkProperty<'Property> "children" value
+        /// Defines the text content of the element. Alias for `children [ Html.text value ]`
+        static member inline text (value: int) = Interop.mkProperty<'Property> "children" value
+        /// Defines the text content of the element. Alias for `children [ Html.text value ]`
+        static member inline text (value: string) = Interop.mkProperty<'Property> "children" value
+
+        /// Defines the text content of the element. Alias for `children [ Html.text (sprintf ...) ]`
+        static member inline textf fmt = Printf.kprintf prop.text fmt
+
+        /// Specifies the width of the space into which the text will draw.
+        ///
+        /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
+        /// specified by the lengthAdjust attribute.
+        static member inline textLength (value: float) = Interop.mkProperty<'Property> "textLength" value
+        /// Specifies the width of the space into which the text will draw.
+        ///
+        /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
+        /// specified by the lengthAdjust attribute.
+        static member inline textLength (value: ICssUnit) = Interop.mkProperty<'Property> "textLength" value
+        /// Specifies the width of the space into which the text will draw.
+        ///
+        /// The user agent will ensure that the text does not extend farther than that distance, using the method or methods
+        /// specified by the lengthAdjust attribute.
+        static member inline textLength (value: int) = Interop.mkProperty<'Property> "textLength" value
+
+        /// The title global attribute contains text representing advisory information related to the element it belongs to.
+        static member inline title (value: string) = Interop.mkProperty<'Property> "title" value
+
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (value: float) = Interop.mkProperty<'Property> "to" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (values: seq<float>) = Interop.mkProperty<'Property> "to" (values |> unbox<seq<string>> |> String.concat " ")
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (value: int) = Interop.mkProperty<'Property> "to" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (values: seq<int>) = Interop.mkProperty<'Property> "to" (values |> unbox<seq<string>> |> String.concat " ")
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (value: string) = Interop.mkProperty<'Property> "to" value
+        /// Indicates the initial value of the attribute that will be modified during the animation.
+        ///
+        /// When used with the `to` attribute, the animation will change the modified attribute from
+        /// the from value to the to value.
+        ///
+        /// When used with the `by` attribute, the animation will change the attribute relatively
+        /// from the from value by the value specified in by.
+        static member inline to' (values: seq<string>) = Interop.mkProperty<'Property> "to" (values |> String.concat " ")
+
+        /// Defines a list of transform definitions that are applied to an element and the element's children.
+        static member inline transform (transform: ITransformProperty) =
+            Interop.mkProperty<'Property> "transform" (unbox<string> transform)
+        /// Defines a list of transform definitions that are applied to an element and the element's children.
+        static member inline transform (transforms: seq<ITransformProperty>) =
+            let unitList = [ "px" ; "deg" ]
+            let removeUnits (s : string) =
+                List.fold (fun (ins:string) toReplace -> ins.Replace(toReplace,"")) s unitList
+            Interop.mkProperty<'Property> "transform" (unbox<seq<string>> transforms |> Seq.map removeUnits |> String.concat " ")
+
+        /// Sets the `type` attribute for the element.
+        static member inline type' (value: string) = Interop.mkProperty<'Property> "type" value
+
+        /// Represents the ideal vertical position of the underline.
+        ///
+        /// The underline position is expressed in the font's coordinate system.
+        static member inline underlinePosition (value: float) = Interop.mkProperty<'Property> "underline-position" value
+        /// Represents the ideal vertical position of the underline.
+        ///
+        /// The underline position is expressed in the font's coordinate system.
+        static member inline underlinePosition (value: int) = Interop.mkProperty<'Property> "underline-position" value
+
+        /// Represents the ideal thickness of the underline.
+        ///
+        /// The underline thickness is expressed in the font's coordinate system.
+        static member inline underlineThickness (value: float) = Interop.mkProperty<'Property> "underline-thickness" value
+        /// Represents the ideal thickness of the underline.
+        ///
+        /// The underline thickness is expressed in the font's coordinate system.
+        static member inline underlineThickness (value: int) = Interop.mkProperty<'Property> "underline-thickness" value
+
+        /// A hash-name reference to a <map> element; that is a '#' followed by the value of a name of a map element.
+        static member inline usemap (value: string) = Interop.mkProperty<'Property> "usemap" value
+
+        /// Sets the value of a React controlled component.
+        static member inline value (value: bool) = Interop.mkProperty<'Property> "value" value
+        /// Sets the value of a React controlled component.
+        static member inline value (value: float) = Interop.mkProperty<'Property> "value" value
+        /// Sets the value of a React controlled component.
+        static member inline value (value: System.Guid) = Interop.mkProperty<'Property> "value" (unbox<string> value)
+        /// Sets the value of a React controlled component.
+        static member inline value (value: int) = Interop.mkProperty<'Property> "value" value
+        /// Sets the value of a React controlled component.
+        static member inline value (value: string) = Interop.mkProperty<'Property> "value" value
+        /// Sets the value of a React controlled component.
+        static member inline value (value: seq<float>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
+        /// Sets the value of a React controlled component.
+        static member inline value (value: seq<int>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
+        /// Sets the value of a React controlled component.
+        static member inline value (value: seq<string>) = Interop.mkProperty<'Property> "value" (ResizeArray value)
+        /// The value of the element, interpreted as a date
+        static member inline value (value: System.DateTime, includeTime: bool) =
             if includeTime
-            then Interop.mkProperty<'Property> "value" (date.ToString("yyyy-MM-ddThh:mm"))
-            else Interop.mkProperty<'Property> "value" (date.ToString("yyyy-MM-dd"))
+            then Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-ddThh:mm"))
+            else Interop.mkProperty<'Property> "value" (value.ToString("yyyy-MM-dd"))
+        /// The value of the element, interpreted as a date
+        static member inline value (value: System.DateTime) = prop.value(value, includeTime=false)
+        /// The value of the element, interpreted as a date, or empty if there is no value.
+        static member inline value (value: System.DateTime option, includeTime: bool) =
+            match value with
+            | None -> Interop.mkProperty<'Property> "value" ""
+            | Some date ->
+                if includeTime
+                then Interop.mkProperty<'Property> "value" (date.ToString("yyyy-MM-ddThh:mm"))
+                else Interop.mkProperty<'Property> "value" (date.ToString("yyyy-MM-dd"))
 
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: bool) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: float) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: System.Guid) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: int) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input box value.
-    static member inline valueOrDefault (value: string) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: seq<float>) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
-    static member inline valueOrDefault (value: seq<int>) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
-    /// `prop.ref` callback that sets the value of an input after DOM element is created.
-    /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input box value.
-    static member inline valueOrDefault (value: seq<string>) =
-        prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: bool) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: float) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: System.Guid) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: int) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input box value.
+        static member inline valueOrDefault (value: string) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!value)
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: seq<float>) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input value.
+        static member inline valueOrDefault (value: seq<int>) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
+        /// `prop.ref` callback that sets the value of an input after DOM element is created.
+        /// Can be used instead of `prop.defaultValue` and `prop.value` props to override input box value.
+        static member inline valueOrDefault (value: seq<string>) =
+            prop.ref (fun e -> if e |> isNull |> not && !!e?value <> !!value then e?value <- !!(ResizeArray value))
 
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (value: float) = Interop.mkProperty<'Property> "values" value
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (values: seq<float>) = Interop.mkProperty<'Property> "values" (values |> unbox<seq<string>> |> String.concat " ")
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (value: int) = Interop.mkProperty<'Property> "values" value
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (values: seq<int>) = Interop.mkProperty<'Property> "values" (values |> unbox<seq<string>> |> String.concat " ")
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (value: string) = Interop.mkProperty<'Property> "values" value
-    /// The values attribute has different meanings, depending upon the context where itʼs used,
-    /// either it defines a sequence of values used over the course of an animation, or itʼs a
-    /// list of numbers for a color matrix, which is interpreted differently depending on the
-    /// type of color change to be performed.
-    static member inline values (values: seq<string>) = Interop.mkProperty<'Property> "values" (values |> String.concat " ")
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (value: float) = Interop.mkProperty<'Property> "values" value
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (values: seq<float>) = Interop.mkProperty<'Property> "values" (values |> unbox<seq<string>> |> String.concat " ")
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (value: int) = Interop.mkProperty<'Property> "values" value
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (values: seq<int>) = Interop.mkProperty<'Property> "values" (values |> unbox<seq<string>> |> String.concat " ")
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (value: string) = Interop.mkProperty<'Property> "values" value
+        /// The values attribute has different meanings, depending upon the context where itʼs used,
+        /// either it defines a sequence of values used over the course of an animation, or itʼs a
+        /// list of numbers for a color matrix, which is interpreted differently depending on the
+        /// type of color change to be performed.
+        static member inline values (values: seq<string>) = Interop.mkProperty<'Property> "values" (values |> String.concat " ")
 
-    /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline width (value: float) = Interop.mkProperty<'Property> "width" value
-    /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline width (value: ICssUnit) = Interop.mkProperty<'Property> "width" value
-    /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
-    ///
-    /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
-    ///
-    /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
-    /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
-    /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
-    /// <mask>, <pattern>
-    static member inline width (value: int) = Interop.mkProperty<'Property> "width" value
+        /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline width (value: float) = Interop.mkProperty<'Property> "width" value
+        /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline width (value: ICssUnit) = Interop.mkProperty<'Property> "width" value
+        /// Specifies the width of elements listed here. For all other elements, use the CSS height property.
+        ///
+        /// HTML: <canvas>, <embed>, <iframe>, <img>, <input>, <object>, <video>
+        ///
+        /// SVG: <feBlend>, <feColorMatrix>, <feComponentTransfer>, <feComposite>, <feConvolveMatrix>,
+        /// <feDiffuseLighting>, <feDisplacementMap>, <feDropShadow>, <feFlood>, <feGaussianBlur>, <feImage>,
+        /// <feMerge>, <feMorphology>, <feOffset>, <feSpecularLighting>, <feTile>, <feTurbulence>, <filter>,
+        /// <mask>, <pattern>
+        static member inline width (value: int) = Interop.mkProperty<'Property> "width" value
 
-    /// SVG attribute to define a x-axis coordinate in the user coordinate system.
-    static member inline x (value: float) = Interop.mkProperty<'Property> "x" value
-    /// SVG attribute to define a x-axis coordinate in the user coordinate system.
-    static member inline x (value: ICssUnit) = Interop.mkProperty<'Property> "x" value
-    /// SVG attribute to define a x-axis coordinate in the user coordinate system.
-    static member inline x (value: int) = Interop.mkProperty<'Property> "x" value
+        /// SVG attribute to define a x-axis coordinate in the user coordinate system.
+        static member inline x (value: float) = Interop.mkProperty<'Property> "x" value
+        /// SVG attribute to define a x-axis coordinate in the user coordinate system.
+        static member inline x (value: ICssUnit) = Interop.mkProperty<'Property> "x" value
+        /// SVG attribute to define a x-axis coordinate in the user coordinate system.
+        static member inline x (value: int) = Interop.mkProperty<'Property> "x" value
 
-    /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
-    /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x1 (value: float) = Interop.mkProperty<'Property> "x1" value
-    /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
-    /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x1 (value: ICssUnit) = Interop.mkProperty<'Property> "x1" value
-    /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
-    /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x1 (value: int) = Interop.mkProperty<'Property> "x1" value
+        /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
+        /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x1 (value: float) = Interop.mkProperty<'Property> "x1" value
+        /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
+        /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x1 (value: ICssUnit) = Interop.mkProperty<'Property> "x1" value
+        /// The x1 attribute is used to specify the first x-coordinate for drawing an SVG element that
+        /// requires more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x1 (value: int) = Interop.mkProperty<'Property> "x1" value
 
-    /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x2 (value: float) = Interop.mkProperty<'Property> "x2" value
-    /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x2 (value: ICssUnit) = Interop.mkProperty<'Property> "x2" value
-    /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline x2 (value: int) = Interop.mkProperty<'Property> "x2" value
+        /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x2 (value: float) = Interop.mkProperty<'Property> "x2" value
+        /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x2 (value: ICssUnit) = Interop.mkProperty<'Property> "x2" value
+        /// The x2 attribute is used to specify the second x-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the x attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline x2 (value: int) = Interop.mkProperty<'Property> "x2" value
 
-    /// Specifies the XML Namespace of the document.
-    ///
-    /// Default value is "http://www.w3.org/1999/xhtml".
-    ///
-    /// This is required in documents parsed with XML parsers, and optional in text/html documents.
-    static member inline xmlns (value: string) = Interop.mkProperty<'Property> "xmlns" value
+        /// Specifies the XML Namespace of the document.
+        ///
+        /// Default value is "http://www.w3.org/1999/xhtml".
+        ///
+        /// This is required in documents parsed with XML parsers, and optional in text/html documents.
+        static member inline xmlns (value: string) = Interop.mkProperty<'Property> "xmlns" value
 
-    /// SVG attribute to define a y-axis coordinate in the user coordinate system.
-    static member inline y (value: float) = Interop.mkProperty<'Property> "y" value
-    /// SVG attribute to define a y-axis coordinate in the user coordinate system.
-    static member inline y (value: ICssUnit) = Interop.mkProperty<'Property> "y" value
-    /// SVG attribute to define a y-axis coordinate in the user coordinate system.
-    static member inline y (value: int) = Interop.mkProperty<'Property> "y" value
+        /// SVG attribute to define a y-axis coordinate in the user coordinate system.
+        static member inline y (value: float) = Interop.mkProperty<'Property> "y" value
+        /// SVG attribute to define a y-axis coordinate in the user coordinate system.
+        static member inline y (value: ICssUnit) = Interop.mkProperty<'Property> "y" value
+        /// SVG attribute to define a y-axis coordinate in the user coordinate system.
+        static member inline y (value: int) = Interop.mkProperty<'Property> "y" value
 
-    /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y1 (value: float) = Interop.mkProperty<'Property> "y1" value
-    /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y1 (value: ICssUnit) = Interop.mkProperty<'Property> "y1" value
-    /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y1 (value: int) = Interop.mkProperty<'Property> "y1" value
+        /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y1 (value: float) = Interop.mkProperty<'Property> "y1" value
+        /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y1 (value: ICssUnit) = Interop.mkProperty<'Property> "y1" value
+        /// The y1 attribute is used to specify the first y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y1 (value: int) = Interop.mkProperty<'Property> "y1" value
 
-    /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y2 (value: float) = Interop.mkProperty<'Property> "y2" value
-    /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y2 (value: ICssUnit) = Interop.mkProperty<'Property> "y2" value
-    /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
-    /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
-    ///
-    /// Two elements are using this attribute: <line>, and <linearGradient>
-    static member inline y2 (value: int) = Interop.mkProperty<'Property> "y2" value
+        /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y2 (value: float) = Interop.mkProperty<'Property> "y2" value
+        /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y2 (value: ICssUnit) = Interop.mkProperty<'Property> "y2" value
+        /// The y2 attribute is used to specify the second y-coordinate for drawing an SVG element that requires
+        /// more than one coordinate. Elements that only need one coordinate use the y attribute instead.
+        ///
+        /// Two elements are using this attribute: <line>, and <linearGradient>
+        static member inline y2 (value: int) = Interop.mkProperty<'Property> "y2" value
 
-    /// Defines the location along the z-axis for a light source in the coordinate system established by the
-    /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
-    /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
-    /// the z-axis equals one unit in x and y.
-    static member inline z (value: float) = Interop.mkProperty<'Property> "z" value
-    /// Defines the location along the z-axis for a light source in the coordinate system established by the
-    /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
-    /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
-    /// the z-axis equals one unit in x and y.
-    static member inline z (value: ICssUnit) = Interop.mkProperty<'Property> "z" value
-    /// Defines the location along the z-axis for a light source in the coordinate system established by the
-    /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
-    /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
-    /// the z-axis equals one unit in x and y.
-    static member inline z (value: int) = Interop.mkProperty<'Property> "z" value
+        /// Defines the location along the z-axis for a light source in the coordinate system established by the
+        /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
+        /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
+        /// the z-axis equals one unit in x and y.
+        static member inline z (value: float) = Interop.mkProperty<'Property> "z" value
+        /// Defines the location along the z-axis for a light source in the coordinate system established by the
+        /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
+        /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
+        /// the z-axis equals one unit in x and y.
+        static member inline z (value: ICssUnit) = Interop.mkProperty<'Property> "z" value
+        /// Defines the location along the z-axis for a light source in the coordinate system established by the
+        /// primitiveUnits attribute on the <filter> element, assuming that, in the initial coordinate system,
+        /// the positive z-axis comes out towards the person viewing the content and assuming that one unit along
+        /// the z-axis equals one unit in x and y.
+        static member inline z (value: int) = Interop.mkProperty<'Property> "z" value
 
 module prop =
     /// Controls whether or not an animation is cumulative.

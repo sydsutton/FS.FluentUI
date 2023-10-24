@@ -7,6 +7,20 @@ open Fable.Core.JsInterop
 open Fable.React
 open Feliz
 
+type [<Erase>] rootProp<'Control> = interface end
+
+type [<Erase>] dirProps<'Control> = interface end
+
+[<Erase; AutoOpen>]
+module Extensions =
+    type rootProp<'Control> with
+        static member inline root (value: IReactProperty list) =
+            Interop.mkProperty<'Control> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+    type dirProps<'Control> with
+        static member inline rtl = Interop.mkProperty<'Control> "dir" "rtl"
+        static member inline ltr = Interop.mkProperty<'Control> "dir" "ltr"
+
 type [<Erase>] style =
     /// Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold.
     /// Possible values are [100, 200, 300, 400, 500, 600, 700, 800, 900]
@@ -55,42 +69,40 @@ type [<Erase>] style =
 
 // -------------------------------------------------------------------------- FluentProvider --------------------------------------------------------------------------------------
 type [<Erase>] fluentProvider =
-    inherit FelizProps.prop<IFluentProviderProp>
-    static member inline root (value: IReactProperty list) = Interop.mkProperty<IFluentProviderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline applyStylesToPortals (value: bool) = Interop.mkProperty<IFluentProviderProp> "applyStylesToPortals" value
-    static member inline targetDocument (value: Document) = Interop.mkProperty<IFluentProviderProp> "targetDocument" value
-    static member inline theme (value: Tokens) = Interop.mkProperty<IFluentProviderProp> "theme" value
-    static member inline overrides_unstable (value: OverridesContextValue_unstable) = Interop.mkProperty<IFluentProviderProp> "overrides_unstable" value
+    interface prop<fluentProvider>
+    interface rootProp<fluentProvider>
+    static member inline applyStylesToPortals (value: bool) = Interop.mkProperty<fluentProvider> "applyStylesToPortals" value
+    static member inline targetDocument (value: Document) = Interop.mkProperty<fluentProvider> "targetDocument" value
+    static member inline theme (value: Tokens) = Interop.mkProperty<fluentProvider> "theme" value
+    static member inline overrides_unstable (value: OverridesContextValue_unstable) = Interop.mkProperty<fluentProvider> "overrides_unstable" value
 
 module fluentProvider =
     type [<Erase>] as' =
-        static member inline div = Interop.mkProperty<IFluentProviderProp> "as" "div"
+        static member inline div = Interop.mkProperty<fluentProvider> "as" "div"
 
-    type [<Erase>] dir =
-        static member inline rtl = Interop.mkProperty<IFluentProviderProp> "dir" "rtl"
-        static member inline ltr = Interop.mkProperty<IFluentProviderProp> "dir" "ltr"
+    type [<Erase>] dir = dirProps<fluentProvider>
 
     type [<Erase>] theme =
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createDarkTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createDarkTheme" "@fluentui/react-components" brand)
+        static member inline createDarkTheme (brand: BrandVariants) = Interop.mkProperty<fluentProvider> "theme" (import "createDarkTheme" "@fluentui/react-components" brand)
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createLightTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createLightTheme" "@fluentui/react-components" brand)
-        static member inline createHighContrastTheme () = Interop.mkProperty<IFluentProviderProp> "theme" (import "createHighContrastTheme" "@fluentui/react-components" ())
+        static member inline createLightTheme (brand: BrandVariants) = Interop.mkProperty<fluentProvider> "theme" (import "createLightTheme" "@fluentui/react-components" brand)
+        static member inline createHighContrastTheme () = Interop.mkProperty<fluentProvider> "theme" (import "createHighContrastTheme" "@fluentui/react-components" ())
         /// To create custom BrandVariants, it's easiest to go to `https://react.fluentui.dev/?path=/docs/theme-theme-designer--page`,
         /// choose your color/theme, then click "Export" and copy the BrandVariants over to use here.
-        static member inline createTeamsDarkTheme (brand: BrandVariants) = Interop.mkProperty<IFluentProviderProp> "theme" (import "createTeamsDarkTheme" "@fluentui/react-components" brand)
-        static member inline teamsLightTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsLightTheme" "@fluentui/react-components")
-        static member inline teamsDarkTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsDarkTheme" "@fluentui/react-components")
-        static member inline teamsHighContrastTheme =Interop.mkProperty<IFluentProviderProp> "theme" (import "teamsHighContrastTheme" "@fluentui/react-components")
-        static member inline webLightTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "webLightTheme" "@fluentui/react-components")
-        static member inline webDarkTheme = Interop.mkProperty<IFluentProviderProp> "theme" (import "webDarkTheme" "@fluentui/react-components")
+        static member inline createTeamsDarkTheme (brand: BrandVariants) = Interop.mkProperty<fluentProvider> "theme" (import "createTeamsDarkTheme" "@fluentui/react-components" brand)
+        static member inline teamsLightTheme = Interop.mkProperty<fluentProvider> "theme" (import "teamsLightTheme" "@fluentui/react-components")
+        static member inline teamsDarkTheme = Interop.mkProperty<fluentProvider> "theme" (import "teamsDarkTheme" "@fluentui/react-components")
+        static member inline teamsHighContrastTheme =Interop.mkProperty<fluentProvider> "theme" (import "teamsHighContrastTheme" "@fluentui/react-components")
+        static member inline webLightTheme = Interop.mkProperty<fluentProvider> "theme" (import "webLightTheme" "@fluentui/react-components")
+        static member inline webDarkTheme = Interop.mkProperty<fluentProvider> "theme" (import "webDarkTheme" "@fluentui/react-components")
 
 // -------------------------------------------------------------------------- Avatar --------------------------------------------------------------------------------------
 type [<Erase>] avatar =
 
-    inherit FelizProps.prop<IAvatarProp>
+    interface prop<IAvatarProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAvatarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The Avatar's image.
     static member inline image (value: IReactProperty list) = Interop.mkProperty<IAvatarProp> "image" (!!value |> createObj |> unbox<IReactProperty>)
@@ -208,7 +220,7 @@ module avatar =
 // -------------------------------------------------------------------------- Image --------------------------------------------------------------------------------------
 
 type [<Erase>] image =
-    inherit FelizProps.prop<IImageProp>
+    interface prop<IImageProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IImageProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline block (value: bool) = Interop.mkProperty<IImageProp> "block" value
     static member inline bordered (value: bool) = Interop.mkProperty<IImageProp> "bordered" value
@@ -234,7 +246,7 @@ module image =
 // -------------------------------------------------------------------------- Button --------------------------------------------------------------------------------------
 
 type [<Erase>] button =
-    inherit FelizProps.prop<IButtonProp>
+    interface prop<IButtonProp>
     /// Root of the component that renders as either a `<button>` tag or an `<a>` tag.
     static member inline root (value:  IReactProperty list) = Interop.mkProperty<IButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
@@ -287,7 +299,7 @@ module button =
 // -------------------------------------------------------------------------- ToggleButton --------------------------------------------------------------------------------------
 
 type [<Erase>] toggleButton =
-    inherit FelizProps.prop<IToggleButtonProp>
+    interface prop<IToggleButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IToggleButtonProp> "icon" value
     /// When set, allows the button to be focusable even when it has been disabled.
@@ -339,7 +351,7 @@ module toggleButton =
 // -------------------------------------------------------------------------- Accordian --------------------------------------------------------------------------------------
 
 type [<Erase>] accordion =
-    inherit FelizProps.prop<IAccordionProp>
+    interface prop<IAccordionProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAccordionProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Default value for the uncontrolled state of the panel.
     /// If using a single value, wrap it in a list, array, or seq.
@@ -368,7 +380,7 @@ module accordion =
         static member inline circular = Interop.mkProperty<IAccordionProp> "navigation" "circular"
 
 type [<Erase>] accordionItem =
-    inherit FelizProps.prop<IAccordionItemProp>
+    interface prop<IAccordionItemProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAccordionItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Disables opening/closing of panel.
     static member inline disabled (value: bool) = Interop.mkProperty<IAccordionItemProp> "disabled" value
@@ -376,7 +388,7 @@ type [<Erase>] accordionItem =
     static member inline value (value: 'T) = Interop.mkProperty<IAccordionItemProp> "value" value
 
 type [<Erase>] accordionHeader =
-    inherit FelizProps.prop<IAccordionHeaderProp>
+    interface prop<IAccordionHeaderProp>
     /// The element wrapping the button. By default this is a div, but can be a heading.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Expand icon slot rendered before (or after) children content in heading.
@@ -406,7 +418,7 @@ module accordionHeader =
         static member inline extraLarge = Interop.mkProperty<IAccordionHeaderProp> "size" "extra-large"
 
 type [<Erase>] accordionPanel =
-    inherit FelizProps.prop<IAccordionPanelProp>
+    interface prop<IAccordionPanelProp>
     static member inline root (value: ReactElement)= Interop.mkProperty<IAccordionPanelProp> "root" value
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IAccordionPanelProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Internal open state, provided by context.
@@ -415,7 +427,7 @@ type [<Erase>] accordionPanel =
 // -------------------------------------------------------------------------- Checkbox --------------------------------------------------------------------------------------
 
 type [<Erase>] checkbox =
-    inherit FelizProps.prop<ICheckboxProp>
+    interface prop<ICheckboxProp>
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
@@ -494,7 +506,7 @@ module checkbox =
 // -------------------------------------------------------------------------- Badge --------------------------------------------------------------------------------------
 
 type [<Erase>] badge =
-    inherit FelizProps.prop<IBadgeProp>
+    interface prop<IBadgeProp>
     static member inline root (value:  IReactProperty list) = Interop.mkProperty<IBadgeProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IBadgeProp> "icon" value
     static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IBadgeProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
@@ -544,7 +556,7 @@ module badge =
 // -------------------------------------------------------------------------- CounterBadge --------------------------------------------------------------------------------------
 
 type [<Erase>] counterBadge =
-    inherit FelizProps.prop<ICounterBadgeProp>
+    interface prop<ICounterBadgeProp>
     /// Value displayed by the Badge
     static member inline count (value: int) = Interop.mkProperty<ICounterBadgeProp> "count" value
     /// Value displayed by the Badge
@@ -601,7 +613,7 @@ module counterBadge =
 // -------------------------------------------------------------------------- PresenceBadge --------------------------------------------------------------------------------------
 
 type [<Erase>] presenceBadge =
-    inherit FelizProps.prop<IPresenceBadgeProp>
+    interface prop<IPresenceBadgeProp>
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IPresenceBadgeProp> "icon" value
     /// Modifies the display to indicate that the user is out of office. This can be combined with any status to display an out-of-office version of that status
     static member inline outOfOffice (value: bool) = Interop.mkProperty<IPresenceBadgeProp> "outOfOffice" value
@@ -631,7 +643,7 @@ module presenceBadge =
 // -------------------------------------------------------------------------- Table --------------------------------------------------------------------------------------
 
 type [<Erase>] table =
-    inherit FelizProps.prop<ITableProp>
+    interface prop<ITableProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Render all table elements as divs instead of semantic table elements Using divs no longer uses display: table layout but display: flex
     static member inline noNativeElements (value: bool) = Interop.mkProperty<ITableProp> "noNativeElements" value
@@ -653,7 +665,7 @@ module table =
 
 /// No info found
 type [<Erase>] tableHeader =
-    inherit FelizProps.prop<ITableHeaderProp>
+    interface prop<ITableHeaderProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableHeaderProp> "root"  (!!value |> createObj |> unbox<IReactProperty>)
     static member inline children (value: ReactElement list) = Interop.mkProperty<ITableHeaderProp> "children" value
 
@@ -666,7 +678,7 @@ module tableHeader =
 
 /// No info found
 type [<Erase>] tableHeaderCell =
-    inherit FelizProps.prop<ITableHeaderCellProp>
+    interface prop<ITableHeaderCellProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableHeaderCellProp> "root"  (!!value |> createObj |> unbox<IReactProperty>)
     /// Aside content for anything that should be after main content of the table header cell
     static member inline aside (value: ReactElement) = Interop.mkProperty<ITableHeaderCellProp> "aside" value
@@ -691,7 +703,7 @@ module tableHeaderCell =
 // -------------------------------------------------------------------------- TableBody --------------------------------------------------------------------------------------
 
 type [<Erase>] tableBody =
-    inherit FelizProps.prop<ITableBodyProp>
+    interface prop<ITableBodyProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableBodyProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 module tableBody =
     type [<Erase>] as' =
@@ -701,7 +713,7 @@ module tableBody =
 // -------------------------------------------------------------------------- TableResizeHandle --------------------------------------------------------------------------------------
 
 type [<Erase>] tableResizeHandle =
-    inherit FelizProps.prop<ITableResizeHandleProp>
+    interface prop<ITableResizeHandleProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableResizeHandleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 
@@ -709,7 +721,7 @@ type [<Erase>] tableResizeHandle =
 
 /// No info found
 type [<Erase>] tableRow =
-    inherit FelizProps.prop<ITableRowProp>
+    interface prop<ITableRowProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableRowProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline children (value: ReactElement list) = Interop.mkProperty<ITableRowProp> "children" value
 
@@ -725,7 +737,7 @@ module tableRow =
 // -------------------------------------------------------------------------- TableCell --------------------------------------------------------------------------------------
 
 type [<Erase>] tableCell =
-    inherit FelizProps.prop<ITableCellProp>
+    interface prop<ITableCellProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableCellProp> "root"  (!!value |> createObj |> unbox<IReactProperty>)
     static member inline children (value: ReactElement list) = Interop.mkProperty<ITableCellProp> "children" value
 
@@ -737,14 +749,14 @@ module tableCell =
 // -------------------------------------------------------------------------- TableCellActions --------------------------------------------------------------------------------------
 
 type [<Erase>] tableCellActions =
-    inherit FelizProps.prop<ITableCellActionsProp>
+    interface prop<ITableCellActionsProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableCellActionsProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 
 // -------------------------------------------------------------------------- TableSelectionCell --------------------------------------------------------------------------------------
 
 type [<Erase>] tableSelectionCell =
-    inherit FelizProps.prop<ITableSelectionCellProp>
+    interface prop<ITableSelectionCellProp>
     /// Selection indicator if selection type is checkbox
     static member inline checkboxIndicator (value: ReactElement) = Interop.mkProperty<ITableSelectionCellProp> "checkboxIndicator" value
     /// Selection indicator if selection type is checkbox
@@ -774,7 +786,7 @@ module tableSelectionCell =
 // -------------------------------------------------------------------------- TableCellLayout --------------------------------------------------------------------------------------
 
 type [<Erase>] tableCellLayout =
-    inherit FelizProps.prop<ITableCellLayoutProp>
+    interface prop<ITableCellLayoutProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITableCellLayoutProp> "root"  (!!value |> createObj |> unbox<IReactProperty>)
     /// Main text for the table cell. Children of the root slot are automatically rendered here
     static member inline main (value: string) = Interop.mkProperty<ITableCellLayoutProp> "main" value
@@ -811,7 +823,7 @@ module tableCellLayout =
 // -------------------------------------------------------------------------- Link --------------------------------------------------------------------------------------
 
 type [<Erase>] link =
-    inherit FelizProps.prop<ILinkProp>
+    interface prop<ILinkProp>
     /// Root of the component that renders as either an <a> or a <button> tag.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ILinkProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Whether the link is disabled.
@@ -834,7 +846,7 @@ module link =
 // -------------------------------------------------------------------------- Divider --------------------------------------------------------------------------------------
 
 type [<Erase>] divider =
-    inherit FelizProps.prop<IDividerProp>
+    interface prop<IDividerProp>
     /// Root of the component that renders as a `<div>` tag.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Accessibility wrapper for content when presented.
@@ -859,7 +871,7 @@ module divider =
 // -------------------------------------------------------------------------- Text --------------------------------------------------------------------------------------
 
 type [<Erase>] text =
-    inherit FelizProps.prop<ITextProp>
+    interface prop<ITextProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITextProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Applies a block display for the content.
     static member inline block (value: bool) = Interop.mkProperty<ITextProp> "block" value
@@ -922,7 +934,7 @@ module text =
 // -------------------------------------------------------------------------- MenuButton --------------------------------------------------------------------------------------
 
 type [<Erase>] menuButton =
-    inherit FelizProps.prop<IMenuButtonProp>
+    interface prop<IMenuButtonProp>
     /// Icon that renders either before or after the children.
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IMenuButtonProp> "icon" value
     /// Icon that renders either before or after the children.
@@ -972,7 +984,7 @@ module menuButton =
 // -------------------------------------------------------------------------- Menu --------------------------------------------------------------------------------------
 
 type [<Erase>] menu =
-    inherit FelizProps.prop<IMenuProp>
+    interface prop<IMenuProp>
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IMenuProp> "mountNode" value
     /// Where the portal children are mounted on DOM
@@ -1060,7 +1072,7 @@ module menu =
 // -------------------------------------------------------------------------- MenuList --------------------------------------------------------------------------------------
 
 type [<Erase>] menuList =
-    inherit FelizProps.prop<IMenuListProp>
+    interface prop<IMenuListProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuListProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Record of all checked values.
     ///
@@ -1092,7 +1104,7 @@ module menuList =
         static member inline div = Interop.mkProperty<IMenuListProp> "as" "div"
 // -------------------------------------------------------------------------- MenuItem --------------------------------------------------------------------------------------
 type [<Erase>] menuItem =
-    inherit FelizProps.prop<IMenuItemProp>
+    interface prop<IMenuItemProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "icon" value
     static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1115,7 +1127,7 @@ type [<Erase>] menuItem =
 
 // -------------------------------------------------------------------------- MenuItemLink --------------------------------------------------------------------------------------
 type [<Erase>] menuItemLink =
-    inherit FelizProps.prop<IMenuItemLinkProp>
+    interface prop<IMenuItemLinkProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "icon" value
     static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1128,7 +1140,7 @@ type [<Erase>] menuItemLink =
 
 // -------------------------------------------------------------------------- MenuItemCheckbox --------------------------------------------------------------------------------------
 type [<Erase>] menuItemCheckbox =
-    inherit FelizProps.prop<IMenuItemCheckboxProp>
+    interface prop<IMenuItemCheckboxProp>
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "icon" value
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemCheckboxProp> "hasSubmenu" value
@@ -1145,7 +1157,7 @@ type [<Erase>] menuItemCheckbox =
 
 // -------------------------------------------------------------------------- MenuItemRadio --------------------------------------------------------------------------------------
 type [<Erase>] menuItemRadio =
-    inherit FelizProps.prop<IMenuItemRadioProp>
+    interface prop<IMenuItemRadioProp>
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "icon" value
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemRadioProp> "hasSubmenu" value
@@ -1162,7 +1174,7 @@ type [<Erase>] menuItemRadio =
 
 // -------------------------------------------------------------------------- MenuPopover --------------------------------------------------------------------------------------
 type [<Erase>] menuPopover =
-    inherit FelizProps.prop<IMenuPopoverProp>
+    interface prop<IMenuPopoverProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- MenuTrigger --------------------------------------------------------------------------------------
@@ -1174,22 +1186,22 @@ type [<Erase>] menuTrigger =
 
 // -------------------------------------------------------------------------- MenuSplitGroup --------------------------------------------------------------------------------------
 type [<Erase>] menuSplitGroup =
-    inherit FelizProps.prop<IMenuSplitGroupProp>
+    interface prop<IMenuSplitGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuSplitGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- MenuGroup --------------------------------------------------------------------------------------
 type [<Erase>] menuGroup =
-    inherit FelizProps.prop<IMenuGroupProp>
+    interface prop<IMenuGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- MenuGroupHeader --------------------------------------------------------------------------------------
 type [<Erase>] menuGroupHeader =
-    inherit FelizProps.prop<IMenuGroupHeaderProp>
+    interface prop<IMenuGroupHeaderProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuGroupHeaderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- MenuDivider --------------------------------------------------------------------------------------
 type [<Erase>] menuDivider =
-    inherit FelizProps.prop<IMenuDividerProp>
+    interface prop<IMenuDividerProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- Popover --------------------------------------------------------------------------------------
@@ -1282,7 +1294,7 @@ type [<Erase>] popoverTrigger =
 
 // -------------------------------------------------------------------------- PopoverSurface --------------------------------------------------------------------------------------
 type [<Erase>] popoverSurface =
-    inherit FelizProps.prop<IPopoverSurfaceProp>
+    interface prop<IPopoverSurfaceProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IPopoverSurfaceProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module popoverSurface =
@@ -1291,7 +1303,7 @@ module popoverSurface =
 
 // -------------------------------------------------------------------------- Tooltip --------------------------------------------------------------------------------------
 type [<Erase>] tooltip =
-    inherit FelizProps.prop<ITooltipProp>
+    interface prop<ITooltipProp>
     /// The text or JSX content of the tooltip.
     static member inline content (value: string) = Interop.mkProperty<ITooltipProp> "content" value
     /// The text or JSX content of the tooltip.
@@ -1365,7 +1377,7 @@ module tooltip =
 
 // -------------------------------------------------------------------------- Label --------------------------------------------------------------------------------------
 type [<Erase>] label =
-    inherit FelizProps.prop<ILabelProp>
+    interface prop<ILabelProp>
     /// Renders the label as disabled
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ILabelProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Renders the label as disabled
@@ -1399,7 +1411,7 @@ module label =
 
 // -------------------------------------------------------------------------- Input --------------------------------------------------------------------------------------
 type [<Erase>] input =
-    inherit FelizProps.prop<IInputProp>
+    interface prop<IInputProp>
     /// WARNING: Input doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<IInputProp> "children" value
     /// WARNING: Input doesn't support children. Using this prop will cause runtime errors.
@@ -1474,7 +1486,7 @@ module input =
 
 // -------------------------------------------------------------------------- CompoundButton --------------------------------------------------------------------------------------
 type [<Erase>] compoundButton =
-    inherit FelizProps.prop<ICompoundButtonProp>
+    interface prop<ICompoundButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member icon (value: ReactElement) = Interop.mkProperty<ICompoundButtonProp> "icon" value
     /// Second line of text that describes the action this button takes.
@@ -1532,7 +1544,7 @@ module compoundButton =
 
 // -------------------------------------------------------------------------- SplitButton --------------------------------------------------------------------------------------
 type [<Erase>] splitButton =
-    inherit FelizProps.prop<ISplitButtonProp>
+    interface prop<ISplitButtonProp>
     /// Root of the component that wraps the primary action button and menu button.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISplitButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Button that opens menu with secondary actions in SplitButton.
@@ -1593,7 +1605,7 @@ module splitButton =
 
 // -------------------------------------------------------------------------- TextArea --------------------------------------------------------------------------------------
 type [<Erase>] textArea =
-    inherit FelizProps.prop<ITextAreaProp>
+    interface prop<ITextAreaProp>
     /// Wrapper element used for displaying the borders for Textarea. This wrapper is needed due to the focus indicator border animation. For more information, see Spec.md
     /// The root only receives className and style. All other props are applied to the textarea slot.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITextAreaProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1638,7 +1650,7 @@ module textArea =
 
 // -------------------------------------------------------------------------- Slider --------------------------------------------------------------------------------------
 type [<Erase>] slider =
-    inherit FelizProps.prop<ISliderProp>
+    interface prop<ISliderProp>
     /// The root of the Slider. The root slot receives the className and style specified directly on the <Slider>.
     /// All other native props will be applied to the primary slot, input.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISliderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1706,7 +1718,7 @@ module slider =
 
 // -------------------------------------------------------------------------- Switch --------------------------------------------------------------------------------------
 type [<Erase>] switch =
-    inherit FelizProps.prop<ISwitchProp>
+    interface prop<ISwitchProp>
     /// The root element of the Switch.
     /// The root slot receives the className and style specified directly on the <Switch> tag. All other native props will be applied to the primary slot: input.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISwitchProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1747,7 +1759,7 @@ module switch =
 
 // -------------------------------------------------------------------------- Radio --------------------------------------------------------------------------------------
 type [<Erase>] radio =
-    inherit FelizProps.prop<IRadioProp>
+    interface prop<IRadioProp>
     /// The root element of the Radio.
     /// The root slot receives the className and style specified directly on the <Radio>. All other native props will be applied to the primary slot: input
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IRadioProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -1787,7 +1799,7 @@ module radio =
 // -------------------------------------------------------------------------- RadioGroup --------------------------------------------------------------------------------------
 
 type [<Erase>] radioGroup =
-    inherit FelizProps.prop<IRadioGroupProp>
+    interface prop<IRadioGroupProp>
     /// The radio group root.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IRadioGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The selected Radio item in this group.
@@ -1829,7 +1841,7 @@ type [<Erase>] portal =
 // -------------------------------------------------------------------------- TabList --------------------------------------------------------------------------------------
 
 type [<Erase>] tabList =
-    inherit FelizProps.prop<ITabListProp>
+    interface prop<ITabListProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITabListProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Tab size may change between unselected and selected states. The default scenario is a selected tab has bold text.
     /// When true, this property requests tabs be the same size whether unselected or selected.
@@ -1868,7 +1880,7 @@ module tabList =
 // -------------------------------------------------------------------------- Tab --------------------------------------------------------------------------------------
 
 type [<Erase>] tab =
-    inherit FelizProps.prop<ITabProp>
+    interface prop<ITabProp>
     /// Root of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITabProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Icon that renders before the content.
@@ -1890,7 +1902,7 @@ type [<Erase>] tab =
 // -------------------------------------------------------------------------- Spinner --------------------------------------------------------------------------------------
 
 type [<Erase>] spinner =
-    inherit FelizProps.prop<ISpinnerProp>
+    interface prop<ISpinnerProp>
     /// The root of the Spinner. The root slot receives the `className` and `style` specified directly on the `<Spinner>`.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISpinnerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The label of the Slider. The label slot receives the styling related to the text associated with the Spinner.
@@ -1937,7 +1949,7 @@ module spinner =
 // -------------------------------------------------------------------------- SpinButton --------------------------------------------------------------------------------------
 
 type [<Erase>] spinButton =
-    inherit FelizProps.prop<ISpinButtonProp>
+    interface prop<ISpinButtonProp>
     /// The root element of SpinButton is a container <div>. The root slot receives the className and style specified on the <SpinButton>.
     /// All other native props are applied to the primary slot: input.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISpinButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -2074,7 +2086,7 @@ module spinButton =
 // -------------------------------------------------------------------------- Select --------------------------------------------------------------------------------------
 
 type [<Erase>] select =
-    inherit FelizProps.prop<ISelectProp>
+    interface prop<ISelectProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISelectProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Primary slot: the actual <select> element
     static member inline select (value: ReactElement) = Interop.mkProperty<ISelectProp> "select" value
@@ -2108,7 +2120,7 @@ module select =
 // -------------------------------------------------------------------------- Dropdown --------------------------------------------------------------------------------------
 
 type [<Erase>] dropdown =
-    inherit FelizProps.prop<IDropdownProp>
+    interface prop<IDropdownProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDropdownProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline button (value: ReactElement) = Interop.mkProperty<IDropdownProp> "button" value
     static member inline button (value: IReactProperty list) = Interop.mkProperty<IDropdownProp> "button" (!!value |> createObj |> unbox<IReactProperty>)
@@ -2186,7 +2198,7 @@ module dropdown =
 // -------------------------------------------------------------------------- Option --------------------------------------------------------------------------------------
 
 type [<Erase>] option =
-    inherit FelizProps.prop<IOptionProp>
+    interface prop<IOptionProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IOptionProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline checkIcon (value: ReactElement) = Interop.mkProperty<IOptionProp> "checkIcon" value
     static member inline checkIcon (value: IReactProperty list) = Interop.mkProperty<IOptionProp> "checkIcon" (!!value |> createObj |> unbox<IReactProperty>)
@@ -2206,7 +2218,7 @@ module option =
 // -------------------------------------------------------------------------- Listbox --------------------------------------------------------------------------------------
 
 type [<Erase>] listbox =
-    inherit FelizProps.prop<IListboxProp>
+    interface prop<IListboxProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IListboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline defaultSelectedOptions (value: array<string>) = Interop.mkProperty<IListboxProp> "defaultSelectedOptions" value
     /// Sets the selection type to multiselect. Set this to true for multiselect, even if fully controlling selection state. This enables styles and accessibility properties to be set.
@@ -2224,7 +2236,7 @@ module listbox =
 // -------------------------------------------------------------------------- Persona --------------------------------------------------------------------------------------
 type [<Erase>] persona =
 
-    inherit FelizProps.prop<IPersonaProp>
+    interface prop<IPersonaProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IPersonaProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Avatar to display. If a PresenceBadge and an Avatar are provided, the Avatar will display the PresenceBadge as its presence.
     static member inline avatar (value: ReactElement) = Interop.mkProperty<IPersonaProp> "avatar" value
@@ -2291,7 +2303,7 @@ module persona =
 
 // -------------------------------------------------------------------------- Combobox --------------------------------------------------------------------------------------
 type [<Erase>] combobox =
-    inherit FelizProps.prop<IComboboxProp>
+    interface prop<IComboboxProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline button (value: ReactElement) = Interop.mkProperty<IComboboxProp> "button" value
     static member inline listbox (value: ReactElement) = Interop.mkProperty<IComboboxProp> "listbox" value
@@ -2369,7 +2381,7 @@ module combobox =
 
 // -------------------------------------------------------------------------- Toolbar --------------------------------------------------------------------------------------
 type [<Erase>] toolbar =
-    inherit FelizProps.prop<IToolbarProp>
+    interface prop<IToolbarProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToolbarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Toolbar can be vertical styled
     static member inline vertical (value: bool) = Interop.mkProperty<IToolbarProp> "vertical" value
@@ -2404,7 +2416,7 @@ module toolbar =
 
 // -------------------------------------------------------------------------- ToolbarButton --------------------------------------------------------------------------------------
 type [<Erase>] toolbarButton =
-    inherit FelizProps.prop<IToolbarButtonProp>
+    interface prop<IToolbarButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarButtonProp> "icon" value
     /// When set, allows the button to be focusable even when it has been disabled.
@@ -2426,7 +2438,7 @@ module toolbarButton =
 
 // -------------------------------------------------------------------------- ToolbarDivider --------------------------------------------------------------------------------------
 type [<Erase>] toolbarDivider =
-    inherit FelizProps.prop<IToolbarDividerProp>
+    interface prop<IToolbarDividerProp>
     /// Accessibility wrapper for content when presented.
     static member inline wrapper (value: ReactElement) = Interop.mkProperty<IToolbarDividerProp> "wrapper" value
     /// A divider can be horizontal or vertical (default).
@@ -2437,7 +2449,7 @@ module toolbarDivider =
         static member inline div = Interop.mkProperty<IToolbarDividerProp> "as" "div"
 // -------------------------------------------------------------------------- ToolbarGroup --------------------------------------------------------------------------------------
 type [<Erase>] toolbarGroup =
-    inherit FelizProps.prop<IToolbarGroupProp>
+    interface prop<IToolbarGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToolbarGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module toolbarGroup =
@@ -2446,7 +2458,7 @@ module toolbarGroup =
 
 // -------------------------------------------------------------------------- ToolbarRadioButton --------------------------------------------------------------------------------------
 type [<Erase>] toolbarRadioButton =
-    inherit FelizProps.prop<IToolbarRadioButtonProp>
+    interface prop<IToolbarRadioButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarRadioButtonProp> "icon" value
     /// When set, allows the button to be focusable even when it has been disabled.
@@ -2471,7 +2483,7 @@ module toolbarRadioButton =
 
 // -------------------------------------------------------------------------- ToolbarRadioGroup --------------------------------------------------------------------------------------
 type [<Erase>] toolbarRadioGroup =
-    inherit FelizProps.prop<IToolbarRadioGroupProp>
+    interface prop<IToolbarRadioGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToolbarRadioGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 module toolbarRadioGroup =
     type [<Erase>] as' =
@@ -2479,7 +2491,7 @@ module toolbarRadioGroup =
 
 // -------------------------------------------------------------------------- ToolbarToggleButton --------------------------------------------------------------------------------------
 type [<Erase>] toolbarToggleButton =
-    inherit FelizProps.prop<IToolbarToggleButtonProp>
+    interface prop<IToolbarToggleButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarToggleButtonProp> "icon" value
     /// When set, allows the button to be focusable even when it has been disabled.
@@ -2505,7 +2517,7 @@ module toolbarToggleButton =
 
 // -------------------------------------------------------------------------- AvatarGroup --------------------------------------------------------------------------------------
 type [<Erase>] avatarGroup =
-    inherit FelizProps.prop<IAvatarGroupProp>
+    interface prop<IAvatarGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAvatarGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module avatarGroup =
@@ -2535,7 +2547,7 @@ module avatarGroup =
 
 // -------------------------------------------------------------------------- AvatarGroupItem --------------------------------------------------------------------------------------
 type [<Erase>] avatarGroupItem =
-    inherit FelizProps.prop<IAvatarGroupItemProp>
+    interface prop<IAvatarGroupItemProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAvatarGroupItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Avatar that represents a person or entity.
     static member inline avatar (value: ReactElement) = Interop.mkProperty<IAvatarGroupItemProp> "avatar" value
@@ -2549,7 +2561,7 @@ type [<Erase>] avatarGroupItem =
 
 // -------------------------------------------------------------------------- AvatarGroupPopover --------------------------------------------------------------------------------------
 type [<Erase>] avatarGroupPopover =
-    inherit FelizProps.prop<IAvatarGroupPopoverProp>
+    interface prop<IAvatarGroupPopoverProp>
     /// Number of AvatarGroupItems that will be rendered.
     /// Note: AvatarGroupPopover handles counting the number of children, but when using a react fragment to wrap the
     /// children, this is not possible and therefore it has do be added manually.
@@ -2611,7 +2623,7 @@ module partitionAvatarGroupItemsOptions =
 
 // -------------------------------------------------------------------------- ProgressBar --------------------------------------------------------------------------------------
 type [<Erase>] progressBar =
-    inherit FelizProps.prop<IProgressBarProp>
+    interface prop<IProgressBarProp>
     /// The track behind the ProgressBar bar
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IProgressBarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The filled portion of the ProgressBar bar. Animated in the indeterminate state, when no value is provided.
@@ -2656,7 +2668,7 @@ module progressBar =
 
 // -------------------------------------------------------------------------- Field --------------------------------------------------------------------------------------
 type [<Erase>] field =
-    inherit FelizProps.prop<IFieldProp>
+    interface prop<IFieldProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IFieldProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The label associated with the field.
     static member inline label (value: string) = Interop.mkProperty<IFieldProp> "label" value
@@ -2738,7 +2750,7 @@ module field =
 
 // -------------------------------------------------------------------------- OptionGroup --------------------------------------------------------------------------------------
 type [<Erase>] optionGroup =
-    inherit FelizProps.prop<IOptionGroupProp>
+    interface prop<IOptionGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IOptionGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline label (value: string) = Interop.mkProperty<IOptionGroupProp> "label" value
     static member inline label (value: ReactElement) = Interop.mkProperty<IOptionGroupProp> "label" value
@@ -2746,7 +2758,7 @@ type [<Erase>] optionGroup =
 
 // -------------------------------------------------------------------------- Dialog --------------------------------------------------------------------------------------
 type [<Erase>] dialog =
-    inherit FelizProps.prop<IDialogProp>
+    interface prop<IDialogProp>
     /// Controls the open state of the dialog
     static member inline open' (value: bool) = Interop.mkProperty<IDialogProp> "open" value
     /// Default value for the uncontrolled open state of the dialog.
@@ -2797,7 +2809,7 @@ type [<Erase>] dialogTrigger =
 
 // -------------------------------------------------------------------------- DialogSurface --------------------------------------------------------------------------------------
 type [<Erase>] dialogSurface =
-    inherit FelizProps.prop<IDialogSurfaceProp>
+    interface prop<IDialogSurfaceProp>
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling.
     /// This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
     static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDialogSurfaceProp> "backdrop" value
@@ -2812,7 +2824,7 @@ module dialogSurface =
         static member inline div = Interop.mkProperty<IDialogSurfaceProp> "as" "div"
 // -------------------------------------------------------------------------- DialogTitle --------------------------------------------------------------------------------------
 type [<Erase>] dialogTitle =
-    inherit FelizProps.prop<IDialogTitleProp>
+    interface prop<IDialogTitleProp>
     /// By default this is a h2, but can be any heading or div,
     /// if `div` is provided do not forget to also provide proper `role="heading"` and `aria-level` attributes
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDialogTitleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -2833,7 +2845,7 @@ module dialogTitle =
 
 // -------------------------------------------------------------------------- DialogActions --------------------------------------------------------------------------------------
 type [<Erase>] dialogActions =
-    inherit FelizProps.prop<IDialogActionsProp>
+    interface prop<IDialogActionsProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDialogActionsProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Makes the actions expand the entire width of the DialogBody
     static member inline fluid (value: bool) = Interop.mkProperty<IDialogActionsProp> "fluid" value
@@ -2848,17 +2860,17 @@ module dialogActions =
 
 // -------------------------------------------------------------------------- DialogBody --------------------------------------------------------------------------------------
 type [<Erase>] dialogBody =
-    inherit FelizProps.prop<IDialogBodyProp>
+    interface prop<IDialogBodyProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDialogBodyProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- DialogContent --------------------------------------------------------------------------------------
 type [<Erase>] dialogContent =
-    inherit FelizProps.prop<IDialogContentProp>
+    interface prop<IDialogContentProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDialogContentProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- Toast --------------------------------------------------------------------------------------
 type [<Erase>] toast =
-    inherit FelizProps.prop<IToastProp>
+    interface prop<IToastProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToastProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module toast =
@@ -2869,7 +2881,7 @@ module toast =
 
 // -------------------------------------------------------------------------- ToastTitle --------------------------------------------------------------------------------------
 type [<Erase>] toastTitle =
-    inherit FelizProps.prop<IToastTitleProp>
+    interface prop<IToastTitleProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToastTitleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline action (value: ReactElement) = Interop.mkProperty<IToastTitleProp> "action" value
     static member inline action (value: IReactProperty list) = Interop.mkProperty<IToastTitleProp> "action" (!!value |> createObj |> unbox<IReactProperty>)
@@ -2882,7 +2894,7 @@ module toastTitle =
 
 // -------------------------------------------------------------------------- ToastBody --------------------------------------------------------------------------------------
 type [<Erase>] toastBody =
-    inherit FelizProps.prop<IToastBodyProp>
+    interface prop<IToastBodyProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToastBodyProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline subtitle (value: string) = Interop.mkProperty<IToastBodyProp> "subtitle" value
     static member inline subtitle (value: ReactElement) = Interop.mkProperty<IToastBodyProp> "subtitle" value
@@ -2894,7 +2906,7 @@ module toastBody =
 
 // -------------------------------------------------------------------------- ToastFooter --------------------------------------------------------------------------------------
 type [<Erase>] toastFooter =
-    inherit FelizProps.prop<IToastFooterProp>
+    interface prop<IToastFooterProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IToastFooterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module toastFooter =
@@ -2903,7 +2915,7 @@ module toastFooter =
 
 // -------------------------------------------------------------------------- Toaster --------------------------------------------------------------------------------------
 type [<Erase>] toaster =
-    inherit FelizProps.prop<IToasterProp>
+    interface prop<IToasterProp>
 
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToasterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline offset (value: IToastOffsetProp list) = Interop.mkProperty<IToasterProp> "offset" (!!value |> createObj |> unbox<ToastOffset>)
@@ -2971,7 +2983,7 @@ type [<Erase>] toastOffset =
 
 // -------------------------------------------------------------------------- Card --------------------------------------------------------------------------------------
 type [<Erase>] card =
-    inherit FelizProps.prop<ICardProp>
+    interface prop<ICardProp>
     /// The internal checkbox element that renders when the card is selectable.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ICardProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The internal checkbox element that renders when the card is selectable.
@@ -3034,7 +3046,7 @@ module card =
 
 // -------------------------------------------------------------------------- CardFooter --------------------------------------------------------------------------------------
 type [<Erase>] cardFooter =
-    inherit FelizProps.prop<ICardFooterProp>
+    interface prop<ICardFooterProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ICardFooterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Container that renders on the far end of the footer, used for action buttons.
@@ -3048,7 +3060,7 @@ module cardFooter =
 
 // -------------------------------------------------------------------------- CardHeader --------------------------------------------------------------------------------------
 type [<Erase>] cardHeader =
-    inherit FelizProps.prop<ICardHeaderProp>
+    interface prop<ICardHeaderProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ICardHeaderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Element used to render the main header title.
@@ -3078,7 +3090,7 @@ module cardHeader =
 
 // -------------------------------------------------------------------------- CardPreview --------------------------------------------------------------------------------------
 type [<Erase>] cardPreview  =
-    inherit FelizProps.prop<ICardPreviewProp>
+    interface prop<ICardPreviewProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ICardPreviewProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Container that holds a logo related to the image preview provided.
@@ -3092,7 +3104,7 @@ module cardPreview  =
 
 // -------------------------------------------------------------------------- Skeleton --------------------------------------------------------------------------------------
 type [<Erase>] skeleton  =
-    inherit FelizProps.prop<ISkeletonProp>
+    interface prop<ISkeletonProp>
     /// The root slot of the `Skeleton` is the container that will contain the slots that make up a `Skeleton`
     /// and any data that the `Skeleton` will load. The default html element is a `div`.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISkeletonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -3121,7 +3133,7 @@ module skeleton  =
 
 // -------------------------------------------------------------------------- SkeletonItem --------------------------------------------------------------------------------------
 type [<Erase>] skeletonItem  =
-    inherit FelizProps.prop<ISkeletonItemProp>
+    interface prop<ISkeletonItemProp>
         static member inline root (value: IReactProperty list) = Interop.mkProperty<ISkeletonItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module skeletonItem =
@@ -3165,7 +3177,7 @@ module skeletonItem =
 
 // -------------------------------------------------------------------------- DatePicker --------------------------------------------------------------------------------------
 type [<Erase>] datePicker  =
-    inherit FelizProps.prop<IDatePickerProp>
+    interface prop<IDatePickerProp>
     /// Wrapper element which visually appears to be the input and is used for borders, focus styling, etc.
     /// (A wrapper is needed to properly position contentBefore and contentAfter relative to input.)
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -3677,7 +3689,7 @@ type [<Erase>] overflowDivider  =
 
 // -------------------------------------------------------------------------- DataGrid --------------------------------------------------------------------------------------
 type [<Erase>] dataGrid  =
-    inherit FelizProps.prop<IDataGridProp>
+    interface prop<IDataGridProp>
     /// Render all table elements as divs instead of semantic table elements Using divs no longer uses display: table layout but display: flex
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDataGridProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Render all table elements as divs instead of semantic table elements Using divs no longer uses display: table layout but display: flex
@@ -3741,7 +3753,7 @@ type [<Erase>] dataGrid  =
     static member inline onSelectionChange (value: KeyboardEvent -> OnSelectionChangeData<decimal> -> unit) =
         Interop.mkProperty<IDataGridProp> "onSelectionChange" (System.Func<_,_,_> (fun e (v: TempSeq<decimal>) -> (TempSeq.mkOnChangeData v) |> value e))
     /// Options for column resizing
-    static member inline columnSizingOptions (value: list<string * ITableColumnSizingOptionsProp list>) =
+    static member inline columnSizingOptions (value: list<string * IProp<ITableColumnSizingOptionsProp> list>) =
         let value =
             match value with
             | [] -> {||} |> unbox
@@ -3801,7 +3813,7 @@ module dataGrid =
         static member inline single = Interop.mkProperty<IDataGridProp> "selectionMode" "single"
 
 // -------------------------------------------------------------------------- DataGridHeader --------------------------------------------------------------------------------------
-type [<Erase>] dataGridHeader = FelizProps.prop<IDataGridHeaderProp>
+type [<Erase>] dataGridHeader = prop<IDataGridHeaderProp>
 
 module dataGridHeader =
     type [<Erase>] as' =
@@ -3810,7 +3822,7 @@ module dataGridHeader =
 
 // -------------------------------------------------------------------------- DataGridHeaderCell --------------------------------------------------------------------------------------
 type [<Erase>] dataGridHeaderCell =
-    inherit FelizProps.prop<IDataGridHeaderCellProp>
+    interface prop<IDataGridHeaderCellProp>
     /// aside content for anything that should be after main content of the table header cell
     static member inline aside (value: ReactElement)= Interop.mkProperty<IDataGridHeaderProp> "aside" value
     /// Button handles correct narration and interactions for sorting
@@ -3827,7 +3839,7 @@ module dataGridHeaderCell =
 
 // -------------------------------------------------------------------------- DataGridBody --------------------------------------------------------------------------------------
 type [<Erase>] dataGridBody =
-    inherit FelizProps.prop<IDataGridBodyProp>
+    interface prop<IDataGridBodyProp>
     static member inline children (value: TableRowData<'T, 'TKeyType> -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_> value)
 
 module dataGridBody =
@@ -3837,7 +3849,7 @@ module dataGridBody =
 
 // -------------------------------------------------------------------------- DataGridRow --------------------------------------------------------------------------------------
 type [<Erase>] dataGridRow =
-    inherit FelizProps.prop<IDataGridRowProp>
+    interface prop<IDataGridRowProp>
     /// When selection is enabled on the DataGrid, all rows will render the selection cell.
     static member inline selectionCell (value: ReactElement) = Interop.mkProperty<IDataGridRowProp> "selectionCell" value
     /// When selection is enabled on the DataGrid, all rows will render the selection cell.
@@ -3860,7 +3872,7 @@ module dataGridRow =
         static member inline brand = Interop.mkProperty<IDataGridRowProp> "appearance" "brand"
 
 // -------------------------------------------------------------------------- DataGridCell --------------------------------------------------------------------------------------
-type [<Erase>] dataGridCell = FelizProps.prop<IDataGridCellProp>
+type [<Erase>] dataGridCell = prop<IDataGridCellProp>
 
 module dataGridCell =
     type [<Erase>] as' =
@@ -3878,7 +3890,7 @@ module dataGridCell =
 
 // -------------------------------------------------------------------------- DataGridSelectionCell --------------------------------------------------------------------------------------
 type [<Erase>] dataGridSelectionCell =
-    inherit FelizProps.prop<IDataGridSelectionCellProp>
+    interface prop<IDataGridSelectionCellProp>
     /// Selection indicator if selection type is checkbox
     static member inline checkboxIndicator (value: ReactElement)= Interop.mkProperty<IDataGridSelectionCellProp> "checkboxIndicator" value
     /// Selection indicator if selection type is checkbox
@@ -3909,7 +3921,7 @@ module dataGridSelectionCell =
 
 // -------------------------------------------------------------------------- Icon --------------------------------------------------------------------------------------
 type [<Erase>] icon =
-    inherit FelizProps.prop<IIconProp>
+    interface prop<IIconProp>
     static member inline primaryFill (value: string)= Interop.mkProperty<IIconProp> "primaryFill" value
     static member inline filled (value: bool)= Interop.mkProperty<IIconProp> "filled" value
 
@@ -3925,7 +3937,7 @@ module icon =
 
 // -------------------------------------------------------------------------- InfoButton --------------------------------------------------------------------------------------
 type [<Erase>] infoButton =
-    inherit FelizProps.prop<IInfoButtonProp>
+    interface prop<IInfoButtonProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IInfoButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The Popover element that wraps the info and root slots. Use this slot to pass props to the Popover.
     static member inline popover (value: ReactElement)= Interop.mkProperty<IInfoButtonProp> "popover" value
@@ -3951,7 +3963,7 @@ module infoButton =
 
 // -------------------------------------------------------------------------- InfoLabel --------------------------------------------------------------------------------------
 type [<Erase>] infoLabel =
-    inherit FelizProps.prop<IInfoLabelProp>
+    interface prop<IInfoLabelProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IInfoLabelProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The Label component.
     /// It is not typically necessary to use this prop. The label text is the child of the <InfoLabel>, and other props such as size and required should be set directly on the InfoLabel.
@@ -3989,7 +4001,7 @@ module infoLabel =
 
 // -------------------------------------------------------------------------- Alert --------------------------------------------------------------------------------------
 type [<Erase>] alert =
-    inherit FelizProps.prop<IAlertProp>
+    interface prop<IAlertProp>
     /// The root slot is the top level container for the alert component
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAlertProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// The icon slot renders the icon determined by the `icon` or `intent` prop
@@ -4025,7 +4037,7 @@ module alert =
 
 // -------------------------------------------------------------------------- Virtualizer --------------------------------------------------------------------------------------
 type [<Erase>] virtualizer =
-    inherit FelizProps.prop<IVirtualizerProp>
+    interface prop<IVirtualizerProp>
     /// The intersection observed 'before' element will detect when scrolling towards the beginning.
     static member inline before (value: ReactElement) = Interop.mkProperty<IVirtualizerProp> "before" value
     /// The intersection observed 'before' element will detect when scrolling towards the beginning.
@@ -4167,7 +4179,7 @@ module virtualizer =
 
 // -------------------------------------------------------------------------- VirtualizerScrollView --------------------------------------------------------------------------------------
 type [<Erase>] virtualizerScrollView =
-    inherit FelizProps.prop<IVirtualizerScrollViewProp>
+    interface prop<IVirtualizerScrollViewProp>
     /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" value
     /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
@@ -4295,7 +4307,7 @@ module virtualizerScrollView =
 
 // -------------------------------------------------------------------------- VirtualizerScrollViewDynamic --------------------------------------------------------------------------------------
 type [<Erase>] virtualizerScrollViewDynamic =
-    inherit FelizProps.prop<IVirtualizerScrollViewDynamicProp>
+    interface prop<IVirtualizerScrollViewDynamicProp>
     /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" value
     /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
@@ -4431,7 +4443,7 @@ module virtualizerScrollViewDynamic =
 
 // -------------------------------------------------------------------------- Drawer --------------------------------------------------------------------------------------
 type [<Erase>] drawer =
-    inherit FelizProps.prop<IDrawerProp>
+    interface prop<IDrawerProp>
     static member inline root (value: IDrawerOverlayProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IDrawerOverlayProp>)
     static member inline root (value: IDrawerInlineProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IDrawerInlineProp>)
     /// Controls the open state of the Drawer
@@ -4488,7 +4500,7 @@ module drawer =
 
 // -------------------------------------------------------------------------- DrawerOverlay --------------------------------------------------------------------------------------
 type [<Erase>] drawerOverlay =
-    inherit FelizProps.prop<IDrawerOverlayProp>
+    interface prop<IDrawerOverlayProp>
     static member inline root (value: IDialogSurfaceProp list) = Interop.mkProperty<IDrawerOverlayProp> "root" (!!value |> createObj |> unbox<IDialogSurfaceProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "open" value
@@ -4544,7 +4556,7 @@ module drawerOverlay =
 
 // -------------------------------------------------------------------------- DrawerInline --------------------------------------------------------------------------------------
 type [<Erase>] drawerInline =
-    inherit FelizProps.prop<IDrawerInlineProp>
+    interface prop<IDrawerInlineProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerInlineProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerInlineProp> "open" value
@@ -4581,7 +4593,7 @@ module drawerInline =
 
 // -------------------------------------------------------------------------- DrawerHeader --------------------------------------------------------------------------------------
 type [<Erase>] drawerHeader =
-    inherit FelizProps.prop<IDrawerHeaderProp>
+    interface prop<IDrawerHeaderProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerHeaderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module drawerHeader =
@@ -4591,7 +4603,7 @@ module drawerHeader =
 
 // -------------------------------------------------------------------------- DrawerHeaderTitle --------------------------------------------------------------------------------------
 type [<Erase>] drawerHeaderTitle =
-    inherit FelizProps.prop<IDrawerHeaderTitleProp>
+    interface prop<IDrawerHeaderTitleProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerHeaderTitleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// By default this is a h2, but can be any heading or div. If div is provided do not forget to also provide proper role="heading" and aria-level attributes
     static member inline heading (value: string) = Interop.mkProperty<IDrawerHeaderTitleProp> "heading" value
@@ -4610,7 +4622,7 @@ module drawerHeaderTitle =
         static member inline div = Interop.mkProperty<IDrawerHeaderTitleProp> "as" "div"
 
 // -------------------------------------------------------------------------- DrawerHeaderNavigation --------------------------------------------------------------------------------------
-type [<Erase>] drawerHeaderNavigation = FelizProps.prop<IDrawerHeaderNavigationProp>
+type [<Erase>] drawerHeaderNavigation = prop<IDrawerHeaderNavigationProp>
 
 module drawerHeaderNavigation =
 
@@ -4618,7 +4630,7 @@ module drawerHeaderNavigation =
         static member inline nav = Interop.mkProperty<IDrawerHeaderNavigationProp> "as" "nav"
 
 // -------------------------------------------------------------------------- DrawerBody --------------------------------------------------------------------------------------
-type [<Erase>] drawerBody = FelizProps.prop<IDrawerBodyProp>
+type [<Erase>] drawerBody = prop<IDrawerBodyProp>
 
 module drawerBody =
 
@@ -4627,7 +4639,7 @@ module drawerBody =
 
 // -------------------------------------------------------------------------- Tree --------------------------------------------------------------------------------------
 type [<Erase>] tree =
-    inherit FelizProps.prop<ITreeProp>
+    interface prop<ITreeProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<ITreeProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// This refers to a list of ids of opened tree items. Controls the state of the open tree items. These property is ignored for subtrees.
     static member inline openItems (value: #seq<'T>)= Interop.mkProperty<ITreeProp> "openItems" value
@@ -4682,7 +4694,7 @@ module tree =
 
 // -------------------------------------------------------------------------- FlatTree --------------------------------------------------------------------------------------
 type [<Erase>] flatTree =
-    inherit FelizProps.prop<IFlatTreeProp>
+    interface prop<IFlatTreeProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IFlatTreeProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// This refers to a list of ids of opened tree items. Controls the state of the open tree items. These property is ignored for subtrees.
     static member inline openItems (value: #seq<'T>)= Interop.mkProperty<IFlatTreeProp> "openItems" value
@@ -4750,7 +4762,7 @@ module flatTree =
         ]
 // -------------------------------------------------------------------------- TreeItem --------------------------------------------------------------------------------------
 type [<Erase>] treeItem =
-    inherit FelizProps.prop<ITreeItemProp>
+    interface prop<ITreeItemProp>
     static member inline itemType (value: TreeItemType)= Interop.mkProperty<ITreeItemProp> "itemType" value
     static member inline value (value: string)= Interop.mkProperty<ITreeItemProp> "value" value
     static member inline parentValue (value: string option)= Interop.mkProperty<ITreeItemProp> "parentValue" value
@@ -4777,7 +4789,7 @@ module treeItem =
 
 // -------------------------------------------------------------------------- TreeItemLayout --------------------------------------------------------------------------------------
 type [<Erase>] treeItemLayout =
-    inherit FelizProps.prop<ITreeItemLayoutProp>
+    interface prop<ITreeItemLayoutProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<ITreeItemLayoutProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Content. Children of the root slot are automatically rendered here
     static member inline main (value: ReactElement)= Interop.mkProperty<ITreeItemLayoutProp> "main" value
@@ -4826,7 +4838,7 @@ module treeItemLayout =
 
 // -------------------------------------------------------------------------- TreeItemPersonaLayout --------------------------------------------------------------------------------------
 type [<Erase>] treeItemPersonaLayout =
-    inherit FelizProps.prop<ITreeItemPersonaLayoutProp>
+    interface prop<ITreeItemPersonaLayoutProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Content. Children of the root slot are automatically rendered here
     static member inline main (value: ReactElement)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "main" value
@@ -5064,7 +5076,7 @@ type [<Erase>] useModalAttributesOptions =
 // -------------------------------------------------------------------------- HeadlessTreeItem --------------------------------------------------------------------------------------
 
 type [<Erase>] headlessTreeItem =
-    inherit FelizProps.prop<IHeadlessTreeItemProp>
+    interface prop<IHeadlessTreeItemProp>
 
     static member inline value (value: string) = Interop.mkProperty<IHeadlessTreeItemProp> "value" value
     static member inline value (value: int) = Interop.mkProperty<IHeadlessTreeItemProp> "value" value
@@ -5083,7 +5095,7 @@ module headlessTreeItem =
 // -------------------------------------------------------------------------- HeadlessFlatTreeOptions --------------------------------------------------------------------------------------
 
 type [<Erase>] headlessFlatTreeOptions =
-    inherit FelizProps.prop<IHeadlessFlatTreeOptionsProp>
+    interface prop<IHeadlessFlatTreeOptionsProp>
     static member inline content (value: string) = Interop.mkProperty<IHeadlessFlatTreeOptionsProp> "content" value
     // Callback fired when the component changes value from open state.
     // These property is ignored for subtrees.
@@ -5270,7 +5282,7 @@ module updateToastOptions =
 
 // -------------------------------------------------------------------------- Breadcrumb --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumb =
-    inherit FelizProps.prop<IBreadcrumbProp>
+    interface prop<IBreadcrumbProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Ordered list which contains items.
@@ -5304,7 +5316,7 @@ module breadcrumb =
 
 // -------------------------------------------------------------------------- BreadcrumbItem --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumbItem =
-    inherit FelizProps.prop<IBreadcrumbItemProp>
+    interface prop<IBreadcrumbItemProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Ordered list which contains items.
@@ -5324,7 +5336,7 @@ module breadcrumbItem =
 
 // -------------------------------------------------------------------------- BreadcrumbDivider --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumbDivider =
-    inherit FelizProps.prop<IBreadcrumbDividerProp>
+    interface prop<IBreadcrumbDividerProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
@@ -5333,7 +5345,7 @@ module breadcrumbDivider =
         static member inline li = Interop.mkProperty<IBreadcrumbDividerProp> "as" "li"
 // -------------------------------------------------------------------------- BreadcrumbButton --------------------------------------------------------------------------------------
 type [<Erase>] breadcrumbButton =
-    inherit FelizProps.prop<IBreadcrumbButtonProp>
+    interface prop<IBreadcrumbButtonProp>
     /// Root of the component that renders as either a `<button>` tag or an `<a>` tag.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
@@ -5380,7 +5392,7 @@ type [<Erase>] partitionBreadcrumbItemsOptions =
 
 // -------------------------------------------------------------------------- Searchbox --------------------------------------------------------------------------------------
 type [<Erase>] searchBox =
-    inherit FelizProps.prop<ISearchBoxProp>
+    interface prop<ISearchBoxProp>
     /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
     /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
@@ -5449,7 +5461,7 @@ module searchBox =
 
 // -------------------------------------------------------------------------- Tag --------------------------------------------------------------------------------------
 type [<Erase>] tag =
-    inherit FelizProps.prop<ITagProp>
+    interface prop<ITagProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Slot for an icon or other visual element
     static member inline media (value:  ReactElement) = Interop.mkProperty<ITagProp> "media" value
@@ -5501,7 +5513,7 @@ module tag =
 
 // -------------------------------------------------------------------------- TagGroup --------------------------------------------------------------------------------------
 type [<Erase>] tagGroup =
-    inherit FelizProps.prop<ITagGroupProp>
+    interface prop<ITagGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITagGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Callback for when a tag is dismissed
     static member inline onDismiss (handler: ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> (fun _ value -> handler value))
@@ -5519,7 +5531,7 @@ module tagGroup =
 
 // -------------------------------------------------------------------------- interactionTag --------------------------------------------------------------------------------------
 type [<Erase>] interactionTag =
-    inherit FelizProps.prop<IInteractionTagProp>
+    interface prop<IInteractionTagProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Unique value identifying the tag within a TagGroup
     static member inline value (value: string) = Interop.mkProperty<IInteractionTagProp> "value" value
@@ -5547,7 +5559,7 @@ module interactionTag =
 
 // -------------------------------------------------------------------------- InteractionTagPrimary --------------------------------------------------------------------------------------
 type [<Erase>] interactionTagPrimary =
-    inherit FelizProps.prop<IInteractionTagPrimaryProp>
+    interface prop<IInteractionTagPrimaryProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagPrimaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Slot for an icon or other visual element
     static member inline media (value:  ReactElement) = Interop.mkProperty<IInteractionTagPrimaryProp> "media" value
@@ -5576,7 +5588,7 @@ module interactionTagPrimary =
 
 // -------------------------------------------------------------------------- InteractionTagSecondary --------------------------------------------------------------------------------------
 type [<Erase>] interactionTagSecondary =
-    inherit FelizProps.prop<IInteractionTagSecondaryProp>
+    interface prop<IInteractionTagSecondaryProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagSecondaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- TableColumnSizingOptions --------------------------------------------------------------------------------------
@@ -5599,7 +5611,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: int) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: string, columnWidth: int) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5611,7 +5623,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: float) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: string, columnWidth: float) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5623,7 +5635,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
     ///
     /// **NOTE**: For this column's width to truly be static, use this property for every column. Otherwise, the user can still resize the surrounding columns.
-    static member inline staticColumnWidth (columnId: string, columnWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+    static member inline staticColumnWidth (columnId: string, columnWidth: decimal) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" columnWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" columnWidth
@@ -5633,7 +5645,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: int, defaultWidth: int, idealWidth: int) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: string, minWidth: int, defaultWidth: int, idealWidth: int) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
@@ -5643,7 +5655,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: float, defaultWidth: float, idealWidth: float) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: string, minWidth: float, defaultWidth: float, idealWidth: float) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
@@ -5653,7 +5665,7 @@ type [<Erase>] tableColumnSizingOptions =
     /// This is a custom helper property to make setting columns widths easier.
     ///
     /// **NOTE**: Without setting `dataGrid.resizeableColumns true`, this property won't do anything.
-    static member inline resizeableColumnWidth (columnId: string, minWidth: decimal, defaultWidth: decimal, idealWidth: decimal) : string * ITableColumnSizingOptionsProp list =
+    static member inline resizeableColumnWidth (columnId: string, minWidth: decimal, defaultWidth: decimal, idealWidth: decimal) : string * IProp<ITableColumnSizingOptionsProp> list =
         columnId, [
             Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" minWidth
             Interop.mkProperty<ITableColumnSizingOptionsProp> "defaultWidth" defaultWidth
@@ -5708,7 +5720,7 @@ type [<Erase>] virtualizerContextProps =
 
 // -------------------------------------------------------------------------- MessageBar --------------------------------------------------------------------------------------
 type [<Erase>] messageBar =
-    inherit FelizProps.prop<IMessageBarProp>
+    interface prop<IMessageBarProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IMessageBarProp> "icon" value
     static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IMessageBarProp> "icon"  (!!value |> createObj |> unbox<IReactProperty>)
@@ -5737,7 +5749,7 @@ module messageBar =
 
 // -------------------------------------------------------------------------- MessageBarBody --------------------------------------------------------------------------------------
 type [<Erase>] messageBarBody =
-    inherit FelizProps.prop<IMessageBarBodyProp>
+    interface prop<IMessageBarBodyProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarBodyProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module messageBarBody =
@@ -5745,7 +5757,7 @@ module messageBarBody =
         static member inline div = Interop.mkProperty<IMessageBarBodyProp> "as"  "div"
 // -------------------------------------------------------------------------- MessageBarTitle --------------------------------------------------------------------------------------
 type [<Erase>] messageBarTitle =
-    inherit FelizProps.prop<IMessageBarTitleProp>
+    interface prop<IMessageBarTitleProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarTitleProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 module messageBarTitle =
@@ -5753,7 +5765,7 @@ module messageBarTitle =
         static member inline span = Interop.mkProperty<IMessageBarTitleProp> "as"  "span"
 // -------------------------------------------------------------------------- MessageBarActions --------------------------------------------------------------------------------------
 type [<Erase>] messageBarActions =
-    inherit FelizProps.prop<IMessageBarActionsProp>
+    interface prop<IMessageBarActionsProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarActionsProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Generally the 'Dismiss' button for the MessageBar
     static member inline containerAction (value: ReactElement) = Interop.mkProperty<IMessageBarActionsProp> "containerAction" value
@@ -5765,7 +5777,7 @@ module messageBarActions =
         static member inline div = Interop.mkProperty<IMessageBarActionsProp> "as"  "div"
 // -------------------------------------------------------------------------- MessageBarGroup --------------------------------------------------------------------------------------
 type [<Erase>] messageBarGroup =
-    inherit FelizProps.prop<IMessageBarGroupProp>
+    interface prop<IMessageBarGroupProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarGroupProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 module messageBarGroup =
     type [<Erase>] animate =

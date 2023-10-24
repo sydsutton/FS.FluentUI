@@ -379,7 +379,7 @@ type [<Erase>] Fui =
 
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
-    static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
+    static member inline fluentProvider (props: IProp<fluentProvider> list) = createElement (import "FluentProvider" FluentUIv9) props
     /// An Avatar is a graphical representation of a user, team, or entity.
     /// Avatar can display an image, icon, or initials, and supports various sizes and shapes.
     static member inline avatar (props: IAvatarProp list) = createElement (import "Avatar" FluentUIv9) props
@@ -414,7 +414,7 @@ type [<Erase>] Fui =
     /// Typography and styling abstraction component used to ensure consistency and standardize text throughout your application.
     static member inline text (text:string) = createElement (import "Text" FluentUIv9) [ prop.text text ]
     /// Typography and styling abstraction component used to ensure consistency and standardize text throughout your application.
-    static member inline text (props: ITextProp list) = createElement (import "Text" FluentUIv9) props
+    static member inline text (props: IProp<ITextProp> list) = createElement (import "Text" FluentUIv9) props
     /// A label provides a name or title for an input.
     static member inline label (props: ILabelProp list) = createElement (import "Label" FluentUIv9) props
     /// A popover displays content on top of other content.
