@@ -214,16 +214,11 @@ type PartitionAvatarGroupItems<'T> = {
 
 type [<RequireQualifiedAccess>] DialogChange = | escapeKeyDown | backdropClick | triggerClick
 
-type DialogOpenChangeEvent = | MouseEvent | KeyboardEvent
-
-type DialogOpenChangeData = {
+type DialogOpenChangeData<'TEvent> = {
     ``type``: DialogChange
     ``open``: bool
-    event: DialogOpenChangeEvent
+    event: 'TEvent
 }
-
-type [<RequireQualifiedAccess>] DialogTriggerAction = ``open`` | close
-
 
 type FocusProp = {
     focus: unit -> unit

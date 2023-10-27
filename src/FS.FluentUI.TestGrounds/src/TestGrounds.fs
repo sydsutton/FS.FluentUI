@@ -1515,7 +1515,7 @@ let DialogTest() =
     let isOpen, setIsOpen = React.useState false
     Fui.dialog [
         dialog.open' isOpen
-        dialog.onOpenChange (fun (d: DialogOpenChangeData) -> setIsOpen d.``open``)
+        dialog.onOpenChange (fun (d: DialogOpenChangeData<MouseEvent>) -> setIsOpen d.``open``)
         dialog.children [
             Fui.dialogTrigger [
                 dialogTrigger.disableButtonEnhancement true
@@ -1528,6 +1528,18 @@ let DialogTest() =
             Fui.dialogSurface [
                 Fui.dialogBody [
                     Fui.dialogTitle [
+                        dialogTitle.action (
+                            Fui.dialogTrigger [
+                                dialogTrigger.action.open'
+                                dialogTrigger.children (
+                                    Fui.button [
+                                        button.children [
+                                            Fui.icon.dismissRegular []
+                                        ]
+                                    ]
+                                )
+                            ]
+                        )
                         dialogTitle.as'.h1
                         dialogTitle.text "Dialog Title"
                     ]
@@ -2175,11 +2187,12 @@ let DrawerTest() =
     let isOpen, setIsOpen = React.useState false
     Fui.stack [
         stack.children [
-            Fui.drawerOverlay [
-                drawerOverlay.modalType.nonModal
-                drawerOverlay.open' isOpen
-                drawerOverlay.onOpenChange (fun (_: KeyboardEvent) (data: DialogOpenChangeData) -> setIsOpen data.``open``)
-                drawerOverlay.children [
+            Fui.drawer [
+                drawer.type'.overlay
+                drawer.separator true
+                drawer.open' isOpen
+                drawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
+                drawer.children [
                     Fui.drawerHeader [
                         Fui.drawerHeaderTitle [
                             drawerHeaderTitle.action (

@@ -2764,11 +2764,13 @@ type [<Erase>] dialog =
             | _ -> elems |> Seq.take 2
         Interop.mkProperty<IDialogProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDialogProp> "inertTrapFocus" value
 
@@ -2787,13 +2789,17 @@ module dialog =
 
 // -------------------------------------------------------------------------- DialogTrigger --------------------------------------------------------------------------------------
 type [<Erase>] dialogTrigger =
-    /// Explicitly declare if the trigger is responsible for opening or closing a Dialog visibility state.
-    /// If DialogTrigger is outside DialogSurface then it'll be open by default
-    /// If DialogTrigger is inside DialogSurface then it'll be close by default
-    static member inline action (value: DialogTriggerAction) = Interop.mkProperty<IDialogTriggerProp> "action" value
     /// Disables internal trigger mechanism that ensures a child provided will be a compliant ARIA button.
     static member inline disableButtonEnhancement (value: bool) = Interop.mkProperty<IDialogTriggerProp> "disableButtonEnhancement" value
     static member inline children (value: ReactElement) = Interop.mkProperty<IDialogTriggerProp> "children" value
+
+module dialogTrigger =
+    /// Explicitly declare if the trigger is responsible for opening or closing a Dialog visibility state.
+    /// If DialogTrigger is outside DialogSurface then it'll be open by default
+    /// If DialogTrigger is inside DialogSurface then it'll be close by default
+    type [<Erase>] action =
+        static member inline open' = Interop.mkProperty<IDialogTriggerProp> "action" "open"
+        static member inline close = Interop.mkProperty<IDialogTriggerProp> "action" "close"
 
 // -------------------------------------------------------------------------- DialogSurface --------------------------------------------------------------------------------------
 type [<Erase>] dialogSurface =
@@ -4447,15 +4453,19 @@ type [<Erase>] drawer =
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
+    static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IDrawerProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
     static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerProp> "backdrop" value //TODO
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerProp> "separator" value
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
 
 module drawer =
 
@@ -4503,15 +4513,19 @@ type [<Erase>] drawerOverlay =
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
-    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerOverlayProp> "backdrop" value //TODO
+    static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IDrawerOverlayProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
+    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerOverlayProp> "backdrop" value
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "separator" value
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
 
 module drawerOverlay =
 
