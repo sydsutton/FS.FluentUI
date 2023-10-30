@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 1.4.0 (10-30-2023)
+
+* Update @fluentui/react-components to 9.37.0
+* Change parameters for drawer/dialog.onOpenChange properties
+* Replace domain type `SortState` with KeyType * SortDirection tuple
+* Update @fluentui/react-breadcrumb-preview to 2.0.0 and Breadcrumb properties
+* Update @fluentui/react-datepicker-compat to 0.4.1
+* Update @fluentui/react-search-preview to 0.1.29
+* Update @fluentui/react-calendar-compat to 0.0.3
+
 ### 1.3.0 (10-23-2023)
 
 * Add Calendar component and properties
