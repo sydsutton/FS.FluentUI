@@ -4455,7 +4455,7 @@ type [<Erase>] drawer =
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
     static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IDrawerProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
-    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerProp> "backdrop" value //TODO
+    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerProp> "backdrop" value
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerProp> "separator" value
     /// Callback fired when the component changes value from open state.
@@ -5295,15 +5295,12 @@ type [<Erase>] breadcrumb =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Ordered list which contains items.
     static member inline list (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbProp> "list" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Ordered list which contains items.
+    static member inline list (value: ReactElement) = Interop.mkProperty<IBreadcrumbProp> "list" value
 
 module breadcrumb =
     type [<Erase>] as' =
         static member inline nav = Interop.mkProperty<IBreadcrumbProp> "as" "nav"
-
-    /// Breadcrumb appearance.
-    type [<Erase>] appearance =
-        static member inline transparent = Interop.mkProperty<IBreadcrumbProp> "appearance" "transparent"
-        static member inline subtle = Interop.mkProperty<IBreadcrumbProp> "appearance" "subtle"
 
     /// Sets the focus behavior for the Breadcrumb.
     type [<Erase>] focusMode =
@@ -5311,10 +5308,6 @@ module breadcrumb =
         static member inline tab = Interop.mkProperty<IBreadcrumbProp> "focusMode" "tab"
         /// This behaviour will cycle through all elements inside of the Breadcrumb when pressing the Arrow key.
         static member inline arrow = Interop.mkProperty<IBreadcrumbProp> "focusMode" "arrow"
-    /// Controls type of the divider.
-    type [<Erase>] dividerType =
-        static member inline chevron = Interop.mkProperty<IBreadcrumbProp> "dividerType" "chevron"
-        static member inline slash = Interop.mkProperty<IBreadcrumbProp> "dividerType" "slash"
 
     /// Controls size of Breadcrumb items and dividers.
     type [<Erase>] size =
@@ -5327,10 +5320,6 @@ type [<Erase>] breadcrumbItem =
     inherit FelizProps.prop<IBreadcrumbItemProp>
     /// Root element of the component.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    /// Ordered list which contains items.
-    static member inline list (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbItemProp> "list" (!!value |> createObj |> unbox<IReactProperty>)
-    /// Defines current sate of the BreadcrumbItem.
-    static member inline current (value: bool) = Interop.mkProperty<IBreadcrumbItemProp> "current" value
 
 module breadcrumbItem =
 
@@ -5374,11 +5363,6 @@ module breadcrumbButton =
     type [<Erase>] as' =
         static member inline a = Interop.mkProperty<IBreadcrumbButtonProp> "as" "a"
         static member inline button = Interop.mkProperty<IBreadcrumbButtonProp> "as" "button"
-
-    /// Breadcrumb appearance.
-    type [<Erase>] appearance =
-        static member inline transparent = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "transparent"
-        static member inline subtle = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "subtle"
 
     /// Controls size of Breadcrumb items and dividers.
     type [<Erase>] size =
