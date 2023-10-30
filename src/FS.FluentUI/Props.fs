@@ -4448,8 +4448,8 @@ type [<Erase>] drawer =
     static member inline root (value: IDrawerInlineProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IDrawerInlineProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerProp> "open" value
-    /// Default value for the uncontrolled open state of the Drawer.
-    static member inline defaultOpen (value: bool) = Interop.mkProperty<IDrawerProp> "defaultOpen" value
+    /// Controls the open state of the Drawer
+    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IDrawerProp> "open" (!!value |> createObj |> unbox)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
@@ -4479,8 +4479,8 @@ module drawer =
 
     /// Position of the drawer.
     type [<Erase>] position =
-        static member inline left = Interop.mkProperty<IDrawerProp> "position" "left"
-        static member inline right = Interop.mkProperty<IDrawerProp> "position" "right"
+        static member inline start = Interop.mkProperty<IDrawerProp> "position" "start"
+        static member inline end' = Interop.mkProperty<IDrawerProp> "position" "end"
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -4508,8 +4508,8 @@ type [<Erase>] drawerOverlay =
     static member inline root (value: IDialogSurfaceProp list) = Interop.mkProperty<IDrawerOverlayProp> "root" (!!value |> createObj |> unbox<IDialogSurfaceProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "open" value
-    /// Default value for the uncontrolled open state of the Drawer.
-    static member inline defaultOpen (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "defaultOpen" value
+    /// Controls the open state of the Drawer
+    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IDrawerOverlayProp> "open" (!!value |> createObj |> unbox)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
@@ -4539,8 +4539,8 @@ module drawerOverlay =
 
     /// Position of the drawer.
     type [<Erase>] position =
-        static member inline left = Interop.mkProperty<IDrawerOverlayProp> "position" "left"
-        static member inline right = Interop.mkProperty<IDrawerOverlayProp> "position" "right"
+        static member inline start = Interop.mkProperty<IDrawerOverlayProp> "position" "start"
+        static member inline end' = Interop.mkProperty<IDrawerOverlayProp> "position" "end"
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -4568,8 +4568,8 @@ type [<Erase>] drawerInline =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerInlineProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerInlineProp> "open" value
-    /// Default value for the uncontrolled open state of the Drawer.
-    static member inline defaultOpen (value: bool) = Interop.mkProperty<IDrawerInlineProp> "defaultOpen" value
+    /// Controls the open state of the Drawer
+    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IDrawerInlineProp> "open" (!!value |> createObj |> unbox)
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IDrawerInlineProp> "separator" value
 
@@ -4578,15 +4578,10 @@ module drawerInline =
     type [<Erase>] as' =
         static member inline div = Interop.mkProperty<IDrawerInlineProp> "as" "div"
 
-    /// Type of the drawer.
-    type [<Erase>] type' =
-        static member inline inline' = Interop.mkProperty<IDrawerInlineProp> "type" "inline"
-        static member inline overlay = Interop.mkProperty<IDrawerInlineProp> "type" "overlay"
-
     /// Position of the drawer.
     type [<Erase>] position =
-        static member inline left = Interop.mkProperty<IDrawerInlineProp> "position" "left"
-        static member inline right = Interop.mkProperty<IDrawerInlineProp> "position" "right"
+        static member inline start = Interop.mkProperty<IDrawerInlineProp> "position" "start"
+        static member inline end' = Interop.mkProperty<IDrawerInlineProp> "position" "end"
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -5775,3 +5770,30 @@ module messageBarGroup =
     type [<Erase>] animate =
         static member inline exitOnly = Interop.mkProperty<IMessageBarGroupProp> "animate" "exit-only"
         static member inline both = Interop.mkProperty<IMessageBarGroupProp> "animate" "both"
+
+// -------------------------------------------------------------------------- MotionState --------------------------------------------------------------------------------------
+type [<Erase>] motionState =
+    /// Ref to the element.
+    static member inline ref (value: IRefValue<Browser.Types.Element>) = Interop.mkProperty<IMotionStateProp> "ref" value
+    /// Indicates whether the component can be rendered.
+    /// Useful to render the element before animating it or to remove it from the DOM after exit animation.
+    static member inline canRender (value: bool) = Interop.mkProperty<IMotionStateProp> "canRender" value
+    /// Indicates whether the component is ready to receive a CSS transition className.
+    /// Useful to apply CSS transitions when the element is mounted and ready to be animated.
+    static member inline active (value: bool) = Interop.mkProperty<IMotionStateProp> "active" value
+
+module motionState =
+    /// Current state of the element.
+    type [<Erase>] type' =
+        /// - `entering` - The element is performing enter animation.
+        static member inline entering = Interop.mkProperty<IMotionStateProp> "type" "entering"
+        /// - `entered` - The element has finished enter animation.
+        static member inline entered = Interop.mkProperty<IMotionStateProp> "type" "entered"
+        /// - `idle` - The element is currently not animating, but rendered on screen.
+        static member inline idle = Interop.mkProperty<IMotionStateProp> "type" "idle"
+        /// - `exiting` - The element is performing exit animation.
+        static member inline exiting = Interop.mkProperty<IMotionStateProp> "type" "exiting"
+        /// - `exited` - The element has finished exit animation.
+        static member inline exited = Interop.mkProperty<IMotionStateProp> "type" "exited"
+        /// - `unmounted` - The element is not yet rendered or can be safely removed from the DOM.
+        static member inline unmounted = Interop.mkProperty<IMotionStateProp> "type" "unmounted"

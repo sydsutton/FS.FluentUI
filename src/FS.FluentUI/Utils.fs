@@ -184,6 +184,7 @@ type [<Erase>] IIgnoreKeyDownProp = interface end
 type [<Erase>] IOverflowBoundaryPaddingProp = interface end
 type [<Erase>] IOffsetProp = interface end
 type [<Erase>] IVirtualizerContextProp = interface end
+type [<Erase>] IMotionStateProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end

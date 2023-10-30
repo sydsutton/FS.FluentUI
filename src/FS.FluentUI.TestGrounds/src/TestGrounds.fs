@@ -2190,6 +2190,8 @@ let DrawerTest() =
             Fui.drawer [
                 drawer.type'.overlay
                 drawer.separator true
+                drawer.position.end'
+                drawer.modalType.alert
                 drawer.open' isOpen
                 drawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
                 drawer.children [
