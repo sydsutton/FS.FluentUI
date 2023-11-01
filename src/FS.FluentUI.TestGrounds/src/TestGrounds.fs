@@ -2187,14 +2187,13 @@ let DrawerTest() =
     let isOpen, setIsOpen = React.useState false
     Fui.stack [
         stack.children [
-            Fui.drawer [
-                drawer.type'.overlay
-                drawer.separator true
-                drawer.position.end'
-                drawer.modalType.alert
-                drawer.open' isOpen
-                drawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
-                drawer.children [
+            Fui.overlayDrawer [
+                overlayDrawer.separator true
+                overlayDrawer.position.end'
+                overlayDrawer.modalType.alert
+                overlayDrawer.open' isOpen
+                overlayDrawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
+                overlayDrawer.children [
                     Fui.drawerHeader [
                         Fui.drawerHeaderTitle [
                             drawerHeaderTitle.action (
@@ -3205,8 +3204,7 @@ let CalendarTest () =
         ]
     ]
 
-let getErrorMessage errorType =
-    match errorType with
+let getErrorMessage = function
     | Some TimePickerErrorType.``invalid-input`` -> "Time is invalid"
     | Some TimePickerErrorType.``out-of-bounds`` -> "Time is out of bounds"
     | Some TimePickerErrorType.``required-input`` -> "Time is required"

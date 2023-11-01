@@ -4444,8 +4444,8 @@ module virtualizerScrollViewDynamic =
 // -------------------------------------------------------------------------- Drawer --------------------------------------------------------------------------------------
 type [<Erase>] drawer =
     inherit FelizProps.prop<IDrawerProp>
-    static member inline root (value: IDrawerOverlayProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IDrawerOverlayProp>)
-    static member inline root (value: IDrawerInlineProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IDrawerInlineProp>)
+    static member inline root (value: IOverlayDrawerProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IOverlayDrawerProp>)
+    static member inline root (value: IInlineDrawerProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IInlineDrawerProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerProp> "open" value
     /// Controls the open state of the Drawer
@@ -4502,97 +4502,92 @@ module drawer =
         /// When a non-modal dialog is open, the rest of the page is not dimmed out and users can interact with the rest of the page. This also implies that the tab focus can move outside the dialog when it reaches the last focusable element.
         static member inline nonModal = Interop.mkProperty<IDrawerProp> "modalType" "non-modal"
 
-// -------------------------------------------------------------------------- DrawerOverlay --------------------------------------------------------------------------------------
-type [<Erase>] drawerOverlay =
-    inherit FelizProps.prop<IDrawerOverlayProp>
-    static member inline root (value: IDialogSurfaceProp list) = Interop.mkProperty<IDrawerOverlayProp> "root" (!!value |> createObj |> unbox<IDialogSurfaceProp>)
+// -------------------------------------------------------------------------- OverlayDrawer --------------------------------------------------------------------------------------
+type [<Erase>] overlayDrawer =
+    inherit FelizProps.prop<IOverlayDrawerProp>
+    static member inline root (value: IDialogSurfaceProp list) = Interop.mkProperty<IOverlayDrawerProp> "root" (!!value |> createObj |> unbox<IDialogSurfaceProp>)
     /// Controls the open state of the Drawer
-    static member inline open' (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "open" value
+    static member inline open' (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "open" value
     /// Controls the open state of the Drawer
-    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IDrawerOverlayProp> "open" (!!value |> createObj |> unbox)
+    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IOverlayDrawerProp> "open" (!!value |> createObj |> unbox)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
-    static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "inertTrapFocus" value
+    static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
-    static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IDrawerOverlayProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IOverlayDrawerProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
-    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IDrawerOverlayProp> "backdrop" value
+    static member inline backdrop (value: ReactElement) = Interop.mkProperty<IOverlayDrawerProp> "backdrop" value
     /// Whether the drawer has a separator line.
-    static member inline separator (value: bool) = Interop.mkProperty<IDrawerOverlayProp> "separator" value
+    static member inline separator (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "separator" value
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
-    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerOverlayProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
 
-module drawerOverlay =
+module overlayDrawer =
 
     type [<Erase>] as' =
-        static member inline div = Interop.mkProperty<IDrawerOverlayProp> "as" "div"
-
-    /// Type of the drawer.
-    type [<Erase>] type' =
-        static member inline inline' = Interop.mkProperty<IDrawerOverlayProp> "type" "inline"
-        static member inline overlay = Interop.mkProperty<IDrawerOverlayProp> "type" "overlay"
+        static member inline div = Interop.mkProperty<IOverlayDrawerProp> "as" "div"
 
     /// Position of the drawer.
     type [<Erase>] position =
-        static member inline start = Interop.mkProperty<IDrawerOverlayProp> "position" "start"
-        static member inline end' = Interop.mkProperty<IDrawerOverlayProp> "position" "end"
+        static member inline start = Interop.mkProperty<IOverlayDrawerProp> "position" "start"
+        static member inline end' = Interop.mkProperty<IOverlayDrawerProp> "position" "end"
 
     /// Size of the drawer.
     type [<Erase>] size =
         /// Drawer is 320px wide.
-        static member inline small = Interop.mkProperty<IDrawerOverlayProp> "size" "small"
+        static member inline small = Interop.mkProperty<IOverlayDrawerProp> "size" "small"
         /// Drawer is 592px wide.
-        static member inline medium = Interop.mkProperty<IDrawerOverlayProp> "size" "medium"
+        static member inline medium = Interop.mkProperty<IOverlayDrawerProp> "size" "medium"
         /// Drawer is 940px wide.
-        static member inline large = Interop.mkProperty<IDrawerOverlayProp> "size" "large"
+        static member inline large = Interop.mkProperty<IOverlayDrawerProp> "size" "large"
         /// Drawer is 100vw wide.
-        static member inline full = Interop.mkProperty<IDrawerOverlayProp> "size" "full"
+        static member inline full = Interop.mkProperty<IOverlayDrawerProp> "size" "full"
 
     /// Dialog variations.
     type [<Erase>] modalType =
         /// A special type of modal dialogs that interrupts the user's workflow to communicate an important message or ask for a decision. Unlike a typical modal dialog, the user must take an action through the options given to dismiss the dialog, and it cannot be dismissed through the dimmed background or escape key.
-        static member inline alert = Interop.mkProperty<IDrawerOverlayProp> "modalType" "alert"
+        static member inline alert = Interop.mkProperty<IOverlayDrawerProp> "modalType" "alert"
         /// When this type of dialog is open, the rest of the page is dimmed out and cannot be interacted with. The tab sequence is kept within the dialog and moving the focus outside the dialog will imply closing it. This is the default type of the component.
-        static member inline modal = Interop.mkProperty<IDrawerOverlayProp> "modalType" "modal"
+        static member inline modal = Interop.mkProperty<IOverlayDrawerProp> "modalType" "modal"
         /// When a non-modal dialog is open, the rest of the page is not dimmed out and users can interact with the rest of the page. This also implies that the tab focus can move outside the dialog when it reaches the last focusable element.
-        static member inline nonModal = Interop.mkProperty<IDrawerOverlayProp> "modalType" "non-modal"
+        static member inline nonModal = Interop.mkProperty<IOverlayDrawerProp> "modalType" "non-modal"
 
-// -------------------------------------------------------------------------- DrawerInline --------------------------------------------------------------------------------------
-type [<Erase>] drawerInline =
-    inherit FelizProps.prop<IDrawerInlineProp>
-    static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerInlineProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+// -------------------------------------------------------------------------- InlineDrawer --------------------------------------------------------------------------------------
+type [<Erase>] inlineDrawer =
+    inherit FelizProps.prop<IInlineDrawerProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IInlineDrawerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Controls the open state of the Drawer
-    static member inline open' (value: bool) = Interop.mkProperty<IDrawerInlineProp> "open" value
+    static member inline open' (value: bool) = Interop.mkProperty<IInlineDrawerProp> "open" value
     /// Controls the open state of the Drawer
-    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IDrawerInlineProp> "open" (!!value |> createObj |> unbox)
+    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IInlineDrawerProp> "open" (!!value |> createObj |> unbox)
     /// Whether the drawer has a separator line.
-    static member inline separator (value: bool) = Interop.mkProperty<IDrawerInlineProp> "separator" value
+    static member inline separator (value: bool) = Interop.mkProperty<IInlineDrawerProp> "separator" value
 
-module drawerInline =
+module inlineDrawer =
 
     type [<Erase>] as' =
-        static member inline div = Interop.mkProperty<IDrawerInlineProp> "as" "div"
+        static member inline div = Interop.mkProperty<IInlineDrawerProp> "as" "div"
 
     /// Position of the drawer.
     type [<Erase>] position =
-        static member inline start = Interop.mkProperty<IDrawerInlineProp> "position" "start"
-        static member inline end' = Interop.mkProperty<IDrawerInlineProp> "position" "end"
+        static member inline start = Interop.mkProperty<IInlineDrawerProp> "position" "start"
+        static member inline end' = Interop.mkProperty<IInlineDrawerProp> "position" "end"
 
     /// Size of the drawer.
     type [<Erase>] size =
         /// Drawer is 320px wide.
-        static member inline small = Interop.mkProperty<IDrawerInlineProp> "size" "small"
+        static member inline small = Interop.mkProperty<IInlineDrawerProp> "size" "small"
         /// Drawer is 592px wide.
-        static member inline medium = Interop.mkProperty<IDrawerInlineProp> "size" "medium"
+        static member inline medium = Interop.mkProperty<IInlineDrawerProp> "size" "medium"
         /// Drawer is 940px wide.
-        static member inline large = Interop.mkProperty<IDrawerInlineProp> "size" "large"
+        static member inline large = Interop.mkProperty<IInlineDrawerProp> "size" "large"
         /// Drawer is 100vw wide.
-        static member inline full = Interop.mkProperty<IDrawerInlineProp> "size" "full"
+        static member inline full = Interop.mkProperty<IInlineDrawerProp> "size" "full"
 
 // -------------------------------------------------------------------------- DrawerHeader --------------------------------------------------------------------------------------
 type [<Erase>] drawerHeader =

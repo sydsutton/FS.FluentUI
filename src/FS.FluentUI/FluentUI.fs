@@ -531,10 +531,10 @@ type [<Erase>] Fui =
     static member inline drawer (props: IDrawerProp list) = createElement (import "Drawer" Drawer_unstable) props
     /// Represents an overlay Drawer. This component renders on top of the whole page. By default blocks the screen and will require users full attention. Uses Dialog component under the hood.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerOverlay (props: IDrawerOverlayProp list) = createElement (import "DrawerOverlay" Drawer_unstable) props
+    static member inline overlayDrawer (props: IOverlayDrawerProp list) = createElement (import "OverlayDrawer" Drawer_unstable) props
     /// Represents an inline Drawer. This is rendered within a container and can be placed next to any content.
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerInline (props: IDrawerInlineProp list) = createElement (import "DrawerInline" Drawer_unstable) props
+    static member inline inlineDrawer (props: IInlineDrawerProp list) = createElement (import "InlineDrawer" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
     static member inline drawerHeader (props: IDrawerHeaderProp list) = createElement (import "DrawerHeader" Drawer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
