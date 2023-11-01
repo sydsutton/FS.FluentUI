@@ -3205,6 +3205,33 @@ let CalendarTest () =
         ]
     ]
 
+let getErrorMessage errorType =
+    match errorType with
+    | Some TimePickerErrorType.``invalid-input`` -> "Time is invalid"
+    | Some TimePickerErrorType.``out-of-bounds`` -> "Time is out of bounds"
+    | Some TimePickerErrorType.``required-input`` -> "Time is required"
+    | _ -> ""
+
+[<ReactComponent>]
+let TimePickerTest () =
+    let errorType, setErrorType = React.useState None
+
+    Fui.field [
+        field.required true
+        field.label "Type a time outside of 10:00 to 19:59, type an invalid time, or leave the input empty and close the TimePicker."
+        field.validationMessage (getErrorMessage errorType)
+        field.children (
+            Fui.timePicker [
+                timePicker.freeform true
+                timePicker.style [ style.maxWidth 300 ]
+                timePicker.startHour.``10``
+                timePicker.endHour.``20``
+                timePicker.appearance.filledDarker
+                timePicker.onTimeChange (fun (data: TimeSelectionData) -> setErrorType data.errorType)
+            ]
+        )
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3227,6 +3254,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            TimePickerTest ()
             MergeClassesTest true
             MergeClassesTest false
             Accordion()

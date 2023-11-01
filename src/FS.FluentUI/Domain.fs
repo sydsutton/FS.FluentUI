@@ -1243,3 +1243,37 @@ type HeadlessFlatTree<'T, 'TEvent> = {
     /// an iterable containing all visually available flat tree items
     items: unit -> seq<HeadlessTreeItem<'T>>
 }
+
+// ----------------------------------- TimePicker --------------------------------------------
+
+type [<RequireQualifiedAccess>] TimePickerErrorType = ``invalid-input`` | ``out-of-bounds`` | ``required-input``
+
+type TimeStringValidationResult = {
+    date: System.DateTime option
+    errorType: TimePickerErrorType
+}
+
+type TimeSelectionData = {
+    /// The Date object associated with the selected option. For freeform TimePicker it can also be the Date object parsed from the user input.
+    selectedTime: System.DateTime option
+    /// The display text for the selected option. For freeform TimePicker it can also be the value in user input.
+    selectedTimeText: string option
+    /// The error type for the selected option.
+    errorType: TimePickerErrorType option
+}
+
+module TimeSelectionData =
+    let parse (data: {| selectedTime: System.DateTime option; selectedTimeText: string option; errorType: string option|}) =
+        let newErrorType =
+            match data.errorType with
+            | Some "invalid-input" -> Some TimePickerErrorType.``invalid-input``
+            | Some "out-of-bounds" -> Some TimePickerErrorType.``out-of-bounds``
+            | Some "required-input" -> Some TimePickerErrorType.``required-input``
+            | _ -> None
+
+        {
+            selectedTime = data.selectedTime
+            selectedTimeText = data.selectedTimeText
+            errorType = newErrorType
+        }
+

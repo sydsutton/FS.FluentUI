@@ -5797,3 +5797,149 @@ module motionState =
         static member inline exited = Interop.mkProperty<IMotionStateProp> "type" "exited"
         /// - `unmounted` - The element is not yet rendered or can be safely removed from the DOM.
         static member inline unmounted = Interop.mkProperty<IMotionStateProp> "type" "unmounted"
+
+// -------------------------------------------------------------------------- TimePicker --------------------------------------------------------------------------------------
+type [<Erase>] timePicker =
+    inherit FelizProps.prop<ITimePickerProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline listbox (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "listbox" value
+    static member inline listbox (value: IListboxProp list) = Interop.mkProperty<ITimePickerProp> "listbox" (!!value |> createObj |> unbox<IListboxProp>)
+    static member inline input (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "input" value
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "input" (!!value |> createObj |> unbox<IListboxProp>)
+    static member inline expandIcon (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "expandIcon" value
+    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "expandIcon" (!!value |> createObj |> unbox<IListboxProp>)
+    /// Time increment, in minutes, of the options in the dropdown.
+    static member inline increment (value: int) = Interop.mkProperty<ITimePickerProp> "increment" value
+    /// Time increment, in minutes, of the options in the dropdown.
+    static member inline increment (value: decimal) = Interop.mkProperty<ITimePickerProp> "increment" value
+    /// Time increment, in minutes, of the options in the dropdown.
+    static member inline increment (value: float) = Interop.mkProperty<ITimePickerProp> "increment" value
+    /// The date in which all dropdown options are based off of.
+    static member inline dateAnchor (value: DateTime) = Interop.mkProperty<ITimePickerProp> "dateAnchor" value
+    /// Currently selected time in the TimePicker.
+    static member inline selectedTime (value: DateTime option) = Interop.mkProperty<ITimePickerProp> "selectedTime" value
+    /// Default selected time in the TimePicker, for uncontrolled scenarios.
+    static member inline defaultSelectedTime (value: DateTime) = Interop.mkProperty<ITimePickerProp> "defaultSelectedTime" value
+    /// The default open state when open is uncontrolled
+    static member inline defaultOpen (value: bool) = Interop.mkProperty<ITimePickerProp> "defaultOpen" value
+    /// The default value displayed in the trigger input or button when the combobox's value is uncontrolled
+    static member inline defaultValue (value: string) = Interop.mkProperty<ITimePickerProp> "defaultValue" value
+    /// Render the combobox's popup inline in the DOM. This has accessibility benefits, particularly for touch screen readers.
+    static member inline inlinePopup (value: bool) = Interop.mkProperty<ITimePickerProp> "inlinePopup" value
+    /// Sets the open/closed state of the dropdown. Use together with onOpenChange to fully control the dropdown's visibility.
+    static member inline open' (value: bool) = Interop.mkProperty<ITimePickerProp> "open" value
+    /// Configure the positioning of the combobox dropdown
+    static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<ITimePickerProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
+    /// The value displayed by the Combobox. Use this with `onOptionSelect` to directly control the displayed value string.
+    static member inline value (value: string list) = Interop.mkProperty<ITimePickerProp> "value" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<ITimePickerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<ITimePickerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline freeform (value: bool) = Interop.mkProperty<ITimePickerProp> "freeform" value
+    /// If true, show seconds in the dropdown options and consider seconds for default validation purposes.
+    static member inline showSeconds (value: bool) = Interop.mkProperty<ITimePickerProp> "showSeconds" value
+    /// Callback for when a time selection is made.
+    static member inline onTimeChange (handler: TimeSelectionData -> unit) = Interop.mkProperty<ITimePickerProp> "onTimeChange" (System.Func<_,_,_> (fun _ value -> handler (value |> TimeSelectionData.parse)))
+    /// Callback for when a time selection is made.
+    static member inline onTimeChange (value: MouseEvent -> TimeSelectionData -> unit) = Interop.mkProperty<ITimePickerProp> "onTimeChange" (System.Func<_,_,_> (fun ev data -> value ev (data |> TimeSelectionData.parse)))
+    /// Callback for when a time selection is made.
+    static member inline onTimeChange (value: KeyboardEvent -> TimeSelectionData -> unit) = Interop.mkProperty<ITimePickerProp> "onTimeChange" (System.Func<_,_,_> (fun ev data -> value ev (data |> TimeSelectionData.parse)))
+    /// Callback for when a time selection is made.
+    static member inline onTimeChange (value: FocusEvent -> TimeSelectionData -> unit) = Interop.mkProperty<ITimePickerProp> "onTimeChange" (System.Func<_,_,_> (fun ev data -> value ev (data |> TimeSelectionData.parse)))
+    /// Customizes the formatting of date strings displayed in dropdown options.
+    static member inline formatDateToTimeString (value: DateTime -> string) = Interop.mkProperty<ITimePickerProp> "formatDateToTimeString" (System.Func<_,_> value)
+    /// In the freeform TimePicker, customizes the parsing from the input time string into a Date and provides custom validation.
+    static member inline formatTimeStringToDate (value: string option -> TimeStringValidationResult) = Interop.mkProperty<ITimePickerProp> "formatTimeStringToDate" (System.Func<_,_> value)
+    /// Callback when the open/closed state of the dropdown changes
+    static member inline onOpenChange (handler: OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback when the open/closed state of the dropdown changes
+    static member inline onOpenChange (value: MouseEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback when the open/closed state of the dropdown changes
+    static member inline onOpenChange (value: KeyboardEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback when the open/closed state of the dropdown changes
+    static member inline onOpenChange (value: FocusEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
+
+module timePicker =
+
+    type [<Erase>] as' =
+        static member inline input = Interop.mkProperty<ITimePickerProp> "as" "input"
+
+    /// Controls the colors and borders of the combobox trigger.
+    type [<Erase>] appearance =
+        static member inline outline = Interop.mkProperty<ITimePickerProp> "appearance" "outline"
+        static member inline underline = Interop.mkProperty<ITimePickerProp> "appearance" "underline"
+        static member inline filledDarker = Interop.mkProperty<ITimePickerProp> "appearance" "filled-darker"
+        static member inline filledLighter = Interop.mkProperty<ITimePickerProp> "appearance" "filled-lighter"
+
+    /// Controls the size of the combobox faceplate
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ITimePickerProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ITimePickerProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ITimePickerProp> "size" "large"
+
+    /// A string value indicating whether the 12-hour format ("h11", "h12") or the 24-hour format ("h23", "h24") should be used.
+    type [<Erase>] hourCycle =
+        /// 'h11' and 'h23' start with hour 0 and go up to 11 and 23 respectively.
+        static member inline h11 = Interop.mkProperty<ITimePickerProp> "hourCycle" "h11"
+        /// 'h12' and 'h24' start with hour 1 and go up to 12 and 24 respectively.
+        static member inline h12 = Interop.mkProperty<ITimePickerProp> "hourCycle" "h12"
+        /// 'h11' and 'h23' start with hour 0 and go up to 11 and 23 respectively.
+        static member inline h23 = Interop.mkProperty<ITimePickerProp> "hourCycle" "h23"
+        /// 'h12' and 'h24' start with hour 1 and go up to 12 and 24 respectively.
+        static member inline h24 = Interop.mkProperty<ITimePickerProp> "hourCycle" "h24"
+
+    /// Start hour (inclusive) for the time range, 0-24.
+    type [<Erase>] startHour =
+        static member inline ``1`` = Interop.mkProperty<ITimePickerProp> "startHour" "1"
+        static member inline ``2`` = Interop.mkProperty<ITimePickerProp> "startHour" "2"
+        static member inline ``3`` = Interop.mkProperty<ITimePickerProp> "startHour" "3"
+        static member inline ``4`` = Interop.mkProperty<ITimePickerProp> "startHour" "4"
+        static member inline ``5`` = Interop.mkProperty<ITimePickerProp> "startHour" "5"
+        static member inline ``6`` = Interop.mkProperty<ITimePickerProp> "startHour" "6"
+        static member inline ``7`` = Interop.mkProperty<ITimePickerProp> "startHour" "7"
+        static member inline ``8`` = Interop.mkProperty<ITimePickerProp> "startHour" "8"
+        static member inline ``9`` = Interop.mkProperty<ITimePickerProp> "startHour" "9"
+        static member inline ``10`` = Interop.mkProperty<ITimePickerProp> "startHour" "10"
+        static member inline ``11`` = Interop.mkProperty<ITimePickerProp> "startHour" "11"
+        static member inline ``12`` = Interop.mkProperty<ITimePickerProp> "startHour" "12"
+        static member inline ``13`` = Interop.mkProperty<ITimePickerProp> "startHour" "13"
+        static member inline ``14`` = Interop.mkProperty<ITimePickerProp> "startHour" "14"
+        static member inline ``15`` = Interop.mkProperty<ITimePickerProp> "startHour" "15"
+        static member inline ``16`` = Interop.mkProperty<ITimePickerProp> "startHour" "16"
+        static member inline ``17`` = Interop.mkProperty<ITimePickerProp> "startHour" "17"
+        static member inline ``18`` = Interop.mkProperty<ITimePickerProp> "startHour" "18"
+        static member inline ``19`` = Interop.mkProperty<ITimePickerProp> "startHour" "19"
+        static member inline ``20`` = Interop.mkProperty<ITimePickerProp> "startHour" "20"
+        static member inline ``21`` = Interop.mkProperty<ITimePickerProp> "startHour" "21"
+        static member inline ``22`` = Interop.mkProperty<ITimePickerProp> "startHour" "22"
+        static member inline ``23`` = Interop.mkProperty<ITimePickerProp> "startHour" "23"
+        static member inline ``24`` = Interop.mkProperty<ITimePickerProp> "startHour" "24"
+
+    /// End hour (exclusive) for the time range, 0-24.
+    type [<Erase>] endHour =
+        static member inline ``1`` = Interop.mkProperty<ITimePickerProp> "endHour" "1"
+        static member inline ``2`` = Interop.mkProperty<ITimePickerProp> "endHour" "2"
+        static member inline ``3`` = Interop.mkProperty<ITimePickerProp> "endHour" "3"
+        static member inline ``4`` = Interop.mkProperty<ITimePickerProp> "endHour" "4"
+        static member inline ``5`` = Interop.mkProperty<ITimePickerProp> "endHour" "5"
+        static member inline ``6`` = Interop.mkProperty<ITimePickerProp> "endHour" "6"
+        static member inline ``7`` = Interop.mkProperty<ITimePickerProp> "endHour" "7"
+        static member inline ``8`` = Interop.mkProperty<ITimePickerProp> "endHour" "8"
+        static member inline ``9`` = Interop.mkProperty<ITimePickerProp> "endHour" "9"
+        static member inline ``10`` = Interop.mkProperty<ITimePickerProp> "endHour" "10"
+        static member inline ``11`` = Interop.mkProperty<ITimePickerProp> "endHour" "11"
+        static member inline ``12`` = Interop.mkProperty<ITimePickerProp> "endHour" "12"
+        static member inline ``13`` = Interop.mkProperty<ITimePickerProp> "endHour" "13"
+        static member inline ``14`` = Interop.mkProperty<ITimePickerProp> "endHour" "14"
+        static member inline ``15`` = Interop.mkProperty<ITimePickerProp> "endHour" "15"
+        static member inline ``16`` = Interop.mkProperty<ITimePickerProp> "endHour" "16"
+        static member inline ``17`` = Interop.mkProperty<ITimePickerProp> "endHour" "17"
+        static member inline ``18`` = Interop.mkProperty<ITimePickerProp> "endHour" "18"
+        static member inline ``19`` = Interop.mkProperty<ITimePickerProp> "endHour" "19"
+        static member inline ``20`` = Interop.mkProperty<ITimePickerProp> "endHour" "20"
+        static member inline ``21`` = Interop.mkProperty<ITimePickerProp> "endHour" "21"
+        static member inline ``22`` = Interop.mkProperty<ITimePickerProp> "endHour" "22"
+        static member inline ``23`` = Interop.mkProperty<ITimePickerProp> "endHour" "23"
+        static member inline ``24`` = Interop.mkProperty<ITimePickerProp> "endHour" "24"

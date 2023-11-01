@@ -31,6 +31,7 @@ module FuiHelpers =
     let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
+    let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -740,6 +741,8 @@ type [<Erase>] Fui =
 
     // Calendar
     static member inline calendar (props: ICalendarProp list) = createElement (import "Calendar" CalendarCompat) props
+
+    static member inline timePicker (props: ITimePickerProp list) = createElement (import "TimePicker" Timepicker_unstable) props
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 
