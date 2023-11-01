@@ -5,6 +5,7 @@ open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
 open FS.FluentUI
+open System
 
 module internal Shorthand =
 
@@ -514,8 +515,9 @@ type [<Erase>] Fui =
     /// An InfoLabel is a Label with an InfoButton at the end, properly handling layout and accessibility properties. It can be used as a drop-in replacement for Label when an InfoButton is also needed.
     static member inline infoLabel (props: IInfoLabelProp list) = createElement (import "InfoLabel" FluentUIv9) props
     /// An Alert displays a brief, important message to attract a user's attention without interrupting their current task.
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline alert (props: IAlertProp list) = createElement (import "Alert" Alert_unstable) props
+    ///
+    /// WARNING: This API is deprecated. Please use the Toast or MessageBar component instead.
+    [<Obsolete>] static member inline alert (props: IAlertProp list) = createElement (import "Alert" Alert_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
     static member inline virtualizer (props: IVirtualizerProp list) = createElement (import "Virtualizer" Virtualizer_unstable) props
     /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
