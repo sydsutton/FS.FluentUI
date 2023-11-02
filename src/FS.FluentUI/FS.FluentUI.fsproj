@@ -52,6 +52,7 @@
             <NpmPackage Name="@fluentui/react-search-preview" Version="gte 0.1.29" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.0.3" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-timepicker-compat-preview" Version="gte 0.1.0" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-motion-preview" Version="gte 0.5.0" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

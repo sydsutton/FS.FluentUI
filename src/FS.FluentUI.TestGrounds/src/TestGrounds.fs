@@ -46,6 +46,9 @@ type Styles = {
     backgroundColor: string
     yellowText: string
     borderRadius: string
+    root: string
+    rectangle: string
+    visible: string
 }
 
 let useStyles: unit -> Styles = Fui.makeStyles [
@@ -114,6 +117,36 @@ let useStyles: unit -> Styles = Fui.makeStyles [
     "yellowText", [ style.color "yellow" ]
     "borderRadius", [
         style.borderRadius (20, 5, 20, 5)
+    ]
+    "root", [
+        style.height (length.px 180)
+        style.display.flex
+        style.flexDirection.column
+        style.alignItems.center
+        style.rowGap (length.px 24)
+    ]
+    "rectangle", [
+        style.borderRadius (length.px 8)
+        style.width (length.px 150)
+        style.height (length.px 100)
+        style.display.flex
+        style.flexDirection.column
+        style.alignContent.center
+        style.justifyContent.center
+        style.backgroundColor tokens.colorBrandBackground
+        style.opacity 0
+        style.transform.translate3D (0, 0, 0)
+        style.transform.scale 0.25
+        style.custom ("transitionDuration", $"{tokens.durationSlow}, {tokens.durationSlower}")
+        style.transitionProperty "opacity, transform"
+        style.custom ("willChange", "opacity, transform")
+        style.color.white
+        style.flexWrap.wrap
+    ]
+    "visible", [
+        style.opacity 1
+        style.transform.translate3D(0,0,0)
+        style.transform.scale 1
     ]
 ]
 
@@ -3204,6 +3237,34 @@ let CalendarTest () =
         ]
     ]
 
+[<ReactComponent>]
+let UseMotionTest () =
+    let styles = useStyles ()
+    let isOpen, setOpen = React.useState(false)
+    let motion = Fui.useMotion(isOpen)
+
+    Html.div [
+        prop.className styles.root
+        prop.children [
+            Fui.button [
+                button.appearance.primary
+                button.onClick (fun _ -> setOpen (isOpen |> not))
+                button.text "Toggle UseMotion"
+            ]
+
+            if motion.canRender then
+                Html.div [
+                    prop.ref motion.ref
+                    prop.className (
+                        Fui.mergeClasses (styles.rectangle, (if motion.active then styles.visible else ""))
+                    )
+                    prop.children [
+                        Fui.text "Lorem ipsum"
+                    ]
+                ]
+        ]
+    ]
+
 let getErrorMessage = function
     | Some TimePickerErrorType.``invalid-input`` -> "Time is invalid"
     | Some TimePickerErrorType.``out-of-bounds`` -> "Time is out of bounds"
@@ -3252,6 +3313,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            UseMotionTest ()
             TimePickerTest ()
             MergeClassesTest true
             MergeClassesTest false

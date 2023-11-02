@@ -5769,7 +5769,7 @@ module messageBarGroup =
 // -------------------------------------------------------------------------- MotionState --------------------------------------------------------------------------------------
 type [<Erase>] motionState =
     /// Ref to the element.
-    static member inline ref (value: IRefValue<Browser.Types.Element>) = Interop.mkProperty<IMotionStateProp> "ref" value
+    static member inline ref (value: IRefValue<Browser.Types.HTMLElement option>) = Interop.mkProperty<IMotionStateProp> "ref" value
     /// Indicates whether the component can be rendered.
     /// Useful to render the element before animating it or to remove it from the DOM after exit animation.
     static member inline canRender (value: bool) = Interop.mkProperty<IMotionStateProp> "canRender" value
@@ -5792,6 +5792,21 @@ module motionState =
         static member inline exited = Interop.mkProperty<IMotionStateProp> "type" "exited"
         /// - `unmounted` - The element is not yet rendered or can be safely removed from the DOM.
         static member inline unmounted = Interop.mkProperty<IMotionStateProp> "type" "unmounted"
+
+// -------------------------------------------------------------------------- MotionOptions --------------------------------------------------------------------------------------
+type [<Erase>] motionOptions =
+    /// Whether to animate the element on first mount.
+    static member inline animateOnFirstMount (value: bool) = Interop.mkProperty<IMotionOptionsProp> "animateOnFirstMount" value
+    /// Duration of the animation in milliseconds.
+    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
+    static member inline duration (value: int) = Interop.mkProperty<IMotionOptionsProp> "duration" value
+    /// Duration of the animation in milliseconds.
+    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
+    static member inline duration (value: float) = Interop.mkProperty<IMotionOptionsProp> "duration" value
+    /// Duration of the animation in milliseconds.
+    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
+    static member inline duration (value: decimal) = Interop.mkProperty<IMotionOptionsProp> "duration" value
+
 
 // -------------------------------------------------------------------------- TimePicker --------------------------------------------------------------------------------------
 type [<Erase>] timePicker =

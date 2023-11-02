@@ -33,6 +33,7 @@ module FuiHelpers =
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
     let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
+    let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -193,11 +194,24 @@ type [<Erase>] Fui =
         let createTableColumn = import "createTableColumn" FluentUIv9
         !!options |> createObj |> createTableColumn
 
-    /// React hook that measures virtualized space based on a static size to ensure optimized virtualization length.
+    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
     [<Hook>]
-    static member inline useStaticVirtualizerMeasure (virtualizerProps: IVirtualizerMeasurePropsProp list): VirtualizerMeasure =
-        let useStaticVirtualizerMeasure = import "useStaticVirtualizerMeasure" Virtualizer_unstable
-        !!virtualizerProps |> createObj |> useStaticVirtualizerMeasure
+    static member inline useMotion (shorthand: bool): MotionState = import "useMotion" Motion_unstable
+
+    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
+    [<Hook>]
+    static member inline useMotion (shorthand: bool, options: IMotionOptionsProp list): MotionState =
+        let options = !!options |> createObj |> unbox
+
+        (shorthand, options) |> JSTuple.from2Args |> import "useMotion" Motion_unstable
+
+    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
+    [<Hook>]
+    static member inline useMotion (shorthand: IMotionStateProp list, options: IMotionOptionsProp list): MotionState =
+        let shorthand = !!shorthand |> createObj |> unbox
+        let options = !!options |> createObj |> unbox
+
+        (shorthand, options) |> JSTuple.from2Args |> import "useMotion" Motion_unstable
 
     /// React hook that measures virtualized space based on a static size to ensure optimized virtualization length.
     /// This hook is a helper to create modal dialog like experiences. The hook creates accessible focus traps that set aria-hidden. The focus trap can only be activated with explicit HTMLElement.focus() call in javscript code.
@@ -378,6 +392,12 @@ type [<Erase>] Fui =
     /// date2 - The second date to compare
     /// Returns A negative value if date1 is earlier than date2, 0 if the dates are equal, or a positive value if date1 is later than date2.
     static member inline compareDatePart (date1: System.DateTime, date2: System.DateTime): int = import "compareDatePart" CalendarCompat
+
+    /// React hook that measures virtualized space based on a static size to ensure optimized virtualization length.
+    [<Hook>]
+    static member inline useStaticVirtualizerMeasure (virtualizerProps: IVirtualizerMeasurePropsProp list): VirtualizerMeasure =
+        let useStaticVirtualizerMeasure = import "useStaticVirtualizerMeasure" Virtualizer_unstable
+        !!virtualizerProps |> createObj |> useStaticVirtualizerMeasure
 
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
