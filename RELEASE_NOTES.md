@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+
+### 1.5.0 (11-2-2023)
+
+* Update @fluentui/react-compoents to 9.37.3
+* Add @fluentui/react-timepicker-compat-preview v0.1.0 and TimePicker component and props
+* Add @fluentui/react-motion-preview v0.5.0 and useMotion hook
+* Update Drawer props and rename DrawerOverlay and DrawerInline
+* Change Drawer's `open` prop to only accepts a bool instead of MotionShorthand
+* Deprecate Alert component
+
 ### 1.4.0 (10-30-2023)
 
 * Update @fluentui/react-components to 9.37.0
