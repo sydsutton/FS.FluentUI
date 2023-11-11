@@ -1,6 +1,18 @@
 Release Notes
 =========
 
+### 1.6.0 (11-11-2023)
+
+* Add new positioning prop
+* Stabilize Drawer components and props
+* Add useOverflowVisibility hook
+* Update @fluentui/react-components to 9.39.0
+* Update @fluentui/react-datepicker-compat to 0.4.4
+* Update @fluentui/react-breadcrumb-preview to 2.1.2
+* Update @fluentui/react-search-preview to 0.1.31
+* Update @fluentui/react-calendar-compat to 0.0.6
+* Update @fluentui/react-timepicker-compat-preview to 0.1.1
+* Update @fluentui/react-motion-preview to 0.5.1
 
 ### 1.5.0 (11-2-2023)
 
