@@ -29,7 +29,6 @@ module FuiHelpers =
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
-    let [<Literal>] Drawer_unstable = "@fluentui/react-drawer"
     let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
     let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
@@ -559,26 +558,17 @@ type [<Erase>] Fui =
     /// DrawerOverlay: Represents an overlay Drawer. This component renders on top of the whole page. By default blocks the screen and will require users full attention. Uses Dialog component under the hood.
     /// DrawerInline: Represents an inline Drawer. This is rendered within a container and can be placed next to any content.
     /// Drawer: It is a combination of DrawerOverlay and DrawerInline. Used when toggling between the two modes is necessary. Often used for responsiveness.
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawer (props: IDrawerProp list) = createElement (import "Drawer" Drawer_unstable) props
+    static member inline drawer (props: IDrawerProp list) = createElement (import "Drawer" FluentUIv9) props
     /// Represents an overlay Drawer. This component renders on top of the whole page. By default blocks the screen and will require users full attention. Uses Dialog component under the hood.
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline overlayDrawer (props: IOverlayDrawerProp list) = createElement (import "OverlayDrawer" Drawer_unstable) props
+    static member inline overlayDrawer (props: IOverlayDrawerProp list) = createElement (import "OverlayDrawer" FluentUIv9) props
     /// Represents an inline Drawer. This is rendered within a container and can be placed next to any content.
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline inlineDrawer (props: IInlineDrawerProp list) = createElement (import "InlineDrawer" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerHeader (props: IDrawerHeaderProp list) = createElement (import "DrawerHeader" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerHeader" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerHeaderTitle (props: IDrawerHeaderTitleProp list) = createElement (import "DrawerHeaderTitle" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerHeaderNavigation (props: IDrawerHeaderNavigationProp list) = createElement (import "DrawerHeaderNavigation" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerBody" Drawer_unstable) props
-    /// WARNING: This component is considered unstable by Microsoft. Features and APIs may change before final release.
-    static member inline drawerBody (props: IDrawerBodyProp list) = createElement (import "DrawerBody" Drawer_unstable) props
+    static member inline inlineDrawer (props: IInlineDrawerProp list) = createElement (import "InlineDrawer" FluentUIv9) props
+    static member inline drawerHeader (props: IDrawerHeaderProp list) = createElement (import "DrawerHeader" FluentUIv9) props
+    static member inline drawerHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerHeader" FluentUIv9) props
+    static member inline drawerHeaderTitle (props: IDrawerHeaderTitleProp list) = createElement (import "DrawerHeaderTitle" FluentUIv9) props
+    static member inline drawerHeaderNavigation (props: IDrawerHeaderNavigationProp list) = createElement (import "DrawerHeaderNavigation" FluentUIv9) props
+    static member inline drawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerBody" FluentUIv9) props
+    static member inline drawerBody (props: IDrawerBodyProp list) = createElement (import "DrawerBody" FluentUIv9) props
     // Card
     /// A card is a container that holds information and actions related to a single concept or object, like a document or a contact.
     /// Cards can give information prominence and create predictable patterns. While they're very flexible, it's important to use them consistently for particular use cases across experiences.

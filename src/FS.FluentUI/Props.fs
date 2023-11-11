@@ -4448,6 +4448,8 @@ type [<Erase>] drawer =
     static member inline root (value: IInlineDrawerProp list) = Interop.mkProperty<IDrawerProp> "root" (!!value |> createObj |> unbox<IInlineDrawerProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IDrawerProp> "open" value
+    /// Default value for the uncontrolled open state of the dialog.
+    static member inline defaultOpen (value: bool) = Interop.mkProperty<IDrawerProp> "defaultOpen" value
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDrawerProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
@@ -4514,8 +4516,6 @@ type [<Erase>] overlayDrawer =
     static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IOverlayDrawerProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
     static member inline backdrop (value: ReactElement) = Interop.mkProperty<IOverlayDrawerProp> "backdrop" value
-    /// Whether the drawer has a separator line.
-    static member inline separator (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "separator" value
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
@@ -4984,6 +4984,10 @@ module positioning =
 
     type [<Erase>] unstable_disableTether =
         static member inline all = Interop.mkProperty<IPositioningProp> "unstable_disableTether" "all"
+
+    /// When set, the positioned element matches the chosen dimension(s) of the target element
+    type [<Erase>] matchTargetSize =
+        static member inline width = Interop.mkProperty<IPositioningProp> "matchTargetSize" "width"
 
 // -------------------------------------------------------------------------- CreateTableColumnOption --------------------------------------------------------------------------------------
 

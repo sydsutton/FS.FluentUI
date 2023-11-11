@@ -304,6 +304,7 @@ let MenuTest() =
         menu.open' isOpen
         menu.positioning [
             positioning.coverTarget true
+            positioning.matchTargetSize.width
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
         menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) ->
@@ -2221,7 +2222,6 @@ let DrawerTest() =
     Fui.stack [
         stack.children [
             Fui.overlayDrawer [
-                overlayDrawer.separator true
                 overlayDrawer.position.end'
                 overlayDrawer.modalType.alert
                 overlayDrawer.open' isOpen
