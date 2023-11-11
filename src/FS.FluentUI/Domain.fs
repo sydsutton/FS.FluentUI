@@ -230,6 +230,11 @@ type OverflowMenuOptions<'Element> = {
     isOverflowing: bool
 }
 
+type OverflowVisibility = {
+    itemVisibility: obj
+    groupVisibility: obj
+}
+
 type [<RequireQualifiedAccess>] OverflowGroupState = visible | hidden | overflow
 
 type VirtualizerContextProps = {

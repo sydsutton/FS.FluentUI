@@ -399,6 +399,16 @@ type [<Erase>] Fui =
         let useStaticVirtualizerMeasure = import "useStaticVirtualizerMeasure" Virtualizer_unstable
         !!virtualizerProps |> createObj |> useStaticVirtualizerMeasure
 
+    /// A hook that returns the visibility status of all items and groups.
+    ///
+    /// ⚠️ Heads up!
+    ///
+    /// This hook will cause the component it is in to re-render for every single time an item overflows or becomes
+    /// visible - use with caution
+    /// Returns visibility status of all items and groups
+    [<Hook>]
+    static member inline useOverflowVisibility (): OverflowVisibility = import "useOverflowVisibility" FluentUIv9
+
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
