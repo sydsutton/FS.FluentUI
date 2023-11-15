@@ -29,7 +29,6 @@ module FuiHelpers =
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
-    let [<Literal>] Breadcrumb_unstable = "@fluentui/react-breadcrumb-preview"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
     let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
@@ -724,14 +723,14 @@ type [<Erase>] Fui =
     static member inline treeItemLayout (props: ITreeItemLayoutProp list) = createElement (import "TreeItemLayout" FluentUIv9) props
     static member inline treeItemPersonaLayout (props: ITreeItemPersonaLayoutProp list) = createElement (import "TreeItemPersonaLayout" FluentUIv9) props
     // Breadcrumb
-    static member inline breadcrumb (props: IBreadcrumbProp list) = createElement (import "Breadcrumb" Breadcrumb_unstable) props
-    static member inline breadcrumb (props: ReactElement list) = Interop.reactElementWithChildren (import "Breadcrumb" Breadcrumb_unstable) props
-    static member inline breadcrumbItem (props: IBreadcrumbItemProp list) = createElement (import "BreadcrumbItem" Breadcrumb_unstable) props
-    static member inline breadcrumbItem (props: ReactElement list) = Interop.reactElementWithChildren (import "BreadcrumbItem" Breadcrumb_unstable) props
-    static member inline breadcrumbButton (props: IBreadcrumbButtonProp list) = createElement (import "BreadcrumbButton" Breadcrumb_unstable) props
-    static member inline breadcrumbDivider (props: IBreadcrumbDividerProp list) = createElement (import "BreadcrumbDivider" Breadcrumb_unstable) props
+    static member inline breadcrumb (props: IBreadcrumbProp list) = createElement (import "Breadcrumb" FluentUIv9) props
+    static member inline breadcrumb (props: ReactElement list) = Interop.reactElementWithChildren (import "Breadcrumb" FluentUIv9) props
+    static member inline breadcrumbItem (props: IBreadcrumbItemProp list) = createElement (import "BreadcrumbItem" FluentUIv9) props
+    static member inline breadcrumbItem (props: ReactElement list) = Interop.reactElementWithChildren (import "BreadcrumbItem" FluentUIv9) props
+    static member inline breadcrumbButton (props: IBreadcrumbButtonProp list) = createElement (import "BreadcrumbButton" FluentUIv9) props
+    static member inline breadcrumbDivider (props: IBreadcrumbDividerProp list) = createElement (import "BreadcrumbDivider" FluentUIv9) props
     static member inline partitionBreadcrumbItems (options: IPartitionBreadcrumbItemsOptionsProp list): PartitionBreadcrumbItems<'T> =
-        let partitionBreadcrumbItems = import "partitionBreadcrumbItems" Breadcrumb_unstable
+        let partitionBreadcrumbItems = import "partitionBreadcrumbItems" FluentUIv9
 
         !!options
         |> createObj

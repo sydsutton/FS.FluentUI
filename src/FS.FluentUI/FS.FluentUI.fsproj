@@ -49,9 +49,8 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="gte 9.39.0" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="gte 9.40.0" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.4" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-breadcrumb-preview" Version="gte 2.1.2" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-search-preview" Version="gte 0.1.31" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.0.6" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-timepicker-compat-preview" Version="gte 0.1.1" ResolutionStrategy="Max" />
