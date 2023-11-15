@@ -4887,7 +4887,7 @@ module treeItemPersonaLayout =
 
 type [<Erase>] positioning =
     /// An imperative handle to Popper methods.
-    static member inline positioningRef (value: IRefValue<PositioningImperativeRef>) = Interop.mkProperty<IPositioningProp> "positioningRef" value
+    static member inline positioningRef (value: IRefValue<PositioningImperativeRef option>) = Interop.mkProperty<IPositioningProp> "positioningRef" value
     /// Manual override for the target element. Useful for scenarios where a component accepts user prop to override target
     static member inline target (value: Element option) = Interop.mkProperty<IPositioningProp> "target" value
     /// Lets you displace a positioned element from its reference element.
