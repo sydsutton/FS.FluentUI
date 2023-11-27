@@ -1,6 +1,13 @@
 Release Notes
 =========
 
+### 1.7.0 (11-27-2023)
+
+* Update @fluentui/react-components to 9.41.0
+* Remove @fluentui/react-breadcrumb-preview package
+* Stabilize Breadcrumb components and props
+* Fix bug in positioning.positioningRef prop
+
 ### 1.6.0 (11-11-2023)
 
 * Add new positioning prop
