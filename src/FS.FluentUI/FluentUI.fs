@@ -407,6 +407,12 @@ type [<Erase>] Fui =
     [<Hook>]
     static member inline useOverflowVisibility (): OverflowVisibility = import "useOverflowVisibility" FluentUIv9
 
+    /// Designates an area where tabster does not control focus
+    /// Returns Attribute to apply to the target element that should be uncontrolled by tabster
+    static member inline useUncontrolledFocus (): IReactProperty =
+        let useUncontrolledFocus = import "useUncontrolledFocus" FluentUIv9
+        let dataTabster : DataTabster = useUncontrolledFocus ()
+        prop.custom("data-tabster", dataTabster.``data-tabster``)
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
