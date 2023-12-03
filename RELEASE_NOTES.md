@@ -1,6 +1,12 @@
 Release Notes
 =========
 
+### 1.8.0 (12-3-2023)
+
+* Update @fluentui/react-components to 9.42.0
+* Add "useUncontrolledFocus" function
+* Fix bugs in AvatarGroup and partitionAvatarGroupItems
+
 ### 1.7.0 (11-27-2023)
 
 * Update @fluentui/react-components to 9.41.0
