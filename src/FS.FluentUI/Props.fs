@@ -826,6 +826,7 @@ module link =
     type [<Erase>] as' =
         static member inline a = Interop.mkProperty<ILinkProp> "as" "a"
         static member inline button = Interop.mkProperty<ILinkProp> "as" "button"
+        static member inline span = Interop.mkProperty<ILinkProp> "as" "span"
     /// A link can appear either with its default style or subtle. If not specified, the link appears with its default styling.
     type [<Erase>] appearance =
         static member inline subtle = Interop.mkProperty<ILinkProp> "appearance" "subtle"
