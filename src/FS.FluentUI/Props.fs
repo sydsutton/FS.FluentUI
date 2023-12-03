@@ -2579,13 +2579,6 @@ type [<Erase>] avatarGroupPopover =
     static member inline tooltip (value: ReactElement) = Interop.mkProperty<IAvatarGroupPopoverProp> "tooltip" value
     /// Tooltip shown when triggerButton is hovered.
     static member inline tooltip (value: ITooltipProp list) = Interop.mkProperty<IAvatarGroupPopoverProp> "tooltip" (!!value |> createObj |> unbox<ITooltipProp>)
-    /// WARNING: AvatarGroupPopover only allows one child. If you try to use more than one child, only the first ReactElement passed to "children" will be used.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
-                    let elemToUse =
-                        match elems |> Seq.length with
-                        | l when l = 1 -> elems
-                        | _ -> elems |> Seq.take 1
-                    Interop.mkProperty<IAvatarGroupPopoverProp> "children" (Interop.reactApi.Children.toArray elemToUse)
 
 module avatarGroupPopover =
     /// Whether the triggerButton should render an icon instead of the number of overflowed AvatarGroupItems.
@@ -2598,7 +2591,7 @@ module avatarGroupPopover =
 
 // -------------------------------------------------------------------------- PartitionAvatarGroupItemsOptions --------------------------------------------------------------------------------------
 type [<Erase>] partitionAvatarGroupItemsOptions =
-    static member inline items (value: #seq<'T>) = Interop.mkProperty<IPartitionAvatarGroupItemsOptionsProp> "items" value
+    static member inline items (value: #seq<'T>) = Interop.mkProperty<IPartitionAvatarGroupItemsOptionsProp> "items" (value |> Seq.toArray)
     static member inline maxInlineItems (value: int) = Interop.mkProperty<IPartitionAvatarGroupItemsOptionsProp> "maxInlineItems" value
     static member inline maxInlineItems (value: float) = Interop.mkProperty<IPartitionAvatarGroupItemsOptionsProp> "maxInlineItems" value
     static member inline maxInlineItems (value: decimal) = Interop.mkProperty<IPartitionAvatarGroupItemsOptionsProp> "maxInlineItems" value
