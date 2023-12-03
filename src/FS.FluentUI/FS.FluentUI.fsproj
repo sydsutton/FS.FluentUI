@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.7.0</Version>
+        <Version>1.8.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,10 +12,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.41.0
-            - Remove @fluentui/react-breadcrumb-preview package
-            - Stabilize Breadcrumb components and props
-            - Fix bug in positioning.positioningRef prop
+            - Update @fluentui/react-components to 9.42.0
+            - Add "useUncontrolledFocus" function
+            - Fix bugs in AvatarGroup and partitionAvatarGroupItems
         </PackageReleaseNotes>
     </PropertyGroup>
 
