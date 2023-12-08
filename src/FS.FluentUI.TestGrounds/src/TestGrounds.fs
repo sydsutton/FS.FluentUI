@@ -3129,7 +3129,7 @@ let InteractionTagTest() =
         Fui.tooltip [
             tooltip.content (if liked then "unlike" else "like")
             tooltip.relationship.label
-            tooltip.children (
+            tooltip.children [
                 Fui.interactionTagSecondary [
                     interactionTagSecondary.onClick (fun _ -> setLiked (liked |> not))
                     interactionTagSecondary.ariaLabelledBy "golden-retriever-primary golden-retriever-secondary"
@@ -3138,7 +3138,7 @@ let InteractionTagTest() =
                         if liked then Fui.icon.heartFilled [] else Fui.icon.heartRegular []
                     ]
                 ]
-            )
+            ]
         ]
     ]
 

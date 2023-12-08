@@ -1301,6 +1301,12 @@ type [<Erase>] tooltip =
     static member inline content (value: IReactProperty list) = Interop.mkProperty<ITooltipProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
     /// WARNING: Only pass a single React Element as children as opposed to a list of React Elements
     static member inline children (value: ReactElement) = Interop.mkProperty<ITooltipProp> "children" value
+    /// WARNING: Tooltip can contain no more than one child element.
+    /// If you try to use more than one child, only the first you pass to this function will be used.
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+        match elems |> Seq.tryHead with
+        | Some el -> Interop.mkProperty<ITooltipProp> "children" el
+        | None -> Interop.mkProperty<ITooltipProp> "children" Html.none
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<ITooltipProp> "mountNode" value
     /// Where the portal children are mounted on DOM
