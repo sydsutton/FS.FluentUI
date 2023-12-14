@@ -1651,6 +1651,7 @@ let ToastTest() =
                 dispatchToastOptions.timeout -1
                 dispatchToastOptions.toastId toastId
                 dispatchToastOptions.intent.error
+                dispatchToastOptions.position.bottom
             ]
         )
 
@@ -1666,6 +1667,7 @@ let ToastTest() =
                 ]
             )
             updateToastOptions.intent.success
+            updateToastOptions.position.top
         ]
 
     Fui.stack [

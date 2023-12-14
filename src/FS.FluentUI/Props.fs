@@ -2959,6 +2959,8 @@ module toaster =
         static member inline topStart = Interop.mkProperty<IToasterProp> "position" "top-start"
         static member inline bottomEnd = Interop.mkProperty<IToasterProp> "position" "bottom-end"
         static member inline bottomStart = Interop.mkProperty<IToasterProp> "position" "bottom-start"
+        static member inline top = Interop.mkProperty<IToasterProp> "position" "top"
+        static member inline bottom = Interop.mkProperty<IToasterProp> "position" "bottom"
 
     /// Used to determine [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) narration
     /// This will override the intent prop
@@ -5205,11 +5207,13 @@ type [<Erase>] dispatchToastOptions =
 
 module dispatchToastOptions =
     /// The position the toast should render to
-    type [<Erase>] toastPosition =
-        static member inline topEnd = Interop.mkProperty<IDispatchToastOptionsProp> "toastPosition" "top-end"
-        static member inline topStart = Interop.mkProperty<IDispatchToastOptionsProp> "toastPosition" "top-start"
-        static member inline bottomEnd = Interop.mkProperty<IDispatchToastOptionsProp> "toastPosition" "bottom-end"
-        static member inline bottomStart = Interop.mkProperty<IDispatchToastOptionsProp> "toastPosition" "bottom-start"
+    type [<Erase>] position =
+        static member inline topEnd = Interop.mkProperty<IDispatchToastOptionsProp> "position" "top-end"
+        static member inline topStart = Interop.mkProperty<IDispatchToastOptionsProp> "position" "top-start"
+        static member inline bottomEnd = Interop.mkProperty<IDispatchToastOptionsProp> "position" "bottom-end"
+        static member inline bottomStart = Interop.mkProperty<IDispatchToastOptionsProp> "position" "bottom-start"
+        static member inline top = Interop.mkProperty<IDispatchToastOptionsProp> "position" "top"
+        static member inline bottom = Interop.mkProperty<IDispatchToastOptionsProp> "position" "bottom"
 
     /// Used to determine [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) narration
     /// This will override the intent prop
@@ -5260,11 +5264,13 @@ type [<Erase>] updateToastOptions =
 
 module updateToastOptions =
     /// The position the toast should render to
-    type [<Erase>] toastPosition =
-        static member inline topEnd = Interop.mkProperty<IUpdateToastOptionsProp> "toastPosition" "top-end"
-        static member inline topStart = Interop.mkProperty<IUpdateToastOptionsProp> "toastPosition" "top-start"
-        static member inline bottomEnd = Interop.mkProperty<IUpdateToastOptionsProp> "toastPosition" "bottom-end"
-        static member inline bottomStart = Interop.mkProperty<IUpdateToastOptionsProp> "toastPosition" "bottom-start"
+    type [<Erase>] position =
+        static member inline topEnd = Interop.mkProperty<IUpdateToastOptionsProp> "position" "top-end"
+        static member inline topStart = Interop.mkProperty<IUpdateToastOptionsProp> "position" "top-start"
+        static member inline bottomEnd = Interop.mkProperty<IUpdateToastOptionsProp> "position" "bottom-end"
+        static member inline bottomStart = Interop.mkProperty<IUpdateToastOptionsProp> "position" "bottom-start"
+        static member inline top = Interop.mkProperty<IUpdateToastOptionsProp> "position" "top"
+        static member inline bottom = Interop.mkProperty<IUpdateToastOptionsProp> "position" "bottom"
 
     /// Used to determine [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) narration
     /// This will override the intent prop
