@@ -413,6 +413,13 @@ type [<Erase>] Fui =
         let useUncontrolledFocus = import "useUncontrolledFocus" FluentUIv9
         let dataTabster : DataTabster = useUncontrolledFocus ()
         prop.custom("data-tabster", dataTabster.``data-tabster``)
+
+    /// Focus will be restored to the most recent target element when it is lost from a source
+    /// Returns Attribute to apply to the element that might lose focus
+    static member inline useRestoreFocusSource (): IReactProperty =
+        let useRestoreFocusSource = import "useRestoreFocusSource" FluentUIv9
+        let dataTabster : DataTabster = useRestoreFocusSource ()
+        prop.custom("data-tabster", dataTabster.``data-tabster``)
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
