@@ -32,6 +32,7 @@ module FuiHelpers =
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
     let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
+    let [<Literal>] TeachingPopover_unstable = "@fluentui/react-teaching-popover-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -779,6 +780,28 @@ type [<Erase>] Fui =
     static member inline timePicker (props: ITimePickerProp list) = createElement (import "TimePicker" Timepicker_unstable) props
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
+
+    // TeachingPopover
+    static member inline teachingPopover (props: ITeachingPopoverProp list) = createElement (import "TeachingPopover" TeachingPopover_unstable) props
+    static member inline teachingPopover (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopover" TeachingPopover_unstable) props
+    static member inline teachingPopoverTrigger (props: ReactElement) = createElement (import "TeachingPopoverTrigger" TeachingPopover_unstable) [prop.children (props)]
+    static member inline teachingPopoverTrigger (props: ITeachingPopoverTriggerProp list) = createElement (import "TeachingPopoverTrigger" TeachingPopover_unstable) props
+    static member inline teachingPopoverSurface (props: ITeachingPopoverSurfaceProp list) = createElement (import "TeachingPopoverSurface" TeachingPopover_unstable) props
+    static member inline teachingPopoverSurface (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverSurface" TeachingPopover_unstable) props
+    static member inline teachingPopoverHeader (props: ITeachingPopoverHeaderProp list) = createElement (import "TeachingPopoverHeader" TeachingPopover_unstable) props
+    static member inline teachingPopoverHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverHeader" TeachingPopover_unstable) props
+    static member inline teachingPopoverHeader (text: string) = createElement (import "TeachingPopoverHeader" TeachingPopover_unstable) [ prop.text text ]
+    static member inline teachingPopoverBody (props: ITeachingPopoverBodyProp list) = createElement (import "TeachingPopoverBody" TeachingPopover_unstable) props
+    static member inline teachingPopoverTitle (props: ITeachingPopoverTitleProp list) = createElement (import "TeachingPopoverTitle" TeachingPopover_unstable) props
+    static member inline teachingPopoverTitle (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverTitle" TeachingPopover_unstable) props
+    static member inline teachingPopoverTitle (text: string) = createElement (import "TeachingPopoverTitle" TeachingPopover_unstable) [ prop.text text ]
+    static member inline teachingPopoverCarousel (props: ITeachingPopoverCarouselProp list) = createElement (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
+    static member inline teachingPopoverCarousel (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
+    static member inline teachingPopoverActions (props: ITeachingPopoverActionsProp list) = createElement (import "TeachingPopoverActions" TeachingPopover_unstable) props
+    static member inline teachingPopoverActions (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverActions" TeachingPopover_unstable) props
+    static member inline teachingPopoverButton (props: ITeachingPopoverButtonProp list) = createElement (import "TeachingPopoverButton" TeachingPopover_unstable) props
+    static member inline teachingPopoverButton (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverButton" TeachingPopover_unstable) props
+    static member inline teachingPopoverPageCount (props: ITeachingPopoverPageCountProp list) = createElement (import "TeachingPopoverPageCount" TeachingPopover_unstable) props
 
 type [<Erase>] Theme =
     static member inline teamsLight = import "TeamsLightTheme" FluentUIv9 |> unbox<ITheme>

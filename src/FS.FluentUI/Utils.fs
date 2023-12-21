@@ -188,6 +188,17 @@ type [<Erase>] IMotionStateProp = interface end
 type [<Erase>] IMotionOptionsProp = interface end
 type [<Erase>] ITimePickerProp = interface end
 
+type [<Erase>] ITeachingPopoverProp = interface end
+type [<Erase>] ITeachingPopoverTriggerProp = interface end
+type [<Erase>] ITeachingPopoverSurfaceProp = interface end
+type [<Erase>] ITeachingPopoverHeaderProp = interface end
+type [<Erase>] ITeachingPopoverBodyProp = interface end
+type [<Erase>] ITeachingPopoverTitleProp = interface end
+type [<Erase>] ITeachingPopoverCarouselProp = interface end
+type [<Erase>] ITeachingPopoverActionsProp = interface end
+type [<Erase>] ITeachingPopoverButtonProp = interface end
+type [<Erase>] ITeachingPopoverPageCountProp = interface end
+
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
 

@@ -1302,3 +1302,7 @@ type MotionState = {
     /// Useful to apply CSS transitions when the element is mounted and ready to be animated.
     active: bool
 }
+
+type TeachingPopoverPageChangeData = {
+    currentPage: int
+}
