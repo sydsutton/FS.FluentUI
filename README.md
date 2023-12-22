@@ -3,6 +3,7 @@
 ## [V9 of Microsoft's FluentUI (React)](https://react.fluentui.dev/?path=/docs/concepts-introduction--page) made for F# in the style of Feliz
 
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
+[![NuGet Downloads](https://img.shields.io/nuget/dt/FS.FluentUI.svg)](https://www.nuget.org/packages/FS.FluentUI/)
 
 ![DataGridGif](https://github.com/sydsutton/FS.FluentUI/assets/83406605/e98ec82f-b0b1-4ae3-ba3e-ea0a94b462ab)
 
@@ -18,7 +19,7 @@ Each component is designed to adhere to the following standards:
 * **Bundle size**: Refactored and slimmed down components that allow you to include the packages and dependencies you need
 * **Accessibility**: WCAG 2.1 compliant and tested by trusted testers
 * **Design to Code**: Stay up to date with Fluent Design Language changes via Design Tokens
-  
+
 **NOTE:** Some components/ functions are incomplete or still considered `Preview Components` and/or `unstable` by Microsoft. Please feel free to send PR's in order to get this library as close to 100% as possible!
 
 Place a `Fui.fluentProvider` at the root of your app and pass the theme in as a prop. You can use pre-determined themes, or create your own `BrandVariants` or `Tokens` to use for your theme. See the [wiki](https://github.com/sydsutton/FS.FluentUI/wiki/FluentProvider---BrandVariants) for specific examples.
