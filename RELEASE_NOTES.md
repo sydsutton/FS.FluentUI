@@ -1,6 +1,20 @@
 Release Notes
 =========
 
+### 1.9.0 (12-22-2023)
+
+* Fix tooltip children bug
+* Fix bug in toast/toaster positioning
+* Add useRestoreFocusSource function
+* Add preview TeachingPopover components and props
+* Update @fluentui/react-components to 9.43.3
+* Update @fluentui/react-datepicker-compat to 0.4.8
+* Update @fluentui/react-search-preview to 0.1.34
+* Update @fluentui/react-calendar-compat to 0.0.10
+* Update @fluentui/react-timepicker-compat-preview to 0.1.7
+* Update @fluentui/react-motion-preview to 0.5.4
+* Add @fluentui/react-teaching-popover-preview version 0.1.0
+
 ### 1.8.0 (12-3-2023)
 
 * Update @fluentui/react-components to 9.42.0
