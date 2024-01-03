@@ -1130,7 +1130,31 @@ type [<Erase>] menuItemLink =
 // -------------------------------------------------------------------------- MenuItemCheckbox --------------------------------------------------------------------------------------
 type [<Erase>] menuItemCheckbox =
     inherit FelizProps.prop<IMenuItemCheckboxProp>
-    static member inline icon (value:  ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "icon" value
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot rendered before children content
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "icon" value
+    /// Icon slot rendered before children content
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// A helper slot for alignment when a menu item is used with selectable menuitems
+    /// Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
+    static member inline checkmark (value: ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "checkmark" value
+    /// A helper slot for alignment when a menu item is used with selectable menuitems
+    /// Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
+    static member inline checkmark (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "checkmark" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Component children are placed in this slot
+    /// Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "content" value
+    /// Component children are placed in this slot
+    /// Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot that shows the indicator for a submenu
+    static member inline submenuIndicator (value: ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "submenuIndicator" value
+    /// Icon slot that shows the indicator for a submenu
+    static member inline submenuIndicator (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "submenuIndicator" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemCheckboxProp> "secondaryContent" value
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemCheckboxProp> "hasSubmenu" value
     /// Clicking on the menu item will not dismiss an open menu
@@ -1147,7 +1171,31 @@ type [<Erase>] menuItemCheckbox =
 // -------------------------------------------------------------------------- MenuItemRadio --------------------------------------------------------------------------------------
 type [<Erase>] menuItemRadio =
     inherit FelizProps.prop<IMenuItemRadioProp>
-    static member inline icon (value:  ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "icon" value
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot rendered before children content
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "icon" value
+    /// Icon slot rendered before children content
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// A helper slot for alignment when a menu item is used with selectable menuitems
+    /// Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
+    static member inline checkmark (value: ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "checkmark" value
+    /// A helper slot for alignment when a menu item is used with selectable menuitems
+    /// Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
+    static member inline checkmark (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "checkmark" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot that shows the indicator for a submenu
+    static member inline submenuIndicator (value: ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "submenuIndicator" value
+    /// Icon slot that shows the indicator for a submenu
+    static member inline submenuIndicator (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "submenuIndicator" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Component children are placed in this slot
+    /// Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "content" value
+    /// Component children are placed in this slot
+    /// Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemRadioProp> "secondaryContent" value
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemRadioProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemRadioProp> "hasSubmenu" value
     /// Clicking on the menu item will not dismiss an open menu
@@ -1155,7 +1203,7 @@ type [<Erase>] menuItemRadio =
     static member inline disabled (value: bool) = Interop.mkProperty<IMenuItemRadioProp> "disabled" value
     /// @deprecated this property does nothing.
     /// disabled focusable is by default by simply using `disabled` property
-    static member inline disabledFocusable (value: bool) = Interop.mkProperty<IMenuItemRadioProp> "disabledFocusable" value
+    [<Obsolete>] static member inline disabledFocusable (value: bool) = Interop.mkProperty<IMenuItemRadioProp> "disabledFocusable" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_name.asp
     static member inline name (value: string) = Interop.mkProperty<IMenuItemRadioProp> "name" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_value.asp
@@ -1164,7 +1212,7 @@ type [<Erase>] menuItemRadio =
 // -------------------------------------------------------------------------- MenuPopover --------------------------------------------------------------------------------------
 type [<Erase>] menuPopover =
     inherit FelizProps.prop<IMenuPopoverProp>
-    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemCheckboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuPopoverProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
 // -------------------------------------------------------------------------- MenuTrigger --------------------------------------------------------------------------------------
 type [<Erase>] menuTrigger =
