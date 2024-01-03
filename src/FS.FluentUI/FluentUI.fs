@@ -33,6 +33,7 @@ module FuiHelpers =
     let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
     let [<Literal>] TeachingPopover_unstable = "@fluentui/react-teaching-popover-preview"
+    let [<Literal>] Rating_unstable = "@fluentui/react-rating-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -802,6 +803,9 @@ type [<Erase>] Fui =
     static member inline teachingPopoverButton (props: ITeachingPopoverButtonProp list) = createElement (import "TeachingPopoverButton" TeachingPopover_unstable) props
     static member inline teachingPopoverButton (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverButton" TeachingPopover_unstable) props
     static member inline teachingPopoverPageCount (props: ITeachingPopoverPageCountProp list) = createElement (import "TeachingPopoverPageCount" TeachingPopover_unstable) props
+
+    static member inline rating (props: IRatingProp list) = createElement (import "Rating" Rating_unstable) props
+    static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" Rating_unstable) props
 
 type [<Erase>] Theme =
     static member inline teamsLight = import "TeamsLightTheme" FluentUIv9 |> unbox<ITheme>

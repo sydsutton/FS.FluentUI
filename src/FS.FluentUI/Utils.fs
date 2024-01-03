@@ -197,6 +197,10 @@ type [<Erase>] ITeachingPopoverTitleProp = interface end
 type [<Erase>] ITeachingPopoverCarouselProp = interface end
 type [<Erase>] ITeachingPopoverActionsProp = interface end
 type [<Erase>] ITeachingPopoverButtonProp = interface end
+
+type [<Erase>] IRatingProp = interface end
+type [<Erase>] IRatingItemProp = interface end
+
 type [<Erase>] ITeachingPopoverPageCountProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end

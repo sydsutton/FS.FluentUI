@@ -3371,6 +3371,18 @@ let TeachingPopoverTest() =
         ]
     ]
 
+let ratingTest() =
+    Fui.rating [
+        rating.precision true
+        rating.defaultValue 4.5M
+        rating.onChange (fun (v: ValueProp<decimal>) -> printfn "value %A" v.value)
+        rating.iconFilled (Fui.icon.circleFilled [])
+        rating.iconOutline (Fui.icon.circleRegular [])
+        rating.size.large
+        rating.max 7
+        rating.style [ style.color Theme.tokens.colorBrandBackground ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3393,6 +3405,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            ratingTest()
             TeachingPopoverTest()
             UseMotionTest ()
             TimePickerTest ()
