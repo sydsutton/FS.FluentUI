@@ -4996,6 +4996,8 @@ type [<Erase>] positioning =
     static member inline useTransform (value: bool) = Interop.mkProperty<IPositioningProp> "useTransform" value
     static member inline unstable_disableTether (value: bool) = Interop.mkProperty<IPositioningProp> "unstable_disableTether" value
     static member inline autoSize (value: bool) = Interop.mkProperty<IPositioningProp> "autoSize" value
+    /// Called when a position update has finished. Multiple position updates can happen in a single render, since positioning happens outside of the React lifecycle.
+    static member inline onPositioningEnd (value: unit -> unit) = Interop.mkProperty<IPositioningProp> "onPositioningEnd" (System.Func<_,_> value)
 
 module positioning =
     type [<Erase>] position =
