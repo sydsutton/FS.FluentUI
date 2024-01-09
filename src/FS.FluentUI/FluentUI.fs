@@ -25,12 +25,12 @@ module FuiHelpers =
     let [<Literal>] FluentIcons = "@fluentui/react-icons"
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
     let [<Literal>] CalendarCompat = "@fluentui/react-calendar-compat"
+    let [<Literal>] TimepickerCompat = "@fluentui/react-timepicker-compat"
 
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
     let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
-    let [<Literal>] Timepicker_unstable = "@fluentui/react-timepicker-compat-preview"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
     let [<Literal>] TeachingPopover_unstable = "@fluentui/react-teaching-popover-preview"
     let [<Literal>] Rating_unstable = "@fluentui/react-rating-preview"
@@ -778,7 +778,7 @@ type [<Erase>] Fui =
     // Calendar
     static member inline calendar (props: ICalendarProp list) = createElement (import "Calendar" CalendarCompat) props
 
-    static member inline timePicker (props: ITimePickerProp list) = createElement (import "TimePicker" Timepicker_unstable) props
+    static member inline timePicker (props: ITimePickerProp list) = createElement (import "TimePicker" TimepickerCompat) props
 
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 

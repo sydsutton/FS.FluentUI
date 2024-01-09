@@ -5917,7 +5917,7 @@ type [<Erase>] timePicker =
     /// Customizes the formatting of date strings displayed in dropdown options.
     static member inline formatDateToTimeString (value: DateTime -> string) = Interop.mkProperty<ITimePickerProp> "formatDateToTimeString" (System.Func<_,_> value)
     /// In the freeform TimePicker, customizes the parsing from the input time string into a Date and provides custom validation.
-    static member inline formatTimeStringToDate (value: string option -> TimeStringValidationResult) = Interop.mkProperty<ITimePickerProp> "formatTimeStringToDate" (System.Func<_,_> value)
+    static member inline parseTimeStringToDate (value: string option -> TimeStringValidationResult) = Interop.mkProperty<ITimePickerProp> "parseTimeStringToDate" (System.Func<_,_> value)
     /// Callback when the open/closed state of the dropdown changes
     static member inline onOpenChange (handler: OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when the open/closed state of the dropdown changes
