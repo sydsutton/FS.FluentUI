@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.9.0</Version>
+        <Version>1.10.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,17 +12,13 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Fix tooltip children bug that causes a runtime error
-            - Fix bug in toast/toaster positioning
-            - Add useRestoreFocusSource function
-            - Add preview TeachingPopover components and props
-            - Update @fluentui/react-components to 9.43.3
-            - Update @fluentui/react-datepicker-compat to 0.4.8
-            - Update @fluentui/react-search-preview to 0.1.34
-            - Update @fluentui/react-calendar-compat to 0.0.10
-            - Update @fluentui/react-timepicker-compat-preview to 0.1.7
-            - Update @fluentui/react-motion-preview to 0.5.4
-            - Add @fluentui/react-teaching-popover-preview version 0.1.0
+            - Update @fluentui/react-components to 9.44.3
+            - Add @fluentui/react-rating-preview version 0.1.2
+            - Add Ratings components and props
+            - Add missing props for MenuItemCheckbox and MenuItemRadio components
+            - Add stable release for TimePicker component
+            - Add onPositioningEnd property to positioning
+            - Update @fluentui/calendar-compat to 0.0.14 and @fluentui/datepicker-compat to 0.4.14
         </PackageReleaseNotes>
     </PropertyGroup>
 
