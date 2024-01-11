@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 1.10.0 (1-11-2024)
+
+* Update @fluentui/react-components to 9.44.3
+* Add @fluentui/react-rating-preview version 0.1.2
+* Add Ratings components and props
+* Add missing props for MenuItemCheckbox and MenuItemRadio components
+* Add stable release for TimePicker component
+* Add onPositioningEnd property to positioning
+* Update @fluentui/calendar-compat to 0.0.14 and @fluentui/datepicker-compat to 0.4.14
+
 ### 1.9.0 (12-22-2023)
 
 * Fix tooltip children bug
