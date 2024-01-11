@@ -6295,8 +6295,6 @@ type [<Erase>] rating =
     static member inline ratingLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingLabel" value
     static member inline ratingCountLabel (value: ILabelProp list) = Interop.mkProperty<IRatingProp> "ratingCountLabel" (!!value |> createObj)
     static member inline ratingCountLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingCountLabel" value
-    /// Sets whether to render a full or compact Rating
-    static member inline compact (value: bool) = Interop.mkProperty<IRatingProp> "compact" value
     /// Default value of the Rating
     static member inline defaultValue (value: int) = Interop.mkProperty<IRatingProp> "defaultValue" value
     /// Default value of the Rating
@@ -6330,10 +6328,6 @@ type [<Erase>] rating =
     static member inline onChange (value: Event -> ValueProp<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when the rating value is changed by the user.
     static member inline onChange (handler: ValueProp<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    /// Sets the precision to allow half-filled shapes in Rating
-    static member inline precision (value: bool) = Interop.mkProperty<IRatingProp> "precision" value
-    /// Sets Rating to be read only
-    static member inline readOnly (value: bool) = Interop.mkProperty<IRatingProp> "readOnly" value
     /// The value of the rating
     static member inline value (value: int) = Interop.mkProperty<IRatingProp> "value" value
     /// The value of the rating
@@ -6352,6 +6346,24 @@ module rating =
         static member inline small = Interop.mkProperty<IRatingProp> "size" "small"
         static member inline medium = Interop.mkProperty<IRatingProp> "size" "medium"
         static member inline large = Interop.mkProperty<IRatingProp> "size" "large"
+        static member inline extraLarge = Interop.mkProperty<IRatingProp> "size" "extra-large"
+
+    /// Controls the appearance of the Rating.
+    type [<Erase>] color =
+        static member inline brand = Interop.mkProperty<IRatingProp> "color" "brand"
+        static member inline marigold = Interop.mkProperty<IRatingProp> "color" "marigold"
+        static member inline neutral = Interop.mkProperty<IRatingProp> "color" "neutral"
+
+    /// Controls the appearance of the Rating.
+    type [<Erase>] mode =
+        static member inline interactive = Interop.mkProperty<IRatingProp> "mode" "interactive"
+        static member inline readOnly = Interop.mkProperty<IRatingProp> "mode" "read-only"
+        static member inline readOnlyCompact = Interop.mkProperty<IRatingProp> "mode" "read-only-compact"
+
+    /// Sets the precision to allow half-filled shapes in Rating
+    type [<Erase>] step =
+        static member inline ``0.5`` = Interop.mkProperty<IRatingProp> "step" 0.5
+        static member inline ``1`` = Interop.mkProperty<IRatingProp> "step" 1
 
 // -------------------------------------------------------------------------- RatingItem --------------------------------------------------------------------------------------
 type [<Erase>] ratingItem =

@@ -3373,14 +3373,14 @@ let TeachingPopoverTest() =
 
 let ratingTest() =
     Fui.rating [
-        rating.precision true
+        rating.step.``0.5``
         rating.defaultValue 4.5M
         rating.onChange (fun (v: ValueProp<decimal>) -> printfn "value %A" v.value)
         rating.iconFilled (Fui.icon.circleFilled [])
         rating.iconOutline (Fui.icon.circleRegular [])
         rating.size.large
         rating.max 7
-        rating.style [ style.color Theme.tokens.colorBrandBackground ]
+        rating.color.marigold
     ]
 
 let mainContent model dispatch =
