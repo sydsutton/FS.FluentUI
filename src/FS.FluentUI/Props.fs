@@ -2206,6 +2206,8 @@ type [<Erase>] dropdown =
     static member inline value (value: string) = Interop.mkProperty<IDropdownProp> "value" value
     /// Configures the positioned dropdown
     static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<IDropdownProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
+    /// If set, the dropdown will show an icon to clear the current value.
+    static member inline clearable (value: bool) = Interop.mkProperty<IDropdownProp> "clearable" value
 
 module dropdown =
 
@@ -2355,14 +2357,14 @@ type [<Erase>] combobox =
     static member inline input (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "input" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<IComboboxProp> "expandIcon" value
     static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline defaultSelectedOptions (value: array<string>) = Interop.mkProperty<IComboboxProp> "defaultSelectedOptions" value
+    static member inline defaultSelectedOptions (value: #seq<string>) = Interop.mkProperty<IComboboxProp> "defaultSelectedOptions" (value |> Seq.toArray)
     static member inline multiselect (value: bool) = Interop.mkProperty<IComboboxProp> "multiselect" value
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onOptionSelect (value: MouseEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
-    static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IComboboxProp> "selectedOptions" value
+    static member inline selectedOptions (value: #seq<string>) = Interop.mkProperty<IComboboxProp> "selectedOptions" (value |> Seq.toArray)
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IComboboxProp> "mountNode" value
     /// Where the portal children are mounted on DOM
@@ -2389,6 +2391,8 @@ type [<Erase>] combobox =
     static member inline value (value: string) = Interop.mkProperty<IComboboxProp> "value" value
     /// Configure the positioning of the combobox dropdown
     static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<IComboboxProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
+    /// If set, the combobox will show an icon to clear the current value.
+    static member inline clearable (value: bool) = Interop.mkProperty<IComboboxProp> "clearable" value
 
 module combobox =
     type [<Erase>] as' =
@@ -4531,6 +4535,7 @@ module drawer =
     type [<Erase>] position =
         static member inline start = Interop.mkProperty<IDrawerProp> "position" "start"
         static member inline end' = Interop.mkProperty<IDrawerProp> "position" "end"
+        static member inline bottom = Interop.mkProperty<IDrawerProp> "position" "bottom"
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -4584,6 +4589,8 @@ module overlayDrawer =
     type [<Erase>] position =
         static member inline start = Interop.mkProperty<IOverlayDrawerProp> "position" "start"
         static member inline end' = Interop.mkProperty<IOverlayDrawerProp> "position" "end"
+        static member inline bottom = Interop.mkProperty<IOverlayDrawerProp> "position" "bottom"
+
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -4625,6 +4632,7 @@ module inlineDrawer =
     type [<Erase>] position =
         static member inline start = Interop.mkProperty<IInlineDrawerProp> "position" "start"
         static member inline end' = Interop.mkProperty<IInlineDrawerProp> "position" "end"
+        static member inline bottom = Interop.mkProperty<IInlineDrawerProp> "position" "bottom"
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -6293,8 +6301,10 @@ type [<Erase>] rating =
     static member inline root (value:  IReactProperty list) = Interop.mkProperty<IRatingProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline ratingLabel (value: ILabelProp list) = Interop.mkProperty<IRatingProp> "ratingLabel" (!!value |> createObj)
     static member inline ratingLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingLabel" value
+    static member inline ratingLabel (value: string) = Interop.mkProperty<IRatingProp> "ratingLabel" value
     static member inline ratingCountLabel (value: ILabelProp list) = Interop.mkProperty<IRatingProp> "ratingCountLabel" (!!value |> createObj)
     static member inline ratingCountLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingCountLabel" value
+    static member inline ratingCountLabel (value: string) = Interop.mkProperty<IRatingProp> "ratingCountLabel" value
     /// Default value of the Rating
     static member inline defaultValue (value: int) = Interop.mkProperty<IRatingProp> "defaultValue" value
     /// Default value of the Rating
