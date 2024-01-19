@@ -7,52 +7,6 @@ open Fable.Core.JsInterop
 open Fable.React
 open Feliz
 
-type [<Erase>] style =
-    /// Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold.
-    /// Possible values are [100, 200, 300, 400, 500, 600, 700, 800, 900]
-    static member inline fontWeight (weight: int) = Interop.mkStyle "fontWeight" weight
-    static member inline fontWeight (weight: string) = Interop.mkStyle "fontWeight" weight
-    /// Sets the size of the font.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    static member inline fontSize(size: int) = Interop.mkStyle "fontSize" (unbox<string> size + "px")
-    /// Sets the size of the font.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    static member inline fontSize(size: float) = Interop.mkStyle "fontSize" (unbox<string> size + "px")
-    /// Sets the size of the font.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    static member inline fontSize(size: Feliz.Styles.ICssUnit) = Interop.mkStyle "fontSize" size
-    /// Sets the size of the font.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    static member inline fontSize(size: string) = Interop.mkStyle "fontSize" size
-    /// Specifies the height of a text lines.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    ///
-    /// Note: Negative values are not allowed.
-    static member inline lineHeight(size: int) = Interop.mkStyle "lineHeight" (unbox<string> size + "px")
-    /// Specifies the height of a text lines.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    ///
-    /// Note: Negative values are not allowed.
-    static member inline lineHeight(size: float) = Interop.mkStyle "lineHeight" (unbox<string> size + "px")
-    /// Specifies the height of a text lines.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    ///
-    /// Note: Negative values are not allowed.
-    static member inline lineHeight(size: Feliz.Styles.ICssUnit) = Interop.mkStyle "lineHeight" size
-    /// Specifies the height of a text lines.
-    ///
-    /// This property is also used to compute the size of em, ex, and other relative <length> units.
-    ///
-    /// Note: Negative values are not allowed.
-    static member inline lineHeight(size: string) = Interop.mkStyle "lineHeight" size
-
 // -------------------------------------------------------------------------- FluentProvider --------------------------------------------------------------------------------------
 type [<Erase>] fluentProvider =
     inherit FelizProps.prop<IFluentProviderProp>
@@ -6402,3 +6356,30 @@ type [<Erase>] ratingItem =
     static member inline value (value: decimal) = Interop.mkProperty<IRatingItemProp> "value" value
     /// The positive whole number value that is displayed by this RatingItem
     static member inline value (value: float) = Interop.mkProperty<IRatingItemProp> "value" value
+
+// -------------------------------------------------------------------------- ComboboxFilterConfig --------------------------------------------------------------------------------------
+type [<Erase>] comboboxFilterConfig =
+    /// Provides a custom filter for the option
+    static member inline filter (value:  string -> string -> bool) = Interop.mkProperty<IComboboxFilterConfigProp> "filter" (System.Func<_,_,_> value)
+    /// Provides a custom message to display when there are no options
+    static member inline noOptionsMessage (value: string) = Interop.mkProperty<IComboboxFilterConfigProp> "noOptionsMessage" value
+    /// Provides a custom message to display when there are no options
+    static member inline noOptionsMessage (value: ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "noOptionsMessage" value
+    /// Provides a way to map an option object to a React key. By default, "value" is used.
+    static member inline optionToReactKey (value: ComboboxFilterOption<string> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value)
+    /// Provides a way to map an option object to a React key. By default, "value" is used.
+    static member inline optionToReactKey (value: ComboboxFilterOption<ReactElement> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value)
+    // /// Provides a way to map an option object to a React key. By default, "value" is used.
+    // static member inline optionToReactKey (value: string -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value) //TODO
+    /// Provides a way to map an option object to a text used for search. By default, "value" is used.
+    static member inline optionToText (value: ComboboxFilterOption<string> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value)
+    /// Provides a way to map an option object to a text used for search. By default, "value" is used.
+    static member inline optionToText (value: ComboboxFilterOption<ReactElement> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value)
+    // /// Provides a way to map an option object to a text used for search. By default, "value" is used.
+    // static member inline optionToText (value: string -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value) //TODO
+    /// Provides a custom render for the option.
+    static member inline renderOption (value: ComboboxFilterOption<string> -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)
+    /// Provides a custom render for the option.
+    static member inline renderOption (value: ComboboxFilterOption<ReactElement> -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)
+    // /// Provides a custom render for the option.
+    // static member inline renderOption (value: string -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value) //TODO

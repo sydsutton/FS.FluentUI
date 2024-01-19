@@ -3387,6 +3387,8 @@ let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
 
+    let typographyStyles = Fui.typographyStyles
+
     Fui.stack [
         stack.horizontal false
         stack.tokens [ stack.tokens.childrenGap 16; stack.tokens.padding 32 ]
@@ -3398,9 +3400,11 @@ let mainContent model dispatch =
                     Fui.text [
                         text.text "Typography Styles"
                         text.style [
-                            style.fontFamily Fui.typographyStyles.title2.fontFamily
+                            style.fontSize typographyStyles.title1.felizFontSize
+                            style.fontFamily typographyStyles.title1.fontFamily
                             style.color newTokens.colorBrandBackgroundHover
-                            style.fontWeight Fui.typographyStyles.body1Strong.fontWeight
+                            style.lineHeight typographyStyles.title1.felizLineHeight
+                            style.fontWeight typographyStyles.title1.felizFontWeight
                         ]
                     ]
                 ]

@@ -1072,7 +1072,51 @@ type TypographyStyle = {
     fontSize: string
     fontWeight: string
     lineHeight: string
-}
+} with
+    /// Use this instead of `.fontSize`
+    ///
+    /// TypographyStyle's fontSize will be e.g. "var(--fontSizeBase100)", which is not usable by Feliz.style
+    member this.felizFontSize: Styles.ICssUnit =
+        match this.fontSize with
+        | "var(--fontSizeBase100)" -> (length.px 10)
+        | "var(--fontSizeBase200)" -> (length.px 12)
+        | "var(--fontSizeBase300)" -> (length.px 14)
+        | "var(--fontSizeBase400)" -> (length.px 16)
+        | "var(--fontSizeBase500)" -> (length.px 20)
+        | "var(--fontSizeBase600)" -> (length.px 24)
+        | "var(--fontSizeHero700)" -> (length.px 28)
+        | "var(--fontSizeHero800)" -> (length.px 32)
+        | "var(--fontSizeHero900)" -> (length.px 40)
+        | "var(--fontSizeHero1000)" -> (length.px 68)
+        | _ -> (length.em 1)
+
+    /// Use this instead of `.lineHeight`
+    ///
+    /// TypographyStyle's lineHeight will be e.g. "var(--lineHeightBase100)", which is not usable by Feliz.style
+    member this.felizLineHeight: Styles.ICssUnit =
+        match this.lineHeight with
+        | "var(--lineHeightBase100)" -> (length.px 14)
+        | "var(--lineHeightBase200)" -> (length.px 16)
+        | "var(--lineHeightBase300)" -> (length.px 20)
+        | "var(--lineHeightBase400)" -> (length.px 22)
+        | "var(--lineHeightBase500)" -> (length.px 28)
+        | "var(--lineHeightBase600)" -> (length.px 32)
+        | "var(--lineHeightHero700)" -> (length.px 36)
+        | "var(--lineHeightHero800)" -> (length.px 40)
+        | "var(--lineHeightHero900)" -> (length.px 52)
+        | "var(--lineHeightHero1000)" -> (length.px 92)
+        | _ -> (length.em 1)
+
+    /// Use this instead of `.fontWeight`
+    ///
+    /// TypographyStyle's fontWeight will be e.g. "var(--fontWeightRegular)", which is not usable by Feliz.style
+    member this.felizFontWeight: int =
+        match this.fontWeight with
+        | "var(--fontWeightRegular)" -> 400
+        | "var(--fontWeightMedium)" -> 500
+        | "var(--fontWeightSemibold)" -> 600
+        | "var(--fontWeightBold)" -> 700
+        | _ -> 400
 
 type TypographyStyles = {
     body1: TypographyStyle
