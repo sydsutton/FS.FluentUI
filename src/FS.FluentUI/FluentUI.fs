@@ -808,11 +808,11 @@ type [<Erase>] Fui =
     static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" Rating_unstable) props
 
 type [<Erase>] Theme =
-    static member inline teamsLight = import "TeamsLightTheme" FluentUIv9 |> unbox<ITheme>
-    static member inline teamsDark = import "TeamsDarkTheme" FluentUIv9|> unbox<ITheme>
-    static member inline teamsHighContrast = import "TeamsHighContrastTheme" FluentUIv9 |> unbox<ITheme>
-    static member inline webLight = import "WebLightTheme" FluentUIv9 |> unbox<ITheme>
-    static member inline webDark = import "WebDarkTheme" FluentUIv9 |> unbox<ITheme>
+    static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9
+    static member inline teamsDarkTheme : Tokens = import "teamsDarkTheme" FluentUIv9
+    static member inline teamsHighContrastTheme : Tokens = import "teamsHighContrastTheme" FluentUIv9
+    static member inline webLightTheme : Tokens = import "webLightTheme" FluentUIv9
+    static member inline webDarkTheme : Tokens = import "webDarkTheme" FluentUIv9
     /// Warning: Although overriding tokens with 'let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }' is possible,
     /// it's not recommended-- if the existing tokens do not fulfill your needs, you should create a custom theme instead of overriding tokens.
     static member inline tokens: Tokens = import "tokens" FluentUIv9
@@ -821,7 +821,7 @@ type [<Erase>] Theme =
     /// affect tree-shaking since bundlers do not know the shape of the output.
     /// @param theme - Theme from which to get the keys to generate the tokens to css variables mapping object
     /// @returns Tokens to css variables mapping object corresponding to the passed theme
-    static member inline themeToTokensObject (theme: ITheme): Tokens = import "themeToTokensObject" FluentUIv9
+    static member inline themeToTokensObject (theme: Tokens): Tokens = import "themeToTokensObject" FluentUIv9
 
 module Fui =
 
