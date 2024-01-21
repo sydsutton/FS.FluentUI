@@ -422,6 +422,20 @@ type [<Erase>] Fui =
         let useRestoreFocusSource = import "useRestoreFocusSource" FluentUIv9
         let dataTabster : DataTabster = useRestoreFocusSource ()
         prop.custom("data-tabster", dataTabster.``data-tabster``)
+    /// A hook to filter the options based on the user-typed string. It can be configured for a custom filter function, custom message, and custom render function.
+    /// We recommend using filtering when creating a freeform Combobox.
+    ///
+    /// **'T must be a type or object that includes `children` and `value` properties. Using a type or object without these properties will cause `Fui.useComboboxFilter` to not filter correctly.**
+    ///
+    /// **`children` is the text/component that will appear for each option in the dropdown**
+    ///
+    /// **`value` is the text that will be used for the filtering based on user's input**
+    [<Hook>]
+    static member inline useComboboxFilter (query: string, options: 'T list, config: IComboboxFilterConfigProp list): ReactElement list =
+        let options = options |> List.toArray
+        let config = !!config |> createObj
+
+        JSTuple.from3Args (query, options, config) |> import "useComboboxFilter" FluentUIv9
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props

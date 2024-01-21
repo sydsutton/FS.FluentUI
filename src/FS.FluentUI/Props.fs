@@ -6360,26 +6360,36 @@ type [<Erase>] ratingItem =
 // -------------------------------------------------------------------------- ComboboxFilterConfig --------------------------------------------------------------------------------------
 type [<Erase>] comboboxFilterConfig =
     /// Provides a custom filter for the option
+    ///
+    /// The first string is the value set in `optionToText`, or by default the option's `value`
+    ///
+    /// The second string is the user's input
     static member inline filter (value:  string -> string -> bool) = Interop.mkProperty<IComboboxFilterConfigProp> "filter" (System.Func<_,_,_> value)
     /// Provides a custom message to display when there are no options
     static member inline noOptionsMessage (value: string) = Interop.mkProperty<IComboboxFilterConfigProp> "noOptionsMessage" value
     /// Provides a custom message to display when there are no options
     static member inline noOptionsMessage (value: ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "noOptionsMessage" value
     /// Provides a way to map an option object to a React key. By default, "value" is used.
-    static member inline optionToReactKey (value: ComboboxFilterOption<string> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value)
-    /// Provides a way to map an option object to a React key. By default, "value" is used.
-    static member inline optionToReactKey (value: ComboboxFilterOption<ReactElement> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value)
-    // /// Provides a way to map an option object to a React key. By default, "value" is used.
-    // static member inline optionToReactKey (value: string -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value) //TODO
+    ///
+    /// **'T must be a type or object that includes `children` and `value` properties. Using a type or object without these properties will cause `Fui.useComboboxFilter` to not filter correctly.**
+    ///
+    /// **`children` is the text/component that will appear for each option in the dropdown**
+    ///
+    /// **`value` is the text that will be used for the filtering based on user's input**
+    static member inline optionToReactKey (value: 'T -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToReactKey" (System.Func<_,_> value)
     /// Provides a way to map an option object to a text used for search. By default, "value" is used.
-    static member inline optionToText (value: ComboboxFilterOption<string> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value)
-    /// Provides a way to map an option object to a text used for search. By default, "value" is used.
-    static member inline optionToText (value: ComboboxFilterOption<ReactElement> -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value)
-    // /// Provides a way to map an option object to a text used for search. By default, "value" is used.
-    // static member inline optionToText (value: string -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value) //TODO
+    ///
+    /// **'T must be a type or object that includes `children` and `value` properties. Using a type or object without these properties will cause `Fui.useComboboxFilter` to not filter correctly.**
+    ///
+    /// **`children` is the text/component that will appear for each option in the dropdown**
+    ///
+    /// **`value` is the text that will be used for the filtering based on user's input**
+    static member inline optionToText (value: 'T -> string) = Interop.mkProperty<IComboboxFilterConfigProp> "optionToText" (System.Func<_,_> value)
     /// Provides a custom render for the option.
-    static member inline renderOption (value: ComboboxFilterOption<string> -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)
-    /// Provides a custom render for the option.
-    static member inline renderOption (value: ComboboxFilterOption<ReactElement> -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)
-    // /// Provides a custom render for the option.
-    // static member inline renderOption (value: string -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value) //TODO
+    ///
+    /// **'T must be a type or object that includes `children` and `value` properties. Using a type or object without these properties will cause `Fui.useComboboxFilter` to not filter correctly.**
+    ///
+    /// **`children` is the text/component that will appear for each option in the dropdown**
+    ///
+    /// **`value` is the text that will be used for the filtering based on user's input**
+    static member inline renderOption (value: 'T -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)

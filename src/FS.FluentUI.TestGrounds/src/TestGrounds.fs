@@ -1196,10 +1196,79 @@ let DropdownTest() =
         ]
     ]
 
+type ComboboxOption<'U> = {
+    children: 'U
+    value: string
+    disabled: bool
+}
+
+let mkOptionChild (s: string) =
+    Fui.text [
+        text.style [ style.color.orange ]
+        text.text s
+    ]
+
+// `children` is the text that will appear for each option in the dropdown
+// `value` is the text that will be used for the filtering based on user's input
+let comboboxOptions = [
+    {
+        children = mkOptionChild "Alligator"
+        value = "alligator"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Bee"
+        value = "bee"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Bird"
+        value = "bird"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Cheetah"
+        value = "cheetah"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Dog"
+        value = "dog"
+        disabled = true
+    }
+    {
+        children = mkOptionChild "Dolphin"
+        value = "dolphin"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Ferret"
+        value = "ferret"
+        disabled = false
+    }
+    {
+        children = mkOptionChild "Firefly"
+        value = "firefly"
+        disabled = false
+    }
+]
+
 [<ReactComponent>]
 let ComboBoxTest() =
-    let seletedOptions, setSelectedOptions = React.useState([| |])
-    let options = ["Cat"; "Dog"; "Ferret"; "Fish"; "Hamster"; "Snake"]
+    let selectedAnimals, setSelectedAnimals = React.useState [| |]
+    let query, setQuery = React.useState ("")
+    let children = Fui.useComboboxFilter(query, comboboxOptions, [
+        comboboxFilterConfig.noOptionsMessage (
+            Fui.text [
+                text.style [ style.color "red"]
+                text.text "No animals match your search"
+            ]
+        )
+        // Always showing firefly when filtering
+        comboboxFilterConfig.filter (fun value input -> value.Contains(input) || value = "text-firefly")
+        comboboxFilterConfig.optionToText (fun (v: ComboboxOption<ReactElement>) -> $"text-{v.value}")
+    ])
+
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -1209,36 +1278,15 @@ let ComboBoxTest() =
             ]
             Fui.combobox [
                 combobox.ariaLabelledBy "comboBoxId"
-                combobox.multiselect true
-                combobox.positioning [
-                    positioning.offset [
-                        offset.crossAxis 50
-                        offset.mainAxis 50
-                    ]
-                ]
-                combobox.defaultSelectedOptions seletedOptions
+                combobox.selectedOptions selectedAnimals
+                combobox.value (if query = "" then selectedAnimals |> String.concat ", " else query)
                 combobox.placeholder "Select one or more animals"
-                combobox.onOptionSelect (fun (d: OptionOnSelectData) -> setSelectedOptions d.selectedOptions)
-                combobox.positioning.afterTop
-                combobox.children (
-                    options |> List.map (fun (o: string) ->
-                        Fui.option [
-                            option.key o
-                            option.disabled (if o = "Ferret" then true else false)
-                            option.value o
-                            option.children [
-                                Fui.text o
-                            ]
-                        ]
-                    )
+                combobox.onTextChange (fun s -> setQuery s)
+                combobox.onOptionSelect (fun (d: OptionOnSelectData ) ->
+                    setSelectedAnimals d.selectedOptions
+                    setQuery ""
                 )
-            ]
-            Fui.stack [
-                stack.horizontal true
-                stack.children [
-                    Fui.text "Chosen pets: "
-                    Fui.text (seletedOptions |> String.concat ", ")
-                ]
+                combobox.children children
             ]
         ]
     ]
