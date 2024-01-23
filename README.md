@@ -30,13 +30,30 @@ open Browser.Dom
 open FS.FluentUI
 open FS.FluentUI.V8toV9
 
+let useStyles: unit -> {| toggleButtons: string |} =
+    Fui.makeStyles [
+        "toggleButtons", [
+            style.height (length.px 300 )
+            style.width (length.px 300)
+            style.margin (length.px 50)
+            style.border (4, borderStyle.solid, "purple")
+        ]
+    ]
+
 [<ReactComponent>]
 let ToggleButtons () =
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
+
+    let styles = useStyles()
+
+    // The use of Fui.stack is preferential and is available through FS.FluentUI.V8toV9
     Fui.stack [
-        stack.horizontal true
+        stack.horizontal false
+        stack.horizontalAlign.center
+        stack.verticalAlign.center
         stack.tokens [ stack.tokens.childrenGap 16 ]
+        stack.className styles.toggleButtons
         stack.children [
             Fui.toggleButton [
                 toggleButton.icon (Fui.icon.checkbox1Filled [])
@@ -61,13 +78,15 @@ let ToggleButtons () =
 let root = ReactDOM.createRoot (document.getElementById "feliz-app")
 root.render (
     Fui.fluentProvider [
-        fluentProvider.theme.webDarkTheme
+        fluentProvider.theme.webLightTheme
         fluentProvider.children [
             ToggleButtons ()
         ]
     ]
 )
 ```
+
+![FSReadMe](https://github.com/sydsutton/FS.FluentUI/assets/83406605/990c4449-a1f3-44d8-836d-d3d2c7598b9d)
 
 ## Installation
 

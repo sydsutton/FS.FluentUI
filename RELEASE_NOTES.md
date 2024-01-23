@@ -1,6 +1,20 @@
 Release Notes
 =========
 
+### 1.11.0 (1-23-2024)
+
+* Update @fluentui/react-components to 9.46.0
+* Update @fluentui/react-calendar-compat to 0.0.18
+* Update @fluentui/react-datepicker-compat to 0.4.19
+* Update @fluentui/react-timepicker-compat to 0.1.5
+* Add navigationIcons prop to calendarDay and calendarMonth
+* Add clearable prop to Dropdown and Combobox
+* Add position.bottom prop to Drawer component
+* Add missing values to Tokens type
+* Refactor TypographyStyle and remove custom style overloads
+* Fix bugs in Theme functions
+* Add useComboboxFilter hook
+
 ### 1.10.0 (1-11-2024)
 
 * Update @fluentui/react-components to 9.44.3
