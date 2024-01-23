@@ -3267,6 +3267,10 @@ let CalendarTest () =
         calendar.restrictedDates [ DateTime.Today; DateTime.Today.AddDays(1)]
         calendar.strings ({ Fui.defaultDatePickerStrings with goToToday = "Pick Me!"})
         calendar.calendarDayProps [
+            calendarDay.navigationIcons [
+                calendarNavigationIcons.downNavigation (Fui.icon.doubleSwipeDownFilled [])
+                calendarNavigationIcons.upNavigation (Fui.icon.doubleSwipeUpFilled [])
+            ]
             calendarDay.firstDayOfWeek.saturday
             calendarDay.getMarkedDays (fun sd _ -> [|
                     Fui.addDays(sd, 3)

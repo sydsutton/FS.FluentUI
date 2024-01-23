@@ -3545,6 +3545,8 @@ type [<Erase>] calendarDay  =
     static member inline customDayCellRef (value: (HTMLElement option -> DateTime -> CalendarDayGridStyles -> unit)) = Interop.mkProperty<ICalendarDayProp> "customDayCellRef" (System.Func<_,_,_,_> value)
     /// Optional callback function to mark specific days with a small symbol. Fires when the date range changes, gives the starting and ending displayed dates and expects the list of which days in between should be marked.
     static member inline getMarkedDays (value: (DateTime -> DateTime -> DateTime array)) = Interop.mkProperty<ICalendarDayProp> "getMarkedDays" (System.Func<_,_,_> value)
+    /// Custom navigation icons
+    static member inline navigationIcons (value: ICalendarNavigationIconsProp list) = Interop.mkProperty<ICalendarDayProp> "navigationIcons" (!!value |> createObj |> unbox)
 
 module calendarDay =
     /// The date range type indicating how many days should be selected as the user selects days
@@ -3577,6 +3579,15 @@ module calendarDay =
     type [<Erase>] animationDirection =
         static member inline horizontal = Interop.mkProperty<ICalendarDayProp> "animationDirection" 0
         static member inline vertical = Interop.mkProperty<ICalendarDayProp> "animationDirection" 1
+
+// -------------------------------------------------------------------------- CalendarNavigationIcons --------------------------------------------------------------------------------------
+type [<Erase>] calendarNavigationIcons  =
+    //  Icon to use for up arrow navigation.
+    static member inline upNavigation (value: ReactElement) = Interop.mkProperty<ICalendarNavigationIconsProp> "upNavigation" value
+    //  Icon to use for down arrow navigation.
+    static member inline downNavigation (value: ReactElement) = Interop.mkProperty<ICalendarNavigationIconsProp> "downNavigation" value
+    //  Icon to use for the dismiss button.
+    static member inline dismiss (value: ReactElement) = Interop.mkProperty<ICalendarNavigationIconsProp> "dismiss" value
 
 // -------------------------------------------------------------------------- CalendarMonth --------------------------------------------------------------------------------------
 type [<Erase>] calendarMonth  =
@@ -3625,6 +3636,8 @@ type [<Erase>] calendarMonth  =
     static member inline className (value: string) = Interop.mkProperty<ICalendarMonthProp> "className" value
     /// Whether the year picker is hidden
     static member inline yearPickerHidden (value: bool) = Interop.mkProperty<ICalendarMonthProp> "yearPickerHidden" value
+    /// Custom navigation icons
+    static member inline navigationIcons (value: ICalendarNavigationIconsProp list) = Interop.mkProperty<ICalendarMonthProp> "navigationIcons" (!!value |> createObj |> unbox)
 
 module calendarMonth =
     /// The cardinal directions for animation to occur during transitions, either horizontal or veritcal

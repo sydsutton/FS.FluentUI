@@ -203,6 +203,7 @@ type [<Erase>] IRatingItemProp = interface end
 
 type [<Erase>] ITeachingPopoverPageCountProp = interface end
 type [<Erase>] IComboboxFilterConfigProp = interface end
+type [<Erase>] ICalendarNavigationIconsProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
