@@ -200,6 +200,7 @@ type [<Erase>] ITeachingPopoverButtonProp = interface end
 
 type [<Erase>] IRatingProp = interface end
 type [<Erase>] IRatingItemProp = interface end
+type [<Erase>] IRatingDisplayProp = interface end
 
 type [<Erase>] ITeachingPopoverPageCountProp = interface end
 type [<Erase>] IComboboxFilterConfigProp = interface end

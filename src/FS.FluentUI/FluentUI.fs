@@ -820,6 +820,7 @@ type [<Erase>] Fui =
 
     static member inline rating (props: IRatingProp list) = createElement (import "Rating" Rating_unstable) props
     static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" Rating_unstable) props
+    static member inline ratingDisplay (props: IRatingDisplayProp list) = createElement (import "RatingDisplay" Rating_unstable) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

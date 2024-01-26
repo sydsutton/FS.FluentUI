@@ -3435,6 +3435,17 @@ let ratingTest() =
         rating.color.marigold
     ]
 
+let ratingDisplayTest =
+    Fui.ratingDisplay [
+        ratingDisplay.compact false
+        ratingDisplay.value 4.3
+        ratingDisplay.max 10
+        ratingDisplay.iconFilled (Fui.icon.vehicleTruckBagFilled [])
+        ratingDisplay.iconOutline (Fui.icon.vehicleTruckBagRegular [])
+        ratingDisplay.color.marigold
+        ratingDisplay.size.extraLarge
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3462,6 +3473,7 @@ let mainContent model dispatch =
                 ]
             ]
             ratingTest()
+            ratingDisplayTest
             TeachingPopoverTest()
             UseMotionTest ()
             TimePickerTest ()

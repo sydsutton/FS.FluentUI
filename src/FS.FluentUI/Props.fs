@@ -6285,12 +6285,6 @@ type [<Erase>] rating =
     /// The max value of the rating. This controls the number of rating items displayed.
     /// Must be a whole number greater than 1.
     static member inline max (value: int) = Interop.mkProperty<IRatingProp> "max" value
-    /// The max value of the rating. This controls the number of rating items displayed.
-    /// Must be a whole number greater than 1.
-    static member inline max (value: decimal) = Interop.mkProperty<IRatingProp> "max" value
-    /// The max value of the rating. This controls the number of rating items displayed.
-    /// Must be a whole number greater than 1.
-    static member inline max (value: float) = Interop.mkProperty<IRatingProp> "max" value
     /// Name for the Radio inputs. If not provided, one will be automatically generated
     static member inline name (value: string) = Interop.mkProperty<IRatingProp> "name" value
     /// Callback when the rating value is changed by the user.
@@ -6406,3 +6400,52 @@ type [<Erase>] comboboxFilterConfig =
     ///
     /// **`value` is the text that will be used for the filtering based on user's input**
     static member inline renderOption (value: 'T -> ReactElement) = Interop.mkProperty<IComboboxFilterConfigProp> "renderOption" (System.Func<_,_> value)
+
+// -------------------------------------------------------------------------- RatingDisplay --------------------------------------------------------------------------------------
+type [<Erase>] ratingDisplay =
+    inherit FelizProps.prop<IRatingDisplayProp>
+    static member inline root (value:  IReactProperty list) = Interop.mkProperty<IRatingDisplayProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline valueText (value: IReactProperty list) = Interop.mkProperty<IRatingDisplayProp> "valueText" (!!value |> createObj)
+    static member inline valueText (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "valueText" value
+    static member inline valueText (value: string) = Interop.mkProperty<IRatingDisplayProp> "valueText" value
+    static member inline countText (value: IReactProperty list) = Interop.mkProperty<IRatingDisplayProp> "countText" (!!value |> createObj)
+    static member inline countText (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "countText" value
+    static member inline countText (value: string) = Interop.mkProperty<IRatingDisplayProp> "countText" value
+    /// The icon used for filled rating items.
+    static member inline iconFilled (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "iconFilled" value
+    /// The icon used for unfilled rating items.
+    static member inline iconOutline (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "iconOutline" value
+    /// The max value of the rating. This controls the number of rating items displayed.
+    /// Must be a whole number greater than 1.
+    static member inline max (value: int) = Interop.mkProperty<IRatingDisplayProp> "max" value
+    /// The value of the rating
+    static member inline value (value: int) = Interop.mkProperty<IRatingDisplayProp> "value" value
+    /// The value of the rating
+    static member inline value (value: decimal) = Interop.mkProperty<IRatingDisplayProp> "value" value
+    /// The value of the rating
+    static member inline value (value: float) = Interop.mkProperty<IRatingDisplayProp> "value" value
+    /// The number of ratings represented by the rating value.
+    /// This will be formatted with a thousands separator (if applicable) and displayed next to the value.
+    static member inline count (value: int) = Interop.mkProperty<IRatingDisplayProp> "count" value
+    /// The number of ratings represented by the rating value.
+    /// This will be formatted with a thousands separator (if applicable) and displayed next to the value.
+    static member inline count (value: decimal) = Interop.mkProperty<IRatingDisplayProp> "count" value
+    /// The number of ratings represented by the rating value.
+    /// This will be formatted with a thousands separator (if applicable) and displayed next to the value.
+    static member inline count (value: float) = Interop.mkProperty<IRatingDisplayProp> "count" value
+    /// Renders a single filled star, with the value written next to it.
+    static member inline compact (value: bool) = Interop.mkProperty<IRatingDisplayProp> "compact" value
+
+module ratingDisplay =
+    /// Sets the size of the Rating items.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IRatingDisplayProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IRatingDisplayProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IRatingDisplayProp> "size" "large"
+        static member inline extraLarge = Interop.mkProperty<IRatingDisplayProp> "size" "extra-large"
+
+    /// Controls the appearance of the Rating.
+    type [<Erase>] color =
+        static member inline brand = Interop.mkProperty<IRatingDisplayProp> "color" "brand"
+        static member inline marigold = Interop.mkProperty<IRatingDisplayProp> "color" "marigold"
+        static member inline neutral = Interop.mkProperty<IRatingDisplayProp> "color" "neutral"
