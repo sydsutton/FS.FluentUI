@@ -1065,7 +1065,55 @@ type Tokens = {
     shadow16Brand: string
     shadow28Brand: string
     shadow64Brand: string
-}
+} with
+    /// Use this instead of `.fontSizeBase100`
+    member this.felizFontSizeBase100 = length.px 10
+    /// Use this instead of `.fontSizeBase200`
+    member this.felizFontSizeBase200 = length.px 12
+    /// Use this instead of `.fontSizeBase300`
+    member this.felizFontSizeBase300 = length.px 14
+    /// Use this instead of `.fontSizeBase400`
+    member this.felizFontSizeBase400 = length.px 16
+    /// Use this instead of `.fontSizeBase500`
+    member this.felizFontSizeBase500 = length.px 20
+    /// Use this instead of `.fontSizeBase600`
+    member this.felizFontSizeBase600 = length.px 24
+    /// Use this instead of `.fontSizeBase700`
+    member this.felizFontSizeBase700 = length.px 28
+    /// Use this instead of `.fontSizeBase800`
+    member this.felizFontSizeBase800 = length.px 32
+    /// Use this instead of `.fontSizeBase900`
+    member this.felizFontSizeBase900 = length.px 40
+    /// Use this instead of `.fontSizeBase1000`
+    member this.felizFontSizeBase1000 = length.px 68
+    /// Use this instead of `.lineHeightBase100`
+    member this.felizLineHeightBase100 = length.px 14
+    /// Use this instead of `.lineHeightBase200`
+    member this.felizLineHeightBase200 = length.px 16
+    /// Use this instead of `.lineHeightBase300`
+    member this.felizLineHeightBase300 = length.px 20
+    /// Use this instead of `.lineHeightBase400`
+    member this.felizLineHeightBase400 = length.px 22
+    /// Use this instead of `.lineHeightBase500`
+    member this.felizLineHeightBase500 = length.px 28
+    /// Use this instead of `.lineHeightBase600`
+    member this.felizLineHeightBase600 = length.px 32
+    /// Use this instead of `.lineHeightBase700`
+    member this.felizLineHeightBase700 = length.px 36
+    /// Use this instead of `.lineHeightBase800`
+    member this.felizLineHeightBase800 = length.px 40
+    /// Use this instead of `.lineHeightBase900`
+    member this.felizLineHeightBase900 = length.px 52
+    /// Use this instead of `.lineHeightBase1000`
+    member this.felizLineHeightBase1000 = length.px 92
+    /// Use this instead of `.fontWeightRegular`
+    member this.felizFontWeightRegular = 400
+    /// Use this instead of `.fontWeightMedium`
+    member this.felizFontWeightMedium = 500
+    /// Use this instead of `.fontWeightSemibold`
+    member this.felizFontWeightSemibold = 600
+    /// Use this instead of `.fontWeightBold`
+    member this.felizFontWeightBold = 700
 
 type TypographyStyle = {
     fontFamily: string
