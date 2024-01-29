@@ -5063,7 +5063,7 @@ module useArrowNavigationGroupOptions =
 
 type [<Erase>] useFocusableGroupOptions =
     /// Tabster can ignore default handling of keydown events
-    static member inline ignoreDefaultKeydown (value: IgnoreKeyDown) = Interop.mkProperty<IUseFocusableGroupOptionsProp> "ignoreDefaultKeydown" value
+    static member inline ignoreDefaultKeydown (value: IIgnoreKeyDownProp list) = Interop.mkProperty<IUseFocusableGroupOptionsProp> "ignoreDefaultKeydown" (!!value |> createObj |> unbox)
 
 module useFocusableGroupOptions =
     /// Behavior for the Tab key.
