@@ -164,12 +164,7 @@ let Accordion () =
         accordion.collapsible true
         accordion.openItems openItems
         accordion.defaultOpenItems openItems
-        accordion.onToggle (fun (i: ValueProp<int>) ->
-            if openItems |> List.contains i.value then
-                setOpenItems (openItems |> List.except [i.value])
-            else
-            setOpenItems (openItems |> List.append [i.value])
-        )
+        accordion.onToggle (fun (i: AccordionToggleData<int>) -> setOpenItems (i.openItems |> Array.toList))
         accordion.multiple true
         accordion.children [
             Fui.accordionItem [
@@ -670,6 +665,8 @@ let tooltipTest =
             Fui.text "Example tooltip"
         )
         tooltip.relationship.label
+        tooltip.positioning.belowStart
+        tooltip.onVisibleChange (fun (v: OnVisibleChangeData) -> printfn "v %A" v.visible)
         tooltip.children (
             Fui.button [
                 button.size.large
@@ -2313,6 +2310,7 @@ let simpleTreeTest =
             tree.children [
                 Fui.treeItem [
                     treeItem.itemType.branch
+                    treeItem.onOpenChange (fun (v: TreeItemOpenChangeData<string, MouseEvent>) -> printfn "%A" v.``type``)
                     treeItem.value "subtree-1"
                     treeItem.children [
                         Fui.treeItemLayout [

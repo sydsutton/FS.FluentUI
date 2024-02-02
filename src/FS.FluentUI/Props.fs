@@ -314,11 +314,11 @@ type [<Erase>] accordion =
     /// Indicates if Accordion support multiple Panels opened at the same time.
     static member inline multiple (value: bool) = Interop.mkProperty<IAccordionProp> "multiple" value
     /// Callback to be called when the opened items change.
-    static member inline onToggle (handler: (ValueProp<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onToggle (handler: (AccordionToggleData<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback to be called when the opened items change.
-    static member inline onToggle (value: (MouseEvent -> ValueProp<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> value)
+    static member inline onToggle (value: (MouseEvent -> AccordionToggleData<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> value)
     /// Callback to be called when the opened items change.
-    static member inline onToggle (value: (KeyboardEvent -> ValueProp<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> value)
+    static member inline onToggle (value: (KeyboardEvent -> AccordionToggleData<'T> -> unit)) = Interop.mkProperty<IAccordionProp> "onToggle" (System.Func<_,_,_> value)
 
 module accordion =
 
@@ -342,17 +342,19 @@ type [<Erase>] accordionHeader =
     /// The element wrapping the button. By default this is a div, but can be a heading.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Expand icon slot rendered before (or after) children content in heading.
-    static member inline icon (value:  ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "icon" value
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "icon" value
     /// Expand icon slot rendered before (or after) children content in heading.
-    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
     /// Expand icon slot rendered before (or after) children content in heading.
-    static member inline expandIcon (value:  ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "expandIcon" value
+    static member inline expandIcon (value: ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "expandIcon" value
     /// Expand icon slot rendered before (or after) children content in heading.
-    static member inline expandIcon (value:  IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
     /// The component to be used as button in heading
-    static member inline button (value:  ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "button" value
+    static member inline button (value: ReactElement) = Interop.mkProperty<IAccordionHeaderProp> "button" value
     /// The component to be used as button in heading
-    static member inline button (value:  IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "button" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline button (value: IReactProperty list) = Interop.mkProperty<IAccordionHeaderProp> "button" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Indicates if the AccordionHeader should be rendered inline.
+    static member inline inline' (value: bool) = Interop.mkProperty<IAccordionHeaderProp> "inline" value
 
 module accordionHeader =
     /// The position of the expand  icon slot in heading.
@@ -369,7 +371,6 @@ module accordionHeader =
 
 type [<Erase>] accordionPanel =
     inherit FelizProps.prop<IAccordionPanelProp>
-    static member inline root (value: ReactElement)= Interop.mkProperty<IAccordionPanelProp> "root" value
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IAccordionPanelProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Internal open state, provided by context.
     static member inline open' (value: bool)= Interop.mkProperty<IAccordionPanelProp> "open" value
@@ -841,15 +842,19 @@ type [<Erase>] text =
 
 module text =
     type [<Erase>] as' =
+        static member inline b = Interop.mkProperty<ITextProp> "as" "b"
+        static member inline em = Interop.mkProperty<ITextProp> "as" "em"
         static member inline h1 = Interop.mkProperty<ITextProp> "as" "h1"
         static member inline h2 = Interop.mkProperty<ITextProp> "as" "h2"
         static member inline h3 = Interop.mkProperty<ITextProp> "as" "h3"
         static member inline h4 = Interop.mkProperty<ITextProp> "as" "h4"
         static member inline h5 = Interop.mkProperty<ITextProp> "as" "h5"
         static member inline h6 = Interop.mkProperty<ITextProp> "as" "h6"
+        static member inline i = Interop.mkProperty<ITextProp> "as" "i"
         static member inline p = Interop.mkProperty<ITextProp> "as" "p"
         static member inline pre = Interop.mkProperty<ITextProp> "as" "pre"
         static member inline span = Interop.mkProperty<ITextProp> "as" "span"
+        static member inline strong = Interop.mkProperty<ITextProp> "as" "strong"
 
     /// Aligns text based on the parent container.
     type [<Erase>] align =
@@ -1126,7 +1131,7 @@ type [<Erase>] menuItemCheckbox =
     static member inline disabled (value: bool) = Interop.mkProperty<IMenuItemCheckboxProp> "disabled" value
     /// @deprecated this property does nothing.
     /// disabled focusable is by default by simply using `disabled` property
-    static member inline disabledFocusable (value: bool) = Interop.mkProperty<IMenuItemCheckboxProp> "disabledFocusable" value
+    [<Obsolete>] static member inline disabledFocusable (value: bool) = Interop.mkProperty<IMenuItemCheckboxProp> "disabledFocusable" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_name.asp
     static member inline name (value: string) = Interop.mkProperty<IMenuItemCheckboxProp> "name" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_value.asp
@@ -1584,7 +1589,7 @@ type [<Erase>] splitButton =
 
 module splitButton =
     type [<Erase>] as' =
-        static member inline undefined = Interop.mkProperty<ISplitButtonProp> "as" "undefined"
+        static member inline div = Interop.mkProperty<ISplitButtonProp> "as" "div"
 
     /// A button can have its content and borders styled for greater emphasis or to be subtle.
     type [<Erase>] appearance =
@@ -1725,9 +1730,19 @@ type [<Erase>] slider =
     static member inline onChange (value: Event -> ValueProp<'T> -> unit) = Interop.mkProperty<ISliderProp> "onChange" (System.Func<_,_,_> value)
 
 module slider =
+    type [<Erase>] as' =
+        static member inline input = Interop.mkProperty<ISliderProp> "as" "input"
+
     type [<Erase>] size =
         static member inline small = Interop.mkProperty<ISliderProp> "size" "small"
         static member inline medium = Interop.mkProperty<ISliderProp> "size" "medium"
+
+    /// Orient is a non standard attribute that allows for vertical orientation in Firefox. It is set internally when vertical is set to true.
+    /// https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range#non_standard_attributes Webkit/Chromium support for vertical inputs
+    /// is provided via -webkit-appearance css property
+    type [<Erase>] orient =
+        static member inline horizontal = Interop.mkProperty<ISliderProp> "orient" "horizontal"
+        static member inline vertical = Interop.mkProperty<ISliderProp> "orient" "vertical"
 
 // -------------------------------------------------------------------------- Switch --------------------------------------------------------------------------------------
 type [<Erase>] switch =
@@ -2142,7 +2157,7 @@ type [<Erase>] dropdown =
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<IDropdownProp> "expandIcon" value
     static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<IDropdownProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
     /// For an uncontrolled component, sets the initial selection. If this is set, the defaultValue prop MUST also be set.
-    static member inline defaultSelectedOptions (value: array<string>) = Interop.mkProperty<IDropdownProp> "defaultSelectedOptions" value
+    static member inline defaultSelectedOptions (value: #seq<string>) = Interop.mkProperty<IDropdownProp> "defaultSelectedOptions" (value |> Seq.toArray)
     /// Sets the selection type to multiselect. Set this to true for multiselect, even if fully controlling selection state. This enables styles and accessibility properties to be set.
     static member inline multiselect (value: bool) = Interop.mkProperty<IDropdownProp> "multiselect" value
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
@@ -2150,7 +2165,7 @@ type [<Erase>] dropdown =
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IDropdownProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
-    static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IDropdownProp> "selectedOptions" value
+    static member inline selectedOptions (value: #seq<string>) = Interop.mkProperty<IDropdownProp> "selectedOptions" (value |> Seq.toArray)
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDropdownProp> "mountNode" value
     /// Where the portal children are mounted on DOM
@@ -2235,7 +2250,7 @@ module option =
 type [<Erase>] listbox =
     inherit FelizProps.prop<IListboxProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IListboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline defaultSelectedOptions (value: array<string>) = Interop.mkProperty<IListboxProp> "defaultSelectedOptions" value
+    static member inline defaultSelectedOptions (value: #seq<string>) = Interop.mkProperty<IListboxProp> "defaultSelectedOptions" (!!value |> Seq.toArray)
     /// Sets the selection type to multiselect. Set this to true for multiselect, even if fully controlling selection state. This enables styles and accessibility properties to be set.
     static member inline multiselect (value: bool) = Interop.mkProperty<IListboxProp> "multiselect" value
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
@@ -2243,7 +2258,7 @@ type [<Erase>] listbox =
     static member inline onOptionSelect (value: KeyboardEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
-    static member inline selectedOptions (value: array<string>) = Interop.mkProperty<IListboxProp> "selectedOptions" value
+    static member inline selectedOptions (value: #seq<string>) = Interop.mkProperty<IListboxProp> "selectedOptions" (!!value |> Seq.toArray)
 
 module listbox =
     type [<Erase>] as' =
@@ -2320,7 +2335,6 @@ module persona =
 type [<Erase>] combobox =
     inherit FelizProps.prop<IComboboxProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline button (value: ReactElement) = Interop.mkProperty<IComboboxProp> "button" value
     static member inline listbox (value: ReactElement) = Interop.mkProperty<IComboboxProp> "listbox" value
     static member inline listbox (value: IListboxProp list) = Interop.mkProperty<IComboboxProp> "listbox" (!!value |> createObj |> unbox<IListboxProp>)
     static member inline input (value: ReactElement) = Interop.mkProperty<IComboboxProp> "input" value
@@ -2722,12 +2736,12 @@ type [<Erase>] field =
     static member inline hint (value: IReactProperty list) = Interop.mkProperty<IFieldProp> "hint" (!!value |> createObj |> unbox<IReactProperty>)
     /// WARNING: The Field's child can be a single form control, or a render function that takes the props that should be spread on a form control.
     /// If trying to use a list of ReactElements, only the first ReactElement will be used as a child.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
                     let child =
-                        match elems |> Seq.length with
-                        | l when l = 1 -> elems
-                        | _ -> elems |> Seq.take 1
-                    Interop.mkProperty<IFieldProp> "children" (Interop.reactApi.Children.toArray child)
+                        match elems |> Seq.tryHead with
+                        | Some el -> el
+                        | None -> Html.none
+                    Interop.mkProperty<IFieldProp> "children" child
     /// The Field's child can be a single form control, or a render function that takes the props that should be spread on a form control.
     /// All form controls in this library can be used directly as children (such as <Input> or <RadioGroup>).
     static member inline children (value: ReactElement) = Interop.mkProperty<IFieldProp> "children" value
@@ -2842,6 +2856,10 @@ type [<Erase>] dialogSurface =
     static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<IDialogSurfaceProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
     /// This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IDialogSurfaceProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDialogSurfaceProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDialogSurfaceProp> "mountNode" value
 
 module dialogSurface =
     type [<Erase>] as' =
@@ -2944,7 +2962,6 @@ type [<Erase>] toaster =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IToasterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline offset (value: IToastOffsetProp list) = Interop.mkProperty<IToasterProp> "offset" (!!value |> createObj |> unbox<ToastOffset>)
     static member inline toasterId (value: string) = Interop.mkProperty<IToasterProp> "toasterId" value
-    static member inline toasterId (value: string option) = Interop.mkProperty<IToasterProp> "toasterId" value
     static member inline limit (value: int) = Interop.mkProperty<IToasterProp> "limit" value
     static member inline limit (value: float) = Interop.mkProperty<IToasterProp> "limit" value
     static member inline limit (value: decimal) = Interop.mkProperty<IToasterProp> "limit" value
@@ -2967,22 +2984,15 @@ type [<Erase>] toaster =
     static member inline pauseOnHover (value: bool) = Interop.mkProperty<IToasterProp> "pauseOnHover" value
     /// User override API for aria-live narration for toasts
     static member inline announce (value: string -> AnnounceOptions -> unit) = Interop.mkProperty<IToasterProp> "announce" (System.Func<_,_,_> value)
-    /// Additional data that needs to be passed to the toast
-    static member inline data (value: obj) = Interop.mkProperty<IToasterProp> "data" value
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IToasterProp> "mountNode" value
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IToasterProp> "mountNode" value
+    static member inline inline' (value: bool) = Interop.mkProperty<IToasterProp> "inline" value
 
 module toaster =
     type [<Erase>] as' =
         static member inline div = Interop.mkProperty<IToasterProp> "as" "div"
-
-    type [<Erase>] intent =
-        static member inline success = Interop.mkProperty<IToasterProp> "intent" "success"
-        static member inline warning = Interop.mkProperty<IToasterProp> "intent" "warning"
-        static member inline error = Interop.mkProperty<IToasterProp> "intent" "error"
-        static member inline info = Interop.mkProperty<IToasterProp> "intent" "info"
 
     type [<Erase>] position =
         static member inline topEnd = Interop.mkProperty<IToasterProp> "position" "top-end"
@@ -2991,12 +3001,6 @@ module toaster =
         static member inline bottomStart = Interop.mkProperty<IToasterProp> "position" "bottom-start"
         static member inline top = Interop.mkProperty<IToasterProp> "position" "top"
         static member inline bottom = Interop.mkProperty<IToasterProp> "position" "bottom"
-
-    /// Used to determine [aria-live](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions) narration
-    /// This will override the intent prop
-    type [<Erase>] politeness =
-        static member inline assertive = Interop.mkProperty<IToasterProp> "politeness" "assertive"
-        static member inline polite = Interop.mkProperty<IToasterProp> "politeness" "polite"
 
 // -------------------------------------------------------------------------- ToastOffset --------------------------------------------------------------------------------------
 type [<Erase>] toastOffset =
@@ -4527,6 +4531,10 @@ type [<Erase>] drawer =
     static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDrawerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode" value
 
 module drawer =
 
@@ -4570,8 +4578,6 @@ type [<Erase>] overlayDrawer =
     static member inline root (value: IDialogSurfaceProp list) = Interop.mkProperty<IOverlayDrawerProp> "root" (!!value |> createObj |> unbox<IDialogSurfaceProp>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "open" value
-    /// Controls the open state of the Drawer
-    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IOverlayDrawerProp> "open" (!!value |> createObj |> unbox)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "inertTrapFocus" value
     /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
@@ -4586,6 +4592,10 @@ type [<Erase>] overlayDrawer =
     static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IOverlayDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IOverlayDrawerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IOverlayDrawerProp> "mountNode" value
 
 module overlayDrawer =
 
@@ -4624,8 +4634,6 @@ type [<Erase>] inlineDrawer =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInlineDrawerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Controls the open state of the Drawer
     static member inline open' (value: bool) = Interop.mkProperty<IInlineDrawerProp> "open" value
-    /// Controls the open state of the Drawer
-    static member inline open' (value: IMotionStateProp list) = Interop.mkProperty<IInlineDrawerProp> "open" (!!value |> createObj |> unbox)
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IInlineDrawerProp> "separator" value
 
@@ -4826,6 +4834,8 @@ type [<Erase>] treeItem =
     static member inline itemType (value: TreeItemType)= Interop.mkProperty<ITreeItemProp> "itemType" value
     static member inline value (value: string)= Interop.mkProperty<ITreeItemProp> "value" value
     static member inline parentValue (value: string option)= Interop.mkProperty<ITreeItemProp> "parentValue" value
+    static member inline onOpenChange (handler: TreeItemOpenChangeData<'T, 'TEvent> -> unit) = Interop.mkProperty<ITreeItemProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOpenChange (value: 'TEvent -> TreeItemOpenChangeData<'T, 'TEvent> -> unit)= Interop.mkProperty<ITreeItemProp> "onOpenChange" (System.Func<_,_,_> value)
 
 module treeItem =
 
@@ -4891,11 +4901,6 @@ type [<Erase>] treeItemLayout =
     static member inline selector (value: ICheckboxProp list)= Interop.mkProperty<ITreeItemLayoutProp> "selector" (!!value |> createObj |> unbox<ICheckboxProp>)
     static member inline selector (value: IRadioProp list)= Interop.mkProperty<ITreeItemLayoutProp> "selector" (!!value |> createObj |> unbox<IRadioProp>)
 
-module treeItemLayout =
-
-    type [<Erase>] actions =
-        static member inline visible (value: bool)= Interop.mkProperty<ITreeItemLayoutProp> "visible" value
-
 // -------------------------------------------------------------------------- TreeItemPersonaLayout --------------------------------------------------------------------------------------
 type [<Erase>] treeItemPersonaLayout =
     inherit FelizProps.prop<ITreeItemPersonaLayoutProp>
@@ -4941,11 +4946,6 @@ type [<Erase>] treeItemPersonaLayout =
     static member inline selector (value: ReactElement)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "selector" value
     static member inline selector (value: ICheckboxProp list)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "selector" (!!value |> createObj |> unbox<ICheckboxProp>)
     static member inline selector (value: IRadioProp list)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "selector" (!!value |> createObj |> unbox<IRadioProp>)
-
-module treeItemPersonaLayout =
-
-    type [<Erase>] actions =
-        static member inline visible (value: bool)= Interop.mkProperty<ITreeItemPersonaLayoutProp> "visible" value
 
 // -------------------------------------------------------------------------- Positioning --------------------------------------------------------------------------------------
 
@@ -5647,6 +5647,9 @@ type [<Erase>] interactionTagSecondary =
     inherit FelizProps.prop<IInteractionTagSecondaryProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagSecondaryProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
 
+module interactionTagSecondary =
+    type [<Erase>] as' =
+        static member inline button = Interop.mkProperty<IInteractionTagSecondaryProp> "as" "button"
 // -------------------------------------------------------------------------- TableColumnSizingOptions --------------------------------------------------------------------------------------
 type [<Erase>] tableColumnSizingOptions =
     static member inline minWidth (value: int) = Interop.mkProperty<ITableColumnSizingOptionsProp> "minWidth" value
@@ -5978,6 +5981,7 @@ module timePicker =
 
     /// Start hour (inclusive) for the time range, 0-24.
     type [<Erase>] startHour =
+        static member inline ``0`` = Interop.mkProperty<ITimePickerProp> "startHour" "0"
         static member inline ``1`` = Interop.mkProperty<ITimePickerProp> "startHour" "1"
         static member inline ``2`` = Interop.mkProperty<ITimePickerProp> "startHour" "2"
         static member inline ``3`` = Interop.mkProperty<ITimePickerProp> "startHour" "3"
@@ -6005,6 +6009,7 @@ module timePicker =
 
     /// End hour (exclusive) for the time range, 0-24.
     type [<Erase>] endHour =
+        static member inline ``0`` = Interop.mkProperty<ITimePickerProp> "endHour" "0"
         static member inline ``1`` = Interop.mkProperty<ITimePickerProp> "endHour" "1"
         static member inline ``2`` = Interop.mkProperty<ITimePickerProp> "endHour" "2"
         static member inline ``3`` = Interop.mkProperty<ITimePickerProp> "endHour" "3"
@@ -6029,6 +6034,20 @@ module timePicker =
         static member inline ``22`` = Interop.mkProperty<ITimePickerProp> "endHour" "22"
         static member inline ``23`` = Interop.mkProperty<ITimePickerProp> "endHour" "23"
         static member inline ``24`` = Interop.mkProperty<ITimePickerProp> "endHour" "24"
+
+    type [<Erase>] positioning =
+        static member inline above = Interop.mkProperty<ITimePickerProp> "positioning" "above"
+        static member inline aboveStart = Interop.mkProperty<ITimePickerProp> "positioning" "above-start"
+        static member inline aboveEnd = Interop.mkProperty<ITimePickerProp> "positioning" "above-end"
+        static member inline below = Interop.mkProperty<ITimePickerProp> "positioning" "below"
+        static member inline belowStart = Interop.mkProperty<ITimePickerProp> "positioning" "below-start"
+        static member inline belowEnd = Interop.mkProperty<ITimePickerProp> "positioning" "below-end"
+        static member inline before = Interop.mkProperty<ITimePickerProp> "positioning" "before"
+        static member inline beforeTop = Interop.mkProperty<ITimePickerProp> "positioning" "before-top"
+        static member inline beforeBottom = Interop.mkProperty<ITimePickerProp> "positioning" "before-bottom"
+        static member inline after = Interop.mkProperty<ITimePickerProp> "positioning" "after"
+        static member inline afterTop = Interop.mkProperty<ITimePickerProp> "positioning" "after-top"
+        static member inline afterBottom = Interop.mkProperty<ITimePickerProp> "positioning" "after-bottom"
 
 // -------------------------------------------------------------------------- TeachingPopover --------------------------------------------------------------------------------------
 type [<Erase>] teachingPopover =

@@ -160,6 +160,9 @@ type PositioningImperativeRef = {
 
 type OnVisibleChangeData = {
     visible: bool
+    /// The event object, if this visibility change was triggered by a keyboard event on the document element
+    /// (such as Escape to hide the visible tooltip). Otherwise undefined.
+    documentKeyboardEvent: Browser.Types.KeyboardEvent
 }
 
 type MountNode = {
@@ -1200,11 +1203,19 @@ type TreeOpenChangeData<'T, 'TEvent> = {
     ``type``: TreeOpen
 }
 
+type TreeItemOpenChangeData<'T, 'TEvent> = {
+    ``open``: bool
+    value: 'T
+    target: Browser.Types.HTMLElement
+    event: 'TEvent
+    ``type``: TreeOpen
+}
+
 type TreeNavigationData_unstable<'T, 'TEvent> = {
     target: Browser.Types.HTMLElement
     value: 'T
     event: 'TEvent
-    type': TreeOpen
+    ``type``: TreeOpen
 }
 
 type [<RequireQualifiedAccess>] TreeItemType = | leaf | branch
@@ -1430,4 +1441,9 @@ type MotionState = {
 
 type TeachingPopoverPageChangeData = {
     currentPage: int
+}
+
+type AccordionToggleData<'T> = {
+    value: 'T
+    openItems: 'T array
 }
