@@ -11,8 +11,11 @@ open Feliz
 type [<Erase>] fluentProvider =
     inherit FelizProps.prop<IFluentProviderProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IFluentProviderProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Passes styles applied to a component down to portals if enabled.
     static member inline applyStylesToPortals (value: bool) = Interop.mkProperty<IFluentProviderProp> "applyStylesToPortals" value
+    /// Provides the document, can be undefined during SSR render.
     static member inline targetDocument (value: Document) = Interop.mkProperty<IFluentProviderProp> "targetDocument" value
+    /// Sets the theme used in a scope.
     static member inline theme (value: Tokens) = Interop.mkProperty<IFluentProviderProp> "theme" value
     static member inline overrides_unstable (value: OverridesContextValue_unstable) = Interop.mkProperty<IFluentProviderProp> "overrides_unstable" value
 
@@ -164,8 +167,11 @@ module avatar =
 type [<Erase>] image =
     inherit FelizProps.prop<IImageProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IImageProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// An image can appear with a rectangular border.
     static member inline block (value: bool) = Interop.mkProperty<IImageProp> "block" value
+    /// An image can appear with a rectangular border.
     static member inline bordered (value: bool) = Interop.mkProperty<IImageProp> "bordered" value
+    /// An image can appear elevated with shadow.
     static member inline shadow (value: bool) = Interop.mkProperty<IImageProp> "shadow" value
     static member inline alt (value: string) = Interop.mkProperty<IImageProp> "alt" value
     static member inline src (value: string) = Interop.mkProperty<IImageProp> "src" value
@@ -229,7 +235,7 @@ module button =
 
     /// A button can format its icon to appear before or after its content.
     type [<Erase>] iconPosition =
-        static member inline before' = Interop.mkProperty<IButtonProp> "iconPosition" "before"
+        static member inline before = Interop.mkProperty<IButtonProp> "iconPosition" "before"
         static member inline after = Interop.mkProperty<IButtonProp> "iconPosition" "after"
 
     /// A button supports different sizes.
@@ -244,6 +250,8 @@ type [<Erase>] toggleButton =
     inherit FelizProps.prop<IToggleButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IToggleButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IToggleButtonProp> "icon" (!!value |> createObj |> unbox)
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
     /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
@@ -277,7 +285,7 @@ module toggleButton =
 
     /// A button can format its icon to appear before or after its content.
     type [<Erase>] iconPosition =
-        static member inline before' = Interop.mkProperty<IToggleButtonProp> "iconPosition" "before"
+        static member inline before = Interop.mkProperty<IToggleButtonProp> "iconPosition" "before"
         static member inline after = Interop.mkProperty<IToggleButtonProp> "iconPosition" "after"
 
     type [<Erase>] shape =
@@ -506,6 +514,7 @@ type [<Erase>] counterBadge =
     /// Value displayed by the Badge
     static member inline count (value: decimal) = Interop.mkProperty<ICounterBadgeProp> "count" value
     static member inline icon (value:  ReactElement) = Interop.mkProperty<ICounterBadgeProp> "icon" value
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<ICounterBadgeProp> "icon" (!!value |> createObj |> unbox)
     /// If a dot should be displayed without the count
     static member inline dot (value: bool) = Interop.mkProperty<ICounterBadgeProp> "dot" value
     /// Max number to be displayed
@@ -557,6 +566,7 @@ module counterBadge =
 type [<Erase>] presenceBadge =
     inherit FelizProps.prop<IPresenceBadgeProp>
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IPresenceBadgeProp> "icon" value
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IPresenceBadgeProp> "icon" (!!value |> createObj |> unbox)
     /// Modifies the display to indicate that the user is out of office. This can be combined with any status to display an out-of-office version of that status
     static member inline outOfOffice (value: bool) = Interop.mkProperty<IPresenceBadgeProp> "outOfOffice" value
 
@@ -1445,7 +1455,7 @@ type [<Erase>] input =
     /// Placeholder text for the input. If using this instead of a label (which is not recommended), be sure to provide an aria-label for screen reader users.
     static member inline placeholder (value: string) = Interop.mkProperty<IInputProp> "placeholder" value
     /// Whether the input is disabled
-    static member inline disabled (value: string) = Interop.mkProperty<IInputProp> "disabled" value
+    static member inline disabled (value: bool) = Interop.mkProperty<IInputProp> "disabled" value
 
 module input =
     /// Size of the input (changes the font size and spacing).
@@ -1486,6 +1496,8 @@ type [<Erase>] compoundButton =
     inherit FelizProps.prop<ICompoundButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member icon (value: ReactElement) = Interop.mkProperty<ICompoundButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member icon (value: IReactProperty list) = Interop.mkProperty<ICompoundButtonProp> "icon" (!!value |> createObj |> unbox)
     /// Second line of text that describes the action this button takes.
     static member inline secondaryContent (value: string) = Interop.mkProperty<ICompoundButtonProp> "secondaryContent" value
     /// Second line of text that describes the action this button takes.
@@ -1556,6 +1568,8 @@ type [<Erase>] splitButton =
     static member inline primaryActionButton (value: IButtonProp list) = Interop.mkProperty<ISplitButtonProp> "primaryActionButton" (!!value |> createObj |> unbox<IButtonProp>)
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member icon (value: ReactElement) = Interop.mkProperty<ISplitButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member icon (value: IReactProperty list) = Interop.mkProperty<ISplitButtonProp> "icon" (!!value |> createObj |> unbox)
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
     /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
@@ -1565,6 +1579,8 @@ type [<Erase>] splitButton =
     static member inline disabledFocusable (value: bool) = Interop.mkProperty<ISplitButtonProp> "disabledFocusable" value
     /// Menu icon that indicates that this button has a menu that can be expanded.
     static member inline menuIcon (value: ReactElement) = Interop.mkProperty<ISplitButtonProp> "menuIcon" value
+    /// Menu icon that indicates that this button has a menu that can be expanded.
+    static member inline menuIcon (value: IReactProperty list) = Interop.mkProperty<ISplitButtonProp> "menuIcon" (!!value |> createObj |> unbox)
 
 module splitButton =
     type [<Erase>] as' =
@@ -2420,6 +2436,8 @@ type [<Erase>] toolbarButton =
     inherit FelizProps.prop<IToolbarButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IToolbarButtonProp> "icon" (!!value |> createObj |> unbox)
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
     /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
@@ -2442,6 +2460,8 @@ type [<Erase>] toolbarDivider =
     inherit FelizProps.prop<IToolbarDividerProp>
     /// Accessibility wrapper for content when presented.
     static member inline wrapper (value: ReactElement) = Interop.mkProperty<IToolbarDividerProp> "wrapper" value
+    /// Accessibility wrapper for content when presented.
+    static member inline wrapper (value: IReactProperty list) = Interop.mkProperty<IToolbarDividerProp> "wrapper" (!!value |> createObj |> unbox)
     /// A divider can be horizontal or vertical (default).
     static member inline vertical (value: bool) = Interop.mkProperty<IToolbarDividerProp> "vertical" value
 
@@ -2462,6 +2482,8 @@ type [<Erase>] toolbarRadioButton =
     inherit FelizProps.prop<IToolbarRadioButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarRadioButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IToolbarRadioButtonProp> "icon" (!!value |> createObj |> unbox)
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
     /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
@@ -2495,6 +2517,8 @@ type [<Erase>] toolbarToggleButton =
     inherit FelizProps.prop<IToolbarToggleButtonProp>
     /// Icon that renders either before or after the children as specified by the iconPosition prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IToolbarToggleButtonProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IToolbarToggleButtonProp> "icon" (!!value |> createObj |> unbox)
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
     /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
@@ -3201,8 +3225,13 @@ type [<Erase>] datePicker  =
     static member inline onChange (value: ChangeEvent -> ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> value)
     /// Element before the input text, within the input border
     static member inline contentBefore (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "contentBefore" value
+    /// Element before the input text, within the input border
+    static member inline contentBefore (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "contentBefore" (!!value |> createObj |> unbox)
     /// Element after the input text, within the input border
     static member inline contentAfter (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "contentAfter" value
+    /// Element after the input text, within the input border
+    static member inline contentAfter (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "contentAfter" (!!value |> createObj |> unbox)
+    static member inline calendar (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "calendar" value
     static member inline calendar (value: ICalendarProp list) = Interop.mkProperty<IDatePickerProp> "calendar" (!!value |> createObj |> unbox<ICalendarProp>)
     static member inline popupSurface (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "popupSurface" value
     static member inline popupSurface (value: IReactProperty list) = Interop.mkProperty<IDatePickerProp> "popupSurface" (!!value |> createObj |> unbox<IReactProperty>)
@@ -3846,9 +3875,14 @@ type [<Erase>] dataGridHeaderCell =
     inherit FelizProps.prop<IDataGridHeaderCellProp>
     /// aside content for anything that should be after main content of the table header cell
     static member inline aside (value: ReactElement)= Interop.mkProperty<IDataGridHeaderProp> "aside" value
+    /// aside content for anything that should be after main content of the table header cell
+    static member inline aside (value: IReactProperty list)= Interop.mkProperty<IDataGridHeaderProp> "aside" (!!value |> createObj |> unbox)
     /// Button handles correct narration and interactions for sorting
     static member inline button (value: ReactElement)= Interop.mkProperty<IDataGridHeaderProp> "button" value
+    /// Button handles correct narration and interactions for sorting
+    static member inline button (value: IReactProperty list)= Interop.mkProperty<IDataGridHeaderProp> "button" (!!value |> createObj |> unbox)
     static member inline sortIcon (value: ReactElement)= Interop.mkProperty<IDataGridHeaderProp> "sortIcon" value
+    static member inline sortIcon (value: IReactProperty list)= Interop.mkProperty<IDataGridHeaderProp> "sortIcon" (!!value |> createObj |> unbox)
 
 module dataGridHeaderCell =
     type [<Erase>] as' =
@@ -4006,6 +4040,12 @@ type [<Erase>] infoLabel =
     static member inline info (value: ReactElement)= Interop.mkProperty<IInfoLabelProp> "info" value
     /// The information to be displayed in the PopoverSurface when the button is pressed.
     static member inline info (value: IPopoverSurfaceProp list)= Interop.mkProperty<IInfoLabelProp> "info" (!!value |> createObj |> unbox<IPopoverSurfaceProp>)
+    /// Displays an indicator that the label is for a required field. The required prop can be set to true to display an asterisk (*). Or it can be set to a string or jsx content to display a different indicator.
+    static member inline required (value: bool)= Interop.mkProperty<IInfoLabelProp> "required" value
+    /// Displays an indicator that the label is for a required field. The required prop can be set to true to display an asterisk (*). Or it can be set to a string or jsx content to display a different indicator.
+    static member inline required (value: ReactElement)= Interop.mkProperty<IInfoLabelProp> "required" value
+    /// Displays an indicator that the label is for a required field. The required prop can be set to true to display an asterisk (*). Or it can be set to a string or jsx content to display a different indicator.
+    static member inline required (value: IReactProperty list)= Interop.mkProperty<IInfoLabelProp> "required" (!!value |> createObj |> unbox)
 
 module infoLabel =
     type [<Erase>] as' =
@@ -4557,7 +4597,6 @@ module overlayDrawer =
         static member inline start = Interop.mkProperty<IOverlayDrawerProp> "position" "start"
         static member inline end' = Interop.mkProperty<IOverlayDrawerProp> "position" "end"
         static member inline bottom = Interop.mkProperty<IOverlayDrawerProp> "position" "bottom"
-
 
     /// Size of the drawer.
     type [<Erase>] size =
@@ -5850,9 +5889,11 @@ type [<Erase>] timePicker =
     static member inline listbox (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "listbox" value
     static member inline listbox (value: IListboxProp list) = Interop.mkProperty<ITimePickerProp> "listbox" (!!value |> createObj |> unbox<IListboxProp>)
     static member inline input (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "input" value
-    static member inline input (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "input" (!!value |> createObj |> unbox<IListboxProp>)
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "input" (!!value |> createObj |> unbox)
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "expandIcon" value
-    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "expandIcon" (!!value |> createObj |> unbox<IListboxProp>)
+    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "expandIcon" (!!value |> createObj |> unbox)
+    static member inline clearIcon (value: ReactElement) = Interop.mkProperty<ITimePickerProp> "clearIcon" value
+    static member inline clearIcon (value: IReactProperty list) = Interop.mkProperty<ITimePickerProp> "clearIcon" (!!value |> createObj |> unbox)
     /// Time increment, in minutes, of the options in the dropdown.
     static member inline increment (value: int) = Interop.mkProperty<ITimePickerProp> "increment" value
     /// Time increment, in minutes, of the options in the dropdown.
@@ -6199,7 +6240,7 @@ module teachingPopoverButton =
 
     /// A button can format its icon to appear before or after its content.
     type [<Erase>] iconPosition =
-        static member inline before' = Interop.mkProperty<ITeachingPopoverButtonProp> "iconPosition" "before"
+        static member inline before = Interop.mkProperty<ITeachingPopoverButtonProp> "iconPosition" "before"
         static member inline after = Interop.mkProperty<ITeachingPopoverButtonProp> "iconPosition" "after"
 
     /// A button supports different sizes.

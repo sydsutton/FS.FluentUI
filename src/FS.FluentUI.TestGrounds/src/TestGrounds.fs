@@ -275,7 +275,7 @@ let buttonTest =
         )
         button.appearance.primary
         button.size.large
-        button.iconPosition.after
+        button.iconPosition.before
         button.shape.circular
         button.onClick (fun (_: MouseEvent) -> printfn "hello")
     ]
