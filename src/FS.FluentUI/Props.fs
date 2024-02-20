@@ -5476,9 +5476,15 @@ type [<Erase>] searchBox =
     /// Current value of the input. Provide this if the input is a controlled component where you are maintaining its current state; otherwise, use defaultValue.
     /// (This prop is mutually exclusive with defaultValue.)
     static member inline value (value: string) = Interop.mkProperty<ISearchBoxProp> "value" value
-    /// Called when the user changes the input's value.
+    /// Custom onChange callback.
+    /// Will be traditionally supplied with a React.ChangeEvent<HTMLInputElement> for usual character entry.
+    /// When the dismiss button is clicked, this will be called with an event of type React.MouseEvent<HTMLSpanElement>
+    /// and an empty string as the `value` property of the data parameter
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<ISearchBoxProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    /// Called when the user changes the input's value.
+    /// Custom onChange callback.
+    /// Will be traditionally supplied with a React.ChangeEvent<HTMLInputElement> for usual character entry.
+    /// When the dismiss button is clicked, this will be called with an event of type React.MouseEvent<HTMLSpanElement>
+    /// and an empty string as the `value` property of the data parameter
     static member inline onChange (value: ChangeEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ISearchBoxProp> "onChange" (System.Func<_,_,_> value)
 
 module searchBox =
@@ -5949,6 +5955,8 @@ type [<Erase>] timePicker =
     static member inline onOpenChange (value: KeyboardEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Callback when the open/closed state of the dropdown changes
     static member inline onOpenChange (value: FocusEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// If set, the timepicker will show an icon to clear the current value.
+    static member inline clearable (value: bool) = Interop.mkProperty<ITimePickerProp> "clearable" value
 
 module timePicker =
 

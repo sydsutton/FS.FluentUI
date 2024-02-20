@@ -3336,6 +3336,7 @@ let TimePickerTest () =
                 timePicker.freeform true
                 timePicker.style [ style.maxWidth 300 ]
                 timePicker.startHour.``10``
+                timePicker.clearable true
                 timePicker.endHour.``20``
                 timePicker.appearance.filledDarker
                 timePicker.onTimeChange (fun (data: TimeSelectionData) -> setErrorType data.errorType)
