@@ -3347,6 +3347,7 @@ let TimePickerTest () =
 [<ReactComponent>]
 let TeachingPopoverTest() =
     Fui.teachingPopover [
+        teachingPopover.appearance.brand
         teachingPopover.withArrow true
         teachingPopover.positioning [
             positioning.offset [
@@ -3363,59 +3364,51 @@ let TeachingPopoverTest() =
             Fui.teachingPopoverSurface [
                 Fui.teachingPopoverHeader "Tips"
                 Fui.teachingPopoverCarousel [
-                    Fui.teachingPopoverBody [
-                        teachingPopoverBody.media (
-                            Fui.image [
-                                image.fit.cover
-                                image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                    teachingPopoverCarousel.paginationType.text
+                    teachingPopoverCarousel.strings [
+                        teachingPopoverStrings.next "Next"
+                        teachingPopoverStrings.previous "Prev"
+                        teachingPopoverStrings.initialStepText "Close"
+                        teachingPopoverStrings.finalStepText "Finish"
+                        teachingPopoverStrings.pageCountText "of"
+                    ]
+                    teachingPopoverCarousel.children [
+                        Fui.teachingPopoverBody [
+                            teachingPopoverBody.media (
+                                Fui.image [
+                                    image.fit.cover
+                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                ]
+                            )
+                            teachingPopoverBody.children [
+                                Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                Fui.text "This is page 1"
                             ]
-                        )
-                        teachingPopoverBody.children [
-                            Fui.teachingPopoverTitle "Teaching Bubble Title"
-                            Fui.text "This is page 1"
                         ]
-                    ]
-                    Fui.teachingPopoverBody [
-                        teachingPopoverBody.media (
-                            Fui.image [
-                                image.fit.cover
-                                image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        Fui.teachingPopoverBody [
+                            teachingPopoverBody.media (
+                                Fui.image [
+                                    image.fit.cover
+                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                ]
+                            )
+                            teachingPopoverBody.children [
+                                Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                Fui.text "This is page 2"
                             ]
-                        )
-                        teachingPopoverBody.children [
-                            Fui.teachingPopoverTitle "Teaching Bubble Title"
-                            Fui.text "This is page 2"
                         ]
-                    ]
-                    Fui.teachingPopoverBody [
-                        teachingPopoverBody.media (
-                            Fui.image [
-                                image.fit.cover
-                                image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        Fui.teachingPopoverBody [
+                            teachingPopoverBody.media (
+                                Fui.image [
+                                    image.fit.cover
+                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                ]
+                            )
+                            teachingPopoverBody.children [
+                                Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                Fui.text "This is page 3"
                             ]
-                        )
-                        teachingPopoverBody.children [
-                            Fui.teachingPopoverTitle "Teaching Bubble Title"
-                            Fui.text "This is page 3"
                         ]
-                    ]
-                ]
-                Fui.teachingPopoverActions [
-                    Fui.teachingPopoverButton [
-                        teachingPopoverButton.buttonType.secondary
-                        teachingPopoverButton.altStepText "Close"
-                        teachingPopoverButton.text "Back"
-                    ]
-                    Fui.teachingPopoverPageCount [
-                        teachingPopoverPageCount.countStyle.text
-                        teachingPopoverPageCount.children (fun currentPage totalPage ->
-                            Fui.text $"{currentPage + 1} of {totalPage}"
-                        )
-                    ]
-                    Fui.teachingPopoverButton [
-                        teachingPopoverButton.buttonType.primary
-                        teachingPopoverButton.altStepText "Finish"
-                        teachingPopoverButton.text "Next"
                     ]
                 ]
             ]

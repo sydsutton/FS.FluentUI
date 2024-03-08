@@ -195,14 +195,12 @@ type [<Erase>] ITeachingPopoverHeaderProp = interface end
 type [<Erase>] ITeachingPopoverBodyProp = interface end
 type [<Erase>] ITeachingPopoverTitleProp = interface end
 type [<Erase>] ITeachingPopoverCarouselProp = interface end
-type [<Erase>] ITeachingPopoverActionsProp = interface end
-type [<Erase>] ITeachingPopoverButtonProp = interface end
+type [<Erase>] ITeachingPopoverStringProp = interface end
 
 type [<Erase>] IRatingProp = interface end
 type [<Erase>] IRatingItemProp = interface end
 type [<Erase>] IRatingDisplayProp = interface end
 
-type [<Erase>] ITeachingPopoverPageCountProp = interface end
 type [<Erase>] IComboboxFilterConfigProp = interface end
 type [<Erase>] ICalendarNavigationIconsProp = interface end
 

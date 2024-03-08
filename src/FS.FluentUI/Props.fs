@@ -4363,6 +4363,8 @@ type [<Erase>] virtualizerScrollView =
     static member inline onRenderedFlaggedIndex (value: float -> unit) = Interop.mkProperty<IVirtualizerScrollViewProp> "onRenderedFlaggedIndex" (System.Func<_,_> value)
     /// Callback for notifying when a flagged index has been rendered
     static member inline onRenderedFlaggedIndex (value: decimal -> unit) = Interop.mkProperty<IVirtualizerScrollViewProp> "onRenderedFlaggedIndex" (System.Func<_,_> value)
+    /// Imperative ref contains our scrollTo index functionality for user control.
+    static member inline enablePagination (value: bool) = Interop.mkProperty<IVirtualizerScrollViewProp> "enablePagination" value
 
 module virtualizerScrollView =
     /// The scroll direction
@@ -4499,6 +4501,8 @@ type [<Erase>] virtualizerScrollViewDynamic =
     static member inline onRenderedFlaggedIndex (value: decimal -> unit) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "onRenderedFlaggedIndex" (System.Func<_,_> value)
     /// Imperative ref contains our scrollTo index functionality for user control.
     static member inline imperativeVirtualizerRef (value: RefObject<VirtualizerDataRef>) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "imperativeVirtualizerRef" value
+    /// Imperative ref contains our scrollTo index functionality for user control.
+    static member inline enablePagination (value: bool) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "enablePagination" value
 
 module virtualizerScrollViewDynamic =
     /// The scroll direction
@@ -6059,18 +6063,6 @@ module timePicker =
 
 // -------------------------------------------------------------------------- TeachingPopover --------------------------------------------------------------------------------------
 type [<Erase>] teachingPopover =
-    /// Enables user to dictate current page number via props
-    static member inline currentPage (value: int) = Interop.mkProperty<ITeachingPopoverProp> "currentPage" value
-    /// Enables user to dictate current page number via props
-    static member inline currentPage (value: decimal) = Interop.mkProperty<ITeachingPopoverProp> "currentPage" value
-    /// Enables user to dictate current page number via props
-    static member inline currentPage (value: float) = Interop.mkProperty<ITeachingPopoverProp> "currentPage" value
-    /// Callback to notify a page change (can be used to update 'currentPage' externally).
-    static member inline onPageChange (handler: TeachingPopoverPageChangeData -> unit) = Interop.mkProperty<ITeachingPopoverProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
-    /// Callback to notify a page change (can be used to update 'currentPage' externally).
-    static member inline onPageChange (value: MouseEvent -> TeachingPopoverPageChangeData -> unit) = Interop.mkProperty<ITeachingPopoverProp> "onOpenChange" (System.Func<_,_,_> value)
-    /// Callback to notify when the final button step of a carousel has been activated.
-    static member inline onFinish (value: MouseEvent -> unit) = Interop.mkProperty<ITeachingPopoverProp> "onFinish" (System.Func<_,_> value)
     /// Can contain two children including PopoverTrigger and PopoverSurface.
     /// Alternatively can only contain PopoverSurface if using a custom `target`.
     static member inline children (value: ReactElement) = Interop.mkProperty<ITeachingPopoverProp> "children" value
@@ -6144,9 +6136,11 @@ type [<Erase>] teachingPopover =
     static member inline mountNode (value: MountNode) = Interop.mkProperty<ITeachingPopoverProp> "mountNode" value
 
 module teachingPopover =
-    /// The appearance property (extended from popover, but removed 'inverted').
+
+    /// A popover can appear styled with brand or inverted. When not specified, the default style is used.
     type [<Erase>] appearance =
         static member inline brand = Interop.mkProperty<ITeachingPopoverProp> "appearance" "brand"
+        static member inline inverted = Interop.mkProperty<ITeachingPopoverProp> "appearance" "inverted"
 
     /// Determines popover padding and arrow size
     type [<Erase>] size =
@@ -6209,128 +6203,75 @@ type [<Erase>] teachingPopoverTitle =
     static member inline dismissButton (value: ReactElement) = Interop.mkProperty<ITeachingPopoverTitleProp> "dismissButton" value
     /// An alternate close button path if not placed in the TeachingPopoverHeader
     static member inline dismissButton (value: IButtonProp list) = Interop.mkProperty<ITeachingPopoverTitleProp> "dismissButton" (!!value |> createObj |> unbox)
-    static member inline showDismiss (value: bool) = Interop.mkProperty<ITeachingPopoverTitleProp> "showDismiss" value
 
 // -------------------------------------------------------------------------- TeachingPopoverCarousel --------------------------------------------------------------------------------------
 type [<Erase>] teachingPopoverCarousel =
     inherit FelizProps.prop<ITeachingPopoverCarouselProp>
     /// The element wrapping the text and close button. By default this is a div, but can be a heading.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The element wrapping the navigation of the carousel.
+    static member inline footer (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "footer" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The element wrapping the navigation of the carousel.
+    static member inline footer (value: ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselProp> "footer" value
+    /// The previous button slot.
+    static member inline previous (value: IButtonProp list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "previous" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The previous button slot.
+    static member inline previous (value: ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselProp> "previous" value
+    /// The next button slot.
+    static member inline next (value: IButtonProp list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "next" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The next button slot.
+    static member inline next (value: ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselProp> "next" value
+    /// The page nav slot when using icon navigation.
+    static member inline nav (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "nav" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The page nav slot when using icon navigation.
+    static member inline nav (value: {| root: IReactProperty list |}) = Interop.mkProperty<ITeachingPopoverCarouselProp> "nav" (!!value.root |> createObj |> unbox)
+    /// The page nav slot when using icon navigation.
+    static member inline nav (value: {| root: ReactElement |}) = Interop.mkProperty<ITeachingPopoverCarouselProp> "nav" value.root
+    /// The page count text slot for paginationType text
+    static member inline pageCount (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "pageCount" (!!value |> createObj |> unbox)
+    /// The page count text slot for paginationType text
+    static member inline pageCount (value: ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselProp> "pageCount" value
+    /// Enables user to dictate current page number via props
+    static member inline currentPage (value: int) = Interop.mkProperty<ITeachingPopoverCarouselProp> "currentPage" value
+    /// Enables user to dictate current page number via props
+    static member inline currentPage (value: decimal) = Interop.mkProperty<ITeachingPopoverCarouselProp> "currentPage" value
+    /// Enables user to dictate current page number via props
+    static member inline currentPage (value: float) = Interop.mkProperty<ITeachingPopoverCarouselProp> "currentPage" value
+    /// Page at which carousel should be initialized to
+    static member inline defaultCurrentPage (value: int) = Interop.mkProperty<ITeachingPopoverCarouselProp> "defaultCurrentPage" value
+    /// Page at which carousel should be initialized to
+    static member inline defaultCurrentPage (value: decimal) = Interop.mkProperty<ITeachingPopoverCarouselProp> "defaultCurrentPage" value
+    /// Page at which carousel should be initialized to
+    static member inline defaultCurrentPage (value: float) = Interop.mkProperty<ITeachingPopoverCarouselProp> "defaultCurrentPage" value
+    /// Callback to notify a page change (can be used to update 'currentPage' externally).
+    static member inline onPageChange (handler: TeachingPopoverPageChangeData -> unit) = Interop.mkProperty<ITeachingPopoverCarouselProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback to notify a page change (can be used to update 'currentPage' externally).
+    static member inline onPageChange (value: MouseEvent -> TeachingPopoverPageChangeData -> unit) = Interop.mkProperty<ITeachingPopoverCarouselProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback to notify when the final button step of a carousel has been activated.
+    static member inline onFinish (value: MouseEvent -> unit) = Interop.mkProperty<ITeachingPopoverCarouselProp> "onFinish" (System.Func<_,_> value)
+    /// Callback to notify when the final button step of a carousel has been activated.
+    static member inline strings (value: ITeachingPopoverStringProp list) = Interop.mkProperty<ITeachingPopoverCarouselProp> "strings" (!!value |> createObj |> unbox)
 
-// -------------------------------------------------------------------------- TeachingPopoverActions --------------------------------------------------------------------------------------
-type [<Erase>] teachingPopoverActions =
-    inherit FelizProps.prop<ITeachingPopoverActionsProp>
-    /// The element wrapping the buttons.
-    static member inline root (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverActionsProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+module teachingPopoverCarousel =
+    /// Controls whether buttons will be centered (balanced) or right aligned
+    type [<Erase>] layout =
+        static member inline offset = Interop.mkProperty<ITeachingPopoverCarouselProp> "layout" "offset"
+        static member inline centered = Interop.mkProperty<ITeachingPopoverCarouselProp> "layout" "centered"
+    /// Dictates whether pagination uses text or icons
+    type [<Erase>] paginationType =
+        static member inline text = Interop.mkProperty<ITeachingPopoverCarouselProp> "paginationType" "text"
+        static member inline icon = Interop.mkProperty<ITeachingPopoverCarouselProp> "paginationType" "icon"
 
-// -------------------------------------------------------------------------- TeachingPopoverButton --------------------------------------------------------------------------------------
-type [<Erase>] teachingPopoverButton =
-    inherit FelizProps.prop<ITeachingPopoverButtonProp>
-    /// The element wrapping the buttons.
-    static member inline root (value:  IReactProperty list) = Interop.mkProperty<ITeachingPopoverButtonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    /// Icon that renders either before or after the children as specified by the iconPosition prop.
-    static member inline icon (value:  ReactElement) = Interop.mkProperty<ITeachingPopoverButtonProp> "icon" value
-    /// Icon that renders either before or after the children as specified by the iconPosition prop.
-    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<ITeachingPopoverButtonProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
-    /// When set, allows the button to be focusable even when it has been disabled.
-    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
-    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
-    /// When set, allows the button to be focusable even when it has been disabled.
-    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
-    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
-    static member inline disabledFocusable (value: bool) = Interop.mkProperty<ITeachingPopoverButtonProp> "disabledFocusable" value
-    static member inline altStepText (value: string) = Interop.mkProperty<ITeachingPopoverButtonProp> "altStepText" value
-
-module teachingPopoverButton =
-
-    type [<Erase>] as' =
-        static member inline a = Interop.mkProperty<ITeachingPopoverButtonProp> "as" "a"
-        static member inline button = Interop.mkProperty<ITeachingPopoverButtonProp> "as" "button"
-
-    /// A button can have its content and borders styled for greater emphasis or to be subtle.
-    type [<Erase>] appearance =
-        /// 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
-        static member inline subtle = Interop.mkProperty<ITeachingPopoverButtonProp> "appearance" "subtle"
-        /// 'outline': Removes background styling.
-        static member inline outline = Interop.mkProperty<ITeachingPopoverButtonProp> "appearance" "outline"
-        /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
-        static member inline secondary = Interop.mkProperty<ITeachingPopoverButtonProp> "appearance" "secondary"
-        /// 'primary': Emphasizes the button as a primary action.
-        static member inline primary = Interop.mkProperty<ITeachingPopoverButtonProp> "appearance" "primary"
-        /// 'transparent': Removes background and border styling.
-        static member inline transparent = Interop.mkProperty<ITeachingPopoverButtonProp> "appearance" "transparent"
-
-    type [<Erase>] shape =
-        static member inline circular = Interop.mkProperty<ITeachingPopoverButtonProp> "shape" "circular"
-        static member inline square = Interop.mkProperty<ITeachingPopoverButtonProp> "shape" "square"
-        static member inline rounded = Interop.mkProperty<ITeachingPopoverButtonProp> "shape" "rounded"
-
-    /// A button can format its icon to appear before or after its content.
-    type [<Erase>] iconPosition =
-        static member inline before = Interop.mkProperty<ITeachingPopoverButtonProp> "iconPosition" "before"
-        static member inline after = Interop.mkProperty<ITeachingPopoverButtonProp> "iconPosition" "after"
-
-    /// A button supports different sizes.
-    type [<Erase>] size =
-        static member inline small = Interop.mkProperty<ITeachingPopoverButtonProp> "size" "small"
-        static member inline medium = Interop.mkProperty<ITeachingPopoverButtonProp> "size" "medium"
-        static member inline large = Interop.mkProperty<ITeachingPopoverButtonProp> "size" "large"
-
-    type [<Erase>] buttonType =
-        static member inline primary = Interop.mkProperty<ITeachingPopoverButtonProp> "buttonType" "primary"
-        static member inline secondary = Interop.mkProperty<ITeachingPopoverButtonProp> "buttonType" "secondary"
-
-// -------------------------------------------------------------------------- TeachingPopoverPageCount --------------------------------------------------------------------------------------
-type [<Erase>] teachingPopoverPageCount =
-    inherit FelizProps.prop<ITeachingPopoverPageCountProp>
-    /// The element wrapping the carousel pagination. By default this is a div, it may contain icons or text depending on TeachingPopoverPageCountStyle
-    static member inline root (value:  IReactProperty list) = Interop.mkProperty<ITeachingPopoverPageCountProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    /// The element for each carousel page in 'icon' mode.
-    static member inline carouselIcon (value:  IButtonProp list) = Interop.mkProperty<ITeachingPopoverPageCountProp> "carouselIcon" (!!value |> createObj |> unbox)
-    /// The element for each carousel page in 'icon' mode.
-    static member inline carouselIcon (value:  ReactElement) = Interop.mkProperty<ITeachingPopoverPageCountProp> "carouselIcon" value
-    /// The element for each carousel page in 'icon' mode.
-    static member inline carouselSelectedIcon (value:  IButtonProp list) = Interop.mkProperty<ITeachingPopoverPageCountProp> "carouselSelectedIcon" (!!value |> createObj |> unbox)
-    /// The element for each carousel page in 'icon' mode.
-    static member inline carouselSelectedIcon (value:  ReactElement) = Interop.mkProperty<ITeachingPopoverPageCountProp> "carouselSelectedIcon" value
-    /// The current carousel page.
-    static member inline currentPage (value:  int) = Interop.mkProperty<ITeachingPopoverPageCountProp> "currentPage" value
-    /// The current carousel page.
-    static member inline currentPage (value:  float) = Interop.mkProperty<ITeachingPopoverPageCountProp> "currentPage" value
-    /// The current carousel page.
-    static member inline currentPage (value:  decimal) = Interop.mkProperty<ITeachingPopoverPageCountProp> "currentPage" value
-    /// The total number of carousel pages, controlled by children within carousel itself.
-    static member inline totalPages (value:  int) = Interop.mkProperty<ITeachingPopoverPageCountProp> "totalPages" value
-    /// The total number of carousel pages, controlled by children within carousel itself.
-    static member inline totalPages (value:  float) = Interop.mkProperty<ITeachingPopoverPageCountProp> "totalPages" value
-    /// The total number of carousel pages, controlled by children within carousel itself.
-    static member inline totalPages (value:  decimal) = Interop.mkProperty<ITeachingPopoverPageCountProp> "totalPages" value
-    /// Allows the carousel pagination to update the current page based on icon interaction.
-    static member inline setCurrentPage (value:  int -> unit) = Interop.mkProperty<ITeachingPopoverPageCountProp> "setCurrentPage" (System.Func<_,_> value)
-    /// Allows the carousel pagination to update the current page based on icon interaction.
-    static member inline setCurrentPage (value:  float -> unit) = Interop.mkProperty<ITeachingPopoverPageCountProp> "setCurrentPage" (System.Func<_,_> value)
-    /// Allows the carousel pagination to update the current page based on icon interaction.
-    static member inline setCurrentPage (value:  decimal -> unit) = Interop.mkProperty<ITeachingPopoverPageCountProp> "setCurrentPage" (System.Func<_,_> value)
-    /// Children of this React element.
-    static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<ITeachingPopoverPageCountProp> "children" value
-    /// WARNING: TeachingPopoverPageCount can contain no more than one child element.
-    /// If you try to use more than one child, only the first you pass to this function will be used.
-    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
-        match elems |> Seq.tryHead with
-        | Some el -> Interop.mkProperty<ITeachingPopoverPageCountProp> "children" el
-        | None -> Interop.mkProperty<ITeachingPopoverPageCountProp> "children" Html.none
-    /// Children of this React element.
-    static member inline children (value: int -> int -> ReactElement) = Interop.mkProperty<ITeachingPopoverPageCountProp> "children" (System.Func<_,_,_> value)
-
-module teachingPopoverPageCount =
-    /// The style in which the page count is rendered.
-    type [<Erase>] countStyle =
-        static member inline text = Interop.mkProperty<ITeachingPopoverPageCountProp> "countStyle" "text"
-        static member inline icon = Interop.mkProperty<ITeachingPopoverPageCountProp> "countStyle" "icon"
-
-    /// Enables branded appearance state.
-    type [<Erase>] appearance =
-        static member inline brand = Interop.mkProperty<ITeachingPopoverPageCountProp> "appearance" "brand"
+// -------------------------------------------------------------------------- TeachingPopoverStrings --------------------------------------------------------------------------------------
+type [<Erase>] teachingPopoverStrings =
+    static member inline previous (value: string) = Interop.mkProperty<ITeachingPopoverStringProp> "previous" value
+    static member inline initialStepText (value: string) = Interop.mkProperty<ITeachingPopoverStringProp> "initialStepText" value
+    static member inline next (value: string) = Interop.mkProperty<ITeachingPopoverStringProp> "next" value
+    static member inline finalStepText (value: string) = Interop.mkProperty<ITeachingPopoverStringProp> "finalStepText" value
+    /// Localize the separator between numbers, or use a function to fully override
+    static member inline pageCountText (value: string) = Interop.mkProperty<ITeachingPopoverStringProp> "pageCountText" value
+    /// Localize the separator between numbers, or use a function to fully override
+    static member inline pageCountText (value: int -> int -> ReactElement) = Interop.mkProperty<ITeachingPopoverStringProp> "pageCountText" (System.Func<_,_,_> value)
 
 // -------------------------------------------------------------------------- Rating --------------------------------------------------------------------------------------
 type [<Erase>] rating =

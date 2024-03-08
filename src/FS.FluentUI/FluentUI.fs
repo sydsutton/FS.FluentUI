@@ -812,11 +812,6 @@ type [<Erase>] Fui =
     static member inline teachingPopoverTitle (text: string) = createElement (import "TeachingPopoverTitle" TeachingPopover_unstable) [ prop.text text ]
     static member inline teachingPopoverCarousel (props: ITeachingPopoverCarouselProp list) = createElement (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
     static member inline teachingPopoverCarousel (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
-    static member inline teachingPopoverActions (props: ITeachingPopoverActionsProp list) = createElement (import "TeachingPopoverActions" TeachingPopover_unstable) props
-    static member inline teachingPopoverActions (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverActions" TeachingPopover_unstable) props
-    static member inline teachingPopoverButton (props: ITeachingPopoverButtonProp list) = createElement (import "TeachingPopoverButton" TeachingPopover_unstable) props
-    static member inline teachingPopoverButton (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverButton" TeachingPopover_unstable) props
-    static member inline teachingPopoverPageCount (props: ITeachingPopoverPageCountProp list) = createElement (import "TeachingPopoverPageCount" TeachingPopover_unstable) props
 
     static member inline rating (props: IRatingProp list) = createElement (import "Rating" Rating_unstable) props
     static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" Rating_unstable) props
