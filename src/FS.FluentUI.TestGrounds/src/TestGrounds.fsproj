@@ -15,6 +15,7 @@
         <Compile Include="../../FS.FluentUI/Domain.fs" />
         <Compile Include="../../FS.FluentUI/Utils.fs" />
         <Compile Include="../../FS.FluentUI/FelizProps.fs" />
+        <Compile Include="../../FS.FluentUI/Props2.fs" />
         <Compile Include="../../FS.FluentUI/Props.fs" />
         <Compile Include="../../FS.FluentUI/FluentUI.fs" />
         <Compile Include="../../FS.FluentUI/BundleIcons.fs" />
