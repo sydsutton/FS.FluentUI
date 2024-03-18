@@ -6277,12 +6277,6 @@ type [<Erase>] teachingPopoverStrings =
 type [<Erase>] rating =
     inherit FelizProps.prop<IRatingProp>
     static member inline root (value:  IReactProperty list) = Interop.mkProperty<IRatingProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    static member inline ratingLabel (value: ILabelProp list) = Interop.mkProperty<IRatingProp> "ratingLabel" (!!value |> createObj)
-    static member inline ratingLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingLabel" value
-    static member inline ratingLabel (value: string) = Interop.mkProperty<IRatingProp> "ratingLabel" value
-    static member inline ratingCountLabel (value: ILabelProp list) = Interop.mkProperty<IRatingProp> "ratingCountLabel" (!!value |> createObj)
-    static member inline ratingCountLabel (value: ReactElement) = Interop.mkProperty<IRatingProp> "ratingCountLabel" value
-    static member inline ratingCountLabel (value: string) = Interop.mkProperty<IRatingProp> "ratingCountLabel" value
     /// Default value of the Rating
     static member inline defaultValue (value: int) = Interop.mkProperty<IRatingProp> "defaultValue" value
     /// Default value of the Rating
@@ -6290,39 +6284,40 @@ type [<Erase>] rating =
     /// Default value of the Rating
     static member inline defaultValue (value: decimal) = Interop.mkProperty<IRatingProp> "defaultValue" value
     /// The icon to display when the rating value is greater than or equal to the item's value.
-    static member inline iconFilled (value: ReactElement) = Interop.mkProperty<IRatingProp> "iconFilled" value
+    static member inline iconFilled (value: BundleIcon) = Interop.mkProperty<IRatingProp> "iconFilled" value
     /// The icon to display when the rating value is less than the item's value.
-    static member inline iconOutline (value: ReactElement) = Interop.mkProperty<IRatingProp> "iconOutline" value
+    static member inline iconOutline (value: BundleIcon) = Interop.mkProperty<IRatingProp> "iconOutline" value
     /// The max value of the rating. This controls the number of rating items displayed.
     /// Must be a whole number greater than 1.
     static member inline max (value: int) = Interop.mkProperty<IRatingProp> "max" value
     /// Name for the Radio inputs. If not provided, one will be automatically generated
     static member inline name (value: string) = Interop.mkProperty<IRatingProp> "name" value
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (value: Event -> ValueProp<int> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> RatingOnChangeEventData<int> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (handler: ValueProp<int> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: RatingOnChangeEventData<int> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (value: Event -> ValueProp<decimal> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> RatingOnChangeEventData<decimal> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (handler: ValueProp<decimal> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: RatingOnChangeEventData<decimal> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (value: Event -> ValueProp<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
+    static member inline onChange (value: Event -> RatingOnChangeEventData<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> value)
     /// Callback when the rating value is changed by the user.
-    static member inline onChange (handler: ValueProp<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onChange (handler: RatingOnChangeEventData<float> -> unit) = Interop.mkProperty<IRatingProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// The value of the rating
     static member inline value (value: int) = Interop.mkProperty<IRatingProp> "value" value
     /// The value of the rating
     static member inline value (value: decimal) = Interop.mkProperty<IRatingProp> "value" value
     /// The value of the rating
     static member inline value (value: float) = Interop.mkProperty<IRatingProp> "value" value
+    /// Prop to generate the aria-label for the rating inputs.
+    static member inline itemLabel (value: int -> string) = Interop.mkProperty<IRatingProp> "itemLabel" (System.Func<_,_> value)
+    /// Prop to generate the aria-label for the rating inputs.
+    static member inline itemLabel (value: decimal -> string) = Interop.mkProperty<IRatingProp> "itemLabel" (System.Func<_,_> value)
+    /// Prop to generate the aria-label for the rating inputs.
+    static member inline itemLabel (value: float -> string) = Interop.mkProperty<IRatingProp> "itemLabel" (System.Func<_,_> value)
 
 module rating =
-    /// Controls the appearance of unselected rating items.
-    type [<Erase>] appearance =
-        static member inline filled = Interop.mkProperty<IRatingProp> "appearance" "filled"
-        static member inline outline = Interop.mkProperty<IRatingProp> "appearance" "outline"
-
     /// Sets the size of the Rating items.
     type [<Erase>] size =
         static member inline small = Interop.mkProperty<IRatingProp> "size" "small"
@@ -6335,12 +6330,6 @@ module rating =
         static member inline brand = Interop.mkProperty<IRatingProp> "color" "brand"
         static member inline marigold = Interop.mkProperty<IRatingProp> "color" "marigold"
         static member inline neutral = Interop.mkProperty<IRatingProp> "color" "neutral"
-
-    /// Controls the appearance of the Rating.
-    type [<Erase>] mode =
-        static member inline interactive = Interop.mkProperty<IRatingProp> "mode" "interactive"
-        static member inline readOnly = Interop.mkProperty<IRatingProp> "mode" "read-only"
-        static member inline readOnlyCompact = Interop.mkProperty<IRatingProp> "mode" "read-only-compact"
 
     /// Sets the precision to allow half-filled shapes in Rating
     type [<Erase>] step =
@@ -6356,24 +6345,20 @@ type [<Erase>] ratingItem =
     static member inline selectedIcon (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "selectedIcon" (!!value |> createObj)
     /// Icon displayed when the rating value is greater than or equal to the item's value.
     static member inline selectedIcon (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "selectedIcon" value
-    /// Icon displayed when the rating value is less than the item's value, when using 'filled' style.
-    static member inline unselectedFilledIcon (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "unselectedFilledIcon" (!!value |> createObj)
-    /// Icon displayed when the rating value is less than the item's value, when using 'filled' style.
-    static member inline unselectedFilledIcon (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "unselectedFilledIcon" value
-    /// Icon displayed when the rating value is less than the item's value, when using 'outline' style or high contrast.
-    static member inline unselectedOutlineIcon (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "unselectedOutlineIcon" (!!value |> createObj)
-    /// Icon displayed when the rating value is less than the item's value, when using 'outline' style or high contrast.
-    static member inline unselectedOutlineIcon (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "unselectedOutlineIcon" value
+    /// Icon displayed when the rating value is less than the item's value.
+    static member inline unselectedIcon (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "unselectedFilledIcon" (!!value |> createObj)
+    /// Icon displayed when the rating value is less than the item's value.
+    static member inline unselectedIcon (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "unselectedIcon" value
     /// Radio input slot used for half star precision
-    static member inline halfValueInput (value: IInputProp list) = Interop.mkProperty<IRatingItemProp> "halfValueInput" (!!value |> createObj)
+    static member inline halfValueInput (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "halfValueInput" (!!value |> createObj)
+    /// Radio input slot used for half star precision
+    static member inline halfValueInput (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "halfValueInput" value
     /// Radio input slot used for full star precision
-    static member inline fullValueInput (value: IInputProp list) = Interop.mkProperty<IRatingItemProp> "fullValueInput" (!!value |> createObj)
+    static member inline fullValueInput (value: IReactProperty list) = Interop.mkProperty<IRatingItemProp> "fullValueInput" (!!value |> createObj)
+    /// Radio input slot used for full star precision
+    static member inline fullValueInput (value: ReactElement) = Interop.mkProperty<IRatingItemProp> "fullValueInput" value
     /// The positive whole number value that is displayed by this RatingItem
     static member inline value (value: int) = Interop.mkProperty<IRatingItemProp> "value" value
-    /// The positive whole number value that is displayed by this RatingItem
-    static member inline value (value: decimal) = Interop.mkProperty<IRatingItemProp> "value" value
-    /// The positive whole number value that is displayed by this RatingItem
-    static member inline value (value: float) = Interop.mkProperty<IRatingItemProp> "value" value
 
 // -------------------------------------------------------------------------- ComboboxFilterConfig --------------------------------------------------------------------------------------
 type [<Erase>] comboboxFilterConfig =
@@ -6422,10 +6407,8 @@ type [<Erase>] ratingDisplay =
     static member inline countText (value: IReactProperty list) = Interop.mkProperty<IRatingDisplayProp> "countText" (!!value |> createObj)
     static member inline countText (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "countText" value
     static member inline countText (value: string) = Interop.mkProperty<IRatingDisplayProp> "countText" value
-    /// The icon used for filled rating items.
-    static member inline iconFilled (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "iconFilled" value
-    /// The icon used for unfilled rating items.
-    static member inline iconOutline (value: ReactElement) = Interop.mkProperty<IRatingDisplayProp> "iconOutline" value
+    /// The icon used for rating items.
+    static member inline icon (value: BundleIcon) = Interop.mkProperty<IRatingDisplayProp> "icon" value
     /// The max value of the rating. This controls the number of rating items displayed.
     /// Must be a whole number greater than 1.
     static member inline max (value: int) = Interop.mkProperty<IRatingDisplayProp> "max" value

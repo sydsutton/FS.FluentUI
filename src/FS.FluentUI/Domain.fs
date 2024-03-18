@@ -1454,3 +1454,10 @@ type AccordionToggleData<'T> = {
     value: 'T
     openItems: 'T array
 }
+
+type RatingOnChangeEventData<'T> = {
+    /// The new value of the rating.
+    value: 'T
+    ``type``: string
+    event: Browser.Types.MouseEvent
+}

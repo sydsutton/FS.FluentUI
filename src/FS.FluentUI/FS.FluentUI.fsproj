@@ -50,14 +50,13 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="gte 9.46.8" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="gte 9.47.0" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.19" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-search-preview" Version="gte 0.1.44" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.0.18" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.2.0" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-motion-preview" Version="gte 0.5.4" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-teaching-popover-preview" Version="gte 0.2.0" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-rating-preview" Version="gte 0.3.2" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

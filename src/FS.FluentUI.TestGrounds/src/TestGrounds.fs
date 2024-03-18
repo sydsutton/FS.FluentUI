@@ -3419,9 +3419,9 @@ let ratingTest() =
     Fui.rating [
         rating.step.``0.5``
         rating.defaultValue 4.5M
-        rating.onChange (fun (v: ValueProp<decimal>) -> printfn "value %A" v.value)
-        rating.iconFilled (Fui.icon.circleFilled [])
-        rating.iconOutline (Fui.icon.circleRegular [])
+        rating.onChange (fun (v: RatingOnChangeEventData<int>) -> printfn "value %A" (v.value, v.event, v.``type``))
+        rating.iconFilled (bundleIcon.circleFilled)
+        rating.iconOutline (bundleIcon.circleRegular)
         rating.size.large
         rating.max 7
         rating.color.marigold
@@ -3429,13 +3429,18 @@ let ratingTest() =
 
 let ratingDisplayTest =
     Fui.ratingDisplay [
-        ratingDisplay.compact false
+        ratingDisplay.compact true
         ratingDisplay.value 4.3
         ratingDisplay.max 10
-        ratingDisplay.iconFilled (Fui.icon.vehicleTruckBagFilled [])
-        ratingDisplay.iconOutline (Fui.icon.vehicleTruckBagRegular [])
+        ratingDisplay.icon (bundleIcon.vehicleTruckBagFilled)
         ratingDisplay.color.marigold
         ratingDisplay.size.extraLarge
+    ]
+
+let ratingItemTest =
+    Fui.ratingItem [
+        ratingItem.value 4
+        ratingItem.selectedIcon (Fui.icon.addFilled [])
     ]
 
 let mainContent model dispatch =
@@ -3466,6 +3471,7 @@ let mainContent model dispatch =
             ]
             ratingTest()
             ratingDisplayTest
+            ratingItemTest
             TeachingPopoverTest()
             UseMotionTest ()
             TimePickerTest ()
