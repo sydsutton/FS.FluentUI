@@ -20,4 +20,6 @@ type [<Erase>] Fui =
     static member inline createBrandVariants (theme: IPalette, interpolation: Interpolation option): 'T = import "createBrandVariants" V8toV9
 
     static member inline stack (props: IStackProp list) = createElement (import "StackShim" V8toV9) props
+    static member inline stack (props: ReactElement list) = Interop.reactElementWithChildren (import "StackShim" V8toV9) props
     static member inline stackItem (props: IStackItemProp list) = createElement (import "StackItemShim" V8toV9) props
+    static member inline stackItem (props: ReactElement list) = Interop.reactElementWithChildren (import "StackItemShim" V8toV9) props

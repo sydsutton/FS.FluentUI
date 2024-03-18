@@ -39,7 +39,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.4.17" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.6.1" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
