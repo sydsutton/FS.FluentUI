@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
@@ -39,7 +39,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.6.1" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-migration-v8-v9" Version="&gt;= 9.6.2" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
