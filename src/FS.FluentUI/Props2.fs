@@ -1454,7 +1454,7 @@ module virtualizerMeasureProps =
 
     type [<Erase>] direction =
         static member inline horizontal = Interop.mkProperty<IVirtualizerMeasurePropsProp> "direction" "horizontal"
-        static member inline vertical = Interop.mkProperty<IVirtualizerMeasurePropsProp> "direction" "limited"
+        static member inline vertical = Interop.mkProperty<IVirtualizerMeasurePropsProp> "direction" "vertical"
 
 // -------------------------------------------------------------------------- useModalAttributesOptions --------------------------------------------------------------------------------------
 
@@ -2121,6 +2121,10 @@ type [<Erase>] messageBar =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMessageBarProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline icon (value:  ReactElement) = Interop.mkProperty<IMessageBarProp> "icon" value
     static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IMessageBarProp> "icon"  (!!value |> createObj |> unbox<IReactProperty>)
+    /// Rendered when the component is in multiline layout to guarantee correct spacing even if no actions are rendered. When actions are rendered, the default actions grid area will render over this element
+    static member inline bottomReflowSpacer (value:  ReactElement) = Interop.mkProperty<IMessageBarProp> "bottomReflowSpacer" value
+    /// Rendered when the component is in multiline layout to guarantee correct spacing even if no actions are rendered. When actions are rendered, the default actions grid area will render over this element
+    static member inline bottomReflowSpacer (value:  IReactProperty list) = Interop.mkProperty<IMessageBarProp> "bottomReflowSpacer"  (!!value |> createObj |> unbox<IReactProperty>)
 
 module messageBar =
     type [<Erase>] as' =
