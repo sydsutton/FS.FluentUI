@@ -1915,6 +1915,7 @@ type [<Erase>] tagGroup =
     static member inline onDismiss (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
     /// Callback for when a tag is dismissed
     static member inline onDismiss (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+    static member inline dismissible (value: bool) = Interop.mkProperty<ITagGroupProp> "dismissible" value
 
 module tagGroup =
     /// A Tag has three sizes.
@@ -1923,6 +1924,10 @@ module tagGroup =
         static member inline extraSmall = Interop.mkProperty<ITagGroupProp> "size" "extra-small"
         static member inline medium = Interop.mkProperty<ITagGroupProp> "size" "medium"
 
+    type [<Erase>] appearance =
+        static member inline brand = Interop.mkProperty<ITagGroupProp> "appearance" "brand"
+        static member inline filled = Interop.mkProperty<ITagGroupProp> "appearance" "filled"
+        static member inline outline = Interop.mkProperty<ITagGroupProp> "appearance" "outline"
 // -------------------------------------------------------------------------- interactionTag --------------------------------------------------------------------------------------
 type [<Erase>] interactionTag =
     inherit FelizProps.prop<IInteractionTagProp>
