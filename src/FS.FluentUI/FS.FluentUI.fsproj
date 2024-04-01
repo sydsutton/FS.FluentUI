@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.11.0</Version>
+        <Version>1.12.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,17 +12,21 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.46.0
-            - Update @fluentui/react-calendar-compat to 0.0.18
-            - Update @fluentui/react-datepicker-compat to 0.4.19
-            - Update @fluentui/react-timepicker-compat to 0.1.5
-            - Add navigationIcons prop to calendarDay and calendarMonth
-            - Add clearable prop to Dropdown and Combobox
-            - Add position.bottom prop to Drawer component
-            - Add missing values to Tokens type
-            - Refactor TypographyStyle and remove custom style overloads
-            - Fix bugs in Theme functions
-            - Add useComboboxFilter hook
+            - Remove @fluentui/react-rating-preview and update Rating components and props
+            - Update @fluentui/react-components to 9.47.2
+            - Update @fluentui/react-teaching-popover-preview to 0.2.3 and update props
+            - Update @fluentui/react-search-preview to 0.1.50
+            - Update @fluentui/react-timepicker-compat to 0.2.5
+            - Update @fluentui/react-calendar-compat to 0.1.0
+            - Update @fluentui/react-motion-preview to 0.5.17
+            - Update @fluentui/react-datepicker-compat to 0.4.29
+            - Add missing Slot overloads and missing properties/ types
+            - Add new color tokens
+            - Add 288 new icons
+            - Split Props.fs into Props.fs and Props2.fs-- may cause issues if not cleaning fable modules properly before running
+            - BREAKING CHANGE: Add Feliz overloads for Tokens' string values
+            - BREAKING CHANGE: Change accordion.onToggle prop
+            - BREAKING CHANGE: Change `.before'` prop to `.before`
         </PackageReleaseNotes>
     </PropertyGroup>
 
