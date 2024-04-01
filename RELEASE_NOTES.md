@@ -1,6 +1,24 @@
 Release Notes
 =========
 
+### 1.12.0 (4-1-2024)
+
+* Remove @fluentui/react-rating-preview and update Rating components and props
+* Update @fluentui/react-components to 9.47.2
+* Update @fluentui/react-teaching-popover-preview to 0.2.3 and update props
+* Update @fluentui/react-search-preview to 0.1.50
+* Update @fluentui/react-timepicker-compat to 0.2.5
+* Update @fluentui/react-calendar-compat to 0.1.0
+* Update @fluentui/react-motion-preview to 0.5.17
+* Update @fluentui/react-datepicker-compat to 0.4.29
+* Add missing Slot overloads and missing properties/ types
+* Add new color tokens
+* Add 288 new icons
+* Split Props.fs into Props.fs and Props2.fs-- may cause issues if not cleaning fable modules properly before running
+* BREAKING CHANGE: Add Feliz overloads for Tokens' string values
+* BREAKING CHANGE: Change accordion.onToggle prop
+* BREAKING CHANGE: Change `.before'` prop to `.before`
+
 ### 1.11.0 (1-23-2024)
 
 * Update @fluentui/react-components to 9.46.0
