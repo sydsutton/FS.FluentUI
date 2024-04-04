@@ -135,6 +135,7 @@ type [<Erase>] IDataGridBodyProp = interface end
 type [<Erase>] IDataGridRowProp = interface end
 type [<Erase>] IDataGridCellProp = interface end
 type [<Erase>] IDataGridSelectionCellProp = interface end
+type [<Erase>] IResizableColumnsOptionsProp = interface end
 
 type [<Erase>] IDrawerProp = interface end
 type [<Erase>] IOverlayDrawerProp = interface end

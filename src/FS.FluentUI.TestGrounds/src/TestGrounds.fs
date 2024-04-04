@@ -2556,6 +2556,7 @@ let DataGridTest () =
                 dataGrid.sortable true
                 dataGrid.selectionAppearance.brand
                 dataGrid.selectionMode.multiselect
+                dataGrid.resizableColumnsOptions [ resizableColumnsOptions.autoFitColumns false ]
                 dataGrid.selectedItems (selectedRows: list<string>)
                 dataGrid.sortState sortState
                 dataGrid.onSortChange (fun s -> setSortState s)

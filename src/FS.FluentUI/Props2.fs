@@ -163,6 +163,8 @@ type [<Erase>] dataGrid  =
     static member inline containerWidthOffset (value: float) = Interop.mkProperty<IDataGridProp> "containerWidthOffset" value
     /// For column resizing. Allows for a container size to be adjusted by a number of pixels, to make sure the columns don't overflow the table. By default, this value is calculated internally based on other props, but can be overriden.
     static member inline containerWidthOffset (value: decimal) = Interop.mkProperty<IDataGridProp> "containerWidthOffset" value
+    /// Custom options for column resizing.
+    static member inline resizableColumnsOptions (value: IResizableColumnsOptionsProp list) = Interop.mkProperty<IDataGridProp> "resizableColumnsOptions" (!!value |> createObj |> unbox)
 
 module dataGrid =
     type [<Erase>] as' =
@@ -193,6 +195,11 @@ module dataGrid =
         static member inline multiselect = Interop.mkProperty<IDataGridProp> "selectionMode" "multiselect"
         static member inline single = Interop.mkProperty<IDataGridProp> "selectionMode" "single"
 
+
+// -------------------------------------------------------------------------- ResizableColumnsOptions --------------------------------------------------------------------------------------
+type [<Erase>] resizableColumnsOptions =
+    /// If true, columns will be auto-fitted to the container width.
+    static member inline autoFitColumns (value: bool) = Interop.mkProperty<IResizableColumnsOptionsProp> "autoFitColumns" value
 
 // -------------------------------------------------------------------------- DataGridHeader --------------------------------------------------------------------------------------
 type [<Erase>] dataGridHeader = FelizProps.prop<IDataGridHeaderProp>

@@ -8,7 +8,7 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui/react-calendar-compat": "^0.1.0",
-    "@fluentui/react-components": "^9.47.2",
+    "@fluentui/react-components": "^9.47.4",
     "@fluentui/react-datepicker-compat": "^0.4.29",
     "@fluentui/react-migration-v8-v9": "^9.6.2",
     "@fluentui/react-motion-preview": "^0.5.17",
