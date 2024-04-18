@@ -1784,7 +1784,6 @@ type [<Erase>] partitionBreadcrumbItemsOptions =
     static member inline overflowIndex (value: float) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
     static member inline overflowIndex (value: decimal) = Interop.mkProperty<IPartitionBreadcrumbItemsOptionsProp> "overflowIndex" value
 
-
 // -------------------------------------------------------------------------- Searchbox --------------------------------------------------------------------------------------
 type [<Erase>] searchBox =
     inherit FelizProps.prop<ISearchBoxProp>

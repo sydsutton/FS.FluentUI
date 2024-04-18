@@ -7,14 +7,13 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@fluentui/react-calendar-compat": "^0.1.0",
-    "@fluentui/react-components": "^9.47.4",
-    "@fluentui/react-datepicker-compat": "^0.4.29",
+    "@fluentui/react-calendar-compat": "^0.1.2",
+    "@fluentui/react-components": "^9.48.0",
+    "@fluentui/react-datepicker-compat": "^0.4.32",
     "@fluentui/react-migration-v8-v9": "^9.6.2",
     "@fluentui/react-motion-preview": "^0.5.17",
-    "@fluentui/react-search-preview": "^0.1.50",
     "@fluentui/react-teaching-popover-preview": "^0.2.3",
-    "@fluentui/react-timepicker-compat": "^0.2.5",
+    "@fluentui/react-timepicker-compat": "^0.2.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "use-sync-external-store": "^1.2.0"

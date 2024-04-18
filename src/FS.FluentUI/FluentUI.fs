@@ -30,7 +30,6 @@ module FuiHelpers =
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
-    let [<Literal>] Searchbox_unstable = "@fluentui/react-search-preview"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
     let [<Literal>] TeachingPopover_unstable = "@fluentui/react-teaching-popover-preview"
 
@@ -765,7 +764,7 @@ type [<Erase>] Fui =
         |> unbox<PartitionBreadcrumbItemsOptions<'T>>
         |> partitionBreadcrumbItems
 
-    static member inline searchBox (props: ISearchBoxProp list) = createElement (import "SearchBox" Searchbox_unstable) props
+    static member inline searchBox (props: ISearchBoxProp list) = createElement (import "SearchBox" FluentUIv9) props
     static member inline tag (props: ITagProp list) = createElement (import "Tag" FluentUIv9) props
     static member inline tagGroup (props: ITagGroupProp list) = createElement (import "TagGroup" FluentUIv9) props
     static member inline interactionTag (props: IInteractionTagProp list) = createElement (import "InteractionTag" FluentUIv9) props
