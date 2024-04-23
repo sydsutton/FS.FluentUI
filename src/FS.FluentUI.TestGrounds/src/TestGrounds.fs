@@ -374,6 +374,11 @@ let MenuTest() =
                             Fui.text "Show Debug Panel"
                         ]
                     ]
+                    Fui.menuItemSwitch [
+                        menuItemSwitch.name "new-explorer"
+                        menuItemSwitch.value "new-explorer"
+                        menuItemSwitch.text "Try V2"
+                    ]
                     Fui.menuDivider []
                     Fui.menu [
                         menu.children [
@@ -3365,49 +3370,70 @@ let TeachingPopoverTest() =
             Fui.teachingPopoverSurface [
                 Fui.teachingPopoverHeader "Tips"
                 Fui.teachingPopoverCarousel [
-                    teachingPopoverCarousel.paginationType.text
-                    teachingPopoverCarousel.strings [
-                        teachingPopoverStrings.next "Next"
-                        teachingPopoverStrings.previous "Prev"
-                        teachingPopoverStrings.initialStepText "Close"
-                        teachingPopoverStrings.finalStepText "Finish"
-                        teachingPopoverStrings.pageCountText "of"
-                    ]
+                    teachingPopoverCarousel.defaultValue "test-0"
                     teachingPopoverCarousel.children [
-                        Fui.teachingPopoverBody [
-                            teachingPopoverBody.media (
-                                Fui.image [
-                                    image.fit.cover
-                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        Fui.teachingPopoverCarouselCard [
+                            teachingPopoverCarouselCard.value "test-0"
+                            teachingPopoverCarouselCard.children [
+                                Fui.teachingPopoverBody [
+                                    teachingPopoverBody.media (
+                                        Fui.image [
+                                            image.fit.cover
+                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                        ]
+                                    )
+                                    teachingPopoverBody.children [
+                                        Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                        Fui.text "This is page 1"
+                                    ]
                                 ]
-                            )
-                            teachingPopoverBody.children [
-                                Fui.teachingPopoverTitle "Teaching Bubble Title"
-                                Fui.text "This is page 1"
                             ]
                         ]
-                        Fui.teachingPopoverBody [
-                            teachingPopoverBody.media (
-                                Fui.image [
-                                    image.fit.cover
-                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        Fui.teachingPopoverCarouselCard [
+                            teachingPopoverCarouselCard.value "test-1"
+                            teachingPopoverCarouselCard.children [
+                                Fui.teachingPopoverBody [
+                                    teachingPopoverBody.media (
+                                        Fui.image [
+                                            image.fit.cover
+                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                        ]
+                                    )
+                                    teachingPopoverBody.children [
+                                        Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                        Fui.text "This is page 2"
+                                    ]
                                 ]
-                            )
-                            teachingPopoverBody.children [
-                                Fui.teachingPopoverTitle "Teaching Bubble Title"
-                                Fui.text "This is page 2"
                             ]
                         ]
-                        Fui.teachingPopoverBody [
-                            teachingPopoverBody.media (
-                                Fui.image [
-                                    image.fit.cover
-                                    image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        Fui.teachingPopoverCarouselCard [
+                            teachingPopoverCarouselCard.value "test-2"
+                            teachingPopoverCarouselCard.children [
+                                Fui.teachingPopoverBody [
+                                    teachingPopoverBody.media (
+                                        Fui.image [
+                                            image.fit.cover
+                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                        ]
+                                    )
+                                    teachingPopoverBody.children [
+                                        Fui.teachingPopoverTitle "Teaching Bubble Title"
+                                        Fui.text "This is page 3"
+                                    ]
                                 ]
-                            )
-                            teachingPopoverBody.children [
-                                Fui.teachingPopoverTitle "Teaching Bubble Title"
-                                Fui.text "This is page 3"
+                            ]
+                        ]
+                        Fui.teachingPopoverCarouselFooter [
+                            teachingPopoverCarouselFooter.next "Next"
+                            teachingPopoverCarouselFooter.previous "Previous"
+                            teachingPopoverCarouselFooter.initialStepText "Close"
+                            teachingPopoverCarouselFooter.finalStepText "Finish"
+                            teachingPopoverCarouselFooter.children [
+                                Fui.teachingPopoverCarouselNav [
+                                    teachingPopoverCarouselNav.children (fun _ ->
+                                        Fui.teachingPopoverCarouselNavButton []
+                                    )
+                                ]
                             ]
                         ]
                     ]

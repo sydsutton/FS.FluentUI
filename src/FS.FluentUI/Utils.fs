@@ -107,6 +107,7 @@ type [<Erase>] IMenuGroupProp = interface end
 type [<Erase>] IMenuGroupHeaderProp = interface end
 type [<Erase>] IMenuDividerProp = interface end
 type [<Erase>] IMenuItemLinkProp = interface end
+type [<Erase>] IMenuItemSwitchProp = interface end
 
 type [<Erase>] IToastProp = interface end
 type [<Erase>] IToastTitleProp = interface end
@@ -196,7 +197,12 @@ type [<Erase>] ITeachingPopoverHeaderProp = interface end
 type [<Erase>] ITeachingPopoverBodyProp = interface end
 type [<Erase>] ITeachingPopoverTitleProp = interface end
 type [<Erase>] ITeachingPopoverCarouselProp = interface end
-type [<Erase>] ITeachingPopoverStringProp = interface end
+type [<Erase>] ITeachingPopoverCarouselCardProp  = interface end
+type [<Erase>] ICarouselItemProp  = interface end
+type [<Erase>] ITeachingPopoverCarouselFooterProp  = interface end
+type [<Erase>] ITeachingPopoverCarouselFooterButtonProp  = interface end
+type [<Erase>] ITeachingPopoverCarouselNavProp  = interface end
+type [<Erase>] ITeachingPopoverCarouselNavButtonProp  = interface end
 
 type [<Erase>] IRatingProp = interface end
 type [<Erase>] IRatingItemProp = interface end

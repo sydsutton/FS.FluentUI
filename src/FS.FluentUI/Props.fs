@@ -1095,6 +1095,31 @@ type [<Erase>] menuItemLink =
     static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" value
     static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
 
+// -------------------------------------------------------------------------- MenuItemSwitch --------------------------------------------------------------------------------------
+type [<Erase>] menuItemSwitch =
+    inherit FelizProps.prop<IMenuItemSwitchProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemSwitchProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot rendered before children content
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemSwitchProp> "icon" value
+    /// Icon slot rendered before children content
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemSwitchProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    static member inline switchIndicator (value: ReactElement) = Interop.mkProperty<IMenuItemSwitchProp> "switchIndicator" value
+    static member inline switchIndicator (value: IReactProperty list) = Interop.mkProperty<IMenuItemSwitchProp> "switchIndicator" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Component children are placed in this slot. Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: ReactElement) = Interop.mkProperty<IMenuItemSwitchProp> "content" value
+    /// Component children are placed in this slot. Avoid using the `children` property in this slot in favour of Component children whenever possible
+    static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemSwitchProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemSwitchProp> "secondaryContent" value
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
+    static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemSwitchProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Clicking on the menu item will not dismiss an open menu
+    static member inline persistOnClick (value: bool) = Interop.mkProperty<IMenuItemSwitchProp> "persistOnClick" value
+    /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_name.asp
+    static member inline name (value: string) = Interop.mkProperty<IMenuItemSwitchProp> "name" value
+    /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_name.asp
+    static member inline value (value: string) = Interop.mkProperty<IMenuItemSwitchProp> "value" value
+
 // -------------------------------------------------------------------------- MenuItemCheckbox --------------------------------------------------------------------------------------
 type [<Erase>] menuItemCheckbox =
     inherit FelizProps.prop<IMenuItemCheckboxProp>
@@ -3137,14 +3162,18 @@ type [<Erase>] skeleton  =
     /// The root slot of the `Skeleton` is the container that will contain the slots that make up a `Skeleton`
     /// and any data that the `Skeleton` will load. The default html element is a `div`.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISkeletonProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Deprecated-- Use `className` prop to set width.
     /// Sets the width value of the skeleton wrapper.
-    static member inline width (value: string) = Interop.mkProperty<ISkeletonProp> "width" value
+    [<Obsolete>] static member inline width (value: string) = Interop.mkProperty<ISkeletonProp> "width" value
+    /// Deprecated-- Use `className` prop to set width.
     /// Sets the width value of the skeleton wrapper.
-    static member inline width (value: int) = Interop.mkProperty<ISkeletonProp> "width" value
+    [<Obsolete>] static member inline width (value: int) = Interop.mkProperty<ISkeletonProp> "width" value
+    /// Deprecated-- Use `className` prop to set width.
     /// Sets the width value of the skeleton wrapper.
-    static member inline width (value: float) = Interop.mkProperty<ISkeletonProp> "width" value
+    [<Obsolete>] static member inline width (value: float) = Interop.mkProperty<ISkeletonProp> "width" value
+    /// Deprecated-- Use `className` prop to set width.
     /// Sets the width value of the skeleton wrapper.
-    static member inline width (value: decimal) = Interop.mkProperty<ISkeletonProp> "width" value
+    [<Obsolete>] static member inline width (value: decimal) = Interop.mkProperty<ISkeletonProp> "width" value
 
 module skeleton  =
     type [<Erase>] as' =

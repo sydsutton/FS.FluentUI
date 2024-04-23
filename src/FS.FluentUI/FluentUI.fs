@@ -31,7 +31,6 @@ module FuiHelpers =
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
     let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
-    let [<Literal>] TeachingPopover_unstable = "@fluentui/react-teaching-popover-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -696,6 +695,7 @@ type [<Erase>] Fui =
     static member inline menuGroup (props: IMenuGroupProp list) = createElement (import "MenuGroup" FluentUIv9) props
     static member inline menuDivider (props: IMenuDividerProp list) = createElement (import "MenuDivider" FluentUIv9) props
     static member inline menuItemLink (props: IMenuItemLinkProp list) = createElement (import "MenuItemLink" FluentUIv9) props
+    static member inline menuItemSwitch (props: IMenuItemSwitchProp list) = createElement (import "MenuItemSwitch" FluentUIv9) props
     // Table
     /// This component is considered low-level and should be used when there is a need for more customization and support for non-standard features. Please check out the DataGrid component if you don't need lots of customization and rely on common features. There is less work involved and you will benefit from first class Microsoft design and accessibility support.
     ///
@@ -795,21 +795,28 @@ type [<Erase>] Fui =
     static member inline typographyStyles: TypographyStyles = import "typographyStyles" FluentUIv9
 
     // TeachingPopover
-    static member inline teachingPopover (props: ITeachingPopoverProp list) = createElement (import "TeachingPopover" TeachingPopover_unstable) props
-    static member inline teachingPopover (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopover" TeachingPopover_unstable) props
-    static member inline teachingPopoverTrigger (props: ReactElement) = createElement (import "TeachingPopoverTrigger" TeachingPopover_unstable) [prop.children (props)]
-    static member inline teachingPopoverTrigger (props: ITeachingPopoverTriggerProp list) = createElement (import "TeachingPopoverTrigger" TeachingPopover_unstable) props
-    static member inline teachingPopoverSurface (props: ITeachingPopoverSurfaceProp list) = createElement (import "TeachingPopoverSurface" TeachingPopover_unstable) props
-    static member inline teachingPopoverSurface (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverSurface" TeachingPopover_unstable) props
-    static member inline teachingPopoverHeader (props: ITeachingPopoverHeaderProp list) = createElement (import "TeachingPopoverHeader" TeachingPopover_unstable) props
-    static member inline teachingPopoverHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverHeader" TeachingPopover_unstable) props
-    static member inline teachingPopoverHeader (text: string) = createElement (import "TeachingPopoverHeader" TeachingPopover_unstable) [ prop.text text ]
-    static member inline teachingPopoverBody (props: ITeachingPopoverBodyProp list) = createElement (import "TeachingPopoverBody" TeachingPopover_unstable) props
-    static member inline teachingPopoverTitle (props: ITeachingPopoverTitleProp list) = createElement (import "TeachingPopoverTitle" TeachingPopover_unstable) props
-    static member inline teachingPopoverTitle (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverTitle" TeachingPopover_unstable) props
-    static member inline teachingPopoverTitle (text: string) = createElement (import "TeachingPopoverTitle" TeachingPopover_unstable) [ prop.text text ]
-    static member inline teachingPopoverCarousel (props: ITeachingPopoverCarouselProp list) = createElement (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
-    static member inline teachingPopoverCarousel (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarousel" TeachingPopover_unstable) props
+    static member inline teachingPopover (props: ITeachingPopoverProp list) = createElement (import "TeachingPopover" FluentUIv9) props
+    static member inline teachingPopover (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopover" FluentUIv9) props
+    static member inline teachingPopoverTrigger (props: ReactElement) = createElement (import "TeachingPopoverTrigger" FluentUIv9) [prop.children (props)]
+    static member inline teachingPopoverTrigger (props: ITeachingPopoverTriggerProp list) = createElement (import "TeachingPopoverTrigger" FluentUIv9) props
+    static member inline teachingPopoverSurface (props: ITeachingPopoverSurfaceProp list) = createElement (import "TeachingPopoverSurface" FluentUIv9) props
+    static member inline teachingPopoverSurface (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverSurface" FluentUIv9) props
+    static member inline teachingPopoverHeader (props: ITeachingPopoverHeaderProp list) = createElement (import "TeachingPopoverHeader" FluentUIv9) props
+    static member inline teachingPopoverHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverHeader" FluentUIv9) props
+    static member inline teachingPopoverHeader (text: string) = createElement (import "TeachingPopoverHeader" FluentUIv9) [ prop.text text ]
+    static member inline teachingPopoverBody (props: ITeachingPopoverBodyProp list) = createElement (import "TeachingPopoverBody" FluentUIv9) props
+    static member inline teachingPopoverTitle (props: ITeachingPopoverTitleProp list) = createElement (import "TeachingPopoverTitle" FluentUIv9) props
+    static member inline teachingPopoverTitle (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverTitle" FluentUIv9) props
+    static member inline teachingPopoverTitle (text: string) = createElement (import "TeachingPopoverTitle" FluentUIv9) [ prop.text text ]
+    static member inline teachingPopoverCarousel (props: ITeachingPopoverCarouselProp list) = createElement (import "TeachingPopoverCarousel" FluentUIv9) props
+    static member inline teachingPopoverCarousel (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarousel" FluentUIv9) props
+    static member inline teachingPopoverCarouselCard (props: ITeachingPopoverCarouselCardProp list) = createElement (import "TeachingPopoverCarouselCard" FluentUIv9) props
+    static member inline teachingPopoverCarouselCard (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarouselCard" FluentUIv9) props
+    static member inline teachingPopoverCarouselFooter (props: ITeachingPopoverCarouselFooterProp list) = createElement (import "TeachingPopoverCarouselFooter" FluentUIv9) props
+    static member inline teachingPopoverCarouselFooter (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarouselFooter" FluentUIv9) props
+    static member inline teachingPopoverCarouselNav (props: ITeachingPopoverCarouselNavProp list) = createElement (import "TeachingPopoverCarouselNav" FluentUIv9) props
+    static member inline teachingPopoverCarouselNav (props: ReactElement list) = Interop.reactElementWithChildren (import "TeachingPopoverCarouselNav" FluentUIv9) props
+    static member inline teachingPopoverCarouselNavButton (props: ITeachingPopoverCarouselNavButtonProp list) = createElement (import "TeachingPopoverCarouselNavButton" FluentUIv9) props
 
     static member inline rating (props: IRatingProp list) = createElement (import "Rating" FluentUIv9) props
     static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" FluentUIv9) props
