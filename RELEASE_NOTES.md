@@ -1,6 +1,18 @@
 Release Notes
 =========
 
+### 1.13.0 (4-24-2024)
+
+* Update @fluentui/react-components to 9.49.0
+* Stabilize SearchBox component
+* Stabilize TeachingPopover components
+* Add MenuItemSwitch component
+* Add 100+ icons
+* Update @fluentui/react-calendar-compat to 0.1.3
+* Update @fluentui/react-datepicker-compat to 0.4.33
+* Update @fluentui/react-timepicker-compat to 0.2.9
+* Update @fluentui/react-motion-preview to 0.5.19
+
 ### 1.12.0 (4-1-2024)
 
 * Remove @fluentui/react-rating-preview and update Rating components and props
