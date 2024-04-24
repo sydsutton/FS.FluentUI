@@ -11,7 +11,7 @@
     "@fluentui/react-components": "^9.49.0",
     "@fluentui/react-datepicker-compat": "^0.4.33",
     "@fluentui/react-migration-v8-v9": "^9.6.2",
-    "@fluentui/react-motion-preview": "^0.5.17",
+    "@fluentui/react-motion-preview": "^0.5.19",
     "@fluentui/react-timepicker-compat": "^0.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

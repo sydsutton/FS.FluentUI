@@ -90,15 +90,23 @@ root.render (
 
 ## Installation
 
+Current NPM dependencies:
+
+@fluentui/react-components
+@fluentui/react-datepicker-compat
+@fluentui/react-calendar-compat
+@fluentui/react-timepicker-compat
+@fluentui/react-motion-preview
+
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
 ```bash
 cd ./{path to Client}
 
 # when using femto as a global CLI tool
-femto install FS.FluentUI --version {newest version}
+femto install FS.FluentUI
 
 # when using femto as a local CLI tool
-dotnet femto install FS.FluentUI --version {newest version}
+dotnet femto install FS.FluentUI
 ```
 This will install the nuget package and afterwards automatically installs the required npm packages used by this binding.
 
@@ -107,5 +115,6 @@ This will install the nuget package and afterwards automatically installs the re
 You can install the library manually if you want by first installing the nuget package
 ```bash
 cd ./{path to your project}
-dotnet add package FS.FluentUI --version {newest version}
+dotnet add package FS.FluentUI
+npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat @fluentui/react-motion-preview
 ```
