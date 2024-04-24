@@ -92,11 +92,11 @@ root.render (
 
 Current NPM dependencies:
 
-@fluentui/react-components
-@fluentui/react-datepicker-compat
-@fluentui/react-calendar-compat
-@fluentui/react-timepicker-compat
-@fluentui/react-motion-preview
+* @fluentui/react-components
+* @fluentui/react-datepicker-compat
+* @fluentui/react-calendar-compat
+* @fluentui/react-timepicker-compat
+* @fluentui/react-motion-preview
 
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
 ```bash
