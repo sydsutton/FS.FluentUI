@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.12.0</Version>
+        <Version>1.13.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,21 +12,15 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Remove @fluentui/react-rating-preview and update Rating components and props
-            - Update @fluentui/react-components to 9.47.2
-            - Update @fluentui/react-teaching-popover-preview to 0.2.3 and update props
-            - Update @fluentui/react-search-preview to 0.1.50
-            - Update @fluentui/react-timepicker-compat to 0.2.5
-            - Update @fluentui/react-calendar-compat to 0.1.0
-            - Update @fluentui/react-motion-preview to 0.5.17
-            - Update @fluentui/react-datepicker-compat to 0.4.29
-            - Add missing Slot overloads and missing properties/ types
-            - Add new color tokens
-            - Add 288 new icons
-            - Split Props.fs into Props.fs and Props2.fs-- may cause issues if not cleaning fable modules properly before running
-            - BREAKING CHANGE: Add Feliz overloads for Tokens' string values
-            - BREAKING CHANGE: Change accordion.onToggle prop
-            - BREAKING CHANGE: Change `.before'` prop to `.before`
+            - Update @fluentui/react-components to 9.49.0
+            - Stabilize SearchBox component
+            - Stabilize TeachingPopover components
+            - Add MenuItemSwitch component
+            - Add 100+ icons
+            - Update @fluentui/react-calendar-compat to 0.1.3
+            - Update @fluentui/react-datepicker-compat to 0.4.33
+            - Update @fluentui/react-timepicker-compat to 0.2.9
+            - Update @fluentui/react-motion-preview to 0.5.19
         </PackageReleaseNotes>
     </PropertyGroup>
 
