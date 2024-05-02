@@ -1461,3 +1461,19 @@ type RatingOnChangeEventData<'T> = {
     ``type``: string
     event: Browser.Types.MouseEvent
 }
+
+type OptionValue = {
+    /// The disabled state of the option.
+    disabled: bool
+    /// The `id` attribute of the option.
+    id: string
+    /// The `text` string for the option.
+    text: string
+    /// The value string of the option.
+    value: string
+}
+
+type ActiveOptionChangeData = {
+    previousOption: OptionValue option
+    nextOption: OptionValue option
+}

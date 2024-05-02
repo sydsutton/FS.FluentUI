@@ -1281,6 +1281,13 @@ let ComboBoxTest() =
             Fui.combobox [
                 combobox.ariaLabelledBy "comboBoxId"
                 combobox.selectedOptions selectedAnimals
+                combobox.onActiveOptionChange (fun changeData ->
+                    printfn "changeData %A" (
+                        match changeData.nextOption with
+                        | Some v -> v.text
+                        | None -> "Nothing"
+                    )
+                )
                 combobox.value (if query = "" then selectedAnimals |> String.concat ", " else query)
                 combobox.placeholder "Select one or more animals"
                 combobox.onTextChange (fun s -> setQuery s)

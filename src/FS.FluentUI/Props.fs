@@ -2217,6 +2217,10 @@ type [<Erase>] dropdown =
     static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<IDropdownProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
     /// If set, the dropdown will show an icon to clear the current value.
     static member inline clearable (value: bool) = Interop.mkProperty<IDropdownProp> "clearable" value
+    /// OnActiveOptionChange notifies the user when the active option in the Combobox was changed by keyboard.
+    static member inline onActiveOptionChange (handler: ActiveOptionChangeData -> unit) = Interop.mkProperty<IDropdownProp> "onActiveOptionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// OnActiveOptionChange notifies the user when the active option in the Combobox was changed by keyboard.
+    static member inline onActiveOptionChange (value: KeyboardEvent -> ActiveOptionChangeData -> unit) = Interop.mkProperty<IDropdownProp> "onActiveOptionChange" (System.Func<_,_,_> value)
 
 module dropdown =
 
@@ -2401,6 +2405,10 @@ type [<Erase>] combobox =
     static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<IComboboxProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
     /// If set, the combobox will show an icon to clear the current value.
     static member inline clearable (value: bool) = Interop.mkProperty<IComboboxProp> "clearable" value
+    /// OnActiveOptionChange notifies the user when the active option in the Combobox was changed by keyboard.
+    static member inline onActiveOptionChange (handler: ActiveOptionChangeData -> unit) = Interop.mkProperty<IComboboxProp> "onActiveOptionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// OnActiveOptionChange notifies the user when the active option in the Combobox was changed by keyboard.
+    static member inline onActiveOptionChange (value: KeyboardEvent -> ActiveOptionChangeData -> unit) = Interop.mkProperty<IComboboxProp> "onActiveOptionChange" (System.Func<_,_,_> value)
 
 module combobox =
     type [<Erase>] as' =
