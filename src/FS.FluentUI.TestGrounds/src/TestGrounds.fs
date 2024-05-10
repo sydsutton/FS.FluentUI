@@ -3531,7 +3531,6 @@ let TagPickerTest () =
         field.children [
             Fui.tagPicker [
                 tagPicker.onOptionSelect (fun (data: TagPickerOnOptionSelectData<MouseEvent>) ->
-                    printfn "data %A" data.event.shiftKey
                     if data.value = "no-matches" then
                         ()
                     else
@@ -3566,9 +3565,7 @@ let TagPickerTest () =
                             tagPickerInput.onTextChange (fun s -> setQuery s)
                         ]
                     ]
-                    Fui.tagPickerList [
-                        children
-                    ]
+                    Fui.tagPickerList children
                 ]
             ]
         ]

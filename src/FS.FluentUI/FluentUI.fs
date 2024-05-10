@@ -434,7 +434,7 @@ type [<Erase>] Fui =
 
         JSTuple.from3Args (query, options, config) |> import "useComboboxFilter" FluentUIv9
 
-    static member inline useTagPickerFilter (filters: IUseTagPickerFilterProp list): ReactElement =
+    static member inline useTagPickerFilter (filters: IUseTagPickerFilterProp list): ReactElement list =
         let useTagPickerFilter = import "useTagPickerFilter" FluentUIv9
 
         !!filters |> createObj |> unbox |> useTagPickerFilter
