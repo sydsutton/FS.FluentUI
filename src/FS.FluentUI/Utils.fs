@@ -208,6 +208,16 @@ type [<Erase>] IRatingProp = interface end
 type [<Erase>] IRatingItemProp = interface end
 type [<Erase>] IRatingDisplayProp = interface end
 
+type [<Erase>] ITagPickerProp = interface end
+type [<Erase>] ITagPickerControlProp = interface end
+type [<Erase>] ITagPickerGroupProp = interface end
+type [<Erase>] ITagPickerButtonProp = interface end
+type [<Erase>] ITagPickerInputProp = interface end
+type [<Erase>] ITagPickerListProp = interface end
+type [<Erase>] ITagPickerOptionProp = interface end
+type [<Erase>] ITagPickerOptionGroupProp = interface end
+type [<Erase>] IUseTagPickerFilterProp = interface end
+
 type [<Erase>] IComboboxFilterConfigProp = interface end
 type [<Erase>] ICalendarNavigationIconsProp = interface end
 

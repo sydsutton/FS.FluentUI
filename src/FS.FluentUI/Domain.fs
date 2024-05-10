@@ -1477,3 +1477,16 @@ type ActiveOptionChangeData = {
     previousOption: OptionValue option
     nextOption: OptionValue option
 }
+
+type TagPickerOnOpenChangeData<'TEvent> = {
+    ``open``: bool
+    ``type``: string option
+    event: 'TEvent
+}
+
+type TagPickerOnOptionSelectData<'TEvent> = {
+    value: string
+    selectedOptions: string array
+    ``type``: string option
+    event: 'TEvent
+}

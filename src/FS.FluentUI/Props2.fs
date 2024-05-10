@@ -2849,3 +2849,149 @@ module ratingDisplay =
         static member inline brand = Interop.mkProperty<IRatingDisplayProp> "color" "brand"
         static member inline marigold = Interop.mkProperty<IRatingDisplayProp> "color" "marigold"
         static member inline neutral = Interop.mkProperty<IRatingDisplayProp> "color" "neutral"
+
+// -------------------------------------------------------------------------- TagPicker --------------------------------------------------------------------------------------
+type [<Erase>] tagPicker =
+    inherit FelizProps.prop<ITagPickerProp>
+    /// Configure the positioning of the combobox dropdown
+    static member inline positioning (value: IPositioningProp list) = Interop.mkProperty<ITagPickerProp> "positioning" (!!value |> createObj |> unbox<IPositioningProp>)
+    static member inline disabled (value: bool) = Interop.mkProperty<ITagPickerProp> "disabled" value
+    /// The default open state when open is uncontrolled
+    static member inline defaultOpen (value: bool) = Interop.mkProperty<ITagPickerProp> "defaultOpen" value
+    /// An array of selected option keys. Use this with `onOptionSelect` to directly control the selected option(s). If this is set, the `value` prop MUST also be controlled.
+    static member inline selectedOptions (value: string list) = Interop.mkProperty<ITagPickerProp> "selectedOptions" (value |> List.toArray)
+    /// Sets the open/closed state of the dropdown.
+    /// Use together with onOpenChange to fully control the dropdown's visibility
+    static member inline open' (value: bool) = Interop.mkProperty<ITagPickerProp> "open" value
+    /// TagPickers are rendered out of DOM order on `document.body` by default, use this to render the popover in DOM order
+    static member inline inline' (value: bool) = Interop.mkProperty<ITagPickerProp> "inline" value
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (handler: TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (handler: TagPickerOnOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: MouseEvent -> TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: KeyboardEvent -> TagPickerOnOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (handler: TagPickerOnOptionSelectData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOptionSelect (handler: TagPickerOnOptionSelectData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onOptionSelect (value: MouseEvent -> TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (value: KeyboardEvent -> TagPickerOnOptionSelectData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> value)
+    /// Can contain two children including a trigger and a popover.
+    static member inline children (value: ReactElement) = Interop.mkProperty<ITagPickerProp> "children" value
+    /// WARNING: TagPicker can contain no more than two children including a trigger and a popover.
+    /// If you try to use more than two children, only the first two you pass to this function will be used
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+        let elemsToUse =
+            match elems |> Seq.length with
+            | l when l <= 2 -> elems
+            | _ -> elems |> Seq.take 2
+        Interop.mkProperty<ITagPickerProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+
+module tagPicker =
+    type [<Erase>] size =
+        static member inline medium = Interop.mkProperty<ITagPickerProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ITagPickerProp> "size" "large"
+        static member inline extraLarge = Interop.mkProperty<ITagPickerProp> "size" "extra-large"
+
+    /// Controls the colors and borders of the combobox trigger.
+    type [<Erase>] appearance =
+        static member inline filledDarker = Interop.mkProperty<ITagPickerProp> "appearance" "filled-darker"
+        static member inline filledLighter = Interop.mkProperty<ITagPickerProp> "appearance" "filled-lighter"
+        static member inline outline = Interop.mkProperty<ITagPickerProp> "appearance" "outline"
+        static member inline underline = Interop.mkProperty<ITagPickerProp> "appearance" "underline"
+
+// -------------------------------------------------------------------------- TagPickerControl --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerControl =
+    inherit FelizProps.prop<ITagPickerControlProp>
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline secondaryAction (value: ReactElement) = Interop.mkProperty<ITagPickerControlProp> "secondaryAction" value
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline secondaryAction (value: IReactProperty list) = Interop.mkProperty<ITagPickerControlProp> "secondaryAction" (!!value |> createObj |> unbox)
+    static member inline expandIcon (value: ReactElement) = Interop.mkProperty<ITagPickerControlProp> "expandIcon" value
+    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<ITagPickerControlProp> "expandIcon" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- TagPickerGroup --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerGroup = FelizProps.prop<ITagPickerGroupProp>
+
+// -------------------------------------------------------------------------- TagPickerButton --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerButton = FelizProps.prop<ITagPickerButtonProp>
+
+module tagPickerButton =
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ITagPickerButtonProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ITagPickerButtonProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ITagPickerButtonProp> "size" "large"
+
+    /// Controls the colors and borders of the combobox trigger.
+    type [<Erase>] appearance =
+        static member inline filledDarker = Interop.mkProperty<ITagPickerButtonProp> "appearance" "filled-darker"
+        static member inline filledLighter = Interop.mkProperty<ITagPickerButtonProp> "appearance" "filled-lighter"
+        static member inline outline = Interop.mkProperty<ITagPickerButtonProp> "appearance" "outline"
+        static member inline underline = Interop.mkProperty<ITagPickerButtonProp> "appearance" "underline"
+
+// -------------------------------------------------------------------------- TagPickerInput --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerInput =
+    inherit FelizProps.prop<ITagPickerInputProp>
+    /// If set, the combobox will show an icon to clear the current value.
+    static member inline clearable (value: bool) = Interop.mkProperty<ITagPickerInputProp> "clearable" value
+    /// WARNING: TagPickerInput doesn't support children. Using this prop will cause runtime errors.
+    [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ITagPickerInputProp> "children" value
+    /// WARNING: TagPickerInput doesn't support children. Using this prop will cause runtime errors.
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ITagPickerInputProp> "children" (Interop.reactApi.Children.toArray elems)
+
+module tagPickerInput =
+
+    /// Controls the colors and borders of the combobox trigger.
+    type [<Erase>] appearance =
+        static member inline filledDarker = Interop.mkProperty<ITagPickerInputProp> "appearance" "filled-darker"
+        static member inline filledLighter = Interop.mkProperty<ITagPickerInputProp> "appearance" "filled-lighter"
+        static member inline outline = Interop.mkProperty<ITagPickerInputProp> "appearance" "outline"
+        static member inline underline = Interop.mkProperty<ITagPickerInputProp> "appearance" "underline"
+
+// -------------------------------------------------------------------------- TagPickerList --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerList = FelizProps.prop<ITagPickerListProp>
+
+// -------------------------------------------------------------------------- TagPickerOption --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerOption =
+    inherit FelizProps.prop<ITagPickerOptionProp>
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline media (value: ReactElement) = Interop.mkProperty<ITagPickerOptionProp> "media" value
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline media (value: IReactProperty list) = Interop.mkProperty<ITagPickerOptionProp> "media" (!!value |> createObj |> unbox)
+    static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<ITagPickerOptionProp> "secondaryContent" value
+    static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<ITagPickerOptionProp> "secondaryContent" (!!value |> createObj |> unbox)
+    /// Can contain one child.
+    static member inline children (value: string) = Interop.mkProperty<ITagPickerOptionProp> "children" value
+    /// Can contain one child.
+    static member inline children (value: ReactElement) = Interop.mkProperty<ITagPickerOptionProp> "children" value
+    /// WARNING: TagPickerOption can contain no more than one child.
+    /// If you try to use more than one children, only the first you pass to this function will be used
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+        let elemsToUse =
+            match elems |> Seq.length with
+            | l when l = 1 -> elems
+            | _ -> elems |> Seq.take 1
+        Interop.mkProperty<ITagPickerOptionProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+
+// -------------------------------------------------------------------------- TagPickerOptionGroup --------------------------------------------------------------------------------------
+type [<Erase>] tagPickerOptionGroup =
+    inherit FelizProps.prop<ITagPickerOptionGroupProp>
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline label (value: ReactElement) = Interop.mkProperty<ITagPickerOptionGroupProp> "label" value
+    /// A secondary action should be a button-like element to be rendered right after the trigger responsible for opening/closing the tag picker popover.
+    static member inline label (value: IReactProperty list) = Interop.mkProperty<ITagPickerOptionGroupProp> "label" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- UseTagPickerFilter --------------------------------------------------------------------------------------
+type [<Erase>] useTagPickerFilter =
+    static member inline query (value: string) = Interop.mkProperty<IUseTagPickerFilterProp> "query" value
+    static member inline options (value: string list) = Interop.mkProperty<IUseTagPickerFilterProp> "options" (value |> List.toArray)
+    /// Provides a custom filter for the option.
+    /// The int in the tuple is the index
+    static member inline filter (value: (string * int) -> bool) = Interop.mkProperty<IUseTagPickerFilterProp> "filter" (System.Func<_,_> value)
+    /// Provides a custom filter for the option.
+    static member inline filter (value: string -> bool) = Interop.mkProperty<IUseTagPickerFilterProp> "filter" (System.Func<_,_> value)
+    /// Provides an element to be displayed when there are no options.
+    static member inline noOptionsElement (value: ReactElement) = Interop.mkProperty<IUseTagPickerFilterProp> "noOptionsElement" value
+    /// Provides a custom render for the option.
+    static member inline renderOption (value: string -> ReactElement) = Interop.mkProperty<IUseTagPickerFilterProp> "renderOption" (System.Func<_,_> value)

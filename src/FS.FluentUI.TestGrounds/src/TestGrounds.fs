@@ -3477,6 +3477,103 @@ let ratingItemTest =
         ratingItem.selectedIcon (Fui.icon.addFilled [])
     ]
 
+[<ReactComponent>]
+let TagPickerTest () =
+
+    let options = [
+        "John Doe"
+        "Jane Doe"
+        "Max Mustermann"
+        "Erika Mustermann"
+        "Pierre Dupont"
+        "Amelie Dupont"
+        "Mario Rossi"
+        "Maria Rossi"
+    ]
+
+    let query, setQuery = React.useState ""
+    let selectedOptions, setSelectedOptions = React.useState []
+
+    let children = Fui.useTagPickerFilter [
+        useTagPickerFilter.query query
+        useTagPickerFilter.options options
+        useTagPickerFilter.noOptionsElement (
+            Fui.tagPickerOption [
+                tagPickerOption.value "no-matches"
+                tagPickerOption.children "We couldn't find any matches"
+            ]
+        )
+        useTagPickerFilter.renderOption (fun option ->
+            Fui.tagPickerOption [
+                tagPickerOption.secondaryContent (Fui.text "Microsoft FTE")
+                tagPickerOption.key option
+                tagPickerOption.media (
+                    Fui.avatar [
+                        avatar.shape.square
+                        avatar.ariaHidden true
+                        avatar.name option
+                        avatar.color.colorful
+                        avatar.value option
+                    ]
+                )
+                tagPickerOption.value option
+                tagPickerOption.children option
+            ]
+        )
+        useTagPickerFilter.filter (fun (option: string) ->
+            selectedOptions |> List.contains option |> not && option.ToLower().Contains(query.ToLower())
+        )
+    ]
+
+    Fui.field [
+        field.label "Select Employees"
+        field.style [ style.maxWidth 100 ]
+        field.children [
+            Fui.tagPicker [
+                tagPicker.onOptionSelect (fun (data: TagPickerOnOptionSelectData<MouseEvent>) ->
+                    printfn "data %A" data.event.shiftKey
+                    if data.value = "no-matches" then
+                        ()
+                    else
+                        setSelectedOptions (data.selectedOptions |> Array.toList)
+                        setQuery ""
+                )
+                tagPicker.selectedOptions selectedOptions
+                tagPicker.children [
+                    Fui.tagPickerControl [
+                        Fui.tagPickerGroup [
+                            yield! selectedOptions |> List.map (fun option ->
+                                Fui.tag [
+                                    tag.key option
+                                    tag.shape.rounded
+                                    tag.media (
+                                        Fui.avatar [
+                                            avatar.ariaHidden true
+                                            avatar.name option
+                                            avatar.color.colorful
+                                        ]
+                                    )
+                                    tag.value option
+                                    tag.children [
+                                        Fui.text option
+                                    ]
+                                ]
+                            )
+                        ]
+                        Fui.tagPickerInput [
+                            tagPickerInput.ariaLabel "Select Employees"
+                            tagPickerInput.value query
+                            tagPickerInput.onTextChange (fun s -> setQuery s)
+                        ]
+                    ]
+                    Fui.tagPickerList [
+                        children
+                    ]
+                ]
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3503,6 +3600,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            TagPickerTest ()
             ratingTest()
             ratingDisplayTest
             ratingItemTest

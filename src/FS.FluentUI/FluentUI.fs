@@ -433,6 +433,12 @@ type [<Erase>] Fui =
         let config = !!config |> createObj
 
         JSTuple.from3Args (query, options, config) |> import "useComboboxFilter" FluentUIv9
+
+    static member inline useTagPickerFilter (filters: IUseTagPickerFilterProp list): ReactElement =
+        let useTagPickerFilter = import "useTagPickerFilter" FluentUIv9
+
+        !!filters |> createObj |> unbox |> useTagPickerFilter
+
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
@@ -821,6 +827,23 @@ type [<Erase>] Fui =
     static member inline rating (props: IRatingProp list) = createElement (import "Rating" FluentUIv9) props
     static member inline ratingItem (props: IRatingItemProp list) = createElement (import "RatingItem" FluentUIv9) props
     static member inline ratingDisplay (props: IRatingDisplayProp list) = createElement (import "RatingDisplay" FluentUIv9) props
+
+    static member inline tagPicker (props: ITagPickerProp list) = createElement (import "TagPicker" FluentUIv9) props
+    static member inline tagPicker (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPicker" FluentUIv9) props
+    static member inline tagPickerControl (props: ITagPickerControlProp list) = createElement (import "TagPickerControl" FluentUIv9) props
+    static member inline tagPickerControl (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerControl" FluentUIv9) props
+    static member inline tagPickerGroup (props: ITagPickerGroupProp list) = createElement (import "TagPickerGroup" FluentUIv9) props
+    static member inline tagPickerGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerGroup" FluentUIv9) props
+    static member inline tagPickerButton (props: ITagPickerButtonProp list) = createElement (import "TagPickerButton" FluentUIv9) props
+    static member inline tagPickerButton (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerButton" FluentUIv9) props
+    static member inline tagPickerInput (props: ITagPickerInputProp list) = createElement (import "TagPickerInput" FluentUIv9) props
+    static member inline tagPickerInput (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerInput" FluentUIv9) props
+    static member inline tagPickerList (props: ITagPickerListProp list) = createElement (import "TagPickerList" FluentUIv9) props
+    static member inline tagPickerList (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerList" FluentUIv9) props
+    static member inline tagPickerOption (props: ITagPickerOptionProp list) = createElement (import "TagPickerOption" FluentUIv9) props
+    static member inline tagPickerOption (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerOption" FluentUIv9) props
+    static member inline tagPickerOptionGroup (props: ITagPickerOptionGroupProp list) = createElement (import "TagPickerOptionGroup" FluentUIv9) props
+    static member inline tagPickerOptionGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerOptionGroup" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9
