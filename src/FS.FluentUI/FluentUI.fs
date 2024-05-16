@@ -103,19 +103,23 @@ type [<Erase>] Fui =
     ///
     /// **Note:** When using IStyleAttributes with single numeric values ie: style.width 150, specify the unit of measurement ie: style.width (length.px 150)
     ///
-    /// **Note:** Type annotation on the useStyles function is necessary for using makeStyles.
-    ///
-    /// Example:
-    ///```
-    /// *outside of function*
+    /// *outside of component*
+    /// ```
     ///type Styles = { root: string }
-    ///let useStyles: unit -> Styles = Fui.makeStyles [ "root", [ style.display.flex; style.flexDirection.row; style.width (length.px 200) ] ]
+    ///let useStyles = Fui.makeStyles<Styles> [ "root", [ style.width (length.px 200) ] ]
+    /// ```
+    /// OR
+    /// ```
+    ///let useStyles: unit -> Styles = Fui.makeStyles [ "root", [ style.width (length.px 200) ] ]
+    ///```
     ///
-    ///*inside of function*
+    ///*inside of component*
+    ///
+    /// ```
     ///let styles = useStyles()
     ///{component}.className styles.root
     /// ```
-    static member makeStyles (stylesBySlots: list<string * list<IStyleAttribute>>): unit -> 'T =
+    static member makeStyles<'T> (stylesBySlots: list<string * list<IStyleAttribute>>): unit -> 'T =
         let makeStyles = import "makeStyles" FluentUIv9
 
         match stylesBySlots with
@@ -141,10 +145,10 @@ type [<Erase>] Fui =
     ///
     /// Example:
     ///```
-    /// *outside of function*
-    ///let componentClassName: unit -> string = Fui.makeResetStyles [ style.display.flex; style.flexDirection.row ]
+    /// *outside of component*
+    ///let componentClassName = Fui.makeResetStyles [ style.display.flex; style.flexDirection.row ]
     ///
-    ///*inside of function*
+    ///*inside of component*
     ///let componentClassName = componentClassName()
     ///{component}.className componentClassName
     /// ```

@@ -51,7 +51,7 @@ type Styles = {
     visible: string
 }
 
-let useStyles: unit -> Styles = Fui.makeStyles [
+let useStyles = Fui.makeStyles<Styles> [
     "accordion", [
         style.color.red
         style.backgroundColor.darkGray
