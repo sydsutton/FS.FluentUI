@@ -30,8 +30,8 @@ open Browser.Dom
 open FS.FluentUI
 open FS.FluentUI.V8toV9
 
-let useStyles: unit -> {| toggleButtons: string |} =
-    Fui.makeStyles [
+let useStyles =
+    Fui.makeStyles<{| toggleButtons: string |}> [
         "toggleButtons", [
             style.height (length.px 300 )
             style.width (length.px 300)
