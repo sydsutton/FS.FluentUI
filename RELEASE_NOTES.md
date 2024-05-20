@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 1.14.0 (5-20-2024)
+
+* Update @fluentui/react-components to 9.52.0
+* Add TagPicker components
+* Add SwatchPicker components
+* Add generic type parameter to Fui.makeStyles hook
+* Update @fluentui/react-calendar-compat to 0.1.8
+* Update @fluentui/react-datepicker-compat to 0.4.38
+* Update @fluentui/react-timepicker-compat to 0.2.15
+
 ### 1.13.0 (4-24-2024)
 
 * Update @fluentui/react-components to 9.49.0
