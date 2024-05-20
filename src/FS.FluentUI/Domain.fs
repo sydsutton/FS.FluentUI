@@ -1490,3 +1490,12 @@ type TagPickerOnOptionSelectData<'TEvent> = {
     ``type``: string option
     event: 'TEvent
 }
+
+type SwatchPickerOnSelectionChangeData = {
+    ``type``: string
+    event: Browser.Types.MouseEvent
+    selectedValue: string
+    selectedSwatch: string
+}
+
+type RenderRowData<'TType> = { children: ReactElement array; rowId: 'TType }

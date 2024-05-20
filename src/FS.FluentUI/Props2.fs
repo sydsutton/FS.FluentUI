@@ -2995,3 +2995,111 @@ type [<Erase>] useTagPickerFilter =
     static member inline noOptionsElement (value: ReactElement) = Interop.mkProperty<IUseTagPickerFilterProp> "noOptionsElement" value
     /// Provides a custom render for the option.
     static member inline renderOption (value: string -> ReactElement) = Interop.mkProperty<IUseTagPickerFilterProp> "renderOption" (System.Func<_,_> value)
+
+// -------------------------------------------------------------------------- SwatchPickerGrid --------------------------------------------------------------------------------------
+type [<Erase>] swatchPickerGrid =
+    static member inline items (value: 'T list) = Interop.mkProperty<ISwatchPickerGridProp> "items" (value |> List.toArray)
+    static member inline columnCount (value: int) = Interop.mkProperty<ISwatchPickerGridProp> "columnCount" value
+    static member inline columnCount (value: decimal) = Interop.mkProperty<ISwatchPickerGridProp> "columnCount" value
+    static member inline columnCount (value: float) = Interop.mkProperty<ISwatchPickerGridProp> "columnCount" value
+    static member inline renderRow (value: RenderRowData<int> -> ReactElement) = Interop.mkProperty<ISwatchPickerGridProp> "renderRow" (System.Func<_,_> value)
+    static member inline renderRow (value: RenderRowData<string> -> ReactElement) = Interop.mkProperty<ISwatchPickerGridProp> "renderRow" (System.Func<_,_> value)
+    static member inline renderSwatch (value: 'T -> ReactElement) = Interop.mkProperty<ISwatchPickerGridProp> "renderSwatch" (System.Func<_,_> value)
+
+// -------------------------------------------------------------------------- ColorSwatch --------------------------------------------------------------------------------------
+type [<Erase>] colorSwatch =
+    inherit FelizProps.prop<IColorSwatchProp>
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IColorSwatchProp> "icon" value
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IColorSwatchProp> "icon" (!!value |> createObj |> unbox)
+    static member inline disabledIcon (value: ReactElement) = Interop.mkProperty<IColorSwatchProp> "disabledIcon" value
+    static member inline disabledIcon (value: IReactProperty list) = Interop.mkProperty<IColorSwatchProp> "disabledIcon" (!!value |> createObj |> unbox)
+    /// Border color when contrast is low
+    static member inline borderColor (value: string) = Interop.mkProperty<IColorSwatchProp> "borderColor" value
+    /// Swatch color
+    static member inline color (value: string) = Interop.mkProperty<IColorSwatchProp> "color" value
+
+module colorSwatch =
+    /// Swatch size
+    type [<Erase>] size =
+        static member inline extraSmall = Interop.mkProperty<IColorSwatchProp> "size" "extra-small"
+        static member inline small = Interop.mkProperty<IColorSwatchProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IColorSwatchProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IColorSwatchProp> "size" "large"
+
+    /// Swatch shape
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IColorSwatchProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IColorSwatchProp> "shape" "square"
+        static member inline circular = Interop.mkProperty<IColorSwatchProp> "shape" "circular"
+
+// -------------------------------------------------------------------------- EmptySwatch --------------------------------------------------------------------------------------
+type [<Erase>] emptySwatch = FelizProps.prop<IEmptySwatchProp>
+module emptySwatch =
+    /// Swatch size
+    type [<Erase>] size =
+        static member inline extraSmall = Interop.mkProperty<IEmptySwatchProp> "size" "extra-small"
+        static member inline small = Interop.mkProperty<IEmptySwatchProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IEmptySwatchProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IEmptySwatchProp> "size" "large"
+
+    /// Swatch shape
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IEmptySwatchProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IEmptySwatchProp> "shape" "square"
+        static member inline circular = Interop.mkProperty<IEmptySwatchProp> "shape" "circular"
+
+// -------------------------------------------------------------------------- ImageSwatch --------------------------------------------------------------------------------------
+type [<Erase>] imageSwatch =
+    inherit FelizProps.prop<IImageSwatchProp>
+    static member inline src (value: string) = Interop.mkProperty<IImageSwatchProp> "src" value
+
+module ImageSwatch =
+    /// Swatch size
+    type [<Erase>] size =
+        static member inline extraSmall = Interop.mkProperty<IImageSwatchProp> "size" "extra-small"
+        static member inline small = Interop.mkProperty<IImageSwatchProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IImageSwatchProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IImageSwatchProp> "size" "large"
+
+    /// Swatch shape
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IImageSwatchProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IImageSwatchProp> "shape" "square"
+        static member inline circular = Interop.mkProperty<IImageSwatchProp> "shape" "circular"
+
+// -------------------------------------------------------------------------- SwatchPicker --------------------------------------------------------------------------------------
+type [<Erase>] swatchPicker =
+    inherit FelizProps.prop<ISwatchPickerProp>
+    static member inline defaultSelectedValue (value: string) = Interop.mkProperty<ISwatchPickerProp> "defaultSelectedValue" value
+    static member inline selectedValue (value: string) = Interop.mkProperty<ISwatchPickerProp> "selectedValue" value
+    /// Triggers a callback when the value has been changed
+    static member inline onSelectionChange (handler: SwatchPickerOnSelectionChangeData -> unit) = Interop.mkProperty<ISwatchPickerProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Triggers a callback when the value has been changed
+    static member inline onSelectionChange (value: MouseEvent -> SwatchPickerOnSelectionChangeData -> unit) = Interop.mkProperty<ISwatchPickerProp> "onSelectionChange" (System.Func<_,_,_> value)
+
+module swatchPicker =
+    /// Swatch size
+    type [<Erase>] size =
+        static member inline extraSmall = Interop.mkProperty<ISwatchPickerProp> "size" "extra-small"
+        static member inline small = Interop.mkProperty<ISwatchPickerProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ISwatchPickerProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ISwatchPickerProp> "size" "large"
+
+    /// Swatch shape
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<ISwatchPickerProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<ISwatchPickerProp> "shape" "square"
+        static member inline circular = Interop.mkProperty<ISwatchPickerProp> "shape" "circular"
+
+    /// Swatch shape
+    type [<Erase>] layout =
+        static member inline row = Interop.mkProperty<ISwatchPickerProp> "layout" "row"
+        static member inline grid = Interop.mkProperty<ISwatchPickerProp> "layout" "grid"
+
+    /// Swatch shape
+    type [<Erase>] spacing =
+        static member inline small = Interop.mkProperty<ISwatchPickerProp> "spacing" "small"
+        static member inline medium = Interop.mkProperty<ISwatchPickerProp> "spacing" "medium"
+
+// -------------------------------------------------------------------------- SwatchPickerRow --------------------------------------------------------------------------------------
+type [<Erase>] swatchPickerRow = FelizProps.prop<ISwatchPickerRowProp>

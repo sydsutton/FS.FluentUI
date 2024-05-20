@@ -218,6 +218,13 @@ type [<Erase>] ITagPickerOptionProp = interface end
 type [<Erase>] ITagPickerOptionGroupProp = interface end
 type [<Erase>] IUseTagPickerFilterProp = interface end
 
+type [<Erase>] ISwatchPickerProp = interface end
+type [<Erase>] IColorSwatchProp = interface end
+type [<Erase>] ISwatchPickerRowProp = interface end
+type [<Erase>] IImageSwatchProp = interface end
+type [<Erase>] IEmptySwatchProp = interface end
+type [<Erase>] ISwatchPickerGridProp = interface end
+
 type [<Erase>] IComboboxFilterConfigProp = interface end
 type [<Erase>] ICalendarNavigationIconsProp = interface end
 

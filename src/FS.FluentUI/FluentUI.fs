@@ -443,6 +443,11 @@ type [<Erase>] Fui =
 
         !!filters |> createObj |> unbox |> useTagPickerFilter
 
+    static member inline renderSwatchPickerGrid  (filters: ISwatchPickerGridProp list): ReactElement list =
+        let renderSwatchPickerGrid  = import "renderSwatchPickerGrid" FluentUIv9
+
+        !!filters |> createObj |> unbox |> renderSwatchPickerGrid
+
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props
@@ -848,6 +853,12 @@ type [<Erase>] Fui =
     static member inline tagPickerOption (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerOption" FluentUIv9) props
     static member inline tagPickerOptionGroup (props: ITagPickerOptionGroupProp list) = createElement (import "TagPickerOptionGroup" FluentUIv9) props
     static member inline tagPickerOptionGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "TagPickerOptionGroup" FluentUIv9) props
+    static member inline swatchPicker (props: ISwatchPickerProp list) = createElement (import "SwatchPicker" FluentUIv9) props
+    static member inline colorSwatch (props: IColorSwatchProp list) = createElement (import "ColorSwatch" FluentUIv9) props
+    static member inline swatchPickerRow (props: ISwatchPickerRowProp list) = createElement (import "SwatchPickerRow" FluentUIv9) props
+    static member inline imageSwatch (props: IImageSwatchProp list) = createElement (import "ImageSwatch" FluentUIv9) props
+    static member inline emptySwatch (props: IEmptySwatchProp list) = createElement (import "EmptySwatch" FluentUIv9) props
+
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

@@ -49,6 +49,9 @@ type Styles = {
     root: string
     rectangle: string
     visible: string
+    swatchExample: string
+    swatchButton: string
+    swatchInput: string
 }
 
 let useStyles = Fui.makeStyles<Styles> [
@@ -147,6 +150,19 @@ let useStyles = Fui.makeStyles<Styles> [
         style.opacity 1
         style.transform.translate3D(0,0,0)
         style.transform.scale 1
+    ]
+    "swatchExample", [
+        style.width (length.px 100)
+        style.height (length.px 100)
+        style.border (1, borderStyle.solid, "#ccc")
+        style.margin (length.px 20)
+    ]
+    "swatchButton", [
+        style.marginRight (length.px 8)
+    ]
+    "swatchInput", [
+        style.display.block
+        style.margin (length.px 10)
     ]
 ]
 
@@ -3571,6 +3587,118 @@ let TagPickerTest () =
         ]
     ]
 
+type Swatch = { color: string; value: string; ``aria-label``: string }
+
+[<ReactComponent>]
+let SwatchPickerTest() =
+    let styles = useStyles()
+    let selectedValue, setSelectedValue = React.useState "00B053"
+    let selectedColor, setSelectedColor = React.useState "#00B053"
+    let defaultItems = [
+        { color = "#FF1921"; value = "FF1921"; ``aria-label`` = "red" }
+        { color = "#FF7A00"; value = "FF7A00"; ``aria-label`` = "dark orange" }
+        { color = "#90D057"; value = "90D057"; ``aria-label`` = "light green" }
+        { color = "#00B053"; value = "00B053"; ``aria-label`` = "green" }
+    ]
+
+    let inputRef: IRefValue<HTMLInputElement option> = React.useRef None
+    let items, setItems = React.useState defaultItems
+    let ITEMS_LIMIT = 8;
+    let emptyItems = ITEMS_LIMIT - items.Length
+
+    let handleAddColor = fun _ ->
+        let newColor =
+            match inputRef.current with
+            | Some ref -> ref.value
+            | None -> ""
+        let newValue = $"custom-{newColor} [{items.Length - ITEMS_LIMIT}]"
+
+        setItems (
+            [ { color = newColor; value = newValue; ``aria-label`` = newColor } ]
+            |> List.append items
+        )
+
+    Html.div [
+        Fui.swatchPicker [
+            swatchPicker.ariaLabel "SwatchPicker with empty swatch"
+            swatchPicker.selectedValue selectedValue
+            swatchPicker.onSelectionChange (fun (data: SwatchPickerOnSelectionChangeData) ->
+                setSelectedValue data.selectedValue
+                setSelectedColor data.selectedSwatch
+            )
+            swatchPicker.children [
+                yield! items |> List.map (fun item ->
+                    Fui.colorSwatch [
+                        colorSwatch.key item.value
+                        colorSwatch.value item.value
+                        colorSwatch.ariaLabel item.``aria-label``
+                        colorSwatch.color item.color
+                    ]
+                )
+                for i in 1..emptyItems do
+                    Fui.emptySwatch [
+                        emptySwatch.disabled true
+                        emptySwatch.key i
+                        emptySwatch.ariaLabel $"empty-swatch-{i}"
+                    ]
+            ]
+        ]
+        Html.div [
+            prop.className styles.swatchExample
+            prop.style [
+                style.backgroundColor selectedColor
+                style.custom ("@media (forcedColors: active)", [ "forcedColorAdjust", "none"])
+            ]
+        ]
+        Fui.label [
+            label.htmlFor "color-select"
+            label.text "Add more colors:"
+        ]
+        Html.input [
+            prop.className styles.swatchInput
+            prop.ref inputRef
+            prop.type'.color
+            prop.id "color-select"
+            prop.name "color-select"
+        ]
+        Fui.button [
+            button.className styles.swatchButton
+            button.appearance.primary
+            button.disabled (items.Length >= ITEMS_LIMIT)
+            button.onClick handleAddColor
+            button.text "Add new color"
+        ]
+        Fui.button [
+            button.className styles.swatchButton
+            button.onClick (fun _ -> setItems defaultItems)
+            button.text "Reset example"
+        ]
+        Html.div [
+            prop.style [ style.margin 25 ]
+        ]
+        Fui.swatchPicker [
+            swatchPicker.layout.grid
+            swatchPicker.children [
+                yield! Fui.renderSwatchPickerGrid [
+                    swatchPickerGrid.items items
+                    swatchPickerGrid.columnCount 2
+                    swatchPickerGrid.renderSwatch (fun (item: Swatch) ->
+                        if item.color = "#FF7A00" then
+                            Fui.text "Orange"
+                        else
+                            Fui.colorSwatch [
+                                colorSwatch.key item.value
+                                colorSwatch.value item.value
+                                colorSwatch.ariaLabel item.``aria-label``
+                                colorSwatch.color item.color
+                            ]
+                    )
+                ]
+            ]
+        ]
+    ]
+
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3597,6 +3725,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            SwatchPickerTest()
             TagPickerTest ()
             ratingTest()
             ratingDisplayTest
