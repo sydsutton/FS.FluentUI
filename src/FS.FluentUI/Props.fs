@@ -3575,7 +3575,7 @@ type [<Erase>] calendarDay  =
     static member inline daysToSelectInDayView (value: float) = Interop.mkProperty<ICalendarDayProp> "daysToSelectInDayView" value
     /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
     static member inline daysToSelectInDayView (value: decimal) = Interop.mkProperty<ICalendarDayProp> "daysToSelectInDayView" value
-    /// The number of days to select while dateRangeType === DateRangeType.Day. Used in order to have multi-day views.
+    /// Value of today. If unspecified, current time in client machine will be used.
     static member inline today (value: DateTime) = Interop.mkProperty<ICalendarDayProp> "today" value
     /// The days that are selectable when `dateRangeType` is `WorkWeek`.
     /// If `dateRangeType` is not `WorkWeek` this property does nothing.
@@ -3610,7 +3610,7 @@ type [<Erase>] calendarDay  =
     static member inline labelledBy (value: string) = Interop.mkProperty<ICalendarDayProp> "labelledBy" value
     /// Whether to show days outside the selected month with lighter styles
     static member inline lightenDaysOutsideNavigatedMonth (value: bool) = Interop.mkProperty<ICalendarDayProp> "lightenDaysOutsideNavigatedMonth" value
-    /// How many weeks to show by default. If not provided, will show enough weeks to display the current month, between 4 and 6 depending
+    /// Ref callback for individual days. Allows for customization of the styling, properties, or listeners of the specific day.
     static member inline customDayCellRef (value: (HTMLElement option -> DateTime -> CalendarDayGridStyles -> unit)) = Interop.mkProperty<ICalendarDayProp> "customDayCellRef" (System.Func<_,_,_,_> value)
     /// Optional callback function to mark specific days with a small symbol. Fires when the date range changes, gives the starting and ending displayed dates and expects the list of which days in between should be marked.
     static member inline getMarkedDays (value: (DateTime -> DateTime -> DateTime array)) = Interop.mkProperty<ICalendarDayProp> "getMarkedDays" (System.Func<_,_,_> value)
