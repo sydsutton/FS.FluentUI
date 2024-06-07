@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.14.0</Version>
+        <Version>1.15.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,13 +12,12 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.52.0
-            - Add TagPicker components
-            - Add SwatchPicker components
-            - Add generic type parameter to Fui.makeStyles hook
-            - Update @fluentui/react-calendar-compat to 0.1.8
-            - Update @fluentui/react-datepicker-compat to 0.4.38
-            - Update @fluentui/react-timepicker-compat to 0.2.15
+            - Update @fluentui/react-components to 9.54.0
+            - Update @fluentui/react-datepicker-compat to 0.4.40
+            - Update @fluentui/react-calendar-compat to 0.1.10
+            - Update @fluentui/react-timepicker-compat to 0.2.17
+            - Add createPresenceComponent function
+            - BREAKING: Remove useMotion function and @fluentui/react-motion-preview package
         </PackageReleaseNotes>
     </PropertyGroup>
 

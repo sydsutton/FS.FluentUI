@@ -1,6 +1,15 @@
 Release Notes
 =========
 
+### 1.15.0 (6-7-2024)
+
+* Update @fluentui/react-components to 9.54.0
+* Update @fluentui/react-datepicker-compat to 0.4.40
+* Update @fluentui/react-calendar-compat to 0.1.10
+* Update @fluentui/react-timepicker-compat to 0.2.17
+* Add createPresenceComponent function
+* BREAKING: Remove useMotion function and @fluentui/react-motion-preview package
+
 ### 1.14.0 (5-20-2024)
 
 * Update @fluentui/react-components to 9.52.0
