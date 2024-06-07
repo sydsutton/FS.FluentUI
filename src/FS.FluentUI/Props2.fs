@@ -2195,49 +2195,6 @@ module messageBarGroup =
     type [<Erase>] animate =
         static member inline exitOnly = Interop.mkProperty<IMessageBarGroupProp> "animate" "exit-only"
         static member inline both = Interop.mkProperty<IMessageBarGroupProp> "animate" "both"
-
-// -------------------------------------------------------------------------- MotionState --------------------------------------------------------------------------------------
-type [<Erase>] motionState =
-    /// Ref to the element.
-    static member inline ref (value: IRefValue<Browser.Types.HTMLElement option>) = Interop.mkProperty<IMotionStateProp> "ref" value
-    /// Indicates whether the component can be rendered.
-    /// Useful to render the element before animating it or to remove it from the DOM after exit animation.
-    static member inline canRender (value: bool) = Interop.mkProperty<IMotionStateProp> "canRender" value
-    /// Indicates whether the component is ready to receive a CSS transition className.
-    /// Useful to apply CSS transitions when the element is mounted and ready to be animated.
-    static member inline active (value: bool) = Interop.mkProperty<IMotionStateProp> "active" value
-
-module motionState =
-    /// Current state of the element.
-    type [<Erase>] type' =
-        /// - `entering` - The element is performing enter animation.
-        static member inline entering = Interop.mkProperty<IMotionStateProp> "type" "entering"
-        /// - `entered` - The element has finished enter animation.
-        static member inline entered = Interop.mkProperty<IMotionStateProp> "type" "entered"
-        /// - `idle` - The element is currently not animating, but rendered on screen.
-        static member inline idle = Interop.mkProperty<IMotionStateProp> "type" "idle"
-        /// - `exiting` - The element is performing exit animation.
-        static member inline exiting = Interop.mkProperty<IMotionStateProp> "type" "exiting"
-        /// - `exited` - The element has finished exit animation.
-        static member inline exited = Interop.mkProperty<IMotionStateProp> "type" "exited"
-        /// - `unmounted` - The element is not yet rendered or can be safely removed from the DOM.
-        static member inline unmounted = Interop.mkProperty<IMotionStateProp> "type" "unmounted"
-
-// -------------------------------------------------------------------------- MotionOptions --------------------------------------------------------------------------------------
-type [<Erase>] motionOptions =
-    /// Whether to animate the element on first mount.
-    static member inline animateOnFirstMount (value: bool) = Interop.mkProperty<IMotionOptionsProp> "animateOnFirstMount" value
-    /// Duration of the animation in milliseconds.
-    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
-    static member inline duration (value: int) = Interop.mkProperty<IMotionOptionsProp> "duration" value
-    /// Duration of the animation in milliseconds.
-    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
-    static member inline duration (value: float) = Interop.mkProperty<IMotionOptionsProp> "duration" value
-    /// Duration of the animation in milliseconds.
-    /// If not specified, the duration will be inferred from the CSS transition/animation duration.
-    static member inline duration (value: decimal) = Interop.mkProperty<IMotionOptionsProp> "duration" value
-
-
 // -------------------------------------------------------------------------- TimePicker --------------------------------------------------------------------------------------
 type [<Erase>] timePicker =
     inherit FelizProps.prop<ITimePickerProp>
@@ -3103,3 +3060,35 @@ module swatchPicker =
 
 // -------------------------------------------------------------------------- SwatchPickerRow --------------------------------------------------------------------------------------
 type [<Erase>] swatchPickerRow = FelizProps.prop<ISwatchPickerRowProp>
+
+// -------------------------------------------------------------------------- PresenceComponent --------------------------------------------------------------------------------------
+type [<Erase>] presenceComponent =
+    /// By default, the child component won't execute the "enter" motion when it initially mounts, regardless of the value of "visible". If you desire this behavior, ensure both "appear" and "visible" are set to "true".
+    static member inline appear (value: bool) = Interop.mkProperty<IPresenceComponentProp> "appear" value
+    /// A React element that will be cloned and will have motion effects applied to it.
+    static member inline children (value: ReactElement) = Interop.mkProperty<IPresenceComponentProp> "children" value
+    /// WARNING: PresenceComponent can contain no more than one child.
+    /// If you try to use more than one children, only the first you pass to this function will be used
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) =
+        let elemsToUse =
+            match elems |> Seq.length with
+            | l when l = 1 -> elems
+            | _ -> elems |> Seq.take 1
+        Interop.mkProperty<IPresenceComponentProp> "children" (elemsToUse |> Seq.head)
+    /// Provides imperative controls for the animation.
+    static member inline imperativeRef (value: IRefValue<MotionImperativeRef option>) = Interop.mkProperty<IPresenceComponentProp> "imperativeRef" value
+    /// Callback that is called when the whole motion finishes.
+    /// A motion definition can contain multiple animations and therefore multiple "finish" events. The callback is triggered once all animations have finished with "null" instead of an event object to avoid ambiguity.
+    static member inline onMotionFinish (handler: OnMotionFinishData -> unit) = Interop.mkProperty<IPresenceComponentProp> "onMotionFinish" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Defines whether a component is visible; triggers the "enter" or "exit" motions.
+    static member inline visible (value: bool) = Interop.mkProperty<IPresenceComponentProp> "visible" value
+    /// By default, the child component remains mounted after it reaches the "finished" state. Set "unmountOnExit" if you prefer to unmount the component after it finishes exiting.
+    static member inline unmountOnExit (value: bool) = Interop.mkProperty<IPresenceComponentProp> "unmountOnExit" value
+
+// -------------------------------------------------------------------------- AtomMotion --------------------------------------------------------------------------------------
+type [<Erase>] atomMotion =
+    static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))
+    static member inline duration (value: int) = Interop.mkProperty<IAtomMotionProp> "duration" value
+    static member inline easing (value: int) = Interop.mkProperty<IAtomMotionProp> "easing" value
+    static member inline easing (value: string) = Interop.mkProperty<IAtomMotionProp> "easing" value
+

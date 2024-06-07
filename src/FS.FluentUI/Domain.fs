@@ -1427,25 +1427,6 @@ module TimeSelectionData =
 
 type [<RequireQualifiedAccess>] MotionType = entering | entered | idle | exiting | exited | unmounted
 
-type MotionState = {
-    /// Ref to the element.
-    ref: IRefValue<Browser.Types.HTMLElement option>
-    /// Current state of the element.
-    /// - `unmounted` - The element is not yet rendered or can be safely removed from the DOM.
-    /// - `entering` - The element is performing enter animation.
-    /// - `entered` - The element has finished enter animation.
-    /// - `idle` - The element is currently not animating, but rendered on screen.
-    /// - `exiting` - The element is performing exit animation.
-    /// - `exited` - The element has finished exit animation.
-    ``type``: MotionType
-    /// Indicates whether the component can be rendered.
-    /// Useful to render the element before animating it or to remove it from the DOM after exit animation.
-    canRender: bool
-    /// Indicates whether the component is ready to receive a CSS transition className.
-    /// Useful to apply CSS transitions when the element is mounted and ready to be animated.
-    active: bool
-}
-
 type TeachingPopoverPageChangeData = {
     currentPage: int
 }
@@ -1499,3 +1480,45 @@ type SwatchPickerOnSelectionChangeData = {
 }
 
 type RenderRowData<'TType> = { children: ReactElement array; rowId: 'TType }
+
+type [<Erase>] IAtomMotionProp = interface end
+
+type PresenceMotion = {
+    enter: IAtomMotionProp list
+    exit: IAtomMotionProp list
+}
+
+type [<RequireQualifiedAccess>] SetPlayState = | ``running`` | ``paused``
+
+type MotionImperativeRef = {
+    /// Sets the playback rate of the animation, where 1 is normal speed.
+    setPlaybackRate: int -> unit
+    /// Sets the state of the animation to running or paused.
+    setPlayState: SetPlayState -> unit
+}
+
+type [<RequireQualifiedAccess>] Direction = | ``enter`` | ``exit``
+
+type OnMotionFinishData = {
+    direction: Direction
+}
+
+type MotionTokens = {
+    curveAccelerateMax: string
+    curveAccelerateMid: string
+    curveAccelerateMin: string
+    curveDecelerateMax: string
+    curveDecelerateMid: string
+    curveDecelerateMin: string
+    curveEasyEaseMax: string
+    curveEasyEase: string
+    curveLinear: string
+    durationUltraFast: int
+    durationFaster: int
+    durationFast: int
+    durationNormal: int
+    durationGentle: int
+    durationSlow: int
+    durationSlower: int
+    durationUltraSlow: int
+}

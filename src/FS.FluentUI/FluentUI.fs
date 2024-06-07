@@ -30,7 +30,6 @@ module FuiHelpers =
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
-    let [<Literal>] Motion_unstable = "@fluentui/react-motion-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -194,25 +193,6 @@ type [<Erase>] Fui =
     static member inline createTableColumn (options: ICreateTableColumnOptionProp list): TableColumnDefinition<'T, 'TKeyType> =
         let createTableColumn = import "createTableColumn" FluentUIv9
         !!options |> createObj |> createTableColumn
-
-    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
-    [<Hook>]
-    static member inline useMotion (shorthand: bool): MotionState = import "useMotion" Motion_unstable
-
-    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
-    [<Hook>]
-    static member inline useMotion (shorthand: bool, options: IMotionOptionsProp list): MotionState =
-        let options = !!options |> createObj |> unbox
-
-        (shorthand, options) |> JSTuple.from2Args |> import "useMotion" Motion_unstable
-
-    /// Hook to manage the presence of an element in the DOM based on its CSS transition/animation state.
-    [<Hook>]
-    static member inline useMotion (shorthand: IMotionStateProp list, options: IMotionOptionsProp list): MotionState =
-        let shorthand = !!shorthand |> createObj |> unbox
-        let options = !!options |> createObj |> unbox
-
-        (shorthand, options) |> JSTuple.from2Args |> import "useMotion" Motion_unstable
 
     /// React hook that measures virtualized space based on a static size to ensure optimized virtualization length.
     /// This hook is a helper to create modal dialog like experiences. The hook creates accessible focus traps that set aria-hidden. The focus trap can only be activated with explicit HTMLElement.focus() call in javscript code.
@@ -447,6 +427,22 @@ type [<Erase>] Fui =
         let renderSwatchPickerGrid  = import "renderSwatchPickerGrid" FluentUIv9
 
         !!filters |> createObj |> unbox |> renderSwatchPickerGrid
+
+    /// `createPresenceComponent` is a factory function that creates a React component based on the provided presence definition.
+    /// This component can be used to animate any element and intended to have a state via the visible prop.
+    static member inline createPresenceComponent (value: PresenceMotion) props: ReactElement =
+        let enter = !!value.enter |> createObj |> unbox
+        let exit = !!value.exit |> createObj |> unbox
+
+        let newValue = {|
+            enter = enter
+            exit = exit
+        |}
+
+        let comp = newValue |> import "createPresenceComponent" FluentUIv9
+        let newProps = !!props |> createObj |> unbox
+
+        newProps |> comp
 
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
@@ -869,6 +865,7 @@ type [<Erase>] Theme =
     /// Warning: Although overriding tokens with 'let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }' is possible,
     /// it's not recommended-- if the existing tokens do not fulfill your needs, you should create a custom theme instead of overriding tokens.
     static member inline tokens: Tokens = import "tokens" FluentUIv9
+    static member inline motionTokens: MotionTokens = import "motionTokens" FluentUIv9
     /// Programmatically generates a tokens to css variables mapping object from the keys in a theme.
     /// This helps with ease of use as a user of a custom theme does not have to manually construct this object, but it could
     /// affect tree-shaking since bundlers do not know the shape of the output.

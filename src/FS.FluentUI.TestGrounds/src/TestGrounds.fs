@@ -179,7 +179,6 @@ let Accordion () =
     Fui.accordion [
         accordion.collapsible true
         accordion.openItems openItems
-        accordion.defaultOpenItems openItems
         accordion.onToggle (fun (i: AccordionToggleData<int>) -> setOpenItems (i.openItems |> Array.toList))
         accordion.multiple true
         accordion.children [
@@ -1967,7 +1966,7 @@ let DatePickerTest() =
                     | Some v -> setFirstDayOfWeek v
                     | None -> ()
                 )
-                dropdown.defaultSelectedOptions [|firstDayOfWeek|]
+                dropdown.selectedOptions [|firstDayOfWeek|]
                 dropdown.value firstDayOfWeek
                 dropdown.children (
                     days |> List.map (fun d ->
@@ -3318,34 +3317,6 @@ let CalendarTest () =
         ]
     ]
 
-[<ReactComponent>]
-let UseMotionTest () =
-    let styles = useStyles ()
-    let isOpen, setOpen = React.useState(false)
-    let motion = Fui.useMotion(isOpen)
-
-    Html.div [
-        prop.className styles.root
-        prop.children [
-            Fui.button [
-                button.appearance.primary
-                button.onClick (fun _ -> setOpen (isOpen |> not))
-                button.text "Toggle UseMotion"
-            ]
-
-            if motion.canRender then
-                Html.div [
-                    prop.ref motion.ref
-                    prop.className (
-                        Fui.mergeClasses (styles.rectangle, (if motion.active then styles.visible else ""))
-                    )
-                    prop.children [
-                        Fui.text "Lorem ipsum"
-                    ]
-                ]
-        ]
-    ]
-
 let getErrorMessage = function
     | Some TimePickerErrorType.``invalid-input`` -> "Time is invalid"
     | Some TimePickerErrorType.``out-of-bounds`` -> "Time is out of bounds"
@@ -3698,6 +3669,110 @@ let SwatchPickerTest() =
         ]
     ]
 
+type MotionStyles = {
+    container: string
+    card: string
+    item: string
+    description: string
+    controls: string
+}
+
+let useMotionStyles = Fui.makeStyles<MotionStyles> [
+    "container", [
+        style.display.grid
+        style.gridTemplateColumns [(length.fr 1)]
+        style.gap (length.px 10)
+    ]
+    "card", [
+        style.display.flex
+        style.flexDirection.column
+        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+        style.borderRadius (length.px 5)
+        style.padding (length.px 10)
+        style.alignItems.center
+    ]
+    "item", [
+        style.backgroundColor tokens.colorBrandBackground
+        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorTransparentStroke)
+        style.borderRadius (length.percent 50)
+        style.width (length.px 100)
+        style.height (length.px 100)
+    ]
+    "description", [
+        style.margin (length.px 5)
+    ]
+    "controls", [
+        style.display.flex
+        style.flexDirection.column
+        style.marginTop (length.px 20)
+        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+        style.borderRadius (length.px 5)
+        style.padding (length.px 10)
+    ]
+]
+
+[<ReactComponent>]
+let PresenceComponentTest () =
+    let styles = useMotionStyles ()
+    let motionRef: IRefValue<MotionImperativeRef option> = React.useRef (None)
+    let visible, setVisible = React.useState false
+
+    let DropIn = Fui.createPresenceComponent {
+        enter = [
+                atomMotion.keyframes [
+                    [ style.transform [ transform.rotate -30; transform.translateY (length.percent -100) ]; style.opacity 0.0 ]
+                    [ style.transform [ transform.rotate -90; transform.translateX (length.percent -50) ]; style.opacity 0.5 ]
+                    [ style.transform [ transform.rotate 0; transform.translateY (length.percent 0) ]; style.opacity 1.0 ]
+                ]
+                atomMotion.duration 2000
+            ]
+        exit = [
+            atomMotion.keyframes [
+                [ style.opacity 1.0; style.opacity 0.0 ]
+            ]
+            atomMotion.duration 1000
+        ]
+    }
+
+    Html.div [
+        Html.div [
+            prop.className styles.container
+            prop.children [
+                Html.div [
+                    prop.className styles.card
+                    prop.children [
+                        DropIn [
+                            presenceComponent.imperativeRef motionRef
+                            presenceComponent.visible visible
+                            presenceComponent.children [
+                                Html.div [ prop.className styles.item ]
+                            ]
+                        ]
+                        Html.code [
+                            prop.className styles.description
+                            prop.text "Drop in"
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
+        Html.div [
+            prop.className styles.controls
+            prop.children [
+                Html.div [
+                    Fui.checkbox [
+                        checkbox.label (Html.code "visible")
+                        checkbox.checked' visible
+                        checkbox.onChange (fun (_: bool) -> setVisible (visible |> not))
+                    ]
+                ]
+            ]
+        ]
+    ]
+
+
+
 
 let mainContent model dispatch =
 
@@ -3725,13 +3800,13 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            PresenceComponentTest ()
             SwatchPickerTest()
             TagPickerTest ()
             ratingTest()
             ratingDisplayTest
             ratingItemTest
             TeachingPopoverTest()
-            UseMotionTest ()
             TimePickerTest ()
             MergeClassesTest true
             MergeClassesTest false
@@ -3782,13 +3857,13 @@ let mainContent model dispatch =
             InfoButtonTest()
             infoLabelTest
             alertTest
-            VirtualizerTest()
-            VirtualizerScrollViewTest()
+            // VirtualizerTest()
+            // VirtualizerScrollViewTest()
             DrawerTest()
             simpleTreeTest
             FlatTreeTest()
             DataGridTest ()
-            SimpleTableTest()
+            // SimpleTableTest()
             UseFocusFindersTest()
             UseModalAttributesOptionsTest()
             fieldPropsTest
