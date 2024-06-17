@@ -821,6 +821,12 @@ module divider =
         static member inline subtle = Interop.mkProperty<IDividerProp> "appearance" "subtle"
         static member inline default' = Interop.mkProperty<IDividerProp> "appearance" "default"
 
+    /// Determines the alignment of the content within the divider.
+    type [<Erase>] alignContent =
+        static member inline start = Interop.mkProperty<IDividerProp> "alignContent" "start"
+        static member inline center = Interop.mkProperty<IDividerProp> "alignContent" "center"
+        static member inline end' = Interop.mkProperty<IDividerProp> "alignContent" "end"
+
 // -------------------------------------------------------------------------- Text --------------------------------------------------------------------------------------
 
 type [<Erase>] text =

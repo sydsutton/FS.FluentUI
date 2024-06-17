@@ -3079,16 +3079,31 @@ type [<Erase>] presenceComponent =
     static member inline imperativeRef (value: IRefValue<MotionImperativeRef option>) = Interop.mkProperty<IPresenceComponentProp> "imperativeRef" value
     /// Callback that is called when the whole motion finishes.
     /// A motion definition can contain multiple animations and therefore multiple "finish" events. The callback is triggered once all animations have finished with "null" instead of an event object to avoid ambiguity.
-    static member inline onMotionFinish (handler: OnMotionFinishData -> unit) = Interop.mkProperty<IPresenceComponentProp> "onMotionFinish" (System.Func<_,_,_> (fun _ value -> handler value))
-    /// Defines whether a component is visible; triggers the "enter" or "exit" motions.
+    static member inline onMotionFinish (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceComponentProp> "onMotionFinish" (System.Func<_,_,_> (fun _ value -> handler value))
+     /// Callback that is called when the whole motion starts.
+     /// A motion definition can contain multiple animations and therefore multiple "start" events. The callback is
+     /// triggered when the first animation is started. There is no official "start" event with the Web Animations API, so the callback is triggered with "null".
+    static member inline onMotionStart (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceComponentProp> "onMotionStart" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback that is called when the whole motion is cancelled. When a motion is cancelled it does not emit a finish event but a specific cancel event.
+    /// A motion definition can contain multiple animations and therefore multiple "finish" events. The callback is
+    /// triggered once all animations have finished with "null" instead of an event object to avoid ambiguity.
+    static member inline onMotionCancel (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceComponentProp> "onMotionCancel" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline visible (value: bool) = Interop.mkProperty<IPresenceComponentProp> "visible" value
     /// By default, the child component remains mounted after it reaches the "finished" state. Set "unmountOnExit" if you prefer to unmount the component after it finishes exiting.
     static member inline unmountOnExit (value: bool) = Interop.mkProperty<IPresenceComponentProp> "unmountOnExit" value
+    static member inline key (value: string) = Interop.mkProperty<IPresenceComponentProp> "key" value
+    static member inline key (value: int) = Interop.mkProperty<IPresenceComponentProp> "key" value
 
 // -------------------------------------------------------------------------- AtomMotion --------------------------------------------------------------------------------------
 type [<Erase>] atomMotion =
     static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))
     static member inline duration (value: int) = Interop.mkProperty<IAtomMotionProp> "duration" value
+    static member inline duration (value: string) = Interop.mkProperty<IAtomMotionProp> "duration" value
     static member inline easing (value: int) = Interop.mkProperty<IAtomMotionProp> "easing" value
     static member inline easing (value: string) = Interop.mkProperty<IAtomMotionProp> "easing" value
+    static member inline iterations (value: int) = Interop.mkProperty<IAtomMotionProp> "iter" value
+
+module atomMotion =
+    type [<Erase>] iterations =
+        static member inline infinity = Interop.mkProperty<IAtomMotionProp> "iterations" "Infinity"
 

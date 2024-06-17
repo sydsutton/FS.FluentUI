@@ -444,6 +444,14 @@ type [<Erase>] Fui =
 
         newProps |> comp
 
+    /// `createMotionComponent` is a factory function that creates a custom motion component powered by Web Animations API.
+    static member inline createMotionComponent (value: IAtomMotionProp list) props: ReactElement =
+        let newValue = !!value |> createObj |> unbox
+        let comp = newValue |> import "createMotionComponent" FluentUIv9
+        let newProps = !!props |> createObj |> unbox
+
+        newProps |> comp
+
 //---------------------------------------------------------------- Components --------------------------------------------------------------------------------
     /// The FluentProvider transforms a passed theme to CSS variables and passes other settings to Fluent UI components.
     static member inline fluentProvider (props: IFluentProviderProp list) = createElement (import "FluentProvider" FluentUIv9) props

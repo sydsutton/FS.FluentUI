@@ -3771,8 +3771,76 @@ let PresenceComponentTest () =
         ]
     ]
 
+type MotionComponentStyles = {
+    container: string
+    card: string
+    item: string
+    description: string
+}
 
+let useMotionComponentStyles = Fui.makeStyles<MotionComponentStyles> [
+    "container", [
+        style.display.grid
+        style.gridTemplateColumns [(length.fr 1)]
+        style.gap (length.px 10)
+    ]
+    "card", [
+        style.display.flex
+        style.flexDirection.column
+        style.alignItems.center
+        style.justifyContent.end'
+        style.gridArea "card"
+        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+        style.borderRadius (length.px 5)
+        style.padding (length.px 10)
+    ]
+    "item", [
+        style.backgroundColor tokens.colorBrandBackground
+        style.borderRadius (length.percent 50)
+        style.width (length.px 100)
+        style.height (length.px 100)
+        style.custom ("forcedColorAdjust", "none")
+    ]
+    "description", [
+        style.fontFamily Theme.tokens.fontFamilyMonospace
+        style.borderRadius (length.px 15)
+        style.marginTop (length.px 10)
+        style.padding (length.px 5)
+        style.backgroundColor Theme.tokens.colorNeutralBackground1Pressed
+    ]
+]
 
+[<ReactComponent>]
+let MotionComponentTest () =
+    let styles = useMotionComponentStyles ()
+
+    let BackgroundChange = Fui.createMotionComponent [
+        atomMotion.keyframes [
+            [ style.backgroundColor Theme.tokens.colorStatusDangerBackground3 ]
+            [ style.backgroundColor Theme.tokens.colorStatusSuccessBackground3 ]
+        ]
+        atomMotion.duration 3000
+        atomMotion.iterations.infinity
+    ]
+
+    Html.div [
+        Html.div [
+            prop.className styles.container
+            prop.children [
+                Html.div [
+                    prop.className styles.card
+                    prop.children [
+                        BackgroundChange [
+                            presenceComponent.children [
+                                Html.div [ prop.className styles.item ]
+                            ]
+                        ]
+                        Html.div "Custom background color motion"
+                    ]
+                ]
+            ]
+        ]
+    ]
 
 let mainContent model dispatch =
 
@@ -3801,6 +3869,7 @@ let mainContent model dispatch =
                 ]
             ]
             PresenceComponentTest ()
+            MotionComponentTest ()
             SwatchPickerTest()
             TagPickerTest ()
             ratingTest()

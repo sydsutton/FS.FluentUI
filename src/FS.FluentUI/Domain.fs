@@ -1499,7 +1499,7 @@ type MotionImperativeRef = {
 
 type [<RequireQualifiedAccess>] Direction = | ``enter`` | ``exit``
 
-type OnMotionFinishData = {
+type OnMotionData = {
     direction: Direction
 }
 
