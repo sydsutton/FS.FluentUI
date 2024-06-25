@@ -235,6 +235,10 @@ module dataGridHeaderCell =
 type [<Erase>] dataGridBody =
     inherit FelizProps.prop<IDataGridBodyProp>
     static member inline children (value: TableRowData<'T, 'TKeyType> -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_> value)
+    /// **This property is mandatory when using virtualized data grids**
+    static member inline children (value: TableRowData<'T, 'TKeyType> -> obj -> int -> bool -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_,_,_,_> value)
+    /// **This property is mandatory when using virtualized data grids**
+    static member inline itemSize (value: int)= Interop.mkProperty<IDataGridBodyProp> "itemSize" value
 
 module dataGridBody =
     type [<Erase>] as' =
@@ -253,6 +257,9 @@ type [<Erase>] dataGridRow =
     ///
     /// *This is a custom property that is not in the Microsoft documentation.*
     static member inline noBottomBorder = Interop.mkProperty<IDataGridRowProp> "style" (createObj ["borderBottomColor", "transparent"])
+    /// Specifically added for using virtualized data grids
+    /// **This property is mandatory when using virtualized data grids**
+    static member inline style (value: obj) = Interop.mkProperty<IDataGridRowProp> "style" value
 
 module dataGridRow =
     type [<Erase>] as' =

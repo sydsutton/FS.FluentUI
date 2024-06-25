@@ -2459,34 +2459,55 @@ type Item = {
     Author: Status
     LastUpdated: TimeStamp
     LastUpdate: Icon
+    Index: int
 }
 
 let items = [
-    {
-        File = { Label = "Meeting notes"; Icon = Fui.icon.documentRegular [] }
-        Author = { Label = "Max Mustermann"; Status = [ presenceBadge.status.available; presenceBadge.size.extraSmall ] }
-        LastUpdated = { Label = "7h ago"; TimeStamp = 1 }
-        LastUpdate = { Label = "You edited this"; Icon = (Fui.icon.editRegular []) }
-    }
-    {
-        File = { Label = "Thursday presentation"; Icon = Fui.icon.folderRegular [] }
-        Author = { Label = "Erika Mustermann"; Status = [ presenceBadge.status.busy; presenceBadge.size.large ]  }
-        LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
-        LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
-    }
-    {
-        File = { Label = "Training recording"; Icon = Fui.icon.videoRegular [] }
-        Author = { Label = "John Doe"; Status = [ presenceBadge.status.away; presenceBadge.size.small ]  }
-        LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
-        LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
-    }
-    {
-        File = { Label = "Purchase order"; Icon = Fui.icon.documentPdfRegular []  }
-        Author = { Label = "Jane Doe"; Status = [ presenceBadge.status.offline; presenceBadge.size.tiny ] }
-        LastUpdated = { Label = "Tue at 9:30 AM"; TimeStamp = 3 }
-        LastUpdate = { Label = "You shared this in a Teams chat"; Icon = Fui.icon.peopleRegular []  }
-    }
+    for index in [ 1.. 500 ] do
+        {
+            File = { Label = "Meeting notes"; Icon = Fui.icon.documentRegular [] }
+            Author = { Label = "Max Mustermann"; Status = [ presenceBadge.status.available; presenceBadge.size.extraSmall ] }
+            LastUpdated = { Label = "7h ago"; TimeStamp = 1 }
+            LastUpdate = { Label = "You edited this"; Icon = (Fui.icon.editRegular []) }
+            Index = index
+        }
+        {
+            File = { Label = "Thursday presentation"; Icon = Fui.icon.folderRegular [] }
+            Author = { Label = "Erika Mustermann"; Status = [ presenceBadge.status.busy; presenceBadge.size.large ]  }
+            LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
+            LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
+            Index = index
+        }
+        {
+            File = { Label = "Training recording"; Icon = Fui.icon.videoRegular [] }
+            Author = { Label = "John Doe"; Status = [ presenceBadge.status.away; presenceBadge.size.small ]  }
+            LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
+            LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
+            Index = index
+        }
+        {
+            File = { Label = "Purchase order"; Icon = Fui.icon.documentPdfRegular []  }
+            Author = { Label = "Jane Doe"; Status = [ presenceBadge.status.offline; presenceBadge.size.tiny ] }
+            LastUpdated = { Label = "Tue at 9:30 AM"; TimeStamp = 3 }
+            LastUpdate = { Label = "You shared this in a Teams chat"; Icon = Fui.icon.peopleRegular []  }
+            Index = index
+        }
 ]
+
+[<ReactComponent>]
+let RenderRow (trd: TableRowData<Item, int>) (style: obj) (index: int) (isScrolling: bool) =
+    Fui.virtualized.dataGridRow [
+        dataGridRow.style style
+        dataGridRow.key trd.rowId
+        dataGridRow.children (fun (tcd: TableColumnDefinition<Item, int>) _ ->
+            Fui.virtualized.dataGridCell [
+                dataGridCell.focusMode.group
+                dataGridCell.children [
+                    tcd.renderCell(trd.item)
+                ]
+            ]
+        )
+    ]
 
 [<ReactComponent>]
 let DataGridTest () =
@@ -2503,16 +2524,20 @@ let DataGridTest () =
     let columns = [
         Fui.createTableColumn [
             createTableColumnOption.columnId "file"
-            createTableColumnOption.compare (fun a b -> a.File.Label.CompareTo (Some b.File.Label))
+            createTableColumnOption.compare (fun (a: Item) (b: Item) ->
+                let a = $"{a.Index}-{a.File.Label}"
+                let b = $"{b.Index}-{b.File.Label}"
+                a.CompareTo (Some b))
             createTableColumnOption.renderHeaderCell (fun _ -> "File")
             createTableColumnOption.renderCell (fun item ->
+                let key: string = $"[{item.Index}]-{item.File.Label}"
                 Fui.tableCellLayout [
-                    tableCellLayout.key item.File.Label
+                    tableCellLayout.key key
                     tableCellLayout.media (
                         item.File.Icon
                     )
                     tableCellLayout.children [
-                        Fui.text item.File.Label
+                        Fui.text key
                     ]
                 ]
             )
@@ -2561,69 +2586,35 @@ let DataGridTest () =
         ]
     ]
 
-    Fui.stack [
-        stack.horizontal false
-        stack.children [
-            Html.ul (
-                items |> List.map (fun i ->
-                    Html.li [
-                        prop.key i.File.Label
-                        prop.children [
-                            Fui.checkbox [
-                                checkbox.label i.File.Label
-                                checkbox.checked' (selectedRows |> List.contains i.File.Label)
-                            ]
+    Fui.virtualized.dataGrid [
+        dataGrid.items items
+        dataGrid.columns columns
+        dataGrid.sortable true
+        dataGrid.selectionAppearance.brand
+        dataGrid.selectionMode.multiselect
+        dataGrid.resizableColumnsOptions [ resizableColumnsOptions.autoFitColumns false ]
+        dataGrid.selectedItems (selectedRows: list<string>)
+        dataGrid.sortState sortState
+        dataGrid.onSortChange (fun s -> setSortState s)
+        dataGrid.resizableColumns true
+        dataGrid.columnSizingOptions columnSizingOptions
+        dataGrid.onSelectionChange (fun (data: OnSelectionChangeData<string>) -> setSelectedRows data.selectedItems)
+        dataGrid.children [
+            Fui.virtualized.dataGridHeader [
+                Fui.virtualized.dataGridRow [
+                    dataGridRow.children (fun tcd _ ->
+                        Fui.virtualized.dataGridHeaderCell [
+                            tcd.renderHeaderCell()
                         ]
-                    ]
-                )
-            )
-            Fui.dataGrid [
-                dataGrid.items items
-                dataGrid.columns columns
-                dataGrid.sortable true
-                dataGrid.selectionAppearance.brand
-                dataGrid.selectionMode.multiselect
-                dataGrid.resizableColumnsOptions [ resizableColumnsOptions.autoFitColumns false ]
-                dataGrid.selectedItems (selectedRows: list<string>)
-                dataGrid.sortState sortState
-                dataGrid.onSortChange (fun s -> setSortState s)
-                dataGrid.resizableColumns true
-                dataGrid.columnSizingOptions columnSizingOptions
-                dataGrid.getRowId (fun (i: Item) -> i.File.Label)
-                dataGrid.onSelectionChange (fun (data: OnSelectionChangeData<string>) -> setSelectedRows data.selectedItems)
-                dataGrid.children [
-                    Fui.dataGridHeader [
-                        Fui.dataGridRow [
-                            dataGridRow.selectionCell [
-                                tableSelectionCell.ariaLabel "Select all rows"
-                            ]
-                            dataGridRow.children (fun tcd _ ->
-                                Fui.dataGridHeaderCell [
-                                    tcd.renderHeaderCell()
-                                ]
-                            )
-                        ]
-                    ]
-                    Fui.dataGridBody [
-                        dataGridBody.children (fun (trd: TableRowData<Item, int>) ->
-                            Fui.dataGridRow [
-                                dataGridRow.noBottomBorder
-                                dataGridRow.key trd.rowId
-                                dataGridRow.selectionCell [
-                                    tableSelectionCell.ariaLabel "Select row"
-                                ]
-                                dataGridRow.children (fun (tcd: TableColumnDefinition<Item, int>) _ ->
-                                    Fui.dataGridCell [
-                                        dataGridCell.key tcd.columnId
-                                        dataGridCell.children [
-                                            tcd.renderCell(trd.item)
-                                        ]
-                                    ]
-                                )
-                            ]
-                        )
-                    ]
+                    )
                 ]
+            ]
+            Fui.virtualized.dataGridBody [
+                dataGridBody.itemSize 50
+                dataGridBody.height 400
+                dataGridBody.children (fun trd style index isScrolling ->
+                    RenderRow trd style index isScrolling
+                )
             ]
         ]
     ]

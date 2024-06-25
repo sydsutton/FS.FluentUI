@@ -26,6 +26,7 @@ module FuiHelpers =
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
     let [<Literal>] CalendarCompat = "@fluentui/react-calendar-compat"
     let [<Literal>] TimepickerCompat = "@fluentui/react-timepicker-compat"
+    let [<Literal>] ReactWindow = "@fluentui-contrib/react-data-grid-react-window"
 
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
@@ -882,6 +883,19 @@ type [<Erase>] Theme =
     static member inline themeToTokensObject (theme: Tokens): Tokens = import "themeToTokensObject" FluentUIv9
 
 module Fui =
+    type [<Erase>] virtualized =
+        static member inline dataGrid (props: IDataGridProp list) = createElement (import "DataGrid" ReactWindow) props
+        static member inline dataGridHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeader" ReactWindow) props
+        static member inline dataGridHeader (props: IDataGridHeaderProp list) = createElement (import "DataGridHeader" ReactWindow) props
+        static member inline dataGridHeaderCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeaderCell" ReactWindow) props
+        static member inline dataGridHeaderCell (props: IDataGridHeaderCellProp list) = createElement (import "DataGridHeaderCell" ReactWindow) props
+        static member inline dataGridRow (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridRow" ReactWindow) props
+        static member inline dataGridRow (props: IDataGridRowProp list) = createElement (import "DataGridRow" ReactWindow) props
+        static member inline dataGridBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridBody" ReactWindow) props
+        static member inline dataGridBody (props: IDataGridBodyProp list) = createElement (import "DataGridBody" ReactWindow) props
+        static member inline dataGridCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridCell" ReactWindow) props
+        static member inline dataGridCell (props: IDataGridCellProp list) = createElement (import "DataGridCell" ReactWindow) props
+        static member inline dataGridSelectionCell (props: IDataGridSelectionCellProp list) = createElement (import "DataGridSelectionCell" ReactWindow) props
 
     type [<Erase>] text =
         static member inline body1 (text: string) = createElement (import "Body1" FluentUIv9) [prop.text text]

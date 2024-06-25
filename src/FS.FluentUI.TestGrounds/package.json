@@ -7,6 +7,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@fluentui-contrib/react-data-grid-react-window": "^1.2.0",
     "@fluentui/react-calendar-compat": "^0.1.10",
     "@fluentui/react-components": "^9.54.2",
     "@fluentui/react-datepicker-compat": "^0.4.40",
