@@ -3099,9 +3099,8 @@ type [<Erase>] atomMotion =
     static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))
     static member inline duration (value: int) = Interop.mkProperty<IAtomMotionProp> "duration" value
     static member inline duration (value: string) = Interop.mkProperty<IAtomMotionProp> "duration" value
-    static member inline easing (value: int) = Interop.mkProperty<IAtomMotionProp> "easing" value
     static member inline easing (value: string) = Interop.mkProperty<IAtomMotionProp> "easing" value
-    static member inline iterations (value: int) = Interop.mkProperty<IAtomMotionProp> "iter" value
+    static member inline iterations (value: int) = Interop.mkProperty<IAtomMotionProp> "iterations" value
 
 module atomMotion =
     type [<Erase>] iterations =

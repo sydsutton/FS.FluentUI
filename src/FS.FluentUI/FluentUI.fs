@@ -430,7 +430,7 @@ type [<Erase>] Fui =
 
     /// `createPresenceComponent` is a factory function that creates a React component based on the provided presence definition.
     /// This component can be used to animate any element and intended to have a state via the visible prop.
-    static member inline createPresenceComponent (value: PresenceMotion) props: ReactElement =
+    static member inline createPresenceComponent (value: PresenceMotion) (props: IPresenceComponentProp list): ReactElement =
         let enter = !!value.enter |> createObj |> unbox
         let exit = !!value.exit |> createObj |> unbox
 
@@ -445,7 +445,7 @@ type [<Erase>] Fui =
         newProps |> comp
 
     /// `createMotionComponent` is a factory function that creates a custom motion component powered by Web Animations API.
-    static member inline createMotionComponent (value: IAtomMotionProp list) props: ReactElement =
+    static member inline createMotionComponent (value: IAtomMotionProp list) (props: IPresenceComponentProp list): ReactElement =
         let newValue = !!value |> createObj |> unbox
         let comp = newValue |> import "createMotionComponent" FluentUIv9
         let newProps = !!props |> createObj |> unbox
