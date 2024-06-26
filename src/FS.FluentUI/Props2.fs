@@ -234,7 +234,9 @@ module dataGridHeaderCell =
 // -------------------------------------------------------------------------- DataGridBody --------------------------------------------------------------------------------------
 type [<Erase>] dataGridBody =
     inherit FelizProps.prop<IDataGridBodyProp>
+    /// Children render function for rows
     static member inline children (value: TableRowData<'T, 'TKeyType> -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_> value)
+    /// Children render function for rows.
     /// The value's tuple reads:
     /// <code>
     /// row: TableRowData<'T, 'TKeyType>,
@@ -244,8 +246,20 @@ type [<Erase>] dataGridBody =
     ///
     /// **This property is mandatory when using virtualized data grids**
     static member inline children (value: TableRowData<'T, 'TKeyType> -> obj -> int -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_,_,_> value)
+    /// The size of each row.
     /// **This property is mandatory when using virtualized data grids**
     static member inline itemSize (value: int)= Interop.mkProperty<IDataGridBodyProp> "itemSize" value
+    /// The height of the virtualized container.
+    /// **This property is mandatory when using virtualized data grids**
+    static member inline height (value: int)= Interop.mkProperty<IDataGridBodyProp> "height" value
+    /// The width of the virtualized container
+    static member inline width (value: int)= Interop.mkProperty<IDataGridBodyProp> "width" value
+    /// The width of the virtualized container
+    static member inline width (value: string)= Interop.mkProperty<IDataGridBodyProp> "width" value
+    /// All virtualized rows must have the [aria-rowindex](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-rowindex)
+    /// attribute for correct screen reader navigation. The default start index is 2 since we assume that there is only
+    /// one row in the header. If this is not the case, the start index can be reconfigured through this prop.
+    static member inline ariaRowIndexStart (value: int)= Interop.mkProperty<IDataGridBodyProp> "ariaRowIndexStart" value
 
 module dataGridBody =
     type [<Erase>] as' =
@@ -264,7 +278,7 @@ type [<Erase>] dataGridRow =
     ///
     /// *This is a custom property that is not in the Microsoft documentation.*
     static member inline noBottomBorder = Interop.mkProperty<IDataGridRowProp> "style" (createObj ["borderBottomColor", "transparent"])
-    /// Specifically added for using virtualized data grids
+    /// Specifically added for using virtualized data grids.
     /// **This property is mandatory when using virtualized data grids**
     static member inline style (value: obj) = Interop.mkProperty<IDataGridRowProp> "style" value
 
