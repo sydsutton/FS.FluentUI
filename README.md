@@ -96,6 +96,7 @@ Current NPM dependencies:
 * @fluentui/react-datepicker-compat
 * @fluentui/react-calendar-compat
 * @fluentui/react-timepicker-compat
+* @fluentui-contrib/react-data-grid-react-window
 
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
 ```bash
@@ -115,5 +116,5 @@ You can install the library manually if you want by first installing the nuget p
 ```bash
 cd ./{path to your project}
 dotnet add package FS.FluentUI
-npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat
+npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat @fluentui-contrib/react-data-grid-react-window
 ```

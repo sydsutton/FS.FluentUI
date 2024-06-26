@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.15.0</Version>
+        <Version>1.15.1</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,12 +12,13 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.54.0
-            - Update @fluentui/react-datepicker-compat to 0.4.40
-            - Update @fluentui/react-calendar-compat to 0.1.10
-            - Update @fluentui/react-timepicker-compat to 0.2.17
-            - Add createPresenceComponent function
-            - BREAKING: Remove useMotion function and @fluentui/react-motion-preview package
+            - Update @fluentui/react-components to 9.54.2
+            - Add createMotionComponent function
+            - Add virtualized DataGrid component
+            - Add @fluentui-contrib/react-data-grid-react-window package for virtualized data grids
+            - Update @fluentui/react-datepicker-compat to 0.4.41
+            - Update @fluentui/react-calendar-compat to 0.1.11
+            - Update @fluentui/react-timepicker-compat to 0.2.19
         </PackageReleaseNotes>
     </PropertyGroup>
 

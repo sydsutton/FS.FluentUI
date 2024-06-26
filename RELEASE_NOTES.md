@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 1.15.1 (6-26-2024)
+
+* Update @fluentui/react-components to 9.54.2
+* Add createMotionComponent function
+* Add virtualized DataGrid component
+* Add @fluentui-contrib/react-data-grid-react-window package for virtualized data grids
+* Update @fluentui/react-datepicker-compat to 0.4.41
+* Update @fluentui/react-calendar-compat to 0.1.11
+* Update @fluentui/react-timepicker-compat to 0.2.19
+
 ### 1.15.0 (6-7-2024)
 
 * Update @fluentui/react-components to 9.54.0
