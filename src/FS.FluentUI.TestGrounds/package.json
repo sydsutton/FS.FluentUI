@@ -8,11 +8,11 @@
   "license": "MIT",
   "dependencies": {
     "@fluentui-contrib/react-data-grid-react-window": "^1.2.0",
-    "@fluentui/react-calendar-compat": "^0.1.10",
+    "@fluentui/react-calendar-compat": "^0.1.11",
     "@fluentui/react-components": "^9.54.2",
-    "@fluentui/react-datepicker-compat": "^0.4.40",
+    "@fluentui/react-datepicker-compat": "^0.4.41",
     "@fluentui/react-migration-v8-v9": "^9.6.2",
-    "@fluentui/react-timepicker-compat": "^0.2.17",
+    "@fluentui/react-timepicker-compat": "^0.2.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "use-sync-external-store": "^1.2.0"
