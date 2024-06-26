@@ -235,8 +235,15 @@ module dataGridHeaderCell =
 type [<Erase>] dataGridBody =
     inherit FelizProps.prop<IDataGridBodyProp>
     static member inline children (value: TableRowData<'T, 'TKeyType> -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_> value)
+    /// The value's tuple reads:
+    /// <code>
+    /// row: TableRowData<'T, 'TKeyType>,
+    /// style: obj,
+    /// index: int
+    /// </code>
+    ///
     /// **This property is mandatory when using virtualized data grids**
-    static member inline children (value: TableRowData<'T, 'TKeyType> -> obj -> int -> bool -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_,_,_,_> value)
+    static member inline children (value: TableRowData<'T, 'TKeyType> -> obj -> int -> ReactElement)= Interop.mkProperty<IDataGridBodyProp> "children" (System.Func<_,_,_,_> value)
     /// **This property is mandatory when using virtualized data grids**
     static member inline itemSize (value: int)= Interop.mkProperty<IDataGridBodyProp> "itemSize" value
 

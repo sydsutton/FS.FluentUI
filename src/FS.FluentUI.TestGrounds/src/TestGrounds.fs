@@ -2495,7 +2495,7 @@ let items = [
 ]
 
 [<ReactComponent>]
-let RenderRow (trd: TableRowData<Item, int>) (style: obj) (index: int) (isScrolling: bool) =
+let RenderRow (trd: TableRowData<Item, int>) (style: obj) (index: int) =
     Fui.virtualized.dataGridRow [
         dataGridRow.style style
         dataGridRow.key trd.rowId
@@ -2612,8 +2612,8 @@ let DataGridTest () =
             Fui.virtualized.dataGridBody [
                 dataGridBody.itemSize 50
                 dataGridBody.height 400
-                dataGridBody.children (fun trd style index isScrolling ->
-                    RenderRow trd style index isScrolling
+                dataGridBody.children (fun trd style index ->
+                    RenderRow trd style index
                 )
             ]
         ]
