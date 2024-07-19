@@ -2293,6 +2293,8 @@ type [<Erase>] listbox =
     static member inline onOptionSelect (value: ChangeEvent -> OptionOnSelectData -> unit) = Interop.mkProperty<IListboxProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// An array of selected option keys. Use this with onOptionSelect to directly control the selected option(s) If this is set, the value prop MUST also be controlled.
     static member inline selectedOptions (value: #seq<string>) = Interop.mkProperty<IListboxProp> "selectedOptions" (!!value |> Seq.toArray)
+    /// Disable auto-focusing on the first item when mounting.
+    static member inline disableAutoFocus (value: bool) = Interop.mkProperty<IListboxProp> "disableAutoFocus" value
 
 module listbox =
     type [<Erase>] as' =
@@ -2415,6 +2417,8 @@ type [<Erase>] combobox =
     static member inline onActiveOptionChange (handler: ActiveOptionChangeData -> unit) = Interop.mkProperty<IComboboxProp> "onActiveOptionChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// OnActiveOptionChange notifies the user when the active option in the Combobox was changed by keyboard.
     static member inline onActiveOptionChange (value: KeyboardEvent -> ActiveOptionChangeData -> unit) = Interop.mkProperty<IComboboxProp> "onActiveOptionChange" (System.Func<_,_,_> value)
+    /// Disable auto-focusing on the first item when mounting.
+    static member inline disableAutoFocus (value: bool) = Interop.mkProperty<IComboboxProp> "disableAutoFocus" value
 
 module combobox =
     type [<Erase>] as' =
