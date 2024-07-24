@@ -2859,6 +2859,7 @@ type [<Erase>] dialog =
     static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> value)
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDialogProp> "inertTrapFocus" value
+    static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDialogProp> "surfaceMotion" (!!value |> createObj |> unbox)
 
 module dialog =
     /// Dialog variations.
@@ -2902,6 +2903,7 @@ type [<Erase>] dialogSurface =
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDialogSurfaceProp> "mountNode" value
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IDialogSurfaceProp> "mountNode" value
+    static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDialogSurfaceProp> "backdropMotion" (!!value |> createObj |> unbox)
 
 module dialogSurface =
     type [<Erase>] as' =

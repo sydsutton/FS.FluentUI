@@ -1622,6 +1622,10 @@ let DialogTest() =
     Fui.dialog [
         dialog.open' isOpen
         dialog.onOpenChange (fun (d: DialogOpenChangeData<MouseEvent>) -> setIsOpen d.``open``)
+        dialog.surfaceMotion [
+            presenceMotionSlot.onMotionStart (fun (d: OnMotionData) -> printfn "surfaceMotion start %A" d.direction)
+            presenceMotionSlot.onMotionFinish (fun (d: OnMotionData) -> printfn "surfaceMotion finish %A" d.direction)
+        ]
         dialog.children [
             Fui.dialogTrigger [
                 dialogTrigger.disableButtonEnhancement true
@@ -1632,50 +1636,56 @@ let DialogTest() =
                 )
             ]
             Fui.dialogSurface [
-                Fui.dialogBody [
-                    Fui.dialogTitle [
-                        dialogTitle.action (
-                            Fui.dialogTrigger [
-                                dialogTrigger.action.open'
-                                dialogTrigger.children (
-                                    Fui.button [
-                                        button.children [
-                                            Fui.icon.dismissRegular []
+                dialogSurface.backdropMotion [
+                    presenceMotionSlot.onMotionStart (fun (d: OnMotionData) -> printfn "backdropMotion start %A" d.direction)
+                    presenceMotionSlot.onMotionFinish (fun (d: OnMotionData) -> printfn "backdropMotion finish %A" d.direction)
+                ]
+                dialogSurface.children [
+                    Fui.dialogBody [
+                        Fui.dialogTitle [
+                            dialogTitle.action (
+                                Fui.dialogTrigger [
+                                    dialogTrigger.action.open'
+                                    dialogTrigger.children (
+                                        Fui.button [
+                                            button.children [
+                                                Fui.icon.dismissRegular []
+                                            ]
                                         ]
-                                    ]
-                                )
-                            ]
-                        )
-                        dialogTitle.as'.h1
-                        dialogTitle.text "Dialog Title"
-                    ]
-                    Fui.dialogContent [
-                        dialogContent.text "This dialog focus on the second button instead of the first"
-                    ]
-                    Fui.dialogActions [
-                        dialogActions.position.start
-                        dialogActions.children [
-                            Fui.button [
-                                button.appearance.outline
-                                button.text "Third Action"
+                                    )
+                                ]
+                            )
+                            dialogTitle.as'.h1
+                            dialogTitle.text "Dialog Title"
+                        ]
+                        Fui.dialogContent [
+                            dialogContent.text "This dialog focus on the second button instead of the first"
+                        ]
+                        Fui.dialogActions [
+                            dialogActions.position.start
+                            dialogActions.children [
+                                Fui.button [
+                                    button.appearance.outline
+                                    button.text "Third Action"
+                                ]
                             ]
                         ]
-                    ]
-                    Fui.dialogActions [
-                        dialogActions.position.end'
-                        dialogActions.children [
-                            Fui.dialogTrigger [
-                                dialogTrigger.disableButtonEnhancement true
-                                dialogTrigger.children (
-                                    Fui.button [
-                                        button.appearance.secondary
-                                        button.text "Close"
-                                    ]
-                                )
-                            ]
-                            Fui.button [
-                                button.appearance.primary
-                                button.text "Do Something"
+                        Fui.dialogActions [
+                            dialogActions.position.end'
+                            dialogActions.children [
+                                Fui.dialogTrigger [
+                                    dialogTrigger.disableButtonEnhancement true
+                                    dialogTrigger.children (
+                                        Fui.button [
+                                            button.appearance.secondary
+                                            button.text "Close"
+                                        ]
+                                    )
+                                ]
+                                Fui.button [
+                                    button.appearance.primary
+                                    button.text "Do Something"
+                                ]
                             ]
                         ]
                     ]

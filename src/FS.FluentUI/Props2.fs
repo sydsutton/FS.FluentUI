@@ -3122,6 +3122,18 @@ type [<Erase>] presenceComponent =
     static member inline key (value: string) = Interop.mkProperty<IPresenceComponentProp> "key" value
     static member inline key (value: int) = Interop.mkProperty<IPresenceComponentProp> "key" value
 
+// -------------------------------------------------------------------------- PresenceMotionSlot --------------------------------------------------------------------------------------
+type [<Erase>] presenceMotionSlot =
+    /// Provides imperative controls for the animation.
+    static member inline imperativeRef (value: IRefValue<MotionImperativeRef option>) = Interop.mkProperty<IPresenceMotionSlotProp> "imperativeRef" value
+    /// Callback that is called when the whole motion finishes.
+    /// A motion definition can contain multiple animations and therefore multiple "finish" events. The callback is triggered once all animations have finished with "null" instead of an event object to avoid ambiguity.
+    static member inline onMotionFinish (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceMotionSlotProp> "onMotionFinish" (System.Func<_,_,_> (fun _ value -> handler value))
+     /// Callback that is called when the whole motion starts.
+     /// A motion definition can contain multiple animations and therefore multiple "start" events. The callback is
+     /// triggered when the first animation is started. There is no official "start" event with the Web Animations API, so the callback is triggered with "null".
+    static member inline onMotionStart (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceMotionSlotProp> "onMotionStart" (System.Func<_,_,_> (fun _ value -> handler value))
+
 // -------------------------------------------------------------------------- AtomMotion --------------------------------------------------------------------------------------
 type [<Erase>] atomMotion =
     static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))

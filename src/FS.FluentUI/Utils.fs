@@ -226,6 +226,7 @@ type [<Erase>] IEmptySwatchProp = interface end
 type [<Erase>] ISwatchPickerGridProp = interface end
 
 type [<Erase>] IPresenceComponentProp = interface end
+type [<Erase>] IPresenceMotionSlotProp = interface end
 
 type [<Erase>] IComboboxFilterConfigProp = interface end
 type [<Erase>] ICalendarNavigationIconsProp = interface end
