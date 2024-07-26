@@ -84,8 +84,9 @@ type [<Erase>] Fui =
 
         {
             dispatchToast = fun (element, options) ->
-                let args = element, (!!options |> createObj |> unbox<DispatchToastOptions>)
-                args |> JSTuple.from2Args |> controller.dispatchToast
+                let options = !!options |> createObj |> unbox<DispatchToastOptions>
+                emitJsExpr (element, options) "$0, $1"
+                |> controller.dispatchToast
             dismissToast = fun props -> controller.dismissToast props
             dismissAllToasts = fun props -> controller.dismissAllToasts props
             updateToast = fun props -> !!props |> createObj |> unbox |> controller.updateToast
