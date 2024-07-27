@@ -1,6 +1,15 @@
 Release Notes
 =========
 
+### 1.15.2 (7-27-2024)
+
+* Update @fluentui/react-components to 9.54.6
+* Add Motion slots for Dialog and DialogSurface
+* Bug fix: Fix dispatchToast call causing runtime error in production code
+* Update @fluentui/react-datepicker-compat to 0.4.45
+* Update @fluentui/react-calendar-compat to 0.1.14
+* Update @fluentui/react-timepicker-compat to 0.2.23
+
 ### 1.15.1 (6-26-2024)
 
 * Update @fluentui/react-components to 9.54.2
