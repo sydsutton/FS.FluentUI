@@ -371,8 +371,7 @@ module accordionHeader =
 type [<Erase>] accordionPanel =
     inherit FelizProps.prop<IAccordionPanelProp>
     static member inline root (value: IReactProperty list)= Interop.mkProperty<IAccordionPanelProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
-    /// Internal open state, provided by context.
-    static member inline open' (value: bool)= Interop.mkProperty<IAccordionPanelProp> "open" value
+    static member inline collapseMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IAccordionPanelProp> "collapseMotion" (!!value |> createObj |> unbox)
 
 // -------------------------------------------------------------------------- Checkbox --------------------------------------------------------------------------------------
 
