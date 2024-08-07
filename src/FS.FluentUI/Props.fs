@@ -2509,6 +2509,7 @@ module toolbarButton =
     type [<Erase>] appearance =
         static member inline subtle = Interop.mkProperty<IToolbarButtonProp> "appearance" "subtle"
         static member inline primary = Interop.mkProperty<IToolbarButtonProp> "appearance" "primary"
+        static member inline transparent = Interop.mkProperty<IToolbarButtonProp> "appearance" "transparent"
 
 // -------------------------------------------------------------------------- ToolbarDivider --------------------------------------------------------------------------------------
 type [<Erase>] toolbarDivider =

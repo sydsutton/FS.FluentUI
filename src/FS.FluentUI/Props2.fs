@@ -1099,7 +1099,7 @@ type [<Erase>] tree =
     static member inline onCheckedChange (handler: TreeCheckedChangeData<'T, 'TEvent> -> unit)= Interop.mkProperty<ITreeProp> "onCheckedChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from checked state. These property is ignored for subtrees.
     static member inline onCheckedChange (value: 'TEvent -> TreeCheckedChangeData<'T, 'TEvent> -> unit)= Interop.mkProperty<ITreeProp> "onCheckedChange" (System.Func<_,_,_> value)
-
+    static member inline collapseMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<ITreeProp> "collapseMotion" (!!value |> createObj |> unbox)
 module tree =
 
     type [<Erase>] as' =
