@@ -3518,6 +3518,7 @@ let TagPickerTest () =
         field.style [ style.maxWidth 100 ]
         field.children [
             Fui.tagPicker [
+                tagPicker.noPopover false
                 tagPicker.onOptionSelect (fun (data: TagPickerOnOptionSelectData<MouseEvent>) ->
                     if data.value = "no-matches" then
                         ()

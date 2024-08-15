@@ -2850,6 +2850,8 @@ type [<Erase>] tagPicker =
     static member inline open' (value: bool) = Interop.mkProperty<ITagPickerProp> "open" value
     /// TagPickers are rendered out of DOM order on `document.body` by default, use this to render the popover in DOM order
     static member inline inline' (value: bool) = Interop.mkProperty<ITagPickerProp> "inline" value
+    /// By default, when a single children is provided, the TagPicker will assume that the children is a popover. By setting this prop to true, the children will be treated as a trigger instead.
+    static member inline noPopover (value: bool) = Interop.mkProperty<ITagPickerProp> "noPopover" value
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (handler: TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
