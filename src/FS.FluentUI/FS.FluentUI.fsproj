@@ -12,12 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.54.6
-            - Add Motion slots for Dialog and DialogSurface
-            - Bug fix: Fix dispatchToast call causing runtime error in production code
-            - Update @fluentui/react-datepicker-compat to 0.4.45
-            - Update @fluentui/react-calendar-compat to 0.1.14
-            - Update @fluentui/react-timepicker-compat to 0.2.23
+            - Update @fluentui/react-components to 9.54.14
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -46,7 +41,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="gte 9.54.13" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="gte 9.54.14" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.45" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.1.14" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.2.23" ResolutionStrategy="Max" />
