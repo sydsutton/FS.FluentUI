@@ -1075,6 +1075,14 @@ type Tokens = {
     shadow16Brand: string
     shadow28Brand: string
     shadow64Brand: string
+    zIndexBackground: string
+    zIndexContent: string
+    zIndexOverlay: string
+    zIndexPopup: string
+    zIndexMessages: string
+    zIndexFloating: string
+    zIndexPriority: string
+    zIndexDebug: string
 } with
     /// Use this instead of `.fontSizeBase100`
     member this.felizFontSizeBase100 = length.px 10
