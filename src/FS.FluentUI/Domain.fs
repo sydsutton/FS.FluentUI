@@ -252,14 +252,16 @@ type VirtualizerDataRef = {
     currentIndex: RefObject<int>
 }
 
+type MutableRefObject<'T> = {
+    current: 'T
+}
+
 type VirtualizerMeasure = {
     virtualizerLength: int
     bufferItems: int
     bufferSize: int
     scrollRef: Browser.Types.Element -> unit
-}
-type MutableRefObject<'T> = {
-    current: 'T
+    containerSizeRef: MutableRefObject<int>
 }
 
 type [<RequireQualifiedAccess>] ScrollBehavior = auto | instant | smooth

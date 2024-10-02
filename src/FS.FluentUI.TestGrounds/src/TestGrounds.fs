@@ -2227,7 +2227,7 @@ let VirtualizerTest() =
         virtualizerMeasureProps.defaultItemSize 100
     ]
 
-    let (vLength, bufferItems, bufferSize, scrollRef) = vm.virtualizerLength, vm.bufferItems, vm.bufferSize, vm.scrollRef
+    let (vLength, bufferItems, bufferSize, scrollRef, containerSizeRef) = vm.virtualizerLength, vm.bufferItems, vm.bufferSize, vm.scrollRef, vm.containerSizeRef
 
     Html.div [
         prop.ariaLabel "Virtualizer Example"
@@ -2242,20 +2242,20 @@ let VirtualizerTest() =
             style.maxHeight 750
         ]
         prop.children [
-            Fui.virtualizerScrollViewDynamic [
-                virtualizerScrollViewDynamic.numItems 1000
-                virtualizerScrollViewDynamic.virtualizerLength vLength
-                virtualizerScrollViewDynamic.bufferItems bufferItems
-                virtualizerScrollViewDynamic.bufferSize bufferSize
-                virtualizerScrollViewDynamic.enableScrollLoad true
-                virtualizerScrollViewDynamic.before (
+            Fui.virtualizer [
+                virtualizer.numItems 1000
+                virtualizer.virtualizerLength vLength
+                virtualizer.bufferItems bufferItems
+                virtualizer.bufferSize bufferSize
+                virtualizer.containerSizeRef containerSizeRef
+                virtualizer.before (
                     Fui.icon.bedFilled []
                 )
-                virtualizerScrollViewDynamic.after (
+                virtualizer.after (
                     Fui.icon.bedRegular []
                 )
-                virtualizerScrollViewDynamic.itemSize 100
-                virtualizerScrollViewDynamic.children (fun index _ ->
+                virtualizer.itemSize 100
+                virtualizer.children (fun index _ ->
                     Html.span [
                         prop.role "listitem"
                         prop.ariaPosInSet index
@@ -2267,7 +2267,7 @@ let VirtualizerTest() =
                         ]
                         prop.key $"test-virtualizer-child-{index}"
                         prop.children [
-                            Fui.text $"Node-{index}"
+                            Fui.text $"Node-{index}-XXX"
                         ]
                     ]
                 )
