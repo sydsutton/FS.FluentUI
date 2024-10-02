@@ -854,6 +854,8 @@ type [<Erase>] virtualizerScrollViewDynamic =
     /// Tells the virtualizer to measure in the reverse direction (for column-reverse order etc.)
     /// This value should be flipped in RTL implementation (TBD whether automate RTL).
     static member inline reversed (value: bool) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "reversed" value
+    // Enables the isScrolling property in the child render function. Default: false - to prevent nessecary render function calls
+    static member inline enableScrollLoad (value: bool) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "enableScrollLoad" value
     /// Virtualizer context can be passed as a prop for extended class use
     static member inline virtualizerContext (value: IVirtualizerContextProp list) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "virtualizerContext" (!!value |> createObj |> unbox<VirtualizerContextProps>)
     /// Callback for notifying when a flagged index has been rendered

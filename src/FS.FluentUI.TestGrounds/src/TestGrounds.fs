@@ -2242,19 +2242,20 @@ let VirtualizerTest() =
             style.maxHeight 750
         ]
         prop.children [
-            Fui.virtualizer [
-                virtualizer.numItems 1000
-                virtualizer.virtualizerLength vLength
-                virtualizer.bufferItems bufferItems
-                virtualizer.bufferSize bufferSize
-                virtualizer.before (
+            Fui.virtualizerScrollViewDynamic [
+                virtualizerScrollViewDynamic.numItems 1000
+                virtualizerScrollViewDynamic.virtualizerLength vLength
+                virtualizerScrollViewDynamic.bufferItems bufferItems
+                virtualizerScrollViewDynamic.bufferSize bufferSize
+                virtualizerScrollViewDynamic.enableScrollLoad true
+                virtualizerScrollViewDynamic.before (
                     Fui.icon.bedFilled []
                 )
-                virtualizer.after (
+                virtualizerScrollViewDynamic.after (
                     Fui.icon.bedRegular []
                 )
-                virtualizer.itemSize 100
-                virtualizer.children (fun index _ ->
+                virtualizerScrollViewDynamic.itemSize 100
+                virtualizerScrollViewDynamic.children (fun index _ ->
                     Html.span [
                         prop.role "listitem"
                         prop.ariaPosInSet index
@@ -3928,8 +3929,8 @@ let mainContent model dispatch =
             InfoButtonTest()
             infoLabelTest
             alertTest
-            // VirtualizerTest()
-            // VirtualizerScrollViewTest()
+            VirtualizerTest()
+            VirtualizerScrollViewTest()
             DrawerTest()
             simpleTreeTest
             FlatTreeTest()
