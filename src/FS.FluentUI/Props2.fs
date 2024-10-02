@@ -598,6 +598,15 @@ type [<Erase>] virtualizer =
     static member inline flaggedIndex (value: MutableRefObject<int option>) = Interop.mkProperty<IVirtualizerProp> "flaggedIndex" value
     /// Imperative ref contains our scrollTo index functionality for user control.
     static member inline imperativeVirtualizerRef (value: RefObject<VirtualizerDataRef>) = Interop.mkProperty<IVirtualizerProp> "imperativeVirtualizerRef" value
+    /// A ref that provides the size of container (vertical - height, horizontal - width), set by a resize observer.
+    /// Virtualizer Measure hooks provide a suitable reference.
+    static member inline containerSizeRef (value: RefObject<int>) = Interop.mkProperty<IVirtualizerProp> "containerSizeRef" value
+    /// A ref that provides the size of container (vertical - height, horizontal - width), set by a resize observer.
+    /// Virtualizer Measure hooks provide a suitable reference.
+    static member inline containerSizeRef (value: RefObject<float>) = Interop.mkProperty<IVirtualizerProp> "containerSizeRef" value
+    /// A ref that provides the size of container (vertical - height, horizontal - width), set by a resize observer.
+    /// Virtualizer Measure hooks provide a suitable reference.
+    static member inline containerSizeRef (value: RefObject<decimal>) = Interop.mkProperty<IVirtualizerProp> "containerSizeRef" value
 
 module virtualizer =
     /// The scroll direction
