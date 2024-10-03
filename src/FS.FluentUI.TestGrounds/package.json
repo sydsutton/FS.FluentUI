@@ -20,16 +20,19 @@
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@vitejs/plugin-react": "^4.2.1",
+    "braces": "^3.0.3",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "remotedev": "^0.2.9",
+    "rollup": "^4.24.0",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "source-map-loader": "^4.0.1",
     "style-loader": "^3.3.3",
-    "vite": "^5.0.12"
+    "vite": "^5.4.8",
+    "ws": "^8.18.0"
   }
 }
