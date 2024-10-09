@@ -1,6 +1,15 @@
 Release Notes
 =========
 
+### 1.16.0 (10-9-2024)
+
+* Update @fluentui/react-components to 9.55.0
+* Add ZIndexTokens to Tokens
+* Add Carousel component(s)
+* Update @fluentui/react-datepicker-compat to 0.4.52
+* Update @fluentui/react-calendar-compat to 0.1.19
+* Update @fluentui/react-timepicker-compat to 0.2.35
+
 ### 1.15.2 (7-27-2024)
 
 * Update @fluentui/react-components to 9.54.6
