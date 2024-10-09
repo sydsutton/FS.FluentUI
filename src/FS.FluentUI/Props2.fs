@@ -3159,3 +3159,222 @@ module atomMotion =
     type [<Erase>] iterations =
         static member inline infinity = Interop.mkProperty<IAtomMotionProp> "iterations" "Infinity"
 
+// -------------------------------------------------------------------------- Carousel --------------------------------------------------------------------------------------
+type [<Erase>] carousel =
+    inherit FelizProps.prop<ICarouselProp>
+    /// The initial page to display in uncontrolled mode.
+    static member inline defaultActiveIndex (value: int) = Interop.mkProperty<ICarouselProp> "defaultActiveIndex" value
+    /// The initial page to display in uncontrolled mode.
+    static member inline defaultActiveIndex (value: float) = Interop.mkProperty<ICarouselProp> "defaultActiveIndex" value
+    /// The initial page to display in uncontrolled mode.
+    static member inline defaultActiveIndex (value: decimal) = Interop.mkProperty<ICarouselProp> "defaultActiveIndex" value
+    /// The value of the currently active page.
+    static member inline activeIndex (value: int) = Interop.mkProperty<ICarouselProp> "activeIndex" value
+    /// The value of the currently active page.
+    static member inline activeIndex (value: float) = Interop.mkProperty<ICarouselProp> "activeIndex" value
+    /// The value of the currently active page.
+    static member inline activeIndex (value: decimal) = Interop.mkProperty<ICarouselProp> "activeIndex" value
+    /// Callback to notify a page change.
+    static member inline onActiveIndexChange (handler: CarouselIndexChangeData -> unit) = Interop.mkProperty<ICarouselProp> "onActiveIndexChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback to notify a page change.
+    static member inline onActiveIndexChange (value: MouseEvent -> CarouselIndexChangeData -> unit) = Interop.mkProperty<ICarouselProp> "onActiveIndexChange" (System.Func<_,_,_> value)
+    /// Circular enables the carousel to loop back around on navigation past trailing index.
+    static member inline circular (value: bool) = Interop.mkProperty<ICarouselProp> "circular" value
+    /// Controls the number of carousel cards per navigation element, will default to 'auto'
+    /// Recommended to set to '1' when using full page carousel cards.
+    static member inline groupSize (value: int) = Interop.mkProperty<ICarouselProp> "groupSize" value
+    /// Controls the number of carousel cards per navigation element, will default to 'auto'
+    /// Recommended to set to '1' when using full page carousel cards.
+    static member inline groupSize (value: float) = Interop.mkProperty<ICarouselProp> "groupSize" value
+    /// Controls the number of carousel cards per navigation element, will default to 'auto'
+    /// Recommended to set to '1' when using full page carousel cards.
+    static member inline groupSize (value: decimal) = Interop.mkProperty<ICarouselProp> "groupSize" value
+    /// Enables drag to scroll on carousel items.
+    static member inline draggable (value: bool) = Interop.mkProperty<ICarouselProp> "draggable" value
+    /// Adds whitespace to start/end so that 'align' prop is always respected for current index
+    static member inline whitespace (value: bool) = Interop.mkProperty<ICarouselProp> "whitespace" value
+    /// Localizes the string used to announce carousel page changes.
+    static member inline announcement (value: int -> int -> int array array -> string) = Interop.mkProperty<ICarouselProp> "announcement" value
+
+module carousel =
+    /// The alignment of the carousel.
+    type [<Erase>] align =
+        static member inline center = Interop.mkProperty<ICarouselProp> "align" "center"
+        static member inline start = Interop.mkProperty<ICarouselProp> "align" "start"
+        static member inline end' = Interop.mkProperty<ICarouselProp> "align" "end"
+
+    /// Controls the number of carousel cards per navigation element, will default to 'auto'
+    /// Recommended to set to '1' when using full page carousel cards.
+    type [<Erase>] groupSize =
+        static member inline auto = Interop.mkProperty<ICarouselProp> "groupSize" "auto"
+
+
+// -------------------------------------------------------------------------- CarouselAutoplayButton --------------------------------------------------------------------------------------
+type [<Erase>] carouselAutoplayButton =
+    inherit FelizProps.prop<ICarouselAutoplayButtonProp>
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: ReactElement) = Interop.mkProperty<ICarouselAutoplayButtonProp> "icon" value
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<ICarouselAutoplayButtonProp> "icon" (!!value |> createObj |> unbox)
+    /// When set, allows the button to be focusable even when it has been disabled. This is used in scenarios where it
+    /// is important to keep a consistent tab order for screen reader and keyboard users. The primary example of this
+    /// pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    static member inline disabledFocusable (value: bool) = Interop.mkProperty<ICarouselAutoplayButtonProp> "disabledFocusable" value
+    /// Defines whether the `ToggleButton` is initially in a checked state or not when rendered.
+    static member inline defaultChecked (value: bool) = Interop.mkProperty<ICarouselAutoplayButtonProp> "defaultChecked" value
+    /// Defines the controlled checked state of the `ToggleButton`.
+    /// If passed, `ToggleButton` ignores the `defaultChecked` property.
+    /// This should only be used if the checked state is to be controlled at a higher level and there is a plan to pass the
+    /// correct value based on handling `onClick` events and re-rendering.
+    static member inline checked' (value: bool) = Interop.mkProperty<ICarouselAutoplayButtonProp> "checked" value
+    /// Callback that informs the user when internal autoplay value has changed
+    static member inline onCheckedChange (handler: CarouselAutoplayChangeData -> unit) = Interop.mkProperty<ICarouselAutoplayButtonProp> "onCheckedChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback that informs the user when internal autoplay value has changed
+    static member inline onCheckedChange (value: MouseEvent -> CarouselAutoplayChangeData -> unit) = Interop.mkProperty<ICarouselAutoplayButtonProp> "onCheckedChange" (System.Func<_,_,_> value)
+
+module carouselAutoplayButton =
+    type [<Erase>] appearance =
+        /// 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+        static member inline subtle = Interop.mkProperty<ICarouselAutoplayButtonProp> "appearance" "subtle"
+        /// 'outline': Removes background styling.
+        static member inline outline = Interop.mkProperty<ICarouselAutoplayButtonProp> "appearance" "outline"
+        /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
+        static member inline secondary = Interop.mkProperty<ICarouselAutoplayButtonProp> "appearance" "secondary"
+        /// 'primary': Emphasizes the button as a primary action.
+        static member inline primary = Interop.mkProperty<ICarouselAutoplayButtonProp> "appearance" "primary"
+        /// 'transparent': Removes background and border styling.
+        static member inline transparent = Interop.mkProperty<ICarouselAutoplayButtonProp> "appearance" "transparent"
+
+    /// A button can format its icon to appear before or after its content.
+    type [<Erase>] iconPosition =
+        static member inline before = Interop.mkProperty<ICarouselAutoplayButtonProp> "iconPosition" "before"
+        static member inline after = Interop.mkProperty<ICarouselAutoplayButtonProp> "iconPosition" "after"
+
+    /// A button can be rounded, circular, or square.
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<ICarouselAutoplayButtonProp> "shape" "rounded"
+        static member inline circular = Interop.mkProperty<ICarouselAutoplayButtonProp> "shape" "circular"
+        static member inline square = Interop.mkProperty<ICarouselAutoplayButtonProp> "shape" "square"
+
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ICarouselAutoplayButtonProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ICarouselAutoplayButtonProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ICarouselAutoplayButtonProp> "size" "large"
+
+// -------------------------------------------------------------------------- CarouselButton --------------------------------------------------------------------------------------
+type [<Erase>] carouselButton =
+    inherit FelizProps.prop<ICarouselButtonProp>
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: ReactElement) = Interop.mkProperty<ICarouselButtonProp> "icon" value
+    /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<ICarouselButtonProp> "icon" (!!value |> createObj |> unbox)
+    /// When set, allows the button to be focusable even when it has been disabled. This is used in scenarios where it
+    /// is important to keep a consistent tab order for screen reader and keyboard users. The primary example of this
+    /// pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    static member inline disabledFocusable (value: bool) = Interop.mkProperty<ICarouselButtonProp> "disabledFocusable" value
+
+module carouselButton =
+    type [<Erase>] appearance =
+        /// 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+        static member inline subtle = Interop.mkProperty<ICarouselButtonProp> "appearance" "subtle"
+        /// 'outline': Removes background styling.
+        static member inline outline = Interop.mkProperty<ICarouselButtonProp> "appearance" "outline"
+        /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
+        static member inline secondary = Interop.mkProperty<ICarouselButtonProp> "appearance" "secondary"
+        /// 'primary': Emphasizes the button as a primary action.
+        static member inline primary = Interop.mkProperty<ICarouselButtonProp> "appearance" "primary"
+        /// 'transparent': Removes background and border styling.
+        static member inline transparent = Interop.mkProperty<ICarouselButtonProp> "appearance" "transparent"
+
+    /// A button can format its icon to appear before or after its content.
+    type [<Erase>] iconPosition =
+        static member inline before = Interop.mkProperty<ICarouselButtonProp> "iconPosition" "before"
+        static member inline after = Interop.mkProperty<ICarouselButtonProp> "iconPosition" "after"
+
+    /// A button can be rounded, circular, or square.
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<ICarouselButtonProp> "shape" "rounded"
+        static member inline circular = Interop.mkProperty<ICarouselButtonProp> "shape" "circular"
+        static member inline square = Interop.mkProperty<ICarouselButtonProp> "shape" "square"
+
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<ICarouselButtonProp> "size" "small"
+        static member inline medium = Interop.mkProperty<ICarouselButtonProp> "size" "medium"
+        static member inline large = Interop.mkProperty<ICarouselButtonProp> "size" "large"
+
+    /// Dictates whether button will be of type go next or go previous
+    type [<Erase>] navType =
+        static member inline prev = Interop.mkProperty<ICarouselButtonProp> "navType" "prev"
+        static member inline next = Interop.mkProperty<ICarouselButtonProp> "navType" "next"
+
+// -------------------------------------------------------------------------- CarouselCard --------------------------------------------------------------------------------------
+type [<Erase>] carouselCard =
+    inherit FelizProps.prop<ICarouselCardProp>
+    /// Sets the card styling to be responsive based on content.
+    static member inline autoSize (value: bool) = Interop.mkProperty<ICarouselCardProp> "autoSize" value
+
+// -------------------------------------------------------------------------- CarouselNav --------------------------------------------------------------------------------------
+type [<Erase>] carouselNav =
+    inherit FelizProps.prop<ICarouselNavProp>
+    /// Sets the card styling to be responsive based on content.
+    static member inline children (value: int -> ReactElement) = Interop.mkProperty<ICarouselNavProp> "children" (System.Func<_,_> value)
+    /// CarouselNav's children only takes an int -> ReactElement function
+    [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<'Property> "children" value
+    /// CarouselNav's children only takes an int -> ReactElement function
+    [<Obsolete>] static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray (Array.ofSeq elems))
+    /// The total number of slides available. Users may override if using the component without a Carousel wrapper or implementing custom functionality.
+    static member inline totalSlides (value: int) = Interop.mkProperty<ICarouselNavProp> "totalSlides" value
+    /// The total number of slides available. Users may override if using the component without a Carousel wrapper or implementing custom functionality.
+    static member inline totalSlides (value: float) = Interop.mkProperty<ICarouselNavProp> "totalSlides" value
+    /// The total number of slides available. Users may override if using the component without a Carousel wrapper or implementing custom functionality.
+    static member inline totalSlides (value: decimal) = Interop.mkProperty<ICarouselNavProp> "totalSlides" value
+
+module carouselNav =
+    type [<Erase>] appearance =
+        /// Enables an alternate brand style when set to 'brand'
+        static member inline brand = Interop.mkProperty<ICarouselNavProp> "appearance" "brand"
+
+// -------------------------------------------------------------------------- CarouselNavButton --------------------------------------------------------------------------------------
+type [<Erase>] carouselNavButton = FelizProps.prop<ICarouselNavButtonProp>
+
+// -------------------------------------------------------------------------- CarouselNavContainer --------------------------------------------------------------------------------------
+type [<Erase>] carouselNavContainer =
+    inherit FelizProps.prop<ICarouselNavContainerProp>
+    /// Sets the card styling to be responsive based on content.
+    static member inline next (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "next" value
+    static member inline next (value: ICarouselButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "next" (!!value |> createObj |> unbox)
+    static member inline prev (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "prev" value
+    static member inline prev (value: ICarouselButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "prev" (!!value |> createObj |> unbox)
+    static member inline autoplay (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "autoplay" value
+    static member inline autoplay (value: ICarouselAutoplayButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "autoplay" (!!value |> createObj |> unbox)
+
+module carouselNavContainer =
+    /// Defines the nav container layout
+    type [<Erase>] layout =
+        /// Default controls inline with carousel view
+        static member inline inline' = Interop.mkProperty<ICarouselNavContainerProp> "layout" "inline"
+        /// Similar to inline but places nav buttons on far left/right
+        static member inline inlineWide = Interop.mkProperty<ICarouselNavContainerProp> "layout" "inline-wide"
+        /// Controls overlaid on bottom of carousel viewport
+        static member inline overlay = Interop.mkProperty<ICarouselNavContainerProp> "layout" "overlay"
+        /// Controls overlaid on bottom of carousel viewport with prev+autoplay/next buttons on far side
+        static member inline overlayWide = Interop.mkProperty<ICarouselNavContainerProp> "layout" "overlay-wide"
+        /// Controls overlaid on bottom of carousel viewport, with prev/next buttons on sides vertically centered
+        static member inline overlayExpanded = Interop.mkProperty<ICarouselNavContainerProp> "layout" "overlay-expanded"
+
+// -------------------------------------------------------------------------- CarouselNavImageButton --------------------------------------------------------------------------------------
+type [<Erase>] carouselNavImageButton =
+    inherit FelizProps.prop<ICarouselNavImageButtonProp>
+    ///  Required: The image within the button
+    static member inline image (value: ReactElement) = Interop.mkProperty<ICarouselNavImageButtonProp> "image" value
+    ///  Required: The image within the button
+    static member inline image (value: IReactProperty list) = Interop.mkProperty<ICarouselNavImageButtonProp> "image" (!!value |> createObj |> unbox)
+        static member inline overlayExpanded = Interop.mkProperty<ICarouselNavContainerProp> "layout" "overlay-expanded"
+
+// -------------------------------------------------------------------------- CarouselSlider --------------------------------------------------------------------------------------
+type [<Erase>] carouselSlider =
+    inherit FelizProps.prop<ICarouselSliderProp>
+    ///cardFocus sets the carousel slider as a focus group,
+    ///enabling left/right navigation of elements.
+    ///This will also be passed into CarouselCards via context and set the appropriate focus attributes
+    static member inline cardFocus (value: bool) = Interop.mkProperty<ICarouselSliderProp> "image" value

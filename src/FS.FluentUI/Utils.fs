@@ -225,6 +225,16 @@ type [<Erase>] IImageSwatchProp = interface end
 type [<Erase>] IEmptySwatchProp = interface end
 type [<Erase>] ISwatchPickerGridProp = interface end
 
+type [<Erase>] ICarouselProp = interface end
+type [<Erase>] ICarouselButtonProp = interface end
+type [<Erase>] ICarouselCardProp = interface end
+type [<Erase>] ICarouselNavProp = interface end
+type [<Erase>] ICarouselNavButtonProp = interface end
+type [<Erase>] ICarouselNavContainerProp = interface end
+type [<Erase>] ICarouselNavImageButtonProp = interface end
+type [<Erase>] ICarouselSliderProp = interface end
+type [<Erase>] ICarouselAutoplayButtonProp = interface end
+
 type [<Erase>] IPresenceComponentProp = interface end
 type [<Erase>] IPresenceMotionSlotProp = interface end
 

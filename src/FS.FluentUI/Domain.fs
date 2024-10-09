@@ -1532,3 +1532,17 @@ type MotionTokens = {
     durationSlower: int
     durationUltraSlow: int
 }
+
+type CarouselIndexChangeData = {
+    /// The index to be set after event has occurred.
+    index: int
+    ``type``: string option;
+    event: Browser.Types.MouseEvent
+}
+
+type CarouselAutoplayChangeData = {
+    /// The updated autoplay value.
+    ``checked``: bool
+    ``type``: string option;
+    event: Browser.Types.MouseEvent
+}

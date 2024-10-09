@@ -864,7 +864,18 @@ type [<Erase>] Fui =
     static member inline swatchPickerRow (props: ISwatchPickerRowProp list) = createElement (import "SwatchPickerRow" FluentUIv9) props
     static member inline imageSwatch (props: IImageSwatchProp list) = createElement (import "ImageSwatch" FluentUIv9) props
     static member inline emptySwatch (props: IEmptySwatchProp list) = createElement (import "EmptySwatch" FluentUIv9) props
-
+    static member inline carousel (props: ICarouselProp list) = createElement (import "Carousel" FluentUIv9) props
+    static member inline carouselButton (props: ICarouselButtonProp list) = createElement (import "CarouselButton" FluentUIv9) props
+    static member inline carouselCard (props: ICarouselCardProp list) = createElement (import "CarouselCard" FluentUIv9) props
+    static member inline carouselCard (props: ReactElement list) = Interop.reactElementWithChildren (import "CarouselCard" FluentUIv9) props
+    static member inline carouselNav (props: ICarouselNavProp list) = createElement (import "CarouselNav" FluentUIv9) props
+    static member inline carouselNav (props: ReactElement list) = Interop.reactElementWithChildren (import "CarouselNav" FluentUIv9) props
+    static member inline carouselNavButton (props: ICarouselNavButtonProp list) = createElement (import "CarouselNavButton" FluentUIv9) props
+    static member inline carouselNavContainer (props: ICarouselNavContainerProp list) = createElement (import "CarouselNavContainer" FluentUIv9) props
+    static member inline carouselNavImageButton (props: ICarouselNavImageButtonProp list) = createElement (import "CarouselNavImageButton" FluentUIv9) props
+    static member inline carouselSlider (props: ICarouselSliderProp list) = createElement (import "CarouselSlider" FluentUIv9) props
+    static member inline carouselSlider (props: ReactElement list) = Interop.reactElementWithChildren (import "CarouselSlider" FluentUIv9) props
+    static member inline carouselAutoplayButton (props: ICarouselAutoplayButtonProp list) = createElement (import "CarouselAutoplayButton" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

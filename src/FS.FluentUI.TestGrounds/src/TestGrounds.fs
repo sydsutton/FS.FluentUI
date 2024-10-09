@@ -3845,6 +3845,106 @@ let MotionComponentTest () =
         ]
     ]
 
+let useCarouselClasses = Fui.makeStyles<{| slider: string; card: string; image: string |}> [
+    "slider", [
+        style.marginBottom (length.px 72)
+        style.width (length.px 500)
+    ]
+    "card", [
+        style.boxSizing.borderBox
+        style.width (length.px 400)
+        style.paddingLeft (length.px 52)
+        style.paddingRight (length.px 52)
+        style.overflow.hidden
+        style.alignItems.center
+    ]
+    "image", [
+        style.alignSelf.center
+        style.width (length.percent 100)
+    ]
+]
+
+type ImageDefinition = {
+    previewUrl: string
+    url: string
+
+    label: string
+}
+
+let images = [
+  {
+    previewUrl =
+      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-swatch.jpg"
+    url = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-full-img.jpg"
+    label = "sea"
+  }
+  {
+    previewUrl=
+      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-swatch.jpg"
+    url= "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-full-img.jpg"
+    label= "bridge"
+  }
+  {
+    previewUrl=
+      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-swatch.jpg"
+    url= "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-full-img.jpg"
+    label= "park"
+  }
+]
+
+[<ReactComponent>]
+let CarouselTest() =
+    let classes = useCarouselClasses()
+
+    Fui.carousel [
+        carousel.groupSize 1
+        carousel.align.center
+        carousel.announcement (fun index totalSlides slideGroupList -> $"Carousel {index + 1} of {totalSlides}")
+        carousel.children [
+            Fui.carouselSlider [
+                carouselSlider.className classes.slider
+                carouselSlider.children [
+                    yield! images |> List.mapi (fun index img ->
+                        Fui.carouselCard [
+                            carouselCard.key img.url
+                            carouselCard.className classes.card
+                            carouselCard.ariaLabel $"{index + 1} of {images.Length}"
+                            carouselCard.children [
+                                Fui.image [
+                                    image.className classes.image
+                                    image.src img.url
+                                    image.role "presentation"
+                                ]
+                            ]
+                        ]
+                    )
+                ]
+            ]
+
+            Fui.carouselNavContainer [
+                carouselNavContainer.layout.overlayExpanded
+                carouselNavContainer.next [
+                    carouselButton.ariaLabel "go to next"
+                ]
+                carouselNavContainer.prev [
+                    carouselButton.ariaLabel "go to prev"
+                ]
+                carouselNavContainer.children [
+                    Fui.carouselNav [
+                        carouselNav.children (fun index ->
+                            Fui.carouselNavImageButton [
+                                carouselNavImageButton.image [
+                                    prop.src images.[index].previewUrl
+                                    prop.ariaLabel $"Carousel Nav Button {index}"
+                                ]
+                            ]
+                        )
+                    ]
+                ]
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
@@ -3871,6 +3971,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            CarouselTest()
             PresenceComponentTest ()
             MotionComponentTest ()
             SwatchPickerTest()
