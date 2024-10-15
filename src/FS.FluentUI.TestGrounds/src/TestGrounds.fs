@@ -969,7 +969,7 @@ let TabListTest() =
     Fui.tabList [
         tabList.defaultSelectedValue "tab2"
         tabList.vertical true
-        tabList.appearance.transparent
+        tabList.appearance.subtleCircular
         tabList.onTabSelect (fun (d: ValueProp<string>) -> printfn "value %A" d.value )
         tabList.size.large
         tabList.children [
@@ -3899,6 +3899,7 @@ let CarouselTest() =
     Fui.carousel [
         carousel.groupSize 1
         carousel.align.center
+        carousel.motion.fade
         carousel.announcement (fun index totalSlides slideGroupList -> $"Carousel {index + 1} of {totalSlides}")
         carousel.children [
             Fui.carouselSlider [

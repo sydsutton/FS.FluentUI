@@ -3208,6 +3208,10 @@ module carousel =
     type [<Erase>] groupSize =
         static member inline auto = Interop.mkProperty<ICarouselProp> "groupSize" "auto"
 
+    /// Sets motion to fade in/out style with minimal movement
+    type [<Erase>] motion =
+        static member inline slide = Interop.mkProperty<ICarouselProp> "motion" "slide"
+        static member inline fade = Interop.mkProperty<ICarouselProp> "motion" "fade"
 
 // -------------------------------------------------------------------------- CarouselAutoplayButton --------------------------------------------------------------------------------------
 type [<Erase>] carouselAutoplayButton =

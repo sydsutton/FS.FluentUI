@@ -1927,6 +1927,8 @@ module tabList =
         static member inline subtle = Interop.mkProperty<ITabListProp> "appearance" "subtle"
         /// No background and border styling The appearance affects each of the contained tabs
         static member inline transparent = Interop.mkProperty<ITabListProp> "appearance" "transparent"
+        static member inline subtleCircular = Interop.mkProperty<ITabListProp> "appearance" "subtle-circular"
+        static member inline filledCircular = Interop.mkProperty<ITabListProp> "appearance" "filled-circular"
 
     /// A tab list can be either 'small', 'medium', or 'large' size. The size affects each of the contained tabs.
     type [<Erase>] size =
