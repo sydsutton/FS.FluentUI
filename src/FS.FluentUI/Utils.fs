@@ -234,6 +234,7 @@ type [<Erase>] ICarouselNavContainerProp = interface end
 type [<Erase>] ICarouselNavImageButtonProp = interface end
 type [<Erase>] ICarouselSliderProp = interface end
 type [<Erase>] ICarouselAutoplayButtonProp = interface end
+type [<Erase>] ICarouselViewportProp = interface end
 
 type [<Erase>] IPresenceComponentProp = interface end
 type [<Erase>] IPresenceMotionSlotProp = interface end

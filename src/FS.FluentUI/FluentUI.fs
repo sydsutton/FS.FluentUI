@@ -876,6 +876,7 @@ type [<Erase>] Fui =
     static member inline carouselSlider (props: ICarouselSliderProp list) = createElement (import "CarouselSlider" FluentUIv9) props
     static member inline carouselSlider (props: ReactElement list) = Interop.reactElementWithChildren (import "CarouselSlider" FluentUIv9) props
     static member inline carouselAutoplayButton (props: ICarouselAutoplayButtonProp list) = createElement (import "CarouselAutoplayButton" FluentUIv9) props
+    static member inline carouselViewport (props: ICarouselViewportProp list) = createElement (import "CarouselViewport" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

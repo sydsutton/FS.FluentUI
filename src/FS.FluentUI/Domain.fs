@@ -1546,3 +1546,11 @@ type CarouselAutoplayChangeData = {
     ``type``: string option;
     event: Browser.Types.MouseEvent
 }
+
+type OverflowState<'ItemType, 'GroupType> = {
+    hasOverflow: bool
+    // Typescript signature is Record<string, boolean>
+    itemVisibility: 'ItemType
+    // Typescript signature is Record<string, OverflowGroupState>
+    groupVisibility: 'GroupType
+}

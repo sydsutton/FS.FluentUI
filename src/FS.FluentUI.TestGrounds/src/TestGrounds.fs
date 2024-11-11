@@ -2073,31 +2073,62 @@ let OverflowMenu itemIds =
         ]
     ]
 
+type ItemVisibility = {
+    ``0``: bool
+    ``1``: bool
+    ``2``: bool
+    ``3``: bool
+    ``4``: bool
+    ``5``: bool
+    ``6``: bool
+    ``7``: bool
+}
+
+type GroupVisibility = {
+    ``0``: OverflowGroupState
+    ``1``: OverflowGroupState
+    ``2``: OverflowGroupState
+    ``3``: OverflowGroupState
+    ``4``: OverflowGroupState
+    ``5``: OverflowGroupState
+    ``6``: OverflowGroupState
+    ``7``: OverflowGroupState
+}
+
 [<ReactComponent>]
 let OverflowTest ()=
     let itemIds = [ "0"; "1"; "2"; "3"; "4"; "5"; "6"; "7"]
+    let (overflowState: (ItemVisibility option)), setOverflowState = React.useState (None)
     let styles = useStyles()
 
-    Fui.overflow [
-        overflow.children (
-            Html.div [
-                prop.className styles.overflow
-                prop.children [
-                    yield! itemIds |> List.map (fun i ->
-                        Fui.overflowItem [
-                            overflowItem.key i
-                            overflowItem.id i
-                            overflowItem.children (
-                                Fui.button [
-                                    button.text $"Item {i}"
+    Html.div [
+        prop.children [
+            if overflowState.IsSome then
+                Fui.text ($"{overflowState.Value.``7``}")
+            Fui.overflow [
+                overflow.onOverflowChange<ItemVisibility, GroupVisibility> (fun data -> setOverflowState (Some data.itemVisibility))
+                overflow.children (
+                    Html.div [
+                        prop.className styles.overflow
+                        prop.children [
+                            yield! itemIds |> List.map (fun i ->
+                                Fui.overflowItem [
+                                    overflowItem.key i
+                                    overflowItem.id i
+                                    overflowItem.children (
+                                        Fui.button [
+                                            button.text $"Item {i}"
+                                        ]
+                                    )
                                 ]
                             )
+                            yield OverflowMenu itemIds
                         ]
-                    )
-                    yield OverflowMenu itemIds
-                ]
+                    ]
+                )
             ]
-        )
+
+        ]
     ]
 
 [<ReactComponent>]
@@ -3845,7 +3876,7 @@ let MotionComponentTest () =
         ]
     ]
 
-let useCarouselClasses = Fui.makeStyles<{| slider: string; card: string; image: string |}> [
+let useCarouselClasses = Fui.makeStyles<{| slider: string; card: string; image: string; viewport: string |}> [
     "slider", [
         style.marginBottom (length.px 72)
         style.width (length.px 500)
@@ -3861,6 +3892,9 @@ let useCarouselClasses = Fui.makeStyles<{| slider: string; card: string; image: 
     "image", [
         style.alignSelf.center
         style.width (length.percent 100)
+    ]
+    "viewport", [
+        style.marginBottom (length.px 72)
     ]
 ]
 
@@ -3902,23 +3936,28 @@ let CarouselTest() =
         carousel.motion.fade
         carousel.announcement (fun index totalSlides slideGroupList -> $"Carousel {index + 1} of {totalSlides}")
         carousel.children [
-            Fui.carouselSlider [
-                carouselSlider.className classes.slider
-                carouselSlider.children [
-                    yield! images |> List.mapi (fun index img ->
-                        Fui.carouselCard [
-                            carouselCard.key img.url
-                            carouselCard.className classes.card
-                            carouselCard.ariaLabel $"{index + 1} of {images.Length}"
-                            carouselCard.children [
-                                Fui.image [
-                                    image.className classes.image
-                                    image.src img.url
-                                    image.role "presentation"
+            Fui.carouselViewport [
+                carouselViewport.className classes.viewport
+                carouselViewport.children [
+                    Fui.carouselSlider [
+                        carouselSlider.className classes.slider
+                        carouselSlider.children [
+                            yield! images |> List.mapi (fun index img ->
+                                Fui.carouselCard [
+                                    carouselCard.key img.url
+                                    carouselCard.className classes.card
+                                    carouselCard.ariaLabel $"{index + 1} of {images.Length}"
+                                    carouselCard.children [
+                                        Fui.image [
+                                            image.className classes.image
+                                            image.src img.url
+                                            image.role "presentation"
+                                        ]
+                                    ]
                                 ]
-                            ]
+                            )
                         ]
-                    )
+                    ]
                 ]
             ]
 

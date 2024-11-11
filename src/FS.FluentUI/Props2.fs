@@ -21,6 +21,35 @@ type [<Erase>] overflow  =
     /// The minimum number of visible items
     static member inline minimumVisible (value: decimal) = Interop.mkProperty<IOverflowProp> "minimumVisible" value
     static member inline children (value: ReactElement) = Interop.mkProperty<IOverflowProp> "children" value
+    /// For 'ItemType, the Typescript signature is Record<string, boolean>.
+    /// For our purposes, it should look something like this, where the fields are the ids of your overflow items.
+    /// <pre><code>
+    /// type ItemVisibility = {
+    ///     ``0``: bool
+    ///     ``1``: bool
+    ///     ``2``: bool
+    ///     ``3``: bool
+    ///     ``4``: bool
+    ///     ``5``: bool
+    ///     ``6``: bool
+    ///     ``7``: bool
+    ///}
+    /// </code></pre>
+    /// For 'GroupType, the Typescript signature is Record<string, OverflowGroupState>.
+    /// Ours should look like this.
+    /// <pre><code>
+    /// type GroupVisibility = {
+    ///     ``0``: OverflowGroupState
+    ///     ``1``: OverflowGroupState
+    ///     ``2``: OverflowGroupState
+    ///     ``3``: OverflowGroupState
+    ///     ``4``: OverflowGroupState
+    ///     ``5``: OverflowGroupState
+    ///     ``6``: OverflowGroupState
+    ///     ``7``: OverflowGroupState
+    /// }
+    /// </code></pre>
+    static member inline onOverflowChange<'ItemType, 'GroupType> (handler: OverflowState<'ItemType, 'GroupType> -> unit) = Interop.mkProperty<IOverflowProp> "onOverflowChange" (System.Func<_,_,_> (fun _ value -> handler value))
 
 module overflow =
     /// Horizontal or vertical overflow
@@ -3382,3 +3411,6 @@ type [<Erase>] carouselSlider =
     ///enabling left/right navigation of elements.
     ///This will also be passed into CarouselCards via context and set the appropriate focus attributes
     static member inline cardFocus (value: bool) = Interop.mkProperty<ICarouselSliderProp> "image" value
+
+// -------------------------------------------------------------------------- CarouselViewport --------------------------------------------------------------------------------------
+type [<Erase>] carouselViewport = FelizProps.prop<ICarouselViewportProp>
