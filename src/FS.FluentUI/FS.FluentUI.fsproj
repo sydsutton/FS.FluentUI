@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.16.0</Version>
+        <Version>1.16.1</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,12 +12,8 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.55.0
-            - Add ZIndexTokens to Tokens
-            - Add Carousel component(s)
-            - Update @fluentui/react-datepicker-compat to 0.4.52
-            - Update @fluentui/react-calendar-compat to 0.1.19
-            - Update @fluentui/react-timepicker-compat to 0.2.35
+            - Update @fluentui/react-components to 9.56.0
+            - Add overflow.onOverflowChange prop
         </PackageReleaseNotes>
     </PropertyGroup>
 
