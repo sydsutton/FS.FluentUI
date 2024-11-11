@@ -1,6 +1,11 @@
 Release Notes
 =========
 
+### 1.16.1 (11-11-2024)
+
+* Update @fluentui/react-components to 9.56.0
+* Add overflow.onOverflowChange prop
+
 ### 1.16.0 (10-9-2024)
 
 * Update @fluentui/react-components to 9.55.0
