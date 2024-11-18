@@ -98,6 +98,8 @@ Current NPM dependencies:
 * @fluentui/react-timepicker-compat
 * @fluentui-contrib/react-data-grid-react-window
 
+#### NOTE: If you don't need to use a DatePicker, Calendar, TimePicker, or VirtualizedDataGrid component, then the only npm package you need is `@fluentui/react-components`. Feel free to pick and choose which packages you download according to what components you need or don't need, so long as you have `@fluentui/react-components` downloaded.
+
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
 ```bash
 cd ./{path to Client}
