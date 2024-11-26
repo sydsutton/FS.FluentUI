@@ -70,12 +70,28 @@ type [<Erase>] Fui =
     static member inline useFocusFinders (): FocusFinders = import "useFocusFinders" FluentUIv9
 
     /// Hook to generate a unique ID.
-    /// @param prefix - Optional prefix for the ID. Defaults to 'fui-'.
-    /// @param providedId - Optional id provided by a parent component. Defaults to the provided value if present,
-    ///  without conditioning the hook call
-    /// @returns The ID
+    /// prefix - Optional prefix for the ID. Defaults to 'fui-'.
+    /// providedId - Optional id provided by a parent component. Defaults to the provided value if present, without conditioning the hook call
     [<Hook>]
     static member inline useId (prefix: string option, providedId: string option): string = import "useId" FluentUIv9
+
+    /// Hook to generate a unique ID.
+    /// prefix - Optional prefix for the ID. Defaults to 'fui-'.
+    /// providedId - Optional id provided by a parent component. Defaults to the provided value if present, without conditioning the hook call
+    [<Hook>]
+    static member inline useId (prefix: string): string = import "useId" FluentUIv9
+
+    /// Hook to generate a unique ID.
+    /// prefix - Optional prefix for the ID. Defaults to 'fui-'.
+    /// providedId - Optional id provided by a parent component. Defaults to the provided value if present, without conditioning the hook call
+    [<Hook>]
+    static member inline useId (prefix: string, providedId: string): string = import "useId" FluentUIv9
+
+    /// Hook to generate a unique ID.
+    /// prefix - Optional prefix for the ID. Defaults to 'fui-'.
+    /// providedId - Optional id provided by a parent component. Defaults to the provided value if present, without conditioning the hook call
+    [<Hook>]
+    static member inline useId (): string = import "useId" FluentUIv9
 
     /// If an id is provided all imperative methods control that specific toaster
     /// Returns Imperative methods to control toasts

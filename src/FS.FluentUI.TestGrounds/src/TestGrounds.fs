@@ -882,7 +882,7 @@ let TextAreaTest () =
 
 [<ReactComponent>]
 let SliderTest() =
-    let id = Fui.useId(None, None)
+    let id = Fui.useId()
     let value, setValue = React.useState (100)
     let valueText = $"Current Value: {value}"
     Fui.stack [
@@ -923,7 +923,8 @@ let SwitchTest() =
 [<ReactComponent>]
 let RadioGroupTest() =
     let value, setValue = React.useState "banana"
-    let labelId = Fui.useId(Some "label-", None)
+    let labelId = Fui.useId "label-"
+
     Fui.stack [
         stack.horizontal false
         stack.children [
