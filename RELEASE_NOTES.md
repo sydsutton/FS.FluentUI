@@ -1,6 +1,14 @@
 Release Notes
 =========
 
+### 1.16.2 (12-4-2024)
+
+* Update @fluentui/react-components to 9.56.3
+* Update Icons and BundleIcons
+* Add additional Fui.useId overloads
+* Add missing tableCellActions overload
+* Update secondary packages
+
 ### 1.16.1 (11-11-2024)
 
 * Update @fluentui/react-components to 9.56.0
