@@ -740,6 +740,7 @@ type [<Erase>] Fui =
     static member inline tableCellLayout (props: ReactElement list) = Interop.reactElementWithChildren (import "TableCellLayout" FluentUIv9) props
     static member inline tableCellLayout (props: ITableCellLayoutProp list) = createElement (import "TableCellLayout" FluentUIv9) props
     static member inline tableCellActions (props: ReactElement list) = Interop.reactElementWithChildren (import "TableCellActions" FluentUIv9) props
+    static member inline tableCellActions (props: ITableCellActionsProp list) = createElement (import "TableCellActions" FluentUIv9) props
     static member inline tableResizeHandle (props: ITableResizeHandleProp list) = createElement (import "TableResizeHandle" FluentUIv9) props
 
     // DataGrid
