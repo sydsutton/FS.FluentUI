@@ -12,8 +12,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.56.0
-            - Add overflow.onOverflowChange prop
+            - Update @fluentui/react-components to 9.56.3
+            - Update Icons and BundleIcons
+            - Add additional Fui.useId overloads
         </PackageReleaseNotes>
     </PropertyGroup>
 
