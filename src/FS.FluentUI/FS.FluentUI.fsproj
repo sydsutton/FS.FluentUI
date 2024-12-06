@@ -45,7 +45,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-components" Version="gte 9.56.3" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-components" Version="gte 9.56.4" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.55" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.1.21" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.2.40" ResolutionStrategy="Max" />

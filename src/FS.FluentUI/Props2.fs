@@ -636,6 +636,18 @@ type [<Erase>] virtualizer =
     /// A ref that provides the size of container (vertical - height, horizontal - width), set by a resize observer.
     /// Virtualizer Measure hooks provide a suitable reference.
     static member inline containerSizeRef (value: MutableRefObject<decimal>) = Interop.mkProperty<IVirtualizerProp> "containerSizeRef" value
+    /// A callback that enables updating scroll position for calculating required dynamic lengths, this should be passed in from useDynamicVirtualizerMeasure
+    static member inline updateScrollPosition (value: int -> unit) = Interop.mkProperty<IVirtualizerProp> "updateScrollPosition" (System.Func<_,_> value)
+    /// A callback that enables updating scroll position for calculating required dynamic lengths, this should be passed in from useDynamicVirtualizerMeasure
+    static member inline updateScrollPosition (value: float -> unit) = Interop.mkProperty<IVirtualizerProp> "updateScrollPosition" (System.Func<_,_> value)
+    /// A callback that enables updating scroll position for calculating required dynamic lengths, this should be passed in from useDynamicVirtualizerMeasure
+    static member inline updateScrollPosition (value: decimal -> unit) = Interop.mkProperty<IVirtualizerProp> "updateScrollPosition" (System.Func<_,_> value)
+    /// Spacing between rendered children for calculation, should match the container's gap CSS value.
+    static member inline gap (value: int) = Interop.mkProperty<IVirtualizerProp> "gap" value
+    /// Spacing between rendered children for calculation, should match the container's gap CSS value.
+    static member inline gap (value: float) = Interop.mkProperty<IVirtualizerProp> "gap" value
+    /// Spacing between rendered children for calculation, should match the container's gap CSS value.
+    static member inline gap (value: decimal) = Interop.mkProperty<IVirtualizerProp> "gap" value
 
 module virtualizer =
     /// The scroll direction
