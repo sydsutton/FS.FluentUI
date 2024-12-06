@@ -6,27 +6,15 @@ open FS.FluentUI
 open FS.FluentUI.V8toV9
 open Browser.Types
 
-type Msg =
-    | ChangeEmail of string
+type Msg = ChangeEmail of string
 
-type Model = {
-    Email: string
-}
+type Model = { Email: string }
 
-let init () =
-    {
-        Email = ""
-    },
-    Cmd.none
+let init () = { Email = "" }, Cmd.none
 
 let update msg model =
     match msg with
-    | ChangeEmail e ->
-        {
-            model with
-                Email = e
-        },
-        Cmd.none
+    | ChangeEmail e -> { model with Email = e }, Cmd.none
 
 let tokens = Theme.tokens
 
@@ -54,121 +42,121 @@ type Styles = {
     swatchInput: string
 }
 
-let useStyles = Fui.makeStyles<Styles> [
-    "accordion", [
-        style.color.red
-        style.backgroundColor.darkGray
+let useStyles =
+    Fui.makeStyles<Styles> [
+        "accordion",
+        [
+            style.color.red
+            style.backgroundColor.darkGray
+        ]
+        "useArrowNavigationGroup",
+        [
+            style.display.flex
+            style.columnGap 15
+        ]
+        "tooltip",
+        [
+            style.backgroundColor tokens.colorBrandBackground
+            style.color tokens.colorNeutralForegroundInverted
+        ]
+        "icon", [ style.color.green ]
+        "compoundButton", [ style.width (length.px 150) ]
+        "splitButton", [ style.width (length.px 150) ]
+        "skeletonStack",
+        [
+            style.backgroundColor tokens.colorBrandForegroundOnLight
+            style.padding (length.px 50)
+        ]
+        "day", [ style.border (1, borderStyle.solid, "red") ]
+        "overflow",
+        [
+            style.overflow.hidden
+            style.display.flex
+            style.flexWrap.nowrap
+            style.minWidth (length.px 200)
+            style.maxWidth (length.px 900)
+            style.height (length.px 30)
+            style.resize.horizontal
+            style.border (1, borderStyle.solid, "lightGray")
+            style.padding (length.px 16)
+            style.zIndex 0
+        ]
+        "breadcrumb",
+        [
+            style.backgroundColor tokens.colorNeutralBackground2
+            style.overflow.hidden
+            style.padding (length.px 25)
+            style.height (length.px 50)
+            style.minWidth (length.px 150)
+            style.zIndex 0
+            style.resize.horizontal
+            style.maxWidth (length.px 600)
+        ]
+        "portalContainer",
+        [
+            style.border (3, borderStyle.dashed, "gray")
+            style.padding (length.px 5)
+        ]
+        "portal",
+        [
+            style.backgroundColor tokens.colorPaletteYellowBackground3
+            style.border (3, borderStyle.dashed, "gray")
+            style.padding (length.px 5)
+        ]
+        "backgroundColor", [ style.backgroundColor "red" ]
+        "yellowText", [ style.color "yellow" ]
+        "borderRadius", [ style.borderRadius (20, 5, 20, 5) ]
+        "root",
+        [
+            style.height (length.px 180)
+            style.display.flex
+            style.flexDirection.column
+            style.alignItems.center
+            style.rowGap (length.px 24)
+        ]
+        "rectangle",
+        [
+            style.borderRadius (length.px 8)
+            style.width (length.px 150)
+            style.height (length.px 100)
+            style.display.flex
+            style.flexDirection.column
+            style.alignContent.center
+            style.justifyContent.center
+            style.backgroundColor tokens.colorBrandBackground
+            style.opacity 0
+            style.transform.translate3D (0, 0, 0)
+            style.transform.scale 0.25
+            style.custom ("transitionDuration", $"{tokens.durationSlow}, {tokens.durationSlower}")
+            style.transitionProperty "opacity, transform"
+            style.custom ("willChange", "opacity, transform")
+            style.color.white
+            style.flexWrap.wrap
+        ]
+        "visible",
+        [
+            style.opacity 1
+            style.transform.translate3D (0, 0, 0)
+            style.transform.scale 1
+        ]
+        "swatchExample",
+        [
+            style.width (length.px 100)
+            style.height (length.px 100)
+            style.border (1, borderStyle.solid, "#ccc")
+            style.margin (length.px 20)
+        ]
+        "swatchButton", [ style.marginRight (length.px 8) ]
+        "swatchInput",
+        [
+            style.display.block
+            style.margin (length.px 10)
+        ]
     ]
-    "useArrowNavigationGroup", [
-        style.display.flex
-        style.columnGap 15
-    ]
-    "tooltip", [
-        style.backgroundColor tokens.colorBrandBackground
-        style.color tokens.colorNeutralForegroundInverted
-    ]
-    "icon", [
-        style.color.green
-    ]
-    "compoundButton", [
-        style.width (length.px 150)
-    ]
-    "splitButton", [
-        style.width (length.px 150)
-    ]
-    "skeletonStack", [
-        style.backgroundColor tokens.colorBrandForegroundOnLight
-        style.padding (length.px 50)
-    ]
-    "day", [
-        style.border (1, borderStyle.solid, "red")
-    ]
-    "overflow", [
-        style.overflow.hidden
-        style.display.flex
-        style.flexWrap.nowrap
-        style.minWidth (length.px 200)
-        style.maxWidth (length.px 900)
-        style.height (length.px 30)
-        style.resize.horizontal
-        style.border (1, borderStyle.solid, "lightGray")
-        style.padding (length.px 16)
-        style.zIndex 0
-    ]
-    "breadcrumb", [
-        style.backgroundColor tokens.colorNeutralBackground2
-        style.overflow.hidden
-        style.padding (length.px 25)
-        style.height (length.px 50)
-        style.minWidth (length.px 150)
-        style.zIndex 0
-        style.resize.horizontal
-        style.maxWidth (length.px 600)
-    ]
-    "portalContainer", [
-        style.border(3, borderStyle.dashed, "gray")
-        style.padding (length.px 5)
-    ]
-    "portal", [
-        style.backgroundColor tokens.colorPaletteYellowBackground3
-        style.border(3, borderStyle.dashed, "gray")
-        style.padding (length.px 5)
-    ]
-    "backgroundColor", [
-        style.backgroundColor "red"
-    ]
-    "yellowText", [ style.color "yellow" ]
-    "borderRadius", [
-        style.borderRadius (20, 5, 20, 5)
-    ]
-    "root", [
-        style.height (length.px 180)
-        style.display.flex
-        style.flexDirection.column
-        style.alignItems.center
-        style.rowGap (length.px 24)
-    ]
-    "rectangle", [
-        style.borderRadius (length.px 8)
-        style.width (length.px 150)
-        style.height (length.px 100)
-        style.display.flex
-        style.flexDirection.column
-        style.alignContent.center
-        style.justifyContent.center
-        style.backgroundColor tokens.colorBrandBackground
-        style.opacity 0
-        style.transform.translate3D (0, 0, 0)
-        style.transform.scale 0.25
-        style.custom ("transitionDuration", $"{tokens.durationSlow}, {tokens.durationSlower}")
-        style.transitionProperty "opacity, transform"
-        style.custom ("willChange", "opacity, transform")
-        style.color.white
-        style.flexWrap.wrap
-    ]
-    "visible", [
-        style.opacity 1
-        style.transform.translate3D(0,0,0)
-        style.transform.scale 1
-    ]
-    "swatchExample", [
-        style.width (length.px 100)
-        style.height (length.px 100)
-        style.border (1, borderStyle.solid, "#ccc")
-        style.margin (length.px 20)
-    ]
-    "swatchButton", [
-        style.marginRight (length.px 8)
-    ]
-    "swatchInput", [
-        style.display.block
-        style.margin (length.px 10)
-    ]
-]
 
 [<ReactComponent>]
 let Accordion () =
-    let openItems, setOpenItems = React.useState [1]
+    let openItems, setOpenItems = React.useState [ 1 ]
 
     let getIcon key =
         if openItems |> List.contains key then
@@ -189,13 +177,9 @@ let Accordion () =
                     Fui.accordionHeader [
                         accordionHeader.expandIcon (getIcon 1)
                         accordionHeader.expandIconPosition.end'
-                        accordionHeader.children [
-                            Fui.text "Header 1"
-                        ]
+                        accordionHeader.children [ Fui.text "Header 1" ]
                     ]
-                    Fui.accordionPanel [
-                        Fui.text "Panel 1"
-                    ]
+                    Fui.accordionPanel [ Fui.text "Panel 1" ]
                 ]
             ]
             Fui.accordionItem [
@@ -204,13 +188,9 @@ let Accordion () =
                 accordionItem.children [
                     Fui.accordionHeader [
                         accordionHeader.expandIcon (getIcon 2)
-                        accordionHeader.children [
-                            Fui.text "Header 2"
-                        ]
+                        accordionHeader.children [ Fui.text "Header 2" ]
                     ]
-                    Fui.accordionPanel [
-                        Fui.text "Panel 2"
-                    ]
+                    Fui.accordionPanel [ Fui.text "Panel 2" ]
                 ]
             ]
             Fui.accordionItem [
@@ -219,13 +199,9 @@ let Accordion () =
                 accordionItem.children [
                     Fui.accordionHeader [
                         accordionHeader.expandIcon (getIcon 3)
-                        accordionHeader.children [
-                            Fui.text "Header 3"
-                        ]
+                        accordionHeader.children [ Fui.text "Header 3" ]
                     ]
-                    Fui.accordionPanel [
-                        Fui.text "Panel 3"
-                    ]
+                    Fui.accordionPanel [ Fui.text "Panel 3" ]
                 ]
             ]
         ]
@@ -241,12 +217,8 @@ let Checkbox () =
             checkbox.checked' isChecked1
             checkbox.onChange (fun i -> setIsChecked1 i)
             checkbox.size.large
-            checkbox.label (
-                Fui.text "This is a label"
-            )
-            checkbox.indicator (
-                Fui.icon.alignStartHorizontalRegular []
-            )
+            checkbox.label (Fui.text "This is a label")
+            checkbox.indicator (Fui.icon.alignStartHorizontalRegular [])
             checkbox.shape.circular
             checkbox.labelPosition.before
         ]
@@ -268,9 +240,7 @@ let avatarTest =
         avatar.color.forest
         avatar.size.``96``
         avatar.shape.circular
-        avatar.badge [
-            presenceBadge.status.outOfOffice
-        ]
+        avatar.badge [ presenceBadge.status.outOfOffice ]
     ]
 
 let buttonTest =
@@ -300,13 +270,25 @@ let menuButtonTest =
         menuButton.text "This is a menu button"
     ]
 
-let AddIcon = Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
-let DataIcon = Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
-let FunnelIcon = Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
+let AddIcon =
+    Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
+
+let DataIcon =
+    Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
+
+let FunnelIcon =
+    Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
 
 [<ReactComponent>]
-let MenuTest() =
-    let checkedValues, setCheckedValues = React.useState([ "data", [| "add" |]; "info", [| "filterInfo" |] ])
+let MenuTest () =
+    let checkedValues, setCheckedValues =
+        React.useState (
+            [
+                "data", [| "add" |]
+                "info", [| "filterInfo" |]
+            ]
+        )
+
     let isOpen, setIsOpen = React.useState false
 
     Fui.menu [
@@ -317,17 +299,12 @@ let MenuTest() =
             positioning.matchTargetSize.width
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
-        menu.onCheckedValueChange (fun (_: MouseEvent) (d:MenuCheckedValueChangeData) ->
-            setCheckedValues([ d.name, d.checkedItems ] |> List.append checkedValues)
-        )
+        menu.onCheckedValueChange (fun (_: MouseEvent) (d: MenuCheckedValueChangeData) ->
+            setCheckedValues ([ d.name, d.checkedItems ] |> List.append checkedValues))
         menu.children [
             Fui.menuTrigger [
                 menuTrigger.disableButtonEnhancement true
-                menuTrigger.children (
-                    Fui.button [
-                        button.text "Toggle menu"
-                    ]
-                )
+                menuTrigger.children (Fui.button [ button.text "Toggle menu" ])
             ]
             Fui.menuPopover [
                 Fui.menuList [
@@ -335,59 +312,45 @@ let MenuTest() =
                         menuItemCheckbox.icon (AddIcon [])
                         menuItemCheckbox.name "data"
                         menuItemCheckbox.value "add"
-                        menuItemCheckbox.children [
-                            Fui.text "Add Data"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Add Data" ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (DataIcon [])
                         menuItemCheckbox.name "data"
                         menuItemCheckbox.value "trends"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Trends"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Show Trends" ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (FunnelIcon [])
                         menuItemCheckbox.name "data"
                         menuItemCheckbox.value "filter"
-                        menuItemCheckbox.children [
-                            Fui.text "Filter Data"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Filter Data" ]
                     ]
                     Fui.menuDivider []
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (AddIcon [])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "addInfo"
-                        menuItemCheckbox.children [
-                            Fui.text "Add Info"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Add Info" ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (DataIcon [])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "infoTrends"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Info Trends"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Show Info Trends" ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.icon (FunnelIcon [])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "filterInfo"
-                        menuItemCheckbox.children [
-                            Fui.text "Filter Info"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Filter Info" ]
                     ]
                     Fui.menuItemCheckbox [
                         menuItemCheckbox.disabled true
                         menuItemCheckbox.icon (Fui.icon.editFilled [])
                         menuItemCheckbox.name "disabled"
                         menuItemCheckbox.value "disabled"
-                        menuItemCheckbox.children [
-                            Fui.text "Show Debug Panel"
-                        ]
+                        menuItemCheckbox.children [ Fui.text "Show Debug Panel" ]
                     ]
                     Fui.menuItemSwitch [
                         menuItemSwitch.name "new-explorer"
@@ -401,11 +364,7 @@ let MenuTest() =
                                 Fui.menuItem "Open"
                                 Fui.menuTrigger [
                                     menuTrigger.disableButtonEnhancement true
-                                    menuTrigger.children (
-                                        Fui.menuItem [
-                                            menuItem.ariaLabel "Open on platform"
-                                        ]
-                                    )
+                                    menuTrigger.children (Fui.menuItem [ menuItem.ariaLabel "Open on platform" ])
                                 ]
                             ]
                             Fui.menuPopover [
@@ -424,12 +383,14 @@ let MenuTest() =
         ]
     ]
 
-let CheckedIcon = Fui.bundleIcon(bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
+let CheckedIcon =
+    Fui.bundleIcon (bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
 
 [<ReactComponent>]
 let ToggleButtons () =
     let isChecked1, setIsChecked1 = React.useState true
     let isChecked2, setIsChecked2 = React.useState false
+
     Html.div [
         Fui.toggleButton [
             toggleButton.icon (CheckedIcon [])
@@ -507,7 +468,10 @@ let divider =
     Fui.divider [
         divider.vertical false
         divider.appearance.brand
-        divider.style [ style.color.red; style.fontWeight 700 ]
+        divider.style [
+            style.color.red
+            style.fontWeight 700
+        ]
         divider.text "Divider"
     ]
 
@@ -557,23 +521,22 @@ let textTest =
                 text.underline true
                 text.text "Body 1 Strong"
             ]
-            Fui.text.display [
-                text.text "Display"
-            ]
+            Fui.text.display [ text.text "Display" ]
         ]
     ]
 
 [<ReactComponent>]
 let UseArrowNavigationGroup () =
-    let keyboardNavAttr = Fui.useArrowNavigationGroup [
-        useArrowNavigationGroupOptions.circular true
-        useArrowNavigationGroupOptions.ignoreDefaultKeydown [
-            ignoreKeyDown.arrowDown true
-            ignoreKeyDown.end' false
+    let keyboardNavAttr =
+        Fui.useArrowNavigationGroup [
+            useArrowNavigationGroupOptions.circular true
+            useArrowNavigationGroupOptions.ignoreDefaultKeydown [
+                ignoreKeyDown.arrowDown true
+                ignoreKeyDown.end' false
+            ]
         ]
-    ]
 
-    let styles = useStyles()
+    let styles = useStyles ()
 
     Html.div [
         prop.ariaLabel "Editor toolbar example"
@@ -641,22 +604,24 @@ let PopoverTest () =
                     positioning.align.start
                     positioning.target target
                     positioning.coverTarget true
-                    positioning.offset [
-                        offset.crossAxis 25
-                    ]
+                    positioning.offset [ offset.crossAxis 25 ]
                 ]
-                popover.onOpenChange (fun (data: OpenProp) -> if data.``open`` = false then setVisible false)
+                popover.onOpenChange (fun (data: OpenProp) ->
+                    if data.``open`` = false then
+                        setVisible false)
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
-                        popoverTrigger.children (
-                            Fui.button [
-                                button.text "Toggle Popover"
-                            ]
-                        )
+                        popoverTrigger.children (Fui.button [ button.text "Toggle Popover" ])
                     ]
                     Fui.popoverSurface [
-                        popoverSurface.style [ style.display.flex; style.flexDirection.column; style.height 100; style.alignContent.center; style.justifyContent.center ]
+                        popoverSurface.style [
+                            style.display.flex
+                            style.flexDirection.column
+                            style.height 100
+                            style.alignContent.center
+                            style.justifyContent.center
+                        ]
                         popoverSurface.children [
                             Fui.text "This is example content"
                             if visible then
@@ -681,18 +646,14 @@ let PopoverTest () =
 let tooltipTest =
     Fui.tooltip [
         tooltip.withArrow true
-        tooltip.content (
-            Fui.text "Example tooltip"
-        )
+        tooltip.content (Fui.text "Example tooltip")
         tooltip.relationship.label
         tooltip.positioning.belowStart
         tooltip.onVisibleChange (fun (v: OnVisibleChangeData) -> printfn "v %A" v.visible)
         tooltip.children (
             Fui.button [
                 button.size.large
-                button.icon (
-                    Fui.icon.slideTextRegular []
-                )
+                button.icon (Fui.icon.slideTextRegular [])
             ]
         )
     ]
@@ -715,9 +676,7 @@ let labelTest =
             ]
             Fui.label [
                 label.text "This is a label"
-                label.required (
-                    Fui.icon.alignStartVerticalRegular []
-                )
+                label.required (Fui.icon.alignStartVerticalRegular [])
                 label.weight.semibold
                 label.size.large
             ]
@@ -725,8 +684,8 @@ let labelTest =
     ]
 
 [<ReactComponent>]
-let IconTest() =
-    let styles = useStyles()
+let IconTest () =
+    let styles = useStyles ()
 
     Fui.stack [
         stack.horizontal true
@@ -755,12 +714,8 @@ let inputTest model dispatch =
                         input.id "emailId"
                         input.value model.Email
                         input.onChange (fun (v: ValueProp<string>) -> ChangeEmail v.value |> dispatch)
-                        input.contentBefore (
-                            Fui.icon.albumAddFilled []
-                        )
-                        input.contentAfter (
-                            Fui.icon.airplaneRegular []
-                        )
+                        input.contentBefore (Fui.icon.albumAddFilled [])
+                        input.contentAfter (Fui.icon.airplaneRegular [])
                         input.size.large
                         input.appearance.outline
                     ]
@@ -776,9 +731,7 @@ let inputTest model dispatch =
                     Fui.input [
                         input.type'.url
                         input.size.small
-                        input.contentBefore (
-                            Fui.icon.alertBadgeRegular []
-                        )
+                        input.contentBefore (Fui.icon.alertBadgeRegular [])
                         input.id "urlId"
                         input.appearance.underline
                     ]
@@ -820,8 +773,8 @@ let inputTest model dispatch =
     ]
 
 [<ReactComponent>]
-let CompoundButtonTest() =
-    let styles = useStyles()
+let CompoundButtonTest () =
+    let styles = useStyles ()
 
     Fui.compoundButton [
         compoundButton.appearance.primary
@@ -834,8 +787,8 @@ let CompoundButtonTest() =
     ]
 
 [<ReactComponent>]
-let SplitButtonTest() =
-    let styles = useStyles()
+let SplitButtonTest () =
+    let styles = useStyles ()
 
     Fui.stack [
         stack.horizontal false
@@ -852,17 +805,12 @@ let SplitButtonTest() =
                                 button.text "Primary action button"
                             ]
                             splitButton.icon (Fui.icon.shareAndroidRegular [])
-                        ]
-                    )
+                        ])
                 ]
                 Fui.menuPopover [
                     Fui.menuList [
-                        Fui.menuItem [
-                            menuItem.text "Item a"
-                        ]
-                        Fui.menuItem [
-                            menuItem.text "Item b"
-                        ]
+                        Fui.menuItem [ menuItem.text "Item a" ]
+                        Fui.menuItem [ menuItem.text "Item b" ]
                     ]
                 ]
             ]
@@ -872,19 +820,25 @@ let SplitButtonTest() =
 [<ReactComponent>]
 let TextAreaTest () =
     let value, setValue = React.useState "Not past 20 chars"
+
     Fui.textArea [
         textArea.size.large
-        textArea.onChange (fun (d: ValueProp<string>) -> if d.value.Length <= 20 then setValue d.value else setValue value)
+        textArea.onChange (fun (d: ValueProp<string>) ->
+            if d.value.Length <= 20 then
+                setValue d.value
+            else
+                setValue value)
         textArea.value value
         textArea.appearance.outline
         textArea.resize.both
     ]
 
 [<ReactComponent>]
-let SliderTest() =
-    let id = Fui.useId()
+let SliderTest () =
+    let id = Fui.useId ()
     let value, setValue = React.useState (100)
     let valueText = $"Current Value: {value}"
+
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -910,18 +864,23 @@ let SliderTest() =
     ]
 
 [<ReactComponent>]
-let SwitchTest() =
+let SwitchTest () =
     let checked', setChecked = React.useState false
 
     Fui.switch [
         switch.checked' checked'
-        switch.label (if checked' then "With label above and checked" else "With label above and unchecked")
+        switch.label (
+            if checked' then
+                "With label above and checked"
+            else
+                "With label above and unchecked"
+        )
         switch.labelPosition.above
         switch.onChange (fun (d: SwitchOnChangeData) -> setChecked d.``checked``)
     ]
 
 [<ReactComponent>]
-let RadioGroupTest() =
+let RadioGroupTest () =
     let value, setValue = React.useState "banana"
     let labelId = Fui.useId "label-"
 
@@ -966,37 +925,29 @@ let RadioGroupTest() =
     ]
 
 [<ReactComponent>]
-let TabListTest() =
+let TabListTest () =
     Fui.tabList [
         tabList.defaultSelectedValue "tab2"
         tabList.vertical true
         tabList.appearance.subtleCircular
-        tabList.onTabSelect (fun (d: ValueProp<string>) -> printfn "value %A" d.value )
+        tabList.onTabSelect (fun (d: ValueProp<string>) -> printfn "value %A" d.value)
         tabList.size.large
         tabList.children [
             Fui.tab [
                 tab.value "tab1"
-                tab.children [
-                    Fui.text "First tab"
-                ]
+                tab.children [ Fui.text "First tab" ]
             ]
             Fui.tab [
                 tab.value "tab2"
-                tab.children [
-                    Fui.text "Second tab"
-                ]
+                tab.children [ Fui.text "Second tab" ]
             ]
             Fui.tab [
                 tab.value "tab3"
-                tab.children [
-                    Fui.text "Third tab"
-                ]
+                tab.children [ Fui.text "Third tab" ]
             ]
             Fui.tab [
                 tab.value "tab4"
-                tab.children [
-                    Fui.text "Fourth tab"
-                ]
+                tab.children [ Fui.text "Fourth tab" ]
             ]
         ]
     ]
@@ -1033,10 +984,11 @@ let spinnerTest =
     ]
 
 [<ReactComponent>]
-let SpinButtonTest() =
-    let id = Fui.useId(None, None)
-    let value, setValue = React.useState(Some 0)
-    let displayValue, setDisplayValue = React.useState("$0")
+let SpinButtonTest () =
+    let id = Fui.useId (None, None)
+    let value, setValue = React.useState (Some 0)
+    let displayValue, setDisplayValue = React.useState ("$0")
+
     Fui.stack [
         stack.horizontal true
         stack.children [
@@ -1048,7 +1000,7 @@ let SpinButtonTest() =
                 spinButton.value value
                 spinButton.displayValue displayValue
                 spinButton.appearance.underline
-                spinButton.incrementButton  [
+                spinButton.incrementButton [
                     button.icon (Fui.icon.arrowUpFilled [])
                     button.size.small
                 ]
@@ -1065,15 +1017,15 @@ let SpinButtonTest() =
                         setDisplayValue "null"
                     | Some v ->
                         setValue (Some v)
-                        setDisplayValue $"{v}"
-                )
+                        setDisplayValue $"{v}")
             ]
         ]
     ]
 
-let SelectTest() =
-    let selectId = Fui.useId(None, None)
-    let value, setValue = React.useState("Red")
+let SelectTest () =
+    let selectId = Fui.useId (None, None)
+    let value, setValue = React.useState ("Red")
+
     Fui.stack [
         stack.horizontal false
         stack.tokens [ stack.tokens.childrenGap 16 ]
@@ -1113,7 +1065,8 @@ let personaTest =
         persona.size.extraLarge
         persona.avatar [
             avatar.image [
-                image.src "https://res-1.cdn.office.net/files/fabric-cdn-prod_20221209.001/office-ui-fabric-react-assets/persona-male.png"
+                image.src
+                    "https://res-1.cdn.office.net/files/fabric-cdn-prod_20221209.001/office-ui-fabric-react-assets/persona-male.png"
             ]
         ]
     ]
@@ -1131,9 +1084,7 @@ let optionGroup =
                             avatar.ariaHidden true
                         ]
                         persona.name "Katri Athokas"
-                        persona.presence [
-                            presenceBadge.status.available
-                        ]
+                        persona.presence [ presenceBadge.status.available ]
                         persona.secondaryText "Available"
                     ]
                 ]
@@ -1147,9 +1098,7 @@ let optionGroup =
                             avatar.ariaHidden true
                         ]
                         persona.name "Elvia Atkins"
-                        persona.presence [
-                            presenceBadge.status.busy
-                        ]
+                        persona.presence [ presenceBadge.status.busy ]
                         persona.secondaryText "Busy"
                     ]
                 ]
@@ -1163,9 +1112,7 @@ let optionGroup =
                             avatar.ariaHidden true
                         ]
                         persona.name "Cameron Evans"
-                        persona.presence [
-                            presenceBadge.status.away
-                        ]
+                        persona.presence [ presenceBadge.status.away ]
                         persona.secondaryText "Away"
                     ]
                 ]
@@ -1179,9 +1126,7 @@ let optionGroup =
                             avatar.ariaHidden true
                         ]
                         persona.name "Wanda Howard"
-                        persona.presence [
-                            presenceBadge.status.outOfOffice
-                        ]
+                        persona.presence [ presenceBadge.status.outOfOffice ]
                         persona.secondaryText "Out of Office"
                     ]
                 ]
@@ -1190,8 +1135,9 @@ let optionGroup =
     ]
 
 [<ReactComponent>]
-let DropdownTest() =
-    let selected, setSelected = React.useState("Katri Athokas")
+let DropdownTest () =
+    let selected, setSelected = React.useState ("Katri Athokas")
+
     Fui.stack [
         stack.horizontal false
         stack.children [
@@ -1202,13 +1148,11 @@ let DropdownTest() =
             Fui.dropdown [
                 dropdown.ariaLabelledBy "dropdownId"
                 dropdown.value selected
-                dropdown.selectedOptions [|selected|]
+                dropdown.selectedOptions [| selected |]
                 dropdown.onOptionSelect (fun (d: OptionOnSelectData) ->
                     match d.optionText with
-                    | Some t ->
-                        setSelected t
-                    | None -> ()
-                )
+                    | Some t -> setSelected t
+                    | None -> ())
                 dropdown.children [ optionGroup ]
             ]
         ]
@@ -1272,20 +1216,26 @@ let comboboxOptions = [
 ]
 
 [<ReactComponent>]
-let ComboBoxTest() =
-    let selectedAnimals, setSelectedAnimals = React.useState [| |]
+let ComboBoxTest () =
+    let selectedAnimals, setSelectedAnimals = React.useState [||]
     let query, setQuery = React.useState ("")
-    let children = Fui.useComboboxFilter(query, comboboxOptions, [
-        comboboxFilterConfig.noOptionsMessage (
-            Fui.text [
-                text.style [ style.color "red"]
-                text.text "No animals match your search"
+
+    let children =
+        Fui.useComboboxFilter (
+            query,
+            comboboxOptions,
+            [
+                comboboxFilterConfig.noOptionsMessage (
+                    Fui.text [
+                        text.style [ style.color "red" ]
+                        text.text "No animals match your search"
+                    ]
+                )
+                // Always showing firefly when filtering
+                comboboxFilterConfig.filter (fun value input -> value.Contains(input) || value = "text-firefly")
+                comboboxFilterConfig.optionToText (fun (v: ComboboxOption<ReactElement>) -> $"text-{v.value}")
             ]
         )
-        // Always showing firefly when filtering
-        comboboxFilterConfig.filter (fun value input -> value.Contains(input) || value = "text-firefly")
-        comboboxFilterConfig.optionToText (fun (v: ComboboxOption<ReactElement>) -> $"text-{v.value}")
-    ])
 
     Fui.stack [
         stack.horizontal false
@@ -1298,27 +1248,30 @@ let ComboBoxTest() =
                 combobox.ariaLabelledBy "comboBoxId"
                 combobox.selectedOptions selectedAnimals
                 combobox.onActiveOptionChange (fun changeData ->
-                    printfn "changeData %A" (
-                        match changeData.nextOption with
-                        | Some v -> v.text
-                        | None -> "Nothing"
-                    )
+                    printfn
+                        "changeData %A"
+                        (match changeData.nextOption with
+                         | Some v -> v.text
+                         | None -> "Nothing"))
+                combobox.value (
+                    if query = "" then
+                        selectedAnimals |> String.concat ", "
+                    else
+                        query
                 )
-                combobox.value (if query = "" then selectedAnimals |> String.concat ", " else query)
                 combobox.placeholder "Select one or more animals"
                 combobox.onTextChange (fun s -> setQuery s)
-                combobox.onOptionSelect (fun (d: OptionOnSelectData ) ->
+                combobox.onOptionSelect (fun (d: OptionOnSelectData) ->
                     setSelectedAnimals d.selectedOptions
-                    setQuery ""
-                )
+                    setQuery "")
                 combobox.children children
             ]
         ]
     ]
 
 [<ReactComponent>]
-let ToolbarTest() =
-    let isOpen, setIsOpen = React.useState(None)
+let ToolbarTest () =
+    let isOpen, setIsOpen = React.useState (None)
 
     Fui.toolbar [
         toolbar.ariaLabel "with popover"
@@ -1328,7 +1281,7 @@ let ToolbarTest() =
                 popover.withArrow true
                 popover.trapFocus true
                 popover.open' (if isOpen = Some "first" then true else false)
-                popover.onOpenChange (fun (d: OpenProp ) -> setIsOpen(if d.``open`` = true then Some "first" else None))
+                popover.onOpenChange (fun (d: OpenProp) -> setIsOpen (if d.``open`` = true then Some "first" else None))
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
@@ -1349,7 +1302,7 @@ let ToolbarTest() =
                                 ]
                                 Fui.button [
                                     button.text "Close"
-                                    button.onClick (fun (_: MouseEvent )-> setIsOpen None)
+                                    button.onClick (fun (_: MouseEvent) -> setIsOpen None)
                                 ]
                             ]
                         ]
@@ -1360,7 +1313,8 @@ let ToolbarTest() =
                 popover.withArrow true
                 popover.trapFocus true
                 popover.open' (if isOpen = Some "second" then true else false)
-                popover.onOpenChange (fun (d: OpenProp ) -> setIsOpen(if d.``open`` = true then Some "second" else None))
+                popover.onOpenChange (fun (d: OpenProp) ->
+                    setIsOpen (if d.``open`` = true then Some "second" else None))
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
@@ -1381,7 +1335,7 @@ let ToolbarTest() =
                                 ]
                                 Fui.button [
                                     button.text "Close"
-                                    button.onClick (fun (_: MouseEvent )-> setIsOpen None)
+                                    button.onClick (fun (_: MouseEvent) -> setIsOpen None)
                                 ]
                             ]
                         ]
@@ -1392,7 +1346,7 @@ let ToolbarTest() =
                 popover.withArrow true
                 popover.trapFocus true
                 popover.open' (if isOpen = Some "third" then true else false)
-                popover.onOpenChange (fun (d: OpenProp ) -> setIsOpen(if d.``open`` = true then Some "third" else None))
+                popover.onOpenChange (fun (d: OpenProp) -> setIsOpen (if d.``open`` = true then Some "third" else None))
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
@@ -1413,7 +1367,7 @@ let ToolbarTest() =
                                 ]
                                 Fui.button [
                                     button.text "Close"
-                                    button.onClick (fun (_: MouseEvent )-> setIsOpen None)
+                                    button.onClick (fun (_: MouseEvent) -> setIsOpen None)
                                 ]
                             ]
                         ]
@@ -1425,16 +1379,15 @@ let ToolbarTest() =
                 popover.withArrow true
                 popover.trapFocus true
                 popover.open' (if isOpen = Some "fourth" then true else false)
-                popover.onOpenChange (fun (d: OpenProp ) -> setIsOpen(if d.``open`` = true then Some "fourth" else None))
+                popover.onOpenChange (fun (d: OpenProp) ->
+                    setIsOpen (if d.``open`` = true then Some "fourth" else None))
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
                         popoverTrigger.children (
                             Fui.toolbarButton [
                                 toolbarButton.ariaLabel "Quick Actions"
-                                toolbarButton.children [
-                                    Fui.text "Quick Actions"
-                                ]
+                                toolbarButton.children [ Fui.text "Quick Actions" ]
                             ]
                         )
                     ]
@@ -1448,7 +1401,7 @@ let ToolbarTest() =
                                 ]
                                 Fui.button [
                                     button.text "Close"
-                                    button.onClick (fun (_: MouseEvent )-> setIsOpen None)
+                                    button.onClick (fun (_: MouseEvent) -> setIsOpen None)
                                 ]
                             ]
                         ]
@@ -1458,18 +1411,30 @@ let ToolbarTest() =
         ]
     ]
 
-let AlertIcon = Fui.bundleIcon(bundleIcon.alertFilled, bundleIcon.alertRegular)
-let AlertOnIcon = Fui.bundleIcon(bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
-let AlertOffIcon = Fui.bundleIcon(bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
+let AlertIcon = Fui.bundleIcon (bundleIcon.alertFilled, bundleIcon.alertRegular)
+
+let AlertOnIcon =
+    Fui.bundleIcon (bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
+
+let AlertOffIcon =
+    Fui.bundleIcon (bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
 
 [<ReactComponent>]
-let ControlledToolbarTest() =
-    let checkedValues, setCheckedValues = React.useState [ "alert", [| "on"; "off" |]]
+let ControlledToolbarTest () =
+    let checkedValues, setCheckedValues =
+        React.useState [
+            "alert",
+            [|
+                "on"
+                "off"
+            |]
+        ]
 
 
     Fui.toolbar [
         toolbar.checkedValues checkedValues
-        toolbar.onCheckedValueChange (fun d -> setCheckedValues ([ d.name, d.checkedItems] |> List.append checkedValues))
+        toolbar.onCheckedValueChange (fun d ->
+            setCheckedValues ([ d.name, d.checkedItems ] |> List.append checkedValues))
         toolbar.children [
             Fui.toolbarToggleButton [
                 toolbarToggleButton.ariaLabel "Alert"
@@ -1507,16 +1472,18 @@ let avatarGroupTest =
         "Elliot Woodward"
     |]
 
-    let spreadPartition = Fui.partitionAvatarGroupItems [
-        partitionAvatarGroupItemsOptions.items names
-        partitionAvatarGroupItemsOptions.layout.spread
-    ]
+    let spreadPartition =
+        Fui.partitionAvatarGroupItems [
+            partitionAvatarGroupItemsOptions.items names
+            partitionAvatarGroupItemsOptions.layout.spread
+        ]
 
-    let piePartition = Fui.partitionAvatarGroupItems [
-        partitionAvatarGroupItemsOptions.items names
-        partitionAvatarGroupItemsOptions.layout.pie
-        partitionAvatarGroupItemsOptions.maxInlineItems 10
-    ]
+    let piePartition =
+        Fui.partitionAvatarGroupItems [
+            partitionAvatarGroupItemsOptions.items names
+            partitionAvatarGroupItemsOptions.layout.pie
+            partitionAvatarGroupItemsOptions.maxInlineItems 10
+        ]
 
     Fui.stack [
         stack.horizontal false
@@ -1525,19 +1492,21 @@ let avatarGroupTest =
                 avatarGroup.layout.spread
                 avatarGroup.size.``56``
                 avatarGroup.children [
-                    yield! spreadPartition.inlineItems |> Array.map (fun n ->
-                        Fui.avatarGroupItem [
-                            avatarGroupItem.name n
-                            avatarGroupItem.key n
-                        ]
-                    )
-                    Fui.avatarGroupPopover [
-                        yield! spreadPartition.overflowItems |> Array.map (fun n ->
+                    yield!
+                        spreadPartition.inlineItems
+                        |> Array.map (fun n ->
                             Fui.avatarGroupItem [
                                 avatarGroupItem.name n
                                 avatarGroupItem.key n
-                            ]
-                        )
+                            ])
+                    Fui.avatarGroupPopover [
+                        yield!
+                            spreadPartition.overflowItems
+                            |> Array.map (fun n ->
+                                Fui.avatarGroupItem [
+                                    avatarGroupItem.name n
+                                    avatarGroupItem.key n
+                                ])
                     ]
                 ]
             ]
@@ -1545,19 +1514,21 @@ let avatarGroupTest =
                 avatarGroup.layout.pie
                 avatarGroup.size.``56``
                 avatarGroup.children [
-                    yield! piePartition.inlineItems |> Array.map (fun n ->
-                        Fui.avatarGroupItem [
-                            avatarGroupItem.name n
-                            avatarGroupItem.key n
-                        ]
-                    )
-                    Fui.avatarGroupPopover [
-                        yield! piePartition.overflowItems |> Array.map (fun n ->
+                    yield!
+                        piePartition.inlineItems
+                        |> Array.map (fun n ->
                             Fui.avatarGroupItem [
                                 avatarGroupItem.name n
                                 avatarGroupItem.key n
-                            ]
-                        )
+                            ])
+                    Fui.avatarGroupPopover [
+                        yield!
+                            piePartition.overflowItems
+                            |> Array.map (fun n ->
+                                Fui.avatarGroupItem [
+                                    avatarGroupItem.name n
+                                    avatarGroupItem.key n
+                                ])
                     ]
                 ]
             ]
@@ -1573,11 +1544,7 @@ let progressBarTest =
             Fui.field [
                 field.validationMessage "Indeterminate ProgressBar"
                 field.validationState.none
-                field.children (
-                    Fui.progressBar [
-                        progressBar.thickness.large
-                    ]
-                )
+                field.children (Fui.progressBar [ progressBar.thickness.large ])
             ]
             Fui.field [
                 field.validationMessage (Fui.text "Error progressbar")
@@ -1618,8 +1585,9 @@ let progressBarTest =
     ]
 
 [<ReactComponent>]
-let DialogTest() =
+let DialogTest () =
     let isOpen, setIsOpen = React.useState false
+
     Fui.dialog [
         dialog.open' isOpen
         dialog.onOpenChange (fun (d: DialogOpenChangeData<MouseEvent>) -> setIsOpen d.``open``)
@@ -1630,16 +1598,14 @@ let DialogTest() =
         dialog.children [
             Fui.dialogTrigger [
                 dialogTrigger.disableButtonEnhancement true
-                dialogTrigger.children (
-                    Fui.button [
-                        button.text "Open dialog"
-                    ]
-                )
+                dialogTrigger.children (Fui.button [ button.text "Open dialog" ])
             ]
             Fui.dialogSurface [
                 dialogSurface.backdropMotion [
-                    presenceMotionSlot.onMotionStart (fun (d: OnMotionData) -> printfn "backdropMotion start %A" d.direction)
-                    presenceMotionSlot.onMotionFinish (fun (d: OnMotionData) -> printfn "backdropMotion finish %A" d.direction)
+                    presenceMotionSlot.onMotionStart (fun (d: OnMotionData) ->
+                        printfn "backdropMotion start %A" d.direction)
+                    presenceMotionSlot.onMotionFinish (fun (d: OnMotionData) ->
+                        printfn "backdropMotion finish %A" d.direction)
                 ]
                 dialogSurface.children [
                     Fui.dialogBody [
@@ -1648,11 +1614,7 @@ let DialogTest() =
                                 Fui.dialogTrigger [
                                     dialogTrigger.action.open'
                                     dialogTrigger.children (
-                                        Fui.button [
-                                            button.children [
-                                                Fui.icon.dismissRegular []
-                                            ]
-                                        ]
+                                        Fui.button [ button.children [ Fui.icon.dismissRegular [] ] ]
                                     )
                                 ]
                             )
@@ -1696,62 +1658,54 @@ let DialogTest() =
     ]
 
 [<ReactComponent>]
-let ToastTest() =
+let ToastTest () =
     let unmounted, setUnmounted = React.useState true
     let toastId = Fui.useId (Some "toast", None)
     let toasterId = Fui.useId (Some "toaster", None)
 
-    let toastController = Fui.useToastController(Some toasterId)
+    let toastController = Fui.useToastController (Some toasterId)
 
-    let notify = fun _ ->
-        setUnmounted false
-        toastController.dispatchToast(
-            Fui.toast [
-                toast.appearance.inverted
-                toast.children [
-                    Fui.toastTitle [
-                        toastTitle.action (
-                            Fui.link [
-                                link.text "Undo"
-                            ]
-                        )
-                        toastTitle.text "Email sent"
-                    ]
-                    Fui.toastBody [
-                        toastBody.subtitle "This is a subtitle"
-                        toastBody.text "This toast never closes"
-                    ]
-                    Fui.toastFooter [
-                        Fui.link [
-                            link.text "Action1"
-                        ]
-                        Fui.link [
-                            link.text "Action2"
-                        ]
-                    ]
-                ]
-            ], [
-                dispatchToastOptions.timeout -1
-                dispatchToastOptions.toastId toastId
-                dispatchToastOptions.intent.error
-                dispatchToastOptions.position.bottom
-            ]
-        )
+    let notify =
+        fun _ ->
+            setUnmounted false
 
-    let update = fun _ ->
-        toastController.updateToast [
-            updateToastOptions.timeout 2000
-            updateToastOptions.toastId toastId
-            updateToastOptions.content (
+            toastController.dispatchToast (
                 Fui.toast [
-                    Fui.toastTitle [
-                        toastTitle.text "This toast will close soon"
+                    toast.appearance.inverted
+                    toast.children [
+                        Fui.toastTitle [
+                            toastTitle.action (Fui.link [ link.text "Undo" ])
+                            toastTitle.text "Email sent"
+                        ]
+                        Fui.toastBody [
+                            toastBody.subtitle "This is a subtitle"
+                            toastBody.text "This toast never closes"
+                        ]
+                        Fui.toastFooter [
+                            Fui.link [ link.text "Action1" ]
+                            Fui.link [ link.text "Action2" ]
+                        ]
                     ]
+                ],
+                [
+                    dispatchToastOptions.timeout -1
+                    dispatchToastOptions.toastId toastId
+                    dispatchToastOptions.intent.error
+                    dispatchToastOptions.position.bottom
                 ]
             )
-            updateToastOptions.intent.success
-            updateToastOptions.position.top
-        ]
+
+    let update =
+        fun _ ->
+            toastController.updateToast [
+                updateToastOptions.timeout 2000
+                updateToastOptions.toastId toastId
+                updateToastOptions.content (
+                    Fui.toast [ Fui.toastTitle [ toastTitle.text "This toast will close soon" ] ]
+                )
+                updateToastOptions.intent.success
+                updateToastOptions.position.top
+            ]
 
     Fui.stack [
         stack.children [
@@ -1761,10 +1715,12 @@ let ToastTest() =
                     toastOffset.horizontal 300
                     toastOffset.vertical 400
                 ]
-                toaster.shortcuts { focus = fun d -> d.ctrlKey && d.key = "m" }
+                toaster.shortcuts {
+                    focus = fun d -> d.ctrlKey && d.key = "m"
+                }
             ]
             Fui.button [
-                button.onClick (fun _ -> if unmounted then notify() else update())
+                button.onClick (fun _ -> if unmounted then notify () else update ())
                 button.text (if unmounted then "Open Toast" else "Update toast")
             ]
         ]
@@ -1772,24 +1728,31 @@ let ToastTest() =
 
 [<ReactComponent>]
 let CardTest () =
-    let selected, setSelected = React.useState(false)
+    let selected, setSelected = React.useState (false)
+
     Fui.card [
         card.appearance.filled
         card.selected selected
         card.onSelectionChange (fun s -> setSelected s.selected)
-        card.style [ style.width 400; style.maxWidth (length.percent 100); style.height.fitContent ]
+        card.style [
+            style.width 400
+            style.maxWidth (length.percent 100)
+            style.height.fitContent
+        ]
         card.children [
             Fui.cardPreview [
                 cardPreview.logo (
                     Fui.image [
                         image.style [ style.width 40 ]
-                        image.src "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=804&h=804&q=75&fit=max&auto=format"
+                        image.src
+                            "https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=804&h=804&q=75&fit=max&auto=format"
                         image.alt "Figma logo"
                     ]
                 )
                 cardPreview.children [
                     Fui.image [
-                        image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                        image.src
+                            "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
                         image.alt "Presentation Preview"
                     ]
                 ]
@@ -1801,13 +1764,11 @@ let CardTest () =
                         text.text "iOS App Prototype"
                     ]
                 )
-                cardHeader.description  "You created 53m ago"
+                cardHeader.description "You created 53m ago"
                 cardHeader.action (
                     Fui.button [
                         button.appearance.transparent
-                        button.icon (
-                            Fui.icon.moreHorizontalFilled []
-                        )
+                        button.icon (Fui.icon.moreHorizontalFilled [])
                         button.ariaLabel "More Actions"
                     ]
                 )
@@ -1835,8 +1796,8 @@ let CardTest () =
 
 
 [<ReactComponent>]
-let SkeletonTest() =
-    let styles = useStyles()
+let SkeletonTest () =
+    let styles = useStyles ()
 
     Fui.stack [
         stack.tokens [ stack.tokens.childrenGap 16 ]
@@ -1848,11 +1809,7 @@ let SkeletonTest() =
                 field.children (
                     Fui.skeleton [
                         skeleton.style [ style.width 300 ]
-                        skeleton.children [
-                            Fui.skeletonItem [
-                                skeletonItem.animation.wave
-                            ]
-                        ]
+                        skeleton.children [ Fui.skeletonItem [ skeletonItem.animation.wave ] ]
                     ]
                 )
             ]
@@ -1862,11 +1819,7 @@ let SkeletonTest() =
                 field.children (
                     Fui.skeleton [
                         skeleton.style [ style.width 300 ]
-                        skeleton.children [
-                            Fui.skeletonItem [
-                                skeletonItem.animation.pulse
-                            ]
-                        ]
+                        skeleton.children [ Fui.skeletonItem [ skeletonItem.animation.pulse ] ]
                     ]
                 )
             ]
@@ -1891,31 +1844,27 @@ let fieldPropsTest =
     Fui.field [
         field.label "Third party input"
         field.hint "Use a render function to properly associate the label with the control."
-        field.children (fun props ->
-            Html.input [
-                yield! props
-            ]
-        )
+        field.children (fun props -> Html.input [ yield! props ])
     ]
 
 open System
 
 [<ReactComponent>]
-let DatePickerTest() =
+let DatePickerTest () =
     let firstDayOfWeek, setFirstDayOfWeek = React.useState ("Sunday")
     let error, setError = React.useState (None)
 
     let days = [
-        "Sunday";
-        "Monday";
-        "Tuesday";
-        "Wednesday";
-        "Thursday";
-        "Friday";
-        "Saturday";
+        "Sunday"
+        "Monday"
+        "Tuesday"
+        "Wednesday"
+        "Thursday"
+        "Friday"
+        "Saturday"
     ]
 
-    let validationMessage : string = error |> DatePickerErrorStrings.fromErrorTypeOption
+    let validationMessage: string = error |> DatePickerErrorStrings.fromErrorTypeOption
 
     let selectedFirstDayOfWeek =
         match firstDayOfWeek with
@@ -1948,18 +1897,37 @@ let DatePickerTest() =
                         datePicker.showGoToToday true
                         datePicker.allowTextInput true
                         datePicker.maxDate (DateTime.Today.AddDays(8))
-                        datePicker.dateTimeFormatter ({ Fui.defaultDateFormatting with formatYear = fun d -> $"Year: {d.Year}"})
+                        datePicker.dateTimeFormatter (
+                            {
+                                Fui.defaultDateFormatting with
+                                    formatYear = fun d -> $"Year: {d.Year}"
+                            }
+                        )
                         //TODO When customizing the formatted date with something other than built-in date functions, it conflicts with onValidationResult and doesn't render the date.
                         datePicker.formatDate (fun d -> d.ToShortDateString())
                         datePicker.onValidationResult (fun d -> setError d.error)
                         datePicker.calendar [
                             calendar.dateRangeType.workWeek
-                            calendar.workWeekDays [ DayOfWeek.Monday; DayOfWeek.Tuesday; DayOfWeek.Wednesday; DayOfWeek.Thursday ]
+                            calendar.workWeekDays [
+                                DayOfWeek.Monday
+                                DayOfWeek.Tuesday
+                                DayOfWeek.Wednesday
+                                DayOfWeek.Thursday
+                            ]
                             calendar.isMonthPickerVisible false
-                            calendar.strings ({
-                                Fui.defaultDatePickerStrings with
-                                    goToToday = "Pick Today"
-                                    shortDays = [| "T"; "E"; "S"; "T"; "I"; "N"; "G"|]
+                            calendar.strings (
+                                {
+                                    Fui.defaultDatePickerStrings with
+                                        goToToday = "Pick Today"
+                                        shortDays = [|
+                                            "T"
+                                            "E"
+                                            "S"
+                                            "T"
+                                            "I"
+                                            "N"
+                                            "G"
+                                        |]
                                 }
                             )
                         ]
@@ -1975,18 +1943,17 @@ let DatePickerTest() =
                 dropdown.onOptionSelect (fun (_: MouseEvent) (d: OptionOnSelectData) ->
                     match d.optionValue with
                     | Some v -> setFirstDayOfWeek v
-                    | None -> ()
-                )
-                dropdown.selectedOptions [|firstDayOfWeek|]
+                    | None -> ())
+                dropdown.selectedOptions [| firstDayOfWeek |]
                 dropdown.value firstDayOfWeek
                 dropdown.children (
-                    days |> List.map (fun d ->
+                    days
+                    |> List.map (fun d ->
                         Fui.option [
                             option.key d
                             option.value d
                             option.children d
-                        ]
-                    )
+                        ])
                 )
             ]
         ]
@@ -1994,8 +1961,9 @@ let DatePickerTest() =
 
 [<ReactComponent>]
 let Portal () =
-    let styles = useStyles()
-    let rootElement, setRootElement = React.useState(None)
+    let styles = useStyles ()
+    let rootElement, setRootElement = React.useState (None)
+
     Html.div [
         Html.div [
             prop.className styles.portalContainer
@@ -2013,9 +1981,7 @@ let Portal () =
                 ]
             ]
         ]
-        Html.div [
-            prop.ref (fun e -> setRootElement (Some e))
-        ]
+        Html.div [ prop.ref (fun e -> setRootElement (Some e)) ]
     ]
 
 let badgeTest =
@@ -2029,9 +1995,10 @@ let badgeTest =
 
 
 [<ReactComponent>]
-let OverflowMenuItem (key: string) (id: string)=
+let OverflowMenuItem (key: string) (id: string) =
 
-    let isVisible = Fui.useIsOverflowItemVisible(id)
+    let isVisible = Fui.useIsOverflowItemVisible (id)
+
     if isVisible then
         Html.none
     else
@@ -2047,32 +2014,27 @@ let OverflowMenu itemIds =
     if options.isOverflowing |> not then
         Html.none
     else
-    Fui.menu [
-        // menu.positioning.afterBottom
-        menu.positioning [
-            positioning.offset [
-                offset.crossAxis 30
-                offset.mainAxis 35 ]
-        ]
-        menu.children [
-            Fui.menuTrigger [
-                menuTrigger.disableButtonEnhancement true
-                menuTrigger.children (
-                    Fui.menuButton [
-                        menuButton.ref options.ref
-                        menuButton.text $"+{options.overflowCount} items"
-                    ]
-                )
+        Fui.menu [
+            // menu.positioning.afterBottom
+            menu.positioning [
+                positioning.offset [
+                    offset.crossAxis 30
+                    offset.mainAxis 35
+                ]
             ]
-            Fui.menuPopover [
-                Fui.menuList (
-                    itemIds |> List.map (fun i ->
-                        OverflowMenuItem i i
+            menu.children [
+                Fui.menuTrigger [
+                    menuTrigger.disableButtonEnhancement true
+                    menuTrigger.children (
+                        Fui.menuButton [
+                            menuButton.ref options.ref
+                            menuButton.text $"+{options.overflowCount} items"
+                        ]
                     )
-                )
+                ]
+                Fui.menuPopover [ Fui.menuList (itemIds |> List.map (fun i -> OverflowMenuItem i i)) ]
             ]
         ]
-    ]
 
 type ItemVisibility = {
     ``0``: bool
@@ -2097,32 +2059,42 @@ type GroupVisibility = {
 }
 
 [<ReactComponent>]
-let OverflowTest ()=
-    let itemIds = [ "0"; "1"; "2"; "3"; "4"; "5"; "6"; "7"]
-    let (overflowState: (ItemVisibility option)), setOverflowState = React.useState (None)
-    let styles = useStyles()
+let OverflowTest () =
+    let itemIds = [
+        "0"
+        "1"
+        "2"
+        "3"
+        "4"
+        "5"
+        "6"
+        "7"
+    ]
+
+    let (overflowState: (ItemVisibility option)), setOverflowState =
+        React.useState (None)
+
+    let styles = useStyles ()
 
     Html.div [
         prop.children [
             if overflowState.IsSome then
                 Fui.text ($"{overflowState.Value.``7``}")
             Fui.overflow [
-                overflow.onOverflowChange<ItemVisibility, GroupVisibility> (fun data -> setOverflowState (Some data.itemVisibility))
+                overflow.onOverflowChange<ItemVisibility, GroupVisibility> (fun data ->
+                    setOverflowState (Some data.itemVisibility))
                 overflow.children (
                     Html.div [
                         prop.className styles.overflow
                         prop.children [
-                            yield! itemIds |> List.map (fun i ->
-                                Fui.overflowItem [
-                                    overflowItem.key i
-                                    overflowItem.id i
-                                    overflowItem.children (
-                                        Fui.button [
-                                            button.text $"Item {i}"
-                                        ]
-                                    )
-                                ]
-                            )
+                            yield!
+                                itemIds
+                                |> List.map (fun i ->
+                                    Fui.overflowItem [
+                                        overflowItem.key i
+                                        overflowItem.id i
+                                        overflowItem.children (Fui.button [ button.text $"Item {i}" ])
+                                    ])
                             yield OverflowMenu itemIds
                         ]
                     ]
@@ -2133,10 +2105,9 @@ let OverflowTest ()=
     ]
 
 [<ReactComponent>]
-let UseFocusableGroupTest ()=
-    let attributes = Fui.useFocusableGroup [
-        useFocusableGroupOptions.tabBehavior.limitedTrapFocus
-    ]
+let UseFocusableGroupTest () =
+    let attributes =
+        Fui.useFocusableGroup [ useFocusableGroupOptions.tabBehavior.limitedTrapFocus ]
 
     Fui.stack [
         stack.horizontal false
@@ -2148,20 +2119,19 @@ let UseFocusableGroupTest ()=
                 prop.children [
                     Fui.text "Hello world!"
                     Html.div [
-                        prop.style [ style.display.flex; style.width 300 ]
+                        prop.style [
+                            style.display.flex
+                            style.width 300
+                        ]
                         prop.children [
                             Fui.button [
                                 button.ariaLabel "Copy"
-                                button.icon (
-                                    Fui.icon.copyRegular []
-                                )
+                                button.icon (Fui.icon.copyRegular [])
                                 button.size.small
                             ]
                             Fui.button [
                                 button.ariaLabel "Delete"
-                                button.icon (
-                                    Fui.icon.deleteRegular []
-                                )
+                                button.icon (Fui.icon.deleteRegular [])
                                 button.size.small
                             ]
                         ]
@@ -2172,8 +2142,8 @@ let UseFocusableGroupTest ()=
     ]
 
 [<ReactComponent>]
-let InfoButtonTest() =
-    let infobuttonInfoId = Fui.useId(Some "infobuton__info", None)
+let InfoButtonTest () =
+    let infobuttonInfoId = Fui.useId (Some "infobuton__info", None)
     let isOpen, setIsOpen = React.useState false
 
     Html.div [
@@ -2186,7 +2156,9 @@ let InfoButtonTest() =
                     popoverSurface.text "This is example information for an InfoButton."
                 ]
                 infoButton.popover [
-                    popover.onOpenChange (fun (d: OpenProp) -> printfn $"infoButton popover open? {d.``open``}"; setIsOpen d.``open``)
+                    popover.onOpenChange (fun (d: OpenProp) ->
+                        printfn $"infoButton popover open? {d.``open``}"
+                        setIsOpen d.``open``)
                 ]
             ]
         ]
@@ -2201,13 +2173,7 @@ let infoLabelTest =
                     Fui.infoLabel [
                         infoLabel.infoButton [
                             infoButton.size.small
-                            infoButton.popover [
-                                popover.positioning [
-                                    positioning.offset [
-                                        offset.mainAxis 200
-                                    ]
-                                ]
-                            ]
+                            infoButton.popover [ popover.positioning [ positioning.offset [ offset.mainAxis 200 ] ] ]
                         ]
                         infoLabel.text "Field with info label"
                         infoLabel.weight.semibold
@@ -2217,9 +2183,7 @@ let infoLabelTest =
                         ]
                     ]
                 )
-                field.children (
-                    Fui.input []
-                )
+                field.children (Fui.input [])
             ]
         ]
     ]
@@ -2237,9 +2201,7 @@ let alertTest =
             Fui.alert [
                 alert.appearance.primary
                 alert.intent.warning
-                alert.icon [
-                    prop.className "testing classname"
-                ]
+                alert.icon [ prop.className "testing classname" ]
             ]
             Fui.alert [
                 alert.appearance.primary
@@ -2254,12 +2216,12 @@ let alertTest =
     ]
 
 [<ReactComponent>]
-let VirtualizerTest() =
-    let vm = Fui.useStaticVirtualizerMeasure [
-        virtualizerMeasureProps.defaultItemSize 100
-    ]
+let VirtualizerTest () =
+    let vm =
+        Fui.useStaticVirtualizerMeasure [ virtualizerMeasureProps.defaultItemSize 100 ]
 
-    let (vLength, bufferItems, bufferSize, scrollRef, containerSizeRef) = vm.virtualizerLength, vm.bufferItems, vm.bufferSize, vm.scrollRef, vm.containerSizeRef
+    let (vLength, bufferItems, bufferSize, scrollRef, containerSizeRef) =
+        vm.virtualizerLength, vm.bufferItems, vm.bufferSize, vm.scrollRef, vm.containerSizeRef
 
     Html.div [
         prop.ariaLabel "Virtualizer Example"
@@ -2280,12 +2242,8 @@ let VirtualizerTest() =
                 virtualizer.bufferItems bufferItems
                 virtualizer.bufferSize bufferSize
                 virtualizer.containerSizeRef containerSizeRef
-                virtualizer.before (
-                    Fui.icon.bedFilled []
-                )
-                virtualizer.after (
-                    Fui.icon.bedRegular []
-                )
+                virtualizer.before (Fui.icon.bedFilled [])
+                virtualizer.after (Fui.icon.bedRegular [])
                 virtualizer.itemSize 100
                 virtualizer.children (fun index _ ->
                     Html.span [
@@ -2298,17 +2256,14 @@ let VirtualizerTest() =
                             style.width (length.percent 100)
                         ]
                         prop.key $"test-virtualizer-child-{index}"
-                        prop.children [
-                            Fui.text $"Node-{index}-XXX"
-                        ]
-                    ]
-                )
+                        prop.children [ Fui.text $"Node-{index}-XXX" ]
+                    ])
             ]
         ]
     ]
 
 [<ReactComponent>]
-let VirtualizerScrollViewTest() =
+let VirtualizerScrollViewTest () =
     Fui.virtualizerScrollView [
         virtualizerScrollView.numItems 1000
         virtualizerScrollView.itemSize 100
@@ -2329,20 +2284,21 @@ let VirtualizerScrollViewTest() =
                     style.height (length.percent 100)
                 ]
                 button.text $"Node-{index}"
-            ]
-        )
+            ])
     ]
 
 [<ReactComponent>]
-let DrawerTest() =
+let DrawerTest () =
     let isOpen, setIsOpen = React.useState false
+
     Fui.stack [
         stack.children [
             Fui.overlayDrawer [
                 overlayDrawer.position.end'
                 overlayDrawer.modalType.alert
                 overlayDrawer.open' isOpen
-                overlayDrawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) -> setIsOpen data.``open``)
+                overlayDrawer.onOpenChange (fun (_: MouseEvent) (data: DialogOpenChangeData<MouseEvent>) ->
+                    setIsOpen data.``open``)
                 overlayDrawer.children [
                     Fui.drawerHeader [
                         Fui.drawerHeaderTitle [
@@ -2350,18 +2306,14 @@ let DrawerTest() =
                                 Fui.button [
                                     button.appearance.subtle
                                     button.ariaLabel "subtle"
-                                    button.icon (
-                                        Fui.icon.dismissRegular [ icon.size.``48`` ]
-                                    )
+                                    button.icon (Fui.icon.dismissRegular [ icon.size.``48`` ])
                                     button.onClick (fun _ -> setIsOpen false)
                                 ]
                             )
                             drawerHeaderTitle.text "Overlay Drawer"
                         ]
                     ]
-                    Fui.drawerBody [
-                        Fui.text "Drawer content"
-                    ]
+                    Fui.drawerBody [ Fui.text "Drawer content" ]
                 ]
             ]
             Fui.button [
@@ -2375,41 +2327,28 @@ let DrawerTest() =
 let simpleTreeTest =
     Html.div [
         Fui.tree [
-            tree.defaultOpenItems ["subtree-1"]
+            tree.defaultOpenItems [ "subtree-1" ]
             tree.ariaLabel "Default Layout"
             tree.children [
                 Fui.treeItem [
                     treeItem.itemType.branch
-                    treeItem.onOpenChange (fun (v: TreeItemOpenChangeData<string, MouseEvent>) -> printfn "%A" v.``type``)
+                    treeItem.onOpenChange (fun (v: TreeItemOpenChangeData<string, MouseEvent>) ->
+                        printfn "%A" v.``type``)
                     treeItem.value "subtree-1"
                     treeItem.children [
-                        Fui.treeItemLayout [
-                            Fui.text "Tree using TreeItemLayout"
-                        ]
+                        Fui.treeItemLayout [ Fui.text "Tree using TreeItemLayout" ]
                         Fui.tree [
                             Fui.treeItem [
                                 treeItem.itemType.leaf
-                                treeItem.children [
-                                    Fui.treeItemLayout [
-                                        Fui.text "level 2, item 1"
-                                    ]
-                                ]
+                                treeItem.children [ Fui.treeItemLayout [ Fui.text "level 2, item 1" ] ]
                             ]
                             Fui.treeItem [
                                 treeItem.itemType.leaf
-                                treeItem.children [
-                                    Fui.treeItemLayout [
-                                        Fui.text "level 2, item 2"
-                                    ]
-                                ]
+                                treeItem.children [ Fui.treeItemLayout [ Fui.text "level 2, item 2" ] ]
                             ]
                             Fui.treeItem [
                                 treeItem.itemType.leaf
-                                treeItem.children [
-                                    Fui.treeItemLayout [
-                                        Fui.text "level 2, item 3"
-                                    ]
-                                ]
+                                treeItem.children [ Fui.treeItemLayout [ Fui.text "level 2, item 3" ] ]
                             ]
                         ]
                     ]
@@ -2424,34 +2363,18 @@ let simpleTreeTest =
                 Fui.treeItem [
                     treeItem.itemType.branch
                     treeItem.children [
-                        Fui.treeItemPersonaLayout  [
-                            treeItemPersonaLayout.media (
-                                Fui.avatar [
-                                    avatar.image [
-                                        image.alt "avatar"
-                                    ]
-                                ]
-                            )
-                            treeItemPersonaLayout.children [
-                                Fui.text "Tree using TreeItemLayout"
-                            ]
+                        Fui.treeItemPersonaLayout [
+                            treeItemPersonaLayout.media (Fui.avatar [ avatar.image [ image.alt "avatar" ] ])
+                            treeItemPersonaLayout.children [ Fui.text "Tree using TreeItemLayout" ]
                         ]
                         Fui.tree [
                             Fui.treeItem [
                                 treeItem.itemType.leaf
                                 treeItem.children [
                                     Fui.treeItemPersonaLayout [
-                                        treeItemPersonaLayout.media (
-                                            Fui.avatar [
-                                                avatar.image [
-                                                    image.alt "avatar"
-                                                ]
-                                            ]
-                                        )
+                                        treeItemPersonaLayout.media (Fui.avatar [ avatar.image [ image.alt "avatar" ] ])
                                         treeItemPersonaLayout.description "with description"
-                                        treeItemPersonaLayout.children [
-                                            Fui.text "level 2, item 1"
-                                        ]
+                                        treeItemPersonaLayout.children [ Fui.text "level 2, item 1" ]
                                     ]
                                 ]
                             ]
@@ -2461,16 +2384,12 @@ let simpleTreeTest =
                                     Fui.treeItemPersonaLayout [
                                         treeItemPersonaLayout.media (
                                             Fui.avatar [
-                                                avatar.image [
-                                                    image.alt "avatar"
-                                                ]
+                                                avatar.image [ image.alt "avatar" ]
                                                 avatar.shape.square
                                             ]
                                         )
                                         treeItemPersonaLayout.description "square shape media"
-                                        treeItemPersonaLayout.children [
-                                            Fui.text "level 2, item 2"
-                                        ]
+                                        treeItemPersonaLayout.children [ Fui.text "level 2, item 2" ]
                                     ]
                                 ]
                             ]
@@ -2479,9 +2398,7 @@ let simpleTreeTest =
                                 treeItem.children [
                                     Fui.treeItemPersonaLayout [
                                         treeItemPersonaLayout.description "without media"
-                                        treeItemPersonaLayout.children [
-                                            Fui.text "level 2, item 3"
-                                        ]
+                                        treeItemPersonaLayout.children [ Fui.text "level 2, item 3" ]
                                     ]
                                 ]
                             ]
@@ -2494,7 +2411,12 @@ let simpleTreeTest =
 
 type Column = { Columnkey: string; Label: string }
 type Icon = { Label: string; Icon: ReactElement }
-type Status = { Label: string; Status: IPresenceBadgeProp list }
+
+type Status = {
+    Label: string
+    Status: IPresenceBadgeProp list
+}
+
 type TimeStamp = { Label: string; TimeStamp: int }
 
 type Item = {
@@ -2506,33 +2428,93 @@ type Item = {
 }
 
 let items = [
-    for index in [ 1.. 500 ] do
+    for index in [ 1..500 ] do
         {
-            File = { Label = "Meeting notes"; Icon = Fui.icon.documentRegular [] }
-            Author = { Label = "Max Mustermann"; Status = [ presenceBadge.status.available; presenceBadge.size.extraSmall ] }
+            File = {
+                Label = "Meeting notes"
+                Icon = Fui.icon.documentRegular []
+            }
+            Author = {
+                Label = "Max Mustermann"
+                Status = [
+                    presenceBadge.status.available
+                    presenceBadge.size.extraSmall
+                ]
+            }
             LastUpdated = { Label = "7h ago"; TimeStamp = 1 }
-            LastUpdate = { Label = "You edited this"; Icon = (Fui.icon.editRegular []) }
+            LastUpdate = {
+                Label = "You edited this"
+                Icon = (Fui.icon.editRegular [])
+            }
             Index = index
         }
+
         {
-            File = { Label = "Thursday presentation"; Icon = Fui.icon.folderRegular [] }
-            Author = { Label = "Erika Mustermann"; Status = [ presenceBadge.status.busy; presenceBadge.size.large ]  }
-            LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
-            LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
+            File = {
+                Label = "Thursday presentation"
+                Icon = Fui.icon.folderRegular []
+            }
+            Author = {
+                Label = "Erika Mustermann"
+                Status = [
+                    presenceBadge.status.busy
+                    presenceBadge.size.large
+                ]
+            }
+            LastUpdated = {
+                Label = "Yesterday at 1:45pm"
+                TimeStamp = 2
+            }
+            LastUpdate = {
+                Label = "You recently opened this"
+                Icon = Fui.icon.openRegular []
+            }
             Index = index
         }
+
         {
-            File = { Label = "Training recording"; Icon = Fui.icon.videoRegular [] }
-            Author = { Label = "John Doe"; Status = [ presenceBadge.status.away; presenceBadge.size.small ]  }
-            LastUpdated = { Label = "Yesterday at 1:45pm"; TimeStamp = 2 }
-            LastUpdate = { Label = "You recently opened this"; Icon = Fui.icon.openRegular [] }
+            File = {
+                Label = "Training recording"
+                Icon = Fui.icon.videoRegular []
+            }
+            Author = {
+                Label = "John Doe"
+                Status = [
+                    presenceBadge.status.away
+                    presenceBadge.size.small
+                ]
+            }
+            LastUpdated = {
+                Label = "Yesterday at 1:45pm"
+                TimeStamp = 2
+            }
+            LastUpdate = {
+                Label = "You recently opened this"
+                Icon = Fui.icon.openRegular []
+            }
             Index = index
         }
+
         {
-            File = { Label = "Purchase order"; Icon = Fui.icon.documentPdfRegular []  }
-            Author = { Label = "Jane Doe"; Status = [ presenceBadge.status.offline; presenceBadge.size.tiny ] }
-            LastUpdated = { Label = "Tue at 9:30 AM"; TimeStamp = 3 }
-            LastUpdate = { Label = "You shared this in a Teams chat"; Icon = Fui.icon.peopleRegular []  }
+            File = {
+                Label = "Purchase order"
+                Icon = Fui.icon.documentPdfRegular []
+            }
+            Author = {
+                Label = "Jane Doe"
+                Status = [
+                    presenceBadge.status.offline
+                    presenceBadge.size.tiny
+                ]
+            }
+            LastUpdated = {
+                Label = "Tue at 9:30 AM"
+                TimeStamp = 3
+            }
+            LastUpdate = {
+                Label = "You shared this in a Teams chat"
+                Icon = Fui.icon.peopleRegular []
+            }
             Index = index
         }
 ]
@@ -2545,17 +2527,14 @@ let RenderRow (trd: TableRowData<Item, int>) (style: obj) (index: int) =
         dataGridRow.children (fun (tcd: TableColumnDefinition<Item, int>) _ ->
             Fui.virtualized.dataGridCell [
                 dataGridCell.focusMode.group
-                dataGridCell.children [
-                    tcd.renderCell(trd.item)
-                ]
-            ]
-        )
+                dataGridCell.children [ tcd.renderCell (trd.item) ]
+            ])
     ]
 
 [<ReactComponent>]
 let DataGridTest () =
-    let selectedRows, setSelectedRows = React.useState ([ ])
-    let sortState, setSortState = React.useState((None, SortDirection.ascending))
+    let selectedRows, setSelectedRows = React.useState ([])
+    let sortState, setSortState = React.useState ((None, SortDirection.ascending))
 
     let columnSizingOptions = [
         tableColumnSizingOptions.staticColumnWidth ("file", 200)
@@ -2570,26 +2549,22 @@ let DataGridTest () =
             createTableColumnOption.compare (fun (a: Item) (b: Item) ->
                 let a = $"{a.Index}-{a.File.Label}"
                 let b = $"{b.Index}-{b.File.Label}"
-                a.CompareTo (Some b))
+                a.CompareTo(Some b))
             createTableColumnOption.renderHeaderCell (fun _ -> "File")
             createTableColumnOption.renderCell (fun item ->
                 let key: string = $"[{item.Index}]-{item.File.Label}"
+
                 Fui.tableCellLayout [
                     tableCellLayout.key key
-                    tableCellLayout.media (
-                        item.File.Icon
-                    )
-                    tableCellLayout.children [
-                        Fui.text key
-                    ]
-                ]
-            )
+                    tableCellLayout.media (item.File.Icon)
+                    tableCellLayout.children [ Fui.text key ]
+                ])
         ]
         Fui.createTableColumn [
-            createTableColumnOption.columnId  "author"
-            createTableColumnOption.compare  (fun a b -> a.Author.Label.CompareTo (b.Author.Label))
-            createTableColumnOption.renderHeaderCell  (fun _ -> "Author")
-            createTableColumnOption.renderCell  (fun item ->
+            createTableColumnOption.columnId "author"
+            createTableColumnOption.compare (fun a b -> a.Author.Label.CompareTo(b.Author.Label))
+            createTableColumnOption.renderHeaderCell (fun _ -> "Author")
+            createTableColumnOption.renderCell (fun item ->
                 Fui.tableCellLayout [
                     tableCellLayout.key item.Author.Label
                     tableCellLayout.media (
@@ -2599,11 +2574,8 @@ let DataGridTest () =
                             avatar.badge item.Author.Status
                         ]
                     )
-                    tableCellLayout.children [
-                        Fui.text item.Author.Label
-                    ]
-                ]
-            )
+                    tableCellLayout.children [ Fui.text item.Author.Label ]
+                ])
         ]
         Fui.createTableColumn [
             createTableColumnOption.columnId "lastUpdated"
@@ -2613,19 +2585,14 @@ let DataGridTest () =
         ]
         Fui.createTableColumn [
             createTableColumnOption.columnId "lastUpdate"
-            createTableColumnOption.compare (fun a b -> a.LastUpdate.Label.CompareTo (b.LastUpdate.Label))
+            createTableColumnOption.compare (fun a b -> a.LastUpdate.Label.CompareTo(b.LastUpdate.Label))
             createTableColumnOption.renderHeaderCell (fun _ -> "Last Update")
             createTableColumnOption.renderCell (fun item ->
                 Fui.tableCellLayout [
                     tableCellLayout.key item.LastUpdate.Label
-                    tableCellLayout.media (
-                        item.LastUpdate.Icon
-                    )
-                    tableCellLayout.children [
-                        Fui.text item.LastUpdate.Label
-                    ]
-                ]
-            )
+                    tableCellLayout.media (item.LastUpdate.Icon)
+                    tableCellLayout.children [ Fui.text item.LastUpdate.Label ]
+                ])
         ]
     ]
 
@@ -2645,19 +2612,13 @@ let DataGridTest () =
         dataGrid.children [
             Fui.virtualized.dataGridHeader [
                 Fui.virtualized.dataGridRow [
-                    dataGridRow.children (fun tcd _ ->
-                        Fui.virtualized.dataGridHeaderCell [
-                            tcd.renderHeaderCell()
-                        ]
-                    )
+                    dataGridRow.children (fun tcd _ -> Fui.virtualized.dataGridHeaderCell [ tcd.renderHeaderCell () ])
                 ]
             ]
             Fui.virtualized.dataGridBody [
                 dataGridBody.itemSize 50
                 dataGridBody.height 400
-                dataGridBody.children (fun trd style index ->
-                    RenderRow trd style index
-                )
+                dataGridBody.children (fun trd style index -> RenderRow trd style index)
             ]
         ]
     ]
@@ -2666,37 +2627,41 @@ let DataGridTest () =
 let SimpleTableTest () =
     let columns = [
         {| columnKey = "file"; label = "File" |}
-        {| columnKey = "author"; label = "Author" |}
-        {| columnKey = "lastUpdated"; label = "Last Updated" |}
-        {| columnKey = "lastUpdate"; label = "Last Update" |}
+        {|
+            columnKey = "author"
+            label = "Author"
+        |}
+        {|
+            columnKey = "lastUpdated"
+            label = "Last Updated"
+        |}
+        {|
+            columnKey = "lastUpdate"
+            label = "Last Update"
+        |}
     ]
 
     Fui.table [
         Fui.tableHeader [
             Fui.tableRow (
-                columns |> List.map (fun c ->
+                columns
+                |> List.map (fun c ->
                     Fui.tableHeaderCell [
                         tableHeaderCell.key c.columnKey
-                        tableHeaderCell.children [
-                            Fui.text c.label
-                        ]
-                    ]
-                )
+                        tableHeaderCell.children [ Fui.text c.label ]
+                    ])
             )
         ]
         Fui.tableBody (
-            items |> List.map (fun i ->
+            items
+            |> List.map (fun i ->
                 Fui.tableRow [
                     tableRow.key i.File.Label
                     tableRow.children [
                         Fui.tableCell [
                             Fui.tableCellLayout [
-                                tableCellLayout.media (
-                                    i.File.Icon
-                                )
-                                tableCellLayout.children [
-                                    Fui.text i.File.Label
-                                ]
+                                tableCellLayout.media (i.File.Icon)
+                                tableCellLayout.children [ Fui.text i.File.Label ]
                             ]
                         ]
                         Fui.tableCell [
@@ -2710,45 +2675,41 @@ let SimpleTableTest () =
                                 )
                             ]
                         ]
-                        Fui.tableCell [
-                            Fui.text i.LastUpdated.Label
-                        ]
+                        Fui.tableCell [ Fui.text i.LastUpdated.Label ]
                         Fui.tableCell [
                             Fui.tableCellLayout [
-                                tableCellLayout.media (
-                                    i.LastUpdate.Icon
-                                )
-                                tableCellLayout.children [
-                                    Fui.text i.LastUpdate.Label
-                                ]
+                                tableCellLayout.media (i.LastUpdate.Icon)
+                                tableCellLayout.children [ Fui.text i.LastUpdate.Label ]
                             ]
                         ]
                     ]
-                ]
-            )
+                ])
         )
     ]
 
 [<ReactComponent>]
-let UseFocusFindersTest() =
-    let focusFinders = Fui.useFocusFinders()
+let UseFocusFindersTest () =
+    let focusFinders = Fui.useFocusFinders ()
     let findAllFocusable = focusFinders.findAllFocusable
     let count, setCount = React.useState 0
-    let toolbarRef = React.useRef<HTMLDivElement option>(None)
-    let attributes = Fui.useArrowNavigationGroup [
-        useArrowNavigationGroupOptions.axis.horizontal
-    ]
+    let toolbarRef = React.useRef<HTMLDivElement option> (None)
+
+    let attributes =
+        Fui.useArrowNavigationGroup [ useArrowNavigationGroupOptions.axis.horizontal ]
 
     let tokens = Theme.tokens
 
-    React.useEffect((fun _ ->
-        match toolbarRef.current with
-        | Some ref ->
-            let count = findAllFocusable ref None |> Seq.length
-            setCount(count)
-        | None -> ()
+    React.useEffect (
+        (fun _ ->
+            match toolbarRef.current with
+            | Some ref ->
+                let count = findAllFocusable ref None |> Seq.length
+                setCount (count)
+            | None -> ()
 
-    ), [| unbox findAllFocusable |])
+        ),
+        [| unbox findAllFocusable |]
+    )
 
     Html.div [
         Html.div [
@@ -2759,9 +2720,7 @@ let UseFocusFindersTest() =
                 style.padding 4
                 style.borderRadius 5
             ]
-            prop.children [
-                Fui.text.body1Stronger $"{count} focusable elements below"
-            ]
+            prop.children [ Fui.text.body1Stronger $"{count} focusable elements below" ]
         ]
         Html.div [
             prop.ref toolbarRef
@@ -2778,84 +2737,67 @@ let UseFocusFindersTest() =
             prop.children [
                 Fui.button [
                     button.ariaLabel "Bold"
-                    button.icon (
-                        Fui.icon.textBoldRegular []
-                    )
+                    button.icon (Fui.icon.textBoldRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Underline"
-                    button.icon (
-                        Fui.icon.textUnderlineRegular []
-                    )
+                    button.icon (Fui.icon.textUnderlineRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Italic"
-                    button.icon (
-                        Fui.icon.textItalicRegular []
-                    )
+                    button.icon (Fui.icon.textItalicRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Align Left"
-                    button.icon (
-                        Fui.icon.textAlignLeftRegular []
-                    )
+                    button.icon (Fui.icon.textAlignLeftRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Align Right"
-                    button.icon (
-                        Fui.icon.textAlignRightRegular []
-                    )
+                    button.icon (Fui.icon.textAlignRightRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Copy"
                     button.disabled true
-                    button.icon (
-                        Fui.icon.copyRegular []
-                    )
+                    button.icon (Fui.icon.copyRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Cut"
                     button.disabled true
-                    button.icon (
-                        Fui.icon.cutRegular []
-                    )
+                    button.icon (Fui.icon.cutRegular [])
                 ]
                 Fui.button [
                     button.ariaLabel "Paste"
                     button.disabled true
-                    button.icon (
-                        Fui.icon.clipboardPasteRegular []
-                    )
+                    button.icon (Fui.icon.clipboardPasteRegular [])
                 ]
             ]
         ]
     ]
 
-let dialogClass = Fui.makeResetStyles [
-    style.position.fixedRelativeToWindow
-    style.top (length.px 200)
-    style.backgroundColor tokens.colorBrandBackground2
-    style.margin (length.auto)
-    style.borderStyle.none
-    style.padding (10, 50)
-    style.boxShadow (5, 5, tokens.shadow16)
-    style.width (length.px 450)
-    style.height (length.px 200)
-    style.display.flex
-    style.flexDirection.column
-    style.zIndex 100
-]
+let dialogClass =
+    Fui.makeResetStyles [
+        style.position.fixedRelativeToWindow
+        style.top (length.px 200)
+        style.backgroundColor tokens.colorBrandBackground2
+        style.margin (length.auto)
+        style.borderStyle.none
+        style.padding (10, 50)
+        style.boxShadow (5, 5, tokens.shadow16)
+        style.width (length.px 450)
+        style.height (length.px 200)
+        style.display.flex
+        style.flexDirection.column
+        style.zIndex 100
+    ]
 
 [<ReactComponent>]
-let UseModalAttributesOptionsTest() =
+let UseModalAttributesOptionsTest () =
     let isOpen, setIsOpen = React.useState false
-    let attributes = Fui.useModalAttributes [
-        useModalAttributesOptions.trapFocus true
-    ]
-    let dialogClass = dialogClass()
+    let attributes = Fui.useModalAttributes [ useModalAttributesOptions.trapFocus true ]
+    let dialogClass = dialogClass ()
 
-    let triggerRef = React.useRef<HTMLButtonElement option>(None)
-    let dialogRef = React.useRef<HTMLDivElement option>(None)
+    let triggerRef = React.useRef<HTMLButtonElement option> (None)
+    let dialogRef = React.useRef<HTMLDivElement option> (None)
 
     Html.div [
         Fui.button [
@@ -2876,13 +2818,9 @@ let UseModalAttributesOptionsTest() =
                         text.as'.h2
                         text.text "Example dialog"
                     ]
+                    Html.div [ Fui.text "This is a dialog for example purposes" ]
                     Html.div [
-                        Fui.text "This is a dialog for example purposes"
-                    ]
-                    Html.div [
-                        Fui.button [
-                            button.text "Action"
-                        ]
+                        Fui.button [ button.text "Action" ]
                         Fui.button [
                             button.onClick (fun _ -> setIsOpen false)
                             button.text "Close"
@@ -2893,17 +2831,38 @@ let UseModalAttributesOptionsTest() =
     ]
 
 [<ReactComponent>]
-let FlatTreeTest() =
+let FlatTreeTest () =
     let items = [
         [ headlessTreeItem.value "1" ]
-        [ headlessTreeItem.value "1-1"; headlessTreeItem.parentValue "1" ]
-        [ headlessTreeItem.value "1-2"; headlessTreeItem.parentValue "1" ]
+        [
+            headlessTreeItem.value "1-1"
+            headlessTreeItem.parentValue "1"
+        ]
+        [
+            headlessTreeItem.value "1-2"
+            headlessTreeItem.parentValue "1"
+        ]
         [ headlessTreeItem.value "2" ]
-        [ headlessTreeItem.value "2-1"; headlessTreeItem.parentValue "2" ]
-        [ headlessTreeItem.value "2-1-1"; headlessTreeItem.parentValue "2-1" ]
-        [ headlessTreeItem.value "2-2"; headlessTreeItem.parentValue "2" ]
-        [ headlessTreeItem.value "2-2-1"; headlessTreeItem.parentValue "2-2" ]
-        [ headlessTreeItem.value "2-2-2"; headlessTreeItem.parentValue "2-2" ]
+        [
+            headlessTreeItem.value "2-1"
+            headlessTreeItem.parentValue "2"
+        ]
+        [
+            headlessTreeItem.value "2-1-1"
+            headlessTreeItem.parentValue "2-1"
+        ]
+        [
+            headlessTreeItem.value "2-2"
+            headlessTreeItem.parentValue "2"
+        ]
+        [
+            headlessTreeItem.value "2-2-1"
+            headlessTreeItem.parentValue "2-2"
+        ]
+        [
+            headlessTreeItem.value "2-2-2"
+            headlessTreeItem.parentValue "2-2"
+        ]
         [ headlessTreeItem.value "3" ]
     ]
 
@@ -2921,31 +2880,35 @@ let FlatTreeTest() =
         | "3" -> Fui.text "Level 1, item 3"
         | _ -> Html.none
 
-    let testFlatTree = Fui.useHeadlessFlatTree_unstable(items, [
-            headlessFlatTreeOptions.defaultOpenItems ["1"; "2"; "2-1"; "2-2"]
-            headlessFlatTreeOptions.defaultCheckedItems ["1-2"]
-            headlessFlatTreeOptions.selectionMode.multiselect
-        ]
-    )
+    let testFlatTree =
+        Fui.useHeadlessFlatTree_unstable (
+            items,
+            [
+                headlessFlatTreeOptions.defaultOpenItems [
+                    "1"
+                    "2"
+                    "2-1"
+                    "2-2"
+                ]
+                headlessFlatTreeOptions.defaultCheckedItems [ "1-2" ]
+                headlessFlatTreeOptions.selectionMode.multiselect
+            ]
+        )
 
     let renderItem flatTreeItem =
-        let treeItemProps = flatTreeItem.getTreeItemProps()
+        let treeItemProps = flatTreeItem.getTreeItemProps ()
 
         Fui.treeItem [
             yield! treeItemProps |> treeItem.getProps
             treeItem.key flatTreeItem.value
-            treeItem.children [
-                Fui.treeItemLayout [
-                    getContent treeItemProps.value
-                ]
-            ]
+            treeItem.children [ Fui.treeItemLayout [ getContent treeItemProps.value ] ]
         ]
 
     Fui.flatTree [
         flatTree.ariaLabel "Selection"
-        yield! testFlatTree.getTreeProps() |> flatTree.getProps
+        yield! testFlatTree.getTreeProps () |> flatTree.getProps
         flatTree.children [
-            for flatTree in testFlatTree.items() do
+            for flatTree in testFlatTree.items () do
                 yield renderItem flatTree
         ]
     ]
@@ -2982,11 +2945,7 @@ let RenderButton (button: ButtonItem) (isLastItem: bool) =
         if isLastItem |> not then
             Fui.overflowDivider [
                 overflowDivider.groupId button.key
-                overflowDivider.children (
-                    Fui.breadcrumbDivider [
-                        breadcrumbDivider.custom ("data-group", button.key)
-                    ]
-                )
+                overflowDivider.children (Fui.breadcrumbDivider [ breadcrumbDivider.custom ("data-group", button.key) ])
             ]
     ]
 
@@ -3010,42 +2969,40 @@ let ControlledOverflowMenu (props: PartitionBreadcrumbItems<ButtonItem>) =
     if options.isOverflowing |> not && props.overflowItems.Length = 0 then
         Html.none
     else
-    Fui.menu [
-        menu.hasIcons true
-        menu.children [
-            Fui.menuTrigger [
-                menuTrigger.disableButtonEnhancement true
-                menuTrigger.children (
-                    Fui.button [
-                        button.style [ style.alignSelf.center ]
-                        button.appearance.transparent
-                        button.ref options.ref
-                        button.icon (
-                            Fui.icon.moreHorizontalRegular []
-                        )
-                        button.ariaLabel $"{options.overflowCount} more tabs"
-                        button.role "tab"
+        Fui.menu [
+            menu.hasIcons true
+            menu.children [
+                Fui.menuTrigger [
+                    menuTrigger.disableButtonEnhancement true
+                    menuTrigger.children (
+                        Fui.button [
+                            button.style [ style.alignSelf.center ]
+                            button.appearance.transparent
+                            button.ref options.ref
+                            button.icon (Fui.icon.moreHorizontalRegular [])
+                            button.ariaLabel $"{options.overflowCount} more tabs"
+                            button.role "tab"
+                        ]
+                    )
+                ]
+                Fui.menuPopover [
+                    Fui.menuList [
+                        if options.isOverflowing then
+                            yield!
+                                props.startDisplayedItems
+                                |> Seq.map (fun b -> OverflowBreadcrumbButton (b.key |> string) b b.key)
+                        if props.overflowItems.Length <> 0 then
+                            yield!
+                                props.overflowItems
+                                |> Seq.map (fun b -> OverflowBreadcrumbButton (b.key |> string) b b.key)
+                        if options.isOverflowing && props.endDisplayedItems.Length <> 0 then
+                            yield!
+                                props.endDisplayedItems
+                                |> Seq.map (fun b -> OverflowBreadcrumbButton (b.key |> string) b b.key)
                     ]
-                )
-            ]
-            Fui.menuPopover [
-                Fui.menuList [
-                    if options.isOverflowing then
-                        yield! props.startDisplayedItems |> Seq.map (fun b ->
-                            OverflowBreadcrumbButton (b.key |> string) b b.key
-                        )
-                    if props.overflowItems.Length <> 0 then
-                        yield! props.overflowItems |> Seq.map (fun b ->
-                            OverflowBreadcrumbButton (b.key |> string) b b.key
-                        )
-                    if options.isOverflowing && props.endDisplayedItems.Length <> 0 then
-                        yield! props.endDisplayedItems |> Seq.map (fun b ->
-                            OverflowBreadcrumbButton (b.key |> string) b b.key
-                        )
                 ]
             ]
         ]
-    ]
 
 let buttonItems = [|
     {
@@ -3067,23 +3024,17 @@ let buttonItems = [|
     {
         key = 2
         item = "Item 2"
-        buttonProps = [
-            breadcrumbButton.onClick (fun _ -> printfn "item 2 was clicked")
-        ]
+        buttonProps = [ breadcrumbButton.onClick (fun _ -> printfn "item 2 was clicked") ]
     }
     {
         key = 3
         item = "Item 3"
-        buttonProps = [
-            breadcrumbButton.onClick (fun _ -> printfn "item 3 was clicked")
-        ]
+        buttonProps = [ breadcrumbButton.onClick (fun _ -> printfn "item 3 was clicked") ]
     }
     {
         key = 4
-        item= "Item 4"
-        buttonProps= [
-            breadcrumbButton.onClick (fun _ -> printfn "item 4 was clicked")
-        ]
+        item = "Item 4"
+        buttonProps = [ breadcrumbButton.onClick (fun _ -> printfn "item 4 was clicked") ]
     }
     {
         key = 5
@@ -3104,21 +3055,20 @@ let buttonItems = [|
     {
         key = 7
         item = "Item 7"
-        buttonProps = [
-            breadcrumbButton.onClick (fun _ -> printfn "item 7 was clicked")
-        ]
+        buttonProps = [ breadcrumbButton.onClick (fun _ -> printfn "item 7 was clicked") ]
     }
 |]
 
 
 [<ReactComponent>]
 let BreadcrumbTest () =
-    let styles = useStyles()
+    let styles = useStyles ()
 
-    let partitionBreadcrumbItems = Fui.partitionBreadcrumbItems [
-        partitionBreadcrumbItemsOptions.items buttonItems
-        partitionBreadcrumbItemsOptions.maxDisplayedItems 4
-    ]
+    let partitionBreadcrumbItems =
+        Fui.partitionBreadcrumbItems [
+            partitionBreadcrumbItemsOptions.items buttonItems
+            partitionBreadcrumbItemsOptions.maxDisplayedItems 4
+        ]
 
     let startItems, overflowItems, endItems =
         partitionBreadcrumbItems.startDisplayedItems,
@@ -3140,8 +3090,7 @@ let BreadcrumbTest () =
                                 endItems
                                 |> Array.map (fun b ->
                                     let isLastItem = b.key = buttonItems.Length - 1
-                                    RenderButton b isLastItem
-                                )
+                                    RenderButton b isLastItem)
                                 |> Array.toList
                     ]
                 )
@@ -3150,29 +3099,27 @@ let BreadcrumbTest () =
     ]
 
 [<ReactComponent>]
-let SearchBoxTest() =
+let SearchBoxTest () =
     let value, setValue = React.useState ("initial value")
     let valid, setValid = React.useState true
 
     Fui.field [
         field.label "Controlled SearchBox limiting the value to 20 characters"
-        if valid then field.validationState.none else field.validationState.warning
+        if valid then
+            field.validationState.none
+        else
+            field.validationState.warning
         field.validationMessage (if valid then "" else "Input is limited to 20 characters.")
         field.children (
             Fui.searchBox [
                 searchBox.value value
-                searchBox.contentBefore (
-                    Fui.icon.searchInfoFilled [
-                        icon.onClick (fun _ -> printfn "Search clicked")
-                    ]
-                )
+                searchBox.contentBefore (Fui.icon.searchInfoFilled [ icon.onClick (fun _ -> printfn "Search clicked") ])
                 searchBox.onChange (fun (v: ValueProp<string>) ->
                     if v.value.Length <= 20 then
                         setValue v.value
                         setValid true
                     else
-                        setValid false
-                )
+                        setValid false)
             ]
         )
     ]
@@ -3186,28 +3133,27 @@ let initialTags = [
 [<ReactComponent>]
 let TagTest () =
     let visibleTags, setVisibleTags = React.useState initialTags
+
     Fui.tagGroup [
         tagGroup.onDismiss (fun (data: ValueProp<string>) ->
-            setVisibleTags (visibleTags |> List.filter (fun t -> t.value <> data.value))
-        )
+            setVisibleTags (visibleTags |> List.filter (fun t -> t.value <> data.value)))
         tagGroup.ariaLabel "Dismiss example"
         tagGroup.children [
-            yield! visibleTags |> List.map (fun t ->
-                Fui.tag [
-                    tag.dismissible true
-                    tag.dismissIcon [
-                        prop.ariaLabel "Remove"
-                    ]
-                    tag.value t.value
-                    tag.key t.value
-                    tag.text t.children
-                ]
-            )
+            yield!
+                visibleTags
+                |> List.map (fun t ->
+                    Fui.tag [
+                        tag.dismissible true
+                        tag.dismissIcon [ prop.ariaLabel "Remove" ]
+                        tag.value t.value
+                        tag.key t.value
+                        tag.text t.children
+                    ])
         ]
     ]
 
 [<ReactComponent>]
-let InteractionTagTest() =
+let InteractionTagTest () =
     let liked, setLiked = React.useState false
 
     Fui.interactionTag [
@@ -3217,9 +3163,7 @@ let InteractionTagTest() =
                     Fui.interactionTagPrimary [
                         interactionTagPrimary.hasSecondaryAction true
                         interactionTagPrimary.id "golden-retreiver-primary"
-                        interactionTagPrimary.children [
-                            Fui.text "Golden Retriever"
-                        ]
+                        interactionTagPrimary.children [ Fui.text "Golden Retriever" ]
                     ]
                 )
             ]
@@ -3230,7 +3174,8 @@ let InteractionTagTest() =
                 ]
                 Html.ul [
                     Html.li "Size: Medium to large-sized dog breed."
-                    Html.li "Coat: Luxurious double coat with a dense, water-repellent outer layer and a soft, dense undercoat."
+                    Html.li
+                        "Coat: Luxurious double coat with a dense, water-repellent outer layer and a soft, dense undercoat."
                     Html.li "Color: Typically a luscious golden or cream color, with variations in shade."
                     Html.li "Build: Sturdy and well-proportioned body with a friendly and intelligent expression."
                 ]
@@ -3245,7 +3190,10 @@ let InteractionTagTest() =
                     interactionTagSecondary.ariaLabelledBy "golden-retriever-primary golden-retriever-secondary"
                     interactionTagSecondary.id "golden-retriever-secondary"
                     interactionTagSecondary.children [
-                        if liked then Fui.icon.heartFilled [] else Fui.icon.heartRegular []
+                        if liked then
+                            Fui.icon.heartFilled []
+                        else
+                            Fui.icon.heartRegular []
                     ]
                 ]
             ]
@@ -3253,53 +3201,62 @@ let InteractionTagTest() =
     ]
 
 [<ReactComponent>]
-let MessageBarTest() =
+let MessageBarTest () =
     let intentIndex, setIntentIndex = React.useState 0
     let messageIntents, setMessageIntents = React.useState []
-    let intents = [ messageBar.intent.error; messageBar.intent.info; messageBar.intent.success; messageBar.intent.warning ]
+
+    let intents = [
+        messageBar.intent.error
+        messageBar.intent.info
+        messageBar.intent.success
+        messageBar.intent.warning
+    ]
 
     Html.div [
-        prop.style [ style.width 600; style.height 200; style.overflowY.scroll ]
+        prop.style [
+            style.width 600
+            style.height 200
+            style.overflowY.scroll
+        ]
         prop.children [
             Fui.button [
                 button.onClick (fun _ ->
                     let index = if intentIndex = 3 then 0 else intentIndex + 1
-                    setMessageIntents (intents.[intentIndex]::messageIntents)
-                    setIntentIndex index
-                )
+                    setMessageIntents (intents.[intentIndex] :: messageIntents)
+                    setIntentIndex index)
                 button.text "Notify"
             ]
             Fui.messageBarGroup [
                 messageBarGroup.animate.both
                 messageBarGroup.children [
-                    yield! messageIntents |> List.mapi (fun index intent ->
-                        Fui.messageBar [
-                            messageBar.shape.square
-                            messageBar.layout.multiline
-                            messageBar.politeness.assertive
-                            intent
-                            messageBar.children [
-                                Fui.messageBarBody [
-                                    Fui.messageBarTitle "Descriptive title"
-                                    Fui.link [
-                                        link.text "Link"
+                    yield!
+                        messageIntents
+                        |> List.mapi (fun index intent ->
+                            Fui.messageBar [
+                                messageBar.shape.square
+                                messageBar.layout.multiline
+                                messageBar.politeness.assertive
+                                intent
+                                messageBar.children [
+                                    Fui.messageBarBody [
+                                        Fui.messageBarTitle "Descriptive title"
+                                        Fui.link [ link.text "Link" ]
+                                        Fui.text "Message providing information to the user with actionable"
                                     ]
-                                    Fui.text "Message providing information to the user with actionable"
+                                    Fui.messageBarActions [
+                                        messageBarActions.containerAction (
+                                            Fui.button [
+                                                button.onClick (fun _ ->
+                                                    setMessageIntents (
+                                                        messageIntents |> List.except [ messageIntents.[index] ]
+                                                    ))
+                                                button.appearance.transparent
+                                                button.icon (Fui.icon.dismissRegular [])
+                                            ]
+                                        )
+                                    ]
                                 ]
-                                Fui.messageBarActions [
-                                    messageBarActions.containerAction (
-                                        Fui.button [
-                                            button.onClick (fun _ -> setMessageIntents (messageIntents |> List.except [messageIntents.[index]]))
-                                            button.appearance.transparent
-                                            button.icon (
-                                                Fui.icon.dismissRegular []
-                                            )
-                                        ]
-                                    )
-                                ]
-                            ]
-                        ]
-                    )
+                            ])
                 ]
             ]
         ]
@@ -3307,25 +3264,39 @@ let MessageBarTest() =
 
 [<ReactComponent>]
 let MergeClassesTest isYellow =
-    let styles = useStyles()
+    let styles = useStyles ()
 
     Html.div [
-        prop.className (Fui.mergeClasses (styles.backgroundColor, styles.borderRadius, (if isYellow then styles.yellowText else ""), "testSize" ))
-        prop.children [
-            Fui.text "Merge Classes Div"
-        ]
+        prop.className (
+            Fui.mergeClasses (
+                styles.backgroundColor,
+                styles.borderRadius,
+                (if isYellow then styles.yellowText else ""),
+                "testSize"
+            )
+        )
+        prop.children [ Fui.text "Merge Classes Div" ]
     ]
 
 [<ReactComponent>]
 let CalendarTest () =
     let date, setDate = React.useState DateTime.Today
+
     Fui.calendar [
         calendar.showGoToToday true
         calendar.onSelectDate (fun d _ -> setDate d)
         calendar.value date
         calendar.highlightSelectedMonth true
-        calendar.restrictedDates [ DateTime.Today; DateTime.Today.AddDays(1)]
-        calendar.strings ({ Fui.defaultDatePickerStrings with goToToday = "Pick Me!"})
+        calendar.restrictedDates [
+            DateTime.Today
+            DateTime.Today.AddDays(1)
+        ]
+        calendar.strings (
+            {
+                Fui.defaultDatePickerStrings with
+                    goToToday = "Pick Me!"
+            }
+        )
         calendar.calendarDayProps [
             calendarDay.navigationIcons [
                 calendarNavigationIcons.downNavigation (Fui.icon.doubleSwipeDownFilled [])
@@ -3333,25 +3304,24 @@ let CalendarTest () =
             ]
             calendarDay.firstDayOfWeek.saturday
             calendarDay.getMarkedDays (fun sd _ -> [|
-                    Fui.addDays(sd, 3)
-                    Fui.addDays(sd, 4)
-                |]
-            )
+                Fui.addDays (sd, 3)
+                Fui.addDays (sd, 4)
+            |])
             calendarDay.customDayCellRef (fun element dt classNames ->
                 match element with
                 | Some el ->
                     el.title <- $"Custom title from customDayCellRef: {dt.ToString()}"
                     // Disables Saturdays and Sundays
                     if dt.DayOfWeek = DayOfWeek.Sunday || dt.DayOfWeek = DayOfWeek.Saturday then
-                        el.classList.add(classNames.dayOutsideBounds.Split(" "))
+                        el.classList.add (classNames.dayOutsideBounds.Split(" "))
                     else
                         ()
-                | None -> ()
-            )
+                | None -> ())
         ]
     ]
 
-let getErrorMessage = function
+let getErrorMessage =
+    function
     | Some TimePickerErrorType.``invalid-input`` -> "Time is invalid"
     | Some TimePickerErrorType.``out-of-bounds`` -> "Time is out of bounds"
     | Some TimePickerErrorType.``required-input`` -> "Time is required"
@@ -3363,7 +3333,8 @@ let TimePickerTest () =
 
     Fui.field [
         field.required true
-        field.label "Type a time outside of 10:00 to 19:59, type an invalid time, or leave the input empty and close the TimePicker."
+        field.label
+            "Type a time outside of 10:00 to 19:59, type an invalid time, or leave the input empty and close the TimePicker."
         field.validationMessage (getErrorMessage errorType)
         field.children (
             Fui.timePicker [
@@ -3379,22 +3350,14 @@ let TimePickerTest () =
     ]
 
 [<ReactComponent>]
-let TeachingPopoverTest() =
+let TeachingPopoverTest () =
     Fui.teachingPopover [
         teachingPopover.appearance.brand
         teachingPopover.withArrow true
-        teachingPopover.positioning [
-            positioning.offset [
-                offset.crossAxis 200
-            ]
-        ]
+        teachingPopover.positioning [ positioning.offset [ offset.crossAxis 200 ] ]
         teachingPopover.openOnHover true
         teachingPopover.children [
-            Fui.teachingPopoverTrigger (
-                Fui.button [
-                    button.text "Teaching Popover Trigger"
-                ]
-            )
+            Fui.teachingPopoverTrigger (Fui.button [ button.text "Teaching Popover Trigger" ])
             Fui.teachingPopoverSurface [
                 Fui.teachingPopoverHeader "Tips"
                 Fui.teachingPopoverCarousel [
@@ -3407,7 +3370,8 @@ let TeachingPopoverTest() =
                                     teachingPopoverBody.media (
                                         Fui.image [
                                             image.fit.cover
-                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                            image.src
+                                                "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
                                         ]
                                     )
                                     teachingPopoverBody.children [
@@ -3424,7 +3388,8 @@ let TeachingPopoverTest() =
                                     teachingPopoverBody.media (
                                         Fui.image [
                                             image.fit.cover
-                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                            image.src
+                                                "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
                                         ]
                                     )
                                     teachingPopoverBody.children [
@@ -3441,7 +3406,8 @@ let TeachingPopoverTest() =
                                     teachingPopoverBody.media (
                                         Fui.image [
                                             image.fit.cover
-                                            image.src "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
+                                            image.src
+                                                "https://i0.wp.com/www.smartprix.com/bytes/wp-content/uploads/2023/06/Untitled-design-88.jpg?fit=1200%2C675&ssl=1"
                                         ]
                                     )
                                     teachingPopoverBody.children [
@@ -3459,8 +3425,7 @@ let TeachingPopoverTest() =
                             teachingPopoverCarouselFooter.children [
                                 Fui.teachingPopoverCarouselNav [
                                     teachingPopoverCarouselNav.children (fun _ ->
-                                        Fui.teachingPopoverCarouselNavButton []
-                                    )
+                                        Fui.teachingPopoverCarouselNavButton [])
                                 ]
                             ]
                         ]
@@ -3470,7 +3435,7 @@ let TeachingPopoverTest() =
         ]
     ]
 
-let ratingTest() =
+let ratingTest () =
     Fui.rating [
         rating.step.``0.5``
         rating.defaultValue 4.5M
@@ -3515,36 +3480,36 @@ let TagPickerTest () =
     let query, setQuery = React.useState ""
     let selectedOptions, setSelectedOptions = React.useState []
 
-    let children = Fui.useTagPickerFilter [
-        useTagPickerFilter.query query
-        useTagPickerFilter.options options
-        useTagPickerFilter.noOptionsElement (
-            Fui.tagPickerOption [
-                tagPickerOption.value "no-matches"
-                tagPickerOption.children "We couldn't find any matches"
-            ]
-        )
-        useTagPickerFilter.renderOption (fun option ->
-            Fui.tagPickerOption [
-                tagPickerOption.secondaryContent (Fui.text "Microsoft FTE")
-                tagPickerOption.key option
-                tagPickerOption.media (
-                    Fui.avatar [
-                        avatar.shape.square
-                        avatar.ariaHidden true
-                        avatar.name option
-                        avatar.color.colorful
-                        avatar.value option
-                    ]
-                )
-                tagPickerOption.value option
-                tagPickerOption.children option
-            ]
-        )
-        useTagPickerFilter.filter (fun (option: string) ->
-            selectedOptions |> List.contains option |> not && option.ToLower().Contains(query.ToLower())
-        )
-    ]
+    let children =
+        Fui.useTagPickerFilter [
+            useTagPickerFilter.query query
+            useTagPickerFilter.options options
+            useTagPickerFilter.noOptionsElement (
+                Fui.tagPickerOption [
+                    tagPickerOption.value "no-matches"
+                    tagPickerOption.children "We couldn't find any matches"
+                ]
+            )
+            useTagPickerFilter.renderOption (fun option ->
+                Fui.tagPickerOption [
+                    tagPickerOption.secondaryContent (Fui.text "Microsoft FTE")
+                    tagPickerOption.key option
+                    tagPickerOption.media (
+                        Fui.avatar [
+                            avatar.shape.square
+                            avatar.ariaHidden true
+                            avatar.name option
+                            avatar.color.colorful
+                            avatar.value option
+                        ]
+                    )
+                    tagPickerOption.value option
+                    tagPickerOption.children option
+                ])
+            useTagPickerFilter.filter (fun (option: string) ->
+                selectedOptions |> List.contains option |> not
+                && option.ToLower().Contains(query.ToLower()))
+        ]
 
     Fui.field [
         field.label "Select Employees"
@@ -3557,29 +3522,27 @@ let TagPickerTest () =
                         ()
                     else
                         setSelectedOptions (data.selectedOptions |> Array.toList)
-                        setQuery ""
-                )
+                        setQuery "")
                 tagPicker.selectedOptions selectedOptions
                 tagPicker.children [
                     Fui.tagPickerControl [
                         Fui.tagPickerGroup [
-                            yield! selectedOptions |> List.map (fun option ->
-                                Fui.tag [
-                                    tag.key option
-                                    tag.shape.rounded
-                                    tag.media (
-                                        Fui.avatar [
-                                            avatar.ariaHidden true
-                                            avatar.name option
-                                            avatar.color.colorful
-                                        ]
-                                    )
-                                    tag.value option
-                                    tag.children [
-                                        Fui.text option
-                                    ]
-                                ]
-                            )
+                            yield!
+                                selectedOptions
+                                |> List.map (fun option ->
+                                    Fui.tag [
+                                        tag.key option
+                                        tag.shape.rounded
+                                        tag.media (
+                                            Fui.avatar [
+                                                avatar.ariaHidden true
+                                                avatar.name option
+                                                avatar.color.colorful
+                                            ]
+                                        )
+                                        tag.value option
+                                        tag.children [ Fui.text option ]
+                                    ])
                         ]
                         Fui.tagPickerInput [
                             tagPickerInput.ariaLabel "Select Employees"
@@ -3593,36 +3556,65 @@ let TagPickerTest () =
         ]
     ]
 
-type Swatch = { color: string; value: string; ``aria-label``: string }
+type Swatch = {
+    color: string
+    value: string
+    ``aria-label``: string
+}
 
 [<ReactComponent>]
-let SwatchPickerTest() =
-    let styles = useStyles()
+let SwatchPickerTest () =
+    let styles = useStyles ()
     let selectedValue, setSelectedValue = React.useState "00B053"
     let selectedColor, setSelectedColor = React.useState "#00B053"
+
     let defaultItems = [
-        { color = "#FF1921"; value = "FF1921"; ``aria-label`` = "red" }
-        { color = "#FF7A00"; value = "FF7A00"; ``aria-label`` = "dark orange" }
-        { color = "#90D057"; value = "90D057"; ``aria-label`` = "light green" }
-        { color = "#00B053"; value = "00B053"; ``aria-label`` = "green" }
+        {
+            color = "#FF1921"
+            value = "FF1921"
+            ``aria-label`` = "red"
+        }
+        {
+            color = "#FF7A00"
+            value = "FF7A00"
+            ``aria-label`` = "dark orange"
+        }
+        {
+            color = "#90D057"
+            value = "90D057"
+            ``aria-label`` = "light green"
+        }
+        {
+            color = "#00B053"
+            value = "00B053"
+            ``aria-label`` = "green"
+        }
     ]
 
     let inputRef: IRefValue<HTMLInputElement option> = React.useRef None
     let items, setItems = React.useState defaultItems
-    let ITEMS_LIMIT = 8;
+    let ITEMS_LIMIT = 8
     let emptyItems = ITEMS_LIMIT - items.Length
 
-    let handleAddColor = fun _ ->
-        let newColor =
-            match inputRef.current with
-            | Some ref -> ref.value
-            | None -> ""
-        let newValue = $"custom-{newColor} [{items.Length - ITEMS_LIMIT}]"
+    let handleAddColor =
+        fun _ ->
+            let newColor =
+                match inputRef.current with
+                | Some ref -> ref.value
+                | None -> ""
 
-        setItems (
-            [ { color = newColor; value = newValue; ``aria-label`` = newColor } ]
-            |> List.append items
-        )
+            let newValue = $"custom-{newColor} [{items.Length - ITEMS_LIMIT}]"
+
+            setItems (
+                [
+                    {
+                        color = newColor
+                        value = newValue
+                        ``aria-label`` = newColor
+                    }
+                ]
+                |> List.append items
+            )
 
     Html.div [
         Fui.swatchPicker [
@@ -3630,17 +3622,17 @@ let SwatchPickerTest() =
             swatchPicker.selectedValue selectedValue
             swatchPicker.onSelectionChange (fun (data: SwatchPickerOnSelectionChangeData) ->
                 setSelectedValue data.selectedValue
-                setSelectedColor data.selectedSwatch
-            )
+                setSelectedColor data.selectedSwatch)
             swatchPicker.children [
-                yield! items |> List.map (fun item ->
-                    Fui.colorSwatch [
-                        colorSwatch.key item.value
-                        colorSwatch.value item.value
-                        colorSwatch.ariaLabel item.``aria-label``
-                        colorSwatch.color item.color
-                    ]
-                )
+                yield!
+                    items
+                    |> List.map (fun item ->
+                        Fui.colorSwatch [
+                            colorSwatch.key item.value
+                            colorSwatch.value item.value
+                            colorSwatch.ariaLabel item.``aria-label``
+                            colorSwatch.color item.color
+                        ])
                 for i in 1..emptyItems do
                     Fui.emptySwatch [
                         emptySwatch.disabled true
@@ -3653,7 +3645,7 @@ let SwatchPickerTest() =
             prop.className styles.swatchExample
             prop.style [
                 style.backgroundColor selectedColor
-                style.custom ("@media (forcedColors: active)", [ "forcedColorAdjust", "none"])
+                style.custom ("@media (forcedColors: active)", [ "forcedColorAdjust", "none" ])
             ]
         ]
         Fui.label [
@@ -3679,27 +3671,25 @@ let SwatchPickerTest() =
             button.onClick (fun _ -> setItems defaultItems)
             button.text "Reset example"
         ]
-        Html.div [
-            prop.style [ style.margin 25 ]
-        ]
+        Html.div [ prop.style [ style.margin 25 ] ]
         Fui.swatchPicker [
             swatchPicker.layout.grid
             swatchPicker.children [
-                yield! Fui.renderSwatchPickerGrid [
-                    swatchPickerGrid.items items
-                    swatchPickerGrid.columnCount 2
-                    swatchPickerGrid.renderSwatch (fun (item: Swatch) ->
-                        if item.color = "#FF7A00" then
-                            Fui.text "Orange"
-                        else
-                            Fui.colorSwatch [
-                                colorSwatch.key item.value
-                                colorSwatch.value item.value
-                                colorSwatch.ariaLabel item.``aria-label``
-                                colorSwatch.color item.color
-                            ]
-                    )
-                ]
+                yield!
+                    Fui.renderSwatchPickerGrid [
+                        swatchPickerGrid.items items
+                        swatchPickerGrid.columnCount 2
+                        swatchPickerGrid.renderSwatch (fun (item: Swatch) ->
+                            if item.color = "#FF7A00" then
+                                Fui.text "Orange"
+                            else
+                                Fui.colorSwatch [
+                                    colorSwatch.key item.value
+                                    colorSwatch.value item.value
+                                    colorSwatch.ariaLabel item.``aria-label``
+                                    colorSwatch.color item.color
+                                ])
+                    ]
             ]
         ]
     ]
@@ -3712,39 +3702,42 @@ type MotionStyles = {
     controls: string
 }
 
-let useMotionStyles = Fui.makeStyles<MotionStyles> [
-    "container", [
-        style.display.grid
-        style.gridTemplateColumns [(length.fr 1)]
-        style.gap (length.px 10)
+let useMotionStyles =
+    Fui.makeStyles<MotionStyles> [
+        "container",
+        [
+            style.display.grid
+            style.gridTemplateColumns [ (length.fr 1) ]
+            style.gap (length.px 10)
+        ]
+        "card",
+        [
+            style.display.flex
+            style.flexDirection.column
+            style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+            style.borderRadius (length.px 5)
+            style.padding (length.px 10)
+            style.alignItems.center
+        ]
+        "item",
+        [
+            style.backgroundColor tokens.colorBrandBackground
+            style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorTransparentStroke)
+            style.borderRadius (length.percent 50)
+            style.width (length.px 100)
+            style.height (length.px 100)
+        ]
+        "description", [ style.margin (length.px 5) ]
+        "controls",
+        [
+            style.display.flex
+            style.flexDirection.column
+            style.marginTop (length.px 20)
+            style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+            style.borderRadius (length.px 5)
+            style.padding (length.px 10)
+        ]
     ]
-    "card", [
-        style.display.flex
-        style.flexDirection.column
-        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
-        style.borderRadius (length.px 5)
-        style.padding (length.px 10)
-        style.alignItems.center
-    ]
-    "item", [
-        style.backgroundColor tokens.colorBrandBackground
-        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorTransparentStroke)
-        style.borderRadius (length.percent 50)
-        style.width (length.px 100)
-        style.height (length.px 100)
-    ]
-    "description", [
-        style.margin (length.px 5)
-    ]
-    "controls", [
-        style.display.flex
-        style.flexDirection.column
-        style.marginTop (length.px 20)
-        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
-        style.borderRadius (length.px 5)
-        style.padding (length.px 10)
-    ]
-]
 
 [<ReactComponent>]
 let PresenceComponentTest () =
@@ -3752,22 +3745,44 @@ let PresenceComponentTest () =
     let motionRef: IRefValue<MotionImperativeRef option> = React.useRef (None)
     let visible, setVisible = React.useState false
 
-    let DropIn = Fui.createPresenceComponent {
-        enter = [
+    let DropIn =
+        Fui.createPresenceComponent {
+            enter = [
                 atomMotion.keyframes [
-                    [ style.transform [ transform.rotate -30; transform.translateY (length.percent -100) ]; style.opacity 0.0 ]
-                    [ style.transform [ transform.rotate -90; transform.translateX (length.percent -50) ]; style.opacity 0.5 ]
-                    [ style.transform [ transform.rotate 0; transform.translateY (length.percent 0) ]; style.opacity 1.0 ]
+                    [
+                        style.transform [
+                            transform.rotate -30
+                            transform.translateY (length.percent -100)
+                        ]
+                        style.opacity 0.0
+                    ]
+                    [
+                        style.transform [
+                            transform.rotate -90
+                            transform.translateX (length.percent -50)
+                        ]
+                        style.opacity 0.5
+                    ]
+                    [
+                        style.transform [
+                            transform.rotate 0
+                            transform.translateY (length.percent 0)
+                        ]
+                        style.opacity 1.0
+                    ]
                 ]
                 atomMotion.duration 2000
             ]
-        exit = [
-            atomMotion.keyframes [
-                [ style.opacity 1.0; style.opacity 0.0 ]
+            exit = [
+                atomMotion.keyframes [
+                    [
+                        style.opacity 1.0
+                        style.opacity 0.0
+                    ]
+                ]
+                atomMotion.duration 1000
             ]
-            atomMotion.duration 1000
-        ]
-    }
+        }
 
     Html.div [
         Html.div [
@@ -3779,9 +3794,7 @@ let PresenceComponentTest () =
                         DropIn [
                             presenceComponent.imperativeRef motionRef
                             presenceComponent.visible visible
-                            presenceComponent.children [
-                                Html.div [ prop.className styles.item ]
-                            ]
+                            presenceComponent.children [ Html.div [ prop.className styles.item ] ]
                         ]
                         Html.code [
                             prop.className styles.description
@@ -3813,50 +3826,56 @@ type MotionComponentStyles = {
     description: string
 }
 
-let useMotionComponentStyles = Fui.makeStyles<MotionComponentStyles> [
-    "container", [
-        style.display.grid
-        style.gridTemplateColumns [(length.fr 1)]
-        style.gap (length.px 10)
+let useMotionComponentStyles =
+    Fui.makeStyles<MotionComponentStyles> [
+        "container",
+        [
+            style.display.grid
+            style.gridTemplateColumns [ (length.fr 1) ]
+            style.gap (length.px 10)
+        ]
+        "card",
+        [
+            style.display.flex
+            style.flexDirection.column
+            style.alignItems.center
+            style.justifyContent.end'
+            style.gridArea "card"
+            style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
+            style.borderRadius (length.px 5)
+            style.padding (length.px 10)
+        ]
+        "item",
+        [
+            style.backgroundColor tokens.colorBrandBackground
+            style.borderRadius (length.percent 50)
+            style.width (length.px 100)
+            style.height (length.px 100)
+            style.custom ("forcedColorAdjust", "none")
+        ]
+        "description",
+        [
+            style.fontFamily Theme.tokens.fontFamilyMonospace
+            style.borderRadius (length.px 15)
+            style.marginTop (length.px 10)
+            style.padding (length.px 5)
+            style.backgroundColor Theme.tokens.colorNeutralBackground1Pressed
+        ]
     ]
-    "card", [
-        style.display.flex
-        style.flexDirection.column
-        style.alignItems.center
-        style.justifyContent.end'
-        style.gridArea "card"
-        style.border (tokens.strokeWidthThicker, borderStyle.solid, tokens.colorNeutralForeground3)
-        style.borderRadius (length.px 5)
-        style.padding (length.px 10)
-    ]
-    "item", [
-        style.backgroundColor tokens.colorBrandBackground
-        style.borderRadius (length.percent 50)
-        style.width (length.px 100)
-        style.height (length.px 100)
-        style.custom ("forcedColorAdjust", "none")
-    ]
-    "description", [
-        style.fontFamily Theme.tokens.fontFamilyMonospace
-        style.borderRadius (length.px 15)
-        style.marginTop (length.px 10)
-        style.padding (length.px 5)
-        style.backgroundColor Theme.tokens.colorNeutralBackground1Pressed
-    ]
-]
 
 [<ReactComponent>]
 let MotionComponentTest () =
     let styles = useMotionComponentStyles ()
 
-    let BackgroundChange = Fui.createMotionComponent [
-        atomMotion.keyframes [
-            [ style.backgroundColor Theme.tokens.colorStatusDangerBackground3 ]
-            [ style.backgroundColor Theme.tokens.colorStatusSuccessBackground3 ]
+    let BackgroundChange =
+        Fui.createMotionComponent [
+            atomMotion.keyframes [
+                [ style.backgroundColor Theme.tokens.colorStatusDangerBackground3 ]
+                [ style.backgroundColor Theme.tokens.colorStatusSuccessBackground3 ]
+            ]
+            atomMotion.duration 3000
+            atomMotion.iterations.infinity
         ]
-        atomMotion.duration 3000
-        atomMotion.iterations.infinity
-    ]
 
     Html.div [
         Html.div [
@@ -3865,11 +3884,7 @@ let MotionComponentTest () =
                 Html.div [
                     prop.className styles.card
                     prop.children [
-                        BackgroundChange [
-                            presenceComponent.children [
-                                Html.div [ prop.className styles.item ]
-                            ]
-                        ]
+                        BackgroundChange [ presenceComponent.children [ Html.div [ prop.className styles.item ] ] ]
                         Html.div "Custom background color motion"
                     ]
                 ]
@@ -3877,27 +3892,35 @@ let MotionComponentTest () =
         ]
     ]
 
-let useCarouselClasses = Fui.makeStyles<{| slider: string; card: string; image: string; viewport: string |}> [
-    "slider", [
-        style.marginBottom (length.px 72)
-        style.width (length.px 500)
-    ]
-    "card", [
-        style.boxSizing.borderBox
-        style.width (length.px 400)
-        style.paddingLeft (length.px 52)
-        style.paddingRight (length.px 52)
-        style.overflow.hidden
-        style.alignItems.center
-    ]
-    "image", [
-        style.alignSelf.center
-        style.width (length.percent 100)
-    ]
-    "viewport", [
-        style.marginBottom (length.px 72)
-    ]
-]
+let useCarouselClasses =
+    Fui.makeStyles<{|
+        slider: string
+        card: string
+        image: string
+        viewport: string
+    |}>
+        [
+            "slider",
+            [
+                style.marginBottom (length.px 72)
+                style.width (length.px 500)
+            ]
+            "card",
+            [
+                style.boxSizing.borderBox
+                style.width (length.px 400)
+                style.paddingLeft (length.px 52)
+                style.paddingRight (length.px 52)
+                style.overflow.hidden
+                style.alignItems.center
+            ]
+            "image",
+            [
+                style.alignSelf.center
+                style.width (length.percent 100)
+            ]
+            "viewport", [ style.marginBottom (length.px 72) ]
+        ]
 
 type ImageDefinition = {
     previewUrl: string
@@ -3907,29 +3930,26 @@ type ImageDefinition = {
 }
 
 let images = [
-  {
-    previewUrl =
-      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-swatch.jpg"
-    url = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-full-img.jpg"
-    label = "sea"
-  }
-  {
-    previewUrl=
-      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-swatch.jpg"
-    url= "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-full-img.jpg"
-    label= "bridge"
-  }
-  {
-    previewUrl=
-      "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-swatch.jpg"
-    url= "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-full-img.jpg"
-    label= "park"
-  }
+    {
+        previewUrl = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-swatch.jpg"
+        url = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/sea-full-img.jpg"
+        label = "sea"
+    }
+    {
+        previewUrl = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-swatch.jpg"
+        url = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/bridge-full-img.jpg"
+        label = "bridge"
+    }
+    {
+        previewUrl = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-swatch.jpg"
+        url = "https://fabricweb.azureedge.net/fabric-website/assets/images/swatch-picker/park-full-img.jpg"
+        label = "park"
+    }
 ]
 
 [<ReactComponent>]
-let CarouselTest() =
-    let classes = useCarouselClasses()
+let CarouselTest () =
+    let classes = useCarouselClasses ()
 
     Fui.carousel [
         carousel.groupSize 1
@@ -3943,20 +3963,21 @@ let CarouselTest() =
                     Fui.carouselSlider [
                         carouselSlider.className classes.slider
                         carouselSlider.children [
-                            yield! images |> List.mapi (fun index img ->
-                                Fui.carouselCard [
-                                    carouselCard.key img.url
-                                    carouselCard.className classes.card
-                                    carouselCard.ariaLabel $"{index + 1} of {images.Length}"
-                                    carouselCard.children [
-                                        Fui.image [
-                                            image.className classes.image
-                                            image.src img.url
-                                            image.role "presentation"
+                            yield!
+                                images
+                                |> List.mapi (fun index img ->
+                                    Fui.carouselCard [
+                                        carouselCard.key img.url
+                                        carouselCard.className classes.card
+                                        carouselCard.ariaLabel $"{index + 1} of {images.Length}"
+                                        carouselCard.children [
+                                            Fui.image [
+                                                image.className classes.image
+                                                image.src img.url
+                                                image.role "presentation"
+                                            ]
                                         ]
-                                    ]
-                                ]
-                            )
+                                    ])
                         ]
                     ]
                 ]
@@ -3964,12 +3985,8 @@ let CarouselTest() =
 
             Fui.carouselNavContainer [
                 carouselNavContainer.layout.overlayExpanded
-                carouselNavContainer.next [
-                    carouselButton.ariaLabel "go to next"
-                ]
-                carouselNavContainer.prev [
-                    carouselButton.ariaLabel "go to prev"
-                ]
+                carouselNavContainer.next [ carouselButton.ariaLabel "go to next" ]
+                carouselNavContainer.prev [ carouselButton.ariaLabel "go to prev" ]
                 carouselNavContainer.children [
                     Fui.carouselNav [
                         carouselNav.children (fun index ->
@@ -3978,8 +3995,7 @@ let CarouselTest() =
                                     prop.src images.[index].previewUrl
                                     prop.ariaLabel $"Carousel Nav Button {index}"
                                 ]
-                            ]
-                        )
+                            ])
                     ]
                 ]
             ]
@@ -3988,17 +4004,27 @@ let CarouselTest() =
 
 let mainContent model dispatch =
 
-    let newTokens = { Theme.tokens with colorBrandStroke1 = "#cbe82e" }
+    let newTokens = {
+        Theme.tokens with
+            colorBrandStroke1 = "#cbe82e"
+    }
 
     let typographyStyles = Fui.typographyStyles
 
     Fui.stack [
         stack.horizontal false
-        stack.tokens [ stack.tokens.childrenGap 16; stack.tokens.padding 32 ]
+        stack.tokens [
+            stack.tokens.childrenGap 16
+            stack.tokens.padding 32
+        ]
         stack.horizontalAlign.center
         stack.children [
             Html.div [
-                prop.style [ style.height 200; style.width 200; style.backgroundColor newTokens.colorBrandStroke1]
+                prop.style [
+                    style.height 200
+                    style.width 200
+                    style.backgroundColor newTokens.colorBrandStroke1
+                ]
                 prop.children [
                     Fui.text [
                         text.text "Typography Styles"
@@ -4013,15 +4039,15 @@ let mainContent model dispatch =
                 ]
             ]
             CarouselTest()
-            PresenceComponentTest ()
-            MotionComponentTest ()
+            PresenceComponentTest()
+            MotionComponentTest()
             SwatchPickerTest()
-            TagPickerTest ()
-            ratingTest()
+            TagPickerTest()
+            ratingTest ()
             ratingDisplayTest
             ratingItemTest
             TeachingPopoverTest()
-            TimePickerTest ()
+            TimePickerTest()
             MergeClassesTest true
             MergeClassesTest false
             Accordion()
@@ -4076,7 +4102,7 @@ let mainContent model dispatch =
             DrawerTest()
             simpleTreeTest
             FlatTreeTest()
-            DataGridTest ()
+            DataGridTest()
             // SimpleTableTest()
             UseFocusFindersTest()
             UseModalAttributesOptionsTest()
@@ -4085,12 +4111,11 @@ let mainContent model dispatch =
             SearchBoxTest()
             TagTest()
             InteractionTagTest()
-            Portal ()
+            Portal()
             MessageBarTest()
             CalendarTest()
         ]
     ]
 
 
-let view model dispatch =
-    mainContent model dispatch
+let view model dispatch = mainContent model dispatch
