@@ -1,6 +1,12 @@
 Release Notes
 =========
 
+### 1.17.0 (12-11-2024)
+
+* Update @fluentui/react-components to 9.56.5
+* Update compat NPM packages
+* Add unstable Nav components
+
 ### 1.16.2 (12-4-2024)
 
 * Update @fluentui/react-components to 9.56.3
