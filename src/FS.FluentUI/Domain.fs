@@ -1554,3 +1554,14 @@ type OverflowState<'ItemType, 'GroupType> = {
     // Typescript signature is Record<string, OverflowGroupState>
     groupVisibility: 'GroupType
 }
+
+type OnNavItemSelectData = {
+    ``type``: string option
+    event: Browser.Types.MouseEvent
+    /// The value of the selected navItem.
+    /// In the case of a category selection, this will be the value of the selected category.
+    value: string
+    /// The parent value of the selected navSubItem
+    /// Null if not a child of a category
+    categoryValue: string
+}

@@ -31,6 +31,7 @@ module FuiHelpers =
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
     let [<Literal>] Virtualizer_unstable = "@fluentui/react-virtualizer"
+    let [<Literal>] Nav_unstable = "@fluentui/react-nav-preview"
 
 // Added because I need the classNames going into mergeClasses to stay as a tuple.
 //TODO Find a way to dynamically create the "jsCode" string without it creating incorrect JS when compiled.
@@ -894,6 +895,40 @@ type [<Erase>] Fui =
     static member inline carouselSlider (props: ReactElement list) = Interop.reactElementWithChildren (import "CarouselSlider" FluentUIv9) props
     static member inline carouselAutoplayButton (props: ICarouselAutoplayButtonProp list) = createElement (import "CarouselAutoplayButton" FluentUIv9) props
     static member inline carouselViewport (props: ICarouselViewportProp list) = createElement (import "CarouselViewport" FluentUIv9) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline appItem (props: IAppItemProp list) = createElement (import "AppItem" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline hamburger (props: IHamburgerProp list) = createElement (import "Hamburger" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navCategory (props: INavCategoryProp list) = createElement (import "NavCategory" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navCategoryItem (props: INavCategoryItemProp list) = createElement (import "NavCategoryItem" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDivider (props: INavDividerProp list) = createElement (import "NavDivider" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawer (props: INavDrawerProp list) = createElement (import "NavDrawer" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawerBody (props: INavDrawerBodyProp list) = createElement (import "NavDrawerBody" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "NavDrawerBody" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawerHeader (props: INavDrawerHeaderProp list) = createElement (import "NavDrawerHeader" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawerHeader (props: ReactElement list) =  Interop.reactElementWithChildren (import "NavDrawerHeader" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navItem (props: INavItemProp list) = createElement (import "NavItem" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navSectionHeader (props: INavSectionHeaderProp list) = createElement (import "NavSectionHeader" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navSubItem (props: INavSubItemProp list) = createElement (import "NavSubItem" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navSubItemGroup (props: INavSubItemGroupProp list) = createElement (import "NavSubItemGroup" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navSubItemGroup (props: ReactElement list) = Interop.reactElementWithChildren (import "NavSubItemGroup" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline appItemStatic (props: IAppItemStaticProp list) = createElement (import "AppItemStatic" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline splitNavItem (props: ISplitNavItemProp list) = createElement (import "SplitNavItem" Nav_unstable) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

@@ -242,6 +242,23 @@ type [<Erase>] IPresenceMotionSlotProp = interface end
 type [<Erase>] IComboboxFilterConfigProp = interface end
 type [<Erase>] ICalendarNavigationIconsProp = interface end
 
+type [<Erase>] IAppItemProp = interface end
+type [<Erase>] IHamburgerProp = interface end
+type [<Erase>] INavCategoryProp = interface end
+type [<Erase>] INavCategoryItemProp = interface end
+type [<Erase>] INavDividerProp = interface end
+type [<Erase>] INavDrawerProp = interface end
+type [<Erase>] INavDrawerBodyProp = interface end
+type [<Erase>] INavDrawerHeaderProp = interface end
+type [<Erase>] INavItemProp = interface end
+type [<Erase>] INavSectionHeaderProp = interface end
+type [<Erase>] INavSubItemProp = interface end
+type [<Erase>] INavSubItemGroupProp = interface end
+type [<Erase>] INavSizeProp = interface end
+type [<Erase>] IAppItemStaticProp = interface end
+type [<Erase>] INavItemValueProp = interface end
+type [<Erase>] ISplitNavItemProp = interface end
+
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
 

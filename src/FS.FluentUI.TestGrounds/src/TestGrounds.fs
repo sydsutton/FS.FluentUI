@@ -4002,6 +4002,229 @@ let CarouselTest () =
         ]
     ]
 
+let navStyles = Fui.makeStyles<{| root: string; content: string; field: string |}> [
+    "root", [
+        style.overflow.hidden
+        style.display.flex
+        style.height (length.px 600)
+    ]
+    "content", [
+        style.custom ("flex", "1")
+        style.padding (length.px 16)
+        style.display.grid
+        style.justifyContent.flexStart
+        style.alignItems.flexStart
+    ]
+]
+
+let Person = Fui.bundleIcon(bundleIcon.personFilled, bundleIcon.personRegular)
+let Dashboard = Fui.bundleIcon(bundleIcon.boardFilled, bundleIcon.boardRegular)
+let Announcements = Fui.bundleIcon(bundleIcon.megaphoneLoudFilled, bundleIcon.megaphoneLoudRegular)
+let EmployeeSpotlight = Fui.bundleIcon(bundleIcon.personLightbulbFilled,bundleIcon.personLightbulbRegular)
+let Search = Fui.bundleIcon(bundleIcon.personSearchFilled, bundleIcon.personSearchRegular)
+let PerformanceReviews = Fui.bundleIcon(bundleIcon.previewLinkFilled, bundleIcon.previewLinkRegular)
+let JobPostings = Fui.bundleIcon(bundleIcon.notePinFilled, bundleIcon.notePinRegular)
+let Interviews = Fui.bundleIcon(bundleIcon.peopleFilled, bundleIcon.peopleRegular)
+let HealthPlans = Fui.bundleIcon(bundleIcon.heartPulseFilled, bundleIcon.heartPulseRegular)
+let TrainingPrograms = Fui.bundleIcon(bundleIcon.boxMultipleFilled, bundleIcon.boxMultipleRegular)
+let CareerDevelopment = Fui.bundleIcon(bundleIcon.peopleStarFilled, bundleIcon.peopleStarRegular)
+let Analytics = Fui.bundleIcon(bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
+let Reports = Fui.bundleIcon(bundleIcon.documentBulletListMultipleFilled,bundleIcon.documentBulletListMultipleRegular)
+
+[<ReactComponent>]
+let NavTest () =
+    let styles = navStyles ()
+    let isOpen, setIsOpen = React.useState true
+
+    let renderHamburderWithTooltip () =
+        Fui.tooltip [
+            tooltip.content "Navigation"
+            tooltip.relationship.label
+            tooltip.children [
+                Fui.hamburger [
+                    hamburger.onClick (fun _ -> setIsOpen (isOpen |> not))
+                ]
+            ]
+        ]
+
+    Html.div [
+        prop.className styles.root
+        prop.children [
+            Fui.navDrawer [
+                navDrawer.defaultSelectedValue "2"
+                navDrawer.defaultSelectedCategoryValue ""
+                navDrawer.open' isOpen
+                navDrawer.type'.inline'
+                navDrawer.multiple true
+                navDrawer.children [
+                    Fui.navDrawerHeader [ renderHamburderWithTooltip () ]
+                    Fui.navDrawerBody [
+                        Fui.appItem [
+                            appItem.icon (Fui.icon.personCircleRegular [icon.size.``28``])
+                            appItem.as'.a
+                            appItem.href ""
+                            appItem.children [
+                                Html.text "Contoso HR"
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (Dashboard [icon.size.``28``])
+                            navItem.value "1"
+                            navItem.children [
+                                Html.text "Dashboard"
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (Announcements [icon.size.``28``])
+                            navItem.value "2"
+                            navItem.children [
+                                Html.text "Announcements"
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (EmployeeSpotlight [icon.size.``28``])
+                            navItem.value "3"
+                            navItem.children [
+                                Html.text "Employee Spotlight"
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (Search [icon.size.``28``])
+                            navItem.value "4"
+                            navItem.children [
+                                Html.text "Profile Search"
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (PerformanceReviews [icon.size.``28``])
+                            navItem.value "5"
+                            navItem.children [
+                                Html.text "Performance Reviews"
+                            ]
+                        ]
+                        Fui.navSectionHeader [
+                            navSectionHeader.text "Employee Management"
+                        ]
+                        Fui.navCategory [
+                            navCategory.value "6"
+                            navCategory.children [
+                                Fui.navCategoryItem [
+                                    navCategoryItem.icon (JobPostings [icon.size.``28``])
+                                    navCategoryItem.text "Job Postings"
+                                ]
+                                Fui.navSubItemGroup [
+                                    Fui.navSubItem [
+                                        navSubItem.href ""
+                                        navSubItem.value "7"
+                                        navSubItem.text "Openings"
+                                    ]
+                                    Fui.navSubItem [
+                                        navSubItem.href ""
+                                        navSubItem.value "8"
+                                        navSubItem.text "Submissions"
+                                    ]
+                                ]
+                            ]
+                        ]
+                        Fui.navItem [
+                            navItem.icon (Interviews [icon.size.``28``])
+                            navItem.value "9"
+                            navItem.text "Interviews"
+                        ]
+                        Fui.navSectionHeader [
+                            navSectionHeader.text "Benefits"
+                        ]
+                        Fui.navItem [
+                            navItem.icon (HealthPlans [icon.size.``28``])
+                            navItem.value "10"
+                            navItem.text "Health Plans"
+                        ]
+                        Fui.navCategory [
+                            navCategory.value "11"
+                            navCategory.children [
+                                Fui.navCategoryItem [
+                                    navCategoryItem.icon (Person [icon.size.``28``])
+                                    navCategoryItem.value "12"
+                                    navCategoryItem.text "Retirement"
+                                ]
+                                Fui.navSubItemGroup [
+                                    navSubItemGroup.children [
+                                        Fui.navSubItem [
+                                            navSubItem.href ""
+                                            navSubItem.value "13"
+                                            navSubItem.text "Plan Information"
+                                        ]
+                                        Fui.navSubItem [
+                                            navSubItem.href ""
+                                            navSubItem.value "14"
+                                            navSubItem.text "Fund Performance"
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                        Fui.navSectionHeader [
+                            navSectionHeader.text "Learning"
+                        ]
+                        Fui.navItem [
+                            navItem.icon (TrainingPrograms [icon.size.``28``])
+                            navItem.value "15"
+                            navItem.text "Training Programs"
+                        ]
+                        Fui.navCategory [
+                            navCategory.value "16"
+                            navCategory.children [
+                                Fui.navCategoryItem [
+                                    navCategoryItem.icon (CareerDevelopment [icon.size.``28``])
+                                    navCategoryItem.text "Career Development"
+                                ]
+                                Fui.navSubItemGroup [
+                                    Fui.navSubItem [
+                                        navSubItem.href ""
+                                        navSubItem.value "17"
+                                        navSubItem.text "Career Paths"
+                                    ]
+                                    Fui.navSubItem [
+                                        navSubItem.href ""
+                                        navSubItem.value "18"
+                                        navSubItem.text "Planning"
+                                    ]
+                                ]
+                            ]
+                        ]
+                        Fui.navDivider []
+                        Fui.navItem [
+                            navItem.target "_blank"
+                            navItem.icon (Analytics [icon.size.``28``])
+                            navItem.value "19"
+                            navItem.text "Workforce Data"
+                        ]
+                        Fui.navItem [
+                            navItem.href ""
+                            navItem.icon (Reports [icon.size.``28``])
+                            navItem.value "20"
+                            navItem.text "Reports"
+                        ]
+                    ]
+                ]
+            ]
+            Html.div [
+                prop.className styles.content
+                prop.children [
+                    if isOpen |> not then
+                        renderHamburderWithTooltip ()
+                    else
+                        Html.none
+                ]
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     let newTokens = {
@@ -4038,6 +4261,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            NavTest ()
             CarouselTest()
             PresenceComponentTest()
             MotionComponentTest()

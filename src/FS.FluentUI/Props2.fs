@@ -3426,3 +3426,269 @@ type [<Erase>] carouselSlider =
 
 // -------------------------------------------------------------------------- CarouselViewport --------------------------------------------------------------------------------------
 type [<Erase>] carouselViewport = FelizProps.prop<ICarouselViewportProp>
+
+// -------------------------------------------------------------------------- AppItem --------------------------------------------------------------------------------------
+type [<Erase>] appItem =
+    inherit FelizProps.prop<IAppItemProp>
+    /// Icon that renders before the content.
+    static member inline icon (value: ReactElement) = Interop.mkProperty<IAppItemProp> "icon" value
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<IAppItemProp> "icon" (!!value |> createObj |> unbox)
+    static member inline href (value: string) = Interop.mkProperty<IAppItemProp> "href" value
+
+module appItem =
+
+    type [<Erase>] as' =
+        static member inline a = Interop.mkProperty<IAppItemProp> "as" "a"
+
+// -------------------------------------------------------------------------- Hamburger --------------------------------------------------------------------------------------
+type [<Erase>] hamburger =
+    inherit FelizProps.prop<IHamburgerProp>
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value:  ReactElement) = Interop.mkProperty<IHamburgerProp> "icon" value
+    /// Icon that renders either before or after the children as specified by the iconPosition prop.
+    static member inline icon (value:  IReactProperty list) = Interop.mkProperty<IHamburgerProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// When set, allows the button to be focusable even when it has been disabled.
+    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
+    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    /// When set, allows the button to be focusable even when it has been disabled.
+    /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
+    /// The primary example of this pattern is when the disabled button is in a menu or a commandbar and is seldom used for standalone buttons.
+    static member inline disabledFocusable (value: bool) = Interop.mkProperty<IHamburgerProp> "disabledFocusable" value
+
+module hamburger =
+
+    type [<Erase>] as' =
+        static member inline a = Interop.mkProperty<IHamburgerProp> "as" "a"
+        static member inline button = Interop.mkProperty<IHamburgerProp> "as" "button"
+
+    /// A button can have its content and borders styled for greater emphasis or to be subtle.
+    type [<Erase>] appearance =
+        /// 'subtle': Minimizes emphasis to blend into the background until hovered or focused.
+        static member inline subtle = Interop.mkProperty<IHamburgerProp> "appearance" "subtle"
+        /// 'outline': Removes background styling.
+        static member inline outline = Interop.mkProperty<IHamburgerProp> "appearance" "outline"
+        /// 'secondary' (default): Gives emphasis to the button in such a way that it indicates a secondary action.
+        static member inline secondary = Interop.mkProperty<IHamburgerProp> "appearance" "secondary"
+        /// 'primary': Emphasizes the button as a primary action.
+        static member inline primary = Interop.mkProperty<IHamburgerProp> "appearance" "primary"
+        /// 'transparent': Removes background and border styling.
+        static member inline transparent = Interop.mkProperty<IHamburgerProp> "appearance" "transparent"
+
+    type [<Erase>] shape =
+        static member inline circular = Interop.mkProperty<IHamburgerProp> "shape" "circular"
+        static member inline square = Interop.mkProperty<IHamburgerProp> "shape" "square"
+        static member inline rounded = Interop.mkProperty<IHamburgerProp> "shape" "rounded"
+
+    /// A button can format its icon to appear before or after its content.
+    type [<Erase>] iconPosition =
+        static member inline before = Interop.mkProperty<IHamburgerProp> "iconPosition" "before"
+        static member inline after = Interop.mkProperty<IHamburgerProp> "iconPosition" "after"
+
+    /// A button supports different sizes.
+    type [<Erase>] size =
+        static member inline small = Interop.mkProperty<IHamburgerProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IHamburgerProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IHamburgerProp> "size" "large"
+
+// -------------------------------------------------------------------------- NavCategory --------------------------------------------------------------------------------------
+type [<Erase>] navCategory = FelizProps.prop<INavCategoryProp>
+
+// -------------------------------------------------------------------------- NavCategoryItem --------------------------------------------------------------------------------------
+type [<Erase>] navCategoryItem =
+    inherit FelizProps.prop<INavCategoryItemProp>
+    /// Icon that renders before the content. Should be specific to each Category
+    static member inline icon (value: ReactElement) = Interop.mkProperty<INavCategoryItemProp> "icon" value
+    /// Icon that renders before the content. Should be specific to each Category
+    static member inline icon (value: IReactProperty list) = Interop.mkProperty<INavCategoryItemProp> "icon" (!!value |> createObj |> unbox)
+    /// Expand icon slot rendered after the content to indicate an open and closed state.
+    static member inline expandIcon (value: ReactElement) = Interop.mkProperty<INavCategoryItemProp> "expandIcon" value
+    /// Expand icon slot rendered after the content to indicate an open and closed state.
+    static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<INavCategoryItemProp> "expandIcon" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- NavDivider --------------------------------------------------------------------------------------
+type [<Erase>] navDivier =
+    inherit FelizProps.prop<INavDividerProp>
+    /// Root of the component that renders as a `<div>` tag.
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<INavDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Accessibility wrapper for content when presented.
+    static member inline wrapper (value: ReactElement) = Interop.mkProperty<INavDividerProp> "wrapper" value
+    /// Accessibility wrapper for content when presented.
+    static member inline wrapper (value: IReactProperty list) = Interop.mkProperty<INavDividerProp> "wrapper" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Adds padding to the beginning and end of the divider.
+    static member inline inset (value: bool) = Interop.mkProperty<INavDividerProp> "inset" value
+    /// A divider can be horizontal (default) or vertical.
+    static member inline vertical (value: bool) = Interop.mkProperty<INavDividerProp> "vertical" value
+
+module navDivider =
+    type [<Erase>] as' =
+        static member inline div = Interop.mkProperty<INavDividerProp> "as" "div"
+    /// A divider can have one of the preset appearances. When not specified, the divider has its default appearance.
+    type [<Erase>] appearance =
+        static member inline strong = Interop.mkProperty<INavDividerProp> "appearance" "strong"
+        static member inline brand = Interop.mkProperty<INavDividerProp> "appearance" "brand"
+        static member inline subtle = Interop.mkProperty<INavDividerProp> "appearance" "subtle"
+        static member inline default' = Interop.mkProperty<INavDividerProp> "appearance" "default"
+
+    /// Determines the alignment of the content within the divider.
+    type [<Erase>] alignContent =
+        static member inline start = Interop.mkProperty<INavDividerProp> "alignContent" "start"
+        static member inline center = Interop.mkProperty<INavDividerProp> "alignContent" "center"
+        static member inline end' = Interop.mkProperty<INavDividerProp> "alignContent" "end"
+
+// -------------------------------------------------------------------------- NavDrawer --------------------------------------------------------------------------------------
+type [<Erase>] navDrawer =
+    inherit FelizProps.prop<INavDrawerProp>
+    static member inline root (value: IOverlayDrawerProp list) = Interop.mkProperty<INavDrawerProp> "root" (!!value |> createObj |> unbox<IOverlayDrawerProp>)
+    static member inline root (value: IInlineDrawerProp list) = Interop.mkProperty<INavDrawerProp> "root" (!!value |> createObj |> unbox<IInlineDrawerProp>)
+    /// Controls the open state of the Drawer
+    static member inline open' (value: bool) = Interop.mkProperty<INavDrawerProp> "open" value
+    /// Default value for the uncontrolled open state of the dialog.
+    static member inline defaultOpen (value: bool) = Interop.mkProperty<INavDrawerProp> "defaultOpen" value
+    /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
+    static member inline inertTrapFocus (value: bool) = Interop.mkProperty<INavDrawerProp> "inertTrapFocus" value
+    /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
+    static member inline backdrop (value: IReactProperty list) = Interop.mkProperty<INavDrawerProp> "backdrop" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Dimmed background of dialog. The default backdrop is rendered as a <div> with styling. This slot expects a <div> element which will replace the default backdrop. The backdrop should have aria-hidden="true".
+    static member inline backdrop (value: ReactElement) = Interop.mkProperty<INavDrawerProp> "backdrop" value
+    /// Whether the drawer has a separator line.
+    static member inline separator (value: bool) = Interop.mkProperty<INavDrawerProp> "separator" value
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<INavDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (handler: DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<INavDrawerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: MouseEvent -> DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<INavDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Callback fired when the component changes value from open state.
+    static member inline onOpenChange (value: KeyboardEvent -> DialogOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<INavDrawerProp> "onOpenChange" (System.Func<_,_,_> value)
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<INavDrawerProp> "mountNode" value
+    /// Where the portal children are mounted on DOM
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<INavDrawerProp> "mountNode" value
+
+//------------------------NavProps--------------------------
+
+    /// The value of the navItem to be selected by default. Typically useful when the selectedValue is uncontrolled.
+    /// Mutually exclusive with selectedValue. Empty string indicates no selection.
+    static member inline defaultSelectedValue (value: string) = Interop.mkProperty<INavDrawerProp> "defaultSelectedValue" value
+    /// The value of the navCategory to be selected by default. Typically useful when the selectedValue is uncontrolled.
+    /// Mutually exclusive with selectedValue. Empty string indicates no selection.
+    static member inline defaultSelectedCategoryValue (value: string) = Interop.mkProperty<INavDrawerProp> "defaultSelectedCategoryValue" value
+    /// Set of categories that are opened by default. Typically useful when the openCategories is uncontrolled.
+    static member inline defaultOpenCategories (value: #seq<string>) = Interop.mkProperty<INavDrawerProp> "defaultOpenCategories" (value |> Seq.toArray)
+    /// Controls the open categories. For use in controlled scenarios.
+    static member inline openCategories (value: #seq<string>) = Interop.mkProperty<INavDrawerProp> "openCategories" (value |> Seq.toArray)
+    /// Raised when a navItem is selected. If the navItem is child of a category, the categoryValue will be provided
+    static member inline onNavItemSelect (handler: OnNavItemSelectData -> unit) = Interop.mkProperty<INavDrawerProp> "onNavItemSelect" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Raised when a navItem is selected. If the navItem is child of a category, the categoryValue will be provided
+    static member inline onNavItemSelect (value: MouseEvent -> OnNavItemSelectData -> unit) = Interop.mkProperty<INavDrawerProp> "onNavItemSelect" (System.Func<_,_,_> value)
+    /// The value of the currently selected navItem. Mutually exclusive with defaultSelectedValue.
+    static member inline selectedValue (value: string) = Interop.mkProperty<INavDrawerProp> "selectedValue" value
+    /// Indicates a category that has a selected child. Will show the category as selected if it is closed.
+    static member inline selectedCategoryValue (value: string) = Interop.mkProperty<INavDrawerProp> "selectedCategoryValue" value
+    /// Indicates if Nav supports multiple open Categories at the same time.
+    static member inline multiple (value: bool) = Interop.mkProperty<INavDrawerProp> "multiple" value
+    /// Callback raised when a NavCategoryItem is toggled.
+    static member inline onNavCategoryItemToggle (handler: OnNavItemSelectData -> unit) = Interop.mkProperty<INavDrawerProp> "onNavCategoryItemToggle" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback raised when a NavCategoryItem is toggled.
+    static member inline onNavCategoryItemToggle (value: MouseEvent -> OnNavItemSelectData -> unit) = Interop.mkProperty<INavDrawerProp> "onNavCategoryItemToggle" (System.Func<_,_,_> value)
+module navDrawer =
+
+    type [<Erase>] as' =
+        static member inline div = Interop.mkProperty<INavDrawerProp> "as" "div"
+
+    /// Type of the drawer.
+    type [<Erase>] type' =
+        static member inline inline' = Interop.mkProperty<INavDrawerProp> "type" "inline"
+        static member inline overlay = Interop.mkProperty<INavDrawerProp> "type" "overlay"
+
+    /// Position of the drawer.
+    type [<Erase>] position =
+        static member inline start = Interop.mkProperty<INavDrawerProp> "position" "start"
+        static member inline end' = Interop.mkProperty<INavDrawerProp> "position" "end"
+        static member inline bottom = Interop.mkProperty<INavDrawerProp> "position" "bottom"
+
+    /// Size of the drawer.
+    type [<Erase>] size =
+        /// Drawer is 320px wide.
+        static member inline small = Interop.mkProperty<INavDrawerProp> "size" "small"
+        /// Drawer is 592px wide.
+        static member inline medium = Interop.mkProperty<INavDrawerProp> "size" "medium"
+        /// Drawer is 940px wide.
+        static member inline large = Interop.mkProperty<INavDrawerProp> "size" "large"
+        /// Drawer is 100vw wide.
+        static member inline full = Interop.mkProperty<INavDrawerProp> "size" "full"
+
+    /// Dialog variations.
+    type [<Erase>] modalType =
+        /// A special type of modal dialogs that interrupts the user's workflow to communicate an important message or ask for a decision. Unlike a typical modal dialog, the user must take an action through the options given to dismiss the dialog, and it cannot be dismissed through the dimmed background or escape key.
+        static member inline alert = Interop.mkProperty<INavDrawerProp> "modalType" "alert"
+        /// When this type of dialog is open, the rest of the page is dimmed out and cannot be interacted with. The tab sequence is kept within the dialog and moving the focus outside the dialog will imply closing it. This is the default type of the component.
+        static member inline modal = Interop.mkProperty<INavDrawerProp> "modalType" "modal"
+        /// When a non-modal dialog is open, the rest of the page is not dimmed out and users can interact with the rest of the page. This also implies that the tab focus can move outside the dialog when it reaches the last focusable element.
+        static member inline nonModal = Interop.mkProperty<INavDrawerProp> "modalType" "non-modal"
+
+// -------------------------------------------------------------------------- NavDrawerBody --------------------------------------------------------------------------------------
+type [<Erase>] navDrawerBody = FelizProps.prop<INavDrawerBodyProp>
+module navDrawerBody =
+    type [<Erase>] as' =
+        static member inline div = Interop.mkProperty<INavDrawerBodyProp> "as" "div"
+
+// -------------------------------------------------------------------------- NavDrawerHeader --------------------------------------------------------------------------------------
+type [<Erase>] navDrawerHeader = FelizProps.prop<INavDrawerHeaderProp>
+module navDrawerHeader =
+    type [<Erase>] as' =
+        static member inline header = Interop.mkProperty<INavDrawerHeaderProp> "as" "header"
+
+// -------------------------------------------------------------------------- NavItem --------------------------------------------------------------------------------------
+type [<Erase>] navItem =
+    inherit FelizProps.prop<INavItemProp>
+    /// Destination where the nav item points to.
+    static member inline href (value: string)= Interop.mkProperty<INavItemProp> "href" value
+    /// The value that identifies this navCategoryItem when selected.
+    static member inline value (value: string)= Interop.mkProperty<INavItemProp> "value" value
+    /// Icon that renders before the content.
+    static member inline icon (value: ReactElement)= Interop.mkProperty<INavItemProp> "icon" value
+    /// Icon that renders before the content.
+    static member inline icon (value: IReactProperty list)= Interop.mkProperty<INavItemProp> "icon" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- NavSectionHeader --------------------------------------------------------------------------------------
+type [<Erase>] navSectionHeader = FelizProps.prop<INavSectionHeaderProp>
+
+// -------------------------------------------------------------------------- NavSubItem --------------------------------------------------------------------------------------
+type [<Erase>] navSubItem =
+    inherit FelizProps.prop<INavSubItemProp>
+    /// Destination where the nav item points to.
+    static member inline href (value: string)= Interop.mkProperty<INavSubItemProp> "href" value
+    /// The value that identifies this navCategoryItem when selected.
+    static member inline value (value: string)= Interop.mkProperty<INavSubItemProp> "value" value
+
+// -------------------------------------------------------------------------- NavSubItemGroup --------------------------------------------------------------------------------------
+type [<Erase>] navSubItemGroup = FelizProps.prop<INavSubItemGroupProp>
+
+// -------------------------------------------------------------------------- AppItemStatic --------------------------------------------------------------------------------------
+type [<Erase>] appItemStatic =
+    inherit FelizProps.prop<IAppItemStaticProp>
+    /// Destination where the nav item points to.
+    static member inline icon (value: ReactElement)= Interop.mkProperty<IAppItemStaticProp> "icon" value
+    /// The value that identifies this navCategoryItem when selected.
+    static member inline icon (value: IReactProperty list)= Interop.mkProperty<IAppItemStaticProp> "icon" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- SplitNavItem --------------------------------------------------------------------------------------
+type [<Erase>] splitNavItem =
+    inherit FelizProps.prop<ISplitNavItemProp>
+    /// The NavItem Slot. Will behave as a SubNavItem if it's in an a SubGroup.
+    static member inline navItem (value: INavItemProp list)= Interop.mkProperty<ISplitNavItemProp> "navItem" (!!value |> createObj |> unbox)
+    /// The NavItem Slot. Will behave as a SubNavItem if it's in an a SubGroup.
+    static member inline navItem (value: INavSubItemProp list)= Interop.mkProperty<ISplitNavItemProp> "navItem" (!!value |> createObj |> unbox)
+    /// Basic button slot.
+    static member inline actionButton (value: IButtonProp list)= Interop.mkProperty<ISplitNavItemProp> "actionButton" (!!value |> createObj |> unbox)
+    /// Toggle button slot
+    static member inline toggleButton (value: IToggleButtonProp list)= Interop.mkProperty<ISplitNavItemProp> "toggleButton" (!!value |> createObj |> unbox)
+    /// Menu button slot to stuff more things in when the other two aren't enough.
+    static member inline menuButton (value: IMenuButtonProp list)= Interop.mkProperty<ISplitNavItemProp> "menuButton" (!!value |> createObj |> unbox)
+    /// Tooltip for the action button.
+    static member inline actionButtonTooltip (value: ITooltipProp list)= Interop.mkProperty<ISplitNavItemProp> "actionButtonTooltip" (!!value |> createObj |> unbox)
+    /// Tooltip for the toggle button.
+    static member inline toggleButtonTooltip (value: ITooltipProp list)= Interop.mkProperty<ISplitNavItemProp> "toggleButtonTooltip" (!!value |> createObj |> unbox)
+    /// Tooltip for the menu button.
+    static member inline menuButtonTooltip (value: ITooltipProp list)= Interop.mkProperty<ISplitNavItemProp> "menuButtonTooltip" (!!value |> createObj |> unbox)
