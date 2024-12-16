@@ -1433,6 +1433,8 @@ type [<Erase>] positioning =
     static member inline onPositioningEnd (value: unit -> unit) = Interop.mkProperty<IPositioningProp> "onPositioningEnd" (System.Func<_,_> value)
     /// Disables the resize observer that updates position on target or dimension change
     static member inline disableUpdateOnResize (value: bool) = Interop.mkProperty<IPositioningProp> "disableUpdateOnResize" value
+    /// When true, the positioned element will shift to cover the target element when there's not enough space.
+    static member inline shiftToCoverTarget (value: bool) = Interop.mkProperty<IPositioningProp> "shiftToCoverTarget" value
 
 module positioning =
     type [<Erase>] position =
