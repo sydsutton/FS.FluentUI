@@ -929,6 +929,8 @@ type [<Erase>] Fui =
     static member inline appItemStatic (props: IAppItemStaticProp list) = createElement (import "AppItemStatic" Nav_unstable) props
     /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
     static member inline splitNavItem (props: ISplitNavItemProp list) = createElement (import "SplitNavItem" Nav_unstable) props
+    /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
+    static member inline navDrawerFooter (props: INavDrawerFooterProp list) = createElement (import "NavDrawerFooter" Nav_unstable) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

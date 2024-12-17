@@ -4211,6 +4211,13 @@ let NavTest () =
                             navItem.text "Reports"
                         ]
                     ]
+                    Fui.navDrawerFooter [
+                        navDrawerFooter.children [
+                            Fui.button [
+                                button.text "Close"
+                            ]
+                        ]
+                    ]
                 ]
             ]
             Html.div [

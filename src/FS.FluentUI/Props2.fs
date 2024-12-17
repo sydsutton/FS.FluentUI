@@ -3694,3 +3694,6 @@ type [<Erase>] splitNavItem =
     static member inline toggleButtonTooltip (value: ITooltipProp list)= Interop.mkProperty<ISplitNavItemProp> "toggleButtonTooltip" (!!value |> createObj |> unbox)
     /// Tooltip for the menu button.
     static member inline menuButtonTooltip (value: ITooltipProp list)= Interop.mkProperty<ISplitNavItemProp> "menuButtonTooltip" (!!value |> createObj |> unbox)
+
+// -------------------------------------------------------------------------- NavDrawerFooter --------------------------------------------------------------------------------------
+type [<Erase>] navDrawerFooter = FelizProps.prop<INavDrawerFooterProp>

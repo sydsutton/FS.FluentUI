@@ -254,10 +254,9 @@ type [<Erase>] INavItemProp = interface end
 type [<Erase>] INavSectionHeaderProp = interface end
 type [<Erase>] INavSubItemProp = interface end
 type [<Erase>] INavSubItemGroupProp = interface end
-type [<Erase>] INavSizeProp = interface end
 type [<Erase>] IAppItemStaticProp = interface end
-type [<Erase>] INavItemValueProp = interface end
 type [<Erase>] ISplitNavItemProp = interface end
+type [<Erase>] INavDrawerFooterProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end
