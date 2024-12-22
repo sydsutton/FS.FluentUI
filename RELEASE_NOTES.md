@@ -1,6 +1,20 @@
 Release Notes
 =========
 
+### 1.18.0 (12-22-2024)
+
+* Update @fluentui/react-components to 9.56.8
+* Update secondary npm deps
+* Add missing NavDrawerFooter component
+* Add custom `compact` properties to MenuItem variations
+* BREAKING CHANGE: Refactor bundleIcon generation. Doing this reduces package size and makes for a easier experience when bundling icons.
+    >* Examples of changes:
+    >* Change `bundleIcon.` to `bundleIcons.`
+    >* Change `bundleIcon.class*`, `bundleIcon.new*`, and `bundleIcon.open*` to `bundleIcons.class'`, `bundleIcons.new'`, and `bundleIcons.open'`
+    >* Remove the few bundleIcons that do not have a `Filled` or `Regular` counterparts
+    >* Change `Fui.bundleIcon (bundleIcon.addFilled, bundleIcon.addRegular)` to `Fui.bundleIcon bundleIcons.add`
+    >* Change `rating.iconFilled bundleIcon.addFilled` to `rating.iconFilled bundleIcons.add.Filled`
+
 ### 1.17.0 (12-11-2024)
 
 * Update @fluentui/react-components to 9.56.5
