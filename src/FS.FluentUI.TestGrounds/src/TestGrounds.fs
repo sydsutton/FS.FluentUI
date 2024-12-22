@@ -288,15 +288,14 @@ let MenuTest () =
                 "info", [| "filterInfo" |]
             ]
         )
-
     let isOpen, setIsOpen = React.useState false
+    let iconStyles = icon.style [ style.fontSize (length.rem 1)]
 
     Fui.menu [
         menu.checkedValues checkedValues
         menu.open' isOpen
         menu.positioning [
             positioning.coverTarget true
-            positioning.matchTargetSize.width
         ]
         menu.onOpenChange (fun (d: MenuOpenChangeData) -> setIsOpen d.``open``)
         menu.onCheckedValueChange (fun (_: MouseEvent) (d: MenuCheckedValueChangeData) ->
@@ -309,50 +308,58 @@ let MenuTest () =
             Fui.menuPopover [
                 Fui.menuList [
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (AddIcon [])
+                        menuItemCheckbox.compact
+                        menuItemCheckbox.icon (AccessTimeIcon [ iconStyles ])
                         menuItemCheckbox.name "data"
                         menuItemCheckbox.value "add"
-                        menuItemCheckbox.children [ Fui.text "Add Data" ]
+                        menuItemCheckbox.text "Add Data"
                     ]
-                    Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (DataIcon [])
-                        menuItemCheckbox.name "data"
-                        menuItemCheckbox.value "trends"
-                        menuItemCheckbox.children [ Fui.text "Show Trends" ]
+                    Fui.menuItemLink [
+                        menuItemLink.compact
+                        menuItemLink.icon (DataIcon [ iconStyles ])
+                        menuItemLink.name "data"
+                        menuItemLink.value "trends"
+                        menuItemLink.text "Show Trends"
                     ]
-                    Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (FunnelIcon [])
-                        menuItemCheckbox.name "data"
-                        menuItemCheckbox.value "filter"
-                        menuItemCheckbox.children [ Fui.text "Filter Data" ]
+                    Fui.menuItemRadio [
+                        menuItemRadio.compact
+                        menuItemRadio.icon (FunnelIcon [ iconStyles ])
+                        menuItemRadio.name "data"
+                        menuItemRadio.value "filter"
+                        menuItemRadio.text "Filter Data"
                     ]
                     Fui.menuDivider []
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (AddIcon [])
+                        menuItemCheckbox.compact
+                        menuItemCheckbox.icon (AccessTimeIcon [ iconStyles ])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "addInfo"
-                        menuItemCheckbox.children [ Fui.text "Add Info" ]
+                        menuItemCheckbox.text "Add Info"
                     ]
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (DataIcon [])
+                        menuItemCheckbox.compact
+                        menuItemCheckbox.icon (DataIcon [ iconStyles ])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "infoTrends"
-                        menuItemCheckbox.children [ Fui.text "Show Info Trends" ]
+                        menuItemCheckbox.text "Show Info Trends"
                     ]
                     Fui.menuItemCheckbox [
-                        menuItemCheckbox.icon (FunnelIcon [])
+                        menuItemCheckbox.compact
+                        menuItemCheckbox.icon (FunnelIcon [ iconStyles ])
                         menuItemCheckbox.name "info"
                         menuItemCheckbox.value "filterInfo"
-                        menuItemCheckbox.children [ Fui.text "Filter Info" ]
+                        menuItemCheckbox.text "Filter Info"
                     ]
                     Fui.menuItemCheckbox [
+                        menuItemCheckbox.compact
                         menuItemCheckbox.disabled true
-                        menuItemCheckbox.icon (Fui.icon.editFilled [])
+                        menuItemCheckbox.icon (Fui.icon.editFilled [ iconStyles ])
                         menuItemCheckbox.name "disabled"
                         menuItemCheckbox.value "disabled"
-                        menuItemCheckbox.children [ Fui.text "Show Debug Panel" ]
+                        menuItemCheckbox.text "Show Debug Panel"
                     ]
                     Fui.menuItemSwitch [
+                        menuItemSwitch.compact
                         menuItemSwitch.name "new-explorer"
                         menuItemSwitch.value "new-explorer"
                         menuItemSwitch.text "Try V2"
@@ -361,18 +368,30 @@ let MenuTest () =
                     Fui.menu [
                         menu.children [
                             Fui.menuSplitGroup [
-                                Fui.menuItem "Open"
+                                Fui.menuItem [
+                                    menuItem.compact
+                                    menuItem.text "Open"
+                                ]
                                 Fui.menuTrigger [
                                     menuTrigger.disableButtonEnhancement true
-                                    menuTrigger.children (Fui.menuItem [ menuItem.ariaLabel "Open on platform" ])
+                                    menuTrigger.children (Fui.menuItem [ menuItem.compact; menuItem.ariaLabel "Open on platform" ])
                                 ]
                             ]
                             Fui.menuPopover [
                                 menuPopover.children [
                                     Fui.menuList [
-                                        Fui.menuItem "In Browser"
-                                        Fui.menuItem "In Desktop App"
-                                        Fui.menuItem "In Mobile"
+                                        Fui.menuItem [
+                                            menuItem.compact
+                                            menuItem.text "In Browser"
+                                        ]
+                                        Fui.menuItem [
+                                            menuItem.compact
+                                            menuItem.text "In Desktop App"
+                                        ]
+                                        Fui.menuItem [
+                                            menuItem.compact
+                                            menuItem.text "In Mobile"
+                                        ]
                                     ]
                                 ]
                             ]

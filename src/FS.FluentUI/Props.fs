@@ -1086,7 +1086,10 @@ type [<Erase>] menuItem =
     /// @deprecated this property does nothing.
     /// disabled focusable is by default by simply using `disabled` property
     [<Obsolete>] static member inline disabledFocusable (value: bool) = Interop.mkProperty<IMenuItemProp> "disabledFocusable" value
-
+    /// Makes the menuItem more compact by changing the minHeight and padding.
+    ///
+    /// **This is a custom property that is not in the Microsoft documentation.**
+    static member inline compact = Interop.mkProperty<IMenuItemProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
 // -------------------------------------------------------------------------- MenuItemLink --------------------------------------------------------------------------------------
 type [<Erase>] menuItemLink =
     inherit FelizProps.prop<IMenuItemLinkProp>
@@ -1099,6 +1102,10 @@ type [<Erase>] menuItemLink =
     static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" value
     static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Makes the menuItemLink more compact by changing the minHeight and padding.
+    ///
+    /// **This is a custom property that is not in the Microsoft documentation.**
+    static member inline compact = Interop.mkProperty<IMenuItemLinkProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
 
 // -------------------------------------------------------------------------- MenuItemSwitch --------------------------------------------------------------------------------------
 type [<Erase>] menuItemSwitch =
@@ -1124,6 +1131,10 @@ type [<Erase>] menuItemSwitch =
     static member inline name (value: string) = Interop.mkProperty<IMenuItemSwitchProp> "name" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_name.asp
     static member inline value (value: string) = Interop.mkProperty<IMenuItemSwitchProp> "value" value
+    /// Makes the menuItemSwitch more compact by changing the minHeight and padding.
+    ///
+    /// **This is a custom property that is not in the Microsoft documentation.**
+    static member inline compact = Interop.mkProperty<IMenuItemSwitchProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
 
 // -------------------------------------------------------------------------- MenuItemCheckbox --------------------------------------------------------------------------------------
 type [<Erase>] menuItemCheckbox =
@@ -1165,6 +1176,10 @@ type [<Erase>] menuItemCheckbox =
     static member inline name (value: string) = Interop.mkProperty<IMenuItemCheckboxProp> "name" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_value.asp
     static member inline value (value: string) = Interop.mkProperty<IMenuItemCheckboxProp> "value" value
+    /// Makes the menuItemCheckbox more compact by changing the minHeight and padding.
+    ///
+    /// **This is a custom property that is not in the Microsoft documentation.**
+    static member inline compact = Interop.mkProperty<IMenuItemCheckboxProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
 
 // -------------------------------------------------------------------------- MenuItemRadio --------------------------------------------------------------------------------------
 type [<Erase>] menuItemRadio =
@@ -1206,6 +1221,10 @@ type [<Erase>] menuItemRadio =
     static member inline name (value: string) = Interop.mkProperty<IMenuItemRadioProp> "name" value
     /// Follows input convention https://www.w3schools.com/jsref/prop_checkbox_value.asp
     static member inline value (value: string) = Interop.mkProperty<IMenuItemRadioProp> "value" value
+    /// Makes the menuItemRadio more compact by changing the minHeight and padding.
+    ///
+    /// **This is a custom property that is not in the Microsoft documentation.**
+    static member inline compact = Interop.mkProperty<IMenuItemRadioProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
 
 // -------------------------------------------------------------------------- MenuPopover --------------------------------------------------------------------------------------
 type [<Erase>] menuPopover =
