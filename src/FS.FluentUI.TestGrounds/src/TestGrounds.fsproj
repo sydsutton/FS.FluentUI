@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
@@ -18,6 +18,7 @@
         <Compile Include="../../FS.FluentUI/Props2.fs" />
         <Compile Include="../../FS.FluentUI/Props.fs" />
         <Compile Include="../../FS.FluentUI/FluentUI.fs" />
+        <Compile Include="../../FS.FluentUI/Icons.fs" />
         <Compile Include="../../FS.FluentUI/BundleIcons.fs" />
     </ItemGroup>
     <ItemGroup>

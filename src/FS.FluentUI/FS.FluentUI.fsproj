@@ -26,6 +26,7 @@
         <Compile Include="Props.fs" />
         <Compile Include="Props2.fs" />
         <Compile Include="FluentUI.fs" />
+        <Compile Include="Icons.fs" />
         <Compile Include="BundleIcons.fs" />
     </ItemGroup>
 
