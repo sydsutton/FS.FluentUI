@@ -198,13 +198,11 @@ type [<Erase>] Fui =
     /// The `bundleIcon` method bundles a `filled` and `unfilled` version of an icon and combines them into one icon.
     /// You can also add additional styles to the bundled icon after the method call.
     ///
-    /// `let AddIcon = Fui.bundleIcon(bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)`
+    /// `let AddIcon = Fui.bundleIcon bundleIcons.addCircle`
     ///
     /// `{component}.icon (AddIcon [ icon.style [ style.color.yellow ] ])`
-    static member inline bundleIcon (filledIcon: BundleIcon, regularIcon: BundleIcon) (iconProps: IIconProp list): ReactElement =
-        let icons = (filledIcon, regularIcon)
-
-        !!iconProps |> createObj |> import "bundleIcon" FluentIcons (icons |> JSTuple.from2Args)
+    static member inline bundleIcon (icons: BundleIcons) (iconProps: IIconProp list): ReactElement =
+        !!iconProps |> createObj |> import "bundleIcon" FluentIcons ((icons.Filled, icons.Regular) |> JSTuple.from2Args)
 
     /// Helper function to create column definition with defaults
     /// options - column definition options

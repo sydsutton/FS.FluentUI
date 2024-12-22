@@ -263,6 +263,8 @@ type [<AllowNullLiteral; Erase>] ITheme = interface end
 
 type [<AllowNullLiteral; Erase>] BundleIcon = interface end
 
+type [<RequireQualifiedAccess>] BundleIcons = { Filled: BundleIcon; Regular: BundleIcon }
+
 [<RequireQualifiedAccess>]
 type Interop =
     static member inline mkProperty<'ControlProperty> (key:string) (value:obj) : 'ControlProperty = unbox (key, value)

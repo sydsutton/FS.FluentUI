@@ -24,6 +24,7 @@
     <ItemGroup>
         <None Include="index.html" />
         <None Include="..\Package.json" />
+        <Compile Include="IconsToTest.fs" />
         <Compile Include="TestGrounds.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>

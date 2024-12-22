@@ -270,14 +270,14 @@ let menuButtonTest =
         menuButton.text "This is a menu button"
     ]
 
-let AddIcon =
-    Fui.bundleIcon (bundleIcon.addCircleFilled, bundleIcon.addCircleRegular)
+let AccessTimeIcon =
+    Fui.bundleIcon bundleIcons.accessTime
 
 let DataIcon =
-    Fui.bundleIcon (bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
+    Fui.bundleIcon bundleIcons.dataArea
 
 let FunnelIcon =
-    Fui.bundleIcon (bundleIcon.dataFunnelFilled, bundleIcon.dataFunnelRegular)
+    Fui.bundleIcon bundleIcons.dataFunnel
 
 [<ReactComponent>]
 let MenuTest () =
@@ -384,7 +384,7 @@ let MenuTest () =
     ]
 
 let CheckedIcon =
-    Fui.bundleIcon (bundleIcon.checkbox1Filled, bundleIcon.checkbox1Regular)
+    Fui.bundleIcon bundleIcons.checkbox1
 
 [<ReactComponent>]
 let ToggleButtons () =
@@ -682,6 +682,19 @@ let labelTest =
             ]
         ]
     ]
+
+let findIconsWithoutFilledOrRegularVersions (icons: string list) =
+    let filledIcons = icons |> List.filter (fun i -> i.EndsWith "Filled")
+    let regularIcons = icons |> List.filter (fun i -> i.EndsWith "Regular")
+
+    let baseFilled = filledIcons |> List.map (fun i -> i.Replace("Filled", ""))
+    let baseRegular = regularIcons |> List.map (fun i -> i.Replace("Regular", ""))
+
+    let missingRegular = baseFilled |> List.filter (fun i -> baseRegular |> List.contains i |> not)
+    let missingFilled = baseRegular |> List.filter (fun i -> baseFilled |> List.contains i |> not)
+
+    printfn "Missing regular: %A" missingRegular
+    printfn "Missing filled: %A" missingFilled
 
 [<ReactComponent>]
 let IconTest () =
@@ -1411,13 +1424,13 @@ let ToolbarTest () =
         ]
     ]
 
-let AlertIcon = Fui.bundleIcon (bundleIcon.alertFilled, bundleIcon.alertRegular)
+let AlertIcon = Fui.bundleIcon bundleIcons.alert
 
 let AlertOnIcon =
-    Fui.bundleIcon (bundleIcon.alertOnFilled, bundleIcon.alertOnRegular)
+    Fui.bundleIcon bundleIcons.alertOn
 
 let AlertOffIcon =
-    Fui.bundleIcon (bundleIcon.alertOffFilled, bundleIcon.alertOffRegular)
+    Fui.bundleIcon bundleIcons.alertOff
 
 [<ReactComponent>]
 let ControlledToolbarTest () =
@@ -3440,8 +3453,8 @@ let ratingTest () =
         rating.step.``0.5``
         rating.defaultValue 4.5M
         rating.onChange (fun (v: RatingOnChangeEventData<int>) -> printfn "value %A" (v.value, v.event, v.``type``))
-        rating.iconFilled (bundleIcon.circleFilled)
-        rating.iconOutline (bundleIcon.circleRegular)
+        rating.iconFilled bundleIcons.circle.Filled
+        rating.iconOutline bundleIcons.circle.Regular
         rating.size.large
         rating.max 7
         rating.color.marigold
@@ -3452,7 +3465,7 @@ let ratingDisplayTest =
         ratingDisplay.compact true
         ratingDisplay.value 4.3
         ratingDisplay.max 10
-        ratingDisplay.icon (bundleIcon.vehicleTruckBagFilled)
+        ratingDisplay.icon bundleIcons.circle.Filled
         ratingDisplay.color.marigold
         ratingDisplay.size.extraLarge
     ]
@@ -4017,19 +4030,19 @@ let navStyles = Fui.makeStyles<{| root: string; content: string; field: string |
     ]
 ]
 
-let Person = Fui.bundleIcon(bundleIcon.personFilled, bundleIcon.personRegular)
-let Dashboard = Fui.bundleIcon(bundleIcon.boardFilled, bundleIcon.boardRegular)
-let Announcements = Fui.bundleIcon(bundleIcon.megaphoneLoudFilled, bundleIcon.megaphoneLoudRegular)
-let EmployeeSpotlight = Fui.bundleIcon(bundleIcon.personLightbulbFilled,bundleIcon.personLightbulbRegular)
-let Search = Fui.bundleIcon(bundleIcon.personSearchFilled, bundleIcon.personSearchRegular)
-let PerformanceReviews = Fui.bundleIcon(bundleIcon.previewLinkFilled, bundleIcon.previewLinkRegular)
-let JobPostings = Fui.bundleIcon(bundleIcon.notePinFilled, bundleIcon.notePinRegular)
-let Interviews = Fui.bundleIcon(bundleIcon.peopleFilled, bundleIcon.peopleRegular)
-let HealthPlans = Fui.bundleIcon(bundleIcon.heartPulseFilled, bundleIcon.heartPulseRegular)
-let TrainingPrograms = Fui.bundleIcon(bundleIcon.boxMultipleFilled, bundleIcon.boxMultipleRegular)
-let CareerDevelopment = Fui.bundleIcon(bundleIcon.peopleStarFilled, bundleIcon.peopleStarRegular)
-let Analytics = Fui.bundleIcon(bundleIcon.dataAreaFilled, bundleIcon.dataAreaRegular)
-let Reports = Fui.bundleIcon(bundleIcon.documentBulletListMultipleFilled,bundleIcon.documentBulletListMultipleRegular)
+let Person = Fui.bundleIcon bundleIcons.person
+let Dashboard = Fui.bundleIcon bundleIcons.board
+let Announcements = Fui.bundleIcon bundleIcons.megaphoneLoud
+let EmployeeSpotlight = Fui.bundleIcon bundleIcons.personLightbulb
+let Search = Fui.bundleIcon bundleIcons.personSearch
+let PerformanceReviews = Fui.bundleIcon bundleIcons.previewLink
+let JobPostings = Fui.bundleIcon bundleIcons.notePin
+let Interviews = Fui.bundleIcon bundleIcons.people
+let HealthPlans = Fui.bundleIcon bundleIcons.heartPulse
+let TrainingPrograms = Fui.bundleIcon bundleIcons.boxMultiple
+let CareerDevelopment = Fui.bundleIcon bundleIcons.peopleStar
+let Analytics = Fui.bundleIcon bundleIcons.dataArea
+let Reports = Fui.bundleIcon bundleIcons.documentBulletListMultiple
 
 [<ReactComponent>]
 let NavTest () =
@@ -4233,6 +4246,8 @@ let NavTest () =
     ]
 
 let mainContent model dispatch =
+
+    // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
 
     let newTokens = {
         Theme.tokens with
