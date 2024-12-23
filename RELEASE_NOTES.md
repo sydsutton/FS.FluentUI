@@ -1,7 +1,7 @@
 Release Notes
 =========
 
-### 1.18.0 (12-22-2024)
+### 2.0.0 (12-23-2024)
 
 * Update @fluentui/react-components to 9.56.8
 * Update secondary npm deps
