@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Router.fs" />
+        <Compile Include="SharedView.fs" />
+        <Folder Include="Pages\" />
+        <Compile Include="Model\App.fs" />
+        <Compile Include="Update\App.fs" />
+        <Compile Include="View\App.fs" />
+        <Compile Include="App.fs" />
+        <Content Include="README.md" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\FS.FluentUI\FS.FluentUI.fsproj" />
+        <ProjectReference Include="..\FS.FluentUI.V8toV9\Fs.FluentUI.V8toV9.fsproj" />
+    </ItemGroup>
+    
+    <ItemGroup>
+      <PackageReference Include="Fable.Core" Version="4.3.0" />
+      <PackageReference Include="Fable.Elmish.React" Version="4.0.0" />
+      <PackageReference Include="Fable.SimpleHttp" Version="3.6.0" />
+      <PackageReference Include="Feliz" Version="2.9.0" />
+      <PackageReference Include="Feliz.Markdown" Version="2.4.0" />
+      <PackageReference Include="Feliz.Router" Version="4.0.0" />
+    </ItemGroup>
+
+</Project>
