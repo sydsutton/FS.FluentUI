@@ -12,6 +12,23 @@ type [<Erase>] bundleHelper =
         { BundleIcons.Filled = filled; BundleIcons.Regular = regular }
 
 type [<Erase>] bundleIcons =
+
+    /// Use this function to import a specific FluentUI Icon by name to use with `Fui.bundleIcon`.
+    /// This was created because, as it currently stands, there are roughly 50 icons that don't have `Filled` or `Regular` counterparts
+    /// and therefore were removed from the list of `bundleIcons`. You can also use this to import an Icon that <u>is</u> in the TS docs
+    /// but <u>is not yet</u> in FS.FluentUI.<br/>
+    /// Please see <link>https://react.fluentui.dev/?path=/docs/icons-catalog--docs</link> for all FluentUI icons.<br/>
+    /// ***WARNING**: Mispelling the iconName or passing an iconName that doesn't exist in the library will cause a runtime error.*
+    ///
+    /// Usage:
+    /// <pre><code>
+    /// let customBundleIcons = {
+    ///     Filled = bundleIcons.import "LayoutColumnThreeFocusLeftFilled"
+    ///     Regular = bundleIcons.accessTime.Regular
+    ///}
+    ///
+    /// Fui.bundleIcon customBundleIcons</code></pre>
+    static member inline import (iconName: string) = import $"{iconName}" FluentIcons |> unbox<BundleIcon>
     static member inline accessTime = bundleHelper.expandImport "AccessTime"
     static member inline accessibility = bundleHelper.expandImport "Accessibility"
     static member inline accessibilityCheckmark = bundleHelper.expandImport "AccessibilityCheckmark"

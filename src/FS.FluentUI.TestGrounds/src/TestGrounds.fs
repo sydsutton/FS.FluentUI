@@ -262,7 +262,7 @@ let buttonTest =
 
 let menuButtonTest =
     Fui.menuButton [
-        menuButton.icon (Fui.icon.calendar3DayFilled [])
+        menuButton.icon (Fui.icon.import "AddFilled" [])
         menuButton.onClick (fun _ -> printfn "menuButton clicked")
         menuButton.shape.square
         menuButton.menuIcon (Fui.icon.arrowUpFilled [])
@@ -271,7 +271,7 @@ let menuButtonTest =
     ]
 
 let AccessTimeIcon =
-    Fui.bundleIcon bundleIcons.accessTime
+    Fui.bundleIcon { Filled = bundleIcons.import "LayoutColumnThreeFocusLeftFilled"; Regular = bundleIcons.accessTime.Regular }
 
 let DataIcon =
     Fui.bundleIcon bundleIcons.dataArea

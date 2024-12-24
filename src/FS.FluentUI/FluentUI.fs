@@ -999,6 +999,18 @@ module Fui =
         static member inline title3 (props: ITextProp list) = createElement (import "Title3" FluentUIv9) props
 
     type [<Erase>] icon =
+        /// Use this function to import a specific FluentUI Icon by name. This is useful when there's an Icon that <u>is</u> in the TS docs
+        /// but <u>is not yet</u> in FS.FluentUI.<br/>
+        /// Please see <link>https://react.fluentui.dev/?path=/docs/icons-catalog--docs</link> for all FluentUI icons.<br/>
+        /// ***WARNING**: Mispelling the iconName or passing an iconName that doesn't exist in the library will cause a runtime error.*
+        ///
+        /// Usage:
+        /// <code>
+        /// let icon = Fui.icon.import "BlockBusterLogoFilled" []
+        /// </code>
+        static member inline import (iconName: string) =
+            let icon = import $"{iconName}" FluentIcons
+            fun (props: IIconProp list) -> createElement icon props
         static member inline accessTimeFilled (props: IIconProp list) = createElement (import "AccessTimeFilled" FluentIcons) props
         static member inline accessTimeRegular (props: IIconProp list) = createElement (import "AccessTimeRegular" FluentIcons) props
         static member inline accessibilityFilled (props: IIconProp list) = createElement (import "AccessibilityFilled" FluentIcons) props
