@@ -11,6 +11,9 @@ open System
 open Feliz
 open FS.FluentUI
 
+/// Overload that allows boxShadow styles to accept boxshadow tokens in FS.FluentUI
+type style with static member inline boxShadow ( value : string ) = Interop.mkStyle "box-shadow" value
+
 /// Represents the native Html properties.
 [<Erase>]
 type prop<'Property> =
