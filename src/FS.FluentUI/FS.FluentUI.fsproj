@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.0.0</Version>
+        <Version>2.1.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,16 +12,8 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.56.8
-            - Update secondary npm deps
-            - Add missing NavDrawerFooter component
-            - Add custom `compact` properties to MenuItem variations
-            - BREAKING CHANGE: Refactor bundleIcon generation.
-                -- Change `bundleIcon.` to `bundleIcons.`
-                -- Change `bundleIcon.classRegular/Filled`, `bundleIcon.newRegular/Filled`, and `bundleIcon.openRegular/Filled` to `bundleIcons.class'`, `bundleIcons.new'`, and `bundleIcons.open'`
-                -- Remove the few bundleIcons that do not have a `Filled` or `Regular` counterparts
-                -- Change `Fui.bundleIcon (bundleIcon.addFilled, bundleIcon.addRegular)` to `Fui.bundleIcon bundleIcons.add`
-                -- Change `rating.iconFilled bundleIcon.addFilled` to `rating.iconFilled bundleIcons.add.Filled`
+            - Add custom Fui.icon.import and bundleIcons.import functions
+            - Add Feliz.style overloads for properties that should take Theme.tokens' string variables
         </PackageReleaseNotes>
     </PropertyGroup>
 

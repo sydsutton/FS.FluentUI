@@ -1,6 +1,11 @@
 Release Notes
 =========
 
+### 2.1.0 (12-27-2024)
+
+* Add custom Fui.icon.import and bundleIcons.import functions
+* Add Feliz.style overloads for properties that should take Theme.tokens' string variables
+
 ### 2.0.0 (12-23-2024)
 
 * Update @fluentui/react-components to 9.56.8
