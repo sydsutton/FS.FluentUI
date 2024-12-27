@@ -7,6 +7,161 @@ open Feliz
 open FS.FluentUI
 open System
 
+[<AutoOpen>]
+module FelizOverloads =
+    type prop with
+
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// SVG attribute to define the size of the font from baseline to baseline when multiple
+        /// lines of text are set solid in a multiline layout environment.
+        static member inline fontSize (value: string) = Interop.mkAttr "fontSize" value
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// SVG attribute to define the width of the stroke to be applied to the shape.
+        /// This is an overload that accepts Theme.tokens string variables in FS.FluentUI
+        static member inline strokeWidth (value: string) = Interop.mkAttr "strokeWidth" value
+
+    type style with
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The zIndex property sets or returns the stack order of a positioned element.
+        ///
+        /// An element with greater stack order (1) is always in front of another element with lower stack order (0).
+        ///
+        /// **Tip**: A positioned element is an element with the position property set to: relative, absolute, or fixed.
+        ///
+        /// **Tip**: This property is useful if you want to create overlapping elements.
+        static member inline zIndex (value: string) = Interop.mkStyle "zIndex" value
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets the length of time a transition animation should take to complete. By default, the
+        /// value is 0s, meaning that no animation will occur.
+        static member inline transitionDuration (timespan: string) = Interop.mkStyle "transitionDuration" timespan
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets the length of time a transition animation should take to complete. By default, the
+        /// value is 0s, meaning that no animation will occur.
+        static member inline transitionDurationMilliseconds (value: string) = Interop.mkStyle "transitionDuration" value
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Specifies the duration to wait before starting a property's transition effect when its value changes.
+        static member inline transitionDelay (timespan: string) = Interop.mkStyle "transitionDelay" timespan
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Specifies the duration to wait before starting a property's transition effect when its value changes.
+        static member inline transitionDelayMilliseconds (value: string) = Interop.mkStyle "transitionDelay" value
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: Styles.ITransitionProperty, duration: string) =
+            Interop.mkStyle "transition" (
+                unbox<string> property + " " +
+                duration
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: string, duration: string) =
+            Interop.mkStyle "transition" (
+                property + " " +
+                duration
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: Styles.ITransitionProperty, duration: string, timingFunction: Styles.ITransitionTimingFunction) =
+            Interop.mkStyle "transition" (
+                unbox<string> property + " " +
+                duration + " " +
+                unbox<string> timingFunction
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: string, duration: string, timingFunction: Styles.ITransitionTimingFunction) =
+            Interop.mkStyle "transition" (
+                property + " " +
+                duration + " " +
+                unbox<string> timingFunction
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: Styles.ITransitionProperty, durationInMs: string, delayInMs: string) =
+            Interop.mkStyle "transition" (
+                unbox<string> property + " " +
+                durationInMs + " " +
+                delayInMs
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: string, durationInMs: string, delayInMs: string) =
+            Interop.mkStyle "transition" (
+                property + " " +
+                durationInMs + " " +
+                delayInMs
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: Styles.ITransitionProperty, durationInMs: string, timingFunction: Styles.ITransitionTimingFunction, delayInMs: string) =
+            Interop.mkStyle "transition" (
+                unbox<string> property + " " +
+                durationInMs + " " +
+                unbox<string> timingFunction,
+                delayInMs
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// The transition property is a shorthand property for transition-property, transition-duration,
+        /// transition-timing-function, transition-delay, and transition-behavior.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+        static member inline transition (property: string, durationInMs: string, timingFunction: Styles.ITransitionTimingFunction, delayInMs: string) =
+            Interop.mkStyle "transition" (
+                property + " " +
+                durationInMs + " " +
+                unbox<string> timingFunction,
+                delayInMs
+            )
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets the size of the font.
+        ///
+        /// This property is also used to compute the size of em, ex, and other relative <length> units.
+        static member inline fontSize (size: string) = Interop.mkStyle "fontSize" size
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets the height of a line box. It's commonly used to set the distance between lines of text.
+        /// On block-level elements, it specifies the minimum height of line boxes within the element.
+        /// On non-replaced inline elements, it specifies the height that is used to calculate line box height.
+        /// https://developer.mozilla.org/en-US/docs/Web/CSS/line-height
+        ///
+        /// This property is also used to compute the size of em, ex, and other relative <length> units.
+        ///
+        /// Note: Negative values are not allowed.
+        static member inline lineHeight (size: string) = Interop.mkStyle "lineHeight" size
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Rounds the corners of an element's outer border edge. You can set a single radius to make
+        /// circular corners, or two radii to make elliptical corners.
+        static member inline borderRadius (radius: string) = Interop.mkStyle "borderRadius" radius
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets the length of time that an animation takes to complete one cycle.
+        static member inline animationDuration (timespan: string) = Interop.mkStyle "animationDuration" timespan
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Sets when an animation starts.
+        ///
+        /// The animation can start later, immediately from its beginning, or immediately and partway through the animation.
+        static member inline animationDelay (timespan: string) = Interop.mkStyle "animationDelay" timespan
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Defines from thin to thick characters. 400 is the same as normal, and 700 is the same as bold.
+        static member inline fontWeight (weight: string) = Interop.mkStyle "fontWeight" weight
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Adds shadow effects around an element's frame.
+        ///
+        /// A box shadow is described by X and Y offsets relative to the element, blur and spread radii, and color.
+        static member inline boxShadow (value: string) = Interop.mkStyle "boxShadow" value
+        /// *This is a custom overload that accepts a `Theme.tokens` string variable.* <br/>
+        /// Specifies extra inter-character space in addition to the default space between characters.
+        static member inline letterSpacing (value: string) = Interop.mkStyle "letterSpacing" value
+
 module internal Shorthand =
 
     let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"

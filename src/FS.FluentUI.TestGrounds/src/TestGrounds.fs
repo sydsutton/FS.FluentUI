@@ -4293,11 +4293,11 @@ let mainContent model dispatch =
                     Fui.text [
                         text.text "Typography Styles"
                         text.style [
-                            style.fontSize typographyStyles.title1.felizFontSize
+                            style.fontSize typographyStyles.title1.fontSize
                             style.fontFamily typographyStyles.title1.fontFamily
                             style.color newTokens.colorBrandBackgroundHover
-                            style.lineHeight typographyStyles.title1.felizLineHeight
-                            style.fontWeight typographyStyles.title1.felizFontWeight
+                            style.lineHeight typographyStyles.title1.lineHeight
+                            style.fontWeight typographyStyles.title1.fontWeight
                         ]
                     ]
                 ]

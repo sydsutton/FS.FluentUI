@@ -45,7 +45,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Feliz" Version="2.6.0" />
+        <PackageReference Include="Feliz" Version="2.9.0" />
     </ItemGroup>
 
     <PropertyGroup>
