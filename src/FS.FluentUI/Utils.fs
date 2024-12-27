@@ -258,9 +258,6 @@ type [<Erase>] IAppItemStaticProp = interface end
 type [<Erase>] ISplitNavItemProp = interface end
 type [<Erase>] INavDrawerFooterProp = interface end
 
-type [<AllowNullLiteral; Erase>] IStyle = interface end
-type [<AllowNullLiteral; Erase>] ITheme = interface end
-
 type [<AllowNullLiteral; Erase>] BundleIcon = interface end
 
 type [<RequireQualifiedAccess>] BundleIcons = { Filled: BundleIcon; Regular: BundleIcon }

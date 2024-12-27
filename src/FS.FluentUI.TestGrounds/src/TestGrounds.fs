@@ -40,6 +40,8 @@ type Styles = {
     swatchExample: string
     swatchButton: string
     swatchInput: string
+    boxShadow: string
+    boxShadowOverloaded: string
 }
 
 let useStyles =
@@ -151,6 +153,14 @@ let useStyles =
         [
             style.display.block
             style.margin (length.px 10)
+        ]
+        "boxShadow",
+        [
+            style.boxShadow (1,1,"black")
+        ]
+        "boxShadowOverloaded",
+        [
+            style.boxShadow Theme.tokens.shadow4
         ]
     ]
 
@@ -4264,6 +4274,20 @@ let NavTest () =
         ]
     ]
 
+[<ReactComponent>]
+let BoxShadow () =
+    let styles = useStyles ()
+    Html.div [
+        Fui.button [
+            button.text "Std BoxShadow"
+            button.className styles.boxShadow
+        ]
+        Fui.button [
+            button.text "Overloaded BoxShadow"
+            button.className styles.boxShadowOverloaded
+        ]
+    ]
+
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
@@ -4302,6 +4326,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            BoxShadow ()
             NavTest ()
             CarouselTest()
             PresenceComponentTest()
