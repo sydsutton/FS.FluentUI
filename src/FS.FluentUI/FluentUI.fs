@@ -7,6 +7,11 @@ open Feliz
 open FS.FluentUI
 open System
 
+[<AutoOpen>]
+module FelizOverloads =
+    /// Overload that allows boxShadow styles to accept boxshadow tokens in FS.FluentUI
+    type style with static member inline boxShadow ( value : string ) = Interop.mkStyle "box-shadow" value
+
 module internal Shorthand =
 
     let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"
