@@ -1086,29 +1086,54 @@ type Tokens = {
     zIndexPriority: string
     zIndexDebug: string
 } with
+    // TODO Remove these members for the next major version bump as they would cause breaking changes.
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase100 = length.px 10
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase200 = length.px 12
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase300 = length.px 14
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase400 = length.px 16
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase500 = length.px 20
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase600 = length.px 24
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase700 = length.px 28
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase800 = length.px 32
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase900 = length.px 40
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSizeBase1000 = length.px 68
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase100 = length.px 14
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase200 = length.px 16
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase300 = length.px 20
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase400 = length.px 22
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase500 = length.px 28
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase600 = length.px 32
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase700 = length.px 36
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase800 = length.px 40
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase900 = length.px 52
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeightBase1000 = length.px 92
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizFontWeightRegular = 400
+    [<System.Obsolete("Please use `.fontWeight` with the custom `Feliz.style.fontWeight` overload that takes a string as a parameter.")>]
     member this.felizFontWeightMedium = 500
+    [<System.Obsolete("Please use `.fontWeight` with the custom `Feliz.style.fontWeight` overload that takes a string as a parameter.")>]
     member this.felizFontWeightSemibold = 600
+    [<System.Obsolete("Please use `.fontWeight` with the custom `Feliz.style.fontWeight` overload that takes a string as a parameter.")>]
     member this.felizFontWeightBold = 700
 
 type TypographyStyle = {
@@ -1117,6 +1142,8 @@ type TypographyStyle = {
     fontWeight: string
     lineHeight: string
 } with
+    // TODO Remove these members for the next major version bump as they would cause breaking changes.
+    [<System.Obsolete("Please use `.fontSize` with the custom `Feliz.style.fontSize` overload that takes a string as a parameter.")>]
     member this.felizFontSize: Styles.ICssUnit =
         match this.fontSize with
         | "var(--fontSizeBase100)" -> (length.px 10)
@@ -1131,6 +1158,8 @@ type TypographyStyle = {
         | "var(--fontSizeHero1000)" -> (length.px 68)
         | _ -> (length.em 1)
 
+    // TODO Remove these members for the next major version bump as they would cause breaking changes.
+    [<System.Obsolete("Please use `.lineHeight` with the custom `Feliz.style.lineHeight` overload that takes a string as a parameter.")>]
     member this.felizLineHeight: Styles.ICssUnit =
         match this.lineHeight with
         | "var(--lineHeightBase100)" -> (length.px 14)
@@ -1145,6 +1174,8 @@ type TypographyStyle = {
         | "var(--lineHeightHero1000)" -> (length.px 92)
         | _ -> (length.em 1)
 
+    // TODO Remove these members for the next major version bump as they would cause breaking changes.
+    [<System.Obsolete("Please use `.fontWeight` with the custom `Feliz.style.fontWeight` overload that takes a string as a parameter.")>]
     member this.felizFontWeight: int =
         match this.fontWeight with
         | "var(--fontWeightRegular)" -> 400
