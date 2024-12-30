@@ -4264,6 +4264,62 @@ let NavTest () =
         ]
     ]
 
+[<ReactComponent>]
+let UseRestoreFocusSource () =
+    let restoreFocusSourceAttribute = Fui.useRestoreFocusSource()
+    let restoreFocusTargetAttribute = Fui.useRestoreFocusTarget()
+    let feedbackSent, setFeedbackSent = React.useState false
+
+    React.useEffect (fun _ ->
+        if feedbackSent then
+            let setFeedback ()= async{
+                do! Async.Sleep 5000
+                setFeedbackSent false
+            }
+
+            setFeedback() |> Async.StartImmediate
+        else
+            ()
+    , [| box feedbackSent |])
+
+    Html.div [
+        prop.children [
+            Fui.field [
+                field.label "Compose message"
+                field.children [
+                    Fui.textArea []
+                ]
+            ]
+            Html.br []
+            Fui.button [
+                restoreFocusTargetAttribute |> unbox
+                button.text "Send Message"
+            ]
+            if feedbackSent |> not then
+                Html.div [
+                    restoreFocusSourceAttribute
+                    prop.children [
+                        Html.text "How was your experience completing this task?"
+                        Fui.button [
+                            button.appearance.subtle
+                            button.onClick (fun _ -> setFeedbackSent true)
+                            button.icon (
+                                Fui.icon.thumbLikeRegular []
+                            )
+                        ]
+                        Fui.button [
+                            button.appearance.subtle
+                            button.onClick (fun _ -> setFeedbackSent true)
+                            button.icon (
+                                Fui.icon.thumbDislikeRegular []
+                            )
+                        ]
+                    ]
+                ]
+            else
+                Html.text "Thanks for submitting feedback!"
+        ]
+    ]
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
@@ -4302,6 +4358,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            UseRestoreFocusSource ()
             NavTest ()
             CarouselTest()
             PresenceComponentTest()

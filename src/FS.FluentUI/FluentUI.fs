@@ -571,10 +571,20 @@ type [<Erase>] Fui =
 
     /// Focus will be restored to the most recent target element when it is lost from a source
     /// Returns Attribute to apply to the element that might lose focus
+    [<Hook>]
     static member inline useRestoreFocusSource (): IReactProperty =
         let useRestoreFocusSource = import "useRestoreFocusSource" FluentUIv9
         let dataTabster : DataTabster = useRestoreFocusSource ()
         prop.custom("data-tabster", dataTabster.``data-tabster``)
+
+    /// Focus will be restored to the most recent target element when it is lost from a source
+    /// Returns Attribute to apply to the target element where focus is restored
+    [<Hook>]
+    static member inline useRestoreFocusTarget (): IReactProperty =
+        let useRestoreFocusTarget = import "useRestoreFocusTarget" FluentUIv9
+        let dataTabster : DataTabster = useRestoreFocusTarget ()
+        prop.custom("data-tabster", dataTabster.``data-tabster``)
+
     /// A hook to filter the options based on the user-typed string. It can be configured for a custom filter function, custom message, and custom render function.
     /// We recommend using filtering when creating a freeform Combobox.
     ///
