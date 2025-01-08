@@ -1,6 +1,13 @@
 Release Notes
 =========
 
+### 2.2.0 (1-8-2024)
+
+* Update @fluentui/react-components to 9.57.0
+* Add useRestoreFocusTarget hook
+* Add List and ListItem components
+* Update secondary NPM dependencies
+
 ### 2.1.0 (12-27-2024)
 
 * Add custom Fui.icon.import and bundleIcons.import functions

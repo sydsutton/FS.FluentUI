@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.1.0</Version>
+        <Version>2.2.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +12,10 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Add custom Fui.icon.import and bundleIcons.import functions
-            - Add Feliz.style overloads for properties that should take Theme.tokens' string variables
+            - Update @fluentui/react-components to 9.57.0
+            - Add useRestoreFocusTarget hook
+            - Add List and ListItem components
+            - Update secondary NPM dependencies
         </PackageReleaseNotes>
     </PropertyGroup>
 
