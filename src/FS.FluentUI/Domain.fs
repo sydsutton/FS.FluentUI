@@ -1563,3 +1563,15 @@ type OnNavItemSelectData = {
     /// Null if not a child of a category
     categoryValue: string
 }
+
+type OnListSelectionChangeData<'T, 'TEvent> = {
+    selectedItems: 'T array
+    ``type``: string
+    event: 'TEvent
+}
+
+type ListItemActionEventData<'T, 'TEvent> = {
+    value: 'T
+    ``type``: string
+    event: 'TEvent
+}

@@ -4320,6 +4320,169 @@ let UseRestoreFocusSource () =
                 Html.text "Thanks for submitting feedback!"
         ]
     ]
+let useListItemRootStyles = Fui.makeResetStyles [
+    style.position.relative
+    style.flexGrow 1
+    style.gap 8
+    style.border (1, borderStyle.solid, "grey")
+    style.alignItems.center
+    style.borderRadius 8
+    style.gridTemplate """ "preview preview preview" auto
+      "header action secondary_action" auto / 1fr auto auto
+    """
+]
+
+let useListStyles = Fui.makeStyles<{| list: string; listItem: string; caption: string; image: string; title: string; preview: string; header: string; action: string; secondaryAction: string |}> [
+    "list", [
+        style.display.flex
+        style.flexDirection.column
+        style.gap (length.px 16)
+        style.maxWidth (length.px 300)
+    ]
+    "listItem", [
+        style.display.grid
+        style.padding (length.px 8)
+    ]
+    "caption", [
+        style.color tokens.colorNeutralForeground3
+    ]
+    "image", [
+        style.height (length.px 160)
+        style.maxWidth (length.percent 100)
+        style.borderRadius (length.px 5)
+    ]
+    "title", [
+        style.color tokens.colorNeutralForeground1
+        style.fontWeight 600
+        style.display.block
+    ]
+    "preview", [
+        style.gridArea "preview"
+        style.overflow.hidden
+    ]
+    "header", [ style.gridArea "header" ]
+    "action", [ style.gridArea "action" ]
+    "secondaryAction", [ style.gridArea "secondary_action" ]
+]
+
+[<ReactComponent>]
+let CustomListItem (title: string) (value: string) =
+    let listItemStyles = useListItemRootStyles()
+    let styles = useListStyles()
+
+    Fui.listItem [
+        listItem.value value
+        listItem.className (Fui.mergeClasses(listItemStyles, styles.listItem))
+        listItem.ariaLabel value
+        listItem.onAction (fun (event: MouseEvent) (data: ListItemActionEventData<string, MouseEvent>) ->
+            event.preventDefault()
+            printfn $"ALERT: {data.value}"
+        )
+        listItem.children [
+            Html.div [
+                prop.role.gridCell
+                prop.className styles.preview
+                prop.children [
+                    Fui.image [
+                        image.fit.cover
+                        image.className styles.image
+                        image.src "https://fabricweb.azureedge.net/fabric-website/assets/images/wireframe/image.png"
+                        image.alt "Presentation Preview"
+                    ]
+                ]
+            ]
+            Html.div [
+                prop.role.gridCell
+                prop.className styles.header
+                prop.children [
+                    Fui.text [
+                        text.className styles.title
+                        text.text title
+                    ]
+                    Fui.text.caption1 [
+                        text.className styles.caption
+                        text.text "You created 53m ago"
+                    ]
+                ]
+            ]
+            Html.div [
+                prop.role.gridCell
+                prop.className styles.action
+                prop.children [
+                    Fui.button [
+                        button.appearance.primary
+                        button.ariaLabel "Install"
+                        button.onClick (fun (e: MouseEvent) ->
+                            e.preventDefault()
+                            printf "Installing!"
+                        )
+                        button.text "Install"
+                    ]
+                ]
+            ]
+            Html.div [
+                prop.role.gridCell
+                prop.className styles.secondaryAction
+                prop.children [
+                    Fui.menu [
+                        Fui.menuTrigger [
+                            menuTrigger.disableButtonEnhancement true
+                            menuTrigger.children (
+                                Fui.button [
+                                    button.appearance.transparent
+                                    button.icon (Fui.icon.moreHorizontalRegular [])
+                                    button.onClick (fun e -> e.preventDefault())
+                                    button.ariaLabel "More actions"
+                                ]
+                            )
+                        ]
+                        Fui.menuPopover [
+                            Fui.menuList [
+                                Fui.menuItem [
+                                    menuItem.onClick (fun e ->
+                                        e.preventDefault()
+                                        printfn "Clicked menu item!"
+                                    )
+                                    menuItem.text "About"
+                                ]
+                                Fui.menuItem [
+                                    menuItem.onClick (fun e ->
+                                        e.preventDefault()
+                                        printfn "Clicked menu item!"
+                                    )
+                                    menuItem.text "Uninstall"
+                                ]
+                                Fui.menuItem [
+                                    menuItem.onClick (fun e ->
+                                        e.preventDefault()
+                                        printfn "Clicked menu item!"
+                                    )
+                                    menuItem.text "Block"
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+
+[<ReactComponent>]
+let ListTest () =
+    let styles = useListStyles ()
+
+    Fui.list [
+        list.navigationMode.composite
+        list.className styles.list
+        list.children [
+            CustomListItem "Example List Item" "card-1"
+            CustomListItem "Example List Item" "card-2"
+            CustomListItem "Example List Item" "card-3"
+            CustomListItem "Example List Item" "card-4"
+            CustomListItem "Example List Item" "card-5"
+        ]
+    ]
+
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
@@ -4358,6 +4521,7 @@ let mainContent model dispatch =
                     ]
                 ]
             ]
+            ListTest ()
             UseRestoreFocusSource ()
             NavTest ()
             CarouselTest()

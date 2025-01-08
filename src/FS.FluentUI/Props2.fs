@@ -3697,3 +3697,65 @@ type [<Erase>] splitNavItem =
 
 // -------------------------------------------------------------------------- NavDrawerFooter --------------------------------------------------------------------------------------
 type [<Erase>] navDrawerFooter = FelizProps.prop<INavDrawerFooterProp>
+
+// -------------------------------------------------------------------------- List --------------------------------------------------------------------------------------
+type [<Erase>] list =
+    inherit FelizProps.prop<IListProp>
+    static member inline selectedItems (value: seq<string>)= Interop.mkProperty<IListProp> "selectedItems" (value |> Array.ofSeq)
+    static member inline selectedItems (value: seq<int>)= Interop.mkProperty<IListProp> "selectedItems" (value |> Array.ofSeq)
+    static member inline selectedItems (value: seq<float>)= Interop.mkProperty<IListProp> "selectedItems" (value |> Array.ofSeq)
+    static member inline selectedItems (value: seq<decimal>)= Interop.mkProperty<IListProp> "selectedItems" (value |> Array.ofSeq)
+    static member inline defaultSelectedItems (value: seq<string>)= Interop.mkProperty<IListProp> "defaultSelectedItems" (value |> Array.ofSeq)
+    static member inline defaultSelectedItems (value: seq<int>)= Interop.mkProperty<IListProp> "defaultSelectedItems" (value |> Array.ofSeq)
+    static member inline defaultSelectedItems (value: seq<float>)= Interop.mkProperty<IListProp> "defaultSelectedItems" (value |> Array.ofSeq)
+    static member inline defaultSelectedItems (value: seq<decimal>)= Interop.mkProperty<IListProp> "defaultSelectedItems" (value |> Array.ofSeq)
+    static member inline onSelectionChange (value: MouseEvent -> OnListSelectionChangeData<string, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: MouseEvent -> OnListSelectionChangeData<int, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: MouseEvent -> OnListSelectionChangeData<float, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: MouseEvent -> OnListSelectionChangeData<decimal, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: KeyboardEvent -> OnListSelectionChangeData<string, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: KeyboardEvent -> OnListSelectionChangeData<int, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: KeyboardEvent -> OnListSelectionChangeData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (value: KeyboardEvent -> OnListSelectionChangeData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> value)
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<string, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<int, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<float, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<decimal, MouseEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<string, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<int, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onSelectionChange (handler: OnListSelectionChangeData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListProp> "onSelectionChange" (System.Func<_,_,_> (fun _ value -> handler value))
+
+module list =
+    type [<Erase>] navigationMode =
+        static member inline items = Interop.mkProperty<IListProp> "navigationMode" "items"
+        static member inline composite = Interop.mkProperty<IListProp> "navigationMode" "composite"
+
+    type [<Erase>] selectionMode =
+        static member inline single = Interop.mkProperty<IListProp> "selectionMode" "single"
+        static member inline multiselect = Interop.mkProperty<IListProp> "selectionMode" "multiselect"
+
+// -------------------------------------------------------------------------- ListItem --------------------------------------------------------------------------------------
+type [<Erase>] listItem =
+    inherit FelizProps.prop<IListItemProp>
+    static member inline checkmark (value: ICheckboxProp list) = Interop.mkProperty<IListItemProp> "checkmark" (!!value |> createObj |> unbox)
+    static member inline value (value: string) = Interop.mkProperty<IListItemProp> "value" value
+    static member inline value (value: int) = Interop.mkProperty<IListItemProp> "value" value
+    static member inline value (value: float) = Interop.mkProperty<IListItemProp> "value" value
+    static member inline value (value: decimal) = Interop.mkProperty<IListItemProp> "value" value
+    static member inline onAction (value: MouseEvent -> ListItemActionEventData<string, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: MouseEvent -> ListItemActionEventData<int, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: MouseEvent -> ListItemActionEventData<float, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: MouseEvent -> ListItemActionEventData<decimal, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: KeyboardEvent -> ListItemActionEventData<string, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: KeyboardEvent -> ListItemActionEventData<int, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: KeyboardEvent -> ListItemActionEventData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (value: KeyboardEvent -> ListItemActionEventData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> value)
+    static member inline onAction (handler: ListItemActionEventData<string, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<int, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<float, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<decimal, MouseEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<string, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<int, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
+    static member inline onAction (handler: ListItemActionEventData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))

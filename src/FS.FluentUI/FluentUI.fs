@@ -1094,6 +1094,12 @@ type [<Erase>] Fui =
     static member inline splitNavItem (props: ISplitNavItemProp list) = createElement (import "SplitNavItem" Nav_unstable) props
     /// WARNING: This is a preview component and is likely to change. Use caution when implementing in production.
     static member inline navDrawerFooter (props: INavDrawerFooterProp list) = createElement (import "NavDrawerFooter" Nav_unstable) props
+    /// The List is a component for rendering set of vertically stacked items (other layouts are being discussed). These items can be focusable, selectable, have one primary action and one or more secondary actions.
+    static member inline list (props: IListProp list) = createElement (import "List" FluentUIv9) props
+    /// The List is a component for rendering set of vertically stacked items (other layouts are being discussed). These items can be focusable, selectable, have one primary action and one or more secondary actions.
+    static member inline list (props: ReactElement list) = Interop.reactElementWithChildren (import "List" FluentUIv9) props
+    static member inline listItem (props: IListItemProp list) = createElement (import "ListItem" FluentUIv9) props
+    static member inline listItem (props: ReactElement list) = Interop.reactElementWithChildren (import "ListItem" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9
