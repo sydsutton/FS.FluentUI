@@ -43,11 +43,11 @@
     <PropertyGroup>
         <NpmDependencies>
             <NpmPackage Name="@fluentui/react-components" Version="gte 9.57.0" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.59" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.1.24" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.2.45" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-datepicker-compat" Version="gte 0.4.60" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-calendar-compat" Version="gte 0.1.25" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.2.46" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui-contrib/react-data-grid-react-window" Version="gte 1.3.1" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fluentui/react-nav-preview" Version="gte 0.10.6" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-nav-preview" Version="gte 0.10.7" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
