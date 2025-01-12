@@ -1575,3 +1575,25 @@ type ListItemActionEventData<'T, 'TEvent> = {
     ``type``: string
     event: 'TEvent
 }
+
+type FixedSizeListChildrenProps<'T> = {
+    data: 'T array
+    index: int
+    isScrolling: bool option
+    style: obj
+}
+
+type OnFixedSizeListItemsRendered = {
+    overscanStartIndex: int
+    overscanStopIndex: int
+    visibleStartIndex: int
+    visibleStopIndex: int
+}
+
+type OnFixedSizeListScroll = {
+    scrollDirection: string
+    scrollOffset: int
+    scrollUpdateWasRequested: bool
+}
+
+

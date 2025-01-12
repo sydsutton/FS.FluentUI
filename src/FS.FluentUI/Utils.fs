@@ -259,6 +259,7 @@ type [<Erase>] ISplitNavItemProp = interface end
 type [<Erase>] INavDrawerFooterProp = interface end
 type [<Erase>] IListProp = interface end
 type [<Erase>] IListItemProp = interface end
+type [<Erase>] IFixedSizeListProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end

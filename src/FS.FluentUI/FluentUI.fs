@@ -181,7 +181,8 @@ module FuiHelpers =
     let [<Literal>] DatePickerCompat = "@fluentui/react-datepicker-compat"
     let [<Literal>] CalendarCompat = "@fluentui/react-calendar-compat"
     let [<Literal>] TimepickerCompat = "@fluentui/react-timepicker-compat"
-    let [<Literal>] ReactWindow = "@fluentui-contrib/react-data-grid-react-window"
+    let [<Literal>] ReactDataGridWindow = "@fluentui-contrib/react-data-grid-react-window"
+    let [<Literal>] ReactWindow = "react-window"
 
     // Preview components
     let [<Literal>] Alert_unstable = "@fluentui/react-alert"
@@ -1100,6 +1101,8 @@ type [<Erase>] Fui =
     static member inline list (props: ReactElement list) = Interop.reactElementWithChildren (import "List" FluentUIv9) props
     static member inline listItem (props: IListItemProp list) = createElement (import "ListItem" FluentUIv9) props
     static member inline listItem (props: ReactElement list) = Interop.reactElementWithChildren (import "ListItem" FluentUIv9) props
+    /// A virtualized List that's leveraging the react-window package.
+    static member inline fixedSizeList (props: IFixedSizeListProp list) = createElement (import "FixedSizeList" ReactWindow) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9
@@ -1120,18 +1123,18 @@ type [<Erase>] Theme =
 
 module Fui =
     type [<Erase>] virtualized =
-        static member inline dataGrid (props: IDataGridProp list) = createElement (import "DataGrid" ReactWindow) props
-        static member inline dataGridHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeader" ReactWindow) props
-        static member inline dataGridHeader (props: IDataGridHeaderProp list) = createElement (import "DataGridHeader" ReactWindow) props
-        static member inline dataGridHeaderCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeaderCell" ReactWindow) props
-        static member inline dataGridHeaderCell (props: IDataGridHeaderCellProp list) = createElement (import "DataGridHeaderCell" ReactWindow) props
-        static member inline dataGridRow (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridRow" ReactWindow) props
-        static member inline dataGridRow (props: IDataGridRowProp list) = createElement (import "DataGridRow" ReactWindow) props
-        static member inline dataGridBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridBody" ReactWindow) props
-        static member inline dataGridBody (props: IDataGridBodyProp list) = createElement (import "DataGridBody" ReactWindow) props
-        static member inline dataGridCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridCell" ReactWindow) props
-        static member inline dataGridCell (props: IDataGridCellProp list) = createElement (import "DataGridCell" ReactWindow) props
-        static member inline dataGridSelectionCell (props: IDataGridSelectionCellProp list) = createElement (import "DataGridSelectionCell" ReactWindow) props
+        static member inline dataGrid (props: IDataGridProp list) = createElement (import "DataGrid" ReactDataGridWindow) props
+        static member inline dataGridHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeader" ReactDataGridWindow) props
+        static member inline dataGridHeader (props: IDataGridHeaderProp list) = createElement (import "DataGridHeader" ReactDataGridWindow) props
+        static member inline dataGridHeaderCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeaderCell" ReactDataGridWindow) props
+        static member inline dataGridHeaderCell (props: IDataGridHeaderCellProp list) = createElement (import "DataGridHeaderCell" ReactDataGridWindow) props
+        static member inline dataGridRow (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridRow" ReactDataGridWindow) props
+        static member inline dataGridRow (props: IDataGridRowProp list) = createElement (import "DataGridRow" ReactDataGridWindow) props
+        static member inline dataGridBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridBody" ReactDataGridWindow) props
+        static member inline dataGridBody (props: IDataGridBodyProp list) = createElement (import "DataGridBody" ReactDataGridWindow) props
+        static member inline dataGridCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridCell" ReactDataGridWindow) props
+        static member inline dataGridCell (props: IDataGridCellProp list) = createElement (import "DataGridCell" ReactDataGridWindow) props
+        static member inline dataGridSelectionCell (props: IDataGridSelectionCellProp list) = createElement (import "DataGridSelectionCell" ReactDataGridWindow) props
 
     type [<Erase>] text =
         static member inline body1 (text: string) = createElement (import "Body1" FluentUIv9) [prop.text text]

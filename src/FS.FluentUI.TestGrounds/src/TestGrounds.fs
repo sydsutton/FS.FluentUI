@@ -4467,20 +4467,88 @@ let CustomListItem (title: string) (value: string) =
         ]
     ]
 
+let countries = [
+    "Afghanistan"
+    "Albania"
+    "Algeria"
+    "Andorra"
+    "Angola"
+    "Antigua & Deps"
+    "Argentina"
+    "Armenia"
+    "Australia"
+    "Austria"
+    "Azerbaijan"
+    "Bahamas"
+    "Bahrain"
+    "Bangladesh"
+    "Barbados"
+    "Belarus"
+    "Belgium"
+    "Belize"
+    "Benin"
+    "Bhutan"
+    "Bolivia"
+    "Bosnia Herzegovin"
+    "Botswana"
+    "Brazil"
+    "Brunei"
+    "Bulgaria"
+    "Burkina"
+    "Burundi"
+    "Cambodia"
+    "Cameroon"
+    "Canada"
+    "Cape Verd"
+    "Central Africa Rep"
+    "Chad"
+    "Chile"
+    "China"
+    "Colombia"
+    "Comoros"
+    "Congo"
+    "Congo {Democrati Rep}"
+    "Costa Ric"
+    "Croatia"
+    "Cuba"
+    "Cyprus"
+    "Czech Republi"
+    "Denmark"
+]
+
 [<ReactComponent>]
 let ListTest () =
-    let styles = useListStyles ()
 
-    Fui.list [
-        list.navigationMode.composite
-        list.className styles.list
-        list.children [
-            CustomListItem "Example List Item" "card-1"
-            CustomListItem "Example List Item" "card-2"
-            CustomListItem "Example List Item" "card-3"
-            CustomListItem "Example List Item" "card-4"
-            CustomListItem "Example List Item" "card-5"
-        ]
+    Fui.fixedSizeList [
+        fixedSizeList.width 400
+        fixedSizeList.height 100
+        fixedSizeList.itemData countries
+        fixedSizeList.itemSize 100
+        fixedSizeList.itemCount countries.Length
+        fixedSizeList.layout.horizontal
+        fixedSizeList.useIsScrolling true
+        fixedSizeList.itemKey (fun index (data: string array) ->
+            let country = data.[index]
+            country
+        )
+        fixedSizeList.onItemsRendered (fun (oir: OnFixedSizeListItemsRendered) ->
+                printfn "oir %A" (oir.overscanStartIndex, oir.overscanStopIndex, oir.visibleStartIndex, oir.visibleStopIndex)
+        )
+        fixedSizeList.onScroll (fun (os: OnFixedSizeListScroll) ->
+                printfn "os %A" (os.scrollDirection, os.scrollOffset)
+        )
+        fixedSizeList.overscanCount 3
+        fixedSizeList.children (fun (props: FixedSizeListChildrenProps<string>) ->
+            let text = props.data[props.index]
+            Fui.listItem [
+                listItem.style props.style
+                listItem.ariaSetSize countries.Length
+                listItem.ariaPosInSet (props.index + 1)
+                listItem.children [
+                    Fui.text text
+                ]
+            ]
+        )
     ]
 
 let mainContent model dispatch =
