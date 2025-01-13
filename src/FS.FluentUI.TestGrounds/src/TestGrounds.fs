@@ -4467,58 +4467,29 @@ let CustomListItem (title: string) (value: string) =
         ]
     ]
 
+type Country = { Name: string; Id: int }
+
 let countries = [
-    "Afghanistan"
-    "Albania"
-    "Algeria"
-    "Andorra"
-    "Angola"
-    "Antigua & Deps"
-    "Argentina"
-    "Armenia"
-    "Australia"
-    "Austria"
-    "Azerbaijan"
-    "Bahamas"
-    "Bahrain"
-    "Bangladesh"
-    "Barbados"
-    "Belarus"
-    "Belgium"
-    "Belize"
-    "Benin"
-    "Bhutan"
-    "Bolivia"
-    "Bosnia Herzegovin"
-    "Botswana"
-    "Brazil"
-    "Brunei"
-    "Bulgaria"
-    "Burkina"
-    "Burundi"
-    "Cambodia"
-    "Cameroon"
-    "Canada"
-    "Cape Verd"
-    "Central Africa Rep"
-    "Chad"
-    "Chile"
-    "China"
-    "Colombia"
-    "Comoros"
-    "Congo"
-    "Congo {Democrati Rep}"
-    "Costa Ric"
-    "Croatia"
-    "Cuba"
-    "Cyprus"
-    "Czech Republi"
-    "Denmark"
+    { Name = "Afghanistan"; Id = 1 }
+    { Name = "Albania"; Id = 2 }
+    { Name = "Algeria"; Id = 3 }
+    { Name = "Andorra"; Id = 4 }
+    { Name = "Angola"; Id = 5 }
+    { Name = "Antigua & Deps"; Id = 6 }
+    { Name = "Argentina"; Id = 7 }
+    { Name = "Armenia"; Id = 8 }
+    { Name = "Australia"; Id = 9 }
+    { Name = "Austria"; Id = 10 }
+    { Name = "Azerbaijan"; Id = 11 }
+    { Name = "Bahamas"; Id = 12 }
+    { Name = "Bahrain"; Id = 13 }
+    { Name = "Bangladesh"; Id = 14 }
+    { Name = "Barbados"; Id = 15 }
+    { Name = "Belarus"; Id = 16 }
 ]
 
 [<ReactComponent>]
 let ListTest () =
-
     Fui.fixedSizeList [
         fixedSizeList.width 400
         fixedSizeList.height 100
@@ -4527,9 +4498,9 @@ let ListTest () =
         fixedSizeList.itemCount countries.Length
         fixedSizeList.layout.horizontal
         fixedSizeList.useIsScrolling true
-        fixedSizeList.itemKey (fun index (data: string array) ->
+        fixedSizeList.itemKey (fun index (data: Country array) ->
             let country = data.[index]
-            country
+            country.Id
         )
         fixedSizeList.onItemsRendered (fun (oir: OnFixedSizeListItemsRendered) ->
                 printfn "oir %A" (oir.overscanStartIndex, oir.overscanStopIndex, oir.visibleStartIndex, oir.visibleStopIndex)
@@ -4538,14 +4509,14 @@ let ListTest () =
                 printfn "os %A" (os.scrollDirection, os.scrollOffset)
         )
         fixedSizeList.overscanCount 3
-        fixedSizeList.children (fun (props: FixedSizeListRenderProps<string>) ->
-            let text = props.data[props.index]
+        fixedSizeList.children (fun (props: FixedSizeListRenderProps<Country>) ->
+            let country = props.data[props.index]
             Fui.listItem [
                 listItem.style props.style
                 listItem.ariaSetSize countries.Length
                 listItem.ariaPosInSet (props.index + 1)
                 listItem.children [
-                    Fui.text text
+                    Fui.text country.Name
                 ]
             ]
         )
