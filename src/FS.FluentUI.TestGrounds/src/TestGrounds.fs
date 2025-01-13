@@ -4538,7 +4538,7 @@ let ListTest () =
                 printfn "os %A" (os.scrollDirection, os.scrollOffset)
         )
         fixedSizeList.overscanCount 3
-        fixedSizeList.children (fun (props: FixedSizeListChildrenProps<string>) ->
+        fixedSizeList.children (fun (props: FixedSizeListRenderProps<string>) ->
             let text = props.data[props.index]
             Fui.listItem [
                 listItem.style props.style

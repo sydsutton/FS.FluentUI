@@ -1576,7 +1576,7 @@ type ListItemActionEventData<'T, 'TEvent> = {
     event: 'TEvent
 }
 
-type FixedSizeListChildrenProps<'T> = {
+type FixedSizeListRenderProps<'T> = {
     data: 'T array
     index: int
     isScrolling: bool option

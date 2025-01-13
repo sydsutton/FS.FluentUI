@@ -3765,7 +3765,7 @@ type [<Erase>] fixedSizeList =
     /// React component responsible for rendering the individual item specified by an index prop. This component also receives a style prop (used for positioning).
     /// If useIsScrolling is enabled for the list, the component also receives an additional isScrolling boolean prop.
 
-    static member inline children (value: FixedSizeListChildrenProps<'T> -> ReactElement)= Interop.mkProperty<IFixedSizeListProp> "children" (System.Func<_,_> value)
+    static member inline children (value: FixedSizeListRenderProps<'T> -> ReactElement)= Interop.mkProperty<IFixedSizeListProp> "children" (System.Func<_,_> value)
     /// By default, lists will use an item's index as its key. This is okay if:
     /// Your collections of items is never sorted or modified.
     /// Your item renderer is not stateful and does not extend PureComponent
