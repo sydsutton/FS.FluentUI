@@ -3739,7 +3739,7 @@ module list =
 type [<Erase>] fixedSizeList =
     inherit FelizProps.prop<IFixedSizeListProp>
     /// Contextual data to be passed to the item renderer as a data prop. This is a light-weight alternative to React's built-in context API. Item data is useful for item renderers that are class components.
-    static member inline itemData (value: 'T list)= Interop.mkProperty<IFixedSizeListProp> "itemData" (value |> List.toArray)
+    static member inline itemData (value: 'T seq)= Interop.mkProperty<IFixedSizeListProp> "itemData" (value |> Seq.toArray)
     /// Size of a item in the direction being windowed. For vertical lists, this is the row height. For horizontal lists, this is the column width.
     static member inline itemSize (value: int)= Interop.mkProperty<IFixedSizeListProp> "itemSize" value
     /// Total number of items in the list. Note that only a few items will be rendered and displayed at a time.
