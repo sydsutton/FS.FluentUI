@@ -1184,6 +1184,12 @@ module tree =
         /// Only one tree item can be selected, radio buttons are rendered.
         static member inline single = Interop.mkProperty<ITreeProp> "selectionMode" "single"
 
+    /// Indicates how navigation between a treeitem and its actions work
+    type [<Erase>] navigationMode =
+        /// The default navigation, pressing right arrow key navigates inward the first inner children of a branch treeitem
+        static member inline tree = Interop.mkProperty<ITreeProp> "navigationMode" "tree"
+        /// Pressing right arrow key navigate towards the actions of a treeitem
+        static member inline treegrid = Interop.mkProperty<ITreeProp> "navigationMode" "treegrid"
 
 // -------------------------------------------------------------------------- FlatTree --------------------------------------------------------------------------------------
 type [<Erase>] flatTree =
@@ -1236,6 +1242,13 @@ module flatTree =
         static member inline multiselect = Interop.mkProperty<IFlatTreeProp> "selectionMode" "multiselect"
         /// Only one tree item can be selected, radio buttons are rendered.
         static member inline single = Interop.mkProperty<IFlatTreeProp> "selectionMode" "single"
+
+    /// Indicates how navigation between a treeitem and its actions work
+    type [<Erase>] navigationMode =
+        /// The default navigation, pressing right arrow key navigates inward the first inner children of a branch treeitem
+        static member inline tree = Interop.mkProperty<IFlatTreeProp> "navigationMode" "tree"
+        /// Pressing right arrow key navigate towards the actions of a treeitem
+        static member inline treegrid = Interop.mkProperty<IFlatTreeProp> "navigationMode" "treegrid"
 
     let getProps (options: HeadlessFlatTreeOptions<'T, 'TEvent>) =
 
