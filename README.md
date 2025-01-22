@@ -97,8 +97,9 @@ Current NPM dependencies:
 * @fluentui/react-calendar-compat
 * @fluentui/react-timepicker-compat
 * @fluentui-contrib/react-data-grid-react-window
+* react-window
 
-#### NOTE: If you don't need to use a DatePicker, Calendar (or any Calendar-related functions listed below), TimePicker, or VirtualizedDataGrid component, then the only npm package you need is `@fluentui/react-components`. Feel free to pick and choose which packages you download according to what components you need or don't need, so long as you have `@fluentui/react-components` downloaded.
+#### NOTE: If you don't need to use a DatePicker, Calendar (or any Calendar-related functions listed below), TimePicker, VirtualizedDataGrid, or FixedSizeList (virtualized List) components then the only npm package you need is `@fluentui/react-components`. Feel free to pick and choose which packages you download according to what components you need or don't need, so long as you have `@fluentui/react-components` downloaded.
 
 #### Calendar-related functions that require `@fluentui/react-calendar-compat`: addDays, addMonths, addWeeks, addYears, setMonth, isInDateRangeArray, getYearStart, getYearEnd, getWeekNumbersInMonth, getWeekNumber, getStartDateOfWeek, getMonthStart, getMonthEnd, getEndDateOfWeek, getDateRangeArray, compareDates, compareDatePart
 
@@ -120,5 +121,5 @@ You can install the library manually if you want by first installing the nuget p
 ```bash
 cd ./{path to your project}
 dotnet add package FS.FluentUI
-npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat @fluentui-contrib/react-data-grid-react-window
+npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat @fluentui-contrib/react-data-grid-react-window react-window
 ```

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.2.0</Version>
+        <Version>2.3.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,10 +12,14 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.57.0
-            - Add useRestoreFocusTarget hook
-            - Add List and ListItem components
-            - Update secondary NPM dependencies
+            - Add FixedSizeList component
+            - Add react-window to NPM dependencies
+            - Update @fluentui/react-components to 9.58.0
+            - Update secondary NPM deps
+            - Update @fluentui/react-nav-preview to 0.11.0
+            - Add density prop to Nav component
+            - Add missing Motion slots for Drawer components
+            - Add navigationMode prop to Tree and FlatTree components
         </PackageReleaseNotes>
     </PropertyGroup>
 
