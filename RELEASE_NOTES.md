@@ -1,6 +1,17 @@
 Release Notes
 =========
 
+### 2.3.0 (1-22-2024)
+
+* Add FixedSizeList component
+* Add react-window to NPM dependencies
+* Update @fluentui/react-components to 9.58.0
+* Update secondary NPM deps
+* Update @fluentui/react-nav-preview to 0.11.0
+* Add density prop to Nav component
+* Add missing Motion slots for Drawer components
+* Add navigationMode prop to Tree and FlatTree components
+
 ### 2.2.0 (1-8-2024)
 
 * Update @fluentui/react-components to 9.57.0
