@@ -4088,6 +4088,8 @@ let NavTest () =
                 navDrawer.open' isOpen
                 navDrawer.type'.inline'
                 navDrawer.multiple true
+                navDrawer.density.small
+                navDrawer.size.medium
                 navDrawer.children [
                     Fui.navDrawerHeader [ renderHamburderWithTooltip () ]
                     Fui.navDrawerBody [

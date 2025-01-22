@@ -12,7 +12,7 @@
     "@fluentui/react-components": "^9.58.0",
     "@fluentui/react-datepicker-compat": "^0.4.60",
     "@fluentui/react-migration-v8-v9": "^9.6.34",
-    "@fluentui/react-nav-preview": "^0.10.7",
+    "@fluentui/react-nav-preview": "^0.11.0",
     "@fluentui/react-timepicker-compat": "^0.2.46",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

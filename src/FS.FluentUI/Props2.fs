@@ -3626,6 +3626,11 @@ module navDrawer =
         /// Drawer is 100vw wide.
         static member inline full = Interop.mkProperty<INavDrawerProp> "size" "full"
 
+    /// The vertical density of the Nav and it's children
+    type [<Erase>] density =
+        static member inline small = Interop.mkProperty<INavDrawerProp> "density" "small"
+        static member inline medium = Interop.mkProperty<INavDrawerProp> "density" "medium"
+
     /// Dialog variations.
     type [<Erase>] modalType =
         /// A special type of modal dialogs that interrupts the user's workflow to communicate an important message or ask for a decision. Unlike a typical modal dialog, the user must take an action through the options given to dismiss the dialog, and it cannot be dismissed through the dimmed background or escape key.
