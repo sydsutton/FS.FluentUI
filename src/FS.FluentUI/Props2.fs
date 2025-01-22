@@ -953,7 +953,10 @@ type [<Erase>] drawer =
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDrawerProp> "mountNode" value
     /// Where the portal children are mounted on DOM
-    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode" value
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode"
+    static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "backdropMotion" (!!value |> createObj |> unbox)
+    static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
+
 
 module drawer =
 
@@ -1015,6 +1018,8 @@ type [<Erase>] overlayDrawer =
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IOverlayDrawerProp> "mountNode" value
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IOverlayDrawerProp> "mountNode" value
+    static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IOverlayDrawerProp> "backdropMotion" (!!value |> createObj |> unbox)
+    static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IOverlayDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
 
 module overlayDrawer =
 
@@ -1055,6 +1060,7 @@ type [<Erase>] inlineDrawer =
     static member inline open' (value: bool) = Interop.mkProperty<IInlineDrawerProp> "open" value
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IInlineDrawerProp> "separator" value
+    static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IInlineDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
 
 module inlineDrawer =
 
