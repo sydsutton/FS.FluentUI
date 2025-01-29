@@ -1068,16 +1068,30 @@ module menuList =
 type [<Erase>] menuItem =
     inherit FelizProps.prop<IMenuItemProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot rendered before children content
     static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "icon" value
+    /// Icon slot rendered before children content
     static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// A helper slot for alignment when a menu item is used with selectable menuitems Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
     static member inline checkmark (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "checkmark" value
+    /// A helper slot for alignment when a menu item is used with selectable menuitems Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
     static member inline checkmark (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "checkmark" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot that shows the indicator for a submenu
     static member inline submenuIndicator (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "submenuIndicator" value
+    /// Icon slot that shows the indicator for a submenu
     static member inline submenuIndicator (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "submenuIndicator" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Component children are placed in this slot Avoid using the children property in this slot in favour of Component children whenever possible
     static member inline content (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "content" value
+    /// Component children are placed in this slot Avoid using the children property in this slot in favour of Component children whenever possible
     static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
     static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "secondaryContent" value
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
     static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Additional descriptor to main content that creates a multiline layout
+    static member inline subText (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "subText" value
+    /// Additional descriptor to main content that creates a multiline layout
+    static member inline subText (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "subText" (!!value |> createObj |> unbox)
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemProp> "hasSubmenu" value
     /// Clicking on the menu item will not dismiss an open menu
@@ -1090,17 +1104,26 @@ type [<Erase>] menuItem =
     ///
     /// **This is a custom property that is not in the Microsoft documentation.**
     static member inline compact = Interop.mkProperty<IMenuItemProp> "style" (createObj [ "minHeight", "unset"; "padding", "2px"; "alignItems", "center"])
+
 // -------------------------------------------------------------------------- MenuItemLink --------------------------------------------------------------------------------------
 type [<Erase>] menuItemLink =
     inherit FelizProps.prop<IMenuItemLinkProp>
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Icon slot rendered before children content
     static member inline icon (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "icon" value
+    /// Icon slot rendered before children content
     static member inline icon (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// A helper slot for alignment when a menu item is used with selectable menuitems Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
     static member inline checkmark (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "checkmark" value
+    /// A helper slot for alignment when a menu item is used with selectable menuitems Avoid using this slot as a replacement for MenuItemCheckbox and MenuItemRadio components
     static member inline checkmark (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "checkmark" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Component children are placed in this slot Avoid using the children property in this slot in favour of Component children whenever possible
     static member inline content (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "content" value
+    /// Component children are placed in this slot Avoid using the children property in this slot in favour of Component children whenever possible
     static member inline content (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "content" (!!value |> createObj |> unbox<IReactProperty>)
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
     static member inline secondaryContent (value: ReactElement) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" value
+    /// Secondary content rendered opposite the primary content (e.g Shortcut text)
     static member inline secondaryContent (value: IReactProperty list) = Interop.mkProperty<IMenuItemLinkProp> "secondaryContent" (!!value |> createObj |> unbox<IReactProperty>)
     /// Makes the menuItemLink more compact by changing the minHeight and padding.
     ///
