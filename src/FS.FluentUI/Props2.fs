@@ -3419,10 +3419,13 @@ type [<Erase>] carouselNavContainer =
     /// Sets the card styling to be responsive based on content.
     static member inline next (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "next" value
     static member inline next (value: ICarouselButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "next" (!!value |> createObj |> unbox)
+    static member inline nextTooltip (value: ITooltipProp list) = Interop.mkProperty<ICarouselNavContainerProp> "nextTooltip" (!!value |> createObj |> unbox)
     static member inline prev (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "prev" value
     static member inline prev (value: ICarouselButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "prev" (!!value |> createObj |> unbox)
+    static member inline prevTooltip (value: ITooltipProp list) = Interop.mkProperty<ICarouselNavContainerProp> "prevTooltip" (!!value |> createObj |> unbox)
     static member inline autoplay (value: ReactElement) = Interop.mkProperty<ICarouselNavContainerProp> "autoplay" value
     static member inline autoplay (value: ICarouselAutoplayButtonProp list) = Interop.mkProperty<ICarouselNavContainerProp> "autoplay" (!!value |> createObj |> unbox)
+    static member inline autoplayTooltip (value: ITooltipProp list) = Interop.mkProperty<ICarouselNavContainerProp> "autoplayTooltip" (!!value |> createObj |> unbox)
 
 module carouselNavContainer =
     /// Defines the nav container layout
