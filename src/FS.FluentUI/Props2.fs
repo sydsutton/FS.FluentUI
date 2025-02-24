@@ -2731,6 +2731,8 @@ type [<Erase>] teachingPopoverCarousel =
     static member inline onFinish (handler: ValueProp<string> -> unit) = Interop.mkProperty<ITeachingPopoverCarouselProp> "onFinish" (System.Func<_,_> (fun _ value -> handler value))
     /// Callback to notify when the final button step of a carousel has been activated.
     static member inline onFinish (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITeachingPopoverCarouselProp> "onFinish" (System.Func<_,_,_> value)
+    /// Localizes the string used to announce carousel page changes to screen reader users.
+    static member inline announcement (newValue: string -> string) = Interop.mkProperty<ITeachingPopoverCarouselProp> "announcement" (System.Func<_,_> newValue)
 
 // -------------------------------------------------------------------------- TeachingPopoverCarouselCard --------------------------------------------------------------------------------------
 type [<Erase>] teachingPopoverCarouselCard =
@@ -3267,6 +3269,12 @@ type [<Erase>] carousel =
     static member inline whitespace (value: bool) = Interop.mkProperty<ICarouselProp> "whitespace" value
     /// Localizes the string used to announce carousel page changes.
     static member inline announcement (value: int -> int -> int array array -> string) = Interop.mkProperty<ICarouselProp> "announcement" value
+    /// Choose a delay between autoplay transitions in milliseconds. Only active if Autoplay is enabled via CarouselAutoplayButton
+    static member inline autoplayInterval (value: int) = Interop.mkProperty<ICarouselProp> "autoplayInterval" value
+    /// Choose a delay between autoplay transitions in milliseconds. Only active if Autoplay is enabled via CarouselAutoplayButton
+    static member inline autoplayInterval (value: float) = Interop.mkProperty<ICarouselProp> "autoplayInterval" value
+    /// Choose a delay between autoplay transitions in milliseconds. Only active if Autoplay is enabled via CarouselAutoplayButton
+    static member inline autoplayInterval (value: decimal) = Interop.mkProperty<ICarouselProp> "autoplayInterval" value
 
 module carousel =
     /// The alignment of the carousel.
@@ -3283,6 +3291,8 @@ module carousel =
     /// Sets motion to fade in/out style with minimal movement
     type [<Erase>] motion =
         static member inline slide = Interop.mkProperty<ICarouselProp> "motion" "slide"
+        /// NOTE: Duration is not in milliseconds because Carousel uses an attraction physics simulation when scrolling instead of easings. Only values between 20-60 are recommended, 25 is the default.
+        static member inline slideWithDuration (value: int) = Interop.mkProperty<ICarouselProp> "motion" (createObj ["kind", "slide"; "duration", value])
         static member inline fade = Interop.mkProperty<ICarouselProp> "motion" "fade"
 
 // -------------------------------------------------------------------------- CarouselAutoplayButton --------------------------------------------------------------------------------------

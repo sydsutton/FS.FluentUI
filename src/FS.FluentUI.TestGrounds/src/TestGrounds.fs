@@ -3395,6 +3395,7 @@ let TeachingPopoverTest () =
                 Fui.teachingPopoverHeader "Tips"
                 Fui.teachingPopoverCarousel [
                     teachingPopoverCarousel.defaultValue "test-0"
+                    teachingPopoverCarousel.announcement (fun _ -> "TESTING?!")
                     teachingPopoverCarousel.children [
                         Fui.teachingPopoverCarouselCard [
                             teachingPopoverCarouselCard.value "test-0"
@@ -3987,7 +3988,7 @@ let CarouselTest () =
     Fui.carousel [
         carousel.groupSize 1
         carousel.align.center
-        carousel.motion.fade
+        carousel.motion.slideWithDuration 50
         carousel.announcement (fun index totalSlides slideGroupList -> $"Carousel {index + 1} of {totalSlides}")
         carousel.children [
             Fui.carouselViewport [
