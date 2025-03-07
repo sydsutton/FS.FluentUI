@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>0.0.1</Version>
+        <Authors>Andrew Sutton</Authors>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Description>F# bindings for @fullcalendar/react, a lightweight React library for building performant and accessible drag and drop experiences.</Description>
+        <PackageProjectUrl>https://github.com/sydsutton/FS.FullCalendar</PackageProjectUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
+        <PackageReleaseNotes>
+            - Initial release
+        </PackageReleaseNotes>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <Compile Include="Domain.fs" />
+        <Compile Include="Utils.fs" />
+        <Compile Include="Props.fs" />
+        <Compile Include="FullCalendar.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="*.fsproj; *.fs; *.js" Exclude="**\*.fs.js" PackagePath="fable\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="6.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Feliz" Version="2.9.0" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <NpmDependencies>
+            <NpmPackage Name="@fullcalendar/react" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/daygrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/interaction" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/timegrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/bootstrap5" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/bootstrap" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/multimonth" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/list" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/moment" Version="gte 6.1.15" ResolutionStrategy="Max" />
+        </NpmDependencies>
+    </PropertyGroup>
+
+</Project>

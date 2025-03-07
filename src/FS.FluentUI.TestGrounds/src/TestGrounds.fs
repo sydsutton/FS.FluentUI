@@ -4,6 +4,7 @@ open Elmish
 open Feliz
 open FS.FluentUI
 open FS.FluentUI.V8toV9
+open FS.FullCalendar
 open Browser.Types
 
 type Msg = ChangeEmail of string
@@ -4526,6 +4527,169 @@ let ListTest () =
         )
     ]
 
+open Fable.Core.JsInterop
+
+[<ReactComponent>]
+let FullCalendar () =
+    let isDialogOpen, setIsDialogOpen = React.useState false
+    let newEventTitle, setNewEventTitle = React.useState ""
+    let (selectedDate: DateSelectArg option), setSelectedDate = React.useState None
+    let startTime, setStartTime = React.useState ("")
+    let endTime, setEndTime = React.useState ("")
+
+    let handleDateClick =
+        (fun selected ->
+            setSelectedDate (Some selected)
+            setIsDialogOpen true)
+
+    let handleCloseDialog =
+        fun _ ->
+            setIsDialogOpen false
+            setNewEventTitle ""
+            setStartTime ""
+            setEndTime ""
+
+    let handleEventClick =
+        fun (selected: EventClickArg) ->
+            if Browser.Dom.window.confirm $"Are you sure you want to delete the event {selected.event.title}" then
+                selected.event.remove ()
+
+    let handleAddEvent =
+        (fun (e: Browser.Types.Event) ->
+            e.preventDefault ()
+
+            if newEventTitle <> "" && selectedDate.IsSome then
+                let calendarApi = selectedDate.Value.view.calendar
+                calendarApi.unselect ()
+
+                let date =
+                    System.DateTime(
+                        selectedDate.Value.start.Year,
+                        selectedDate.Value.start.Month,
+                        selectedDate.Value.start.Day
+                    )
+
+                let newEvent = [
+                    event.id $"{selectedDate.Value.start.ToShortDateString()}-{newEventTitle}"
+                    event.title newEventTitle
+                    event.start (System.DateTime.Parse($"{date.Month}/{date.Day}/{date.Year} {startTime}"))
+                    event.end' (System.DateTime.Parse($"{date.Month}/{date.Day}/{date.Year} {endTime}"))
+                    event.allDay false
+                    event.backgroundColor "yellow"
+                    event.textColor "black"
+                ]
+
+                calendarApi.addEvent (!!newEvent |> createObj |> unbox)
+                handleCloseDialog ())
+
+    Html.div [
+        prop.style [ style.width (length.vw 70) ]
+        prop.children [
+            FullCalendar [
+                fullCalendar.plugins [
+                    Plugin.dayGridPlugin
+                    Plugin.timeGridPlugin
+                    Plugin.interactionPlugin
+                    Plugin.bootstrap5Plugin
+                    Plugin.listPlugin
+                    Plugin.multimonthPlugin
+                ]
+                fullCalendar.initialView.dayGridMonth
+                fullCalendar.editable true
+                fullCalendar.selectMirror true
+                fullCalendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]
+                // fullCalendar.slotMinTime [
+                //     duration.hour 9
+                // ]
+                fullCalendar.selectable true
+                fullCalendar.themeSystem.bootstrap5
+                fullCalendar.dayMaxEvents true
+                fullCalendar.eventAdd (fun e -> printfn "e %A" (e.event.title))
+                fullCalendar.select handleDateClick
+                fullCalendar.eventClick handleEventClick
+                fullCalendar.buttonIcons [
+                    buttonIcon.prev "chevron-left"
+                ]
+                // fullCalendar.eventsSet (fun events -> setC)
+                fullCalendar.headerToolbar [
+                    headerToolbar.start "today prev,next"
+                    headerToolbar.center "myCustomButton"
+                    headerToolbar.end' "dayGridMonth,timeGridWeek,timeGridDay,list"
+                ]
+                fullCalendar.customButtons [
+                    "myCustomButton",
+                    [
+                        customButton.text "Custom button"
+                    ]
+                ]
+                fullCalendar.initialEvents [
+                    [
+                        event.id "1"
+                        event.title "All-day event"
+                        event.start (System.DateTime.Parse "3/10/2025 11:00:00 AM")
+                        event.end' (System.DateTime.Parse "3/10/2025 12:00:00 PM")
+                        event.backgroundColor "red"
+                    ]
+                    [
+                        event.id "2"
+                        event.title "Timed event"
+                        event.start (System.DateTime.Parse "3/11/2025 11:00:00 AM")
+                        event.end' (System.DateTime.Parse "3/11/2025 12:00:00 PM")
+                    ]
+                ]
+            ]
+            Fui.dialog [
+                dialog.open' isDialogOpen
+                dialog.onOpenChange (fun (d: DialogOpenChangeData<Browser.Types.MouseEvent>) ->
+                    d.``open`` |> setIsDialogOpen)
+                dialog.children [
+                    Fui.dialogSurface [
+                        Fui.dialogContent [
+                            dialogContent.children [
+                                Html.form [
+                                    prop.onSubmit handleAddEvent
+                                    prop.children [
+                                        Fui.stack [
+                                            stack.tokens [ stack.tokens.childrenGap 8 ]
+                                            stack.horizontal false
+                                            stack.children [
+                                                Fui.input [
+                                                    input.type' "text"
+                                                    input.placeholder "Event Title"
+                                                    input.value newEventTitle
+                                                    input.onChange (fun e -> setNewEventTitle e)
+                                                    input.required true
+                                                ]
+                                                Fui.input [
+                                                    input.type' "text"
+                                                    input.placeholder "Start Time"
+                                                    input.value startTime
+                                                    input.onChange (fun e -> setStartTime e)
+                                                    input.required true
+                                                ]
+                                                Fui.input [
+                                                    input.type' "text"
+                                                    input.placeholder "End Time"
+                                                    input.value endTime
+                                                    input.onChange (fun e -> setEndTime e)
+                                                    input.required true
+                                                ]
+                                                Fui.button [
+                                                    button.type' "submit"
+                                                    button.text "Add"
+                                                ]
+                                            ]
+                                        ]
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
@@ -4545,6 +4709,7 @@ let mainContent model dispatch =
         ]
         stack.horizontalAlign.center
         stack.children [
+            FullCalendar()
             Html.div [
                 prop.style [
                     style.height 200

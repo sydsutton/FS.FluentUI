@@ -1,0 +1,18 @@
+root = true
+
+[*]
+indent_style = space
+indent_size = 4
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{fs,fsx}]
+fsharp_multiline_bracket_style = stroustrup
+fsharp_newline_before_multiline_computation_expression = false
+fsharp_array_or_list_multiline_formatter = number_of_items
+fsharp_max_array_or_list_number_of_items = 1
+
+[*.tsv]
+indent_style = tab
+trim_trailing_whitespace = false

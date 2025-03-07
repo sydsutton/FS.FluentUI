@@ -6,6 +6,11 @@
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="../../FS.FullCalendar/Domain.fs" />
+        <Compile Include="../../FS.FullCalendar/Utils.fs" />
+        <Compile Include="../../FS.FullCalendar/Props.fs" />
+        <Compile Include="../../FS.FullCalendar/FullCalendar.fs" />
+
         <Compile Include="../../FS.FluentUI.V8toV9/Domain.fs" />
         <Compile Include="../../FS.FluentUI.V8toV9/Utils.fs" />
         <Compile Include="../../FS.FluentUI.V8toV9/FelizProps.fs" />
