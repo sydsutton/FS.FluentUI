@@ -1130,6 +1130,16 @@ module drawerBody =
     type [<Erase>] as' =
         static member inline div = Interop.mkProperty<IDrawerBodyProp> "as" "div"
 
+// -------------------------------------------------------------------------- DrawerFooter --------------------------------------------------------------------------------------
+type [<Erase>] drawerFooter =
+    inherit FelizProps.prop<IDrawerFooterProp>
+    static member inline root (value: IReactProperty list) = Interop.mkProperty<IDrawerFooterProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
+
+module drawerFooter =
+
+    type [<Erase>] as' =
+        static member inline footer = Interop.mkProperty<IDrawerFooterProp> "as" "footer"
+
 // -------------------------------------------------------------------------- Tree --------------------------------------------------------------------------------------
 type [<Erase>] tree =
     inherit FelizProps.prop<ITreeProp>

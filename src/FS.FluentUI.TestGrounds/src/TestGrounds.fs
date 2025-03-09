@@ -2346,6 +2346,7 @@ let DrawerTest () =
                         ]
                     ]
                     Fui.drawerBody [ Fui.text "Drawer content" ]
+                    Fui.drawerFooter [ Fui.text "Footer content" ]
                 ]
             ]
             Fui.button [
