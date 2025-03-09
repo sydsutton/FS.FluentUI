@@ -92,6 +92,14 @@ type fullCalendar =
     static member inline eventAdd(value: EventAddData -> unit) =
         Interop.mkProperty<IFullCalendarProp> "eventAdd" (System.Func<_, _> value)
 
+    /// Called after an event has been modified in some way.
+    static member inline eventChange (value: ChangeInfo -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "eventChange" (System.Func<_, _> value)
+
+    /// Called after an event has been removed from the calendar.
+    static member inline eventRemove (value: RemoveInfo -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "eventRemove" (System.Func<_, _> value)
+
     /// This is exactly like specifying event as an array except that if the supplied value changes, the calendar will NOT be updated to reflect.
     static member inline initialEvents(value: IEventProp list list) =
         let events = value |> List.map (fun e -> !!e |> createObj) |> List.toArray
@@ -116,9 +124,12 @@ type fullCalendar =
 
     static member inline eventClick(value: EventClickArg -> unit) =
         Interop.mkProperty<IFullCalendarProp> "eventClick" (System.Func<_, _> value)
-
+    /// Called after event data is initialized OR changed in any way.
     static member inline eventsSet(value: Event array -> unit) =
         Interop.mkProperty<IFullCalendarProp> "eventsSet" (System.Func<_, _> value)
+    /// Triggered when dragging stops and the event has moved to a different day/time.
+    static member inline eventDrop(value: EventDropInfo -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "eventDrop" (System.Func<_, _> value)
 
     /// Determines the text that will be displayed in the headerToolbar’s title.
     static member inline titleFormat(value: IDateFormatProp list) =

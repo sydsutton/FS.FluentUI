@@ -4595,6 +4595,8 @@ let FullCalendar () =
                     Plugin.multimonthPlugin
                 ]
                 fullCalendar.initialView.dayGridMonth
+                fullCalendar.eventDrop (fun i -> printfn "i %A" (i.delta.days) )
+                fullCalendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
                 fullCalendar.editable true
                 fullCalendar.selectMirror true
                 fullCalendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]

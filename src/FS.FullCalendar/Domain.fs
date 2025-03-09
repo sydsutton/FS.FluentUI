@@ -29,7 +29,7 @@ and CalendarApi = {
     on: string * obj -> unit //TODO
     off: string * obj -> unit //TODO
     trigger: string * obj -> unit //TODO
-    changeVie: string * DateRangeInput -> unit //TODO
+    changeView: string -> DateRangeInput -> unit //TODO
     zoomTo: System.DateTime * string -> unit //TODO
     prev: unit -> unit
     next: unit -> unit
@@ -125,14 +125,241 @@ type EventAddData = {
     revert: unit -> unit //TODO
 }
 
+type SetStartOptions = {
+    granularity: string
+    maintainDuration: bool
+}
+
+type SetEndOptions = {
+    granularity: string
+}
+
+type StartInputOptions = {
+    allDay: bool
+    granularity: string
+}
+
+type DurationObjectInput = {
+    years: int
+    year: int
+    months: int
+    month: int
+    weeks: int
+    week: int
+    days: int
+    day: int
+    hours: int
+    hour: int
+    minutes: int
+    minute: int
+    seconds: int
+    second: int
+    milliseconds: int
+    millisecond: int
+    ms: int
+}
+
+type SetAllDayOptions = {
+    maintainDuration: bool
+}
+
+type FormatterInput = {
+    week: string
+    meridiem: string
+    omitZeroMinute: bool
+    omitCommas: bool
+    separator: string
+}
+
+type Duration = {
+    years: int
+    months: int
+    days: int
+    milliseconds: int
+    specifiedWeeks: bool
+}
+type EventMutation = {
+    datesDelta: Duration;
+    startDelta: Duration
+    endDelta: Duration
+    standardProps: obj
+    extendedProps: obj
+}
+
+type DateRange = {
+    start: DateTime
+    ``end``: DateTime
+}
+
+type DateSpanApi = {
+    allDay: bool
+    start: DateTime
+    ``end``: DateTime
+    startStr: string
+    endStr: string
+}
+
+type CalendarContext = { //TODO
+    dateEnv: obj
+    options: obj
+    pluginHooks: obj
+    emitter: obj
+    dispatch: obj
+    getCurrentData: obj
+    calendarApi: obj
+}
+
+type ToPlainObjectSettings = {
+    collapseExtendedProps: bool
+    collapseColor: bool
+}
+
+type EventSourceApi = {
+    id: string
+    url: string
+    format: string
+    remove: unit -> unit
+    refetch: unit -> unit
+}
+
+type EventApi = {
+    source: EventSourceApi option
+    start: DateTime option
+    ``end``: DateTime option
+    startStr: string
+    endStr: string
+    id: string
+    groupId: string
+    allDay: bool
+    title: string
+    url: string
+    display: string
+    startEditable: bool
+    durationEditable: bool
+    ``constraint``: string
+    overlap: bool
+    allow: string
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    classNames: string array
+    extendedProps: obj
+    setProp: string -> obj -> unit // TODO (name: string, val: any): void;
+    setExtendedProp: string -> obj -> unit //TODO (name: string, val: any): void;
+    setStart: DateTime -> SetStartOptions -> unit
+    setEnd: DateTime option -> SetEndOptions -> unit
+    setDates: DateTime -> DateTime option -> StartInputOptions -> unit
+    moveStart: DurationObjectInput -> unit
+    moveEnd: DurationObjectInput -> unit
+    moveDates: DurationObjectInput -> unit
+    setAllDay: bool -> SetAllDayOptions -> unit
+    formatRange: FormatterInput -> obj //TODO : any
+    remove: unit -> unit
+    toPlainObject: ToPlainObjectSettings -> obj
+    toJSON: unit -> obj
+}
+
+type EventSourceSuccessResponseHandler = obj * obj * obj -> obj array //TODO
+type EventSource = {
+    sourceId: string
+    sourceDefId: int
+    meta: obj // TODO
+    publicId: string
+    isFetching: bool
+    latestFetchId: string
+    fetchRange: DateRange option
+    defaultAllDay: bool option
+    eventDataTransform: obj -> obj //TODO
+    ui: EventUi;
+    success: EventSourceSuccessResponseHandler option
+    failure: (obj -> unit) option //TODO
+    extendedProps: obj
+}
+and EventSourceImpl = {
+    internalEventSource: EventSource
+    constructor: CalendarContext * obj //TODO (context: CalendarContext, internalEventSource: EventSource<any>);
+    id: string
+    url: string
+    format: string
+    remove: unit -> unit
+    refetch: unit -> unit
+}
+and EventImpl = {
+    mutate: EventMutation -> unit
+    source: EventSourceApi option
+    start: DateTime option
+    ``end``: DateTime option
+    startStr: string
+    endStr: string
+    id: string
+    groupId: string
+    allDay: bool
+    title: string
+    url: string
+    display: string
+    startEditable: bool
+    durationEditable: bool
+    ``constraint``: string
+    overlap: bool
+    allow: string
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    classNames: string array
+    extendedProps: obj
+    setProp: string -> obj -> unit // TODO (name: string, val: any): void;
+    setExtendedProp: string -> obj -> unit //TODO (name: string, val: any): void;
+    setStart: DateTime -> SetStartOptions -> unit
+    setEnd: DateTime option -> SetEndOptions -> unit
+    setDates: DateTime -> DateTime option -> StartInputOptions -> unit
+    moveStart: DurationObjectInput -> unit
+    moveEnd: DurationObjectInput -> unit
+    moveDates: DurationObjectInput -> unit
+    setAllDay: bool -> SetAllDayOptions -> unit
+    formatRange: FormatterInput -> obj //TODO : any
+    remove: unit -> unit
+    toPlainObject: ToPlainObjectSettings -> obj
+    toJSON: unit -> obj
+}
+and AllowFunc = DateSpanApi * EventImpl option -> bool
+and EventUi = {
+    display: string option
+    startEditable: bool option
+    durationEditable: bool option
+    constraints: string array
+    overlap: bool option
+    allows: AllowFunc array
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    classNames: string array
+}
+
 type EventClickArg = {
     el: Browser.Types.HTMLElement
-    event: {|
-        title: string
-        remove: unit -> unit
-    |} //TODO
+    event: EventImpl
     jsEvent: Browser.Types.MouseEvent
     view: ViewApi
+}
+
+type ChangeInfo = {
+    /// An Event Object with the updated changed data
+    event: Event
+    /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
+    relatedEvents: Event array
+    /// An Event Object with data prior to the change
+    oldEvent: Event
+    /// A function that can be called to reverse this action
+    revert: unit -> unit
+}
+
+type RemoveInfo = {
+    /// An Event Object with the updated changed data
+    event: Event
+    /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
+    relatedEvents: Event array
+    /// A function that can be called to reverse this action
+    revert: unit -> unit
 }
 
 type PointerDragEvent = {
@@ -143,4 +370,47 @@ type PointerDragEvent = {
     pageY: int
     deltaX: int
     deltaY: int
+}
+
+type Resource = {
+    /// the unique string identifier for this resource
+    id: string
+    /// the string title of this resource
+    title: string
+    /// a hash of non-standard props that were specified during parsing
+    extendedProps: obj
+    eventConstraint: string //TODO
+    eventOverlap: bool
+    eventAllow: bool
+    eventBackgroundColor: string
+    eventBorderColor: string
+    eventTextColor: string
+    eventClassNames: string array
+    getParent: unit -> obj //TODO
+    getChildren: unit -> obj //TODO
+    getEvents: unit -> Event array
+    remove: unit -> unit
+}
+
+type EventDropInfo = {
+    /// An Event Object that holds information about the event (date, title, etc) after the drop.
+    event: Event
+    /// An array of other related Event Objects that were also dropped. an event might have other recurring event instances or might be linked to other events with the same groupId
+    relatedEvents: Event array
+    /// An Event Object that holds information about the event before the drop.
+    oldEvent: Event
+    /// If the resource has changed, this is the Resource Object the event came from. If the resource has not changed, this will be undefined. For use with the resource plugins only.
+    oldResource: Resource
+    /// If the resource has changed, this is the Resource Object the event went to. If the resource has not changed, this will be undefined. For use with the resource plugins only.
+    newResource: Resource
+    /// A Duration Object that represents the amount of time the event was moved by.
+    delta: DurationObjectInput
+    /// A function that, if called, reverts the event’s start/end date to the values before the drag. This is useful if an ajax call should fail.
+    revert: unit -> unit
+    /// The current View Object.
+    view: ViewApi
+    /// The HTML element that was dragged.
+    el: Browser.Types.HTMLElement
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: Browser.Types.MouseEvent
 }
