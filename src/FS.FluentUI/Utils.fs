@@ -145,6 +145,7 @@ type [<Erase>] IDrawerHeaderProp = interface end
 type [<Erase>] IDrawerHeaderTitleProp = interface end
 type [<Erase>] IDrawerHeaderNavigationProp = interface end
 type [<Erase>] IDrawerBodyProp = interface end
+type [<Erase>] IDrawerFooterProp = interface end
 
 type [<Erase>] ITreeProp = interface end
 type [<Erase>] IFlatTreeProp = interface end

@@ -796,6 +796,9 @@ type [<Erase>] Fui =
     static member inline drawerHeaderNavigation (props: IDrawerHeaderNavigationProp list) = createElement (import "DrawerHeaderNavigation" FluentUIv9) props
     static member inline drawerBody (props: ReactElement list) = Interop.reactElementWithChildren (import "DrawerBody" FluentUIv9) props
     static member inline drawerBody (props: IDrawerBodyProp list) = createElement (import "DrawerBody" FluentUIv9) props
+    static member inline drawerFooter (props : IDrawerFooterProp list) =  createElement (import "DrawerFooter" FluentUIv9) props
+    static member inline drawerFooter (props : ReactElement list) =  Interop.reactElementWithChildren (import "DrawerFooter" FluentUIv9) props
+
     // Card
     /// A card is a container that holds information and actions related to a single concept or object, like a document or a contact.
     /// Cards can give information prominence and create predictable patterns. While they're very flexible, it's important to use them consistently for particular use cases across experiences.
