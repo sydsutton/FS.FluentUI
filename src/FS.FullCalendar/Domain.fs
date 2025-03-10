@@ -42,7 +42,7 @@ and CalendarApi = {
     formatDate: System.DateTime * string -> unit //TODO
     formatRange: System.DateTime * System.DateTime * string -> unit //TODO
     formatIso: System.DateTime * bool -> string //TODO
-    select: System.DateTime * System.DateTime -> unit //TODO
+    select: System.DateTime -> System.DateTime option -> unit
     unselect: unit -> unit
     addEvent: obj -> unit //TODO
     getEventById: string -> unit //TODO
@@ -56,7 +56,7 @@ and CalendarApi = {
     scrollToTime: obj -> unit //TODO
 }
 
-type Event = {
+type CalendarEvent = {
     /// A unique identifier of an event. Useful for getEventById.
     id: string
     /// Events that share a groupId will be dragged and resized together automatically.
@@ -110,7 +110,7 @@ type Event = {
 }
 
 type DateSelectArg = {
-    jsEvent: Browser.Types.MouseEvent option
+    jsEvent: Browser.Types.UIEvent option
     view: ViewApi
     start: System.DateTime
     ``end``: System.DateTime
@@ -120,8 +120,8 @@ type DateSelectArg = {
 }
 
 type EventAddData = {
-    event: Event
-    relatedEvents: Event array
+    event: CalendarEvent
+    relatedEvents: CalendarEvent array
     revert: unit -> unit //TODO
 }
 
@@ -338,26 +338,26 @@ and EventUi = {
 type EventClickArg = {
     el: Browser.Types.HTMLElement
     event: EventImpl
-    jsEvent: Browser.Types.MouseEvent
+    jsEvent: Browser.Types.UIEvent
     view: ViewApi
 }
 
 type ChangeInfo = {
     /// An Event Object with the updated changed data
-    event: Event
+    event: CalendarEvent
     /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: Event array
+    relatedEvents: CalendarEvent array
     /// An Event Object with data prior to the change
-    oldEvent: Event
+    oldEvent: CalendarEvent
     /// A function that can be called to reverse this action
     revert: unit -> unit
 }
 
 type RemoveInfo = {
     /// An Event Object with the updated changed data
-    event: Event
+    event: CalendarEvent
     /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: Event array
+    relatedEvents: CalendarEvent array
     /// A function that can be called to reverse this action
     revert: unit -> unit
 }
@@ -388,17 +388,17 @@ type Resource = {
     eventClassNames: string array
     getParent: unit -> obj //TODO
     getChildren: unit -> obj //TODO
-    getEvents: unit -> Event array
+    getEvents: unit -> CalendarEvent array
     remove: unit -> unit
 }
 
 type EventDropInfo = {
     /// An Event Object that holds information about the event (date, title, etc) after the drop.
-    event: Event
+    event: CalendarEvent
     /// An array of other related Event Objects that were also dropped. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: Event array
+    relatedEvents: CalendarEvent array
     /// An Event Object that holds information about the event before the drop.
-    oldEvent: Event
+    oldEvent: CalendarEvent
     /// If the resource has changed, this is the Resource Object the event came from. If the resource has not changed, this will be undefined. For use with the resource plugins only.
     oldResource: Resource
     /// If the resource has changed, this is the Resource Object the event went to. If the resource has not changed, this will be undefined. For use with the resource plugins only.
@@ -412,5 +412,42 @@ type EventDropInfo = {
     /// The HTML element that was dragged.
     el: Browser.Types.HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.MouseEvent
+    jsEvent: Browser.Types.UIEvent
+}
+
+type SelectInfo = {
+/// Date. A date indicating the beginning of the selection.
+start: DateTime
+/// Date. A date indicating the end of the selection.
+/// In line with the discussion about the Event object, it is important to stress that the end date property is exclusive. For example, if the selection is all-day and the last day is a Thursday, end will be Friday.
+``end``: DateTime
+/// String. An ISO8601 string representation of the start date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-01T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-01.
+startStr: string
+/// String. An ISO8601 string representation of the end date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-02T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-02.
+endStr: string
+/// Boolean. true or false whether the selection happened on all-day cells.
+allDay: bool
+/// The native JavaScript event with low-level information such as click coordinates.
+jsEvent: Browser.Types.UIEvent
+/// View object. The current Calendar view.
+View: ViewApi
+/// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
+resource: Resource
+}
+
+type DateClickInfo = {
+/// a Date for the clicked day/time.
+date: DateTime
+/// An ISO8601 string representation of the date. Will have a time zone offset according to the calendar’s timeZone like 2018-09-01T12:30:00-05:00. If clicked on an all-day cell, won’t have a time part nor a time zone part, like 2018-09-01.
+dateStr: string
+/// true or false whether the click happened on an all-day cell.
+allDay: bool
+/// An HTML element that represents the whole-day that was clicked on.
+dayEl: Browser.Types.HTMLElement
+/// The native JavaScript event with low-level information such as click coordinates.
+jsEvent: Browser.Types.UIEvent
+/// The current View Object.
+view: ViewApi
+/// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
+resource: Resource
 }

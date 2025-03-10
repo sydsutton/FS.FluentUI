@@ -125,7 +125,7 @@ type fullCalendar =
     static member inline eventClick(value: EventClickArg -> unit) =
         Interop.mkProperty<IFullCalendarProp> "eventClick" (System.Func<_, _> value)
     /// Called after event data is initialized OR changed in any way.
-    static member inline eventsSet(value: Event array -> unit) =
+    static member inline eventsSet(value: CalendarEvent array -> unit) =
         Interop.mkProperty<IFullCalendarProp> "eventsSet" (System.Func<_, _> value)
     /// Triggered when dragging stops and the event has moved to a different day/time.
     static member inline eventDrop(value: EventDropInfo -> unit) =
@@ -271,6 +271,66 @@ type fullCalendar =
     /// Multi-Month Grid will not allow each mini-month to be become smaller than this pixel value.
     static member inline multiMonthTitleFormat(value: IDateFormatProp list) =
         Interop.mkProperty<IFullCalendarProp> "multiMonthTitleFormat" (!!value |> createObj |> unbox)
+    /// Determines if week numbers should be displayed on the calendar.
+    static member inline weekNumbers(value: bool) =
+        Interop.mkProperty<IFullCalendarProp> "weekNumbers" value
+    /// The method for calculating week numbers that are displayed with the weekNumbers setting.
+    /// You may also specify a function, which must accept a single Date and return an integer week number.
+    static member inline weekNumberCalculation(value: DateTime -> int) =
+        Interop.mkProperty<IFullCalendarProp> "weekNumberCalculation" (System.Func<_,_> value)
+    /// The heading text for week numbers. Also affects weeks in date formatting.
+    static member inline weekText(value: string) =
+        Interop.mkProperty<IFullCalendarProp> "weekText" value
+    /// Like weekText but only used when the date-formatting week setting is set to 'long'.
+    static member inline weekTextLong(value: string) =
+        Interop.mkProperty<IFullCalendarProp> "weekTextLong" value
+    /// Controls the week number text.
+    static member inline weekNumberFormat(value: IDateFormatProp list) =
+        Interop.mkProperty<IFullCalendarProp> "weekNumberFormat" (!!value |> createObj |> unbox)
+    /// Whether clicking elsewhere on the page will cause the current selection to be cleared.
+    static member inline unselectAuto(value: bool) =
+        Interop.mkProperty<IFullCalendarProp> "unselectAuto" value
+    /// A way to specify elements that will ignore the unselectAuto option.
+    static member inline unselectCancel(value: string) =
+        Interop.mkProperty<IFullCalendarProp> "unselectCancel" value
+    /// Determines whether the user is allowed to select periods of time that are occupied by events.
+    static member inline selectOverlap(value: bool) =
+        Interop.mkProperty<IFullCalendarProp> "selectOverlap" value
+    /// Determines whether the user is allowed to select periods of time that are occupied by events.
+    static member inline selectOverlap(value: CalendarEvent -> bool) =
+        Interop.mkProperty<IFullCalendarProp> "selectOverlap" (System.Func<_,_> value)
+    /// Limits user selection to certain windows of time.
+    static member inline selectConstraint(value: string) =
+        Interop.mkProperty<IFullCalendarProp> "selectConstraint" value
+    /// Exact programmatic control over where the user can select.
+    static member inline selectAllow(value: SelectInfo -> bool) =
+        Interop.mkProperty<IFullCalendarProp> "selectAllow" (System.Func<_,_> value)
+    /// The minimum distance the user’s mouse must travel after a mousedown, before a selection is allowed.
+    static member inline selectMinDistance(value: int) =
+        Interop.mkProperty<IFullCalendarProp> "selectMinDistance" value
+    /// Triggered when the user clicks on a date or a time.
+    static member inline dateClick(value: DateClickInfo -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "dateClick" (System.Func<_,_> value)
+    /// Triggered when a date/time selection is made
+    static member inline select(value: SelectInfo -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "select" (System.Func<_,_> value)
+    /// Triggered when the current selection is cleared.
+    static member inline unselect(value: UIEvent -> ViewApi -> unit) =
+        Interop.mkProperty<IFullCalendarProp> "unselect" (System.Func<_,_,_> value)
+    /// Whether or not to display a marker indicating the current time.
+    static member inline nowIndicator(value: bool) =
+        Interop.mkProperty<IFullCalendarProp> "nowIndicator" value
+    /// Explicitly sets the “today” date of the calendar. This is the day that is normally highlighted in yellow.
+    static member inline now(value: DateTime) =
+        Interop.mkProperty<IFullCalendarProp> "now" value
+    /// Emphasizes certain time slots on the calendar. By default, Monday-Friday, 9am-5pm.
+    static member inline businessHours(value: bool) =
+        Interop.mkProperty<IFullCalendarProp> "businessHours" value
+    /// Emphasizes certain time slots on the calendar. By default, Monday-Friday, 9am-5pm.
+    static member inline businessHours(value: IBusinessDayProp list list) =
+        let bds = value |> List.map (fun e -> !!e |> createObj) |> List.toArray
+
+        Interop.mkProperty<IFullCalendarProp> "businessHours" bds
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
@@ -304,7 +364,15 @@ module fullCalendar =
 
         static member inline multiMonthYear =
             Interop.mkProperty<IFullCalendarProp> "initialView" "multiMonthYear"
-
+    /// The method for calculating week numbers that are displayed with the weekNumbers setting.
+    [<Erase>]
+    type weekNumberCalculation =
+        /// Specifying "local" causes the locale-specific calculation to be used, as determined by the calendar’s locale setting. This is the default.
+        static member inline local =
+            Interop.mkProperty<IFullCalendarProp> "weekNumberCalculation" "local"
+        /// Specifiying "ISO" results in ISO8601 week numbers. Specifying "ISO" changes the default value of firstDay to 1 (Monday).
+        static member inline ISO =
+            Interop.mkProperty<IFullCalendarProp> "weekNumberCalculation" "ISO"
     [<Erase>]
     type themeSystem =
         static member inline standard = Interop.mkProperty<IFullCalendarProp> "themeSystem" "standard"
@@ -614,3 +682,13 @@ type range =
         Interop.mkProperty<IRangeProp> "end" value
     static member inline end'(value: string) =
         Interop.mkProperty<IRangeProp> "end" value
+
+// ----------------------------------------------------- BusinessDay ----------------------------------------------------------------------
+[<Erase>]
+type businessDay =
+    static member inline start(value: string) =
+        Interop.mkProperty<IBusinessDayProp> "start" value
+    static member inline end'(value: string) =
+        Interop.mkProperty<IBusinessDayProp> "end" value
+    static member inline daysOfWeek (value: IDayProp list) =
+        Interop.mkProperty<IBusinessDayProp> "daysOfWeek" (value |> List.toArray)

@@ -4527,6 +4527,24 @@ let ListTest () =
         )
     ]
 
+type Event =
+    | Presenter
+    | Break
+    | ``Team Bonding``
+
+module Event =
+    let getColors = function
+        | Presenter -> "black", "orange"
+        | Break -> "white", "green"
+        | ``Team Bonding`` -> "black", "yellow"
+        | _ -> "black", "white"
+
+    let fromText = function
+        | Some "Presenter" -> Presenter
+        | Some "Break" -> Break
+        | Some "Team Bonding" -> ``Team Bonding``
+        | _ -> Presenter
+
 open Fable.Core.JsInterop
 
 [<ReactComponent>]
@@ -4534,20 +4552,26 @@ let FullCalendar () =
     let isDialogOpen, setIsDialogOpen = React.useState false
     let newEventTitle, setNewEventTitle = React.useState ""
     let (selectedDate: DateSelectArg option), setSelectedDate = React.useState None
-    let startTime, setStartTime = React.useState ("")
-    let endTime, setEndTime = React.useState ("")
+    let startTime, setStartTime = React.useState None
+    let endTime, setEndTime = React.useState None
+    let (dayEvent: Event), setDayEvent = React.useState Presenter
+    let allDay, setAllDay = React.useState false
 
     let handleDateClick =
-        (fun selected ->
+        (fun (selected: DateSelectArg) ->
             setSelectedDate (Some selected)
-            setIsDialogOpen true)
+            setIsDialogOpen true
+            setStartTime (Some selected.start)
+            setEndTime (Some selected.``end``)
+        )
 
     let handleCloseDialog =
         fun _ ->
             setIsDialogOpen false
             setNewEventTitle ""
-            setStartTime ""
-            setEndTime ""
+            setStartTime None
+            setEndTime None
+            setDayEvent Presenter
 
     let handleEventClick =
         fun (selected: EventClickArg) ->
@@ -4558,29 +4582,28 @@ let FullCalendar () =
         (fun (e: Browser.Types.Event) ->
             e.preventDefault ()
 
-            if newEventTitle <> "" && selectedDate.IsSome then
-                let calendarApi = selectedDate.Value.view.calendar
-                calendarApi.unselect ()
+            match startTime, endTime with
+            | Some startTime, Some endTime ->
+                if newEventTitle <> "" && selectedDate.IsSome then
+                    let calendarApi = selectedDate.Value.view.calendar
+                    calendarApi.unselect ()
 
-                let date =
-                    System.DateTime(
-                        selectedDate.Value.start.Year,
-                        selectedDate.Value.start.Month,
-                        selectedDate.Value.start.Day
-                    )
+                    let (textColor, backgrounColor) = dayEvent |> Event.getColors
 
-                let newEvent = [
-                    event.id $"{selectedDate.Value.start.ToShortDateString()}-{newEventTitle}"
-                    event.title newEventTitle
-                    event.start (System.DateTime.Parse($"{date.Month}/{date.Day}/{date.Year} {startTime}"))
-                    event.end' (System.DateTime.Parse($"{date.Month}/{date.Day}/{date.Year} {endTime}"))
-                    event.allDay false
-                    event.backgroundColor "yellow"
-                    event.textColor "black"
-                ]
+                    let newEvent = [
+                        event.id newEventTitle
+                        event.title newEventTitle
+                        event.start startTime
+                        event.end' endTime
+                        event.allDay allDay
+                        event.backgroundColor backgrounColor
+                        event.textColor textColor
+                    ]
 
-                calendarApi.addEvent (!!newEvent |> createObj |> unbox)
-                handleCloseDialog ())
+                    calendarApi.addEvent (!!newEvent |> createObj |> unbox)
+                    handleCloseDialog ()
+            | _, _ -> ()
+        )
 
     Html.div [
         prop.style [ style.width (length.vw 70) ]
@@ -4599,6 +4622,9 @@ let FullCalendar () =
                 fullCalendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
                 fullCalendar.editable true
                 fullCalendar.selectMirror true
+                fullCalendar.nowIndicator true
+                fullCalendar.unselectAuto true
+                fullCalendar.unselect (fun ev view -> printfn "view %A" view) //TODO
                 fullCalendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]
                 // fullCalendar.slotMinTime [
                 //     duration.hour 9
@@ -4612,7 +4638,7 @@ let FullCalendar () =
                 fullCalendar.buttonIcons [
                     buttonIcon.prev "chevron-left"
                 ]
-                // fullCalendar.eventsSet (fun events -> setC)
+                fullCalendar.eventsSet (fun (e: CalendarEvent array) -> printfn "eventsSet %A" (e |> Array.map (fun e -> e.title)))
                 fullCalendar.headerToolbar [
                     headerToolbar.start "today prev,next"
                     headerToolbar.center "myCustomButton"
@@ -4655,6 +4681,20 @@ let FullCalendar () =
                                             stack.tokens [ stack.tokens.childrenGap 8 ]
                                             stack.horizontal false
                                             stack.children [
+                                                Fui.dropdown [
+                                                    dropdown.value $"{dayEvent}"
+                                                    dropdown.onOptionSelect (fun (d: OptionOnSelectData) -> d.optionValue |> Event.fromText |> setDayEvent)
+                                                    dropdown.children [
+                                                        for event in [ Presenter; Break; ``Team Bonding``] do
+                                                            Fui.option [
+                                                                option.value $"{event}"
+                                                                option.text $"{event}"
+                                                                option.children [
+                                                                    Fui.text $"{event}"
+                                                                ]
+                                                            ]
+                                                    ]
+                                                ]
                                                 Fui.input [
                                                     input.type' "text"
                                                     input.placeholder "Event Title"
@@ -4662,19 +4702,22 @@ let FullCalendar () =
                                                     input.onChange (fun e -> setNewEventTitle e)
                                                     input.required true
                                                 ]
-                                                Fui.input [
-                                                    input.type' "text"
-                                                    input.placeholder "Start Time"
-                                                    input.value startTime
-                                                    input.onChange (fun e -> setStartTime e)
-                                                    input.required true
+                                                Fui.timePicker [
+                                                    timePicker.selectedTime startTime
+                                                    timePicker.formatDateToTimeString (fun d -> d.ToShortDateString() + " " + d.ToShortTimeString())
+                                                    timePicker.onTimeChange (fun (t: TimeSelectionData) -> setStartTime t.selectedTime)
                                                 ]
-                                                Fui.input [
-                                                    input.type' "text"
-                                                    input.placeholder "End Time"
-                                                    input.value endTime
-                                                    input.onChange (fun e -> setEndTime e)
-                                                    input.required true
+                                                Fui.timePicker [
+                                                    timePicker.selectedTime endTime
+                                                    if selectedDate.IsSome then
+                                                        timePicker.dateAnchor selectedDate.Value.start
+                                                    timePicker.formatDateToTimeString (fun d -> d.ToShortDateString() + " " + d.ToShortTimeString())
+                                                    timePicker.onTimeChange (fun (t: TimeSelectionData) -> setEndTime t.selectedTime)
+                                                ]
+                                                Fui.checkbox [
+                                                    checkbox.isChecked allDay
+                                                    checkbox.onCheckedChange (fun c -> setAllDay c)
+                                                    checkbox.label "All Day Event"
                                                 ]
                                                 Fui.button [
                                                     button.type' "submit"

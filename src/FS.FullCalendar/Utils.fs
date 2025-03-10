@@ -41,3 +41,6 @@ type IDurationProp = interface end
 
 [<Erase>]
 type IRangeProp = interface end
+
+[<Erase>]
+type IBusinessDayProp = interface end
