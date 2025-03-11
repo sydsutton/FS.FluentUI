@@ -2372,6 +2372,10 @@ type [<Erase>] timePicker =
     static member inline onOpenChange (value: FocusEvent -> OpenProp -> unit) = Interop.mkProperty<ITimePickerProp> "onOpenChange" (System.Func<_,_,_> value)
     /// If set, the timepicker will show an icon to clear the current value.
     static member inline clearable (value: bool) = Interop.mkProperty<ITimePickerProp> "clearable" value
+    /// Start hour (inclusive) for the time range, 0-24.
+    static member inline startHour (value: int) = Interop.mkProperty<ITimePickerProp> "startHour" value
+    /// End hour (exclusive) for the time range, 0-24.
+    static member inline endHour (value: int) = Interop.mkProperty<ITimePickerProp> "endHour" value
 
 module timePicker =
 
