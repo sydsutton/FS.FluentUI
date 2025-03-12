@@ -17,6 +17,9 @@ module Helpers =
     let inline createElement (el: ReactElementType) (props: 'ControlProperty list) : ReactElement =
         reactElement el (!!props |> createObj)
 
+[<RequireQualifiedAccess>]
+type [<Erase>] JSTuple =
+    static member inline from2Args (args: 'T) = emitJsExpr args "$0[0], $0[1]"
 
 [<System.ComponentModel.EditorBrowsable(System.ComponentModel.EditorBrowsableState.Never)>]
 module Plugin =
@@ -45,7 +48,18 @@ module Plugin =
     [<ImportDefault("@fullcalendar/moment")>]
     let momentPlugin: IPlugin = jsNative
 
+    [<ImportDefault("@fullcalendar/moment-timezone")>]
+    let momentTimezonePlugin: IPlugin = jsNative
+
 [<AutoOpen>]
 type FC =
-    static member inline FullCalendar(props: IFullCalendarProp list) =
+    static member inline Calendar(props: ICalendarProp list) =
         Helpers.createElement Helpers.FullCalendar props
+    static member inline Draggable (el: Browser.Types.HTMLElement, props: IDraggableProp list) : unit =
+        let props = !!props |> createObj |> unbox
+        let draggable = import "Draggable" "@fullcalendar/interaction"
+        createNew draggable (JSTuple.from2Args (el, props)) |> ignore
+
+    static member inline Draggable (el: Browser.Types.HTMLElement) : unit =
+        let draggable = import "Draggable" "@fullcalendar/interaction"
+        createNew draggable el |> ignore

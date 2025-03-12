@@ -7,7 +7,10 @@ type Interop =
     static member inline mkProperty<'ControlProperty> (key: string) (value: obj) : 'ControlProperty = unbox (key, value)
 
 [<Erase>]
-type IFullCalendarProp = interface end
+type ICalendarProp = interface end
+
+[<Erase>]
+type IDraggableProp = interface end
 
 [<Erase>]
 type IPlugin = interface end
@@ -44,3 +47,6 @@ type IRangeProp = interface end
 
 [<Erase>]
 type IBusinessDayProp = interface end
+
+[<Erase>]
+type IFetchInfoProp = interface end

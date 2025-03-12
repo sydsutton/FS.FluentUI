@@ -4556,9 +4556,25 @@ let FullCalendar () =
     let endTime, setEndTime = React.useState None
     let (dayEvent: Event), setDayEvent = React.useState Presenter
     let allDay, setAllDay = React.useState false
+    let (calRef: IRefValue<FullCalendar option>) = React.useRef None
+    let containerEl = Browser.Dom.document.getElementById "external-events"
+    let checkboxEl = Browser.Dom.document.getElementById "drop-remove"
 
-    let handleDateClick =
-        (fun (selected: DateSelectArg) ->
+    if containerEl <> null then
+        Draggable (containerEl, [
+            draggable.itemSelector ".fc-event"
+            draggable.eventData (fun el -> [
+                    event.title el.innerText
+                    event.backgroundColor "green"
+                ]
+            )
+        ])
+
+    let handleDateSelect =
+        (fun selected ->
+            let calendarApi = calRef.current.Value.getApi()
+            let events = calendarApi.getEvents()
+            printfn "calRef %A" (events |> Array.map (fun t -> t.title))
             setSelectedDate (Some selected)
             setIsDialogOpen true
             setStartTime (Some selected.start)
@@ -4600,69 +4616,142 @@ let FullCalendar () =
                         event.textColor textColor
                     ]
 
-                    calendarApi.addEvent (!!newEvent |> createObj |> unbox)
+                    let added = calendarApi.addEvent (!!newEvent |> createObj |> unbox)
+                    printfn "added %A" added
+                    added
                     handleCloseDialog ()
             | _, _ -> ()
         )
 
+    let getTimePickerStartHour = function
+        | 1 -> timePicker.startHour.``1``
+        | 2 -> timePicker.startHour.``2``
+        | 3 -> timePicker.startHour.``3``
+        | 4 -> timePicker.startHour.``4``
+        | 5 -> timePicker.startHour.``5``
+        | 6 -> timePicker.startHour.``6``
+        | 7 -> timePicker.startHour.``7``
+        | 8 -> timePicker.startHour.``8``
+        | 9 -> timePicker.startHour.``9``
+        | 10 -> timePicker.startHour.``10``
+        | 11 -> timePicker.startHour.``11``
+        | 12 -> timePicker.startHour.``12``
+        | 13 -> timePicker.startHour.``13``
+        | 14 -> timePicker.startHour.``14``
+        | 15 -> timePicker.startHour.``15``
+        | 16 -> timePicker.startHour.``16``
+        | 17 -> timePicker.startHour.``17``
+        | 18 -> timePicker.startHour.``18``
+        | 19 -> timePicker.startHour.``19``
+        | 20 -> timePicker.startHour.``20``
+        | 21 -> timePicker.startHour.``21``
+        | 22 -> timePicker.startHour.``22``
+        | 23 -> timePicker.startHour.``23``
+        | 0
+        | _ -> timePicker.startHour.``0``
+
     Html.div [
         prop.style [ style.width (length.vw 70) ]
         prop.children [
-            FullCalendar [
-                fullCalendar.plugins [
+            Html.div [
+                prop.id "external-events"
+                prop.children [
+                    for i in [1..5] do
+                        Html.div [
+                            prop.key i
+                            prop.className "fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+                            prop.children [
+                                Html.div [
+                                    prop.className "fc-event-main"
+                                    prop.children [
+                                        Html.text $"My Event {i}"
+                                    ]
+                                ]
+                            ]
+                        ]
+                    Html.p [
+                        Fui.checkbox [
+                            checkbox.id "drop-remove"
+                            checkbox.label "Remove after drop"
+                        ]
+                    ]
+                ]
+            ]
+            Calendar [
+                calendar.plugins [
                     Plugin.dayGridPlugin
                     Plugin.timeGridPlugin
                     Plugin.interactionPlugin
                     Plugin.bootstrap5Plugin
                     Plugin.listPlugin
                     Plugin.multimonthPlugin
+                    // Plugin.momentTimezonePlugin
                 ]
-                fullCalendar.initialView.dayGridMonth
-                fullCalendar.eventDrop (fun i -> printfn "i %A" (i.delta.days) )
-                fullCalendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
-                fullCalendar.editable true
-                fullCalendar.selectMirror true
-                fullCalendar.nowIndicator true
-                fullCalendar.unselectAuto true
-                fullCalendar.unselect (fun ev view -> printfn "view %A" view) //TODO
-                fullCalendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]
-                // fullCalendar.slotMinTime [
+                calendar.ref calRef
+                calendar.droppable true
+                calendar.initialView.dayGridMonth
+                calendar.eventDrop (fun i -> printfn "i %A" (i.delta.days) )
+                calendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
+                calendar.editable true
+                calendar.drop (fun (info: DropInfo) ->
+                    if checkboxEl?checked = true then
+                        info.draggedEl.parentNode.removeChild(info.draggedEl) |> ignore
+                    else
+                        ()
+                )
+                calendar.selectMirror true
+                calendar.nowIndicator true
+                // calendar.timezone "Europe/Moscow"
+                calendar.unselectAuto true
+                calendar.unselect (fun ev view -> printfn "view %A" view) //TODO
+                // calendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]
+                // calendar.slotMinTime [
                 //     duration.hour 9
                 // ]
-                fullCalendar.selectable true
-                fullCalendar.themeSystem.bootstrap5
-                fullCalendar.dayMaxEvents true
-                fullCalendar.eventAdd (fun e -> printfn "e %A" (e.event.title))
-                fullCalendar.select handleDateClick
-                fullCalendar.eventClick handleEventClick
-                fullCalendar.buttonIcons [
+                calendar.selectable true
+                calendar.select handleDateSelect
+                calendar.eventClick handleEventClick
+                calendar.themeSystem.bootstrap5
+                calendar.dayMaxEvents true
+                calendar.eventAdd (fun e -> printfn "e %A" (e.event.title))
+                calendar.loading (fun b -> printfn "isLoading %A" b)
+                calendar.buttonIcons [
                     buttonIcon.prev "chevron-left"
                 ]
-                fullCalendar.eventsSet (fun (e: CalendarEvent array) -> printfn "eventsSet %A" (e |> Array.map (fun e -> e.title)))
-                fullCalendar.headerToolbar [
+                calendar.eventsSet (fun (e: CalendarEvent array) -> printfn "eventsSet %A" (e |> Array.map (fun e -> e.title)))
+                calendar.headerToolbar [
                     headerToolbar.start "today prev,next"
-                    headerToolbar.center "myCustomButton"
-                    headerToolbar.end' "dayGridMonth,timeGridWeek,timeGridDay,list"
+                    headerToolbar.center "title"
+                    headerToolbar.end' "myCustomButton, dayGridMonth,timeGridWeek,timeGridDay,list"
                 ]
-                fullCalendar.customButtons [
+                calendar.dayHeaderFormat [
+                    dateFormat.weekday.short
+                ]
+                calendar.customButtons [
                     "myCustomButton",
                     [
-                        customButton.text "Custom button"
+                        customButton.text "Add event"
+                        customButton.icon "plus-circle"
+                        // customButton.click handleAddEventClick
                     ]
                 ]
-                fullCalendar.initialEvents [
+                // calendar.events "https://calendar.io/api/demo-feeds/events.json"
+                calendar.initialEvents [
                     [
                         event.id "1"
                         event.title "All-day event"
-                        event.start (System.DateTime.Parse "3/10/2025 11:00:00 AM")
-                        event.end' (System.DateTime.Parse "3/10/2025 12:00:00 PM")
+                        event.start (System.DateTime.Parse "3/13/2025 11:00:00 AM")
+                        event.end' (System.DateTime.Parse "3/13/2025 12:00:00 PM")
                         event.backgroundColor "red"
+                        event.allDay true
                     ]
                     [
                         event.id "2"
                         event.title "Timed event"
+                        event.allDay false
                         event.start (System.DateTime.Parse "3/11/2025 11:00:00 AM")
                         event.end' (System.DateTime.Parse "3/11/2025 12:00:00 PM")
+                        prop.custom("displayEventTime", "false") |> unbox
                     ]
                 ]
             ]
@@ -4704,14 +4793,16 @@ let FullCalendar () =
                                                 ]
                                                 Fui.timePicker [
                                                     timePicker.selectedTime startTime
-                                                    timePicker.formatDateToTimeString (fun d -> d.ToShortDateString() + " " + d.ToShortTimeString())
                                                     timePicker.onTimeChange (fun (t: TimeSelectionData) -> setStartTime t.selectedTime)
                                                 ]
                                                 Fui.timePicker [
                                                     timePicker.selectedTime endTime
-                                                    if selectedDate.IsSome then
-                                                        timePicker.dateAnchor selectedDate.Value.start
-                                                    timePicker.formatDateToTimeString (fun d -> d.ToShortDateString() + " " + d.ToShortTimeString())
+                                                    match selectedDate with
+                                                    | Some sd ->
+                                                        timePicker.dateAnchor sd.start
+                                                        getTimePickerStartHour sd.start.Hour
+                                                    | None ->
+                                                        prop.custom ("", "") |> unbox
                                                     timePicker.onTimeChange (fun (t: TimeSelectionData) -> setEndTime t.selectedTime)
                                                 ]
                                                 Fui.checkbox [

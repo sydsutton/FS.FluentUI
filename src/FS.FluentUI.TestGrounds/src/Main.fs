@@ -66,7 +66,7 @@ let TestGrounds () =
     let model, dispatch = React.useElmish (TestGrounds.init, TestGrounds.update, [||])
 
     Fui.fluentProvider [
-        fluentProvider.theme.createDarkTheme brandVariants
+        fluentProvider.theme.webLightTheme
         fluentProvider.children [
             Fui.fluentProvider [
                 fluentProvider.theme customTokens

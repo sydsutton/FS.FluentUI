@@ -4,57 +4,86 @@ open Fable.Core
 open Feliz
 open System
 
-type DateRangeInput = {
-    start: System.DateTime
-    ``end``: System.DateTime
+type DateRangeInput = { start: DateTime; ``end``: DateTime }
+
+type SetAllDayOptions = { maintainDuration: bool }
+
+type DurationObjectInput = {
+    years: int
+    year: int
+    months: int
+    month: int
+    weeks: int
+    week: int
+    days: int
+    day: int
+    hours: int
+    hour: int
+    minutes: int
+    minute: int
+    seconds: int
+    second: int
+    milliseconds: int
+    millisecond: int
+    ms: int
 }
 
-type ViewApi = {
-    calendar: CalendarApi
-    ``type``: string
-    title: string
-    activeStart: System.DateTime
-    activeEnd: System.DateTime
-    currentStart: System.DateTime
-    currentEnd: System.DateTime
-    getOption: string -> unit
+type FormatterInput = {
+    week: string
+    meridiem: string
+    omitZeroMinute: bool
+    omitCommas: bool
+    separator: string
 }
 
-and CalendarApi = {
-    view: ViewApi
-    updateSize: unit -> unit
-    setOption: string * obj -> unit //TODO
-    getOption: string * obj //TODO
-    getAvailableLocaleCodes: unit -> string array
-    on: string * obj -> unit //TODO
-    off: string * obj -> unit //TODO
-    trigger: string * obj -> unit //TODO
-    changeView: string -> DateRangeInput -> unit //TODO
-    zoomTo: System.DateTime * string -> unit //TODO
-    prev: unit -> unit
-    next: unit -> unit
-    prevYear: unit -> unit
-    nextYear: unit -> unit
-    today: unit -> unit
-    gotoDate: System.DateTime -> unit
-    incrementDate: string -> unit //TODO
-    getDate: unit -> System.DateTime
-    formatDate: System.DateTime * string -> unit //TODO
-    formatRange: System.DateTime * System.DateTime * string -> unit //TODO
-    formatIso: System.DateTime * bool -> string //TODO
-    select: System.DateTime -> System.DateTime option -> unit
-    unselect: unit -> unit
-    addEvent: obj -> unit //TODO
-    getEventById: string -> unit //TODO
-    getEvents: unit -> string array //TODO
-    removeAllEvents: unit -> unit
-    getEventSources: unit -> obj //TODO
-    getEventSourceById: string -> obj //TODO
-    addEventSource: obj -> obj //TODO
-    removeAllEventSources: unit -> unit
-    refetchEvents: unit -> unit
-    scrollToTime: obj -> unit //TODO
+type Duration = {
+    years: int
+    months: int
+    days: int
+    milliseconds: int
+    specifiedWeeks: bool
 }
+
+type EventMutation = {
+    datesDelta: Duration
+    startDelta: Duration
+    endDelta: Duration
+    standardProps: obj
+    extendedProps: obj
+}
+
+type DateRange = { start: DateTime; ``end``: DateTime }
+
+type DateSpanApi = {
+    allDay: bool
+    start: DateTime
+    ``end``: DateTime
+    startStr: string
+    endStr: string
+}
+
+type ToPlainObjectSettings = {
+    collapseExtendedProps: bool
+    collapseColor: bool
+}
+
+type EventSourceApi = {
+    id: string
+    url: string
+    format: string
+    remove: unit -> unit
+    refetch: unit -> unit
+}
+
+type SetStartOptions = {
+    granularity: string
+    maintainDuration: bool
+}
+
+type SetEndOptions = { granularity: string }
+
+type StartInputOptions = { allDay: bool; granularity: string }
+
 
 type CalendarEvent = {
     /// A unique identifier of an event. Useful for getEventById.
@@ -112,117 +141,20 @@ type CalendarEvent = {
 type DateSelectArg = {
     jsEvent: Browser.Types.UIEvent option
     view: ViewApi
-    start: System.DateTime
-    ``end``: System.DateTime
+    start: DateTime
+    ``end``: DateTime
     startStr: string
     endStr: string
     allDay: bool
 }
 
-type EventAddData = {
+and EventAddData = {
     event: CalendarEvent
     relatedEvents: CalendarEvent array
     revert: unit -> unit //TODO
 }
 
-type SetStartOptions = {
-    granularity: string
-    maintainDuration: bool
-}
-
-type SetEndOptions = {
-    granularity: string
-}
-
-type StartInputOptions = {
-    allDay: bool
-    granularity: string
-}
-
-type DurationObjectInput = {
-    years: int
-    year: int
-    months: int
-    month: int
-    weeks: int
-    week: int
-    days: int
-    day: int
-    hours: int
-    hour: int
-    minutes: int
-    minute: int
-    seconds: int
-    second: int
-    milliseconds: int
-    millisecond: int
-    ms: int
-}
-
-type SetAllDayOptions = {
-    maintainDuration: bool
-}
-
-type FormatterInput = {
-    week: string
-    meridiem: string
-    omitZeroMinute: bool
-    omitCommas: bool
-    separator: string
-}
-
-type Duration = {
-    years: int
-    months: int
-    days: int
-    milliseconds: int
-    specifiedWeeks: bool
-}
-type EventMutation = {
-    datesDelta: Duration;
-    startDelta: Duration
-    endDelta: Duration
-    standardProps: obj
-    extendedProps: obj
-}
-
-type DateRange = {
-    start: DateTime
-    ``end``: DateTime
-}
-
-type DateSpanApi = {
-    allDay: bool
-    start: DateTime
-    ``end``: DateTime
-    startStr: string
-    endStr: string
-}
-
-type CalendarContext = { //TODO
-    dateEnv: obj
-    options: obj
-    pluginHooks: obj
-    emitter: obj
-    dispatch: obj
-    getCurrentData: obj
-    calendarApi: obj
-}
-
-type ToPlainObjectSettings = {
-    collapseExtendedProps: bool
-    collapseColor: bool
-}
-
-type EventSourceApi = {
-    id: string
-    url: string
-    format: string
-    remove: unit -> unit
-    refetch: unit -> unit
-}
-
-type EventApi = {
+and EventApi = {
     source: EventSourceApi option
     start: DateTime option
     ``end``: DateTime option
@@ -259,8 +191,66 @@ type EventApi = {
     toJSON: unit -> obj
 }
 
-type EventSourceSuccessResponseHandler = obj * obj * obj -> obj array //TODO
-type EventSource = {
+and EventSourceSuccessResponseHandler = obj * obj * obj -> obj array //TODO
+
+and ViewApi = {
+    calendar: CalendarApi
+    ``type``: string
+    title: string
+    activeStart: DateTime
+    activeEnd: DateTime
+    currentStart: DateTime
+    currentEnd: DateTime
+    getOption: string -> unit
+}
+
+and CalendarApi = {
+    view: ViewApi
+    updateSize: unit -> unit
+    setOption: string -> obj -> unit
+    getOption: string -> obj
+    getAvailableLocaleCodes: unit -> string array
+    on: string -> obj -> unit
+    off: string -> obj -> unit
+    trigger: string -> obj -> unit
+    changeView: string -> DateRangeInput -> unit
+    zoomTo: DateTime -> string -> unit
+    prev: unit -> unit
+    next: unit -> unit
+    prevYear: unit -> unit
+    nextYear: unit -> unit
+    today: unit -> unit
+    gotoDate: DateTime -> unit
+    incrementDate: DurationObjectInput -> unit
+    getDate: unit -> DateTime
+    formatDate: DateTime -> FormatterInput -> unit
+    formatRange: DateTime -> DateTime -> obj -> unit
+    formatIso: DateTime -> bool -> string
+    select: DateTime -> DateTime option -> unit
+    unselect: unit -> unit
+    addEvent: obj -> EventSourceImpl -> EventImpl option
+    getEventById: string -> EventImpl option
+    getEvents: unit -> EventImpl array
+    removeAllEvents: unit -> unit
+    getEventSources: unit -> EventSourceImpl array
+    getEventSourceById: string -> EventSourceImpl option
+    addEventSource: obj -> EventSourceImpl
+    removeAllEventSources: unit -> unit
+    refetchEvents: unit -> unit
+    scrollToTime: DurationObjectInput -> unit
+}
+
+and CalendarContext = { //TODO
+    dateEnv: obj
+    options: obj
+    pluginHooks: obj
+    emitter: obj
+    dispatch: obj
+    getCurrentData: obj
+    calendarApi: obj // TODO
+}
+
+and EventSource = {
     sourceId: string
     sourceDefId: int
     meta: obj // TODO
@@ -270,11 +260,12 @@ type EventSource = {
     fetchRange: DateRange option
     defaultAllDay: bool option
     eventDataTransform: obj -> obj //TODO
-    ui: EventUi;
+    ui: EventUi
     success: EventSourceSuccessResponseHandler option
     failure: (obj -> unit) option //TODO
     extendedProps: obj
 }
+
 and EventSourceImpl = {
     internalEventSource: EventSource
     constructor: CalendarContext * obj //TODO (context: CalendarContext, internalEventSource: EventSource<any>);
@@ -284,6 +275,7 @@ and EventSourceImpl = {
     remove: unit -> unit
     refetch: unit -> unit
 }
+
 and EventImpl = {
     mutate: EventMutation -> unit
     source: EventSourceApi option
@@ -321,7 +313,9 @@ and EventImpl = {
     toPlainObject: ToPlainObjectSettings -> obj
     toJSON: unit -> obj
 }
+
 and AllowFunc = DateSpanApi * EventImpl option -> bool
+
 and EventUi = {
     display: string option
     startEditable: bool option
@@ -416,38 +410,97 @@ type EventDropInfo = {
 }
 
 type SelectInfo = {
-/// Date. A date indicating the beginning of the selection.
-start: DateTime
-/// Date. A date indicating the end of the selection.
-/// In line with the discussion about the Event object, it is important to stress that the end date property is exclusive. For example, if the selection is all-day and the last day is a Thursday, end will be Friday.
-``end``: DateTime
-/// String. An ISO8601 string representation of the start date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-01T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-01.
-startStr: string
-/// String. An ISO8601 string representation of the end date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-02T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-02.
-endStr: string
-/// Boolean. true or false whether the selection happened on all-day cells.
-allDay: bool
-/// The native JavaScript event with low-level information such as click coordinates.
-jsEvent: Browser.Types.UIEvent
-/// View object. The current Calendar view.
-View: ViewApi
-/// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
-resource: Resource
+    /// Date. A date indicating the beginning of the selection.
+    start: DateTime
+    /// Date. A date indicating the end of the selection.
+    /// In line with the discussion about the Event object, it is important to stress that the end date property is exclusive. For example, if the selection is all-day and the last day is a Thursday, end will be Friday.
+    ``end``: DateTime
+    /// String. An ISO8601 string representation of the start date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-01T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-01.
+    startStr: string
+    /// String. An ISO8601 string representation of the end date. It will have a timezone offset similar to the calendar’s timeZone e.g. 2018-09-02T12:30:00-05:00. If selecting all-day cells, it won’t have a time nor timezone part e.g. 2018-09-02.
+    endStr: string
+    /// Boolean. true or false whether the selection happened on all-day cells.
+    allDay: bool
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: Browser.Types.UIEvent
+    /// View object. The current Calendar view.
+    View: ViewApi
+    /// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
+    resource: Resource
 }
 
 type DateClickInfo = {
-/// a Date for the clicked day/time.
-date: DateTime
-/// An ISO8601 string representation of the date. Will have a time zone offset according to the calendar’s timeZone like 2018-09-01T12:30:00-05:00. If clicked on an all-day cell, won’t have a time part nor a time zone part, like 2018-09-01.
-dateStr: string
-/// true or false whether the click happened on an all-day cell.
-allDay: bool
-/// An HTML element that represents the whole-day that was clicked on.
-dayEl: Browser.Types.HTMLElement
-/// The native JavaScript event with low-level information such as click coordinates.
-jsEvent: Browser.Types.UIEvent
-/// The current View Object.
-view: ViewApi
-/// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
-resource: Resource
+    /// a Date for the clicked day/time.
+    date: DateTime
+    /// An ISO8601 string representation of the date. Will have a time zone offset according to the calendar’s timeZone like 2018-09-01T12:30:00-05:00. If clicked on an all-day cell, won’t have a time part nor a time zone part, like 2018-09-01.
+    dateStr: string
+    /// true or false whether the click happened on an all-day cell.
+    allDay: bool
+    /// An HTML element that represents the whole-day that was clicked on.
+    dayEl: Browser.Types.HTMLElement
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: Browser.Types.UIEvent
+    /// The current View Object.
+    view: ViewApi
+    /// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
+    resource: Resource
+}
+
+type FullCalendar = {
+    render: unit -> Fable.React.ReactElement
+    componentDidMount: unit -> unit
+    componentDidUpdate: unit -> unit
+    componentWillUnmount: unit -> unit
+    requestResize: unit -> unit
+    doResize: unit -> unit
+    cancelResize: unit -> unit
+    getApi: unit -> CalendarApi
+}
+
+[<RequireQualifiedAccess>]
+type Error = {
+    name: string
+    message: string
+    stack: string
+}
+
+type EventInput = {
+    extendedProps: obj
+    start: DateTime
+    ``end``: DateTime
+    date: DateTime
+    allDay: bool
+    id: string
+    groupId: string
+    title: string
+    url: string
+    interactive: bool
+}
+
+type MouseInfo = {
+    /// The associated Event Object.
+    event: CalendarEvent
+    /// The HTML element for this event.
+    el: Browser.Types.HTMLElement
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: Browser.Types.UIEvent
+    /// The current View Object.
+    view: ViewApi
+}
+
+type DropInfo = {
+    /// true or false whether dropped on one of the all-day cells.
+    allDay: bool
+    /// The Date of where the draggable was dropped.
+    date: DateTime
+    /// The ISO8601 string representation of where the draggable was dropped.
+    dateStr: string
+    /// The HTML element that was being dragged.
+    draggedEl: Browser.Types.HTMLElement
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: Browser.Types.UIEvent
+    /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
+    resource: Resource
+    /// The current View Object.
+    view: ViewApi
 }
