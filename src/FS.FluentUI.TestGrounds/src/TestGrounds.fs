@@ -4556,13 +4556,14 @@ let FullCalendar () =
     let endTime, setEndTime = React.useState None
     let (dayEvent: Event), setDayEvent = React.useState Presenter
     let allDay, setAllDay = React.useState false
-    let (calRef: IRefValue<FullCalendar option>) = React.useRef None
+    let (calRef: IRefValue<CalendarRoot option>) = React.useRef None
     let containerEl = Browser.Dom.document.getElementById "external-events"
     let checkboxEl = Browser.Dom.document.getElementById "drop-remove"
 
     if containerEl <> null then
-        Draggable (containerEl, [
+        FullCalendar.Draggable (containerEl, [
             draggable.itemSelector ".fc-event"
+            draggable.minDistance 200
             draggable.eventData (fun el -> [
                     event.title el.innerText
                     event.backgroundColor "green"
@@ -4623,33 +4624,6 @@ let FullCalendar () =
             | _, _ -> ()
         )
 
-    let getTimePickerStartHour = function
-        | 1 -> timePicker.startHour.``1``
-        | 2 -> timePicker.startHour.``2``
-        | 3 -> timePicker.startHour.``3``
-        | 4 -> timePicker.startHour.``4``
-        | 5 -> timePicker.startHour.``5``
-        | 6 -> timePicker.startHour.``6``
-        | 7 -> timePicker.startHour.``7``
-        | 8 -> timePicker.startHour.``8``
-        | 9 -> timePicker.startHour.``9``
-        | 10 -> timePicker.startHour.``10``
-        | 11 -> timePicker.startHour.``11``
-        | 12 -> timePicker.startHour.``12``
-        | 13 -> timePicker.startHour.``13``
-        | 14 -> timePicker.startHour.``14``
-        | 15 -> timePicker.startHour.``15``
-        | 16 -> timePicker.startHour.``16``
-        | 17 -> timePicker.startHour.``17``
-        | 18 -> timePicker.startHour.``18``
-        | 19 -> timePicker.startHour.``19``
-        | 20 -> timePicker.startHour.``20``
-        | 21 -> timePicker.startHour.``21``
-        | 22 -> timePicker.startHour.``22``
-        | 23 -> timePicker.startHour.``23``
-        | 0
-        | _ -> timePicker.startHour.``0``
-
     Html.div [
         prop.style [ style.width (length.vw 70) ]
         prop.children [
@@ -4677,7 +4651,7 @@ let FullCalendar () =
                     ]
                 ]
             ]
-            Calendar [
+            FullCalendar.Calendar [
                 calendar.plugins [
                     Plugin.dayGridPlugin
                     Plugin.timeGridPlugin
@@ -4693,6 +4667,7 @@ let FullCalendar () =
                 calendar.eventDrop (fun i -> printfn "i %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
                 calendar.editable true
+                calendar.eventResize (fun info -> Browser.Dom.window.alert (info.event.title + " end is now " + info.event.``end``.ToString()))
                 calendar.drop (fun (info: DropInfo) ->
                     if checkboxEl?checked = true then
                         info.draggedEl.parentNode.removeChild(info.draggedEl) |> ignore
@@ -4700,6 +4675,7 @@ let FullCalendar () =
                         ()
                 )
                 calendar.selectMirror true
+                calendar.dropAccept (fun el -> printfn "api %A" el.innerText; true)
                 calendar.nowIndicator true
                 // calendar.timezone "Europe/Moscow"
                 calendar.unselectAuto true
@@ -4711,10 +4687,12 @@ let FullCalendar () =
                 calendar.selectable true
                 calendar.select handleDateSelect
                 calendar.eventClick handleEventClick
+                // calendar.eventDisplay.background
                 calendar.themeSystem.bootstrap5
                 calendar.dayMaxEvents true
                 calendar.eventAdd (fun e -> printfn "e %A" (e.event.title))
                 calendar.loading (fun b -> printfn "isLoading %A" b)
+                // calendar.eventOrder (fun (a: CalendarEvent) b -> printfn "a %A b%A" a.title b; 1)
                 calendar.buttonIcons [
                     buttonIcon.prev "chevron-left"
                 ]
@@ -4735,25 +4713,7 @@ let FullCalendar () =
                         // customButton.click handleAddEventClick
                     ]
                 ]
-                // calendar.events "https://calendar.io/api/demo-feeds/events.json"
-                calendar.initialEvents [
-                    [
-                        event.id "1"
-                        event.title "All-day event"
-                        event.start (System.DateTime.Parse "3/13/2025 11:00:00 AM")
-                        event.end' (System.DateTime.Parse "3/13/2025 12:00:00 PM")
-                        event.backgroundColor "red"
-                        event.allDay true
-                    ]
-                    [
-                        event.id "2"
-                        event.title "Timed event"
-                        event.allDay false
-                        event.start (System.DateTime.Parse "3/11/2025 11:00:00 AM")
-                        event.end' (System.DateTime.Parse "3/11/2025 12:00:00 PM")
-                        prop.custom("displayEventTime", "false") |> unbox
-                    ]
-                ]
+                calendar.events "https://fullcalendar.io/api/demo-feeds/events.json?start=2/23/2025&end=4/5/2025"
             ]
             Fui.dialog [
                 dialog.open' isDialogOpen
@@ -4792,15 +4752,17 @@ let FullCalendar () =
                                                     input.required true
                                                 ]
                                                 Fui.timePicker [
+                                                    timePicker.value ((startTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
                                                     timePicker.selectedTime startTime
                                                     timePicker.onTimeChange (fun (t: TimeSelectionData) -> setStartTime t.selectedTime)
                                                 ]
                                                 Fui.timePicker [
+                                                    timePicker.value ((endTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
                                                     timePicker.selectedTime endTime
                                                     match selectedDate with
                                                     | Some sd ->
                                                         timePicker.dateAnchor sd.start
-                                                        getTimePickerStartHour sd.start.Hour
+                                                        timePicker.startHour sd.start.Hour
                                                     | None ->
                                                         prop.custom ("", "") |> unbox
                                                     timePicker.onTimeChange (fun (t: TimeSelectionData) -> setEndTime t.selectedTime)
@@ -4846,104 +4808,104 @@ let mainContent model dispatch =
         stack.horizontalAlign.center
         stack.children [
             FullCalendar()
-            Html.div [
-                prop.style [
-                    style.height 200
-                    style.width 200
-                    style.backgroundColor newTokens.colorBrandStroke1
-                ]
-                prop.children [
-                    Fui.text [
-                        text.text "Typography Styles"
-                        text.style [
-                            style.fontSize typographyStyles.title1.felizFontSize
-                            style.fontFamily typographyStyles.title1.fontFamily
-                            style.color newTokens.colorBrandBackgroundHover
-                            style.lineHeight typographyStyles.title1.lineHeight
-                            style.fontWeight typographyStyles.title1.fontWeight
-                        ]
-                    ]
-                ]
-            ]
-            ListTest ()
-            UseRestoreFocusSource ()
-            NavTest ()
-            CarouselTest()
-            PresenceComponentTest()
-            MotionComponentTest()
-            SwatchPickerTest()
-            TagPickerTest()
-            ratingTest ()
-            ratingDisplayTest
-            ratingItemTest
-            TeachingPopoverTest()
-            TimePickerTest()
-            MergeClassesTest true
-            MergeClassesTest false
-            Accordion()
-            Checkbox()
-            avatarTest
-            ToggleButtons()
-            buttonTest
-            menuButtonTest
-            MenuTest()
-            imageTest
-            presenceBadgeTest
-            counterBadge
-            PopoverTest()
-            tooltipTest
-            linkTest
-            divider
-            textTest
-            UseArrowNavigationGroup()
-            labelTest
-            IconTest()
-            inputTest model dispatch
-            CompoundButtonTest()
-            SplitButtonTest()
-            TextAreaTest()
-            SliderTest()
-            SwitchTest()
-            RadioGroupTest()
-            TabListTest()
-            spinnerTest
-            SpinButtonTest()
-            SelectTest()
-            personaTest
-            DropdownTest()
-            ComboBoxTest()
-            ToolbarTest()
-            ControlledToolbarTest()
-            avatarGroupTest
-            progressBarTest
-            DialogTest()
-            ToastTest()
-            CardTest()
-            SkeletonTest()
-            DatePickerTest()
-            badgeTest
-            OverflowTest()
-            UseFocusableGroupTest()
-            InfoButtonTest()
-            infoLabelTest
-            alertTest
-            VirtualizerTest()
-            VirtualizerScrollViewTest()
-            DrawerTest()
-            simpleTreeTest
-            FlatTreeTest()
-            DataGridTest()
-            // SimpleTableTest()
-            UseFocusFindersTest()
-            UseModalAttributesOptionsTest()
-            fieldPropsTest
-            BreadcrumbTest()
-            SearchBoxTest()
-            TagTest()
-            InteractionTagTest()
-            Portal()
-            MessageBarTest()
-            CalendarTest()
+            // Html.div [
+            //     prop.style [
+            //         style.height 200
+            //         style.width 200
+            //         style.backgroundColor newTokens.colorBrandStroke1
+            //     ]
+            //     prop.children [
+            //         Fui.text [
+            //             text.text "Typography Styles"
+            //             text.style [
+            //                 style.fontSize typographyStyles.title1.felizFontSize
+            //                 style.fontFamily typographyStyles.title1.fontFamily
+            //                 style.color newTokens.colorBrandBackgroundHover
+            //                 style.lineHeight typographyStyles.title1.lineHeight
+            //                 style.fontWeight typographyStyles.title1.fontWeight
+            //             ]
+            //         ]
+            //     ]
+            // ]
+            // ListTest ()
+            // UseRestoreFocusSource ()
+            // NavTest ()
+            // CarouselTest()
+            // PresenceComponentTest()
+            // MotionComponentTest()
+            // SwatchPickerTest()
+            // TagPickerTest()
+            // ratingTest ()
+            // ratingDisplayTest
+            // ratingItemTest
+            // TeachingPopoverTest()
+            // TimePickerTest()
+            // MergeClassesTest true
+            // MergeClassesTest false
+            // Accordion()
+            // Checkbox()
+            // avatarTest
+            // ToggleButtons()
+            // buttonTest
+            // menuButtonTest
+            // MenuTest()
+            // imageTest
+            // presenceBadgeTest
+            // counterBadge
+            // PopoverTest()
+            // tooltipTest
+            // linkTest
+            // divider
+            // textTest
+            // UseArrowNavigationGroup()
+            // labelTest
+            // IconTest()
+            // inputTest model dispatch
+            // CompoundButtonTest()
+            // SplitButtonTest()
+            // TextAreaTest()
+            // SliderTest()
+            // SwitchTest()
+            // RadioGroupTest()
+            // TabListTest()
+            // spinnerTest
+            // SpinButtonTest()
+            // SelectTest()
+            // personaTest
+            // DropdownTest()
+            // ComboBoxTest()
+            // ToolbarTest()
+            // ControlledToolbarTest()
+            // avatarGroupTest
+            // progressBarTest
+            // DialogTest()
+            // ToastTest()
+            // CardTest()
+            // SkeletonTest()
+            // DatePickerTest()
+            // badgeTest
+            // OverflowTest()
+            // UseFocusableGroupTest()
+            // InfoButtonTest()
+            // infoLabelTest
+            // alertTest
+            // VirtualizerTest()
+            // VirtualizerScrollViewTest()
+            // DrawerTest()
+            // simpleTreeTest
+            // FlatTreeTest()
+            // DataGridTest()
+            // // SimpleTableTest()
+            // UseFocusFindersTest()
+            // UseModalAttributesOptionsTest()
+            // fieldPropsTest
+            // BreadcrumbTest()
+            // SearchBoxTest()
+            // TagTest()
+            // InteractionTagTest()
+            // Portal()
+            // MessageBarTest()
+            // CalendarTest()
         ]
     ]
 

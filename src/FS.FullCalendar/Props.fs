@@ -123,8 +123,10 @@ type calendar =
         let events = value |> List.map (fun e -> !!e |> createObj) |> List.toArray
 
         Interop.mkProperty<ICalendarProp> "initialEvents" events
+
     /// This is exactly like specifying event as an array except that if the supplied value changes, the calendar will NOT be updated to reflect.
-    static member inline initialEvents(value: 'T list) = Interop.mkProperty<ICalendarProp> "initialEvents" (value |> List.toArray)
+    static member inline initialEvents(value: 'T list) =
+        Interop.mkProperty<ICalendarProp> "initialEvents" (value |> List.toArray)
 
     /// An array of Event Objects that will be displayed on the calendar.
     static member inline events(value: IEventProp list list) =
@@ -133,7 +135,8 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "events" events
 
     /// An array of Event Objects that will be displayed on the calendar.
-    static member inline events(value: 'T list) = Interop.mkProperty<ICalendarProp> "events" (value |> List.toArray)
+    static member inline events(value: 'T list) =
+        Interop.mkProperty<ICalendarProp> "events" (value |> List.toArray)
 
     /// A URL of a JSON feed that the calendar will fetch Event Objects from.
     static member inline events(value: string) =
@@ -175,8 +178,61 @@ type calendar =
     static member inline googleCalendarApiKey(value: string) =
         Interop.mkProperty<ICalendarProp> "googleCalendarApiKey" value
 
+    /// Determines whether the events on the calendar can be modified.
     static member inline editable(value: bool) =
         Interop.mkProperty<ICalendarProp> "editable" value
+
+    /// Allow events’ start times to be editable through dragging.
+    static member inline eventStartEditable(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventStartEditable" value
+
+    /// Whether the user can resize an event from its starting edge.
+    static member inline eventResizableFromStart(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventResizableFromStart" value
+
+    /// Allow events’ durations to be editable through resizing.
+    static member inline eventDurationEditable(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventDurationEditable" value
+
+    /// Determines whether the user can drag events between resources.
+    static member inline eventResourceEditable(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventResourceEditable" value
+
+    /// How many pixels the user’s mouse/touch must move before an event drag activates.
+    static member inline eventDragMinDistance(value: int) =
+        Interop.mkProperty<ICalendarProp> "eventDragMinDistance" value
+
+    /// Time it takes for an event to revert to its original position after an unsuccessful drag.
+    static member inline dragRevertDuration(value: int) =
+        Interop.mkProperty<ICalendarProp> "dragRevertDuration" value
+
+    /// Whether to automatically scoll the scroll-containers during event drag-and-drop and date selecting.
+    static member inline dragScroll(value: bool) =
+        Interop.mkProperty<ICalendarProp> "dragScroll" value
+
+    /// Determines how an event’s duration should be mutated when it is dragged from a timed section to an all-day section and vice versa.
+    static member inline allDayMaintainDuration(value: bool) =
+        Interop.mkProperty<ICalendarProp> "allDayMaintainDuration" value
+
+    /// The parent element that fixed-positioned event mirror elements are attached to while dragging.
+    static member inline fixedMirrorParent(value: HTMLElement) =
+        Interop.mkProperty<ICalendarProp> "fixedMirrorParent" value
+
+    /// Determines if events being dragged and resized are allowed to overlap each other.
+    static member inline eventOverlap(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventOverlap" value
+
+    /// Limits event dragging and resizing to certain windows of time.
+    static member inline eventConstraint(value: string list) =
+        Interop.mkProperty<ICalendarProp> "eventConstraint" (value |> List.toArray)
+
+    /// Limits event dragging and resizing to certain windows of time.
+    static member inline eventConstraint(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventConstraint" value
+
+    /// Limits event dragging and resizing to certain windows of time.
+    static member inline eventConstraint(value: IBusinessDayProp list) =
+        Interop.mkProperty<ICalendarProp> "eventConstraint" (!!value |> createObj |> unbox)
 
     static member inline selectMirror(value: bool) =
         Interop.mkProperty<ICalendarProp> "selectMirror" value
@@ -186,12 +242,15 @@ type calendar =
 
     static member inline select(value: DateSelectArg -> unit) =
         Interop.mkProperty<ICalendarProp> "select" (System.Func<_, _> value)
+
     /// Triggered when the user clicks an event.
     static member inline eventClick(value: EventClickArg -> unit) =
         Interop.mkProperty<ICalendarProp> "eventClick" (System.Func<_, _> value)
+
     /// Triggered when the user mouses over an event. Similar to the native mouseenter.
     static member inline eventMouseEnter(value: MouseInfo -> unit) =
         Interop.mkProperty<ICalendarProp> "eventMouseEnter" (System.Func<_, _> value)
+
     /// Triggered when the user mouses out of an event. Similar to the native mouseleave.
     static member inline eventMouseLeave(value: MouseInfo -> unit) =
         Interop.mkProperty<ICalendarProp> "eventMouseLeave" (System.Func<_, _> value)
@@ -204,13 +263,13 @@ type calendar =
     static member inline eventDrop(value: EventDropInfo -> unit) =
         Interop.mkProperty<ICalendarProp> "eventDrop" (System.Func<_, _> value)
 
-    /// Triggered when dragging stops and the event has moved to a different day/time.
+    /// Determines if external draggable elements or events from other calendars can be dropped onto the calendar.
     static member inline droppable(value: bool) =
         Interop.mkProperty<ICalendarProp> "droppable" value
 
     /// Called when an external draggable element or an event from another calendar has been dropped onto the calendar.
     static member inline drop(value: DropInfo -> unit) =
-        Interop.mkProperty<ICalendarProp> "drop" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "drop" (System.Func<_, _> value)
 
     /// Determines the text that will be displayed in the headerToolbar’s title.
     static member inline titleFormat(value: IDateFormatProp list) =
@@ -440,8 +499,9 @@ type calendar =
     static member inline timezone(value: string) =
         Interop.mkProperty<ICalendarProp> "timezone" value
 
-    static member inline ref(value: IRefValue<FullCalendar option>) =
+    static member inline ref(value: IRefValue<CalendarRoot option>) =
         Interop.mkProperty<ICalendarProp> "ref" value
+
     /// A hook for transforming custom data into a standard CalendarEvent object.
     static member inline eventDataTransform(value: 'T) =
         Interop.mkProperty<ICalendarProp> "eventDataTransform" value
@@ -465,18 +525,114 @@ type calendar =
     /// A parameter of this name will be sent to each JSON event feed. It describes the start of the interval being fetched.
     static member inline startParam(value: string) =
         Interop.mkProperty<ICalendarProp> "startParam" value
+
     /// A parameter of this name will be sent to each JSON event feed. It describes the exclusive end of the interval being fetched.
     static member inline endParam(value: string) =
         Interop.mkProperty<ICalendarProp> "endParam" value
+
     /// A parameter of this name will be sent to each JSON event feed. It describes the timezone of the startParam and endParam values, as well as the desired timezone of the returned events.
     static member inline timeZoneParam(value: string) =
         Interop.mkProperty<ICalendarProp> "timeZoneParam" value
+
     /// Determines when event fetching should occur.
     static member inline lazyFetching(value: bool) =
         Interop.mkProperty<ICalendarProp> "lazyFetching" value
+
     /// Triggered when event or resource fetching starts/stops.
     static member inline loading(value: bool -> unit) =
-        Interop.mkProperty<ICalendarProp> "loading" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "loading" (System.Func<_, _> value)
+
+    /// Sets the background and border colors for all events on the calendar.
+    static member inline eventColor(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventColor" value
+
+    /// Sets the background color for all events on the calendar.
+    static member inline eventBackgroundColor(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventBackgroundColor" value
+
+    /// Sets the border color for all events on the calendar.
+    static member inline eventBorderColor(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventBorderColor" value
+
+    /// Sets the text color for all events on the calendar.
+    static member inline eventTextColor(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventTextColor" value
+
+    /// Determines the time-text that will be displayed on each event.
+    static member inline eventTimeFormat(value: IDurationProp list) =
+        Interop.mkProperty<ICalendarProp> "eventTimeFormat" (!!value |> createObj |> unbox)
+
+    /// Whether or not to display the text for an event’s date/time.
+    static member inline displayEventTime(value: bool) =
+        Interop.mkProperty<ICalendarProp> "displayEventTime" value
+
+    /// Whether or not to display an event’s end time.
+    static member inline displayEventEnd(value: bool) =
+        Interop.mkProperty<ICalendarProp> "displayEventEnd" value
+
+    /// When an event’s end time spans into another day, the minimum time it must be in order for it to render as if it were on that day.
+    static member inline nextDayThreshold(value: string) =
+        Interop.mkProperty<ICalendarProp> "nextDayThreshold" value
+
+    /// Determines the ordering events within the same day.
+    static member inline eventOrder(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventOrder" value
+
+    /// Determines the ordering events within the same day.
+    static member inline eventOrder(value: string list) =
+        Interop.mkProperty<ICalendarProp> "eventOrder" (value |> List.toArray)
+
+    /// Determines the ordering events within the same day. A function that accepts two arguments and returns -1 or 1, similar to sort’s compare function
+    static member inline eventOrder(value: 'T -> 'T -> int) =
+        Interop.mkProperty<ICalendarProp> "eventOrder" (System.Func<_, _, _> value)
+
+    /// Ensures the eventOrder setting is strictly followed.
+    static member inline eventOrderStrict(value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventOrderStrict" value
+
+    /// When to render multiple asynchronous event sources in an individual or batched manner.
+    static member inline progressiveEventRendering(value: bool) =
+        Interop.mkProperty<ICalendarProp> "progressiveEventRendering" value
+
+    /// Exact programmatic control over where an event can be dropped.
+    static member inline eventAllow(value: DropInfo -> CalendarEvent -> bool) =
+        Interop.mkProperty<ICalendarProp> "eventAllow" (System.Func<_, _, _> value)
+
+    /// Provides a way to filter which external elements can be dropped onto the calendar.
+    static member inline dropAccept(value: string) =
+        Interop.mkProperty<ICalendarProp> "dropAccept" value
+
+    /// Provides a way to filter which external elements can be dropped onto the calendar.
+    static member inline dropAccept(value: HTMLElement -> bool) =
+        Interop.mkProperty<ICalendarProp> "dropAccept" (System.Func<_, _> value)
+
+    /// Triggered when event dragging begins.
+    static member inline eventDragStart(value: EventDragInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventDragStart" (System.Func<_, _> value)
+
+    /// Triggered when event dragging stops.
+    static member inline eventDragStop(value: EventDragInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventDragStop" (System.Func<_, _> value)
+
+    /// Called when an external draggable element with associated event data was dropped onto the calendar. Or an event from another calendar.
+    static member inline eventReceive(value: EventInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventReceive" (System.Func<_, _> value)
+
+    /// Triggered when on a calendar when one if its events is about to be dropped onto another calendar.
+    static member inline eventLeave(value: EventInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventLeave" (System.Func<_, _> value)
+
+    /// Triggered when event resizing begins.
+    static member inline eventResizeStart(value: EventDragInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventResizeStart" (System.Func<_, _> value)
+
+    /// Triggered when event resizing stops.
+    static member inline eventResizeStop(value: EventDragInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventResizeStop" (System.Func<_, _> value)
+
+    /// Triggered when resizing stops and the event has changed in duration.
+    static member inline eventResize(value: EventResizeInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventResize" (System.Func<_, _> value)
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
@@ -493,7 +649,8 @@ type calendar =
 
         Interop.mkProperty<ICalendarProp> "customButtons" buttons
 
-module calendar =    /// The initial view when the calendar loads.
+module calendar =
+    /// The initial view when the calendar loads.
     [<Erase>]
     type initialView =
         static member inline dayGridMonth =
@@ -514,8 +671,7 @@ module calendar =    /// The initial view when the calendar loads.
     [<Erase>]
     type weekNumberCalculation =
         /// Specifying "local" causes the locale-specific calculation to be used, as determined by the calendar’s locale setting. This is the default.
-        static member inline local =
-            Interop.mkProperty<ICalendarProp> "weekNumberCalculation" "local"
+        static member inline local = Interop.mkProperty<ICalendarProp> "weekNumberCalculation" "local"
 
         /// Specifiying "ISO" results in ISO8601 week numbers. Specifying "ISO" changes the default value of firstDay to 1 (Monday).
         static member inline ISO = Interop.mkProperty<ICalendarProp> "weekNumberCalculation" "ISO"
@@ -531,8 +687,7 @@ module calendar =    /// The initial view when the calendar loads.
         /// <br/>
         /// `<link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>`
         /// </code>
-        static member inline bootstrap5 =
-            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        static member inline bootstrap5 = Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
 
         /// To use this theme, you must use the Bootstrap plugin, as well as add this code to the head of your index.html file.
         /// <br/>
@@ -541,8 +696,7 @@ module calendar =    /// The initial view when the calendar loads.
         /// <br/>
         /// `<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>`
         /// </code>
-        static member inline bootstrap =
-            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap"
+        static member inline bootstrap = Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap"
 
     /// A time zone is a region of the world that serves as a context for displaying dates.
     [<Erase>]
@@ -550,6 +704,30 @@ module calendar =    /// The initial view when the calendar loads.
         static member inline local = Interop.mkProperty<ICalendarProp> "timezone" "local"
         static member inline UTC = Interop.mkProperty<ICalendarProp> "timezone" "UTC"
 
+    /// Controls which preset rendering style events use
+    [<Erase>]
+    type eventDisplay =
+        /// When in daygrid, renders the event as a solid rectangle if it is all-day or multi-day. If a timed event, will render it with a dot. When in other views, will render normally.
+        static member inline auto = Interop.mkProperty<ICalendarProp> "eventDisplay" "auto"
+        /// When in daygrid, renders the event as a solid rectangle. When in other views, will render normally.
+        static member inline block = Interop.mkProperty<ICalendarProp> "eventDisplay" "block"
+        /// When in daygrid, renders the event with a dot. When in other views, will render normally.
+        static member inline listItem = Interop.mkProperty<ICalendarProp> "eventDisplay" "list-item"
+
+        static member inline background =
+            Interop.mkProperty<ICalendarProp> "eventDisplay" "background"
+
+        /// Like 'background', but fills the reverse space
+        static member inline inverseBackground =
+            Interop.mkProperty<ICalendarProp> "eventDisplay" "inverse-background"
+
+        /// Won’t render the event at all.
+        static member inline none = Interop.mkProperty<ICalendarProp> "eventDisplay" "none"
+
+    [<Erase>]
+    type eventConstraint =
+        static member inline businessHours =
+            Interop.mkProperty<ICalendarProp> "eventConstraint" "businessHours"
 // ----------------------------------------------------- Event ----------------------------------------------------------------------
 [<Erase>]
 type event =
@@ -568,18 +746,22 @@ type event =
     static member inline end'(value: System.DateTime) =
         Interop.mkProperty<IEventProp> "end" value
 
-    static member inline daysOfWeek (value: IDayProp list) =
+    static member inline daysOfWeek(value: IDayProp list) =
         Interop.mkProperty<IEventProp> "daysOfWeek" (value |> List.toArray)
 
-    static member inline startTime (value: IDurationProp list) =
+    static member inline startTime(value: IDurationProp list) =
         Interop.mkProperty<IEventProp> "startTime" (!!value |> createObj |> unbox)
-    static member inline endTime (value: IDurationProp list) =
+
+    static member inline endTime(value: IDurationProp list) =
         Interop.mkProperty<IEventProp> "endTime" (!!value |> createObj |> unbox)
-    static member inline startRecur (value: IDurationProp list) =
+
+    static member inline startRecur(value: IDurationProp list) =
         Interop.mkProperty<IEventProp> "startRecur" (!!value |> createObj |> unbox)
-    static member inline endRecur (value: IDurationProp list) =
+
+    static member inline endRecur(value: IDurationProp list) =
         Interop.mkProperty<IEventProp> "endRecur" (!!value |> createObj |> unbox)
-    static member inline interactive (value: bool) =
+
+    static member inline interactive(value: bool) =
         Interop.mkProperty<IEventProp> "interactive" value
 
     static member inline startStr(value: string) =
@@ -596,6 +778,7 @@ type event =
 
     static member inline classNames(value: string list) =
         Interop.mkProperty<IEventProp> "className" (value |> Array.ofList)
+
     static member inline className(value: string) =
         Interop.mkProperty<IEventProp> "className" value
 
@@ -610,12 +793,16 @@ type event =
 
     static member inline duration(value: IDurationProp list) =
         Interop.mkProperty<IEventProp> "duration" (!!value |> createObj |> unbox)
+
     static member inline durationEditable(value: bool) =
         Interop.mkProperty<IEventProp> "durationEditable" value
+
     static member inline resourceEditable(value: bool) =
         Interop.mkProperty<IEventProp> "resourceEditable" value
+
     static member inline resourceId(value: string) =
         Interop.mkProperty<IEventProp> "resourceId" value
+
     static member inline resourceIds(value: string list) =
         Interop.mkProperty<IEventProp> "resourceIds" (value |> List.toArray)
 
@@ -627,6 +814,7 @@ type event =
 
     static member inline color(value: string) =
         Interop.mkProperty<IEventProp> "color" value
+
     static member inline backgroundColor(value: string) =
         Interop.mkProperty<IEventProp> "backgroundColor" value
 
@@ -641,8 +829,10 @@ type event =
 
     static member inline googleCalendarId(value: string) =
         Interop.mkProperty<IEventProp> "googleCalendarId" value
+
     static member inline extendedProps(value: obj) =
         Interop.mkProperty<IEventProp> "extendedProps" value
+
     /// Enter false if you do not want an event to be created upon drop. You might want to do this to simply draw an “event mirror” while dragging. true by default.
     static member inline create(value: bool) =
         Interop.mkProperty<IEventProp> "create" value
@@ -916,18 +1106,23 @@ type draggable =
     /// A CSS selector that matches draggable elements within a container element.
     static member inline itemSelector(value: string) =
         Interop.mkProperty<IDraggableProp> "itemSelector" value
+
     /// An object or a function that returns an object. Exact properties explained below.
-    static member inline eventData (handler: HTMLElement -> IEventProp list) =
+    static member inline eventData(handler: HTMLElement -> IEventProp list) =
         Interop.mkProperty<IDraggableProp> "eventData" (fun value -> !!(handler value) |> createObj |> unbox)
+
     /// An object or a function that returns an object. Exact properties explained below.
-    static member inline eventData (value: IEventProp list) =
+    static member inline eventData(value: IEventProp list) =
         Interop.mkProperty<IDraggableProp> "eventData" (!!value |> createObj |> unbox)
+
     /// For touch devices, the amount of time the user must hold down before an event becomes draggable.
-    static member inline longPressDelay (value: int) =
+    static member inline longPressDelay(value: int) =
         Interop.mkProperty<IDraggableProp> "longPressDelay" value
+
     /// How many pixels the user’s mouse/touch must move before an event drag activates.
-    static member inline minDistance (value: int) =
+    static member inline minDistance(value: int) =
         Interop.mkProperty<IDraggableProp> "minDistance" value
+
     /// An HTML element that will be the parent of the “mirror” element that follows the mouse while dragging. Defaults to the <body>.
-    static member inline appendTo (value: int) =
+    static member inline appendTo(value: int) =
         Interop.mkProperty<IDraggableProp> "appendTo" value

@@ -228,7 +228,7 @@ and CalendarApi = {
     formatIso: DateTime -> bool -> string
     select: DateTime -> DateTime option -> unit
     unselect: unit -> unit
-    addEvent: obj -> EventSourceImpl -> EventImpl option
+    addEvent: obj -> unit //TODO obj -> EventSourceImpl -> EventImpl option
     getEventById: string -> EventImpl option
     getEvents: unit -> EventImpl array
     removeAllEvents: unit -> unit
@@ -331,6 +331,12 @@ and EventUi = {
 
 type EventClickArg = {
     el: Browser.Types.HTMLElement
+    event: EventImpl
+    jsEvent: Browser.Types.UIEvent
+    view: ViewApi
+}
+
+type EventDragInfo = {
     event: EventImpl
     jsEvent: Browser.Types.UIEvent
     view: ViewApi
@@ -446,7 +452,7 @@ type DateClickInfo = {
     resource: Resource
 }
 
-type FullCalendar = {
+type CalendarRoot = {
     render: unit -> Fable.React.ReactElement
     componentDidMount: unit -> unit
     componentDidUpdate: unit -> unit
@@ -503,4 +509,24 @@ type DropInfo = {
     resource: Resource
     /// The current View Object.
     view: ViewApi
+}
+
+type EventInfo = {
+    event: EventImpl
+    relatedEvents: EventImpl array
+    revert: unit -> unit
+    draggedEl: Browser.Types.HTMLElement
+    view: ViewApi
+}
+
+type EventResizeInfo = {
+    event: EventImpl
+    relatedEvents: EventImpl array
+    oldEvent: EventImpl
+    endDelta: DurationObjectInput
+    startDelta: DurationObjectInput
+    revert: unit -> unit
+    view: ViewApi
+    el: Browser.Types.HTMLElement
+    jsEvent: Browser.Types.UIEvent
 }
