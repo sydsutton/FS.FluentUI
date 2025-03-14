@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
         <Compile Include="Domain.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Props.fs" />
