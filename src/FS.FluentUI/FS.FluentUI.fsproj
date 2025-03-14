@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.3.0</Version>
+        <Version>2.3.1</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,14 +12,10 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Add FixedSizeList component
-            - Add react-window to NPM dependencies
-            - Update @fluentui/react-components to 9.58.0
-            - Update secondary NPM deps
-            - Update @fluentui/react-nav-preview to 0.11.0
-            - Add density prop to Nav component
-            - Add missing Motion slots for Drawer components
-            - Add navigationMode prop to Tree and FlatTree components
+            - Update @fluentui/react-components to 9.60.1
+            - Add subText slot overloads for MenuItem component
+            - Add tooltip CarouselNavContainer Slots
+            - Add slideWithDuration property for Carousel component.
         </PackageReleaseNotes>
     </PropertyGroup>
 
