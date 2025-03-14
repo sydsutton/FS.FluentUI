@@ -2,6 +2,8 @@
 
 ## [FullCalendar (React)](https://fullcalendar.io/demos) made for F# in the style of Feliz
 
+[![NuGet version (FS.FullCalendar)](https://img.shields.io/nuget/v/FS.FullCalendar.svg?style=flat-square)](https://www.nuget.org/packages/FS.FullCalendar/)
+
 ### Please check [all FullCalendar docs](https://fullcalendar.io/docs#toc) for further component usage and properties
 
 ### Simple example of a Calendar implementation:
