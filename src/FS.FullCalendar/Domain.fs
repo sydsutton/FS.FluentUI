@@ -235,7 +235,7 @@ and CalendarApi = {
     formatRange: DateTime -> DateTime -> obj -> unit
     formatIso: DateTime -> bool -> string
     select: DateTime -> DateTime option -> unit
-    unselect: DateUnselectArg -> unit
+    unselect: unit -> unit
     addEvent: obj -> EventSourceImpl option -> EventImpl option
     getEventById: string -> EventImpl option
     getEvents: unit -> EventImpl array
