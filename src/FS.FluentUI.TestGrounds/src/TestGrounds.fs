@@ -1466,7 +1466,7 @@ let ControlledToolbarTest () =
 
     Fui.toolbar [
         toolbar.checkedValues checkedValues
-        toolbar.onCheckedValueChange (fun d ->
+        toolbar.onCheckedValueChange (fun (d: ToolbarCheckedValueChangeData) ->
             setCheckedValues ([ d.name, d.checkedItems ] |> List.append checkedValues))
         toolbar.children [
             Fui.toolbarToggleButton [
@@ -4537,7 +4537,6 @@ module Event =
         | Presenter -> "black", "orange"
         | Break -> "white", "green"
         | ``Team Bonding`` -> "black", "yellow"
-        | _ -> "black", "white"
 
     let fromText = function
         | Some "Presenter" -> Presenter
@@ -4617,40 +4616,115 @@ let FullCalendar () =
                         event.textColor textColor
                     ]
 
-                    let added = calendarApi.addEvent (!!newEvent |> createObj |> unbox)
-                    printfn "added %A" added
-                    added
+                    let addedEventImpl=
+                        calendarApi.addEvent (!!newEvent |> createObj |> unbox) None
+
+                    addedEventImpl |> ignore
                     handleCloseDialog ()
             | _, _ -> ()
         )
 
-    Html.div [
-        prop.style [ style.width (length.vw 70) ]
-        prop.children [
-            Html.div [
-                prop.id "external-events"
-                prop.children [
-                    for i in [1..5] do
-                        Html.div [
-                            prop.key i
-                            prop.className "fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
-                            prop.children [
-                                Html.div [
-                                    prop.className "fc-event-main"
-                                    prop.children [
-                                        Html.text $"My Event {i}"
+    let calendarDialog =
+        Fui.dialog [
+            dialog.open' isDialogOpen
+            dialog.onOpenChange (fun (d: DialogOpenChangeData<Browser.Types.MouseEvent>) ->
+                d.``open`` |> setIsDialogOpen)
+            dialog.children [
+                Fui.dialogSurface [
+                    Fui.dialogContent [
+                        dialogContent.children [
+                            Html.form [
+                                prop.onSubmit handleAddEvent
+                                prop.children [
+                                    Fui.stack [
+                                        stack.tokens [ stack.tokens.childrenGap 8 ]
+                                        stack.horizontal false
+                                        stack.children [
+                                            Fui.dropdown [
+                                                dropdown.value $"{dayEvent}"
+                                                dropdown.onOptionSelect (fun (d: OptionOnSelectData) -> d.optionValue |> Event.fromText |> setDayEvent)
+                                                dropdown.children [
+                                                    for event in [ Presenter; Break; ``Team Bonding``] do
+                                                        Fui.option [
+                                                            option.value $"{event}"
+                                                            option.text $"{event}"
+                                                            option.children [
+                                                                Fui.text $"{event}"
+                                                            ]
+                                                        ]
+                                                ]
+                                            ]
+                                            Fui.input [
+                                                input.type' "text"
+                                                input.placeholder "Event Title"
+                                                input.value newEventTitle
+                                                input.onChange (fun e -> setNewEventTitle e)
+                                                input.required true
+                                            ]
+                                            Fui.timePicker [
+                                                timePicker.value ((startTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
+                                                timePicker.selectedTime startTime
+                                                timePicker.onTimeChange (fun (t: TimeSelectionData) -> setStartTime t.selectedTime)
+                                            ]
+                                            Fui.timePicker [
+                                                timePicker.value ((endTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
+                                                timePicker.selectedTime endTime
+                                                match selectedDate with
+                                                | Some sd ->
+                                                    timePicker.dateAnchor sd.start
+                                                    timePicker.startHour sd.start.Hour
+                                                | None ->
+                                                    prop.custom ("", "") |> unbox
+                                                timePicker.onTimeChange (fun (t: TimeSelectionData) -> setEndTime t.selectedTime)
+                                            ]
+                                            Fui.checkbox [
+                                                checkbox.isChecked allDay
+                                                checkbox.onCheckedChange (fun c -> setAllDay c)
+                                                checkbox.label "All Day Event"
+                                            ]
+                                            Fui.button [
+                                                button.type' "submit"
+                                                button.text "Add"
+                                            ]
+                                        ]
                                     ]
                                 ]
                             ]
                         ]
-                    Html.p [
-                        Fui.checkbox [
-                            checkbox.id "drop-remove"
-                            checkbox.label "Remove after drop"
-                        ]
                     ]
                 ]
             ]
+        ]
+
+    let draggableEvents =
+        Html.div [
+            prop.id "external-events"
+            prop.children [
+                for i in [1..5] do
+                    Html.div [
+                        prop.key i
+                        prop.className "fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event"
+                        prop.children [
+                            Html.div [
+                                prop.className "fc-event-main"
+                                prop.children [
+                                    Html.text $"My Event {i}"
+                                ]
+                            ]
+                        ]
+                    ]
+                Fui.checkbox [
+                    checkbox.id "drop-remove"
+                    checkbox.label "Remove after drop"
+                ]
+            ]
+        ]
+
+    Html.div [
+        prop.style [ style.width (length.vw 70) ]
+        prop.children [
+            draggableEvents
+
             FullCalendar.Calendar [
                 calendar.plugins [
                     Plugin.dayGridPlugin
@@ -4659,14 +4733,15 @@ let FullCalendar () =
                     Plugin.bootstrap5Plugin
                     Plugin.listPlugin
                     Plugin.multimonthPlugin
-                    // Plugin.momentTimezonePlugin
                 ]
                 calendar.ref calRef
                 calendar.droppable true
                 calendar.initialView.dayGridMonth
-                calendar.eventDrop (fun i -> printfn "i %A" (i.delta.days) )
+                calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
                 calendar.editable true
+                calendar.eventMaxStack 2
+                calendar.dayMaxEventRows 3
                 calendar.eventResize (fun info -> Browser.Dom.window.alert (info.event.title + " end is now " + info.event.``end``.ToString()))
                 calendar.drop (fun (info: DropInfo) ->
                     if checkboxEl?checked = true then
@@ -4677,22 +4752,16 @@ let FullCalendar () =
                 calendar.selectMirror true
                 calendar.dropAccept (fun el -> printfn "api %A" el.innerText; true)
                 calendar.nowIndicator true
-                // calendar.timezone "Europe/Moscow"
                 calendar.unselectAuto true
-                calendar.unselect (fun ev view -> printfn "view %A" view) //TODO
-                // calendar.validRange [ range.start DateTime.Today; range.end' (DateTime.Today.AddDays 4)]
-                // calendar.slotMinTime [
-                //     duration.hour 9
-                // ]
+                calendar.unselect (fun unselectArg -> printfn "unselect %A" unselectArg)
+                calendar.validRange [ range.start (DateTime.Today.AddDays -7); range.end' (DateTime.Today.AddDays 7)]
                 calendar.selectable true
                 calendar.select handleDateSelect
                 calendar.eventClick handleEventClick
-                // calendar.eventDisplay.background
                 calendar.themeSystem.bootstrap5
                 calendar.dayMaxEvents true
-                calendar.eventAdd (fun e -> printfn "e %A" (e.event.title))
+                calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event.title))
                 calendar.loading (fun b -> printfn "isLoading %A" b)
-                // calendar.eventOrder (fun (a: CalendarEvent) b -> printfn "a %A b%A" a.title b; 1)
                 calendar.buttonIcons [
                     buttonIcon.prev "chevron-left"
                 ]
@@ -4710,81 +4779,13 @@ let FullCalendar () =
                     [
                         customButton.text "Add event"
                         customButton.icon "plus-circle"
-                        // customButton.click handleAddEventClick
+                        customButton.click (fun _ _ -> printf "Joke's on you, I don't do anything")
                     ]
                 ]
                 calendar.events "https://fullcalendar.io/api/demo-feeds/events.json?start=2/23/2025&end=4/5/2025"
             ]
-            Fui.dialog [
-                dialog.open' isDialogOpen
-                dialog.onOpenChange (fun (d: DialogOpenChangeData<Browser.Types.MouseEvent>) ->
-                    d.``open`` |> setIsDialogOpen)
-                dialog.children [
-                    Fui.dialogSurface [
-                        Fui.dialogContent [
-                            dialogContent.children [
-                                Html.form [
-                                    prop.onSubmit handleAddEvent
-                                    prop.children [
-                                        Fui.stack [
-                                            stack.tokens [ stack.tokens.childrenGap 8 ]
-                                            stack.horizontal false
-                                            stack.children [
-                                                Fui.dropdown [
-                                                    dropdown.value $"{dayEvent}"
-                                                    dropdown.onOptionSelect (fun (d: OptionOnSelectData) -> d.optionValue |> Event.fromText |> setDayEvent)
-                                                    dropdown.children [
-                                                        for event in [ Presenter; Break; ``Team Bonding``] do
-                                                            Fui.option [
-                                                                option.value $"{event}"
-                                                                option.text $"{event}"
-                                                                option.children [
-                                                                    Fui.text $"{event}"
-                                                                ]
-                                                            ]
-                                                    ]
-                                                ]
-                                                Fui.input [
-                                                    input.type' "text"
-                                                    input.placeholder "Event Title"
-                                                    input.value newEventTitle
-                                                    input.onChange (fun e -> setNewEventTitle e)
-                                                    input.required true
-                                                ]
-                                                Fui.timePicker [
-                                                    timePicker.value ((startTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
-                                                    timePicker.selectedTime startTime
-                                                    timePicker.onTimeChange (fun (t: TimeSelectionData) -> setStartTime t.selectedTime)
-                                                ]
-                                                Fui.timePicker [
-                                                    timePicker.value ((endTime |> Option.defaultValue DateTime.Today).ToShortTimeString())
-                                                    timePicker.selectedTime endTime
-                                                    match selectedDate with
-                                                    | Some sd ->
-                                                        timePicker.dateAnchor sd.start
-                                                        timePicker.startHour sd.start.Hour
-                                                    | None ->
-                                                        prop.custom ("", "") |> unbox
-                                                    timePicker.onTimeChange (fun (t: TimeSelectionData) -> setEndTime t.selectedTime)
-                                                ]
-                                                Fui.checkbox [
-                                                    checkbox.isChecked allDay
-                                                    checkbox.onCheckedChange (fun c -> setAllDay c)
-                                                    checkbox.label "All Day Event"
-                                                ]
-                                                Fui.button [
-                                                    button.type' "submit"
-                                                    button.text "Add"
-                                                ]
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-            ]
+
+            calendarDialog
         ]
     ]
 

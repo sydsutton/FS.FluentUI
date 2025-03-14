@@ -91,8 +91,8 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "dateIncrement" (!!value |> createObj |> unbox)
 
     /// Determines the first visible day of a custom view.
-    static member inline dateAlignmnent(value: string) =
-        Interop.mkProperty<ICalendarProp> "dateAlignmnent" value
+    static member inline dateAlignment(value: string) =
+        Interop.mkProperty<ICalendarProp> "dateAlignment" value
 
     /// Determines the first visible day of a custom view.
     static member inline validRange(value: IRangeProp list) =
@@ -145,7 +145,7 @@ type calendar =
     /// A custom function for programmatically generating Events.
     /// function( fetchInfo, successCallback, failureCallback ) { }
     static member inline events
-        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (FS.FullCalendar.Error -> unit) -> unit)
+        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
         Interop.mkProperty<ICalendarProp>
             "events"
@@ -155,7 +155,7 @@ type calendar =
     /// A custom function for programmatically generating Events.
     /// function( fetchInfo, successCallback, failureCallback ) { }
     static member inline eventSources
-        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (FS.FullCalendar.Error -> unit) -> unit)
+        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
         Interop.mkProperty<ICalendarProp>
             "eventSources"
@@ -174,6 +174,9 @@ type calendar =
     /// Defines the buttons and title at the top of the calendar.
     static member inline headerToolbar(value: IHeaderToolbarProp list) =
         Interop.mkProperty<ICalendarProp> "headerToolbar" (!!value |> createObj |> unbox)
+    /// Defines the controls at the bottom of the calendar.
+    static member inline footerToolbar(value: IFooterToolbarProp list) =
+        Interop.mkProperty<ICalendarProp> "footerToolbar" (!!value |> createObj |> unbox)
 
     static member inline googleCalendarApiKey(value: string) =
         Interop.mkProperty<ICalendarProp> "googleCalendarApiKey" value
@@ -233,13 +236,13 @@ type calendar =
     /// Limits event dragging and resizing to certain windows of time.
     static member inline eventConstraint(value: IBusinessDayProp list) =
         Interop.mkProperty<ICalendarProp> "eventConstraint" (!!value |> createObj |> unbox)
-
+    /// Whether to draw a “placeholder” event while the user is dragging.
     static member inline selectMirror(value: bool) =
         Interop.mkProperty<ICalendarProp> "selectMirror" value
-
+    /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
     static member inline dayMaxEvents(value: bool) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
-
+    /// Triggered when a date/time selection is made.
     static member inline select(value: DateSelectArg -> unit) =
         Interop.mkProperty<ICalendarProp> "select" (System.Func<_, _> value)
 
@@ -456,6 +459,27 @@ type calendar =
     /// Limits user selection to certain windows of time.
     static member inline selectConstraint(value: string) =
         Interop.mkProperty<ICalendarProp> "selectConstraint" value
+    /// The locale and locales options allow you to localize certain aspects of the calendar
+    static member inline locale(value: string) =
+        Interop.mkProperty<ICalendarProp> "locale" value
+    /// The locale and locales options allow you to localize certain aspects of the calendar
+    static member inline locale(value: IDateFormatProp list) =
+        Interop.mkProperty<ICalendarProp> "locale" (!!value |> createObj |> unbox)
+    /// The locale and locales options allow you to localize certain aspects of the calendar
+    static member inline locale(value: DateTime -> int) =
+        Interop.mkProperty<ICalendarProp> "locale" (System.Func<_,_> value)
+    /// The locale and locales options allow you to localize certain aspects of the calendar
+    static member inline locale(value: int) =
+        Interop.mkProperty<ICalendarProp> "locale" value
+    /// The locale and locales options allow you to localize certain aspects of the calendar
+    static member inline locale(value: IDayProp) =
+        Interop.mkProperty<ICalendarProp> "locale" value
+    /// The day that each week begins.
+    static member inline firstDay(value: IDayProp) =
+        Interop.mkProperty<ICalendarProp> "firstDay" value
+    /// The day that each week begins.
+    static member inline firstDay(value: int) =
+        Interop.mkProperty<ICalendarProp> "firstDay" value
 
     /// Exact programmatic control over where the user can select.
     static member inline selectAllow(value: SelectInfo -> bool) =
@@ -474,8 +498,8 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "select" (System.Func<_, _> value)
 
     /// Triggered when the current selection is cleared.
-    static member inline unselect(value: UIEvent -> ViewApi -> unit) =
-        Interop.mkProperty<ICalendarProp> "unselect" (System.Func<_, _, _> value)
+    static member inline unselect(value: DateUnselectArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "unselect" (System.Func<_, _> value)
 
     /// Whether or not to display a marker indicating the current time.
     static member inline nowIndicator(value: bool) =
@@ -633,6 +657,27 @@ type calendar =
     /// Triggered when resizing stops and the event has changed in duration.
     static member inline eventResize(value: EventResizeInfo -> unit) =
         Interop.mkProperty<ICalendarProp> "eventResize" (System.Func<_, _> value)
+    /// In dayGrid view, the max number of stacked event levels within a given day. This includes the +more link if present. The rest will show up in a popover.
+    static member inline dayMaxEventRows(value: int) =
+        Interop.mkProperty<ICalendarProp> "dayMaxEventRows" value
+    /// In dayGrid view, the max number of stacked event levels within a given day. This includes the +more link if present. The rest will show up in a popover.
+    static member inline dayMaxEventRows(value: bool) =
+        Interop.mkProperty<ICalendarProp> "dayMaxEventRows" value
+    /// For timeline view, the maximum number of events that stack top-to-bottom. For timeGrid view, the maximum number of events that stack left-to-right.
+    static member inline eventMaxStack(value: int) =
+        Interop.mkProperty<ICalendarProp> "eventMaxStack" value
+    /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
+    static member inline dayMaxEvents(value: int) =
+        Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
+    /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
+    static member inline moreLinkClick(value: string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClick" value
+    /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
+    static member inline moreLinkClick(value: MoreLinkClickInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClick" (System.Func<_,_> value)
+    /// Determines the date format of title of the popover created by the moreLinkClick option.
+    static member inline dayPopoverFormat(value: IDateFormatProp list) =
+        Interop.mkProperty<ICalendarProp> "dayPopoverFormat" (!!value |> createObj |> unbox)
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
@@ -728,6 +773,30 @@ module calendar =
     type eventConstraint =
         static member inline businessHours =
             Interop.mkProperty<ICalendarProp> "eventConstraint" "businessHours"
+
+    /// The direction that elements in the calendar are rendered. Either left-to-right or right-to-left.
+    [<Erase>]
+    type direction =
+        static member inline ltr =
+            Interop.mkProperty<ICalendarProp> "direction" "ltr"
+        static member inline rtl =
+            Interop.mkProperty<ICalendarProp> "direction" "rtl"
+
+    /// Whether to fix the date-headers at the top of the calendar to the viewport while scrolling.
+    [<Erase>]
+    type stickyHeaderDates =
+        static member inline auto =
+            Interop.mkProperty<ICalendarProp> "stickyHeaderDates" "auto"
+
+    /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
+    [<Erase>]
+    type moreLinkClick =
+        static member inline popover =
+            Interop.mkProperty<ICalendarProp> "moreLinkClick" "popover"
+        static member inline week =
+            Interop.mkProperty<ICalendarProp> "moreLinkClick" "week"
+        static member inline day =
+            Interop.mkProperty<ICalendarProp> "moreLinkClick" "day"
 // ----------------------------------------------------- Event ----------------------------------------------------------------------
 [<Erase>]
 type event =
@@ -997,6 +1066,8 @@ type day =
 type buttonIcon =
     static member inline prev(value: string) =
         Interop.mkProperty<IButtonIconProp> "prev" value
+    static member inline close(value: string) =
+        Interop.mkProperty<IButtonIconProp> "close" value
 
     static member inline next(value: string) =
         Interop.mkProperty<IButtonIconProp> "next" value
@@ -1118,6 +1189,12 @@ type draggable =
     /// For touch devices, the amount of time the user must hold down before an event becomes draggable.
     static member inline longPressDelay(value: int) =
         Interop.mkProperty<IDraggableProp> "longPressDelay" value
+    /// For touch devices, the amount of time the user must hold down before an event becomes draggable.
+    static member inline eventLongPressDelay(value: int) =
+        Interop.mkProperty<IDraggableProp> "eventLongPressDelay" value
+    /// For touch devices, the amount of time the user must hold down before a date becomes selectable.
+    static member inline selectLongPressDelay(value: int) =
+        Interop.mkProperty<IDraggableProp> "selectLongPressDelay" value
 
     /// How many pixels the user’s mouse/touch must move before an event drag activates.
     static member inline minDistance(value: int) =

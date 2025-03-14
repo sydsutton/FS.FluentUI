@@ -2,12 +2,12 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1</Version>
+        <Version>0.0.1-beta01</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Description>F# bindings for @fullcalendar/react, a lightweight React library for building performant and accessible drag and drop experiences.</Description>
+        <Description>F# bindings for @fullcalendar/react</Description>
         <PackageProjectUrl>https://github.com/sydsutton/FS.FullCalendar</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
@@ -17,7 +17,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
         <Compile Include="Domain.fs" />
         <Compile Include="Utils.fs" />
         <Compile Include="Props.fs" />

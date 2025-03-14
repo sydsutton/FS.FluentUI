@@ -1,8 +1,7 @@
 namespace FS.FullCalendar
 
-open Fable.Core
-open Feliz
 open System
+open Browser.Types
 
 type DateRangeInput = { start: DateTime; ``end``: DateTime }
 
@@ -120,7 +119,7 @@ type CalendarEvent = {
     /// The value overriding the eventOverlap setting for this specific event. If false, prevents this event from being dragged/resized over other events. Also prevents other events from being dragged/resized over this event. Does not accept a function.
     overlap: bool
     /// The eventConstraint override for this specific event.
-    ``constraint``: string array // TODO
+    ``constraint``: string
 
     /// The eventBackgroundColor override for this specific event.
     backgroundColor: string
@@ -138,8 +137,14 @@ type CalendarEvent = {
     source: obj
 }
 
+type CalendarError = {
+    name: string
+    message: string
+    stack: string
+}
+
 type DateSelectArg = {
-    jsEvent: Browser.Types.UIEvent option
+    jsEvent: UIEvent option
     view: ViewApi
     start: DateTime
     ``end``: DateTime
@@ -151,7 +156,7 @@ type DateSelectArg = {
 and EventAddData = {
     event: CalendarEvent
     relatedEvents: CalendarEvent array
-    revert: unit -> unit //TODO
+    revert: unit -> unit
 }
 
 and EventApi = {
@@ -176,8 +181,8 @@ and EventApi = {
     textColor: string
     classNames: string array
     extendedProps: obj
-    setProp: string -> obj -> unit // TODO (name: string, val: any): void;
-    setExtendedProp: string -> obj -> unit //TODO (name: string, val: any): void;
+    setProp: string -> obj -> unit
+    setExtendedProp: string -> obj -> unit
     setStart: DateTime -> SetStartOptions -> unit
     setEnd: DateTime option -> SetEndOptions -> unit
     setDates: DateTime -> DateTime option -> StartInputOptions -> unit
@@ -185,13 +190,13 @@ and EventApi = {
     moveEnd: DurationObjectInput -> unit
     moveDates: DurationObjectInput -> unit
     setAllDay: bool -> SetAllDayOptions -> unit
-    formatRange: FormatterInput -> obj //TODO : any
+    formatRange: FormatterInput -> obj
     remove: unit -> unit
     toPlainObject: ToPlainObjectSettings -> obj
     toJSON: unit -> obj
 }
 
-and EventSourceSuccessResponseHandler = obj * obj * obj -> obj array //TODO
+and EventSourceSuccessResponseHandler = obj * obj * obj -> obj array
 
 and ViewApi = {
     calendar: CalendarApi
@@ -203,7 +208,10 @@ and ViewApi = {
     currentEnd: DateTime
     getOption: string -> unit
 }
-
+and DateUnselectArg = {
+    jsEvent: MouseEvent
+    view: ViewApi
+}
 and CalendarApi = {
     view: ViewApi
     updateSize: unit -> unit
@@ -227,8 +235,8 @@ and CalendarApi = {
     formatRange: DateTime -> DateTime -> obj -> unit
     formatIso: DateTime -> bool -> string
     select: DateTime -> DateTime option -> unit
-    unselect: unit -> unit
-    addEvent: obj -> unit //TODO obj -> EventSourceImpl -> EventImpl option
+    unselect: DateUnselectArg -> unit
+    addEvent: obj -> EventSourceImpl option -> EventImpl option
     getEventById: string -> EventImpl option
     getEvents: unit -> EventImpl array
     removeAllEvents: unit -> unit
@@ -239,36 +247,56 @@ and CalendarApi = {
     refetchEvents: unit -> unit
     scrollToTime: DurationObjectInput -> unit
 }
-
-and CalendarContext = { //TODO
-    dateEnv: obj
-    options: obj
-    pluginHooks: obj
-    emitter: obj
-    dispatch: obj
-    getCurrentData: obj
-    calendarApi: obj // TODO
+and  DropInfo = {
+    /// true or false whether dropped on one of the all-day cells.
+    allDay: bool
+    /// The Date of where the draggable was dropped.
+    date: DateTime
+    /// The ISO8601 string representation of where the draggable was dropped.
+    dateStr: string
+    /// The HTML element that was being dragged.
+    draggedEl: HTMLElement
+    /// The native JavaScript event with low-level information such as click coordinates.
+    jsEvent: UIEvent
+    /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
+    resource: Resource
+    /// The current View Object.
+    view: ViewApi
 }
-
 and EventSource = {
+    id: string
+    url: string
+    format: string
+    color: string
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    className: string
+    editable: bool
+    startEditable: bool
+    durationEditable: bool
+    resourceEditable: bool
+    display: string
+    overlap: bool
+    ``constraint``: string
+    allow: DropInfo -> HTMLElement -> unit
+    defaultAllDay: bool option
+    success: EventSourceSuccessResponseHandler option
+    failure: (CalendarError -> unit) option
+    eventDataTransform: obj -> obj
     sourceId: string
     sourceDefId: int
-    meta: obj // TODO
+    meta: obj
     publicId: string
     isFetching: bool
     latestFetchId: string
     fetchRange: DateRange option
-    defaultAllDay: bool option
-    eventDataTransform: obj -> obj //TODO
     ui: EventUi
-    success: EventSourceSuccessResponseHandler option
-    failure: (obj -> unit) option //TODO
     extendedProps: obj
 }
 
 and EventSourceImpl = {
     internalEventSource: EventSource
-    constructor: CalendarContext * obj //TODO (context: CalendarContext, internalEventSource: EventSource<any>);
     id: string
     url: string
     format: string
@@ -299,8 +327,8 @@ and EventImpl = {
     textColor: string
     classNames: string array
     extendedProps: obj
-    setProp: string -> obj -> unit // TODO (name: string, val: any): void;
-    setExtendedProp: string -> obj -> unit //TODO (name: string, val: any): void;
+    setProp: string -> obj -> unit
+    setExtendedProp: string -> obj -> unit
     setStart: DateTime -> SetStartOptions -> unit
     setEnd: DateTime option -> SetEndOptions -> unit
     setDates: DateTime -> DateTime option -> StartInputOptions -> unit
@@ -308,7 +336,7 @@ and EventImpl = {
     moveEnd: DurationObjectInput -> unit
     moveDates: DurationObjectInput -> unit
     setAllDay: bool -> SetAllDayOptions -> unit
-    formatRange: FormatterInput -> obj //TODO : any
+    formatRange: FormatterInput -> obj
     remove: unit -> unit
     toPlainObject: ToPlainObjectSettings -> obj
     toJSON: unit -> obj
@@ -328,17 +356,36 @@ and EventUi = {
     textColor: string
     classNames: string array
 }
+and Resource = {
+    /// the unique string identifier for this resource
+    id: string
+    /// the string title of this resource
+    title: string
+    /// a hash of non-standard props that were specified during parsing
+    extendedProps: obj
+    eventConstraint: string
+    eventOverlap: bool
+    eventAllow: bool
+    eventBackgroundColor: string
+    eventBorderColor: string
+    eventTextColor: string
+    eventClassNames: string array
+    getParent: unit -> Resource
+    getChildren: unit -> Resource array
+    getEvents: unit -> CalendarEvent array
+    remove: unit -> unit
+}
 
 type EventClickArg = {
-    el: Browser.Types.HTMLElement
+    el: HTMLElement
     event: EventImpl
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
     view: ViewApi
 }
 
 type EventDragInfo = {
     event: EventImpl
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
     view: ViewApi
 }
 
@@ -363,33 +410,13 @@ type RemoveInfo = {
 }
 
 type PointerDragEvent = {
-    origEvent: Browser.Types.UIEvent
+    origEvent: UIEvent
     isTouch: bool
-    subjectEl: Browser.Types.EventTarget
+    subjectEl: EventTarget
     pageX: int
     pageY: int
     deltaX: int
     deltaY: int
-}
-
-type Resource = {
-    /// the unique string identifier for this resource
-    id: string
-    /// the string title of this resource
-    title: string
-    /// a hash of non-standard props that were specified during parsing
-    extendedProps: obj
-    eventConstraint: string //TODO
-    eventOverlap: bool
-    eventAllow: bool
-    eventBackgroundColor: string
-    eventBorderColor: string
-    eventTextColor: string
-    eventClassNames: string array
-    getParent: unit -> obj //TODO
-    getChildren: unit -> obj //TODO
-    getEvents: unit -> CalendarEvent array
-    remove: unit -> unit
 }
 
 type EventDropInfo = {
@@ -410,9 +437,9 @@ type EventDropInfo = {
     /// The current View Object.
     view: ViewApi
     /// The HTML element that was dragged.
-    el: Browser.Types.HTMLElement
+    el: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
 }
 
 type SelectInfo = {
@@ -428,7 +455,7 @@ type SelectInfo = {
     /// Boolean. true or false whether the selection happened on all-day cells.
     allDay: bool
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
     /// View object. The current Calendar view.
     View: ViewApi
     /// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
@@ -443,9 +470,9 @@ type DateClickInfo = {
     /// true or false whether the click happened on an all-day cell.
     allDay: bool
     /// An HTML element that represents the whole-day that was clicked on.
-    dayEl: Browser.Types.HTMLElement
+    dayEl: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
     /// The current View Object.
     view: ViewApi
     /// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
@@ -461,13 +488,6 @@ type CalendarRoot = {
     doResize: unit -> unit
     cancelResize: unit -> unit
     getApi: unit -> CalendarApi
-}
-
-[<RequireQualifiedAccess>]
-type Error = {
-    name: string
-    message: string
-    stack: string
 }
 
 type EventInput = {
@@ -487,35 +507,17 @@ type MouseInfo = {
     /// The associated Event Object.
     event: CalendarEvent
     /// The HTML element for this event.
-    el: Browser.Types.HTMLElement
+    el: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.UIEvent
+    jsEvent: UIEvent
     /// The current View Object.
     view: ViewApi
 }
-
-type DropInfo = {
-    /// true or false whether dropped on one of the all-day cells.
-    allDay: bool
-    /// The Date of where the draggable was dropped.
-    date: DateTime
-    /// The ISO8601 string representation of where the draggable was dropped.
-    dateStr: string
-    /// The HTML element that was being dragged.
-    draggedEl: Browser.Types.HTMLElement
-    /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: Browser.Types.UIEvent
-    /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
-    resource: Resource
-    /// The current View Object.
-    view: ViewApi
-}
-
 type EventInfo = {
     event: EventImpl
     relatedEvents: EventImpl array
     revert: unit -> unit
-    draggedEl: Browser.Types.HTMLElement
+    draggedEl: HTMLElement
     view: ViewApi
 }
 
@@ -527,6 +529,20 @@ type EventResizeInfo = {
     startDelta: DurationObjectInput
     revert: unit -> unit
     view: ViewApi
-    el: Browser.Types.HTMLElement
-    jsEvent: Browser.Types.UIEvent
+    el: HTMLElement
+    jsEvent: UIEvent
+}
+
+type EventSegment = {
+    event: EventImpl
+    start: DateTime
+    ``end``: DateTime
+    isStart: bool
+    isEnd: bool
+}
+
+type MoreLinkClickInfo = {
+    date: DateTime
+    allSegs: EventSegment array
+    jsEvent: UIEvent
 }
