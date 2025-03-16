@@ -8,7 +8,7 @@
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <Description>F# bindings for @fullcalendar/react</Description>
-        <PackageProjectUrl>https://github.com/sydsutton/FS.FullCalendar</PackageProjectUrl>
+        <PackageProjectUrl>https://github.com/sydsutton/FS.FluentUI/tree/master/src/FS.FullCalendar</PackageProjectUrl>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
