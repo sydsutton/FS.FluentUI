@@ -742,6 +742,181 @@ module calendar =
         /// `<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>`
         /// </code>
         static member inline bootstrap = Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline cerulean =
+            importSideEffects "bootswatch/dist/cerulean/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline cosmo =
+            importSideEffects "bootswatch/dist/cosmo/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline cyborg =
+            importSideEffects "bootswatch/dist/cyborg/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline darkly =
+            importSideEffects "bootswatch/dist/darkly/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline flatly =
+            importSideEffects "bootswatch/dist/flatly/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline journal =
+            importSideEffects "bootswatch/dist/journal/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline litera =
+            importSideEffects "bootswatch/dist/litera/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline lumen =
+            importSideEffects "bootswatch/dist/lumen/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline lux =
+            importSideEffects "bootswatch/dist/lux/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline materia =
+            importSideEffects "bootswatch/dist/materia/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline minty =
+            importSideEffects "bootswatch/dist/minty/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline morph =
+            importSideEffects "bootswatch/dist/morph/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline pulse =
+            importSideEffects "bootswatch/dist/pulse/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline quartz =
+            importSideEffects "bootswatch/dist/quartz/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline sandstone =
+            importSideEffects "bootswatch/dist/sandstone/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline simplex =
+            importSideEffects "bootswatch/dist/simplex/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline sketchy =
+            importSideEffects "bootswatch/dist/sketchy/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline slate =
+            importSideEffects "bootswatch/dist/slate/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline solar =
+            importSideEffects "bootswatch/dist/solar/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline spacelab =
+            importSideEffects "bootswatch/dist/spacelab/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline superhero =
+            importSideEffects "bootswatch/dist/superhero/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline united =
+            importSideEffects "bootswatch/dist/united/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline vapor =
+            importSideEffects "bootswatch/dist/vapor/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline yeti =
+            importSideEffects "bootswatch/dist/yeti/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+        /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
+        /// <br/>
+        /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
+        /// in order for this theme to take full effect. If placed inside of a `fluentProvider`, the custom theme will not override styles like fontFamily.
+        static member inline zephyr =
+            importSideEffects "bootswatch/dist/zephyr/bootstrap.min.css" |> ignore
+            Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
 
     /// A time zone is a region of the world that serves as a context for displaying dates.
     [<Erase>]

@@ -4758,7 +4758,7 @@ let FullCalendar () =
                 calendar.selectable true
                 calendar.select handleDateSelect
                 calendar.eventClick handleEventClick
-                calendar.themeSystem.bootstrap5
+                calendar.themeSystem.cyborg
                 calendar.dayMaxEvents true
                 calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event.title))
                 calendar.loading (fun b -> printfn "isLoading %A" b)

@@ -24,6 +24,7 @@
     "@fullcalendar/multimonth": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",
+    "bootswatch": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-window": "^1.8.11",
