@@ -25,6 +25,7 @@ FullCalendar.Calendar [
         Plugin.interactionPlugin
     ]
     calendar.initialView.dayGridMonth
+    calendar.themeSystem.materia
     calendar.nowIndicator true
     calendar.validRange [ range.start (DateTime.Today.AddDays -7); range.end' (DateTime.Today.AddDays 7)]
     calendar.headerToolbar [
@@ -61,6 +62,7 @@ Current NPM dependencies:
 * @fullcalendar/multimonth
 * @fullcalendar/list
 * @fullcalendar/moment
+* bootswatch (for various themes)
 
 Install into your Client.fsproj project using [Femto](https://github.com/Zaid-Ajaj/Femto) (recommended)
 ```bash
@@ -80,5 +82,5 @@ You can install the library manually if you want by first installing the nuget p
 ```bash
 cd ./{path to your project}
 dotnet add package FS.FullCalendar
-npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/interaction @fullcalendar/timegrid @fullcalendar/bootstrap5 @fullcalendar/bootstrap @fullcalendar/multimonth @fullcalendar/list @fullcalendar/moment
+npm install @fullcalendar/react @fullcalendar/daygrid @fullcalendar/interaction @fullcalendar/timegrid @fullcalendar/bootstrap5 @fullcalendar/bootstrap @fullcalendar/multimonth @fullcalendar/list @fullcalendar/moment bootswatch
 ```
