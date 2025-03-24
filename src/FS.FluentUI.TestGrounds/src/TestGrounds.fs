@@ -4794,7 +4794,7 @@ let DEFAULT_COLOR_HSV = { h = 109; s= 1; v= 0.9; a = 1 }
 [<ReactComponent>]
 let ColorPickerTest () =
     let color, setColor = React.useState DEFAULT_COLOR_HSV
-    let tinyColor = ColorPicker.tinyColor color
+    let tinyColor = Fui.tinyColor color
     let backgroundColor = tinyColor.toRgbString()
     Html.div [
         Fui.colorPicker [

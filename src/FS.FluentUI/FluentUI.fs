@@ -162,10 +162,6 @@ module FelizOverloads =
         /// Specifies extra inter-character space in addition to the default space between characters.
         static member inline letterSpacing (value: string) = Interop.mkStyle "letterSpacing" value
 
-module internal ColorPicker =
-    [<ImportDefault("@ctrl/tinycolor")>]
-    let tinyColor (colorInput: 'T): TinyColor = jsNative
-
 module internal Shorthand =
 
     let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"
@@ -209,7 +205,6 @@ type [<Erase>] JSTuple =
 
 type [<Erase>] Fui =
 //---------------------------------------------------------------- Functions --------------------------------------------------------------------------------
-
     /// A hook that returns the necessary tabster attributes to support arrow key navigation
     /// @param options - Options to configure keyboard navigation
     [<Hook>]
@@ -1133,6 +1128,9 @@ type [<Erase>] Theme =
     static member inline themeToTokensObject (theme: Tokens): Tokens = import "themeToTokensObject" FluentUIv9
 
 module Fui =
+    [<ImportDefault("@ctrl/tinycolor")>]
+    let tinyColor (colorInput: 'T): TinyColor = jsNative
+
     type [<Erase>] virtualized =
         static member inline dataGrid (props: IDataGridProp list) = createElement (import "DataGrid" ReactDataGridWindow) props
         static member inline dataGridHeader (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridHeader" ReactDataGridWindow) props
