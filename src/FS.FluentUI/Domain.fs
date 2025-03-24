@@ -1768,3 +1768,8 @@ and TinyColor = {
     /// compare color vs current color
     equals: ColorInput -> bool
 }
+
+type TagSelectData = {
+    value: string
+    selectedValues: string array
+}

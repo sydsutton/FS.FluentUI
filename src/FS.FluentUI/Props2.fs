@@ -1998,6 +1998,8 @@ type [<Erase>] tag =
     static member inline dismissible (value: bool) = Interop.mkProperty<ITagProp> "dismissible" value
     /// Unique value identifying the tag within a TagGroup
     static member inline value (value: string) = Interop.mkProperty<ITagProp> "value" value
+    /// An InteractionTag can be selected. Note: This prop only changes the appearance of the tag at the moment. A future PR will add the integration with TagGroup.
+    static member inline selected (value: bool) = Interop.mkProperty<ITagProp> "selected" value
 
 module tag =
     type [<Erase>] as' =
@@ -2032,6 +2034,10 @@ type [<Erase>] tagGroup =
     static member inline onDismiss (value: MouseEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
     /// Callback for when a tag is dismissed
     static member inline onDismiss (value: KeyboardEvent -> ValueProp<string> -> unit) = Interop.mkProperty<ITagGroupProp> "onDismiss" (System.Func<_,_,_> value)
+    /// Callback for when a tag is selected
+    static member inline onTagSelect (handler: TagSelectData -> unit) = Interop.mkProperty<ITagGroupProp> "onTagSelect" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Callback for when a tag is selected
+    static member inline onTagSelect (value: MouseEvent -> TagSelectData -> unit) = Interop.mkProperty<ITagGroupProp> "onTagSelect" (System.Func<_,_,_> value)
     static member inline dismissible (value: bool) = Interop.mkProperty<ITagGroupProp> "dismissible" value
 
 module tagGroup =
@@ -2051,6 +2057,8 @@ type [<Erase>] interactionTag =
     static member inline root (value: IReactProperty list) = Interop.mkProperty<IInteractionTagProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Unique value identifying the tag within a TagGroup
     static member inline value (value: string) = Interop.mkProperty<IInteractionTagProp> "value" value
+    /// An InteractionTag can be selected. Note: This prop only changes the appearance of the tag at the moment. A future PR will add the integration with TagGroup.
+    static member inline selected (value: bool) = Interop.mkProperty<IInteractionTagProp> "selected" value
 
 module interactionTag =
     type [<Erase>] as' =
