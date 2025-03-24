@@ -76,7 +76,7 @@ let useStyles =
             style.flexWrap.nowrap
             style.minWidth (length.px 200)
             style.maxWidth (length.px 900)
-            style.height (length.px 30)
+            style.height (length.px 70)
             style.resize.horizontal
             style.border (1, borderStyle.solid, "lightGray")
             style.padding (length.px 16)
