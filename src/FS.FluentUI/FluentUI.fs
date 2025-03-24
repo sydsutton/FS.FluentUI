@@ -162,6 +162,10 @@ module FelizOverloads =
         /// Specifies extra inter-character space in addition to the default space between characters.
         static member inline letterSpacing (value: string) = Interop.mkStyle "letterSpacing" value
 
+module internal ColorPicker =
+    [<ImportDefault("@ctrl/tinycolor")>]
+    let tinyColor (colorInput: 'T): TinyColor = jsNative
+
 module internal Shorthand =
 
     let expand (style): obj = import "expand" "./inline-style-expand-shorthand.js"
@@ -1106,6 +1110,10 @@ type [<Erase>] Fui =
     static member inline listItem (props: ReactElement list) = Interop.reactElementWithChildren (import "ListItem" FluentUIv9) props
     /// A virtualized List that's leveraging the react-window package.
     static member inline fixedSizeList (props: IFixedSizeListProp list) = createElement (import "FixedSizeList" ReactWindow) props
+    static member inline colorPicker (props: IColorPickerProp list) = createElement (import "ColorPicker" FluentUIv9) props
+    static member inline colorArea (props: IColorAreaProp list) = createElement (import "ColorArea" FluentUIv9) props
+    static member inline colorSlider (props: IColorSliderProp list) = createElement (import "ColorSlider" FluentUIv9) props
+    static member inline alphaSlider (props: IAlphaSliderProp list) = createElement (import "AlphaSlider" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

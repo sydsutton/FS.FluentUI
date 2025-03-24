@@ -1596,4 +1596,175 @@ type OnFixedSizeListScroll = {
     scrollUpdateWasRequested: bool
 }
 
+type RGB = {
+    r: string
+    g: string
+    b: string
+}
 
+type RGBA = {
+    r: string
+    g: string
+    b: string
+    a: string
+}
+
+type HSL = {
+    h: string
+    s: string
+    l: string
+}
+
+type HSLA = {
+    h: string
+    s: string
+    l: string
+    a: string
+}
+
+type HSV = {
+    h: string
+    s: string
+    v: string
+}
+
+type HSVA = {
+    h: float
+    s: float
+    v: float
+    a: float
+}
+
+type ColorPickerOnChangeData = {
+    ``type``: string
+    event: Browser.Types.MouseEvent
+    color: HSVA
+}
+
+type TinyColorOptions = {
+    format: string
+    gradientType: string
+}
+
+type [<RequireQualifiedAccess>] ColorFormats = rgb | prgb | hex | hex3 | hex4 | hex6 | hex8 | name | hsl | hsv
+
+type ColorInput = String of string | Int of int | RGB of RGB | RGBA of RGBA | HSL of HSL | HSLA of HSLA | HSV of HSV | HSVA of HSVA | TinyColor of TinyColor
+and TinyColor = {
+    /// red
+    r: int
+    /// green
+    g: int
+    /// blue
+    b: int
+    /// alpha
+    a: int
+    /// the format used to create the tinycolor instance */
+    format: ColorFormats
+    /// input passed into the constructer used to create the tinycolor instance */
+    originalInput: ColorInput
+    /// the color was successfully parsed */
+    isValid: bool
+    gradientType: string
+    /// rounded alpha */
+    roundA: int
+    constructor: ColorInput -> TinyColorOptions -> unit
+    isDark: unit -> bool
+    isLight: unit -> bool
+    /// Returns the perceived brightness of the color, from 0-255.
+    getBrightness: unit -> int
+    /// Returns the perceived luminance of a color, from 0-1.
+    getLuminance: unit -> int
+    /// Returns the alpha value of a color, from 0-1.
+    getAlpha: unit -> int
+    /// Sets the alpha value on the current color.
+    /// @param alpha - The new alpha value. The accepted range is 0-1.
+    setAlpha: string -> unit
+    /// Returns the object as a HSVA object.
+    toHsv: unit -> HSV
+    /// Returns the hsva values interpolated into a string with the following format:
+    /// "hsva(xxx, xxx, xxx, xx)".
+    toHsvString: unit -> string
+    /// Returns the object as a HSLA object.
+    toHsl: unit -> HSLA
+    /// Returns the hsla values interpolated into a string with the following format:
+    /// "hsla(xxx, xxx, xxx, xx)".
+    toHslString: unit -> string
+    /// Returns the hex value of the color.
+    /// @param allow3Char will shorten hex value to 3 char if possible
+    toHex: bool -> string
+    /// Returns the hex value of the color -with a # appened.
+    /// @param allow3Char will shorten hex value to 3 char if possible
+    toHexString: bool -> string
+    /// Returns the hex 8 value of the color.
+    /// @param allow4Char will shorten hex value to 4 char if possible
+    toHex8: bool -> string
+    /// Returns the hex 8 value of the color -with a # appened.
+    /// @param allow4Char will shorten hex value to 4 char if possible
+    toHex8String: bool -> string
+    /// Returns the object as a RGBA object.
+    toRgb: unit -> RGBA
+    /// Returns the RGBA values interpolated into a string with the following format:
+    /// "RGBA(xxx, xxx, xxx, xx)".
+    toRgbString: unit -> string
+    /// Returns the object as a RGBA object.
+    toPercentageRgb: unit -> RGBA
+    /// Returns the RGBA relative values interpolated into a string
+    toPercentageRgbString: unit -> string
+    /// The 'real' name of the color -if there is one.
+    toName: unit -> string
+    /// String representation of the color.
+    /// @param format - The format to be used when displaying the string representation.
+    toString: ColorFormats -> string
+    toNumber: unit -> int
+    clone: unit -> TinyColor
+    /// Lighten the color a given amount. Providing 100 will always return white.
+    /// @param amount - valid between 1-100
+    lighten: int -> TinyColor
+    /// Brighten the color a given amount, from 0 to 100.
+    /// @param amount - valid between 1-100
+    brighten: int -> TinyColor
+    /// Darken the color a given amount, from 0 to 100.
+    /// Providing 100 will always return black.
+    /// @param amount - valid between 1-100
+    darken: int -> TinyColor
+    /// Mix the color with pure white, from 0 to 100.
+    /// Providing 0 will do nothing, providing 100 will always return white.
+    /// @param amount - valid between 1-100
+    tint: int -> TinyColor
+    /// Mix the color with pure black, from 0 to 100.
+    /// Providing 0 will do nothing, providing 100 will always return black.
+    /// @param amount - valid between 1-100
+    shade: int -> TinyColor
+    /// Desaturate the color a given amount, from 0 to 100.
+    /// Providing 100 will is the same as calling greyscale
+    /// @param amount - valid between 1-100
+    desaturate: int -> TinyColor
+    /// Saturate the color a given amount, from 0 to 100.
+    /// @param amount - valid between 1-100
+    saturate: int -> TinyColor
+    /// Completely desaturates a color into greyscale.
+    /// Same as calling `desaturate(100)`
+    greyscale: unit -> TinyColor
+    /// Spin takes a positive or negative amount within [-360, 360] indicating the change of hue.
+    /// Values outside of this range will be wrapped into this range.
+    spin: int -> TinyColor
+    /// Mix the current color a given amount with another color, from 0 to 100.
+    /// 0 means no mixing (return current color).
+    mix: ColorInput -> int -> TinyColor
+    analogous: int -> int -> TinyColor array
+    /// taken from https://github.com/infusion/jQuery-xcolor/blob/master/jquery.xcolor.js
+    complement: unit -> TinyColor;
+    monochromatic: int -> TinyColor array
+    splitcomplement: unit -> TinyColor array
+    /// Compute how the color would appear on a background
+    onBackground: ColorInput -> TinyColor
+    /// Alias for `polyad(3)`
+    triad: unit -> TinyColor array
+    /// Alias for `polyad(4)`
+    tetrad: unit -> TinyColor array
+    /// Get polyad colors, like (for 1, 2, 3, 4, 5, 6, 7, 8, etc...)
+    /// monad, dyad, triad, tetrad, pentad, hexad, heptad, octad, etc...
+    polyad: int -> TinyColor array
+    /// compare color vs current color
+    equals: ColorInput -> bool
+}

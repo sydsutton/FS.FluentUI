@@ -261,6 +261,10 @@ type [<Erase>] INavDrawerFooterProp = interface end
 type [<Erase>] IListProp = interface end
 type [<Erase>] IListItemProp = interface end
 type [<Erase>] IFixedSizeListProp = interface end
+type [<Erase>] IColorPickerProp = interface end
+type [<Erase>] IColorAreaProp = interface end
+type [<Erase>] IColorSliderProp = interface end
+type [<Erase>] IAlphaSliderProp = interface end
 
 type [<AllowNullLiteral; Erase>] IStyle = interface end
 type [<AllowNullLiteral; Erase>] ITheme = interface end

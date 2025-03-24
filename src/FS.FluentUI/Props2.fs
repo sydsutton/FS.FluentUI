@@ -3871,3 +3871,90 @@ type [<Erase>] listItem =
     static member inline onAction (handler: ListItemActionEventData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onAction (handler: ListItemActionEventData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline style (value: obj)= Interop.mkProperty<IListItemProp> "style" value
+
+// -------------------------------------------------------------------------- ColorPicker --------------------------------------------------------------------------------------
+type [<Erase>] colorPicker =
+    inherit FelizProps.prop<IColorPickerProp>
+    /// Selected color
+    static member inline color (value: HSVA) = Interop.mkProperty<IColorPickerProp> "color" value
+    /// Callback for when the user changes the color.
+    static member inline onColorChange (value: MouseEvent -> ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorPickerProp> "onColorChange" (System.Func<_,_,_> value)
+    /// Callback for when the user changes the color.
+    static member inline onColorChange (handler: ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorPickerProp> "onColorChange" (System.Func<_,_,_> (fun _ value -> handler value))
+
+module colorPicker =
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IColorPickerProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IColorPickerProp> "shape" "square"
+// -------------------------------------------------------------------------- ColorArea --------------------------------------------------------------------------------------
+type [<Erase>] colorArea =
+    inherit FelizProps.prop<IColorAreaProp>
+    static member inline thumb (value: IReactProperty list) = Interop.mkProperty<IColorAreaProp> "thumb" (!!value |> createObj |> unbox)
+    static member inline inputX (value: IReactProperty list) = Interop.mkProperty<IColorAreaProp> "inputX" (!!value |> createObj |> unbox)
+    static member inline inputY (value: IReactProperty list) = Interop.mkProperty<IColorAreaProp> "inputY" (!!value |> createObj |> unbox)
+    /// Selected color
+    static member inline color (value: HSVA) = Interop.mkProperty<IColorAreaProp> "color" value
+    /// Callback for when the user changes the color.
+    static member inline onColorChange (value: MouseEvent -> ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorAreaProp> "onColorChange" (System.Func<_,_,_> value)
+    /// Callback for when the user changes the color.
+    static member inline onColorChange (handler: ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorAreaProp> "onColorChange" (System.Func<_,_,_> (fun _ value -> handler value))
+
+module colorArea =
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IColorAreaProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IColorAreaProp> "shape" "square"
+
+// -------------------------------------------------------------------------- ColorSlider --------------------------------------------------------------------------------------
+type [<Erase>] colorSlider =
+    inherit FelizProps.prop<IColorSliderProp>
+    static member inline thumb (value: IReactProperty list) = Interop.mkProperty<IColorSliderProp> "thumb" (!!value |> createObj |> unbox)
+    static member inline rail (value: IReactProperty list) = Interop.mkProperty<IColorSliderProp> "rail" (!!value |> createObj |> unbox)
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<IColorSliderProp> "input" (!!value |> createObj |> unbox)
+    /// Selected color
+    static member inline color (value: HSVA) = Interop.mkProperty<IColorSliderProp> "color" value
+    /// The starting color for an uncontrolled ColorSlider.
+    static member inline defaultColor (value: HSVA) = Interop.mkProperty<IColorSliderProp> "defaultColor" value
+    /// Triggers a callback when the value has been changed. This will be called on every individual step.
+    static member inline onColorChange (value: MouseEvent -> ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorSliderProp> "onColorChange" (System.Func<_,_,_> value)
+    /// Triggers a callback when the value has been changed. This will be called on every individual step.
+    static member inline onColorChange (handler: ColorPickerOnChangeData -> unit) = Interop.mkProperty<IColorSliderProp> "onColorChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Render the Slider in a vertical orientation, smallest value on the bottom.
+    static member inline vertical (value: bool) = Interop.mkProperty<IColorSliderProp> "vertical" value
+
+module colorSlider =
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IColorSliderProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IColorSliderProp> "shape" "square"
+
+    ///  Color channel of the Slider
+    type [<Erase>] channel =
+        static member inline hue = Interop.mkProperty<IColorSliderProp> "channel" "hue"
+        static member inline saturation = Interop.mkProperty<IColorSliderProp> "channel" "saturation"
+        static member inline value = Interop.mkProperty<IColorSliderProp> "channel" "value"
+
+// -------------------------------------------------------------------------- AlphaSlider --------------------------------------------------------------------------------------
+type [<Erase>] alphaSlider =
+    inherit FelizProps.prop<IAlphaSliderProp>
+    static member inline thumb (value: IReactProperty list) = Interop.mkProperty<IAlphaSliderProp> "thumb" (!!value |> createObj |> unbox)
+    static member inline rail (value: IReactProperty list) = Interop.mkProperty<IAlphaSliderProp> "rail" (!!value |> createObj |> unbox)
+    static member inline input (value: IReactProperty list) = Interop.mkProperty<IAlphaSliderProp> "input" (!!value |> createObj |> unbox)
+    /// Selected color
+    static member inline color (value: HSVA) = Interop.mkProperty<IAlphaSliderProp> "color" value
+    /// The starting color for an uncontrolled ColorSlider.
+    static member inline defaultColor (value: HSVA) = Interop.mkProperty<IAlphaSliderProp> "defaultColor" value
+    /// Triggers a callback when the value has been changed. This will be called on every individual step.
+    static member inline onColorChange (value: MouseEvent -> ColorPickerOnChangeData -> unit) = Interop.mkProperty<IAlphaSliderProp> "onColorChange" (System.Func<_,_,_> value)
+    /// Triggers a callback when the value has been changed. This will be called on every individual step.
+    static member inline onColorChange (handler: ColorPickerOnChangeData -> unit) = Interop.mkProperty<IAlphaSliderProp> "onColorChange" (System.Func<_,_,_> (fun _ value -> handler value))
+    /// Render the Slider in a vertical orientation, smallest value on the bottom.
+    static member inline vertical (value: bool) = Interop.mkProperty<IAlphaSliderProp> "vertical" value
+    /// The `transparency` property determines how the alpha channel is interpreted.
+    /// - When `false`, the alpha channel represents the opacity of the color.
+    /// - When `true`, the alpha channel represents the transparency of the color.
+    /// For example, a 30% transparent color has 70% opacity.
+    static member inline transparency (value: bool) = Interop.mkProperty<IAlphaSliderProp> "transparency" value
+
+module alphaSlider =
+    type [<Erase>] shape =
+        static member inline rounded = Interop.mkProperty<IAlphaSliderProp> "shape" "rounded"
+        static member inline square = Interop.mkProperty<IAlphaSliderProp> "shape" "square"

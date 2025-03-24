@@ -4789,6 +4789,43 @@ let FullCalendar () =
         ]
     ]
 
+let DEFAULT_COLOR_HSV = { h = 109; s= 1; v= 0.9; a = 1 }
+
+[<ReactComponent>]
+let ColorPickerTest () =
+    let color, setColor = React.useState DEFAULT_COLOR_HSV
+    let tinyColor = ColorPicker.tinyColor color
+    let backgroundColor = tinyColor.toRgbString()
+    Html.div [
+        Fui.colorPicker [
+            colorPicker.color color
+            colorPicker.onColorChange (fun (v: ColorPickerOnChangeData) -> v.color |> setColor)
+            colorPicker.children [
+                Fui.colorArea [
+                    colorArea.inputX [
+                        prop.ariaLabel "Saturation"
+                    ]
+                    colorArea.inputY [
+                        prop.ariaLabel "Brightness"
+                    ]
+                ]
+                Fui.colorSlider [
+                    colorSlider.ariaLabel "Hue"
+                ]
+                Fui.alphaSlider [
+                    alphaSlider.ariaLabel "Alpha"
+                ]
+            ]
+        ]
+        Html.div [
+            prop.style [
+                style.backgroundColor backgroundColor
+                style.width 100
+                style.height 100
+            ]
+        ]
+    ]
+
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
@@ -4808,6 +4845,7 @@ let mainContent model dispatch =
         ]
         stack.horizontalAlign.center
         stack.children [
+            ColorPickerTest ()
             FullCalendar()
             Html.div [
                 prop.style [
