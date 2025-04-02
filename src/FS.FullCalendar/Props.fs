@@ -174,6 +174,7 @@ type calendar =
     /// Defines the buttons and title at the top of the calendar.
     static member inline headerToolbar(value: IHeaderToolbarProp list) =
         Interop.mkProperty<ICalendarProp> "headerToolbar" (!!value |> createObj |> unbox)
+
     /// Defines the controls at the bottom of the calendar.
     static member inline footerToolbar(value: IFooterToolbarProp list) =
         Interop.mkProperty<ICalendarProp> "footerToolbar" (!!value |> createObj |> unbox)
@@ -236,12 +237,15 @@ type calendar =
     /// Limits event dragging and resizing to certain windows of time.
     static member inline eventConstraint(value: IBusinessDayProp list) =
         Interop.mkProperty<ICalendarProp> "eventConstraint" (!!value |> createObj |> unbox)
+
     /// Whether to draw a “placeholder” event while the user is dragging.
     static member inline selectMirror(value: bool) =
         Interop.mkProperty<ICalendarProp> "selectMirror" value
+
     /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
     static member inline dayMaxEvents(value: bool) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
+
     /// Triggered when a date/time selection is made.
     static member inline select(value: DateSelectArg -> unit) =
         Interop.mkProperty<ICalendarProp> "select" (System.Func<_, _> value)
@@ -459,24 +463,31 @@ type calendar =
     /// Limits user selection to certain windows of time.
     static member inline selectConstraint(value: string) =
         Interop.mkProperty<ICalendarProp> "selectConstraint" value
+
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: string) =
         Interop.mkProperty<ICalendarProp> "locale" value
+
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: IDateFormatProp list) =
         Interop.mkProperty<ICalendarProp> "locale" (!!value |> createObj |> unbox)
+
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: DateTime -> int) =
-        Interop.mkProperty<ICalendarProp> "locale" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "locale" (System.Func<_, _> value)
+
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: int) =
         Interop.mkProperty<ICalendarProp> "locale" value
+
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: IDayProp) =
         Interop.mkProperty<ICalendarProp> "locale" value
+
     /// The day that each week begins.
     static member inline firstDay(value: IDayProp) =
         Interop.mkProperty<ICalendarProp> "firstDay" value
+
     /// The day that each week begins.
     static member inline firstDay(value: int) =
         Interop.mkProperty<ICalendarProp> "firstDay" value
@@ -657,27 +668,189 @@ type calendar =
     /// Triggered when resizing stops and the event has changed in duration.
     static member inline eventResize(value: EventResizeInfo -> unit) =
         Interop.mkProperty<ICalendarProp> "eventResize" (System.Func<_, _> value)
+
     /// In dayGrid view, the max number of stacked event levels within a given day. This includes the +more link if present. The rest will show up in a popover.
     static member inline dayMaxEventRows(value: int) =
         Interop.mkProperty<ICalendarProp> "dayMaxEventRows" value
+
     /// In dayGrid view, the max number of stacked event levels within a given day. This includes the +more link if present. The rest will show up in a popover.
     static member inline dayMaxEventRows(value: bool) =
         Interop.mkProperty<ICalendarProp> "dayMaxEventRows" value
+
     /// For timeline view, the maximum number of events that stack top-to-bottom. For timeGrid view, the maximum number of events that stack left-to-right.
     static member inline eventMaxStack(value: int) =
         Interop.mkProperty<ICalendarProp> "eventMaxStack" value
+
     /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
     static member inline dayMaxEvents(value: int) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
+
     /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
     static member inline moreLinkClick(value: string) =
         Interop.mkProperty<ICalendarProp> "moreLinkClick" value
+
     /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
     static member inline moreLinkClick(value: MoreLinkClickInfo -> unit) =
-        Interop.mkProperty<ICalendarProp> "moreLinkClick" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkClick" (System.Func<_, _> value)
+
     /// Determines the date format of title of the popover created by the moreLinkClick option.
     static member inline dayPopoverFormat(value: IDateFormatProp list) =
         Interop.mkProperty<ICalendarProp> "dayPopoverFormat" (!!value |> createObj |> unbox)
+
+    /// The license key you must enter to use premium features.
+    static member inline schedulerLicenseKey(value: string) =
+        Interop.mkProperty<ICalendarProp> "schedulerLicenseKey" value
+
+    /// Visually groups resources by certain criteria. The given argument must be a field name that each resource object has
+    static member inline resourceGroupField(value: string) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupField" value
+
+    /// Determines the width of the area that contains the list of resources.
+    static member inline resourceAreaWidth(value: string) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaWidth" value
+
+    /// Determines the width of the area that contains the list of resources.
+    static member inline resourceAreaWidth(value: int) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaWidth" value
+
+    /// Determines the width of the area that contains the list of resources.
+    static member inline resourceAreaWidth(value: IStyleAttribute) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaWidth" value
+
+    /// Turns the resource area from a plain list of titles into a grid of data.
+    static member inline resourceAreaColumns(value: IResourceAreaColumnProp list list) =
+        let cols = value |> List.map (fun c -> !!c |> createObj) |> List.toArray
+
+        Interop.mkProperty<ICalendarProp> "resourceAreaColumns" cols
+
+    /// Whether child resources should be expanded when the view loads.
+    static member inline resourcesInitiallyExpanded(value: bool) =
+        Interop.mkProperty<ICalendarProp> "resourcesInitiallyExpanded" value
+
+    /// Determines how wide each of the time-axis slots will be. Specified as a number of pixels.
+    static member inline slotMinWidth(value: int) =
+        Interop.mkProperty<ICalendarProp> "slotMinWidth" value
+
+    /// In timeline view, the minimum width an event is allowed to be.
+    static member inline eventMinWidth(value: int) =
+        Interop.mkProperty<ICalendarProp> "eventMinWidth" value
+
+    /// Determines if resourceTimeGrid or resourceDayGrid views should render their date headings above their resource headings.
+    static member inline datesAboveResources(value: bool) =
+        Interop.mkProperty<ICalendarProp> "datesAboveResources" value
+
+    /// Tells the calendar to display resources from an array input.
+    static member inline resources(value: IResourceProp list list) =
+        let res = value |> List.map (fun r -> !!r |> createObj) |> List.toArray
+
+        Interop.mkProperty<ICalendarProp> "resources" res
+
+    /// Tells the calendar to display resources from an array input.
+    static member inline resources(value: 'T list) =
+        Interop.mkProperty<ICalendarProp> "resources" (!!value |> createObj |> unbox)
+
+    /// Whether to refetch and rerender resources when the user navigates to a different date or changes the view.
+    static member inline refetchResourcesOnNavigate(value: bool) =
+        Interop.mkProperty<ICalendarProp> "refetchResourcesOnNavigate" value
+
+    /// Tells the calendar to display resources from an array input.
+    static member inline resources(value: string) =
+        Interop.mkProperty<ICalendarProp> "resources" value
+
+    /// This is exactly like specifying resources as an array except that if the supplied value changes, the calendar will NOT be updated to reflect. Only applicable to declarative front-end frameworks such as React, Vue, and Angular.
+    static member inline initialResources(value: IResourceProp list list) =
+        let res = value |> List.map (fun r -> !!r |> createObj) |> List.toArray
+
+        Interop.mkProperty<ICalendarProp> "initialResources" res
+
+    /// Called after a resource has been added to the calendar.
+    static member inline resourceAdd(value: AddInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceAdd" (System.Func<_, _> value)
+
+    /// This is exactly like specifying resources as an array except that if the supplied value changes, the calendar will NOT be updated to reflect. Only applicable to declarative front-end frameworks such as React, Vue, and Angular.
+    static member inline initialResources(value: 'T list) =
+        Interop.mkProperty<ICalendarProp> "initialResources" (!!value |> createObj |> unbox)
+
+    /// This is exactly like specifying resources as an array except that if the supplied value changes, the calendar will NOT be updated to reflect. Only applicable to declarative front-end frameworks such as React, Vue, and Angular.
+    static member inline initialResources(value: string) =
+        Interop.mkProperty<ICalendarProp> "initialResources" value
+
+    /// A custom function for programmatically generating raw Resources objects. This allows for any sort of asynchronous means of obtaining the resource list.
+    /// function( fetchInfo, successCallback, failureCallback ) { }
+    static member inline resources(value: FetchInfo -> (obj array -> unit) -> (CalendarError -> unit) -> unit) =
+        Interop.mkProperty<ICalendarProp> "resources" (System.Func<_, _, _, _> value)
+
+    /// Called after a resource has been modified in some way.
+    static member inline resourceChange(value: ResourceChangeInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceChange" (System.Func<_, _> value)
+
+    /// Called after a resource has been removed from the calendar.
+    static member inline resourceRemove(value: ResourceChangeInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceRemove" (System.Func<_, _> value)
+
+    /// Called after resource data is initialized OR changed in any way.
+    static member inline resourcesSet(value: ResourceApi array -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourcesSet" (System.Func<_, _> value)
+
+    /// Determines the ordering of the resource list.
+    static member inline resourceOrder(value: string) =
+        Interop.mkProperty<ICalendarProp> "resourceOrder" value
+
+    /// When this setting is activated, only resources that have associated events will be displayed.
+    static member inline filterResourcesWithEvents(value: bool) =
+        Interop.mkProperty<ICalendarProp> "filterResourcesWithEvents" value
+
+    /// a ClassName Input
+    static member inline resourceLabelClassNames(value: ResourceLabelContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelClassNames" (System.Func<_, _> value)
+
+    /// a ClassName Input
+    static member inline resourceLabelClassNames(value: ResourceLabelContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelClassNames" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> {| html: string |}) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> {| domNodes: Node array |}) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
+
+    static member inline resourceLabelDidMount(value: ResourceLabelMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelDidMount" (System.Func<_, _> value)
+
+    static member inline resourceLabelWillUnmount(value: ResourceLabelMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelWillUnmount" (System.Func<_, _> value)
+
+    /// a ClassName Input
+    static member inline resourceLaneClassNames(value: ResourceLabelContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneClassNames" (System.Func<_, _> value)
+
+    /// a ClassName Input
+    static member inline resourceLaneClassNames(value: ResourceLabelContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneClassNames" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> {| html: string |}) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> {| domNodes: Node array |}) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
+
+    static member inline resourceLaneDidMount(value: ResourceLabelMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneDidMount" (System.Func<_, _> value)
+
+    static member inline resourceLaneWillUnmount(value: ResourceLabelMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneWillUnmount" (System.Func<_, _> value)
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
@@ -712,6 +885,15 @@ module calendar =
         static member inline multiMonthYear =
             Interop.mkProperty<ICalendarProp> "initialView" "multiMonthYear"
 
+        static member inline resourceTimelineWeek =
+            Interop.mkProperty<ICalendarProp> "initialView" "resourceTimelineWeek"
+
+        static member inline resourceTimeline =
+            Interop.mkProperty<ICalendarProp> "initialView" "resourceTimeline"
+
+        static member inline resourceTimeGridDay =
+            Interop.mkProperty<ICalendarProp> "initialView" "resourceTimeGridDay"
+
     /// The method for calculating week numbers that are displayed with the weekNumbers setting.
     [<Erase>]
     type weekNumberCalculation =
@@ -742,6 +924,7 @@ module calendar =
         /// `<link href='https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.1/css/all.css' rel='stylesheet'>`
         /// </code>
         static member inline bootstrap = Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -749,6 +932,7 @@ module calendar =
         static member inline cerulean =
             importSideEffects "bootswatch/dist/cerulean/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -756,6 +940,7 @@ module calendar =
         static member inline cosmo =
             importSideEffects "bootswatch/dist/cosmo/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -763,6 +948,7 @@ module calendar =
         static member inline cyborg =
             importSideEffects "bootswatch/dist/cyborg/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -770,6 +956,7 @@ module calendar =
         static member inline darkly =
             importSideEffects "bootswatch/dist/darkly/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -777,6 +964,7 @@ module calendar =
         static member inline flatly =
             importSideEffects "bootswatch/dist/flatly/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -784,6 +972,7 @@ module calendar =
         static member inline journal =
             importSideEffects "bootswatch/dist/journal/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -791,6 +980,7 @@ module calendar =
         static member inline litera =
             importSideEffects "bootswatch/dist/litera/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -798,6 +988,7 @@ module calendar =
         static member inline lumen =
             importSideEffects "bootswatch/dist/lumen/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -805,6 +996,7 @@ module calendar =
         static member inline lux =
             importSideEffects "bootswatch/dist/lux/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -812,6 +1004,7 @@ module calendar =
         static member inline materia =
             importSideEffects "bootswatch/dist/materia/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -819,6 +1012,7 @@ module calendar =
         static member inline minty =
             importSideEffects "bootswatch/dist/minty/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -826,6 +1020,7 @@ module calendar =
         static member inline morph =
             importSideEffects "bootswatch/dist/morph/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -833,6 +1028,7 @@ module calendar =
         static member inline pulse =
             importSideEffects "bootswatch/dist/pulse/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -840,6 +1036,7 @@ module calendar =
         static member inline quartz =
             importSideEffects "bootswatch/dist/quartz/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -847,6 +1044,7 @@ module calendar =
         static member inline sandstone =
             importSideEffects "bootswatch/dist/sandstone/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -854,6 +1052,7 @@ module calendar =
         static member inline simplex =
             importSideEffects "bootswatch/dist/simplex/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -861,6 +1060,7 @@ module calendar =
         static member inline sketchy =
             importSideEffects "bootswatch/dist/sketchy/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -868,6 +1068,7 @@ module calendar =
         static member inline slate =
             importSideEffects "bootswatch/dist/slate/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -875,6 +1076,7 @@ module calendar =
         static member inline solar =
             importSideEffects "bootswatch/dist/solar/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -882,6 +1084,7 @@ module calendar =
         static member inline spacelab =
             importSideEffects "bootswatch/dist/spacelab/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -889,6 +1092,7 @@ module calendar =
         static member inline superhero =
             importSideEffects "bootswatch/dist/superhero/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -896,6 +1100,7 @@ module calendar =
         static member inline united =
             importSideEffects "bootswatch/dist/united/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -903,6 +1108,7 @@ module calendar =
         static member inline vapor =
             importSideEffects "bootswatch/dist/vapor/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -910,6 +1116,7 @@ module calendar =
         static member inline yeti =
             importSideEffects "bootswatch/dist/yeti/bootstrap.min.css" |> ignore
             Interop.mkProperty<ICalendarProp> "themeSystem" "bootstrap5"
+
         /// User must have bootswatch install, as well as use the Bootstrap5 plugin, in order to use this theme.
         /// <br/>
         /// **NOTE**: If FS.FullCalendar is being used in conjunction with FS.FluentUI, the Calendar must be placed <u>outside</u> of a `Fui.fluentProvider`
@@ -952,26 +1159,20 @@ module calendar =
     /// The direction that elements in the calendar are rendered. Either left-to-right or right-to-left.
     [<Erase>]
     type direction =
-        static member inline ltr =
-            Interop.mkProperty<ICalendarProp> "direction" "ltr"
-        static member inline rtl =
-            Interop.mkProperty<ICalendarProp> "direction" "rtl"
+        static member inline ltr = Interop.mkProperty<ICalendarProp> "direction" "ltr"
+        static member inline rtl = Interop.mkProperty<ICalendarProp> "direction" "rtl"
 
     /// Whether to fix the date-headers at the top of the calendar to the viewport while scrolling.
     [<Erase>]
     type stickyHeaderDates =
-        static member inline auto =
-            Interop.mkProperty<ICalendarProp> "stickyHeaderDates" "auto"
+        static member inline auto = Interop.mkProperty<ICalendarProp> "stickyHeaderDates" "auto"
 
     /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
     [<Erase>]
     type moreLinkClick =
-        static member inline popover =
-            Interop.mkProperty<ICalendarProp> "moreLinkClick" "popover"
-        static member inline week =
-            Interop.mkProperty<ICalendarProp> "moreLinkClick" "week"
-        static member inline day =
-            Interop.mkProperty<ICalendarProp> "moreLinkClick" "day"
+        static member inline popover = Interop.mkProperty<ICalendarProp> "moreLinkClick" "popover"
+        static member inline week = Interop.mkProperty<ICalendarProp> "moreLinkClick" "week"
+        static member inline day = Interop.mkProperty<ICalendarProp> "moreLinkClick" "day"
 // ----------------------------------------------------- Event ----------------------------------------------------------------------
 [<Erase>]
 type event =
@@ -1241,6 +1442,7 @@ type day =
 type buttonIcon =
     static member inline prev(value: string) =
         Interop.mkProperty<IButtonIconProp> "prev" value
+
     static member inline close(value: string) =
         Interop.mkProperty<IButtonIconProp> "close" value
 
@@ -1364,9 +1566,11 @@ type draggable =
     /// For touch devices, the amount of time the user must hold down before an event becomes draggable.
     static member inline longPressDelay(value: int) =
         Interop.mkProperty<IDraggableProp> "longPressDelay" value
+
     /// For touch devices, the amount of time the user must hold down before an event becomes draggable.
     static member inline eventLongPressDelay(value: int) =
         Interop.mkProperty<IDraggableProp> "eventLongPressDelay" value
+
     /// For touch devices, the amount of time the user must hold down before a date becomes selectable.
     static member inline selectLongPressDelay(value: int) =
         Interop.mkProperty<IDraggableProp> "selectLongPressDelay" value
@@ -1378,3 +1582,155 @@ type draggable =
     /// An HTML element that will be the parent of the “mirror” element that follows the mouse while dragging. Defaults to the <body>.
     static member inline appendTo(value: int) =
         Interop.mkProperty<IDraggableProp> "appendTo" value
+
+// ----------------------------------------------------- ResourceAreaColumn ----------------------------------------------------------------------
+[<Erase>]
+type resourceAreaColumn =
+    /// the property of the Resource Object where the data will come from. The data is displayed in the cell of the grid.
+    static member inline field(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "field" value
+
+    /// If specified as true, resources will be grouped by this column.
+    static member inline group(value: bool) =
+        Interop.mkProperty<IResourceAreaColumnProp> "group" value
+
+    /// the width of the column, either in a number of pixels or a string percentage like `"50%"`
+    static member inline width(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "width" value
+
+    /// the width of the column, either in a number of pixels or a string percentage like `"50%"`
+    static member inline width(value: int) =
+        Interop.mkProperty<IResourceAreaColumnProp> "width" value
+
+    /// the width of the column, either in a number of pixels or a string percentage like `"50%"`
+    static member inline width(value: IStyleAttribute) =
+        Interop.mkProperty<IResourceAreaColumnProp> "width" value
+
+    /// a ClassName Input for the <th> at the top
+    static member inline headerClassNames(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerClassNames" value
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: {| html: string |}) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: Node list) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" {| domNodes = value |> List.toArray |}
+
+    /// called right after the <th> was added to the DOM
+    static member inline headerDidMount(value: bool) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerDidMount" value
+
+    /// called right before the <th> will be removed from the DOM
+    static member inline headerWillUnmount(value: bool) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerWillUnmount" value
+
+    /// a ClassName Input for the <td> in the body
+    static member inline cellClassNames(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellClassNames" value
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: {| html: string |}) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: Node list) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" {| domNodes = value |> List.toArray |}
+
+    /// called right after the <td> was added to the DOM
+    static member inline cellDidMount(value: bool) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellDidMount" value
+
+    /// called right before the <td> will be removed from the DOM
+    static member inline cellWillUnmount(value: bool) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellWillUnmount" value
+
+// ----------------------------------------------------- Resource ----------------------------------------------------------------------
+[<Erase>]
+type resource =
+    /// the unique string identifier for this resource
+    static member inline id(value: string) =
+        Interop.mkProperty<IResourceProp> "id" value
+
+    static member inline groupId(value: string) =
+        Interop.mkProperty<IResourceProp> "groupId " value
+
+    /// the string title of this resource
+    static member inline title(value: string) =
+        Interop.mkProperty<IResourceProp> "title" value
+
+    /// a hash of non-standard props that were specified during parsing
+    static member inline extendedProps(value: obj) =
+        Interop.mkProperty<IResourceProp> "extendedProps" value
+
+    /// The eventConstraint setting for associated events.
+    static member inline eventConstraint(value: string) =
+        Interop.mkProperty<IResourceProp> "eventConstraint" value
+
+    static member inline children(value: IResourceProp list list) =
+        let children = value |> List.map (fun c -> !!c |> createObj) |> List.toArray
+        Interop.mkProperty<IResourceProp> "children" children
+
+    /// The eventConstraint setting for associated events.
+    static member inline eventConstraint(value: string list) =
+        Interop.mkProperty<IResourceProp> "eventConstraint" (value |> List.toArray)
+
+    static member inline eventOverlap(value: bool) =
+        Interop.mkProperty<IResourceProp> "eventOverlap" value
+
+    /// The eventAllow setting for associated events.
+    static member inline eventAllow(value: DateSpanApi -> EventImpl -> bool) =
+        Interop.mkProperty<IResourceProp> "eventAllow" (System.Func<_, _, _> value)
+
+    static member inline eventBackgroundColor(value: string) =
+        Interop.mkProperty<IResourceProp> "eventBackgroundColor" value
+
+    static member inline eventBorderColor(value: string) =
+        Interop.mkProperty<IResourceProp> "eventBorderColor" value
+
+    static member inline eventTextColor(value: string) =
+        Interop.mkProperty<IResourceProp> "eventTextColor" value
+
+    /// Events associated with this resources will have their backgrounds and borders colored.
+    /// Any CSS string color format can be specified, like "#f00" or "rgb(255,0,0)".
+    /// This value will take precedence over the global eventColor option and the Event Source Object color option,
+    /// but it will not take precedence over the Event Object color option.
+    static member inline eventColor(value: string) =
+        Interop.mkProperty<IResourceProp> "eventColor" value
+
+    static member inline eventClassNames(value: string list) =
+        Interop.mkProperty<IResourceProp> "eventClassNames" (value |> List.toArray)
+
+    static member inline getParent(value: unit -> ResourceApi option) =
+        Interop.mkProperty<IResourceProp> "getParent" (System.Func<_, _> value)
+
+    static member inline getChildren(value: unit -> ResourceApi array) =
+        Interop.mkProperty<IResourceProp> "getChildren" (System.Func<_, _> value)
+
+    static member inline getEvents(value: unit -> EventApi array) =
+        Interop.mkProperty<IResourceProp> "getEvents" (System.Func<_, _> value)
+
+    static member inline remove(value: unit -> unit) =
+        Interop.mkProperty<IResourceProp> "remove" (System.Func<_, _> value)
+
+    static member inline url(value: string) =
+        Interop.mkProperty<IResourceProp> "url" value
+
+    static member inline method(value: string) =
+        Interop.mkProperty<IResourceProp> "method" value
+
+    static member inline parentId(value: string) =
+        Interop.mkProperty<IResourceProp> "parentId" value
+
+    /// A businessHours declaration that will only apply to this resource
+    static member inline businessHours(value: IBusinessDayProp list) =
+        Interop.mkProperty<IResourceProp> "businessHours" (!!value |> createObj |> unbox)

@@ -4558,6 +4558,7 @@ let FullCalendar () =
     let (calRef: IRefValue<CalendarRoot option>) = React.useRef None
     let containerEl = Browser.Dom.document.getElementById "external-events"
     let checkboxEl = Browser.Dom.document.getElementById "drop-remove"
+    let selectedResourceId, setSelectedResourceId = React.useState ""
 
     if containerEl <> null then
         FullCalendar.Draggable (containerEl, [
@@ -4603,11 +4604,11 @@ let FullCalendar () =
                 if newEventTitle <> "" && selectedDate.IsSome then
                     let calendarApi = selectedDate.Value.view.calendar
                     calendarApi.unselect ()
-
                     let (textColor, backgrounColor) = dayEvent |> Event.getColors
 
                     let newEvent = [
                         event.id newEventTitle
+                        event.resourceId selectedResourceId
                         event.title newEventTitle
                         event.start startTime
                         event.end' endTime
@@ -4733,10 +4734,14 @@ let FullCalendar () =
                     Plugin.bootstrap5Plugin
                     Plugin.listPlugin
                     Plugin.multimonthPlugin
+                    Plugin.resourceTimelinePlugin
+                    Plugin.adaptivePlugin
+                    Plugin.resourceTimeGridPlugin
                 ]
                 calendar.ref calRef
+                calendar.schedulerLicenseKey ""
                 calendar.droppable true
-                calendar.initialView.dayGridMonth
+                calendar.initialView.resourceTimelineWeek
                 calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
                 calendar.editable true
@@ -4750,14 +4755,23 @@ let FullCalendar () =
                         ()
                 )
                 calendar.selectMirror true
+                calendar.resourceGroupField "title"
+                calendar.dateClick (fun (info: DateClickInfo) -> setSelectedResourceId info.resource.id)
                 calendar.dropAccept (fun el -> printfn "api %A" el.innerText; true)
                 calendar.nowIndicator true
                 calendar.unselectAuto true
+                calendar.resourceChange (fun info -> printfn "resourceChange %A" info.resource.id)
                 calendar.unselect (fun unselectArg -> printfn "unselect %A" unselectArg)
                 calendar.validRange [ range.start (DateTime.Today.AddDays -7); range.end' (DateTime.Today.AddDays 7)]
                 calendar.selectable true
                 calendar.select handleDateSelect
                 calendar.eventClick handleEventClick
+                calendar.resourceLabelContent (fun info ->
+                    let resource = info.resource
+                    let resourceId = resource.id
+                    let resourceTitle = resource.title
+                    {| html = $"{resourceTitle} (id = {resourceId})" |}
+                )
                 calendar.themeSystem.cyborg
                 calendar.dayMaxEvents true
                 calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event.title))
@@ -4782,7 +4796,52 @@ let FullCalendar () =
                         customButton.click (fun _ _ -> printf "Joke's on you, I don't do anything")
                     ]
                 ]
-                calendar.events "https://fullcalendar.io/api/demo-feeds/events.json?start=2/23/2025&end=4/5/2025"
+                calendar.resources [
+                    [
+                        resource.id "a"
+                        resource.title "Room A"
+                        resource.groupId "1"
+                        resource.children [
+                            [
+                                resource.id "a1"
+                                resource.title "Room A1"
+                            ]
+                        ]
+                    ]
+                    [
+                        resource.id "b"
+                        resource.groupId "2"
+                        resource.title "Room B"
+                    ]
+                    [
+                        resource.id "c"
+                        resource.groupId "1"
+                        resource.title "Room C"
+                    ]
+                ]
+                calendar.initialEvents [
+                    [
+                        event.id "1"
+                        event.resourceId "a"
+                        event.title "Meeting"
+                        event.start (DateTime (2025, 4, 2, 3, 30, 0))
+                        event.end' (DateTime (2025, 4, 2, 5, 30, 0))
+                    ]
+                    [
+                        event.id "2"
+                        event.resourceId "b"
+                        event.title "Lunch"
+                        event.start (DateTime (2025, 4, 2, 12, 30, 0))
+                        event.end' (DateTime (2025, 4, 2, 1, 30, 0))
+                    ]
+                    [
+                        event.id "3"
+                        event.resourceId "a1"
+                        event.title "Breakfast"
+                        event.start (DateTime (2025, 4, 2, 12, 30, 0))
+                        event.end' (DateTime (2025, 4, 2, 1, 30, 0))
+                    ]
+                ]
             ]
 
             calendarDialog
@@ -4847,104 +4906,104 @@ let mainContent model dispatch =
         stack.children [
             ColorPickerTest ()
             FullCalendar()
-            Html.div [
-                prop.style [
-                    style.height 200
-                    style.width 200
-                    style.backgroundColor newTokens.colorBrandStroke1
-                ]
-                prop.children [
-                    Fui.text [
-                        text.text "Typography Styles"
-                        text.style [
-                            style.fontSize typographyStyles.title1.felizFontSize
-                            style.fontFamily typographyStyles.title1.fontFamily
-                            style.color newTokens.colorBrandBackgroundHover
-                            style.lineHeight typographyStyles.title1.lineHeight
-                            style.fontWeight typographyStyles.title1.fontWeight
-                        ]
-                    ]
-                ]
-            ]
-            ListTest ()
-            UseRestoreFocusSource ()
-            NavTest ()
-            CarouselTest()
-            PresenceComponentTest()
-            MotionComponentTest()
-            SwatchPickerTest()
-            TagPickerTest()
-            ratingTest ()
-            ratingDisplayTest
-            ratingItemTest
-            TeachingPopoverTest()
-            TimePickerTest()
-            MergeClassesTest true
-            MergeClassesTest false
-            Accordion()
-            Checkbox()
-            avatarTest
-            ToggleButtons()
-            buttonTest
-            menuButtonTest
-            MenuTest()
-            imageTest
-            presenceBadgeTest
-            counterBadge
-            PopoverTest()
-            tooltipTest
-            linkTest
-            divider
-            textTest
-            UseArrowNavigationGroup()
-            labelTest
-            IconTest()
-            inputTest model dispatch
-            CompoundButtonTest()
-            SplitButtonTest()
-            TextAreaTest()
-            SliderTest()
-            SwitchTest()
-            RadioGroupTest()
-            TabListTest()
-            spinnerTest
-            SpinButtonTest()
-            SelectTest()
-            personaTest
-            DropdownTest()
-            ComboBoxTest()
-            ToolbarTest()
-            ControlledToolbarTest()
-            avatarGroupTest
-            progressBarTest
-            DialogTest()
-            ToastTest()
-            CardTest()
-            SkeletonTest()
-            DatePickerTest()
-            badgeTest
-            OverflowTest()
-            UseFocusableGroupTest()
-            InfoButtonTest()
-            infoLabelTest
-            alertTest
-            VirtualizerTest()
-            VirtualizerScrollViewTest()
-            DrawerTest()
-            simpleTreeTest
-            FlatTreeTest()
-            DataGridTest()
-            // SimpleTableTest()
-            UseFocusFindersTest()
-            UseModalAttributesOptionsTest()
-            fieldPropsTest
-            BreadcrumbTest()
-            SearchBoxTest()
-            TagTest()
-            InteractionTagTest()
-            Portal()
-            MessageBarTest()
-            CalendarTest()
+            // Html.div [
+            //     prop.style [
+            //         style.height 200
+            //         style.width 200
+            //         style.backgroundColor newTokens.colorBrandStroke1
+            //     ]
+            //     prop.children [
+            //         Fui.text [
+            //             text.text "Typography Styles"
+            //             text.style [
+            //                 style.fontSize typographyStyles.title1.felizFontSize
+            //                 style.fontFamily typographyStyles.title1.fontFamily
+            //                 style.color newTokens.colorBrandBackgroundHover
+            //                 style.lineHeight typographyStyles.title1.lineHeight
+            //                 style.fontWeight typographyStyles.title1.fontWeight
+            //             ]
+            //         ]
+            //     ]
+            // ]
+            // ListTest ()
+            // UseRestoreFocusSource ()
+            // NavTest ()
+            // CarouselTest()
+            // PresenceComponentTest()
+            // MotionComponentTest()
+            // SwatchPickerTest()
+            // TagPickerTest()
+            // ratingTest ()
+            // ratingDisplayTest
+            // ratingItemTest
+            // TeachingPopoverTest()
+            // TimePickerTest()
+            // MergeClassesTest true
+            // MergeClassesTest false
+            // Accordion()
+            // Checkbox()
+            // avatarTest
+            // ToggleButtons()
+            // buttonTest
+            // menuButtonTest
+            // MenuTest()
+            // imageTest
+            // presenceBadgeTest
+            // counterBadge
+            // PopoverTest()
+            // tooltipTest
+            // linkTest
+            // divider
+            // textTest
+            // UseArrowNavigationGroup()
+            // labelTest
+            // IconTest()
+            // inputTest model dispatch
+            // CompoundButtonTest()
+            // SplitButtonTest()
+            // TextAreaTest()
+            // SliderTest()
+            // SwitchTest()
+            // RadioGroupTest()
+            // TabListTest()
+            // spinnerTest
+            // SpinButtonTest()
+            // SelectTest()
+            // personaTest
+            // DropdownTest()
+            // ComboBoxTest()
+            // ToolbarTest()
+            // ControlledToolbarTest()
+            // avatarGroupTest
+            // progressBarTest
+            // DialogTest()
+            // ToastTest()
+            // CardTest()
+            // SkeletonTest()
+            // DatePickerTest()
+            // badgeTest
+            // OverflowTest()
+            // UseFocusableGroupTest()
+            // InfoButtonTest()
+            // infoLabelTest
+            // alertTest
+            // VirtualizerTest()
+            // VirtualizerScrollViewTest()
+            // DrawerTest()
+            // simpleTreeTest
+            // FlatTreeTest()
+            // DataGridTest()
+            // // SimpleTableTest()
+            // UseFocusFindersTest()
+            // UseModalAttributesOptionsTest()
+            // fieldPropsTest
+            // BreadcrumbTest()
+            // SearchBoxTest()
+            // TagTest()
+            // InteractionTagTest()
+            // Portal()
+            // MessageBarTest()
+            // CalendarTest()
         ]
     ]
 

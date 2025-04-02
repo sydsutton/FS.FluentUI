@@ -52,6 +52,15 @@ module Plugin =
     [<ImportDefault("@fullcalendar/moment-timezone")>]
     let momentTimezonePlugin: IPlugin = jsNative
 
+    [<ImportDefault("@fullcalendar/resource-timeline")>]
+    let resourceTimelinePlugin: IPlugin = jsNative
+
+    [<ImportDefault("@fullcalendar/adaptive")>]
+    let adaptivePlugin: IPlugin = jsNative
+
+    [<ImportDefault("@fullcalendar/resource-timegrid")>]
+    let resourceTimeGridPlugin: IPlugin = jsNative
+
 type FullCalendar =
     static member inline Calendar(props: ICalendarProp list) =
         Helpers.createElement Helpers.FullCalendar props

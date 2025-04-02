@@ -47,6 +47,9 @@
             <NpmPackage Name="@fullcalendar/multimonth" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/list" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/moment" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-timeline" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/adaptive" Version="gte 6.1.17" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
             <NpmPackage Name="bootswatch" Version="gte 5.3.3" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>

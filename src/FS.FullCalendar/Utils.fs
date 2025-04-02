@@ -50,3 +50,9 @@ type IBusinessDayProp = interface end
 
 [<Erase>]
 type IFetchInfoProp = interface end
+
+[<Erase>]
+type IResourceAreaColumnProp = interface end
+
+[<Erase>]
+type IResourceProp = interface end

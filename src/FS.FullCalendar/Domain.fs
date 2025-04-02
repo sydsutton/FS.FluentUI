@@ -43,23 +43,21 @@ type Duration = {
     specifiedWeeks: bool
 }
 
+type ResourceMutation = {
+    matchResourceId: string
+    setResourceId: string
+}
+
 type EventMutation = {
     datesDelta: Duration
     startDelta: Duration
     endDelta: Duration
     standardProps: obj
     extendedProps: obj
+    resourceMutation: ResourceMutation
 }
 
 type DateRange = { start: DateTime; ``end``: DateTime }
-
-type DateSpanApi = {
-    allDay: bool
-    start: DateTime
-    ``end``: DateTime
-    startStr: string
-    endStr: string
-}
 
 type ToPlainObjectSettings = {
     collapseExtendedProps: bool
@@ -208,10 +206,9 @@ and ViewApi = {
     currentEnd: DateTime
     getOption: string -> unit
 }
-and DateUnselectArg = {
-    jsEvent: MouseEvent
-    view: ViewApi
-}
+
+and DateUnselectArg = { jsEvent: MouseEvent; view: ViewApi }
+
 and CalendarApi = {
     view: ViewApi
     updateSize: unit -> unit
@@ -246,8 +243,19 @@ and CalendarApi = {
     removeAllEventSources: unit -> unit
     refetchEvents: unit -> unit
     scrollToTime: DurationObjectInput -> unit
+    ///  method that retrieves only top-level Resources.
+    getTopLevelResources: unit -> ResourceApi array
+    /// Causes the resource data to be fetched and freshly rerendered.
+    refetchResources: unit -> unit
+    /// A method that retrieves only top-level Resources.
+    getResources: unit -> ResourceApi array
+    /// A method that retrieves a specific Resource Object in memory.
+    getResourceById: string -> ResourceApi option
+    /// Allows programmatic rendering of a new resource on the calendar after the initial set of resources has already been displayed.
+    addResource: obj -> bool -> ResourceApi
 }
-and  DropInfo = {
+
+and DropInfo = {
     /// true or false whether dropped on one of the all-day cells.
     allDay: bool
     /// The Date of where the draggable was dropped.
@@ -259,10 +267,11 @@ and  DropInfo = {
     /// The native JavaScript event with low-level information such as click coordinates.
     jsEvent: UIEvent
     /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
-    resource: Resource
+    resource: ResourceApi
     /// The current View Object.
     view: ViewApi
 }
+
 and EventSource = {
     id: string
     url: string
@@ -305,6 +314,8 @@ and EventSourceImpl = {
 }
 
 and EventImpl = {
+    getResources: unit -> ResourceApi array
+    setResources: ResourceApi array -> unit
     mutate: EventMutation -> unit
     source: EventSourceApi option
     start: DateTime option
@@ -356,24 +367,43 @@ and EventUi = {
     textColor: string
     classNames: string array
 }
-and Resource = {
-    /// the unique string identifier for this resource
+
+and ResourceApi = {
+    remove: unit -> unit
+    getParent: unit -> ResourceApi option
+    getChildren: unit -> ResourceApi array
+    getEvents: unit -> EventApi array
     id: string
-    /// the string title of this resource
     title: string
-    /// a hash of non-standard props that were specified during parsing
-    extendedProps: obj
     eventConstraint: string
+    children: ResourceApi array
     eventOverlap: bool
-    eventAllow: bool
+    eventAllow: obj
     eventBackgroundColor: string
     eventBorderColor: string
     eventTextColor: string
     eventClassNames: string array
-    getParent: unit -> Resource
-    getChildren: unit -> Resource array
-    getEvents: unit -> CalendarEvent array
-    remove: unit -> unit
+    extendedProps: obj
+    toPlainObject: PlainObjectSettings -> obj
+    toJSON: unit -> obj
+    setProp: string -> obj -> unit
+    setExtendedProp: string -> obj -> unit
+    getResources: unit -> ResourceApi array
+    setResources: ResourceApi array -> unit
+}
+
+and PlainObjectSettings = {
+    collapseExtendedProps: bool
+    collapseEventColor: bool
+}
+
+and DateSpanApi = {
+    allDay: bool
+    start: DateTime
+    ``end``: DateTime
+    startStr: string
+    endStr: string
+    resource: ResourceApi
 }
 
 type EventClickArg = {
@@ -427,9 +457,9 @@ type EventDropInfo = {
     /// An Event Object that holds information about the event before the drop.
     oldEvent: CalendarEvent
     /// If the resource has changed, this is the Resource Object the event came from. If the resource has not changed, this will be undefined. For use with the resource plugins only.
-    oldResource: Resource
+    oldResource: ResourceApi
     /// If the resource has changed, this is the Resource Object the event went to. If the resource has not changed, this will be undefined. For use with the resource plugins only.
-    newResource: Resource
+    newResource: ResourceApi
     /// A Duration Object that represents the amount of time the event was moved by.
     delta: DurationObjectInput
     /// A function that, if called, reverts the event’s start/end date to the values before the drag. This is useful if an ajax call should fail.
@@ -459,7 +489,7 @@ type SelectInfo = {
     /// View object. The current Calendar view.
     View: ViewApi
     /// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
-    resource: Resource
+    resource: ResourceApi
 }
 
 type DateClickInfo = {
@@ -476,7 +506,7 @@ type DateClickInfo = {
     /// The current View Object.
     view: ViewApi
     /// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
-    resource: Resource
+    resource: ResourceApi
 }
 
 type CalendarRoot = {
@@ -513,6 +543,7 @@ type MouseInfo = {
     /// The current View Object.
     view: ViewApi
 }
+
 type EventInfo = {
     event: EventImpl
     relatedEvents: EventImpl array
@@ -545,4 +576,41 @@ type MoreLinkClickInfo = {
     date: DateTime
     allSegs: EventSegment array
     jsEvent: UIEvent
+}
+
+type FetchInfo = {
+    start: DateTime
+    ``end``: DateTime
+    startStr: string
+    endStr: string
+    timeZone: string
+}
+
+type ResourceChangeInfo = {
+    resource: ResourceApi
+    oldResource: ResourceApi
+    revert: unit -> unit
+}
+
+type ResourceRemoveInfo = {
+    resource: ResourceApi
+    revert: unit -> unit
+}
+
+type ResourceLabelContentArg = {
+    resource: ResourceApi
+    date: DateTime
+    view: ViewApi
+}
+
+type ResourceLabelMountArg = {
+    resource: ResourceApi
+    date: DateTime
+    view: ViewApi
+    el: HTMLElement
+}
+
+type AddInfo = {
+    resource: ResourceApi
+    revert: unit -> unit
 }
