@@ -95,6 +95,7 @@ type DateSelectArg = {
     startStr: string
     endStr: string
     allDay: bool
+    resource: ResourceApi
 }
 
 and EventAddData = {
