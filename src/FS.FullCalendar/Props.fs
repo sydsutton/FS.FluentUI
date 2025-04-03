@@ -747,7 +747,7 @@ type calendar =
 
     /// Tells the calendar to display resources from an array input.
     static member inline resources(value: 'T list) =
-        Interop.mkProperty<ICalendarProp> "resources" (!!value |> createObj |> unbox)
+        Interop.mkProperty<ICalendarProp> "resources" (value |> List.toArray)
 
     /// Whether to refetch and rerender resources when the user navigates to a different date or changes the view.
     static member inline refetchResourcesOnNavigate(value: bool) =

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta04</Version>
+        <Version>0.0.1-beta05</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Add Premium/resource-related properties and types.
+            - Fix bug in one of the `resources` prop overloads.
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -50,6 +50,7 @@
             <NpmPackage Name="@fullcalendar/resource-timeline" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/adaptive" Version="gte 6.1.17" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="bootswatch" Version="gte 5.3.3" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
