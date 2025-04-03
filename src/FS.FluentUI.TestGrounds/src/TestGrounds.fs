@@ -4592,6 +4592,7 @@ let FullCalendar () =
 
     let handleEventClick =
         fun (selected: EventClickArg) ->
+            printfn "selected %A" selected.event._def.resourceIds
             if Browser.Dom.window.confirm $"Are you sure you want to delete the event {selected.event.title}" then
                 selected.event.remove ()
 
@@ -4741,9 +4742,9 @@ let FullCalendar () =
                 calendar.ref calRef
                 calendar.schedulerLicenseKey ""
                 calendar.droppable true
-                calendar.initialView.resourceTimelineWeek
+                calendar.initialView.resourceTimeGridDay
                 calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
-                calendar.eventChange (fun c -> printfn "event %A oldEvent %A" c.event.start c.oldEvent.start)
+                calendar.eventChange (fun c -> printfn "event %A oldEventResourceId %A" c.event.start c.oldEvent._def.resourceIds)
                 calendar.editable true
                 calendar.eventMaxStack 2
                 calendar.dayMaxEventRows 3
@@ -4774,12 +4775,12 @@ let FullCalendar () =
                 )
                 calendar.themeSystem.cyborg
                 calendar.dayMaxEvents true
-                calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event.title))
+                calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event._def.resourceIds))
                 calendar.loading (fun b -> printfn "isLoading %A" b)
                 calendar.buttonIcons [
                     buttonIcon.prev "chevron-left"
                 ]
-                calendar.eventsSet (fun (e: CalendarEvent array) -> printfn "eventsSet %A" (e |> Array.map (fun e -> e.title)))
+                calendar.eventsSet (fun (e: EventImpl array) -> printfn "eventsSet %A" (e |> Array.map (fun e -> e._def.resourceIds)))
                 calendar.headerToolbar [
                     headerToolbar.start "today prev,next"
                     headerToolbar.center "title"

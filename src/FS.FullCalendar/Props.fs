@@ -263,7 +263,7 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "eventMouseLeave" (System.Func<_, _> value)
 
     /// Called after event data is initialized OR changed in any way.
-    static member inline eventsSet(value: CalendarEvent array -> unit) =
+    static member inline eventsSet(value: EventImpl array -> unit) =
         Interop.mkProperty<ICalendarProp> "eventsSet" (System.Func<_, _> value)
 
     /// Triggered when dragging stops and the event has moved to a different day/time.
@@ -457,7 +457,7 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "selectOverlap" value
 
     /// Determines whether the user is allowed to select periods of time that are occupied by events.
-    static member inline selectOverlap(value: CalendarEvent -> bool) =
+    static member inline selectOverlap(value: EventImpl -> bool) =
         Interop.mkProperty<ICalendarProp> "selectOverlap" (System.Func<_, _> value)
 
     /// Limits user selection to certain windows of time.
@@ -537,7 +537,7 @@ type calendar =
     static member inline ref(value: IRefValue<CalendarRoot option>) =
         Interop.mkProperty<ICalendarProp> "ref" value
 
-    /// A hook for transforming custom data into a standard CalendarEvent object.
+    /// A hook for transforming custom data into a standard EventImpl object.
     static member inline eventDataTransform(value: 'T) =
         Interop.mkProperty<ICalendarProp> "eventDataTransform" value
 
@@ -630,7 +630,7 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "progressiveEventRendering" value
 
     /// Exact programmatic control over where an event can be dropped.
-    static member inline eventAllow(value: DropInfo -> CalendarEvent -> bool) =
+    static member inline eventAllow(value: DropInfo -> EventImpl -> bool) =
         Interop.mkProperty<ICalendarProp> "eventAllow" (System.Func<_, _, _> value)
 
     /// Provides a way to filter which external elements can be dropped onto the calendar.
@@ -1716,7 +1716,7 @@ type resource =
     static member inline getChildren(value: unit -> ResourceApi array) =
         Interop.mkProperty<IResourceProp> "getChildren" (System.Func<_, _> value)
 
-    static member inline getEvents(value: unit -> EventApi array) =
+    static member inline getEvents(value: unit -> EventImpl array) =
         Interop.mkProperty<IResourceProp> "getEvents" (System.Func<_, _> value)
 
     static member inline remove(value: unit -> unit) =

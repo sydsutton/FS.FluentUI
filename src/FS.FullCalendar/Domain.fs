@@ -81,60 +81,6 @@ type SetEndOptions = { granularity: string }
 
 type StartInputOptions = { allDay: bool; granularity: string }
 
-
-type CalendarEvent = {
-    /// A unique identifier of an event. Useful for getEventById.
-    id: string
-    /// Events that share a groupId will be dragged and resized together automatically.
-    groupId: string
-    /// Determines if the event is shown in the “all-day” section of relevant views. In addition, if true the time text is not displayed with the event.
-    allDay: bool
-    /// Date object that obeys the current timeZone. When an event begins.
-    start: DateTime
-    /// Date oject that obeys the current timeZone. When an event ends. It could be null if an end wasn’t specified.
-    /// Note: This value is exclusive. For example, an event with the end of 2018-09-03 will appear to span through 2018-09-02 but end before the start of 2018-09-03. See how events are are parsed from a plain object for further details.
-    ``end``: DateTime
-    /// An ISO8601 string representation of the start date. If the event is all-day, there will not be a time part.
-    startStr: string
-    /// An ISO8601 string representation of the end date. If the event is all-day, there will not be a time part.
-    /// The text that will appear on an event.
-    endStr: string
-    title: string
-    /// A URL that will be visited when this event is clicked by the user. For more information on controlling this behavior, see the eventClick callback.
-    url: string
-    /// An array of strings like [ 'myclass1', myclass2' ]. Determines which HTML classNames will be attached to the rendered event.
-    classNames: string array
-    /// The value overriding the editable setting for this specific event.
-    editable: bool
-    /// Boolean (true or false) or null.
-    startEditable: bool
-    /// The value overriding the eventDurationEditable setting for this specific event.
-    durationEditable: bool
-    /// The value overriding the eventResourceEditable setting for this specific event.
-    resourceEditable: bool
-    /// The rendering type of this event. Can be 'auto', 'block', 'list-item', 'background', 'inverse-background', or 'none'. See eventDisplay.
-    display: string
-    /// The value overriding the eventOverlap setting for this specific event. If false, prevents this event from being dragged/resized over other events. Also prevents other events from being dragged/resized over this event. Does not accept a function.
-    overlap: bool
-    /// The eventConstraint override for this specific event.
-    ``constraint``: string
-
-    /// The eventBackgroundColor override for this specific event.
-    backgroundColor: string
-
-    /// The eventBorderColor override for this specific event.
-    borderColor: string
-
-    /// The eventTextColor override for this specific event.
-    textColor: string
-
-    /// A plain object holding miscellaneous other properties specified during parsing. Receives properties in the explicitly given extendedProps hash as well as other non-standard properties.
-    extendedProps: obj
-
-    /// A reference to the Event Source this event came from. If the event was added dynamically via addEvent, and the source parameter was not specified, this value will be null.
-    source: obj
-}
-
 type CalendarError = {
     name: string
     message: string
@@ -152,46 +98,9 @@ type DateSelectArg = {
 }
 
 and EventAddData = {
-    event: CalendarEvent
-    relatedEvents: CalendarEvent array
+    event: EventImpl
+    relatedEvents: EventImpl array
     revert: unit -> unit
-}
-
-and EventApi = {
-    source: EventSourceApi option
-    start: DateTime option
-    ``end``: DateTime option
-    startStr: string
-    endStr: string
-    id: string
-    groupId: string
-    allDay: bool
-    title: string
-    url: string
-    display: string
-    startEditable: bool
-    durationEditable: bool
-    ``constraint``: string
-    overlap: bool
-    allow: string
-    backgroundColor: string
-    borderColor: string
-    textColor: string
-    classNames: string array
-    extendedProps: obj
-    setProp: string -> obj -> unit
-    setExtendedProp: string -> obj -> unit
-    setStart: DateTime -> SetStartOptions -> unit
-    setEnd: DateTime option -> SetEndOptions -> unit
-    setDates: DateTime -> DateTime option -> StartInputOptions -> unit
-    moveStart: DurationObjectInput -> unit
-    moveEnd: DurationObjectInput -> unit
-    moveDates: DurationObjectInput -> unit
-    setAllDay: bool -> SetAllDayOptions -> unit
-    formatRange: FormatterInput -> obj
-    remove: unit -> unit
-    toPlainObject: ToPlainObjectSettings -> obj
-    toJSON: unit -> obj
 }
 
 and EventSourceSuccessResponseHandler = obj * obj * obj -> obj array
@@ -312,7 +221,34 @@ and EventSourceImpl = {
     remove: unit -> unit
     refetch: unit -> unit
 }
+and EventDef = {
+    allDay: bool
+    defId: string
+    extendedProps: obj
+    groupId: string
+    hasEnd: bool
+    interactive: bool
+    publicId: string
+    recurringDef: RecurringDef option
+    resourceIds: string array
+    sourceId: string
+    title: string
+    url: string
+    ui: EventUi
+}
+and EventInstance = {
+    instanceId: string
+    defId: string
+    range: DateRange
+    forcedStartTzo: int option
+    forcedEndTzo: int option
+}
 
+and RecurringDef = {
+    typeId: int
+    typeData: obj
+    duration: Duration option
+}
 and EventImpl = {
     getResources: unit -> ResourceApi array
     setResources: ResourceApi array -> unit
@@ -351,7 +287,13 @@ and EventImpl = {
     remove: unit -> unit
     toPlainObject: ToPlainObjectSettings -> obj
     toJSON: unit -> obj
+    _def: EventDef
+    _instance: EventInstance option
+    view: ViewApi
+    editable: bool
+    resourceEditable: bool
 }
+
 
 and AllowFunc = DateSpanApi * EventImpl option -> bool
 
@@ -372,7 +314,7 @@ and ResourceApi = {
     remove: unit -> unit
     getParent: unit -> ResourceApi option
     getChildren: unit -> ResourceApi array
-    getEvents: unit -> EventApi array
+    getEvents: unit -> EventImpl array
     id: string
     title: string
     eventConstraint: string
@@ -421,20 +363,20 @@ type EventDragInfo = {
 
 type ChangeInfo = {
     /// An Event Object with the updated changed data
-    event: CalendarEvent
+    event: EventImpl
     /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: CalendarEvent array
+    relatedEvents: EventImpl array
     /// An Event Object with data prior to the change
-    oldEvent: CalendarEvent
+    oldEvent: EventImpl
     /// A function that can be called to reverse this action
     revert: unit -> unit
 }
 
 type RemoveInfo = {
     /// An Event Object with the updated changed data
-    event: CalendarEvent
+    event: EventImpl
     /// An array of other related Event Objects that were also affected. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: CalendarEvent array
+    relatedEvents: EventImpl array
     /// A function that can be called to reverse this action
     revert: unit -> unit
 }
@@ -451,11 +393,11 @@ type PointerDragEvent = {
 
 type EventDropInfo = {
     /// An Event Object that holds information about the event (date, title, etc) after the drop.
-    event: CalendarEvent
+    event: EventImpl
     /// An array of other related Event Objects that were also dropped. an event might have other recurring event instances or might be linked to other events with the same groupId
-    relatedEvents: CalendarEvent array
+    relatedEvents: EventImpl array
     /// An Event Object that holds information about the event before the drop.
-    oldEvent: CalendarEvent
+    oldEvent: EventImpl
     /// If the resource has changed, this is the Resource Object the event came from. If the resource has not changed, this will be undefined. For use with the resource plugins only.
     oldResource: ResourceApi
     /// If the resource has changed, this is the Resource Object the event went to. If the resource has not changed, this will be undefined. For use with the resource plugins only.
@@ -535,7 +477,7 @@ type EventInput = {
 
 type MouseInfo = {
     /// The associated Event Object.
-    event: CalendarEvent
+    event: EventImpl
     /// The HTML element for this event.
     el: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
