@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>0.0.1-beta05</Version>
+        <Version>0.0.1-beta06</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Fix bug in one of the `resources` prop overloads.
+            - Remove unnecessary Event-related types and add _def and _instance values to EventImpl type.
         </PackageReleaseNotes>
     </PropertyGroup>
 
