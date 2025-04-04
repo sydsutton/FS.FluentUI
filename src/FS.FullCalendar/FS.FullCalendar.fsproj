@@ -42,6 +42,7 @@
             <NpmPackage Name="@fullcalendar/daygrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/interaction" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/timegrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/timeline" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/bootstrap5" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/bootstrap" Version="gte 6.1.15" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/multimonth" Version="gte 6.1.15" ResolutionStrategy="Max" />
@@ -51,6 +52,7 @@
             <NpmPackage Name="@fullcalendar/adaptive" Version="gte 6.1.17" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/resource" Version="gte 6.1.15" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-daygrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
             <NpmPackage Name="bootswatch" Version="gte 5.3.3" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>

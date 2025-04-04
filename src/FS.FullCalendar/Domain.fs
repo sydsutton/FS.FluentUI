@@ -222,6 +222,7 @@ and EventSourceImpl = {
     remove: unit -> unit
     refetch: unit -> unit
 }
+
 and EventDef = {
     allDay: bool
     defId: string
@@ -237,6 +238,7 @@ and EventDef = {
     url: string
     ui: EventUi
 }
+
 and EventInstance = {
     instanceId: string
     defId: string
@@ -250,6 +252,7 @@ and RecurringDef = {
     typeData: obj
     duration: Duration option
 }
+
 and EventImpl = {
     getResources: unit -> ResourceApi array
     setResources: ResourceApi array -> unit
@@ -556,4 +559,27 @@ type ResourceLabelMountArg = {
 type AddInfo = {
     resource: ResourceApi
     revert: unit -> unit
+}
+
+type MountInfo = { el: HTMLElement; view: ViewApi }
+
+type EventContentArg = {
+    event: EventImpl
+    timeText: string
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    isDraggable: bool
+    isStartResizable: bool
+    isEndResizable: bool
+    isMirror: bool
+    isStart: bool
+    isEnd: bool
+    isPast: bool
+    isFuture: bool
+    isToday: bool
+    isSelected: bool
+    isDragging: bool
+    isResizing: bool
+    view: ViewApi
 }

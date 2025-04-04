@@ -99,8 +99,12 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "validRange" (!!value |> createObj |> unbox)
 
     /// Programatically scroll the current view to the given time.
-    static member inline scrollToTime(value: IDurationProp list) = //TODO
+    static member inline scrollToTime(value: IDurationProp list) =
         Interop.mkProperty<ICalendarProp> "scrollToTime" (!!value |> createObj |> unbox)
+
+    /// Programatically scroll the current view to the given time.
+    static member inline scrollToTime(value: string) =
+        Interop.mkProperty<ICalendarProp> "scrollToTime" value
 
     /// Allows a user to highlight multiple days or timeslots by clicking and dragging.
     static member inline selectable(value: bool) =
@@ -359,6 +363,10 @@ type calendar =
     static member inline windowResize(value: ViewApi -> unit) =
         Interop.mkProperty<ICalendarProp> "windowResize" (System.Func<_, _> value)
 
+    /// The separator text used for date-formatting ranges throughout the API.
+    static member inline defaultRangeSeparator(value: string) =
+        Interop.mkProperty<ICalendarProp> "defaultRangeSeparator" value
+
     /// In month view, whether dates in the previous or next month should be rendered at all.
     static member inline showNonCurrentDates(value: bool) =
         Interop.mkProperty<ICalendarProp> "showNonCurrentDates" value
@@ -382,6 +390,10 @@ type calendar =
     /// A Date Formatter that affects the text on the left side of the day headings in list view.
     static member inline listDayFormat(value: string) =
         Interop.mkProperty<ICalendarProp> "listDayFormat" value
+
+    /// Determines the number of weeks displayed in a month view.
+    static member inline fixedWeekCount(value: bool) =
+        Interop.mkProperty<ICalendarProp> "fixedWeekCount" value
 
     /// A Date Formatter that affects the text on the left side of the day headings in list view.
     static member inline listDayFormat(value: bool) =
@@ -436,6 +448,14 @@ type calendar =
     static member inline weekText(value: string) =
         Interop.mkProperty<ICalendarProp> "weekText" value
 
+    /// Sets the exact date range that is visible in a view.
+    static member inline visibleRange(value: DateRangeInput) =
+        Interop.mkProperty<ICalendarProp> "visibleRange" value
+
+    /// Sets the exact date range that is visible in a view.
+    static member inline visibleRange(value: DateTime -> DateRangeInput) =
+        Interop.mkProperty<ICalendarProp> "visibleRange" (System.Func<_, _> value)
+
     /// Like weekText but only used when the date-formatting week setting is set to 'long'.
     static member inline weekTextLong(value: string) =
         Interop.mkProperty<ICalendarProp> "weekTextLong" value
@@ -463,6 +483,10 @@ type calendar =
     /// Limits user selection to certain windows of time.
     static member inline selectConstraint(value: string) =
         Interop.mkProperty<ICalendarProp> "selectConstraint" value
+
+    /// Sets the exact number of days displayed in a custom view, regardless of weekends or hiddenDays.
+    static member inline dayCount(value: int) =
+        Interop.mkProperty<ICalendarProp> "dayCount" value
 
     /// The locale and locales options allow you to localize certain aspects of the calendar
     static member inline locale(value: string) =
@@ -681,6 +705,30 @@ type calendar =
     static member inline eventMaxStack(value: int) =
         Interop.mkProperty<ICalendarProp> "eventMaxStack" value
 
+    /// a ClassName Input for adding classNames to the root view element. called whenever the view changes.
+    static member inline viewClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "viewClassNames" (value |> List.toArray)
+
+    /// a ClassName Input for adding classNames to the root view element. called whenever the view changes.
+    static member inline viewClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "viewClassNames" value
+
+    /// a ClassName Input for adding classNames to the root view element. called whenever the view changes.
+    static member inline viewClassNames(value: EventContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "viewClassNames" (System.Func<_, _> value)
+
+    /// a ClassName Input for adding classNames to the root view element. called whenever the view changes.
+    static member inline viewClassNames(value: EventContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "viewClassNames" (System.Func<_, _> value)
+
+    /// called right after the view has been added to the DOM
+    static member inline viewDidMount(value: MountInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "viewDidMount" (System.Func<_, _> value)
+
+    /// called right before the view will be removed from the DOM
+    static member inline viewWillUnmount(value: MountInfo -> unit) =
+        Interop.mkProperty<ICalendarProp> "viewWillUnmount" (System.Func<_, _> value)
+
     /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
     static member inline dayMaxEvents(value: int) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
@@ -859,13 +907,28 @@ type calendar =
             | [] -> {| |} |> unbox
             | buttons ->
                 [
-                    for (name, styles) in buttons do
-                        name, !!styles |> createObj
+                    for (name, props) in buttons do
+                        name, !!props |> createObj
                 ]
                 |> createObj
                 |> unbox
 
         Interop.mkProperty<ICalendarProp> "customButtons" buttons
+
+    /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
+    static member inline views(value: (string * ICustomViewProp list) list) =
+        let views =
+            match value with
+            | [] -> {| |} |> unbox
+            | views ->
+                [
+                    for (name, props) in views do
+                        name, !!props |> createObj
+                ]
+                |> createObj
+                |> unbox
+
+        Interop.mkProperty<ICalendarProp> "views" views
 
 module calendar =
     /// The initial view when the calendar loads.
@@ -880,6 +943,9 @@ module calendar =
         static member inline timeGridDay =
             Interop.mkProperty<ICalendarProp> "initialView" "timeGridDay"
 
+        static member inline timelineWeek =
+            Interop.mkProperty<ICalendarProp> "initialView" "timelineWeek"
+
         static member inline listWeek = Interop.mkProperty<ICalendarProp> "initialView" "listWeek"
 
         static member inline multiMonthYear =
@@ -893,6 +959,9 @@ module calendar =
 
         static member inline resourceTimeGridDay =
             Interop.mkProperty<ICalendarProp> "initialView" "resourceTimeGridDay"
+
+        static member inline resourceTimelineDay =
+            Interop.mkProperty<ICalendarProp> "initialView" "resourceTimelineDay"
 
     /// The method for calculating week numbers that are displayed with the weekNumbers setting.
     [<Erase>]
@@ -1269,8 +1338,29 @@ type event =
     static member inline textColor(value: string) =
         Interop.mkProperty<IEventProp> "textColor" value
 
-    static member inline source(value: 'T) =
-        Interop.mkProperty<IEventProp> "source" value //TODO
+    /// An “event source” is anything that provides FullCalendar with data about events. It can be a simple array,
+    /// an event-generating function that you define, a URL to a json feed, or a Google Calendar feed.
+    static member inline source(value: string) =
+        Interop.mkProperty<IEventProp> "source" value
+
+    /// An “event source” is anything that provides FullCalendar with data about events. It can be a simple array,
+    /// an event-generating function that you define, a URL to a json feed, or a Google Calendar feed.
+    static member inline source(value: 'T list) =
+        Interop.mkProperty<IEventProp> "source" (value |> List.toArray)
+
+    /// An “event source” is anything that provides FullCalendar with data about events. It can be a simple array,
+    /// an event-generating function that you define, a URL to a json feed, or a Google Calendar feed.
+    static member inline source(value: IEventProp list) =
+        Interop.mkProperty<IEventProp> "source" (!!value |> createObj |> unbox)
+
+    /// A custom function for programmatically generating Events.
+    static member inline source
+        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
+        =
+        Interop.mkProperty<ICalendarProp>
+            "events"
+            (System.Func<_, _, _, _>(fun (value: IFetchInfoProp list) success failure ->
+                handler (!!value |> createObj |> unbox) success failure))
 
     static member inline googleCalendarId(value: string) =
         Interop.mkProperty<IEventProp> "googleCalendarId" value
@@ -1309,7 +1399,7 @@ type customButton =
     static member inline icon(value: string) =
         Interop.mkProperty<ICustomButtonProp> "icon" value
 
-    static member inline bootstrapFontAwesome(value: string) = //TODO
+    static member inline bootstrapFontAwesome(value: string) =
         Interop.mkProperty<ICustomButtonProp> "bootstrapFontAwesome" value
 
 // ----------------------------------------------------- HeaderToolbar ----------------------------------------------------------------------
@@ -1662,7 +1752,7 @@ type resource =
         Interop.mkProperty<IResourceProp> "id" value
 
     static member inline groupId(value: string) =
-        Interop.mkProperty<IResourceProp> "groupId " value
+        Interop.mkProperty<IResourceProp> "groupId" value
 
     /// the string title of this resource
     static member inline title(value: string) =
@@ -1734,3 +1824,53 @@ type resource =
     /// A businessHours declaration that will only apply to this resource
     static member inline businessHours(value: IBusinessDayProp list) =
         Interop.mkProperty<IResourceProp> "businessHours" (!!value |> createObj |> unbox)
+
+// ----------------------------------------------------- CustomView ----------------------------------------------------------------------
+[<Erase>]
+type customView =
+    static member inline buttonText(value: string) =
+        Interop.mkProperty<ICustomViewProp> "buttonText" value
+
+    static member inline duration(value: IDurationProp list) =
+        Interop.mkProperty<ICustomViewProp> "duration" (!!value |> createObj |> unbox)
+
+    static member inline titleFormat(value: IDateFormatProp list) =
+        Interop.mkProperty<ICustomViewProp> "titleFormat" (!!value |> createObj |> unbox)
+
+    static member inline dayCount(value: int) =
+        Interop.mkProperty<ICustomViewProp> "dayCount" value
+
+    static member inline visibleRange(value: DateRangeInput) =
+        Interop.mkProperty<ICustomViewProp> "visibleRange" value
+
+    /// Sets the exact date range that is visible in a view.
+    static member inline visibleRange(value: DateTime -> DateRangeInput) =
+        Interop.mkProperty<ICustomViewProp> "visibleRange" (System.Func<_, _> value)
+
+    static member inline slotDuration(value: string) =
+        Interop.mkProperty<ICustomViewProp> "slotDuration" value
+
+module customView =
+    [<Erase>]
+    type type' =
+        static member inline timeGrid = Interop.mkProperty<ICustomViewProp> "type" "timeGrid"
+        static member inline dayGrid = Interop.mkProperty<ICustomViewProp> "type" "dayGrid"
+        static member inline dayGridMonth = Interop.mkProperty<ICustomViewProp> "type" "dayGridMonth"
+        static member inline dayGridWeek = Interop.mkProperty<ICustomViewProp> "type" "dayGridWeek"
+        static member inline timeGridDay = Interop.mkProperty<ICustomViewProp> "type" "timeGridDay"
+        static member inline listWeek = Interop.mkProperty<ICustomViewProp> "type" "listWeek"
+
+        static member inline multiMonthYear =
+            Interop.mkProperty<ICustomViewProp> "type" "multiMonthYear"
+
+        static member inline resourceTimelineWeek =
+            Interop.mkProperty<ICustomViewProp> "type" "resourceTimelineWeek"
+
+        static member inline resourceTimeline =
+            Interop.mkProperty<ICustomViewProp> "type" "resourceTimeline"
+
+        static member inline resourceTimeGridDay =
+            Interop.mkProperty<ICustomViewProp> "type" "resourceTimeGridDay"
+
+        static member inline resourceTimelineDay =
+            Interop.mkProperty<ICustomViewProp> "type" "resourceTimelineDay"

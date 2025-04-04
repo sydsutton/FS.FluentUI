@@ -61,6 +61,12 @@ module Plugin =
     [<ImportDefault("@fullcalendar/resource-timegrid")>]
     let resourceTimeGridPlugin: IPlugin = jsNative
 
+    [<ImportDefault("@fullcalendar/resource-daygrid")>]
+    let resourceDayGridPlugin: IPlugin = jsNative
+
+    [<ImportDefault("@fullcalendar/timeline")>]
+    let timelinePlugin: IPlugin = jsNative
+
 type FullCalendar =
     static member inline Calendar(props: ICalendarProp list) =
         Helpers.createElement Helpers.FullCalendar props

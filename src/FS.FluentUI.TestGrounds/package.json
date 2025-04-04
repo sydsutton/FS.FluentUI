@@ -25,6 +25,7 @@
     "@fullcalendar/multimonth": "^6.1.15",
     "@fullcalendar/react": "^6.1.15",
     "@fullcalendar/resource": "^6.1.15",
+    "@fullcalendar/resource-daygrid": "^6.1.17",
     "@fullcalendar/resource-timegrid": "^6.1.17",
     "@fullcalendar/resource-timeline": "^6.1.15",
     "@fullcalendar/timegrid": "^6.1.15",

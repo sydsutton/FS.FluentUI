@@ -4742,7 +4742,7 @@ let FullCalendar () =
                 calendar.ref calRef
                 calendar.schedulerLicenseKey ""
                 calendar.droppable true
-                calendar.initialView.resourceTimeGridDay
+                calendar.initialView.dayGridMonth
                 calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEventResourceId %A" c.event.start c.oldEvent._def.resourceIds)
                 calendar.editable true
@@ -4763,7 +4763,6 @@ let FullCalendar () =
                 calendar.unselectAuto true
                 calendar.resourceChange (fun info -> printfn "resourceChange %A" info.resource.id)
                 calendar.unselect (fun unselectArg -> printfn "unselect %A" unselectArg)
-                calendar.validRange [ range.start (DateTime.Today.AddDays -7); range.end' (DateTime.Today.AddDays 7)]
                 calendar.selectable true
                 calendar.select handleDateSelect
                 calendar.eventClick handleEventClick
@@ -4784,7 +4783,7 @@ let FullCalendar () =
                 calendar.headerToolbar [
                     headerToolbar.start "today prev,next"
                     headerToolbar.center "title"
-                    headerToolbar.end' "myCustomButton, dayGridMonth,timeGridWeek,timeGridDay,list"
+                    headerToolbar.end' "myCustomButton, resourceTimelineDay,resourceTimelineTenDay"
                 ]
                 calendar.dayHeaderFormat [
                     dateFormat.weekday.short
@@ -4795,6 +4794,17 @@ let FullCalendar () =
                         customButton.text "Add event"
                         customButton.icon "plus-circle"
                         customButton.click (fun _ _ -> printf "Joke's on you, I don't do anything")
+                    ]
+                ]
+                calendar.views [
+                    "resourceTimelineDay", [
+                        customView.buttonText "15 mins"
+                        customView.slotDuration "00:15"
+                    ]
+                    "resourceTimelineTenDay", [
+                        customView.buttonText "10 days"
+                        customView.type'.resourceTimeline
+                        customView.duration [ duration.days 10]
                     ]
                 ]
                 calendar.resources [

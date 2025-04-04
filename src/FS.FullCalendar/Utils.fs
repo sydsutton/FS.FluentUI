@@ -56,3 +56,6 @@ type IResourceAreaColumnProp = interface end
 
 [<Erase>]
 type IResourceProp = interface end
+
+[<Erase>]
+type ICustomViewProp = interface end
