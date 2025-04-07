@@ -4742,7 +4742,7 @@ let FullCalendar () =
                 calendar.ref calRef
                 calendar.schedulerLicenseKey ""
                 calendar.droppable true
-                calendar.initialView.dayGridMonth
+                calendar.initialView.resourceTimeGridDay
                 calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEventResourceId %A" c.event.start c.oldEvent._def.resourceIds)
                 calendar.editable true

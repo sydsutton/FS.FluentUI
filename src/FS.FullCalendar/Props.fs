@@ -900,6 +900,10 @@ type calendar =
     static member inline resourceLaneWillUnmount(value: ResourceLabelMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "resourceLaneWillUnmount" (System.Func<_, _> value)
 
+    /// The initial view when the calendar loads.
+    static member inline initialView (value: string) =
+        Interop.mkProperty<ICalendarProp> "initialView" value
+
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
         let buttons =
