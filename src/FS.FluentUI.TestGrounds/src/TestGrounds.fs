@@ -4770,9 +4770,12 @@ let FullCalendar () =
                     let resource = info.resource
                     let resourceId = resource.id
                     let resourceTitle = resource.title
-                    {| html = $"{resourceTitle} (id = {resourceId})" |}
+                    { html = $"{resourceTitle} (id = {resourceId})" }
                 )
+                calendar.resourceGroupLabelClassNames (fun info -> [| "testing-className" |])
+                calendar.resourceGroupLaneClassNames (fun info -> "testing-className")
                 calendar.themeSystem.cyborg
+                calendar.resourceGroupLabelContent (fun (arg: ColCellContentArg) -> printfn "arg %A" arg.resource.id; { html = $"Testing {arg.groupValue}" })
                 calendar.dayMaxEvents true
                 calendar.eventAdd (fun e -> printfn "eventAdd %A" (e.event._def.resourceIds))
                 calendar.loading (fun b -> printfn "isLoading %A" b)

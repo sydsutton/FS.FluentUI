@@ -584,8 +584,25 @@ type EventContentArg = {
     view: ViewApi
 }
 
+type ColCellContentArg = {
+    resource: ResourceApi
+    groupValue: string
+    view: ViewApi
+}
+
+type ColCellMountArg = {
+    resource: ResourceApi
+    groupValue: string
+    view: ViewApi
+    el: HTMLElement
+}
+
 type HtmlProp = { html: string }
 
 type DomNodesProp = { domNodes: Node array }
 
 type ResourceIdsProp = { resourceIds: string array }
+
+type ColHeaderContentArg = {
+    view: ViewApi
+}
