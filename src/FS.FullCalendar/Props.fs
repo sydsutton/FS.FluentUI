@@ -861,11 +861,11 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
 
     /// a Content Injection Input
-    static member inline resourceLabelContent(value: ResourceLabelContentArg -> {| html: string |}) =
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> HtmlProp) =
         Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
 
     /// a Content Injection Input
-    static member inline resourceLabelContent(value: ResourceLabelContentArg -> {| domNodes: Node array |}) =
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
 
     static member inline resourceLabelDidMount(value: ResourceLabelMountArg -> unit) =
@@ -887,11 +887,11 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
 
     /// a Content Injection Input
-    static member inline resourceLaneContent(value: ResourceLabelContentArg -> {| html: string |}) =
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> HtmlProp) =
         Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
 
     /// a Content Injection Input
-    static member inline resourceLaneContent(value: ResourceLabelContentArg -> {| domNodes: Node array |}) =
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
 
     static member inline resourceLaneDidMount(value: ResourceLabelMountArg -> unit) =
@@ -1327,7 +1327,7 @@ type event =
     static member inline overlap(value: bool) =
         Interop.mkProperty<IEventProp> "overlap" value
 
-    static member inline constraint'(value: {| resourceIds: string array |}) =
+    static member inline constraint'(value: ResourceIdsProp) =
         Interop.mkProperty<IEventProp> "constraint" value
 
     static member inline color(value: string) =
@@ -1709,12 +1709,12 @@ type resourceAreaColumn =
         Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
 
     /// a Content Injection Input for the <th> at the top
-    static member inline headerContent(value: {| html: string |}) =
+    static member inline headerContent(value: HtmlProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
 
     /// a Content Injection Input for the <th> at the top
-    static member inline headerContent(value: Node list) =
-        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" {| domNodes = value |> List.toArray |}
+    static member inline headerContent(value: DomNodesProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
 
     /// called right after the <th> was added to the DOM
     static member inline headerDidMount(value: bool) =
@@ -1733,12 +1733,12 @@ type resourceAreaColumn =
         Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
 
     /// a Content Injection Input for the <td> in the body
-    static member inline cellContent(value: {| html: string |}) =
+    static member inline cellContent(value: HtmlProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
 
     /// a Content Injection Input for the <td> in the body
-    static member inline cellContent(value: Node list) =
-        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" {| domNodes = value |> List.toArray |}
+    static member inline cellContent(value: DomNodesProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
 
     /// called right after the <td> was added to the DOM
     static member inline cellDidMount(value: bool) =
@@ -1853,6 +1853,9 @@ type customView =
 
     static member inline slotDuration(value: string) =
         Interop.mkProperty<ICustomViewProp> "slotDuration" value
+
+    static member inline dayMaxEventRows(value: int) =
+        Interop.mkProperty<ICustomViewProp> "dayMaxEventRows" value
 
 module customView =
     [<Erase>]

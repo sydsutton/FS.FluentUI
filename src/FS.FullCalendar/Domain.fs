@@ -583,3 +583,9 @@ type EventContentArg = {
     isResizing: bool
     view: ViewApi
 }
+
+type HtmlProp = { html: string }
+
+type DomNodesProp = { domNodes: Node array }
+
+type ResourceIdsProp = { resourceIds: string array }
