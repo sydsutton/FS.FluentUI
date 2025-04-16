@@ -173,6 +173,14 @@ type calendar =
     static member inline eventSources(value: string list) =
         Interop.mkProperty<ICalendarProp> "eventSources" (value |> Array.ofList)
 
+    /// A function that gets called when fetching succeeds. It can transform the response. Gets called for any type of Event source.
+    static member inline eventSourceSuccess(value: EventImpl -> Response -> EventInput array) =
+        Interop.mkProperty<ICalendarProp> "eventSourceSuccess" (System.Func<_,_,_> value)
+
+    /// Called when any of the event sources fails. Probably because an AJAX request failed.
+    static member inline eventSourceFailure(value: CalendarError -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventSourceFailure" (System.Func<_,_> value)
+
     /// Defines the buttons and title at the top of the calendar.
     static member inline headerToolbar(value: IHeaderToolbarProp list) =
         Interop.mkProperty<ICalendarProp> "headerToolbar" (!!value |> createObj |> unbox)
@@ -388,6 +396,90 @@ type calendar =
     /// A Date Formatter that affects the text on the left side of the day headings in list view.
     static member inline listDayFormat(value: string) =
         Interop.mkProperty<ICalendarProp> "listDayFormat" value
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" value
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (value |> List.toArray)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsClassNames(value: NoEventsContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsClassNames(value: NoEventsContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" value
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" value
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" value
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: NoEventsContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: NoEventsContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: NoEventsContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsDidMount(value: NoEventsMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "noEventsDidMount" (System.Func<_,_> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsWillMount(value: NoEventsMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "noEventsWillMount" (System.Func<_,_> value)
+
+    static member inline moreLinkClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" value
+
+    static member inline moreLinkClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (value |> List.toArray)
+
+    static member inline moreLinkClassNames(value: MoreLinkContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_,_> value)
+
+    static member inline moreLinkClassNames(value: MoreLinkContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_,_> value)
+
+    static member inline moreLinkContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" value
+
+    static member inline moreLinkContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" value
+
+    static member inline moreLinkContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" value
+
+    static member inline moreLinkContent(value: MoreLinkContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+
+    static member inline moreLinkContent(value: MoreLinkContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+
+    static member inline moreLinkContent(value: MoreLinkContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+
+    static member inline moreLinkDidMount(value: MoreLinkMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "moreLinkDidMount" (System.Func<_,_> value)
+
+    static member inline moreLinkWillUnmount (value: MoreLinkMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "moreLinkWillUnmount" (System.Func<_,_> value)
 
     /// Determines the number of weeks displayed in a month view.
     static member inline fixedWeekCount(value: bool) =
@@ -731,6 +823,82 @@ type calendar =
     static member inline dayMaxEvents(value: int) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
 
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventContent" value
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "eventContent" value
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "eventContent" value
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: EventContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: EventContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: EventContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+
+    /// CSS classNames can be injected into FullCalendar’s DOM in various places
+    static member inline eventClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventClassNames" value
+
+    /// CSS classNames can be injected into FullCalendar’s DOM in various places
+    static member inline eventClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "eventClassNames" (value |> List.toArray)
+
+    /// CSS classNames can be injected into FullCalendar’s DOM in various places
+    static member inline eventClassNames(value: EventContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_,_> value)
+
+    /// CSS classNames can be injected into FullCalendar’s DOM in various places
+    static member inline eventClassNames(value: EventContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_,_> value)
+
+    /// Called right after the element has been added to the DOM. If the event data changes, this is NOT called again.
+    static member inline eventDidMount(value: EventMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventDidMount" (System.Func<_,_> value)
+
+    /// Called right after the element has been added to the DOM. If the event data changes, this is NOT called again.
+    static member inline eventWillUnmount(value: EventMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "eventWillUnmount" (System.Func<_,_> value)
+
+    /// Sets the titles for the specified buttons.
+    static member inline buttonHints(value: IButtonHintProp list) =
+        Interop.mkProperty<ICalendarProp> "buttonHints" (!!value |> createObj |> unbox)
+
+    /// Sets the title for the buttons that represent calendar views.
+    static member inline viewHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "viewHint" value
+
+    /// Sets the title for the navLinks.
+    static member inline navLinkHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "navLinkHint" value
+
+    /// Sets the title for the “+more” link opens an event popover.
+    static member inline moreLinkHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkHint" value
+
+    /// Sets the title for the “X” icon on the event popover. Default: "Close"
+    static member inline closeHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "closeHint" value
+
+    /// For list view’s non-visible table header, describes the column with days and times. Default: "Time"
+    static member inline timeHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "timeHint" value
+
+    /// For list view’s non-visible table header, describes the column with event names. Default: "Event"
+    static member inline eventHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "eventHint" value
+
     /// Determines the action taken when the user clicks on a “more” link created by the dayMaxEventRows or dayMaxEvents options.
     static member inline moreLinkClick(value: string) =
         Interop.mkProperty<ICalendarProp> "moreLinkClick" value
@@ -1020,6 +1188,10 @@ type calendar =
 
     static member inline initialView (value: string) =
         Interop.mkProperty<ICalendarProp> "initialView" value
+
+    /// Setting to true will cause all events to be focusable/tabbable. By default, only events that have an event.url property are tabbable.
+    static member inline eventInteractive (value: bool) =
+        Interop.mkProperty<ICalendarProp> "eventInteractive" value
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
     static member inline customButtons(value: (string * ICustomButtonProp list) list) =
@@ -1995,3 +2167,23 @@ module customView =
 
         static member inline resourceTimelineDay =
             Interop.mkProperty<ICustomViewProp> "type" "resourceTimelineDay"
+
+// ----------------------------------------------------- ButtonHint ----------------------------------------------------------------------
+[<Erase>]
+type buttonHint =
+    static member inline prev(value: string) =
+        Interop.mkProperty<IButtonHintProp> "prev" value
+    static member inline next(value: string) =
+        Interop.mkProperty<IButtonHintProp> "next" value
+    static member inline prevYear(value: string) =
+        Interop.mkProperty<IButtonHintProp> "prevYear" value
+    static member inline nextYear(value: string) =
+        Interop.mkProperty<IButtonHintProp> "nextYear" value
+    static member inline today(value: string) =
+        Interop.mkProperty<IButtonHintProp> "today" value
+    static member inline month(value: string) =
+        Interop.mkProperty<IButtonHintProp> "month" value
+    static member inline week(value: string) =
+        Interop.mkProperty<IButtonHintProp> "week" value
+    static member inline day(value: string) =
+        Interop.mkProperty<IButtonHintProp> "day" value

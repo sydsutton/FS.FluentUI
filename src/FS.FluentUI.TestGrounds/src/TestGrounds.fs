@@ -4746,8 +4746,13 @@ let FullCalendar () =
                 calendar.eventDrop (fun i -> printfn "eventDrop %A" (i.delta.days) )
                 calendar.eventChange (fun c -> printfn "event %A oldEventResourceId %A" c.event.start c.oldEvent._def.resourceIds)
                 calendar.editable true
+                prop.custom ("eventContent", "test-text") |> unbox
                 calendar.eventMaxStack 2
                 calendar.dayMaxEventRows 3
+                calendar.buttonHints [
+                    buttonHint.next "NEXT!"
+                    buttonHint.prev "PREV?!"
+                ]
                 calendar.eventResize (fun info -> Browser.Dom.window.alert (info.event.title + " end is now " + info.event.``end``.ToString()))
                 calendar.drop (fun (info: DropInfo) ->
                     if checkboxEl?checked = true then
@@ -4799,6 +4804,7 @@ let FullCalendar () =
                         customButton.click (fun _ _ -> printf "Joke's on you, I don't do anything")
                     ]
                 ]
+                calendar.eventDidMount (fun info -> printfn "eventDidMount %A" info.event.title)
                 calendar.views [
                     "resourceTimelineDay", [
                         customView.buttonText "15 mins"
@@ -4810,6 +4816,8 @@ let FullCalendar () =
                         customView.duration [ duration.days 10]
                     ]
                 ]
+                calendar.eventSources (fun x y z -> printfn "ran")
+                calendar.eventSourceFailure (fun (err: CalendarError) -> printfn "err %A" err.stack)
                 calendar.resources [
                     [
                         resource.id "a"
@@ -4902,6 +4910,8 @@ let ColorPickerTest () =
 let mainContent model dispatch =
 
     // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
+
+    Force.toRun
 
     let newTokens = {
         Theme.tokens with

@@ -584,6 +584,28 @@ type EventContentArg = {
     view: ViewApi
 }
 
+type EventMountArg = {
+    event: EventImpl
+    timeText: string
+    backgroundColor: string
+    borderColor: string
+    textColor: string
+    isDraggable: bool
+    isStartResizable: bool
+    isEndResizable: bool
+    isMirror: bool
+    isStart: bool
+    isEnd: bool
+    isPast: bool
+    isFuture: bool
+    isToday: bool
+    isSelected: bool
+    isDragging: bool
+    isResizing: bool
+    view: ViewApi
+    el: HTMLElement
+}
+
 type ColCellContentArg = {
     resource: ResourceApi
     groupValue: string
@@ -605,4 +627,54 @@ type ResourceIdsProp = { resourceIds: string array }
 
 type ColHeaderContentArg = {
     view: ViewApi
+}
+
+// Copied from Fable.Fetch
+type Headers =
+    abstract append : string * string -> unit
+    abstract delete : string -> unit
+    abstract get : string -> string
+    abstract getAll : string -> string[]
+    abstract has : string -> bool
+    abstract set : string * string -> unit
+
+// Copied from Fable.Fetch
+type Response =
+    abstract ok: bool
+    abstract status: int
+    abstract statusText: string
+    abstract redirected: bool
+    abstract url: string
+    abstract headers: Headers
+    abstract bodyUsed: bool
+    abstract text: unit -> Fable.Core.JS.Promise<string>
+    abstract json: unit -> Fable.Core.JS.Promise<obj>
+    abstract blob: unit -> Fable.Core.JS.Promise<Blob>
+    abstract arrayBuffer: unit -> Fable.Core.JS.Promise<Fable.Core.JS.ArrayBuffer>
+    abstract formData: unit -> Fable.Core.JS.Promise<FormData>
+
+type NoEventsContentArg = {
+    text: string
+    view: ViewApi
+}
+
+type NoEventsMountArg = {
+    text: string
+    view: ViewApi
+    el: HTMLElement
+}
+
+type MoreLinkContentArg = {
+    num: int
+    text: string
+    shortText: string
+    view: ViewApi
+}
+
+type MoreLinkMountArg = {
+    num: int
+    text: string
+    shortText: string
+    view: ViewApi
+    el: HTMLElement
 }
