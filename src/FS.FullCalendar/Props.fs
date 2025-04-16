@@ -6,6 +6,10 @@ open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
 
+// // Forcing a function to run in TestGrounds so that the XML documentation gets generated in Props
+// module Force =
+//     let toRun = printfn "ran"
+
 // ----------------------------------------------------- Calendar ----------------------------------------------------------------------
 [<Erase>]
 type calendar =
@@ -149,22 +153,16 @@ type calendar =
     /// A custom function for programmatically generating Events.
     /// function( fetchInfo, successCallback, failureCallback ) { }
     static member inline events
-        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
+        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
-        Interop.mkProperty<ICalendarProp>
-            "events"
-            (System.Func<_, _, _, _>(fun (value: IFetchInfoProp list) success failure ->
-                handler (!!value |> createObj |> unbox) success failure))
+        Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
 
     /// A custom function for programmatically generating Events.
     /// function( fetchInfo, successCallback, failureCallback ) { }
     static member inline eventSources
-        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
+        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
-        Interop.mkProperty<ICalendarProp>
-            "eventSources"
-            (System.Func<_, _, _, _>(fun (value: IFetchInfoProp list) success failure ->
-                handler (!!value |> createObj |> unbox) success failure))
+        Interop.mkProperty<ICalendarProp> "eventSources" (System.Func<_,_,_,_> value)
 
     /// A way to specify multiple event sources.
     static member inline eventSources(value: IEventProp list list) =
@@ -642,7 +640,7 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "eventOrder" (value |> List.toArray)
 
     /// Determines the ordering events within the same day. A function that accepts two arguments and returns -1 or 1, similar to sort’s compare function
-    static member inline eventOrder(value: 'T -> 'T -> int) =
+    static member inline eventOrder(value: EventImpl -> EventImpl -> int) =
         Interop.mkProperty<ICalendarProp> "eventOrder" (System.Func<_, _, _> value)
 
     /// Ensures the eventOrder setting is strictly followed.
@@ -1478,12 +1476,9 @@ type event =
 
     /// A custom function for programmatically generating Events.
     static member inline source
-        (handler: IFetchInfoProp list -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
+        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
-        Interop.mkProperty<ICalendarProp>
-            "events"
-            (System.Func<_, _, _, _>(fun (value: IFetchInfoProp list) success failure ->
-                handler (!!value |> createObj |> unbox) success failure))
+        Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
 
     static member inline googleCalendarId(value: string) =
         Interop.mkProperty<IEventProp> "googleCalendarId" value
