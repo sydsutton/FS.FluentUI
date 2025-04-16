@@ -152,9 +152,7 @@ type calendar =
 
     /// A custom function for programmatically generating Events.
     /// function( fetchInfo, successCallback, failureCallback ) { }
-    static member inline events
-        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
-        =
+    static member inline events(value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit) =
         Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
 
     /// A custom function for programmatically generating Events.
@@ -162,7 +160,7 @@ type calendar =
     static member inline eventSources
         (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
         =
-        Interop.mkProperty<ICalendarProp> "eventSources" (System.Func<_,_,_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventSources" (System.Func<_, _, _, _> value)
 
     /// A way to specify multiple event sources.
     static member inline eventSources(value: IEventProp list list) =
@@ -175,11 +173,11 @@ type calendar =
 
     /// A function that gets called when fetching succeeds. It can transform the response. Gets called for any type of Event source.
     static member inline eventSourceSuccess(value: EventImpl -> Response -> EventInput array) =
-        Interop.mkProperty<ICalendarProp> "eventSourceSuccess" (System.Func<_,_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventSourceSuccess" (System.Func<_, _, _> value)
 
     /// Called when any of the event sources fails. Probably because an AJAX request failed.
     static member inline eventSourceFailure(value: CalendarError -> unit) =
-        Interop.mkProperty<ICalendarProp> "eventSourceFailure" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventSourceFailure" (System.Func<_, _> value)
 
     /// Defines the buttons and title at the top of the calendar.
     static member inline headerToolbar(value: IHeaderToolbarProp list) =
@@ -407,11 +405,11 @@ type calendar =
 
     /// In list view, the “No events to display” message.
     static member inline noEventsClassNames(value: NoEventsContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsClassNames(value: NoEventsContentArg -> string array) =
-        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsClassNames" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsContent(value: string) =
@@ -427,23 +425,23 @@ type calendar =
 
     /// In list view, the “No events to display” message.
     static member inline noEventsContent(value: NoEventsContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsContent(value: NoEventsContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsContent(value: NoEventsContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsDidMount(value: NoEventsMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "noEventsDidMount" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsDidMount" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
     static member inline noEventsWillMount(value: NoEventsMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "noEventsWillMount" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "noEventsWillMount" (System.Func<_, _> value)
 
     static member inline moreLinkClassNames(value: string) =
         Interop.mkProperty<ICalendarProp> "moreLinkClassNames" value
@@ -452,10 +450,10 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (value |> List.toArray)
 
     static member inline moreLinkClassNames(value: MoreLinkContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_, _> value)
 
     static member inline moreLinkClassNames(value: MoreLinkContentArg -> string array) =
-        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkClassNames" (System.Func<_, _> value)
 
     static member inline moreLinkContent(value: string) =
         Interop.mkProperty<ICalendarProp> "moreLinkContent" value
@@ -467,19 +465,151 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "moreLinkContent" value
 
     static member inline moreLinkContent(value: MoreLinkContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_, _> value)
 
     static member inline moreLinkContent(value: MoreLinkContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_, _> value)
 
     static member inline moreLinkContent(value: MoreLinkContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_, _> value)
 
     static member inline moreLinkDidMount(value: MoreLinkMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "moreLinkDidMount" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "moreLinkDidMount" (System.Func<_, _> value)
 
-    static member inline moreLinkWillUnmount (value: MoreLinkMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "moreLinkWillUnmount" (System.Func<_,_> value)
+    static member inline moreLinkWillUnmount(value: MoreLinkMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "moreLinkWillUnmount" (System.Func<_, _> value)
+
+    /// a ClassName Input for adding classNames to the header <th> cell
+    static member inline dayHeaderClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderClassNames" value
+
+    /// a ClassName Input for adding classNames to the header <th> cell
+    static member inline dayHeaderClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderClassNames" (value |> List.toArray)
+
+    /// a ClassName Input for adding classNames to the header <th> cell
+    static member inline dayHeaderClassNames(value: DayHeaderContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderClassNames" (System.Func<_, _> value)
+
+    /// a ClassName Input for adding classNames to the header <th> cell
+    static member inline dayHeaderClassNames(value: DayHeaderContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderClassNames" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: DayHeaderContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: DayHeaderContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: DayHeaderContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" (System.Func<_, _> value)
+
+    /// called right after the <th> has been added to the DOM
+    static member inline dayHeaderDidMount(value: DayHeaderMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderDidMount" (System.Func<_, _> value)
+
+    /// called right before the <th> will be removed from the DOM
+    static member inline dayHeaderWillUnmount(value: DayHeaderMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderWillUnmount" (System.Func<_, _> value)
+
+    /// a ClassName Input for adding classNames to the <td> cell
+    static member inline dayCellClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "dayCellClassNames" value
+
+    /// a ClassName Input for adding classNames to the <td> cell
+    static member inline dayCellClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "dayCellClassNames" (value |> List.toArray)
+
+    /// a ClassName Input for adding classNames to the <td> cell
+    static member inline dayCellClassNames(value: DayCellContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "dayCellClassNames" (System.Func<_, _> value)
+
+    /// a ClassName Input for adding classNames to the <td> cell
+    static member inline dayCellClassNames(value: DayCellContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "dayCellClassNames" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" value
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: DayCellContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: DayCellContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: DayCellContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" (System.Func<_, _> value)
+
+    /// called right after the <td> has been added to the DOM
+    static member inline dayCellDidMount(value: DayCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "dayCellDidMount" (System.Func<_, _> value)
+
+    /// called right before the <td> will be removed from the DOM
+    static member inline dayCellWillUnmount(value: DayCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "dayCellWillUnmount" (System.Func<_, _> value)
+
+    static member inline nowIndicatorClassNames(value: string) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorClassNames" value
+
+    static member inline nowIndicatorClassNames(value: string list) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorClassNames" (value |> List.toArray)
+
+    static member inline nowIndicatorClassNames(value: NowIndicatorContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorClassNames" (System.Func<_, _> value)
+
+    static member inline nowIndicatorClassNames(value: NowIndicatorContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorClassNames" (System.Func<_, _> value)
+
+    static member inline nowIndicatorContent(value: string) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" value
+
+    static member inline nowIndicatorContent(value: HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" value
+
+    static member inline nowIndicatorContent(value: DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" value
+
+    static member inline nowIndicatorContent(value: NowIndicatorContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" (System.Func<_, _> value)
+
+    static member inline nowIndicatorContent(value: NowIndicatorContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" (System.Func<_, _> value)
+
+    static member inline nowIndicatorContent(value: NowIndicatorContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" (System.Func<_, _> value)
+
+    static member inline nowIndicatorDidMount(value: NowIndicatorMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorDidMount" (System.Func<_, _> value)
+
+    static member inline nowIndicatorWillUnmount(value: NowIndicatorMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorWillUnmount" (System.Func<_, _> value)
 
     /// Determines the number of weeks displayed in a month view.
     static member inline fixedWeekCount(value: bool) =
@@ -837,15 +967,15 @@ type calendar =
 
     /// Customize the rendering of event elements
     static member inline eventContent(value: EventContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_, _> value)
 
     /// Customize the rendering of event elements
     static member inline eventContent(value: EventContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_, _> value)
 
     /// Customize the rendering of event elements
     static member inline eventContent(value: EventContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_, _> value)
 
     /// CSS classNames can be injected into FullCalendar’s DOM in various places
     static member inline eventClassNames(value: string) =
@@ -857,19 +987,19 @@ type calendar =
 
     /// CSS classNames can be injected into FullCalendar’s DOM in various places
     static member inline eventClassNames(value: EventContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_, _> value)
 
     /// CSS classNames can be injected into FullCalendar’s DOM in various places
     static member inline eventClassNames(value: EventContentArg -> string array) =
-        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventClassNames" (System.Func<_, _> value)
 
     /// Called right after the element has been added to the DOM. If the event data changes, this is NOT called again.
     static member inline eventDidMount(value: EventMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "eventDidMount" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventDidMount" (System.Func<_, _> value)
 
     /// Called right after the element has been added to the DOM. If the event data changes, this is NOT called again.
     static member inline eventWillUnmount(value: EventMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "eventWillUnmount" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "eventWillUnmount" (System.Func<_, _> value)
 
     /// Sets the titles for the specified buttons.
     static member inline buttonHints(value: IButtonHintProp list) =
@@ -1100,97 +1230,97 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" value
 
     static member inline resourceGroupLaneClassNames(value: ColCellContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" (System.Func<_,_> value)
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" (System.Func<_, _> value)
 
-    static member inline resourceGroupLabelContent (value: HtmlProp) =
+    static member inline resourceGroupLabelContent(value: HtmlProp) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" value
 
-    static member inline resourceGroupLabelContent (value: DomNodesProp) =
+    static member inline resourceGroupLabelContent(value: DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" value
 
-    static member inline resourceGroupLabelContent (value: string) =
+    static member inline resourceGroupLabelContent(value: string) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" value
 
-    static member inline resourceGroupLabelContent (value: ColCellContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_,_> value)
+    static member inline resourceGroupLabelContent(value: ColCellContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLabelContent (value: ColCellContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_,_> value)
+    static member inline resourceGroupLabelContent(value: ColCellContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLabelContent (value: ColCellContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_,_> value)
+    static member inline resourceGroupLabelContent(value: ColCellContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLabelDidMount (value: ColCellMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLabelDidMount" (System.Func<_,_> value)
+    static member inline resourceGroupLabelDidMount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelDidMount" (System.Func<_, _> value)
 
-    static member inline resourceGroupLabelWillUnmount (value: ColCellMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLabelWillUnmount" (System.Func<_,_> value)
+    static member inline resourceGroupLabelWillUnmount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelWillUnmount" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneClassNames (value: string list) =
+    static member inline resourceGroupLaneClassNames(value: string list) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" (value |> List.toArray)
 
-    static member inline resourceGroupLaneClassNames (value: ColCellContentArg -> string array) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" (System.Func<_,_> value)
+    static member inline resourceGroupLaneClassNames(value: ColCellContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneClassNames" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneContent (value: HtmlProp) =
+    static member inline resourceGroupLaneContent(value: HtmlProp) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" value
 
-    static member inline resourceGroupLaneContent (value: DomNodesProp) =
+    static member inline resourceGroupLaneContent(value: DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" value
 
-    static member inline resourceGroupLaneContent (value: string) =
+    static member inline resourceGroupLaneContent(value: string) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" value
 
-    static member inline resourceGroupLaneContent (value: ColCellContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_,_> value)
+    static member inline resourceGroupLaneContent(value: ColCellContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneContent (value: ColCellContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_,_> value)
+    static member inline resourceGroupLaneContent(value: ColCellContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneContent (value: ColCellContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_,_> value)
+    static member inline resourceGroupLaneContent(value: ColCellContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneDidMount (value: ColCellMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneDidMount" (System.Func<_,_> value)
+    static member inline resourceGroupLaneDidMount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneDidMount" (System.Func<_, _> value)
 
-    static member inline resourceGroupLaneWillUnmount (value: ColCellMountArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "resourceGroupLaneWillUnmount" (System.Func<_,_> value)
+    static member inline resourceGroupLaneWillUnmount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneWillUnmount" (System.Func<_, _> value)
 
-    static member inline resourceAreaHeaderClassNames (value: string) =
+    static member inline resourceAreaHeaderClassNames(value: string) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" value
 
-    static member inline resourceAreaHeaderClassNames (value: string list) =
+    static member inline resourceAreaHeaderClassNames(value: string list) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" (value |> List.toArray)
 
-    static member inline resourceAreaHeaderClassNames (value: ColHeaderContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" (System.Func<_,_> value)
+    static member inline resourceAreaHeaderClassNames(value: ColHeaderContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" (System.Func<_, _> value)
 
-    static member inline resourceAreaHeaderClassNames (value: ColHeaderContentArg -> string array) =
-        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" (System.Func<_,_> value)
+    static member inline resourceAreaHeaderClassNames(value: ColHeaderContentArg -> string array) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderClassNames" (System.Func<_, _> value)
 
-    static member inline resourceAreaHeaderContent (value: HtmlProp) =
+    static member inline resourceAreaHeaderContent(value: HtmlProp) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" value
 
-    static member inline resourceAreaHeaderContent (value: DomNodesProp) =
+    static member inline resourceAreaHeaderContent(value: DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" value
 
-    static member inline resourceAreaHeaderContent (value: string) =
+    static member inline resourceAreaHeaderContent(value: string) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" value
 
-    static member inline resourceAreaHeaderContent (value: ColHeaderContentArg -> HtmlProp) =
-        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_,_> value)
+    static member inline resourceAreaHeaderContent(value: ColHeaderContentArg -> HtmlProp) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_, _> value)
 
-    static member inline resourceAreaHeaderContent (value: ColHeaderContentArg -> DomNodesProp) =
-        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_,_> value)
+    static member inline resourceAreaHeaderContent(value: ColHeaderContentArg -> DomNodesProp) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_, _> value)
 
-    static member inline resourceAreaHeaderContent (value: ColHeaderContentArg -> string) =
-        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_,_> value)
+    static member inline resourceAreaHeaderContent(value: ColHeaderContentArg -> string) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_, _> value)
 
-    static member inline initialView (value: string) =
+    static member inline initialView(value: string) =
         Interop.mkProperty<ICalendarProp> "initialView" value
 
     /// Setting to true will cause all events to be focusable/tabbable. By default, only events that have an event.url property are tabbable.
-    static member inline eventInteractive (value: bool) =
+    static member inline eventInteractive(value: bool) =
         Interop.mkProperty<ICalendarProp> "eventInteractive" value
 
     /// Defines custom buttons that can be used in the headerToolbar/footerToolbar.
@@ -1647,9 +1777,7 @@ type event =
         Interop.mkProperty<IEventProp> "source" (!!value |> createObj |> unbox)
 
     /// A custom function for programmatically generating Events.
-    static member inline source
-        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
-        =
+    static member inline source(value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit) =
         Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
 
     static member inline googleCalendarId(value: string) =
@@ -2173,17 +2301,24 @@ module customView =
 type buttonHint =
     static member inline prev(value: string) =
         Interop.mkProperty<IButtonHintProp> "prev" value
+
     static member inline next(value: string) =
         Interop.mkProperty<IButtonHintProp> "next" value
+
     static member inline prevYear(value: string) =
         Interop.mkProperty<IButtonHintProp> "prevYear" value
+
     static member inline nextYear(value: string) =
         Interop.mkProperty<IButtonHintProp> "nextYear" value
+
     static member inline today(value: string) =
         Interop.mkProperty<IButtonHintProp> "today" value
+
     static member inline month(value: string) =
         Interop.mkProperty<IButtonHintProp> "month" value
+
     static member inline week(value: string) =
         Interop.mkProperty<IButtonHintProp> "week" value
+
     static member inline day(value: string) =
         Interop.mkProperty<IButtonHintProp> "day" value

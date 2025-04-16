@@ -625,18 +625,16 @@ type DomNodesProp = { domNodes: Node array }
 
 type ResourceIdsProp = { resourceIds: string array }
 
-type ColHeaderContentArg = {
-    view: ViewApi
-}
+type ColHeaderContentArg = { view: ViewApi }
 
 // Copied from Fable.Fetch
 type Headers =
-    abstract append : string * string -> unit
-    abstract delete : string -> unit
-    abstract get : string -> string
-    abstract getAll : string -> string[]
-    abstract has : string -> bool
-    abstract set : string * string -> unit
+    abstract append: string * string -> unit
+    abstract delete: string -> unit
+    abstract get: string -> string
+    abstract getAll: string -> string[]
+    abstract has: string -> bool
+    abstract set: string * string -> unit
 
 // Copied from Fable.Fetch
 type Response =
@@ -653,10 +651,7 @@ type Response =
     abstract arrayBuffer: unit -> Fable.Core.JS.Promise<Fable.Core.JS.ArrayBuffer>
     abstract formData: unit -> Fable.Core.JS.Promise<FormData>
 
-type NoEventsContentArg = {
-    text: string
-    view: ViewApi
-}
+type NoEventsContentArg = { text: string; view: ViewApi }
 
 type NoEventsMountArg = {
     text: string
@@ -675,6 +670,69 @@ type MoreLinkMountArg = {
     num: int
     text: string
     shortText: string
+    view: ViewApi
+    el: HTMLElement
+}
+
+type DayHeaderContentArg = {
+    dow: int
+    isDisabled: bool
+    isOther: bool
+    isToday: bool
+    isPast: bool
+    isFuture: bool
+    date: DateTime
+    view: ViewApi
+    text: string
+}
+
+type DayHeaderMountArg = {
+    dow: int
+    isDisabled: bool
+    isOther: bool
+    isToday: bool
+    isPast: bool
+    isFuture: bool
+    date: DateTime
+    view: ViewApi
+    text: string
+    el: HTMLElement
+}
+
+type DayCellContentArg = {
+    dow: int
+    isDisabled: bool
+    isOther: bool
+    isToday: bool
+    isPast: bool
+    isFuture: bool
+    date: DateTime
+    view: ViewApi
+    dayNumberText: string
+}
+
+type DayCellMountArg = {
+    dow: int
+    isDisabled: bool
+    isOther: bool
+    isToday: bool
+    isPast: bool
+    isFuture: bool
+    date: DateTime
+    view: ViewApi
+    dayNumberText: string
+    el: HTMLElement
+}
+
+type NowIndicatorContentArg = {
+    isAxis: bool
+    date: DateTime
+    view: ViewApi
+}
+
+type NowIndicatorMountArg = {
+    isAxis: bool
+    date: DateTime
     view: ViewApi
     el: HTMLElement
 }
