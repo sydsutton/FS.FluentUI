@@ -1002,12 +1002,25 @@ type calendar =
     static member inline viewHint(value: string) =
         Interop.mkProperty<ICalendarProp> "viewHint" value
 
+    /// Sets the title for the buttons that represent calendar views.
+    /// The first placeholder/function argument (info below) will be the localized buttonText, the second is the button name from the headerToolbar/footerToolbar options.
+    static member inline viewHint(value: string -> string -> string) =
+        Interop.mkProperty<ICalendarProp> "viewHint" (System.Func<_,_,_> value)
+
     /// Sets the title for the navLinks.
     static member inline navLinkHint(value: string) =
         Interop.mkProperty<ICalendarProp> "navLinkHint" value
 
+    /// Sets the title for the navLinks.
+    static member inline navLinkHint(value: string -> DateTime -> string) =
+        Interop.mkProperty<ICalendarProp> "navLinkHint" (System.Func<_,_,_> value)
+
     /// Sets the title for the “+more” link opens an event popover.
     static member inline moreLinkHint(value: string) =
+        Interop.mkProperty<ICalendarProp> "moreLinkHint" value
+
+    /// Sets the title for the “+more” link opens an event popover.
+    static member inline moreLinkHint(value: int -> string) =
         Interop.mkProperty<ICalendarProp> "moreLinkHint" value
 
     /// Sets the title for the “X” icon on the event popover. Default: "Close"
