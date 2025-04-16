@@ -6,9 +6,9 @@ open Fable.Core
 open Fable.Core.JsInterop
 open Feliz
 
-// // Forcing a function to run in TestGrounds so that the XML documentation gets generated in Props
-// module Force =
-//     let toRun = printfn "ran"
+// Forcing a function to run in TestGrounds so that the XML documentation gets generated in Props
+module Force =
+    let toRun = printfn "ran"
 
 // ----------------------------------------------------- Calendar ----------------------------------------------------------------------
 [<Erase>]
@@ -154,13 +154,6 @@ type calendar =
     /// function( fetchInfo, successCallback, failureCallback ) { }
     static member inline events(value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit) =
         Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
-
-    /// A custom function for programmatically generating Events.
-    /// function( fetchInfo, successCallback, failureCallback ) { }
-    static member inline eventSources
-        (value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit)
-        =
-        Interop.mkProperty<ICalendarProp> "eventSources" (System.Func<_, _, _, _> value)
 
     /// A way to specify multiple event sources.
     static member inline eventSources(value: IEventProp list list) =
@@ -1778,7 +1771,7 @@ type event =
 
     /// A custom function for programmatically generating Events.
     static member inline source(value: FetchInfo -> (EventInput array -> unit) -> (CalendarError -> unit) -> unit) =
-        Interop.mkProperty<ICalendarProp> "events" (System.Func<_, _, _, _> value)
+        Interop.mkProperty<IEventProp> "source" (System.Func<_, _, _, _> value)
 
     static member inline googleCalendarId(value: string) =
         Interop.mkProperty<IEventProp> "googleCalendarId" value
@@ -2038,24 +2031,6 @@ type businessDay =
     static member inline daysOfWeek(value: IDayProp list) =
         Interop.mkProperty<IBusinessDayProp> "daysOfWeek" (value |> List.toArray)
 
-// ----------------------------------------------------- FetchInfo ----------------------------------------------------------------------
-[<Erase>]
-type fetchInfo =
-    static member inline start(value: DateTime) =
-        Interop.mkProperty<IFetchInfoProp> "start" value
-
-    static member inline end'(value: DateTime) =
-        Interop.mkProperty<IFetchInfoProp> "end" value
-
-    static member inline startStr(value: string) =
-        Interop.mkProperty<IFetchInfoProp> "startStr" value
-
-    static member inline endStr(value: string) =
-        Interop.mkProperty<IFetchInfoProp> "endStr" value
-
-    static member inline timeZone(value: string) =
-        Interop.mkProperty<IFetchInfoProp> "timeZone" value
-
 // ----------------------------------------------------- Draggable ----------------------------------------------------------------------
 [<Erase>]
 type draggable =
@@ -2118,6 +2093,18 @@ type resourceAreaColumn =
     static member inline headerClassNames(value: string) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerClassNames" value
 
+    /// a ClassName Input for the <th> at the top
+    static member inline headerClassNames(value: string list) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerClassNames" (value |> List.toArray)
+
+    /// a ClassName Input for the <th> at the top
+    static member inline headerClassNames(value: ResourceContentArg -> string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerClassNames" (System.Func<_,_> value)
+
+    /// a ClassName Input for the <th> at the top
+    static member inline headerClassNames(value: ResourceContentArg -> string array) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerClassNames" (System.Func<_,_> value)
+
     /// a Content Injection Input for the <th> at the top
     static member inline headerContent(value: string) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
@@ -2130,17 +2117,41 @@ type resourceAreaColumn =
     static member inline headerContent(value: DomNodesProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
 
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: ResourceContentArg -> string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: ResourceContentArg -> HtmlProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: ResourceContentArg -> DomNodesProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" (System.Func<_,_> value)
+
     /// called right after the <th> was added to the DOM
-    static member inline headerDidMount(value: bool) =
-        Interop.mkProperty<IResourceAreaColumnProp> "headerDidMount" value
+    static member inline headerDidMount(value: ResourceMountArg -> unit) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerDidMount" (System.Func<_,_> value)
 
     /// called right before the <th> will be removed from the DOM
-    static member inline headerWillUnmount(value: bool) =
-        Interop.mkProperty<IResourceAreaColumnProp> "headerWillUnmount" value
+    static member inline headerWillUnmount(value: ResourceMountArg -> unit) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerWillUnmount" (System.Func<_,_> value)
 
     /// a ClassName Input for the <td> in the body
     static member inline cellClassNames(value: string) =
         Interop.mkProperty<IResourceAreaColumnProp> "cellClassNames" value
+
+    /// a ClassName Input for the <td> in the body
+    static member inline cellClassNames(value: string list) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellClassNames" (value |> List.toArray)
+
+    /// a ClassName Input for the <td> in the body
+    static member inline cellClassNames(value: ColCellContentArg -> string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellClassNames" (System.Func<_,_> value)
+
+    /// a ClassName Input for the <td> in the body
+    static member inline cellClassNames(value: ColCellContentArg -> string array) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellClassNames" (System.Func<_,_> value)
 
     /// a Content Injection Input for the <td> in the body
     static member inline cellContent(value: string) =
@@ -2154,13 +2165,25 @@ type resourceAreaColumn =
     static member inline cellContent(value: DomNodesProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
 
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: ColCellContentArg -> string) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: ColCellContentArg -> HtmlProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: ColCellContentArg -> DomNodesProp) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" (System.Func<_,_> value)
+
     /// called right after the <td> was added to the DOM
-    static member inline cellDidMount(value: bool) =
-        Interop.mkProperty<IResourceAreaColumnProp> "cellDidMount" value
+    static member inline cellDidMount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellDidMount" (System.Func<_,_> value)
 
     /// called right before the <td> will be removed from the DOM
-    static member inline cellWillUnmount(value: bool) =
-        Interop.mkProperty<IResourceAreaColumnProp> "cellWillUnmount" value
+    static member inline cellWillUnmount(value: ColCellMountArg -> unit) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellWillUnmount" (System.Func<_,_> value)
 
 // ----------------------------------------------------- Resource ----------------------------------------------------------------------
 [<Erase>]

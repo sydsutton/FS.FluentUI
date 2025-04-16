@@ -4816,7 +4816,7 @@ let FullCalendar () =
                         customView.duration [ duration.days 10]
                     ]
                 ]
-                calendar.eventSources (fun x y z -> printfn "ran")
+                calendar.events (fun x y z -> printfn "ran")
                 calendar.eventSourceFailure (fun (err: CalendarError) -> printfn "err %A" err.stack)
                 calendar.resources [
                     [

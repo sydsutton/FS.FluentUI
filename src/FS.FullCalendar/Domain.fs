@@ -736,3 +736,12 @@ type NowIndicatorMountArg = {
     view: ViewApi
     el: HTMLElement
 }
+
+type ResourceContentArg = {
+    view: ViewApi
+}
+
+type ResourceMountArg = {
+    view: ViewApi
+    el: HTMLElement
+}
