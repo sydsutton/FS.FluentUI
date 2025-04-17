@@ -429,6 +429,14 @@ type calendar =
         Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_, _> value)
 
     /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: NoEventsContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" (System.Func<_, _> value)
+
+    /// In list view, the “No events to display” message.
+    static member inline noEventsContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "noEventsContent" value
+
+    /// In list view, the “No events to display” message.
     static member inline noEventsDidMount(value: NoEventsMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "noEventsDidMount" (System.Func<_, _> value)
 
@@ -465,6 +473,12 @@ type calendar =
 
     static member inline moreLinkContent(value: MoreLinkContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_, _> value)
+
+    static member inline moreLinkContent(value: MoreLinkContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" (System.Func<_, _> value)
+
+    static member inline moreLinkContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "moreLinkContent" value
 
     static member inline moreLinkDidMount(value: MoreLinkMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "moreLinkDidMount" (System.Func<_, _> value)
@@ -511,6 +525,14 @@ type calendar =
     /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
     static member inline dayHeaderContent(value: DayHeaderContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "dayHeaderContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: DayHeaderContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the header cell. It does not replace the <th> cell.
+    static member inline dayHeaderContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "dayHeaderContent" value
 
     /// called right after the <th> has been added to the DOM
     static member inline dayHeaderDidMount(value: DayHeaderMountArg -> unit) =
@@ -560,6 +582,14 @@ type calendar =
     static member inline dayCellContent(value: DayCellContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "dayCellContent" (System.Func<_, _> value)
 
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: DayCellContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input. Generated content is inserted inside the inner-most wrapper of the day cell. It does not replace the <td> cell.
+    static member inline dayCellContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "dayCellContent" value
+
     /// called right after the <td> has been added to the DOM
     static member inline dayCellDidMount(value: DayCellMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "dayCellDidMount" (System.Func<_, _> value)
@@ -597,6 +627,12 @@ type calendar =
 
     static member inline nowIndicatorContent(value: NowIndicatorContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "nowIndicatorContent" (System.Func<_, _> value)
+
+    static member inline nowIndicatorContent(value: NowIndicatorContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" (System.Func<_, _> value)
+
+    static member inline nowIndicatorContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "nowIndicatorContent" value
 
     static member inline nowIndicatorDidMount(value: NowIndicatorMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "nowIndicatorDidMount" (System.Func<_, _> value)
@@ -970,6 +1006,14 @@ type calendar =
     static member inline eventContent(value: EventContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_, _> value)
 
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: EventContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "eventContent" (System.Func<_, _> value)
+
+    /// Customize the rendering of event elements
+    static member inline eventContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "eventContent" value
+
     /// CSS classNames can be injected into FullCalendar’s DOM in various places
     static member inline eventClassNames(value: string) =
         Interop.mkProperty<ICalendarProp> "eventClassNames" value
@@ -1182,6 +1226,14 @@ type calendar =
     static member inline resourceLabelContent(value: ResourceLabelContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
 
+    /// a Content Injection Input
+    static member inline resourceLabelContent(value: ResourceLabelContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLabelContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceLabelContent" value
+
     static member inline resourceLabelDidMount(value: ResourceLabelMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "resourceLabelDidMount" (System.Func<_, _> value)
 
@@ -1220,6 +1272,14 @@ type calendar =
     static member inline resourceLaneContent(value: ResourceLabelContentArg -> DomNodesProp) =
         Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
 
+    /// a Content Injection Input
+    static member inline resourceLaneContent(value: ResourceLabelContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneContent" (System.Func<_, _> value)
+
+    /// a Content Injection Input
+    static member inline resourceLaneContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceLaneContent" value
+
     static member inline resourceLaneDidMount(value: ResourceLabelMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "resourceLaneDidMount" (System.Func<_, _> value)
 
@@ -1256,6 +1316,12 @@ type calendar =
     static member inline resourceGroupLabelContent(value: ColCellContentArg -> string) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_, _> value)
 
+    static member inline resourceGroupLabelContent(value: ColCellContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" (System.Func<_, _> value)
+
+    static member inline resourceGroupLabelContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLabelContent" value
+
     static member inline resourceGroupLabelDidMount(value: ColCellMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLabelDidMount" (System.Func<_, _> value)
 
@@ -1285,6 +1351,12 @@ type calendar =
 
     static member inline resourceGroupLaneContent(value: ColCellContentArg -> string) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_, _> value)
+
+    static member inline resourceGroupLaneContent(value: ColCellContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" (System.Func<_, _> value)
+
+    static member inline resourceGroupLaneContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceGroupLaneContent" value
 
     static member inline resourceGroupLaneDidMount(value: ColCellMountArg -> unit) =
         Interop.mkProperty<ICalendarProp> "resourceGroupLaneDidMount" (System.Func<_, _> value)
@@ -1321,6 +1393,12 @@ type calendar =
 
     static member inline resourceAreaHeaderContent(value: ColHeaderContentArg -> string) =
         Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_, _> value)
+
+    static member inline resourceAreaHeaderContent(value: ColHeaderContentArg -> ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" (System.Func<_, _> value)
+
+    static member inline resourceAreaHeaderContent(value: ReactElement) =
+        Interop.mkProperty<ICalendarProp> "resourceAreaHeaderContent" value
 
     static member inline initialView(value: string) =
         Interop.mkProperty<ICalendarProp> "initialView" value
@@ -2142,6 +2220,14 @@ type resourceAreaColumn =
     static member inline headerContent(value: ResourceContentArg -> DomNodesProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerContent" (System.Func<_,_> value)
 
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: ResourceContentArg -> ReactElement) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <th> at the top
+    static member inline headerContent(value: ReactElement) =
+        Interop.mkProperty<IResourceAreaColumnProp> "headerContent" value
+
     /// called right after the <th> was added to the DOM
     static member inline headerDidMount(value: ResourceMountArg -> unit) =
         Interop.mkProperty<IResourceAreaColumnProp> "headerDidMount" (System.Func<_,_> value)
@@ -2189,6 +2275,14 @@ type resourceAreaColumn =
     /// a Content Injection Input for the <td> in the body
     static member inline cellContent(value: ColCellContentArg -> DomNodesProp) =
         Interop.mkProperty<IResourceAreaColumnProp> "cellContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: ColCellContentArg -> ReactElement) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" (System.Func<_,_> value)
+
+    /// a Content Injection Input for the <td> in the body
+    static member inline cellContent(value: ReactElement) =
+        Interop.mkProperty<IResourceAreaColumnProp> "cellContent" value
 
     /// called right after the <td> was added to the DOM
     static member inline cellDidMount(value: ColCellMountArg -> unit) =
