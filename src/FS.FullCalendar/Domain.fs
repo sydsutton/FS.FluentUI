@@ -177,7 +177,7 @@ and DropInfo = {
     /// The native JavaScript event with low-level information such as click coordinates.
     jsEvent: UIEvent
     /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
-    resource: ResourceApi
+    resource: ResourceApi option
     /// The current View Object.
     view: ViewApi
 }
