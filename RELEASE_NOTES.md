@@ -1,6 +1,17 @@
 Release Notes
 =========
 
+### 2.4.1 (4-25-2025)
+
+* Update @fluentui/react-components to 9.63.0
+* Update secondary NPM dependencies
+
+### 2.4.0 (3-24-2025)
+
+* Update @fluentui/react-components to 9.61.2
+* Add ColorPicker components
+* Add `selected` state for Tag components and OnTagSelect callback to TagGroup
+
 ### 2.3.0 (1-22-2024)
 
 * Add FixedSizeList component
