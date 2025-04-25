@@ -247,10 +247,6 @@ type calendar =
     static member inline dayMaxEvents(value: bool) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
 
-    /// Triggered when a date/time selection is made.
-    static member inline select(value: DateSelectArg -> unit) =
-        Interop.mkProperty<ICalendarProp> "select" (System.Func<_, _> value)
-
     /// Triggered when the user clicks an event.
     static member inline eventClick(value: EventClickArg -> unit) =
         Interop.mkProperty<ICalendarProp> "eventClick" (System.Func<_, _> value)
