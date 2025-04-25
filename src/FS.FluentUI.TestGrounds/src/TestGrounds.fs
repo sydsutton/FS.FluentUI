@@ -4550,7 +4550,7 @@ open Fable.Core.JsInterop
 let FullCalendar () =
     let isDialogOpen, setIsDialogOpen = React.useState false
     let newEventTitle, setNewEventTitle = React.useState ""
-    let (selectedDate: DateSelectArg option), setSelectedDate = React.useState None
+    let (selectedDate: SelectInfo option), setSelectedDate = React.useState None
     let startTime, setStartTime = React.useState None
     let endTime, setEndTime = React.useState None
     let (dayEvent: Event), setDayEvent = React.useState Presenter
@@ -4572,7 +4572,7 @@ let FullCalendar () =
         ])
 
     let handleDateSelect =
-        (fun selected ->
+        (fun (selected: SelectInfo) ->
             let calendarApi = calRef.current.Value.getApi()
             let events = calendarApi.getEvents()
             printfn "calRef %A" (events |> Array.map (fun t -> t.title))

@@ -433,7 +433,7 @@ type SelectInfo = {
     /// The native JavaScript event with low-level information such as click coordinates.
     jsEvent: UIEvent
     /// View object. The current Calendar view.
-    View: ViewApi
+    view: ViewApi
     /// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
     resource: ResourceApi
 }
