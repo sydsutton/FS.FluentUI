@@ -5,6 +5,8 @@
 [![NuGet version (FS.FullCalendar)](https://img.shields.io/nuget/v/FS.FullCalendar.svg?style=flat-square)](https://www.nuget.org/packages/FS.FullCalendar/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FS.FullCalendar.svg)](https://www.nuget.org/packages/FS.FullCalendar/)
 
+<a href="https://www.buymeacoffee.com/andrewsydsh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="50" width="200"></a>
+
 ### Please check [all FullCalendar docs](https://fullcalendar.io/docs#toc) for further component usage and properties
 
 ![2025-03-1410-32-04-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/20289af4-fecc-40eb-9bc7-2b546dcab413)
