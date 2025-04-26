@@ -9,6 +9,8 @@
 
 ![DataGridGif](https://github.com/sydsutton/FS.FluentUI/assets/83406605/e98ec82f-b0b1-4ae3-ba3e-ea0a94b462ab)
 
+<a href="https://www.youtube.com/watch?v=jrlvFe8Hzb8" target="_blank">Intro to FS.FluentUI Walk-through</a>
+
 ### Please see all F# component examples in the [FS.FluentUI Wiki](https://github.com/sydsutton/FS.FluentUI/wiki)
 ### Please check [Microsoft's documentation](https://react.fluentui.dev/?path=/docs/concepts-introduction--page) for further component usage and descriptions
 
