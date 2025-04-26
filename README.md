@@ -5,6 +5,8 @@
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FS.FluentUI.svg)](https://www.nuget.org/packages/FS.FluentUI/)
 
+<a href="https://www.buymeacoffee.com/andrewsydsh" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-yellow.png" alt="Buy Me A Coffee" height="50" width="200"></a>
+
 ![DataGridGif](https://github.com/sydsutton/FS.FluentUI/assets/83406605/e98ec82f-b0b1-4ae3-ba3e-ea0a94b462ab)
 
 ### Please see all F# component examples in the [FS.FluentUI Wiki](https://github.com/sydsutton/FS.FluentUI/wiki)
