@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.0.0-prerelease-003</Version>
+        <Version>1.0.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Remove duplicate `select` property.
-            - Fix typo in SelectInfo type.
+            - Change UIEvent to MouseEvent in all Domain types.
         </PackageReleaseNotes>
     </PropertyGroup>
 
