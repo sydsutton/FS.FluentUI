@@ -88,7 +88,7 @@ type CalendarError = {
 }
 
 type DateSelectArg = {
-    jsEvent: UIEvent option
+    jsEvent: MouseEvent option
     view: ViewApi
     start: DateTime
     ``end``: DateTime
@@ -175,7 +175,7 @@ and DropInfo = {
     /// The HTML element that was being dragged.
     draggedEl: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     /// If the current view is a resource-view, the Resource Object the element was dropped on. Must be using one of the resource plugins.
     resource: ResourceApi option
     /// The current View Object.
@@ -355,13 +355,13 @@ and DateSpanApi = {
 type EventClickArg = {
     el: HTMLElement
     event: EventImpl
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     view: ViewApi
 }
 
 type EventDragInfo = {
     event: EventImpl
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     view: ViewApi
 }
 
@@ -386,7 +386,7 @@ type RemoveInfo = {
 }
 
 type PointerDragEvent = {
-    origEvent: UIEvent
+    origEvent: MouseEvent
     isTouch: bool
     subjectEl: EventTarget
     pageX: int
@@ -415,7 +415,7 @@ type EventDropInfo = {
     /// The HTML element that was dragged.
     el: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
 }
 
 type SelectInfo = {
@@ -431,7 +431,7 @@ type SelectInfo = {
     /// Boolean. true or false whether the selection happened on all-day cells.
     allDay: bool
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     /// View object. The current Calendar view.
     view: ViewApi
     /// Resource object. If the current view is a resource view, this is the Resource object that was selected. This is only available when using one of the resource plugins.
@@ -448,7 +448,7 @@ type DateClickInfo = {
     /// An HTML element that represents the whole-day that was clicked on.
     dayEl: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     /// The current View Object.
     view: ViewApi
     /// If the current view is a resource-view, the Resource Object that owns this date. Must be using one of the resource plugins.
@@ -485,7 +485,7 @@ type MouseInfo = {
     /// The HTML element for this event.
     el: HTMLElement
     /// The native JavaScript event with low-level information such as click coordinates.
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
     /// The current View Object.
     view: ViewApi
 }
@@ -507,7 +507,7 @@ type EventResizeInfo = {
     revert: unit -> unit
     view: ViewApi
     el: HTMLElement
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
 }
 
 type EventSegment = {
@@ -521,7 +521,7 @@ type EventSegment = {
 type MoreLinkClickInfo = {
     date: DateTime
     allSegs: EventSegment array
-    jsEvent: UIEvent
+    jsEvent: MouseEvent
 }
 
 type FetchInfo = {
