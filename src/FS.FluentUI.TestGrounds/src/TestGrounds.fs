@@ -2972,6 +2972,7 @@ let RenderButton (button: ButtonItem) (isLastItem: bool) =
                         yield! button.buttonProps
                         breadcrumbButton.current isLastItem
                         breadcrumbButton.text button.item
+                        breadcrumbButton.appearance.subtle
                     ]
                 ]
             )
