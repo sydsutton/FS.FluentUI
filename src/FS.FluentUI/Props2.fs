@@ -1863,7 +1863,7 @@ type [<Erase>] breadcrumbButton =
     static member inline icon (value: IReactProperty list) = Interop.mkProperty<IBreadcrumbButtonProp> "icon" (!!value |> createObj |> unbox<IReactProperty>)
     /// Icon that renders either before or after the `children` as specified by the `iconPosition` prop.
     static member inline icon (value: ReactElement) = Interop.mkProperty<IBreadcrumbButtonProp> "icon" value
-    /// Defines current sate of BreadcrumbButton.
+    /// Defines current state of BreadcrumbButton.
     static member inline current (value: bool) = Interop.mkProperty<IBreadcrumbButtonProp> "current" value
     /// When set, allows the button to be focusable even when it has been disabled.
     /// This is used in scenarios where it is important to keep a consistent tab order for screen reader and keyboard users.
@@ -1884,6 +1884,18 @@ module breadcrumbButton =
         static member inline medium = Interop.mkProperty<IBreadcrumbButtonProp> "size" "medium"
         static member inline large = Interop.mkProperty<IBreadcrumbButtonProp> "size" "large"
 
+    /// A breadcrumbButton can have its content and borders styled for greater emphasis or to be subtle.
+    type [<Erase>] appearance =
+        /// 'subtle' (default): Minimizes emphasis to blend into the background until hovered or focused.
+        static member inline subtle = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "subtle"
+        /// 'outline': Removes background styling.
+        static member inline outline = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "outline"
+        /// 'secondary': Gives emphasis to the button in such a way that it indicates a secondary action.
+        static member inline secondary = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "secondary"
+        /// 'primary': Emphasizes the button as a primary action.
+        static member inline primary = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "primary"
+        /// 'transparent': Removes background and border styling.
+        static member inline transparent = Interop.mkProperty<IBreadcrumbButtonProp> "appearance" "transparent"
 
 // -------------------------------------------------------------------------- PartitionBreadcrumbItemsOptions --------------------------------------------------------------------------------------
 type [<Erase>] partitionBreadcrumbItemsOptions =

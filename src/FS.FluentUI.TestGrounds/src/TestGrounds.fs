@@ -2970,6 +2970,7 @@ let RenderButton (button: ButtonItem) (isLastItem: bool) =
                 Fui.breadcrumbItem [
                     Fui.breadcrumbButton [
                         yield! button.buttonProps
+                        breadcrumbButton.appearance.transparent
                         breadcrumbButton.current isLastItem
                         breadcrumbButton.text button.item
                     ]
@@ -5021,7 +5022,7 @@ let mainContent model dispatch =
             // UseFocusFindersTest()
             // UseModalAttributesOptionsTest()
             // fieldPropsTest
-            // BreadcrumbTest()
+            BreadcrumbTest()
             // SearchBoxTest()
             // TagTest()
             // InteractionTagTest()
