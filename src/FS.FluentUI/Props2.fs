@@ -3632,6 +3632,7 @@ type [<Erase>] navDrawer =
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<INavDrawerProp> "mountNode" value
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: MountNode) = Interop.mkProperty<INavDrawerProp> "mountNode" value
+    static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<INavDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
 
 //------------------------NavProps--------------------------
 
