@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.4.1</Version>
+        <Version>2.5.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +12,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.63.0
-            - Update secondary NPM dependencies
+            - Update @fluentui/react-components to 9.66.0
+            - Add appearance prop to BreadcrumbButtons (thanks @rbertels!)
+            - Stabilize Nav components
         </PackageReleaseNotes>
     </PropertyGroup>
 
