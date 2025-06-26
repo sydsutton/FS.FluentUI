@@ -3245,6 +3245,18 @@ type [<Erase>] presenceMotionSlot =
      /// triggered when the first animation is started. There is no official "start" event with the Web Animations API, so the callback is triggered with "null".
     static member inline onMotionStart (handler: OnMotionData -> unit) = Interop.mkProperty<IPresenceMotionSlotProp> "onMotionStart" (System.Func<_,_,_> (fun _ value -> handler value))
 
+     /// The number of items in the NavSubItemGroup
+    static member inline items (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "items" value
+    /// The number of items in the NavSubItemGroup
+    static member inline items (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "items" value
+    /// The number of items in the NavSubItemGroup
+    static member inline items (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "items" value
+
+module presenceMotionSlotWithCollapseMotion =
+    /// The density of the NavItem
+    type density =
+        static member inline small = Interop.mkProperty<IPresenceMotionSlotProp> "density" "small"
+        static member inline medium = Interop.mkProperty<IPresenceMotionSlotProp> "density" "medium"
 // -------------------------------------------------------------------------- AtomMotion --------------------------------------------------------------------------------------
 type [<Erase>] atomMotion =
     static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))
@@ -3572,6 +3584,8 @@ type [<Erase>] navCategoryItem =
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<INavCategoryItemProp> "expandIcon" value
     /// Expand icon slot rendered after the content to indicate an open and closed state.
     static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<INavCategoryItemProp> "expandIcon" (!!value |> createObj |> unbox)
+    /// Expand icon slot rendered after the content to indicate an open and closed state.
+    static member inline expandIconMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<INavCategoryItemProp> "expandIconMotion" (!!value |> createObj |> unbox)
 
 // -------------------------------------------------------------------------- NavDivider --------------------------------------------------------------------------------------
 type [<Erase>] navDivier =
@@ -3735,6 +3749,7 @@ type [<Erase>] navSubItem =
     static member inline href (value: string)= Interop.mkProperty<INavSubItemProp> "href" value
     /// The value that identifies this navCategoryItem when selected.
     static member inline value (value: string)= Interop.mkProperty<INavSubItemProp> "value" value
+    static member inline collapseMotion (value: IPresenceMotionSlotProp list)= Interop.mkProperty<INavSubItemProp> "collapseMotion" (!!value |> createObj |> unbox)
 
 // -------------------------------------------------------------------------- NavSubItemGroup --------------------------------------------------------------------------------------
 type [<Erase>] navSubItemGroup = FelizProps.prop<INavSubItemGroupProp>
