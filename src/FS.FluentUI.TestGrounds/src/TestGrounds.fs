@@ -4930,98 +4930,98 @@ let mainContent model dispatch =
         stack.horizontalAlign.center
         stack.children [
             ColorPickerTest ()
-            FullCalendar()
-            // Html.div [
-            //     prop.style [
-            //         style.height 200
-            //         style.width 200
-            //         style.backgroundColor newTokens.colorBrandStroke1
-            //     ]
-            //     prop.children [
-            //         Fui.text [
-            //             text.text "Typography Styles"
-            //             text.style [
-            //                 style.fontSize typographyStyles.title1.felizFontSize
-            //                 style.fontFamily typographyStyles.title1.fontFamily
-            //                 style.color newTokens.colorBrandBackgroundHover
-            //                 style.lineHeight typographyStyles.title1.lineHeight
-            //                 style.fontWeight typographyStyles.title1.fontWeight
-            //             ]
-            //         ]
-            //     ]
-            // ]
-            // ListTest ()
-            // UseRestoreFocusSource ()
-            // NavTest ()
-            // CarouselTest()
-            // PresenceComponentTest()
-            // MotionComponentTest()
-            // SwatchPickerTest()
-            // TagPickerTest()
-            // ratingTest ()
-            // ratingDisplayTest
-            // ratingItemTest
-            // TeachingPopoverTest()
-            // TimePickerTest()
-            // MergeClassesTest true
-            // MergeClassesTest false
-            // Accordion()
-            // Checkbox()
-            // avatarTest
-            // ToggleButtons()
-            // buttonTest
-            // menuButtonTest
-            // MenuTest()
-            // imageTest
-            // presenceBadgeTest
-            // counterBadge
-            // PopoverTest()
-            // tooltipTest
-            // linkTest
-            // divider
-            // textTest
-            // UseArrowNavigationGroup()
-            // labelTest
-            // IconTest()
-            // inputTest model dispatch
-            // CompoundButtonTest()
-            // SplitButtonTest()
-            // TextAreaTest()
-            // SliderTest()
-            // SwitchTest()
-            // RadioGroupTest()
-            // TabListTest()
-            // spinnerTest
-            // SpinButtonTest()
-            // SelectTest()
-            // personaTest
-            // DropdownTest()
-            // ComboBoxTest()
-            // ToolbarTest()
-            // ControlledToolbarTest()
-            // avatarGroupTest
-            // progressBarTest
-            // DialogTest()
-            // ToastTest()
-            // CardTest()
-            // SkeletonTest()
-            // DatePickerTest()
-            // badgeTest
-            // OverflowTest()
-            // UseFocusableGroupTest()
-            // InfoButtonTest()
-            // infoLabelTest
-            // alertTest
-            // VirtualizerTest()
-            // VirtualizerScrollViewTest()
-            // DrawerTest()
-            // simpleTreeTest
-            // FlatTreeTest()
-            // DataGridTest()
-            // // SimpleTableTest()
-            // UseFocusFindersTest()
-            // UseModalAttributesOptionsTest()
-            // fieldPropsTest
+            // FullCalendar()
+            Html.div [
+                prop.style [
+                    style.height 200
+                    style.width 200
+                    style.backgroundColor newTokens.colorBrandStroke1
+                ]
+                prop.children [
+                    Fui.text [
+                        text.text "Typography Styles"
+                        text.style [
+                            style.fontSize typographyStyles.title1.felizFontSize
+                            style.fontFamily typographyStyles.title1.fontFamily
+                            style.color newTokens.colorBrandBackgroundHover
+                            style.lineHeight typographyStyles.title1.lineHeight
+                            style.fontWeight typographyStyles.title1.fontWeight
+                        ]
+                    ]
+                ]
+            ]
+            ListTest ()
+            UseRestoreFocusSource ()
+            NavTest ()
+            CarouselTest()
+            PresenceComponentTest()
+            MotionComponentTest()
+            SwatchPickerTest()
+            TagPickerTest()
+            ratingTest ()
+            ratingDisplayTest
+            ratingItemTest
+            TeachingPopoverTest()
+            TimePickerTest()
+            MergeClassesTest true
+            MergeClassesTest false
+            Accordion()
+            Checkbox()
+            avatarTest
+            ToggleButtons()
+            buttonTest
+            menuButtonTest
+            MenuTest()
+            imageTest
+            presenceBadgeTest
+            counterBadge
+            PopoverTest()
+            tooltipTest
+            linkTest
+            divider
+            textTest
+            UseArrowNavigationGroup()
+            labelTest
+            IconTest()
+            inputTest model dispatch
+            CompoundButtonTest()
+            SplitButtonTest()
+            TextAreaTest()
+            SliderTest()
+            SwitchTest()
+            RadioGroupTest()
+            TabListTest()
+            spinnerTest
+            SpinButtonTest()
+            SelectTest()
+            personaTest
+            DropdownTest()
+            ComboBoxTest()
+            ToolbarTest()
+            ControlledToolbarTest()
+            avatarGroupTest
+            progressBarTest
+            DialogTest()
+            ToastTest()
+            CardTest()
+            SkeletonTest()
+            DatePickerTest()
+            badgeTest
+            OverflowTest()
+            UseFocusableGroupTest()
+            InfoButtonTest()
+            infoLabelTest
+            alertTest
+            VirtualizerTest()
+            VirtualizerScrollViewTest()
+            DrawerTest()
+            simpleTreeTest
+            FlatTreeTest()
+            DataGridTest()
+            // SimpleTableTest()
+            UseFocusFindersTest()
+            UseModalAttributesOptionsTest()
+            fieldPropsTest
             BreadcrumbTest()
             // SearchBoxTest()
             // TagTest()
