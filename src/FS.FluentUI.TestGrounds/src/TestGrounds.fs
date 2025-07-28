@@ -4930,8 +4930,8 @@ let mainContent model dispatch =
         ]
         stack.horizontalAlign.center
         stack.children [
-            //ColorPickerTest ()
-            //FullCalendar()
+            ColorPickerTest ()
+            FullCalendar()
             // Html.div [
             //     prop.style [
             //         style.height 200
