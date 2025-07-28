@@ -1092,6 +1092,8 @@ type [<Erase>] menuItem =
     static member inline subText (value: ReactElement) = Interop.mkProperty<IMenuItemProp> "subText" value
     /// Additional descriptor to main content that creates a multiline layout
     static member inline subText (value: IReactProperty list) = Interop.mkProperty<IMenuItemProp> "subText" (!!value |> createObj |> unbox)
+    /// Additional descriptor to main content that creates a multiline layout
+    static member inline subText (value : string) = Interop.mkProperty "subText" value
     /// If the menu item is a trigger for a submenu
     static member inline hasSubmenu (value: bool) = Interop.mkProperty<IMenuItemProp> "hasSubmenu" value
     /// Clicking on the menu item will not dismiss an open menu

@@ -392,6 +392,7 @@ let MenuTest () =
                                         Fui.menuItem [
                                             menuItem.compact
                                             menuItem.text "In Mobile"
+                                            menuItem.subText "This is some subtext"
                                         ]
                                     ]
                                 ]
@@ -4929,8 +4930,8 @@ let mainContent model dispatch =
         ]
         stack.horizontalAlign.center
         stack.children [
-            ColorPickerTest ()
-            FullCalendar()
+            //ColorPickerTest ()
+            //FullCalendar()
             // Html.div [
             //     prop.style [
             //         style.height 200
@@ -4971,7 +4972,7 @@ let mainContent model dispatch =
             // ToggleButtons()
             // buttonTest
             // menuButtonTest
-            // MenuTest()
+            MenuTest()
             // imageTest
             // presenceBadgeTest
             // counterBadge
@@ -5022,7 +5023,7 @@ let mainContent model dispatch =
             // UseFocusFindersTest()
             // UseModalAttributesOptionsTest()
             // fieldPropsTest
-            BreadcrumbTest()
+            // BreadcrumbTest()
             // SearchBoxTest()
             // TagTest()
             // InteractionTagTest()
