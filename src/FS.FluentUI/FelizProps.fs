@@ -1546,7 +1546,7 @@ type prop<'Property> =
     static member inline span (value: int) = Interop.mkProperty<'Property> "span" value
 
     /// Defines whether the element may be checked for spelling errors.
-    static member inline spellCheck (value: bool) = Interop.mkProperty<'Property> "spellCheck" (string value)
+    static member inline spellcheck (value: bool) = Interop.mkProperty<'Property> "spellCheck" (string value)
 
     /// Controls the ratio of reflection of the specular lighting.
     ///
