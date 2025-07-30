@@ -1,6 +1,19 @@
 Release Notes
 =========
 
+### 2.5.1 (7-30-2025)
+
+* Update @fluentui/react-components to 9.68.1
+* Update secondary date/time NPM dependencies
+* Fix spellCheck prop bug (thanks @rbertels!)
+* Add string overload for subText prop (thanks @rbertels!)
+
+### 2.5.0 (6-12-2025)
+
+* Update @fluentui/react-components to 9.66.0
+* Add appearance prop to BreadcrumbButtons (thanks @rbertels!)
+* Stabilize Nav components
+
 ### 2.4.1 (4-25-2025)
 
 * Update @fluentui/react-components to 9.63.0
