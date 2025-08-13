@@ -2231,6 +2231,10 @@ type [<Erase>] dropdown =
     static member inline listbox (value: IListboxProp list) = Interop.mkProperty<IDropdownProp> "listbox" (!!value |> createObj |> unbox<IListboxProp>)
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<IDropdownProp> "expandIcon" value
     static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<IDropdownProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The dropdown clear icon
+    static member inline clearButton (value: ReactElement) = Interop.mkProperty<IDropdownProp> "clearButton" value
+    /// The dropdown clear icon
+    static member inline clearButton (value: IReactProperty list) = Interop.mkProperty<IDropdownProp> "clearButton" (!!value |> createObj |> unbox<IReactProperty>)
     /// For an uncontrolled component, sets the initial selection. If this is set, the defaultValue prop MUST also be set.
     static member inline defaultSelectedOptions (value: #seq<string>) = Interop.mkProperty<IDropdownProp> "defaultSelectedOptions" (value |> Seq.toArray)
     /// Sets the selection type to multiselect. Set this to true for multiselect, even if fully controlling selection state. This enables styles and accessibility properties to be set.
@@ -2422,6 +2426,10 @@ type [<Erase>] combobox =
     static member inline input (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "input" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline expandIcon (value: ReactElement) = Interop.mkProperty<IComboboxProp> "expandIcon" value
     static member inline expandIcon (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "expandIcon" (!!value |> createObj |> unbox<IReactProperty>)
+    /// The dropdown clear icon
+    static member inline clearIcon (value: ReactElement) = Interop.mkProperty<IComboboxProp> "clearIcon" value
+    /// The dropdown clear icon
+    static member inline clearIcon (value: IReactProperty list) = Interop.mkProperty<IComboboxProp> "clearIcon" (!!value |> createObj |> unbox<IReactProperty>)
     static member inline defaultSelectedOptions (value: #seq<string>) = Interop.mkProperty<IComboboxProp> "defaultSelectedOptions" (value |> Seq.toArray)
     static member inline multiselect (value: bool) = Interop.mkProperty<IComboboxProp> "multiselect" value
     static member inline onOptionSelect (handler: OptionOnSelectData -> unit) = Interop.mkProperty<IComboboxProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
