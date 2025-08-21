@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.5.1</Version>
+        <Version>2.5.2</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,10 +12,9 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.68.1
-            - Update secondary date/time NPM dependencies
-            - Fix spellCheck prop bug
-            - Add string overload for subText prop
+            - Update @fluentui/react-components to 9.69.0
+            - Add clearButton and clearIcon props to Dropdown and Combobox components
+            - Add disabledSelection prop to ListItem component
         </PackageReleaseNotes>
     </PropertyGroup>
 
