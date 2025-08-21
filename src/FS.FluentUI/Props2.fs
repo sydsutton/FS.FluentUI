@@ -3907,6 +3907,7 @@ type [<Erase>] listItem =
     static member inline onAction (handler: ListItemActionEventData<float, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onAction (handler: ListItemActionEventData<decimal, KeyboardEvent> -> unit)= Interop.mkProperty<IListItemProp> "onAction" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline style (value: obj)= Interop.mkProperty<IListItemProp> "style" value
+    static member inline disabledSelection (value: bool)= Interop.mkProperty<IListItemProp> "disabledSelection" value
 
 // -------------------------------------------------------------------------- ColorPicker --------------------------------------------------------------------------------------
 type [<Erase>] colorPicker =
