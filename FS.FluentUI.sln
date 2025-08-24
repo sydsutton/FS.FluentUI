@@ -15,6 +15,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FS.FluentUI.V8toV9", "src\F
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FS.FullCalendar", "src\FS.FullCalendar\FS.FullCalendar.fsproj", "{4383DB05-2CB0-4AFD-901E-1215F57CCBF0}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "FS.FluentUI.Charts", "src\FS.FluentUI.Charts\FS.FluentUI.Charts.fsproj", "{EBE37E6E-33EE-4D64-A9FA-A97B3033FEB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{4383DB05-2CB0-4AFD-901E-1215F57CCBF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4383DB05-2CB0-4AFD-901E-1215F57CCBF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4383DB05-2CB0-4AFD-901E-1215F57CCBF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE37E6E-33EE-4D64-A9FA-A97B3033FEB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE37E6E-33EE-4D64-A9FA-A97B3033FEB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE37E6E-33EE-4D64-A9FA-A97B3033FEB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE37E6E-33EE-4D64-A9FA-A97B3033FEB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6DCB5EE1-8636-46D0-802B-5DE215645909} = {55E5674B-2084-494C-9CC6-E9CF7817605F}

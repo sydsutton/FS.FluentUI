@@ -3,7 +3,8 @@
   "scripts": {
     "start": "dotnet tool restore && dotnet fable watch src --runFast vite",
     "build": "dotnet tool restore && dotnet fable src --run vite build",
-    "clean": "dotnet fable clean src --yes"
+    "clean": "dotnet fable clean src --yes",
+    "jsx": "dotnet tool restore && dotnet fable watch src --verbose --outDir . --extension .jsx --run vite"
   },
   "license": "MIT",
   "dependencies": {
@@ -13,6 +14,7 @@
     "@fluentui/react-datepicker-compat": "^0.6.13",
     "@fluentui/react-migration-v8-v9": "^9.6.34",
     "@fluentui/react-timepicker-compat": "^0.4.15",
+    "@fluentui/react-charts": "^9.2.2",
     "@fullcalendar/adaptive": "^6.1.17",
     "@fullcalendar/bootstrap": "^6.1.15",
     "@fullcalendar/bootstrap5": "^6.1.15",
