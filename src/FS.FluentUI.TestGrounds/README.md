@@ -17,4 +17,9 @@ npm start
 ```
 This will start the development server after compiling the project, once it is finished, navigate to http://localhost:8080 to view the application.
 
-
+Alternatively
+```bash
+npm run jsx
+```
+This will start development server, but compile to jsx instead.
+Change source bundle file in index.html to jsx

@@ -4929,6 +4929,7 @@ let mainContent model dispatch =
         ]
         stack.horizontalAlign.center
         stack.children [
+            TestCharts.TestChartsComponent()
             ColorPickerTest ()
             // FullCalendar()
             Html.div [

@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Utils.fs" />
+        <Compile Include="Domain.fs" />
+        <Compile Include="Props.fs" />
+        <Compile Include="Charts.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Content Include="*.fsproj; *.fs; *.js" Exclude="**\*.fs.js" PackagePath="fable\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Update="FSharp.Core" Version="6.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Feliz" Version="2.9.0" />
+    </ItemGroup>
+
+</Project>

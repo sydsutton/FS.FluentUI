@@ -6,6 +6,11 @@
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+        <Compile Include="../../FS.FluentUI.Charts/Utils.fs" />
+        <Compile Include="../../FS.FluentUI.Charts/Domain.fs" />
+        <Compile Include="../../FS.FluentUI.Charts/Props.fs" />
+        <Compile Include="../../FS.FluentUI.Charts/Charts.fs" />
+
         <Compile Include="../../FS.FullCalendar/Domain.fs" />
         <Compile Include="../../FS.FullCalendar/Utils.fs" />
         <Compile Include="../../FS.FullCalendar/Props.fs" />
@@ -29,6 +34,7 @@
         <None Include="index.html" />
         <None Include="..\Package.json" />
         <Compile Include="IconsToTest.fs" />
+        <Compile Include="TestCharts.fs" />
         <Compile Include="TestGrounds.fs" />
         <Compile Include="Main.fs" />
     </ItemGroup>
