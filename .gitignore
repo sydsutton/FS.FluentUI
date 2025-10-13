@@ -14,5 +14,3 @@ yarn-error.log
 output/
 src/**/*.fs.js*
 src/**/*.js*
-.idea/
-.direnv
