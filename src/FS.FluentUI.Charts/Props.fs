@@ -31,18 +31,6 @@ type [<Erase>] baseDataPoint<'Property> =
     static member inline markerSize (value: decimal) = Interop.mkProperty<'Property> "markerSize" value
 
 
-// // Need this in order for legendProps type to create property 'shape', while all other types use 'legendShape'
-// type [<Erase>] shape<'property> =
-//     static member inline ``default`` = Interop.mkProperty<'property> "shape" "default"
-//     static member inline circle = Interop.mkProperty<'property> "shape" "circle"
-//     static member inline square = Interop.mkProperty<'property> "shape" "square"
-//     static member inline triangle = Interop.mkProperty<'property> "shape" "triangle"
-//     static member inline diamond = Interop.mkProperty<'property> "shape" "diamond"
-//     static member inline pyramid = Interop.mkProperty<'property> "shape" "pyramid"
-//     static member inline hexagon = Interop.mkProperty<'property> "shape" "hexagon"
-//     static member inline pentagon = Interop.mkProperty<'property> "shape" "pentagon"
-//     static member inline octagon = Interop.mkProperty<'property> "shape" "octagon"
-
 // type [<Erase>] legendsStyles =
 //     // Style set for the root of the legend component
 //     static member inline root(value: string) = Interop.mkProperty<ILegendsStylesProp> "root" value
@@ -166,308 +154,224 @@ module legendProp =
         static member inline octagon = Interop.mkProperty<ILegendProp> "shape" "octagon"
         static member inline dottedLine = Interop.mkProperty<ILegendProp> "shape" "dottedLine"
 
-// type [<Erase>] cartesianChartStyles<'Property> =
-//     //Additional CSS class(es) to apply to the Chart.
-//     static member inline className(value: string) = Interop.mkProperty<'Property> "className" value
-//     /// Width of the chart.
-//     static member inline width(value: int) = Interop.mkProperty<'Property> "width" value
-//     /// Height of the chart.
-//     static member inline height(value: int) = Interop.mkProperty<'Property> "height" value
-//     /// Color of the chart.
-//     static member inline color(value: string) = Interop.mkProperty<'Property> "color" value
-//     /// Link to redirect if click action for graph
-//     static member inline href(value: string) = Interop.mkProperty<'Property> "href" value
-//     /// Prop to check if the chart is selected or hovered upon to determine opacity
-//     static member inline shouldHighlight(value: bool) = Interop.mkProperty<'Property> "shouldHighlight" value
-//     /// Prop to check if the Page is in Rtl
-//     static member inline useRtl(value: bool) = Interop.mkProperty<'Property> "useRtl" value
-//     /// Color of the line
-//     static member inline lineColor(value: string) = Interop.mkProperty<'Property> "lineColor" value
-//     /// Boolean flag which determines if shape is drawn in callout
-//     static member inline toDrawShape(value: bool) = Interop.mkProperty<'Property> "toDrawShape" value
-//     /// Prop to disable shrinking of the chart beyond a certain limit and enable scrolling when the chart overflows
-//     /// [Deprecated: Use reflowProps instead]
-//     static member inline enableReflow(value: bool) = Interop.mkProperty<'Property> "enableReflow" value
+/// Props related to reflow behavior of the chart
+/// Determines the reflow behavior of the chart.
+/// When set to `'min-width'`, the chart will not shrink below a certain width and will enable scrolling if it overflows.
+type [<Erase>] reflowProps<'Property> =
+    static member inline modeNone = Interop.mkProperty<'Property> "reflowProps" {| mode = "none" |}
+    static member inline modeMinWidth = Interop.mkProperty<'Property> "reflowProps" {| mode = "min-width" |}
 
+type [<Erase>] xAxis<'Property> =
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: int) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: float) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: decimal) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: string) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: int) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: float) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: decimal) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: DateTime) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
 
-// type [<Erase>] cartesianChartProps<'property> =
-//     // Below height used for resizing of the chart
-//     // Wrap chart in your container and send the updated height and width to these props.
-//     // These values decide wheather chart re render or not. Please check examples for reference
-//     static member inline height(value: float) = Interop.mkProperty<'property> "height" value
-//     /// Below width used for resizing of the chart
-//     /// Wrap chart in your container and send the updated height and width to these props.
-//     /// These values decide wheather chart re render or not. Please check examples for reference
-//     static member inline width(value: float) = Interop.mkProperty<'property> "width" value
-//     /// This prop takes its parent as a HTML element to define the width and height of the chart
-//     static member inline parentRef(value: Browser.Types.HTMLElement option) = Interop.mkProperty<'property> "parentRef" value
-//     /// Additional CSS class(es) to apply to the Chart
-//     static member inline className(value: string) = Interop.mkProperty<'property> "className" value
-//     /// Margins for the chart
-//     /// Default: { top: 20, bottom: 35, left: 40, right: 20 }
-//     /// To avoid edge cuttings to the chart, we recommend you use default values or greater then default values
-//     static member inline margins(value: IMargins list) = Interop.mkProperty<'property> "margins" (createObj !!value)
-//     /// Decides whether to show/hide legends
-//     // Default: false
-//     static member inline hideLegend(value: bool) = Interop.mkProperty<'property> "hideLegend" value
-//     /// Do not show tooltips in chart
-//     /// Default: false
-//     static member inline hideTooltip(value: bool) = Interop.mkProperty<'property> "hideTooltip" value
-//     /// This prop takes values that you want the chart to render on x-axis
-//     /// This is a optional parameter if not specified D3 will decide which values appear on the x-axis for you
-//     static member inline tickValues(value: float list) = Interop.mkProperty<'property> "tickValues" (value |> List.toArray)
-//     /// This prop takes values that you want the chart to render on x-axis
-//     /// This is a optional parameter if not specified D3 will decide which values appear on the x-axis for you
-//     static member inline tickValues(value: DateTime list) = Interop.mkProperty<'property> "tickValues" (value |> List.toArray)
-//     /// This prop takes values that you want the chart to render on x-axis
-//     /// This is a optional parameter if not specified D3 will decide which values appear on the x-axis for you
-//     static member inline tickValues(value: string list) = Interop.mkProperty<'property> "tickValues" (value |> List.toArray)
-//     /// The format for the data on x-axis. For date object this can be specified to your requirement. Eg: '%m/%d', '%d'
-//     /// Please look at https://github.com/d3/d3-time-format for all the formats supported for date axis
-//     /// Only applicable for date axis. For y-axis format use yAxisTickFormat prop.
-//     static member inline tickFormat(value: string) = Interop.mkProperty<'property> "tickFormat" value
-//     /// Width of line stroke
-//     static member inline strokeWidth(value: float) = Interop.mkProperty<'property> "strokeWidth" value
-//     /// x Axis labels tick padding. This defines the gap between tick labels and tick lines.
-//     /// Default: 10
-//     static member inline xAxisTickPadding(value: float) = Interop.mkProperty<'property> "xAxisTickPadding" value
-//     /// The format in for the data on y-axis. For data object this can be specified to your requirement.
-//     /// Eg: d3.format(".0%")(0.123),d3.format("+20")(42);
-//     /// Please look at https://github.com/d3/d3-format for all the formats supported
-//     static member inline yAxisTickFormat(value: obj) = Interop.mkProperty<'property> "yAxisTickFormat" value
-//     /// Secondary y-scale options
-//     /// By default this is not defined, meaning there will be no secondary y-scale.
-//     static member inline secondaryYScaleOptions(value: obj) = Interop.mkProperty<'property> "secondaryYScaleOptions" value // TODO
-//     /// Minimum data value point in y-axis
-//     static member inline yMinValue(value: float) = Interop.mkProperty<'property> "yMinValue" value
-//     /// Maximum data value point in y-axis
-//     static member inline yMaxValue(value: float) = Interop.mkProperty<'property> "yMaxValue" value
-//     /// Maximum data value point in x-axis
-//     static member inline xMaxValue(value: float) = Interop.mkProperty<'property> "xMaxValue" value
-//     /// Number of ticks on the y-axis.
-//     /// Tick count should be factor of difference between (yMinValue, yMaxValue)?
-//     /// Default: 4
-//     static member inline yAxisTickCount(value: int) = Interop.mkProperty<'property> "yAxisTickCount" value
-//     /// Defines the number of ticks on the x-axis. Tries to match the nearest interval satisfying the count.
-//     /// Does not work for string axis.
-//     /// Default: 6
-//     static member inline xAxisTickCount(value: int) = Interop.mkProperty<'property> "xAxisTickCount" value
-//     /// Define the size of the tick lines on the x-axis
-//     /// Default: 10
-//     static member inline xAxistickSize(value: float) = Interop.mkProperty<'property> "xAxistickSize" value
-//     /// Defines the space between the tick line and the data label
-//     /// Default: 10
-//     static member inline tickPadding(value: float) = Interop.mkProperty<'property> "tickPadding" value
-//     /// Url that the data-viz needs to redirect to upon clicking on it
-//     static member inline href(value: string) = Interop.mkProperty<'property> "href" value
-//     /// Legends overflow text
-//     static member inline legendsOverflowText(value: obj) = Interop.mkProperty<'property> "legendsOverflowText" value
-//     /// Enable the legends to wrap lines if there is not enough space to show all legends on a single line
-//     static member inline enabledLegendsWrapLines(value: bool) = Interop.mkProperty<'property> "enabledLegendsWrapLines" value
-//     /// Legend properties
-//     static member inline legendProps(value: ILegendProp list) = Interop.mkProperty<'property> "legendProps" (keyValueList CaseRules.LowerFirst value)
-//     /// Default: false
-//     /// Used for to elipse x axis labes and show tooltip on x axis labels
-//     static member inline showXAxisLablesTooltip(value: bool) = Interop.mkProperty<'property> "showXAxisLablesTooltip" value
-//     /// Default: 4
-//     /// Used for X axis labels
-//     /// While Giving showXAxisLablesTooltip prop, need to define after how many chars, we need to truncate the word.
-//     static member inline noOfCharsToTruncate(value: int) = Interop.mkProperty<'property> "noOfCharsToTruncate" value
-//     /// Default: false
-//     /// Used to wrap x axis labels values (whole value)
-//     static member inline wrapXAxisLables(value: bool) = Interop.mkProperty<'property> "wrapXAxisLables" value
-//     /// Default: false
-//     /// Used to rotate x axis labels by 45 degrees
-//     static member inline rotateXAxisLables(value: bool) = Interop.mkProperty<'property> "rotateXAxisLables" value
-//     // The prop used to define the date time localization options
-//     static member inline dateLocalizeOptions(value: obj) = Interop.mkProperty<'property> "dateLocalizeOptions" value // Intl.DateTimeFormatOptions
-//     // The prop used to define a custom locale for the date time format
-//     static member inline timeFormatLocale(value: obj) = Interop.mkProperty<'property> "timeFormatLocale" value // TimeLocaleDefinition
-//     /// The prop used to define a custom datetime formatter for date axis
-//     static member inline customDateTimeFormatter(value: DateTime -> string) = Interop.mkProperty<'property> "customDateTimeFormatter" value
-//     /// Call to provide customized styling that will layer on top of the variant rules
-//     static member inline styles(value: cartesianChartStyles<'property> list) = Interop.mkProperty<'property> "styles" (keyValueList CaseRules.LowerFirst value)
-
-//     // Callout customization props
-//     static member inline calloutProps(value: IChartPopoverProps list) = Interop.mkProperty<'property> "calloutProps" (keyValueList CaseRules.LowerFirst value)
-
-//     // Props for the svg; use this to include aria-* or other attributes on the tag
-//     // TODO static member inline svgProps(value: obj) = Interop.mkProperty<'property> "svgProps" value
-//     // Prop to disable shrinking of the chart beyond a certain limit and enable scrolling when the chart overflows
-//     // Deprecated: Use reflowProps instead
-
-//     static member inline enableReflow(value: bool) = Interop.mkProperty<'property> "enableReflow" value
-
-//     // Props related to reflow behavior of the chart
-//     // TODO static member inline reflowProps(value: string) = Interop.mkProperty<'property> "reflowProps" value
-//     // Prop to set the x axis title
-//     // Default: undefined
-//     // Minimum bottom margin required for x axis title is 55px
-
-//     static member inline xAxisTitle(value: string) = Interop.mkProperty<'property> "xAxisTitle" value
-//     /// Prop to set the y axis title
-//     /// Default: undefined
-//     /// Minimum left margin required for y axis title is 60px and for RTL is 40px
-//     /// Minimum right margin required for y axis title is 40px and for RTL is 60px
-//     static member inline yAxisTitle(value: string) = Interop.mkProperty<'property> "yAxisTitle" value
-//     /// Prop to set the secondary y axis title
-//     /// Default: undefined
-//     /// If RTL is enabled, minimum left and right margins required for secondary y axis title is 60px
-//     static member inline secondaryYAxistitle(value: string) = Interop.mkProperty<'property> "secondaryYAxistitle" value
-//     /// Whether to use UTC time for axis scale, ticks, and the time display in callouts.
-//     /// When set to true, time is displayed equally, regardless of the user's timezone settings.
-//     /// Default: true
-//     static member inline useUTC(value: string) = Interop.mkProperty<'property> "useUTC" value
-//     /// Whether to use UTC time for axis scale, ticks, and the time display in callouts.
-//     /// When set to true, time is displayed equally, regardless of the user's timezone settings.
-//     /// Default: true
-//     static member inline useUTC(value: bool) = Interop.mkProperty<'property> "useUTC" value
-//     /// Default: false
-//     /// The prop used to decide rounded ticks on y axis
-//     static member inline roundedTicks(value: bool) = Interop.mkProperty<'property> "roundedTicks" value
-//     /// Determines whether overlapping x-axis tick labels should be hidden
-//     /// Default: true
-//     static member inline hideTickOverlap(value: bool) = Interop.mkProperty<'property> "hideTickOverlap" value
-//     /// Define a custom callout props override
-//     static member inline calloutPropsPerDataPoint(value: obj -> obj) = Interop.mkProperty<'property> "calloutPropsPerDataPoint" value // TODO
-//     /// Optional callback to access the Chart interface. Use this instead of ref for accessing
-//     /// the public methods and properties of the component
-//     static member inline componentRef(value: IRefValue<FocusProp>) = Interop.mkProperty<'property> "componentRef" value
-//     /// Prop to set the x axis annotation. Used to display additional information on the x-axis.
-//     /// This is shown on the top of the chart.
-//     /// Default: undefined
-//     static member inline xAxisAnnotation(value: string) = Interop.mkProperty<'property> "xAxisAnnotation" value
-//     /// Prop to set the y axis annotation. Used to display additional information on the y-axis.
-//     /// This is shown on the right side of the chart. Not shown if secondary y-axis is enabled.
-//     /// Default: undefined
-//     static member inline yAxisAnnotation(value: string) = Interop.mkProperty<'property> "yAxisAnnotation" value
-//     /// Specifies the ordering logic for categories (or string tick labels) on the x-axis
-//     /// Default: 'default'
-//     static member inline xAxisCategoryOrder(value: IAxisCategoryOrder) = Interop.mkProperty<'property> "xAxisCategoryOrder" value
-//     /// Specifies the ordering logic for categories (or string tick labels) on the y-axis
-//     /// Default: 'default'
-//     static member inline yAxisCategoryOrder(value: IAxisCategoryOrder) = Interop.mkProperty<'property> "yAxisCategoryOrder" value
-//     /// Defines the scale type for the x-axis
-//     /// Default: 'default'
-//     /// default or 'log'
-//     static member inline xScaleType(value: string) = Interop.mkProperty<'property> "xScaleType" value
-//     /// Defines the scale type for the primary y-axis
-//     /// Default: 'default'
-//     /// default or 'log'
-//     static member inline yScaleType(value: string) = Interop.mkProperty<'property> "yScaleType" value
-//     /// Defines the scale type for the secondary y-axis
-//     /// Default: 'default'
-//     /// default or 'log'
-//     static member inline secondaryYScaleType(value: string) = Interop.mkProperty<'property> "secondaryYScaleType" value
-//     /// Explicit set of tick values for the y-axis.
-//     /// If provided, these values override automatic tick generation
-//     static member inline yAxisTickValues(value: float list) = Interop.mkProperty<'property> "yAxisTickValues" (value |> List.toArray)
-//     /// Explicit set of tick values for the y-axis.
-//     /// If provided, these values override automatic tick generation
-//     static member inline yAxisTickValues(value: DateTime list) = Interop.mkProperty<'property> "yAxisTickValues" (value |> List.toArray)
-//     /// Explicit set of tick values for the y-axis.
-//     /// If provided, these values override automatic tick generation
-//     static member inline yAxisTickValues(value: string list) = Interop.mkProperty<'property> "yAxisTickValues" (value |> List.toArray)
-//     /// Configuration for the x-axis.
-//     /// Use this to control tickStep, tick0, etc.
-//     static member inline xAxis(value: axisProps list) = Interop.mkProperty<'property> "xAxis" (value |> List.toArray)
-//     /// Configuration for the y-axis.
-//     /// Use this to control tickStep, tick0, etc.
-//     static member inline yAxis(value: axisProps list) = Interop.mkProperty<'property> "yAxis" (value |> List.toArray)
-
-// type [<Erase>] lineChartLineOptions =
-//     /// Width of the line/stroke.
-//     /// Overrides the strokeWidth set on 'Propertys level.
-//     /// @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-width
-//     static member strokeWidth(value: float) = Interop.mkProperty<ILineChartLineOptions> "strokeWidth" value
-//     /// Pattern of dashes and gaps.
-//     /// @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray
-//     static member strokeDasharray(value: float) = Interop.mkProperty<ILineChartLineOptions> "strokeDasharray" value
-//     /// Offset on rendering of stroke dash array.
-//     /// @see https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dashoffset
-//     static member strokeDashoffset(value: float) = Interop.mkProperty<ILineChartLineOptions> "strokeDashoffset" value
-//     /// Width of border around the line. Default no border.
-//     static member lineBorderWidth(value: float) = Interop.mkProperty<ILineChartLineOptions> "lineBorderWidth" value
-//     /// Color of border around the line. Default white.
-//     static member lineBorderColor(value: string) = Interop.mkProperty<ILineChartLineOptions> "lineBorderColor" value
-
-// module lineChartLineOptions =
-//     type [<Erase>] curve =
-//         static member inline linear = Interop.mkProperty<ILineChartLineOptions> "curve" "linear"
-//         static member inline natural = Interop.mkProperty<ILineChartLineOptions> "curve" "natural"
-//         static member inline step = Interop.mkProperty<ILineChartLineOptions> "curve" "step"
-//         static member inline stepAfter = Interop.mkProperty<ILineChartLineOptions> "curve" "stepAfter"
-//         static member inline stepBefore = Interop.mkProperty<ILineChartLineOptions> "curve" "stepBefore"
-
-//     type [<Erase>] strokeLinecap =
-//         static member inline butt = Interop.mkProperty<ILineChartLineOptions> "strokeLinecap" "butt"
-//         static member inline round = Interop.mkProperty<ILineChartLineOptions> "strokeLinecap" "round"
-//         static member inline square = Interop.mkProperty<ILineChartLineOptions> "strokeLinecap" "square"
-//         static member inline ``inherit`` = Interop.mkProperty<ILineChartLineOptions> "strokeLinecap" "inherit"
-
-//     type [<Erase>] mode =
-//         static member inline lines = Interop.mkProperty<ILineChartLineOptions> "mode" "lines"
-//         static member inline markers = Interop.mkProperty<ILineChartLineOptions> "mode" "markers"
-//         static member inline text = Interop.mkProperty<ILineChartLineOptions> "mode" "text"
-//         static member inline linesMarkers = Interop.mkProperty<ILineChartLineOptions> "mode" "lines+markers"
-//         static member inline textMarkers = Interop.mkProperty<ILineChartLineOptions> "mode" "text+markers"
-//         static member inline textLines = Interop.mkProperty<ILineChartLineOptions> "mode" "text+lines"
-//         static member inline textLinesMarkers = Interop.mkProperty<ILineChartLineOptions> "mode" "text+lines+markers"
-//         static member inline none = Interop.mkProperty<ILineChartLineOptions> "mode" "none"
-//         static member inline gauge = Interop.mkProperty<ILineChartLineOptions> "mode" "gauge"
-//         static member inline number = Interop.mkProperty<ILineChartLineOptions> "mode" "number"
-//         static member inline delta = Interop.mkProperty<ILineChartLineOptions> "mode" "delta"
-//         static member inline numberDelta = Interop.mkProperty<ILineChartLineOptions> "mode" "number+delta"
-//         static member inline gaugeNumber = Interop.mkProperty<ILineChartLineOptions> "mode" "gauge+number"
-//         static member inline gaugeNumberDelta = Interop.mkProperty<ILineChartLineOptions> "mode" "gauge+number+delta"
-//         static member inline gaugeDelta = Interop.mkProperty<ILineChartLineOptions> "mode" "gauge+delta"
-//         static member inline markersText = Interop.mkProperty<ILineChartLineOptions> "mode" "markers+text"
-//         static member inline linesText = Interop.mkProperty<ILineChartLineOptions> "mode" "lines+text"
-//         static member inline linesMarkersText = Interop.mkProperty<ILineChartLineOptions> "mode" "lines+markers+text"
-
-// module lineChartData =
-//     type [<Erase>] legendShape =
-//         class
-//             inherit legendShape<ILineChartDataProp>
-//         end
-
-// type [<Erase>] lineChartData =
-//     static member inline legend(value: string) = Interop.mkProperty<ILineChartDataProp> "legend" value
-//     static member inline data(value: ILineChartDataPoint list) = Interop.mkProperty<ILineChartDataProp> "data" (value |> List.toArray)
-//     static member inline color(value: string) = Interop.mkProperty<ILineChartDataProp> "color" value
-//     static member inline opacity(value: float) = Interop.mkProperty<ILineChartDataProp> "opacity" value
-//     static member inline lineOptions(value: ILineChartLineOptions list) = Interop.mkProperty<ILineChartDataProp> "lineOptions" (keyValueList CaseRules.LowerFirst value)
-//     static member inline gaps(value: ILineChartGap list) = Interop.mkProperty<ILineChartDataProp> "gaps" (value |> List.toArray)
-//     static member inline hideNonActiveDots(value: bool) = Interop.mkProperty<ILineChartDataProp> "hideNonActiveDots" value
-//     static member inline onLegendClick(value: string option -> unit) = Interop.mkProperty<ILineChartDataProp> "onLegendClick" value
-//     static member inline onLineCLick(value: unit -> unit) = Interop.mkProperty<ILineChartDataProp> "onLineClick" value
-//     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<ILineChartDataProp> "useSecondaryYScale" value
-
-// type [<Erase>] accessibilityProps =
-//     static member inline ariaLabel(value: string) = Interop.mkProperty<IAccessibilityProps> "ariaLabel" value
-//     static member inline ariaLabelledBy(value: string) = Interop.mkProperty<IAccessibilityProps> "ariaLabelledBy" value
-//     static member inline ariaDescribedBy(value: string) = Interop.mkProperty<IAccessibilityProps> "ariaDescribedBy" value
-
-// type [<Erase>] chartProps =
-//     ///chart title for the chart
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IChartProps> "chartTitle" value
-//     /// Accessibility data for chart title
-//     static member inline chartTitleAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IChartProps> "chartTitleAccessibilityData" (value |> List.toArray)
-//     /// data for the points in the chart
-//     static member inline chartData(value: IChartDataPoint list) = Interop.mkProperty<IChartProps> "chartData" (value |> List.toArray)
-//     /// Accessibility data for chart data
-//     static member inline chartDataAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IChartProps> "chartDataAccessibilityData" (value |> List.toArray)
-//     /// data for the points in the line chart
-//     /// LineChart data is also used for areacharts
-//     static member inline lineChartData(value: ILineChartDataProp list) = Interop.mkProperty<IChartProps> "lineChartData" (value |> List.toArray)
-//     /// data for the points in the scatter chart
-//     static member inline scatterChartData(value: IScatterChartPoints list) = Interop.mkProperty<IChartProps> "scatterChartData" (value |> List.toArray)
-//     /// data for the points in the line chart
-//     static member inline sankeyChartData(value: ISankeyChartData list) = Interop.mkProperty<IChartProps> "SankeyChartData" (keyValueList CaseRules.LowerFirst value)
-//     /// data for the points in the line chart
-//     static member inline pointOptions(value: obj) = Interop.mkProperty<IChartProps> "pointOptions" value
-//     /// data for the dotted line on hovering the point
-//     static member inline pointLineOptions(value: obj) = Interop.mkProperty<IChartProps> "SankeyChartData" value
+type [<Erase>] yAxis<'Property> =
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: int) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: float) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: decimal) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    ///
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    ///
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    static member inline tickStep (value: string) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: int) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: float) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: decimal) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///
+    /// - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    static member inline tick0 (value: DateTime) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
 
 // type [<Erase>] timeLocaleDefinition =
 //     static member inline dateTime(value: string) = Interop.mkProperty<ITimeLocaleDefinitionProp> "dateTime" value
@@ -506,29 +410,6 @@ module legendProp =
 //     static member inline culture(value: string) = Interop.mkProperty<ILineChartProps> "culture" value
 //     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<ILineChartProps> "enablePerfOptimization" value
 
-// module areaChartData =
-//     type [<Erase>] legendShape =
-//         class
-//             inherit legendShape<IAreaChartDataProp>
-//         end
-
-// type [<Erase>] areaChartData =
-//     static member inline legend(value: string) = Interop.mkProperty<IAreaChartDataProp> "legend" value
-//     static member inline data(value: ILineChartDataPoint list) = Interop.mkProperty<IAreaChartDataProp> "data" (value |> List.toArray)
-//     static member inline color(value: string) = Interop.mkProperty<IAreaChartDataProp> "color" value
-//     static member inline opacity(value: float) = Interop.mkProperty<IAreaChartDataProp> "opacity" value
-//     static member inline lineOptions(value: ILineChartLineOptions list) = Interop.mkProperty<IAreaChartDataProp> "lineOptions" (keyValueList CaseRules.LowerFirst value)
-//     static member inline gaps(value: ILineChartGap list) = Interop.mkProperty<IAreaChartDataProp> "gaps" (value |> List.toArray)
-//     static member inline hideNonActiveDots(value: bool) = Interop.mkProperty<IAreaChartDataProp> "hideNonActiveDots" value
-//     static member inline onLegendClick(value: string option -> unit) = Interop.mkProperty<IAreaChartDataProp> "onLegendClick" value
-//     static member inline onLineCLick(value: unit -> unit) = Interop.mkProperty<IAreaChartDataProp> "onLineClick" value
-//     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IAreaChartDataProp> "useSecondaryYScale" value
-
-// module areaChart =
-//     /// The prop used to define the Y axis mode (tonexty or tozeroy)
-//     type [<Erase>] mode =
-//         static member inline tozeroy = Interop.mkProperty<IAreaChartProp> "mode" "tozeroy"
-//         static member inline tonexty = Interop.mkProperty<IAreaChartProp> "mode" "tonexty"
 // type [<Erase>] donutChartStyles =
 //     /// Style for the root element.
 //     static member inline root(value: string) = Interop.mkProperty<IDonutChartStyles> "root" value
@@ -1196,13 +1077,6 @@ module legendProp =
 //     static member inline value() = Interop.mkProperty<IChartTableDataProps> "value" null
 //     static member inline style(properties: IStyleAttribute list) = Interop.mkProperty<IChartTableDataProps> "style" (createObj !!properties)
 
-// type [<Erase>] chartTableStyles =
-//     static member inline root(value: string) = Interop.mkProperty<IChartTableStyles> "root" value
-//     static member inline table(value: string) = Interop.mkProperty<IChartTableStyles> "table" value
-//     static member inline headerCell(value: string) = Interop.mkProperty<IChartTableStyles> "headerCell" value
-//     static member inline bodyCell(value: string) = Interop.mkProperty<IChartTableStyles> "bodyCell" value
-//     static member inline chart(value: string) = Interop.mkProperty<IChartTableStyles> "chart" value
-
 // type [<Erase>] chartTable =
 //     static member inline headers(value: IChartTableDataProps list) = Interop.mkProperty<IChartTableProps> "headers" (value |> List.toArray)
 //     static member inline rows(value: List<IChartTableDataProps list>) =
@@ -1440,226 +1314,6 @@ type [<Erase>] cartesianChart<'Property> =
     /// If provided, these values override automatic tick generation.
     static member inline xAxis (value: string list) = Interop.mkProperty<'Property> "xAxis" (value |> List.toArray)
 
-module cartesianChart =
-    /// Props related to reflow behavior of the chart
-    /// Determines the reflow behavior of the chart.
-    /// When set to `'min-width'`, the chart will not shrink below a certain width and will enable scrolling if it overflows.
-    type [<Erase>] reflowProps<'Property> =
-        static member inline modeNone = Interop.mkProperty<'Property> "reflowProps" {| mode = "none" |}
-        static member inline modeMinWidth = Interop.mkProperty<'Property> "reflowProps" {| mode = "min-width" |}
-
-    type [<Erase>] xAxis =
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: int) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: float) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: decimal) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: string) = Interop.mkProperty<'Property> "xAxis" {| tickStep = value |}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: int) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: float) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: decimal) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: DateTime) = Interop.mkProperty<'Property> "xAxis" {| tick0 = value|}
-
-    type [<Erase>] yAxis =
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: int) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: float) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: decimal) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
-        /// Defines the step between tick marks on the axis.
-        /// Works in combination with `tick0`.
-        /// Must be a positive number.
-        ///
-        /// - **Log scale**:
-        ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
-        ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
-        ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
-        ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
-        ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
-        ///
-        /// - **Date axis**:
-        ///   - Must be in milliseconds.
-        ///     - Example: one day = `tickStep = 86400000`.
-        ///   - Special format `"M<n>"`: Places ticks every `n` months.
-        ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
-        ///     - Example: `tickStep = "M48"` → ticks every 4 years.
-        static member inline tickStep (value: string) = Interop.mkProperty<'Property> "yAxis" {| tickStep = value |}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: int) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: float) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: decimal) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
-        /// Sets the reference value for axis ticks.
-        /// Works in combination with `tickStep`.
-        ///
-        /// - **Log scale**:
-        ///   - `tick0` must be given as the logarithm of the reference tick.
-        ///     - Example: to align ticks with 100, use `tick0 = 2`.
-        ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
-        static member inline tick0 (value: DateTime) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
-
 //----------------------------------------------------------------- Margins -------------------------------------------------
 type [<Erase>] margin =
     /// Left margin for the chart.
@@ -1844,13 +1498,14 @@ type [<Erase>] areaChart =
     inherit cartesianChart<IAreaChartProp>
     /// Data to render in the chart.
     static member inline data(value: IChartPropProp list) = Interop.mkProperty<IAreaChartProp> "data" (!!value |> createObj |> unbox)
-
     // TODO static member inline onRenderCalloutPerDataPoint(value: 'a)
     // TODO static member inline onRenderCalloutPerStack(value: 'a)
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "styles" (!!value |> createObj |> unbox)
-    /// Call to provide customized styling that will layer on top of the variant rules.
-    static member inline onRenderCalloutPerDataPoint(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint" (!!value |> createObj |> unbox)
+    /// Define a custom callout renderer for a data point
+    static member inline onRenderCalloutPerDataPoint(value: RenderFunction<CustomizedCalloutData>) = Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> value)
+    /// Define a custom callout renderer for a stack; default is to render per data point
+    static member inline onRenderCalloutPerStack(value: RenderFunction<CustomizedCalloutData>) = Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> value)
     /// The prop used to define the culture to localized the numbers
     static member inline culture(value: string) = Interop.mkProperty<IAreaChartProp> "culture" value
     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<IAreaChartProp> "enablePerfOptimization" value
@@ -1860,18 +1515,14 @@ type [<Erase>] areaChart =
     static member inline enableGradient(value: bool) = Interop.mkProperty<IAreaChartProp> "enableGradient" value
 
 module areaChart =
+    type [<Erase>] reflowProps = reflowProps<IAreaChartProp>
+    type [<Erase>] xAxis = xAxis<IAreaChartProp>
+    type [<Erase>] yAxis = yAxis<IAreaChartProp>
     /// The prop used to define the Y axis mode (tonexty or tozeroy)
     type [<Erase>] mode =
         static member inline tozeroy = Interop.mkProperty<IAreaChartProp> "mode" "tozeroy"
         static member inline tonexty = Interop.mkProperty<IAreaChartProp> "mode" "tonexty"
-    // /**
-    //  * Define a custom callout renderer for a data point
-    //  */
-    // onRenderCalloutPerDataPoint?: RenderFunction<CustomizedCalloutData>;
-    // /**
-    //  * Define a custom callout renderer for a stack; default is to render per data point
-    //  */
-    // onRenderCalloutPerStack?: RenderFunction<CustomizedCalloutData>;
+
 //----------------------------------------------------------------- ChartProp -------------------------------------------------
 type [<Erase>] chartProp =
     /// Chart title for the chart
@@ -1939,6 +1590,8 @@ type [<Erase>] lineChartPoints =
     static member inline data (value: IScatterChartDataPointProp list list) =
                     let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
                     Interop.mkProperty<ILineChartPointsProp> "data" newValue
+    /// dataPoints for the line chart
+    static member inline data (value: 'T list) = Interop.mkProperty<ILineChartPointsProp> "data" (value |> List.toArray)
     /// Legend text for the datapoint in the chart
     static member inline gaps (value: ILineChartGapProp list list) =
                     let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
@@ -2039,8 +1692,8 @@ type [<Erase>] lineChartGap =
     /// Ending index of the gap.
     static member inline endIndex (value: float) = Interop.mkProperty<ILineChartGapProp> "endIndex" value
 
-//----------------------------------------------------------------- LineOptions -------------------------------------------------
-type [<Erase>] lineOptions =
+//----------------------------------------------------------------- LineChartLineOptions -------------------------------------------------
+type [<Erase>] lineChartLineOptions =
     /// Width of the line/stroke.
     static member inline strokeWidth (value: string) = Interop.mkProperty<ILineChartLineOptionsProp> "strokeWidth" value
     /// Width of the line/stroke.
@@ -2076,7 +1729,7 @@ type [<Erase>] lineOptions =
     /// Color of border around the line. Default white.
     static member inline lineBorderColor (value: string) = Interop.mkProperty<ILineChartLineOptionsProp> "lineBorderColor" value
 
-module lineOptions =
+module lineChartLineOptions =
     /// Shape at the end of a subpath.
     type [<Erase>] strokeLinecap =
         static member inline butt = Interop.mkProperty<ILineChartLineOptionsProp> "strokeLinecap" "butt"
@@ -2162,3 +1815,83 @@ type [<Erase>] sLink =
     static member inline unnormalizedValue (value: int) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
     static member inline unnormalizedValue (value: float) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
     static member inline unnormalizedValue (value: decimal) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
+
+//----------------------------------------------------------------- ChartTableHeader -------------------------------------------------
+type [<Erase>] chartTableHeader =
+    /// 1d or 2d Array of header values.
+    static member inline value (value: string) = Interop.mkProperty<IChartTableHeaderProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: int) = Interop.mkProperty<IChartTableHeaderProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: decimal) = Interop.mkProperty<IChartTableHeaderProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: float) = Interop.mkProperty<IChartTableHeaderProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: bool) = Interop.mkProperty<IChartTableHeaderProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline style (value: IStyleAttribute list) = Interop.mkProperty<IChartTableHeaderProp> "style" (!!value |> createObj |> unbox)
+
+//----------------------------------------------------------------- ChartTableRow -------------------------------------------------
+type [<Erase>] chartTableRow =
+    /// 1d or 2d Array of header values.
+    static member inline value (value: string) = Interop.mkProperty<IChartTableRowProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: int) = Interop.mkProperty<IChartTableRowProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: decimal) = Interop.mkProperty<IChartTableRowProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: float) = Interop.mkProperty<IChartTableRowProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline value (value: bool) = Interop.mkProperty<IChartTableRowProp> "value" value
+    /// 1d or 2d Array of header values.
+    static member inline style (value: IStyleAttribute list) = Interop.mkProperty<IChartTableRowProp> "style" (!!value |> createObj |> unbox)
+
+//----------------------------------------------------------------- ChartTable -------------------------------------------------
+type [<Erase>] chartTable =
+    /// 1d or 2d Array of header values.
+    static member inline headers (value: IChartTableHeaderProp list list) =
+                            let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                            Interop.mkProperty<IChartTableProp> "headers" newValue
+    /// Array of rows. Each row corresponds to one data entry under each column.
+    static member inline rows (value: IChartTableRowProp list list list) =
+                            let newValue =
+                                value
+                                |> List.map (fun rows ->
+                                    rows
+                                    |> List.map (fun props -> !!props |> createObj |> unbox)
+                                    |> List.toArray
+                                )
+                                |> List.toArray
+                            Interop.mkProperty<IChartTableProp> "rows" newValue
+    /// Optional width for the table
+    static member inline width (value: string) = Interop.mkProperty<IChartTableProp> "width" value
+    /// Optional width for the table
+    static member inline width (value: int) = Interop.mkProperty<IChartTableProp> "width" value
+    /// Optional width for the table
+    static member inline width (value: float) = Interop.mkProperty<IChartTableProp> "width" value
+    /// Optional width for the table
+    static member inline width (value: decimal) = Interop.mkProperty<IChartTableProp> "width" value
+    /// Optional height for the table
+    static member inline height (value: string) = Interop.mkProperty<IChartTableProp> "height" value
+    /// Optional height for the table
+    static member inline height (value: int) = Interop.mkProperty<IChartTableProp> "height" value
+    /// Optional height for the table
+    static member inline height (value: float) = Interop.mkProperty<IChartTableProp> "height" value
+    /// Optional height for the table
+    static member inline height (value: decimal) = Interop.mkProperty<IChartTableProp> "height" value
+    /// Additional class name(s) to apply to the table chart
+    static member inline className (value: string) = Interop.mkProperty<IChartTableProp> "className" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles (value: IChartTableStylesProp list) = Interop.mkProperty<IChartTableProp> "styles" (!!value |> createObj |> unbox)
+    /// Optional callback to access the Chart interface. Use this instead of ref for accessing
+    /// the public methods and properties of the component.
+    static member inline componentRef (value: RefObject<Chart>) = Interop.mkProperty<IChartTableProp> "componentRef" value
+
+//----------------------------------------------------------------- ChartTableStyles ----------------
+type [<Erase>] chartTableStyles =
+    static member inline root(value: string) = Interop.mkProperty<IChartTableStylesProp> "root" value
+    static member inline root(value: IStyleAttribute list) = Interop.mkProperty<IChartTableStylesProp> "root" (!!value |> createObj |> unbox) //TODO ?
+    static member inline table(value: string) = Interop.mkProperty<IChartTableStylesProp> "table" value
+    static member inline headerCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "headerCell" value
+    static member inline bodyCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "bodyCell" value
+    static member inline chart(value: string) = Interop.mkProperty<IChartTableStylesProp> "chart" value

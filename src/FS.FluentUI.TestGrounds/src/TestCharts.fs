@@ -183,6 +183,11 @@ let areaChartDataList = [
         lineChartPoints.opacity 1.0
         lineChartPoints.legend "legend1"
         lineChartPoints.color "green"
+        lineChartPoints.lineOptions [
+            lineChartLineOptions.curve.stepAfter
+            lineChartLineOptions.mode.``text+Lines``
+            lineChartLineOptions.strokeWidth 15
+        ]
         lineChartPoints.data [
             [ lineChartDataPoint.x 20; lineChartDataPoint.y -9.0 ]
             [ lineChartDataPoint.x 25; lineChartDataPoint.y 14 ]
@@ -552,215 +557,87 @@ let heatMapDataPointsList: HeatMapChartData list = [
     }
 ]
 
-
-type ChartTableDataCell = {
-    Color: string option
-    FontSize: int option
-    BorderColor: string option
-    Height: int option
-    Value: float
-}
-
-type ChartTableData = {
-    Header: string
-    Data: ChartTableDataCell list
-}
-
-let chartTableDataList: ChartTableData list = [
-    {
-        Header = "Quarter"
-        Data = [
-            {
-                Color = Some "#2563eb"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 1.0
-            }
-            {
-                Color = Some "#2563eb"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 2.0
-            }
-            {
-                Color = Some "#2563eb"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 3.0
-            }
-            {
-                Color = Some "#2563eb"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 4.0
-            }
-        ]
-    }
-    {
-        Header = "Revenue (M)"
-        Data = [
-            {
-                Color = Some "#16a34a"
-                FontSize = Some 16
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 145.7
-            }
-            {
-                Color = Some "#dc2626"
-                FontSize = Some 16
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 132.4
-            }
-            {
-                Color = Some "#16a34a"
-                FontSize = Some 16
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 168.9
-            }
-            {
-                Color = Some "#16a34a"
-                FontSize = Some 16
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 189.2
-            }
-        ]
-    }
-    {
-        Header = "Growth %"
-        Data = [
-            {
-                Color = Some "#059669"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 12.3
-            }
-            {
-                Color = Some "#dc2626"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = -9.1
-            }
-            {
-                Color = Some "#059669"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 27.6
-            }
-            {
-                Color = Some "#059669"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 12.0
-            }
-        ]
-    }
-    {
-        Header = "Customers"
-        Data = [
-            {
-                Color = Some "#7c3aed"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 8450.0
-            }
-            {
-                Color = Some "#7c3aed"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 8720.0
-            }
-            {
-                Color = Some "#7c3aed"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 9180.0
-            }
-            {
-                Color = Some "#7c3aed"
-                FontSize = Some 14
-                BorderColor = Some "#e5e7eb"
-                Height = Some 32
-                Value = 9650.0
-            }
-        ]
-    }
+let basicChartTableHeaders = [
+    [ chartTableHeader.value "Product" ]
+    [ chartTableHeader.value "Q1 Sales" ]
+    [ chartTableHeader.value "Q2 Sales" ]
+    [ chartTableHeader.value "Q3 Sales" ]
+    [ chartTableHeader.value "Q4 Sales" ]
+    [ chartTableHeader.value "Total" ]
 ]
 
-
+let basicChartTableRows = [
+    [
+        [chartTableRow.value "Product A" ]
+        [chartTableRow.value 25000 ]
+        [chartTableRow.value 30000 ]
+        [chartTableRow.value 28000 ]
+        [chartTableRow.value 35000 ]
+        [chartTableRow.value 118000 ]
+    ]
+    [
+        [ chartTableRow.value "Product B" ]
+        [ chartTableRow.value 18000 ]
+        [ chartTableRow.value 22000 ]
+        [ chartTableRow.value 25000 ]
+        [ chartTableRow.value 27000 ]
+        [ chartTableRow.value 9200 ]
+    ]
+    [
+        [ chartTableRow.value "Product C" ]
+        [ chartTableRow.value 32000 ]
+        [ chartTableRow.value 28000 ]
+        [ chartTableRow.value 31000 ]
+        [ chartTableRow.value 29000 ]
+        [ chartTableRow.value 12000 ]
+    ]
+    [
+        [ chartTableRow.value "Product D" ]
+        [ chartTableRow.value 15000 ]
+        [ chartTableRow.value 19000 ]
+        [ chartTableRow.value 21000 ]
+        [ chartTableRow.value 23000 ]
+        [ chartTableRow.value 780000 ]
+    ]
+]
 
 [<ReactComponent>]
 let TestChartsComponent () =
-    Fui.areaChart [
-        areaChart.mode.tonexty
-        areaChart.height 300
-        areaChart.width 600
-        areaChart.legendsOverflowText "Overflow Items"
-        areaChart.yAxisTickFormat (fun (s:string) -> $"${s}")
-        areaChart.svgProps [ prop.ariaLabel "This is another test?!"]
-        areaChart.enableGradient true
-        areaChart.enablePerfOptimization true
-        areaChart.legendProps [
-            legendProp.allowFocusOnLegends true
-            legendProp.canSelectMultipleLegends true
-            legendProp.centerLegends true
-        ]
-        areaChart.data [
-            chartProp.chartTitle "Areachart"
-            chartProp.lineChartData [
-                yield! areaChartDataList
+    Html.div [
+        prop.style [ style.width 600]
+        prop.children [
+            Fui.areaChart [
+                areaChart.mode.tonexty
+                areaChart.height 300
+                areaChart.width 600
+                areaChart.legendsOverflowText "Overflow Items"
+                areaChart.yAxisTickFormat (fun (s:string) -> $"${s}")
+                areaChart.svgProps [ prop.ariaLabel "This is another test?!"]
+                areaChart.enableGradient true
+                areaChart.enablePerfOptimization true
+                areaChart.reflowProps.modeNone
+                areaChart.xAxis.tickStep 5
+                areaChart.xAxis.tick0 5
+                areaChart.legendProps [
+                    legendProp.allowFocusOnLegends true
+                    legendProp.canSelectMultipleLegends true
+                    legendProp.centerLegends true
+                ]
+                areaChart.data [
+                    chartProp.chartTitle "Areachart"
+                    chartProp.lineChartData [
+                        yield! areaChartDataList
+                    ]
+                ]
+            ]
+            Fui.chartTable [
+                chartTable.height 250
+                chartTable.width 600
+                chartTable.headers basicChartTableHeaders
+                chartTable.rows basicChartTableRows
             ]
         ]
     ]
-                                    // Charts.chartTable [
-                                    //     chartTable.height 250
-                                    //     chartTable.headers (
-                                    //         chartTableDataList
-                                    //         |> List.map (fun d ->
-                                    //             Charts.ChartTableData [
-                                    //                 chartTableData.value d.Header
-                                    //                 chartTableData.style [ style.height 10 ]
-                                    //             ])
-                                    //     )
-                                    //     chartTable.rows [
-                                    //         yield!
-                                    //             chartTableDataList
-                                    //             |> List.map (fun d ->
-                                    //                 d.Data
-                                    //                 |> List.map (fun dd ->
-                                    //                     Charts.ChartTableData [
-                                    //                         chartTableData.style [
-                                    //                             match dd.Color with
-                                    //                             | Some c -> style.color c
-                                    //                             | _ -> ()
-                                    //                             match dd.FontSize with
-                                    //                             | Some c -> style.fontSize c
-                                    //                             | _ -> ()
-                                    //                             match dd.BorderColor with
-                                    //                             | Some c -> style.borderColor c
-                                    //                             | _ -> ()
-                                    //                             match dd.Height with
-                                    //                             | Some c -> style.height 12
-                                    //                             | _ -> ()
-                                    //                         ]
-                                    //                         chartTableData.value dd.Value
-                                    //                     ]))
-                                    //     ]
-                                    // ]
 
                             //         Charts.verticalStackedBarChart [
                             //             verticalStackedBarChart.styles [ styles.barLabel "" ]

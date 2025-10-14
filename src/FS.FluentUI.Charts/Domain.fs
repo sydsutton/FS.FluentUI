@@ -165,3 +165,22 @@ type [<RequireQualifiedAccess>] AxisCategoryOrder =
 type [<RequireQualifiedAccess>] AxisScaleType =
     | ``default``
     | ``log``
+
+/// Translated from (props?: P, defaultRender?: (props?: P) => JSXElement | null) => JSXElement | null
+type RenderFunction<'P> =
+    'P option ->
+      (('P option -> ReactElement option) option) ->
+        ReactElement option
+
+type CustomizedCalloutDataPoint = {
+    legend: string
+    y: int
+    color: string
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+}
+
+type CustomizedCalloutData = {
+    x: int
+    values: CustomizedCalloutDataPoint array
+}

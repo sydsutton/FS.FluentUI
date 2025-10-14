@@ -48,6 +48,9 @@ type [<Erase>] ISankeyChartDataProp = interface end
 type [<Erase>] ISankeyChartPointProp = interface end
 type [<Erase>] ISNodeProp = interface end
 type [<Erase>] ISLinkProp = interface end
+type [<Erase>] IChartTableHeaderProp = interface end
+type [<Erase>] IChartTableRowProp = interface end
+type [<Erase>] IChartTableStylesProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end
@@ -98,5 +101,4 @@ type [<Erase>] ILineDataInVerticalStackedBarChart = interface end
 type [<Erase>] IVerticalStackedBarChartStyles = interface end
 type [<Erase>] IChartTableProps = interface end
 type [<Erase>] IChartTableDataProps = interface end
-type [<Erase>] IChartTableStyles = interface end
 
