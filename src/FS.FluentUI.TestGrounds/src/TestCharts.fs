@@ -237,77 +237,37 @@ let areaChartDataList = [
     ]
 ]
 
-type GanttChartData = {
-    Name: string
-    Y: string
-    X: {| start: DateTime; end': DateTime |}
-}
-
 let ganttChartDataList = [
-    {
-        Name = "Project Planning"
-        Y = "Phase 1"
-        X = {|
-            start = DateTime(2024, 1, 15)
-            end' = DateTime(2024, 2, 15)
-        |}
-    }
-    {
-        Name = "Requirements Analysis"
-        Y = "Phase 1"
-        X = {|
-            start = DateTime(2024, 2, 1)
-            end' = DateTime(2024, 2, 28)
-        |}
-    }
-    {
-        Name = "System Design"
-        Y = "Phase 2"
-        X = {|
-            start = DateTime(2024, 2, 20)
-            end' = DateTime(2024, 3, 20)
-        |}
-    }
-    {
-        Name = "Database Setup"
-        Y = "Phase 2"
-        X = {|
-            start = DateTime(2024, 3, 1)
-            end' = DateTime(2024, 3, 15)
-        |}
-    }
-    {
-        Name = "Frontend Development"
-        Y = "Phase 3"
-        X = {|
-            start = DateTime(2024, 3, 10)
-            end' = DateTime(2024, 5, 15)
-        |}
-    }
-    {
-        Name = "Backend Development"
-        Y = "Phase 3"
-        X = {|
-            start = DateTime(2024, 3, 15)
-            end' = DateTime(2024, 5, 30)
-        |}
-    }
-    {
-        Name = "Testing & QA"
-        Y = "Phase 4"
-        X = {|
-            start = DateTime(2024, 5, 1)
-            end' = DateTime(2024, 6, 15)
-        |}
-    }
-    {
-        Name = "Deployment & Launch"
-        Y = "Phase 4"
-        X = {|
-            start = DateTime(2024, 6, 10)
-            end' = DateTime(2024, 6, 30)
-        |}
-    }
+    [
+        ganttChartDataPoint.x [
+            xDataPoint.start (System.DateOnly.Parse "2009-01-01")
+            xDataPoint.end' (System.DateOnly.Parse "2009-02-28")
+        ]
+        ganttChartDataPoint.y "Job A"
+        ganttChartDataPoint.legend "Alex"
+        ganttChartDataPoint.color Fui.dataVizPallete.color1
+        ganttChartDataPoint.gradient ("#4760D5", "#637CEF")
+    ]
+    [
+        ganttChartDataPoint.x [
+            xDataPoint.start (System.DateOnly.Parse "2009-03-05")
+            xDataPoint.end' (System.DateOnly.Parse "2009-04-15")
+        ]
+        ganttChartDataPoint.y "Job B"
+        ganttChartDataPoint.legend "Alex"
+        ganttChartDataPoint.color Fui.dataVizPallete.color1
+        ganttChartDataPoint.gradient ("#4760D5", "#637CEF")
+    ]
+    [
+        ganttChartDataPoint.x [
+            xDataPoint.start (System.DateOnly.Parse "2009-02-20")
+            xDataPoint.end' (System.DateOnly.Parse "2009-05-30")
+        ]
+        ganttChartDataPoint.y "Job C"
+        ganttChartDataPoint.legend "Max"
+        ganttChartDataPoint.color Fui.dataVizPallete.color2
+        ganttChartDataPoint.gradient ("#E61C99", "#EE5FB7")
+    ]
 ]
 
 type HeatMapChartDataPoint = {
@@ -745,6 +705,14 @@ let TestChartsComponent () =
                 funnelChart.legendProps [
                     legendProp.canSelectMultipleLegends true
                 ]
+            ]
+            Fui.ganttChart [
+                ganttChart.data ganttChartDataList
+                ganttChart.showYAxisLables true
+                ganttChart.width 500
+                ganttChart.height 300
+                ganttChart.enableGradient true
+                ganttChart.roundCorners true
             ]
         ]
     ]
@@ -1363,20 +1331,6 @@ let TestChartsComponent () =
                                     //                 ]
                                     //             ]
                                     //         ]
-                                    //     ]
-                                    // ]
-                                    // Charts.ganttChart [
-                                    //     ganttChart.chartTitle "Testing gant"
-                                    //     ganttChart.data [
-                                    //         yield!
-                                    //             ganttChartDataList
-                                    //             |> List.map (fun d ->
-                                    //                 Charts.ganttChartDataPoint [
-                                    //                     ganttChartDataPoint.legend d.Name
-                                    //                     ganttChartDataPoint.x d.X
-                                    //                     ganttChartDataPoint.y d.Y
-                                    //                 ])
-
                                     //     ]
                                     // ]
                                     // Charts.gaugeChart [

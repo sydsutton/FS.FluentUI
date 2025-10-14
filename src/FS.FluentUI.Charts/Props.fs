@@ -1992,4 +1992,96 @@ type [<Erase>] funnelChartStyles =
     static member inline text(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "text" value
     /// Styles for the callout root element
     static member inline calloutContentRoot(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "calloutContentRoot" value
+    static member inline color(value: string) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "color" value
 
+//----------------------------------------------------------------- GanttChart -------------------------------------------------
+type [<Erase>] ganttChart =
+    inherit cartesianChart<IGanttChartProp>
+    /// An array of data points to be rendered in the chart.
+    static member inline data(value: IGanttChartDataPointProp list list) =
+                            let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                            Interop.mkProperty<IGanttChartProp> "data" newValue
+    /// Callback function to render a custom callout for each data point.
+    static member inline onRenderCalloutPerDataPoint(value: RenderFunction<GanttChartDataPoint>) = Interop.mkProperty<IGanttChartProp> "onRenderCalloutPerDataPoint" value
+    /// Height of each bar, in pixels.
+    static member inline barHeight(value: int) = Interop.mkProperty<IGanttChartProp> "barHeight" value
+    /// Height of each bar, in pixels.
+    static member inline barHeight(value: float) = Interop.mkProperty<IGanttChartProp> "barHeight" value
+    /// Height of each bar, in pixels.
+    static member inline barHeight(value: decimal) = Interop.mkProperty<IGanttChartProp> "barHeight" value
+    /// Height of each bar, in pixels.
+    static member inline chartTitle(value: string) = Interop.mkProperty<IGanttChartProp> "chartTitle" value
+    /// Locale identifier string used to format numbers and dates according to the specified culture.
+    /// Example: 'en-US', 'fr-FR'.
+    static member inline culture(value: string) = Interop.mkProperty<IGanttChartProp> "culture" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1].
+    static member inline yAxisPadding(value: int) = Interop.mkProperty<IGanttChartProp> "yAxisPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1].
+    static member inline yAxisPadding(value: decimal) = Interop.mkProperty<IGanttChartProp> "yAxisPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1].
+    static member inline yAxisPadding(value: float) = Interop.mkProperty<IGanttChartProp> "yAxisPadding" value
+    /// If true, truncates y-axis tick labels longer than `noOfCharsToTruncate` with ellipses
+    /// and displays them in a tooltip on hover.
+    static member inline showYAxisLablesTooltip(value: bool) = Interop.mkProperty<IGanttChartProp> "showYAxisLablesTooltip" value
+    /// If true, renders full y-axis tick labels without truncation.
+    static member inline showYAxisLables(value: bool) = Interop.mkProperty<IGanttChartProp> "showYAxisLables" value
+    /// If true, enables gradient fills for the bars.
+    static member inline enableGradient(value: bool) = Interop.mkProperty<IGanttChartProp> "enableGradient" value
+    /// If true, applies rounded corners to the bars.
+    static member inline roundCorners(value: bool) = Interop.mkProperty<IGanttChartProp> "roundCorners" value
+    /// Maximum height of each bar, in pixels.
+    static member inline maxBarHeight(value: bool) = Interop.mkProperty<IGanttChartProp> "maxBarHeight" value
+
+//----------------------------------------------------------------- GanttChartDataPoint -------------------------------------------------
+type [<Erase>] ganttChartDataPoint =
+    /// Dependent value of the data point, rendered along the x-axis.
+    static member inline x (value: IXDataPointProp list) = Interop.mkProperty<IGanttChartDataPointProp> "x" (!!value |> createObj |> unbox)
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y (value: int) = Interop.mkProperty<IGanttChartDataPointProp> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y (value: float) = Interop.mkProperty<IGanttChartDataPointProp> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y (value: decimal) = Interop.mkProperty<IGanttChartDataPointProp> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y (value: string) = Interop.mkProperty<IGanttChartDataPointProp> "y" value
+    /// Legend text for the datapoint in the chart
+    static member inline legend (value: string) = Interop.mkProperty<IGanttChartDataPointProp> "legend" value
+    /// color for the legend in the chart
+    static member inline color (value: string) = Interop.mkProperty<IGanttChartDataPointProp> "color" value
+    /// Gradient for the legend in the chart. If not provided, it will fallback on the default color palette.
+    /// If provided, it will override the color prop. granted `enableGradient` is set to true for the chart.
+    static member inline gradient (value: string * string) = Interop.mkProperty<IGanttChartDataPointProp> "gradient" value
+    /// Callout data for x axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline xAxisCalloutData (value: string) = Interop.mkProperty<IGanttChartDataPointProp> "xAxisCalloutData" value
+    /// Callout data for y axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline yAxisCalloutData (value: string) = Interop.mkProperty<IGanttChartDataPointProp> "yAxisCalloutData" value
+    /// onClick action for each datapoint in the chart
+    static member inline onClick (value: unit -> unit) = Interop.mkProperty<IGanttChartDataPointProp> "onClick" value
+    /// onClick action for each datapoint in the chart
+    static member inline callOutAccessibilityData (value:  IAccessibilityProp list) = Interop.mkProperty<IGanttChartDataPointProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+
+//----------------------------------------------------------------- XDataPoint -------------------------------------------------
+type [<Erase>] xDataPoint =
+    static member inline start (value: DateTime) = Interop.mkProperty<IXDataPointProp> "start" value
+    static member inline start (value: DateOnly) = Interop.mkProperty<IXDataPointProp> "start" value
+    static member inline start (value: int) = Interop.mkProperty<IXDataPointProp> "start" value
+    static member inline start (value: decimal) = Interop.mkProperty<IXDataPointProp> "start" value
+    static member inline start (value: float) = Interop.mkProperty<IXDataPointProp> "start" value
+    static member inline end' (value: DateTime) = Interop.mkProperty<IXDataPointProp> "end" value
+    static member inline end' (value: DateOnly) = Interop.mkProperty<IXDataPointProp> "end" value
+    static member inline end' (value: int) = Interop.mkProperty<IXDataPointProp> "end" value
+    static member inline end' (value: decimal) = Interop.mkProperty<IXDataPointProp> "end" value
+    static member inline end' (value: float) = Interop.mkProperty<IXDataPointProp> "end" value

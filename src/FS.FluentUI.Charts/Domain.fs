@@ -2,6 +2,8 @@ namespace FS.Charts
 
 open Fable.React
 open Browser.Types
+open System
+open Fable.Core
 
 type ILineChartGap = { startIndex: float; endIndex: float }
 
@@ -90,11 +92,11 @@ type AccessibilityProps = {
 
 type YValueHover = {
     legend: string
-    y: int
+    y: U2<int, string>
     color: string
-    data: string
+    data: U2<int, string>
     shouldDrawBorderBottom: bool
-    yAxisCalloutData: string
+    yAxisCalloutData: U2<string, obj>
     index: int
     callOutAccessibilityData: AccessibilityProps
 }
@@ -111,9 +113,9 @@ and ChartPopoverProps = {
     clickPosition: ClickPosition
     isPopoverOpen: bool
     xCalloutValue: string
-    legend: string
+    legend: U3<string, int, DateTime>
     yCalloutValue: string
-    YValue: string
+    YValue: U3<string, int, DateTime>
     XValue: string
     color: string
     culture: string
@@ -181,7 +183,7 @@ type CustomizedCalloutDataPoint = {
 }
 
 type CustomizedCalloutData = {
-    x: int
+    x: U3<int, string, DateTime>
     values: CustomizedCalloutDataPoint array
 }
 
@@ -200,4 +202,71 @@ type ChartDataPoint = {
     xAxisCalloutData: string
     yAxisCalloutData: string
     callOutAccessibilityData: AccessibilityProps
+}
+
+type X = {
+    start: U2<DateTime, int>
+    ``end``: U2<DateTime, int>
+}
+
+type GanttChartDataPoint = {
+    x: X
+    y: U2<int, string>
+    legend: string
+    color: string
+    gradient: array<string * string>
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+    onClick: unit -> unit
+    callOutAccessibilityData: AccessibilityProps
+}
+
+type DataVizPalette = {
+    color1: string
+    color2: string
+    color3: string
+    color4: string
+    color5: string
+    color6: string
+    color7: string
+    color8: string
+    color9: string
+    color10: string
+    color11: string
+    color12: string
+    color13: string
+    color14: string
+    color15: string
+    color16: string
+    color17: string
+    color18: string
+    color19: string
+    color20: string
+    color21: string
+    color22: string
+    color23: string
+    color24: string
+    color25: string
+    color26: string
+    color27: string
+    color28: string
+    color29: string
+    color30: string
+    color31: string
+    color32: string
+    color33: string
+    color34: string
+    color35: string
+    color36: string
+    color37: string
+    color38: string
+    color39: string
+    color40: string
+    info: string
+    disabled: string
+    highError: string
+    error: string
+    warning: string
+    success: string
+    highSuccess: string
 }
