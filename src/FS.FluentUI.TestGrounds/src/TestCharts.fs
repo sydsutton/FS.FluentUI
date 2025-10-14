@@ -636,6 +636,27 @@ let TestChartsComponent () =
                 chartTable.headers basicChartTableHeaders
                 chartTable.rows basicChartTableRows
             ]
+            Fui.donutChart [
+                donutChart.valueInsideDonut 65
+                donutChart.innerRadius 50
+                donutChart.data [
+                    chartProp.chartTitle "Pai sjart"
+                    chartProp.chartData [
+                        [
+                            chartDataPoint.legend "legend 1"
+                            chartDataPoint.color "green"
+                            chartDataPoint.data 65
+                            chartDataPoint.xAxisCalloutData "2025/10/14"
+                        ]
+                        [
+                            chartDataPoint.legend "legend 2"
+                            chartDataPoint.color "blue"
+                            chartDataPoint.data 35
+                            chartDataPoint.xAxisCalloutData "2025/10/09"
+                        ]
+                    ]
+                ]
+            ]
         ]
     ]
 

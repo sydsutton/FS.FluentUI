@@ -184,3 +184,20 @@ type CustomizedCalloutData = {
     x: int
     values: CustomizedCalloutDataPoint array
 }
+
+type HorizontalDataPoint = {
+    x: int
+    total: int
+}
+
+type ChartDataPoint = {
+    legend: string
+    data: int
+    horizontalBarChartdata: HorizontalDataPoint
+    onClick: unit -> unit
+    color: string
+    placeHolder: bool
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+    callOutAccessibilityData: AccessibilityProps
+}

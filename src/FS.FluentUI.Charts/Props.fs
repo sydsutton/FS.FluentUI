@@ -410,44 +410,6 @@ type [<Erase>] yAxis<'Property> =
 //     static member inline culture(value: string) = Interop.mkProperty<ILineChartProps> "culture" value
 //     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<ILineChartProps> "enablePerfOptimization" value
 
-// type [<Erase>] donutChartStyles =
-//     /// Style for the root element.
-//     static member inline root(value: string) = Interop.mkProperty<IDonutChartStyles> "root" value
-//     /// Style for the chart.
-//     static member inline chart(value: string) = Interop.mkProperty<IDonutChartStyles> "chart" value
-//     /// Style for the legend container.
-//     static member inline legendContainer(value: string) = Interop.mkProperty<IDonutChartStyles> "legendContainer" value
-//     /// styles for axis annotation
-//     static member inline axisAnnotationh(value: string) = Interop.mkProperty<IDonutChartStyles> "axisAnnotationh" value
-//     /// Styles for the chart wrapper div
-//     static member inline chartWrapper(value: string) = Interop.mkProperty<IDonutChartStyles> "chartWrapper" value
-
-// type [<Erase>] donutChart =
-//     inherit cartesianChartProps<IDonutChartProps>
-//     static member inline data(value: IChartProps list) = Interop.mkProperty<IDonutChartProps> "data" (createObj !!value)
-//     static member inline innerRadius(value: float) = Interop.mkProperty<IDonutChartProps> "innerRadius" value
-//     static member inline styles(value: IDonutChartStyles list) = Interop.mkProperty<IDonutChartProps> "styles" (value |> List.toArray)
-//     static member inline valueInsideDonut(value: string) = Interop.mkProperty<IDonutChartProps> "valueInsideDonut" value
-//     static member inline valueInsideDonut(value: float) = Interop.mkProperty<IDonutChartProps> "valueInsideDonut" value
-
-//     // TODO onRenderCalloutPerDataPoint
-//     // TODO calloutPropsPerDataPoint
-//     static member inline calloutProps(value: IChartPopoverProps list) = Interop.mkProperty<IDonutChartProps> "calloutProps" (keyValueList CaseRules.LowerFirst value)
-//     static member inline culture(value: string) =Interop.mkProperty<IDonutChartProps> "culture" value
-//     static member inline showLabelsInPercent(value: bool) =Interop.mkProperty<IDonutChartProps> "showLabelsInPercent" value
-//     static member inline hideLabels(value: bool) =Interop.mkProperty<IDonutChartProps> "hideLabels" value
-//     static member inline height(value: float) =Interop.mkProperty<IDonutChartProps> "height" value
-//     static member inline width(value: float) =Interop.mkProperty<IDonutChartProps> "width" value
-//     static member inline parentRef(value: Browser.Types.HTMLElement) =Interop.mkProperty<IDonutChartProps> "parentRef" value
-//     static member inline className(value: string) =Interop.mkProperty<IDonutChartProps> "className" value
-//     static member inline legendsOverflowText(value: 'a) =Interop.mkProperty<IDonutChartProps> "showTriangle" value // TS any prop
-//     static member inline legendProps(value: legendProps) =Interop.mkProperty<IDonutChartProps> "legendProps" value
-//     static member inline hideLegend(value: bool) =Interop.mkProperty<IDonutChartProps> "hideLegend" value
-//     static member inline href(value: string) =Interop.mkProperty<IDonutChartProps> "hideLegend" value
-//     static member inline hideTooltip(value: bool) =Interop.mkProperty<IDonutChartProps> "hideLegend" value
-//     static member inline componentRef(value: IRefValue<FocusProp>) =Interop.mkProperty<IDonutChartProps> "componentRef" value
-//     static member inline roundCorners(value: bool) =Interop.mkProperty<IDonutChartProps> "roundCorners" value
-
 // type [<Erase>] funnelChartDataPoint =
 //     static member inline stage(value: string) =Interop.mkProperty<IFunnelChartDataPoint> "stage" value
 //     static member inline subValues
@@ -1895,3 +1857,93 @@ type [<Erase>] chartTableStyles =
     static member inline headerCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "headerCell" value
     static member inline bodyCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "bodyCell" value
     static member inline chart(value: string) = Interop.mkProperty<IChartTableStylesProp> "chart" value
+
+//----------------------------------------------------------------- DonutChart -------------------------------------------------
+type [<Erase>] donutChart =
+    inherit cartesianChart<IDonutChartProp>
+    /// Data to render in the chart.
+    static member inline data(value: IChartPropProp list) = Interop.mkProperty<IDonutChartProp> "data" (!!value |> createObj |> unbox)
+    /// inner radius for donut size
+    static member inline innerRadius(value: int) = Interop.mkProperty<IDonutChartProp> "innerRadius" value
+    /// inner radius for donut size
+    static member inline innerRadius(value: float) = Interop.mkProperty<IDonutChartProp> "innerRadius" value
+    /// inner radius for donut size
+    static member inline innerRadius(value: decimal) = Interop.mkProperty<IDonutChartProp> "innerRadius" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: IDonutChartStylesProp list) = Interop.mkProperty<IDonutChartProp> "styles" (!!value |> createObj |> unbox)
+    /// props for inside donut value
+    static member inline valueInsideDonut(value: string) = Interop.mkProperty<IDonutChartProp> "valueInsideDonut" value
+    /// props for inside donut value
+    static member inline valueInsideDonut(value: int) = Interop.mkProperty<IDonutChartProp> "valueInsideDonut" value
+    /// props for inside donut value
+    static member inline valueInsideDonut(value: float) = Interop.mkProperty<IDonutChartProp> "valueInsideDonut" value
+    /// props for inside donut value
+    static member inline valueInsideDonut(value: decimal) = Interop.mkProperty<IDonutChartProp> "valueInsideDonut" value
+    /// Define a custom callout renderer for a data point
+    static member inline onRenderCalloutPerDataPoint(value: ChartDataPoint -> ReactElement option) = Interop.mkProperty<IDonutChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_> value)
+    /// Define a custom callout props override
+    static member inline calloutPropsPerDataPoint(handler: ChartDataPoint -> IChartPopoverProp list) = Interop.mkProperty<IDonutChartProp> "calloutPropsPerDataPoint" (System.Func<_,_> (fun _ value -> handler (!!value |> createObj |> unbox)))
+    /// Define a custom callout props override
+    static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<IDonutChartProp> "calloutProps" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture(value: string) = Interop.mkProperty<IDonutChartProp> "culture" value
+    /// Prop to show the arc labels in percentage format
+    static member inline showLabelsInPercent(value: bool) = Interop.mkProperty<IDonutChartProp> "showLabelsInPercent" value
+    /// Prop to hide the arc labels
+    static member inline hideLabels(value: bool) = Interop.mkProperty<IDonutChartProp> "hideLabels" value
+    /// Below height used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline height(value: int) = Interop.mkProperty<IDonutChartProp> "height" value
+    /// Below height used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline height(value: float) = Interop.mkProperty<IDonutChartProp> "height" value
+    /// Below height used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline height(value: decimal) = Interop.mkProperty<IDonutChartProp> "height" value
+    /// Below width used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline width(value: int) = Interop.mkProperty<IDonutChartProp> "width" value
+    /// Below width used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline width(value: float) = Interop.mkProperty<IDonutChartProp> "width" value
+    /// Below width used for resizing of the chart
+    /// Wrap chart in your container and send the updated height and width to these props.
+    /// These values decide wheather chart re render or not. Please check examples for reference
+    static member inline width(value: decimal) = Interop.mkProperty<IDonutChartProp> "width" value
+    /// this prop takes its parent as a HTML element to define the width and height of the chart
+    static member inline parentRef(value: HTMLElement option) = Interop.mkProperty<IDonutChartProp> "parentRef" value
+    /// Additional CSS class(es) to apply to the Chart.
+    static member inline className(value: string) = Interop.mkProperty<IDonutChartProp> "className" value
+    /// Additional CSS class(es) to apply to the Chart.
+    static member inline legendsOverflowText(value: 'T) = Interop.mkProperty<IDonutChartProp> "legendsOverflowText" value
+    /// Additional CSS class(es) to apply to the Chart.
+    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IDonutChartProp> "legendProps" (!!value |> createObj |> unbox)
+    /// decides wether to show/hide legends
+    static member inline hideLegend(value: bool) = Interop.mkProperty<IDonutChartProp> "hideLegend" value
+    /// Url that the data-viz needs to redirect to upon clicking on it
+    static member inline href(value: string) = Interop.mkProperty<IDonutChartProp> "href" value
+    /// Do not show tooltips in chart
+    static member inline hideTooltip(value: bool) = Interop.mkProperty<IDonutChartProp> "hideTooltip" value
+    /// Optional callback to access the Chart interface. Use this instead of ref for accessing
+    /// the public methods and properties of the component.
+    static member inline componentRef(value: RefObject<Chart>) = Interop.mkProperty<IDonutChartProp> "componentRef" value
+    /// Prop to enable the round corners in the chart
+    static member inline roundCorners(value: bool) = Interop.mkProperty<IDonutChartProp> "roundCorners" value
+
+//----------------------------------------------------------------- DonutChartStyles -------------------------------------------------
+type [<Erase>] donutChartStyles =
+    /// Style for the root element.
+    static member inline root(value: string) = Interop.mkProperty<IDonutChartStylesProp> "root" value
+    /// Style for the chart.
+    static member inline chart(value: string) = Interop.mkProperty<IDonutChartStylesProp> "chart" value
+    /// Style for the legend container.
+    static member inline legendContainer(value: string) = Interop.mkProperty<IDonutChartStylesProp> "legendContainer" value
+    /// styles for axis annotation
+    static member inline axisAnnotation(value: string) = Interop.mkProperty<IDonutChartStylesProp> "axisAnnotation" value
+    /// Styles for the chart wrapper div
+    static member inline chartWrapper(value: string) = Interop.mkProperty<IDonutChartStylesProp> "chartWrapper" value
