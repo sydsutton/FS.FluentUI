@@ -410,43 +410,6 @@ type [<Erase>] yAxis<'Property> =
 //     static member inline culture(value: string) = Interop.mkProperty<ILineChartProps> "culture" value
 //     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<ILineChartProps> "enablePerfOptimization" value
 
-// type [<Erase>] funnelChartDataPoint =
-//     static member inline stage(value: string) =Interop.mkProperty<IFunnelChartDataPoint> "stage" value
-//     static member inline subValues
-//         (value:
-//             {|
-//                 category: string
-//                 value: float
-//                 color: string
-//             |} list)
-//         = Interop.mkProperty<IFunnelChartDataPoint> "subValues" (createObj !!value)
-//     static member inline value(value: float) = Interop.mkProperty<IFunnelChartDataPoint> "value" value
-//     static member inline color(value: string) = Interop.mkProperty<IFunnelChartDataPoint> "color" value
-
-// type [<Erase>] funnelChartStyles =
-//     static member inline root(value: string) = Interop.mkProperty<IFunnelChartStyles> "root" value
-//     static member inline chart(value: string) = Interop.mkProperty<IFunnelChartStyles> "chart" value
-//     static member inline text(value: string) = Interop.mkProperty<IFunnelChartStyles> "text" value
-//     static member inline calloutContentRoot(value: string) = Interop.mkProperty<IFunnelChartStyles> "calloutContentRoot" value
-
-// module funnelChart =
-//     type [<Erase>] orientation =
-//         static member inline horizontal = Interop.mkProperty<IFunnelChartProps> "orientation" "horizontal"
-//         static member inline vertical = Interop.mkProperty<IFunnelChartProps> "orientation" "vertical"
-
-// type [<Erase>] funnelChart =
-//     static member inline data(value: IFunnelChartDataPoint list) = Interop.mkProperty<IFunnelChartProps> "data" (value |> List.toArray)
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IFunnelChartProps> "chartTitle" value
-//     static member inline width(value: int) = Interop.mkProperty<IFunnelChartProps> "width" value
-//     static member inline height(value: int) = Interop.mkProperty<IFunnelChartProps> "height" value
-//     static member inline hideLegend(value: bool) = Interop.mkProperty<IFunnelChartProps> "hideLegend" value
-//     static member inline legendProps(value: legendProps) = Interop.mkProperty<IFunnelChartProps> "legendProps" value
-//     static member inline calloutProps(value: IChartPopoverProps list) = Interop.mkProperty<IFunnelChartProps> "calloutProps" (keyValueList CaseRules.LowerFirst value)
-//     static member inline styles(value: IFunnelChartStyles list) = Interop.mkProperty<IFunnelChartProps> "styles" (value |> List.toArray)
-//     static member inline culture(value: string) = Interop.mkProperty<IFunnelChartProps> "culture" value
-//     static member inline componentRef(value: IRefValue<FocusProp>) = Interop.mkProperty<IFunnelChartProps> "componentRef" value
-//     static member inline className(value: string) = Interop.mkProperty<IFunnelChartProps> "className" value
-
 // type [<Erase>] gaugeChartStyles =
 //     /// Styles for the root element
 //     static member inline root(value: string) = Interop.mkProperty<IGaugeChartStyles> "root" value
@@ -1947,3 +1910,86 @@ type [<Erase>] donutChartStyles =
     static member inline axisAnnotation(value: string) = Interop.mkProperty<IDonutChartStylesProp> "axisAnnotation" value
     /// Styles for the chart wrapper div
     static member inline chartWrapper(value: string) = Interop.mkProperty<IDonutChartStylesProp> "chartWrapper" value
+
+//----------------------------------------------------------------- FunnelChart -------------------------------------------------
+type [<Erase>] funnelChart =
+    /// Data points for the funnel chart
+    static member inline data(value: IFunnelChartDataPointProp list list) =
+                        let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                        Interop.mkProperty<IFunnelChartProp> "data" newValue
+    /// Title for the chart
+    static member inline chartTitle(value: string) = Interop.mkProperty<IFunnelChartProp> "chartTitle" value
+    /// Width of the chart
+    static member inline width(value: int) = Interop.mkProperty<IFunnelChartProp> "width" value
+    /// Width of the chart
+    static member inline width(value: float) = Interop.mkProperty<IFunnelChartProp> "width" value
+    /// Width of the chart
+    static member inline width(value: decimal) = Interop.mkProperty<IFunnelChartProp> "width" value
+    /// Height of the chart
+    static member inline height(value: int) = Interop.mkProperty<IFunnelChartProp> "height" value
+    /// Height of the chart
+    static member inline height(value: float) = Interop.mkProperty<IFunnelChartProp> "height" value
+    /// Height of the chart
+    static member inline height(value: decimal) = Interop.mkProperty<IFunnelChartProp> "height" value
+    /// Decides whether to show/hide legends
+    static member inline hideLegend(value: bool) = Interop.mkProperty<IFunnelChartProp> "hideLegend" value
+    /// Props for the legends in the chart
+    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IFunnelChartProp> "legendProps" (!!value |> createObj |> unbox)
+    /// Props for the callout in the chart
+    static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<IFunnelChartProp> "calloutProps" (!!value |> createObj |> unbox)
+    /// Call to provide customized styling that will layer on top of the variant rules
+    static member inline styles(value: IFunnelChartStylesProp list) = Interop.mkProperty<IFunnelChartProp> "styles" (!!value |> createObj |> unbox)
+    /// Defines the culture to localize the numbers and dates
+    static member inline culture(value: string) = Interop.mkProperty<IFunnelChartProp> "culture" value
+    /// Reference to the chart component
+    static member inline componentRef(value: RefObject<'T>) = Interop.mkProperty<IFunnelChartProp> "componentRef" value
+    /// Additional CSS class(es) to apply to the chart
+    static member inline className(value: string) = Interop.mkProperty<IFunnelChartProp> "className" value
+
+module funnelChart =
+    type [<Erase>] orientation =
+        static member inline horizontal = Interop.mkProperty<IFunnelChartProp> "orientation" "horizontal"
+        static member inline vertical = Interop.mkProperty<IFunnelChartProp> "orientation" "vertical"
+
+//----------------------------------------------------------------- FunnelChartDataPoint -------------------------------------------------
+type [<Erase>] funnelChartDataPoint =
+    /// Stage name or identifier
+    static member inline stage(value: string) = Interop.mkProperty<IFunnelChartDataPointProp> "stage" value
+    /// Stage name or identifier
+    static member inline stage(value: int) = Interop.mkProperty<IFunnelChartDataPointProp> "stage" value
+    /// Stage name or identifier
+    static member inline stage(value: decimal) = Interop.mkProperty<IFunnelChartDataPointProp> "stage" value
+    /// Stage name or identifier
+    static member inline stage(value: float) = Interop.mkProperty<IFunnelChartDataPointProp> "stage" value
+    /// Stage name or identifier
+    static member inline subValues(value: IFunnelChartDataPointSubValueProp list list) =
+                        let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                        Interop.mkProperty<IFunnelChartDataPointProp> "subValues" newValue
+    /// Value for the stage (used for non-stacked funnel charts)
+    static member inline value(value: int) = Interop.mkProperty<IFunnelChartDataPointProp> "value" value
+    /// Value for the stage (used for non-stacked funnel charts)
+    static member inline value(value: decimal) = Interop.mkProperty<IFunnelChartDataPointProp> "value" value
+    /// Value for the stage (used for non-stacked funnel charts)
+    static member inline value(value: float) = Interop.mkProperty<IFunnelChartDataPointProp> "value" value
+    /// Color for the stage (used for non-stacked funnel charts)
+    static member inline color(value: string) = Interop.mkProperty<IFunnelChartDataPointProp> "color" value
+
+//----------------------------------------------------------------- FunnelChartDataPointSubValue -------------------------------------------------
+type [<Erase>] funnelChartDataPointSubValue =
+    static member inline category(value: string) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "category" value
+    static member inline value(value: int) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "value" value
+    static member inline value(value: decimal) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "value" value
+    static member inline value(value: float) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "value" value
+    static member inline color(value: string) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "color" value
+
+//----------------------------------------------------------------- FunnelChartStyles -------------------------------------------------
+type [<Erase>] funnelChartStyles =
+    /// Styles for the root element
+    static member inline root(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "root" value
+    /// Styles for the chart
+    static member inline chart(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "chart" value
+    /// Styles for text elements
+    static member inline text(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "text" value
+    /// Styles for the callout root element
+    static member inline calloutContentRoot(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "calloutContentRoot" value
+

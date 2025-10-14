@@ -601,10 +601,88 @@ let basicChartTableRows = [
     ]
 ]
 
+let funnelChartStackedData = [
+    [
+        funnelChartDataPoint.stage "Visit"
+        funnelChartDataPoint.subValues [
+            [
+                funnelChartDataPointSubValue.category "A"
+                funnelChartDataPointSubValue.value 100
+                funnelChartDataPointSubValue.color "red"
+            ]
+            [
+                funnelChartDataPointSubValue.category "B"
+                funnelChartDataPointSubValue.value 80
+                funnelChartDataPointSubValue.color "blue"
+            ]
+            [
+                funnelChartDataPointSubValue.category "C"
+                funnelChartDataPointSubValue.value 50
+                funnelChartDataPointSubValue.color "green"
+            ]
+            [
+                funnelChartDataPointSubValue.category "D"
+                funnelChartDataPointSubValue.value 30
+                funnelChartDataPointSubValue.color "pink"
+            ]
+        ]
+    ]
+    [
+        funnelChartDataPoint.stage "Sign-Up"
+        funnelChartDataPoint.subValues [
+            [
+                funnelChartDataPointSubValue.category "A"
+                funnelChartDataPointSubValue.value 60
+                funnelChartDataPointSubValue.color "red"
+            ]
+            [
+                funnelChartDataPointSubValue.category "B"
+                funnelChartDataPointSubValue.value 40
+                funnelChartDataPointSubValue.color "blue"
+            ]
+            [
+                funnelChartDataPointSubValue.category "C"
+                funnelChartDataPointSubValue.value 20
+                funnelChartDataPointSubValue.color "green"
+            ]
+            [
+                funnelChartDataPointSubValue.category "D"
+                funnelChartDataPointSubValue.value 10
+                funnelChartDataPointSubValue.color "pink"
+            ]
+        ]
+    ]
+    [
+        funnelChartDataPoint.stage "Purchase"
+        funnelChartDataPoint.subValues [
+            [
+                funnelChartDataPointSubValue.category "A"
+                funnelChartDataPointSubValue.value 30
+                funnelChartDataPointSubValue.color "red"
+            ]
+            [
+                funnelChartDataPointSubValue.category "B"
+                funnelChartDataPointSubValue.value 20
+                funnelChartDataPointSubValue.color "blue"
+            ]
+            [
+                funnelChartDataPointSubValue.category "C"
+                funnelChartDataPointSubValue.value 10
+                funnelChartDataPointSubValue.color "green"
+            ]
+            [
+                funnelChartDataPointSubValue.category "D"
+                funnelChartDataPointSubValue.value 5
+                funnelChartDataPointSubValue.color "pink"
+            ]
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     Html.div [
-        prop.style [ style.width 600]
+        prop.style [ style.width 600; style.margin 36 ]
         prop.children [
             Fui.areaChart [
                 areaChart.mode.tonexty
@@ -655,6 +733,17 @@ let TestChartsComponent () =
                             chartDataPoint.xAxisCalloutData "2025/10/09"
                         ]
                     ]
+                ]
+            ]
+            Fui.funnelChart [
+                funnelChart.data funnelChartStackedData
+                funnelChart.chartTitle "Stacked Funnel Chart"
+                funnelChart.width 600
+                funnelChart.height 400
+                funnelChart.hideLegend false
+                funnelChart.orientation.horizontal
+                funnelChart.legendProps [
+                    legendProp.canSelectMultipleLegends true
                 ]
             ]
         ]
@@ -1313,54 +1402,6 @@ let TestChartsComponent () =
                                     //     ]
 
                                     // ]
-                            //         Charts.funnelChart [
-                            //             funnelChart.width 750
-                            //             funnelChart.chartTitle "Funnel chart"
-                            //             funnelChart.orientation.horizontal
-                            //             funnelChart.data [
-                            //                 Charts.funnelChartData [
-                            //                     funnelChartDataPoint.value 1000
-                            //                     funnelChartDataPoint.color "#13a10e"
-                            //                     funnelChartDataPoint.stage "visitor"
-                            //                     funnelChartDataPoint.subValues [
-                            //                         {|
-                            //                             category = ""
-                            //                             value = 1.
-                            //                             color = ""
-                            //                         |}
-                            //                         {|
-                            //                             category = ""
-                            //                             value = 1.
-                            //                             color = ""
-                            //                         |}
-                            //                         {|
-                            //                             category = ""
-                            //                             value = 1.
-                            //                             color = ""
-                            //                         |}
-                            //                         {|
-                            //                             category = ""
-                            //                             value = 1.
-                            //                             color = ""
-                            //                         |}
-                            //                     ]
-                            //                 ]
-                            //                 Charts.funnelChartData [
-                            //                     funnelChartDataPoint.value 600
-                            //                     funnelChartDataPoint.color "#3a96dd"
-                            //                     funnelChartDataPoint.stage "Signups"
-                            //                 ]
-                            //                 Charts.funnelChartData [
-                            //                     funnelChartDataPoint.value 300
-                            //                     funnelChartDataPoint.color "#ca5010"
-                            //                     funnelChartDataPoint.stage "Trials"
-                            //                 ]
-                            //                 Charts.funnelChartData [
-                            //                     funnelChartDataPoint.value 250
-                            //                     funnelChartDataPoint.color "#ae8c00"
-                            //                     funnelChartDataPoint.stage "Customers"
-                            //                 ]
-                            //             ]
                             //         ]
                             //     ]
                             // ]
