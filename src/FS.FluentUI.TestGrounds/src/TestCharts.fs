@@ -941,282 +941,72 @@ let heatMapChartData = [
     ]
 ]
 
-//     const HeatMapData: HeatMapChartProps["data"] = [
-//       {
-//         value: 100,
-//         legend: "Excellent (0-200)",
-//         data: [
-//           {
-//             x: xPoint[2],
-//             y: yPoint[2],
-//             value: 46,
-//             rectText: 46,
-//             ratio: [46, 2391],
-//             descriptionMessage: "air quality seems to be excellent today",
-//           },
-//         ],
-//       },
-//       {
-//         value: 250,
-//         legend: "Good (201-300)",
-//         data: [
-//           {
-//             x: xPoint[0],
-//             y: yPoint[1],
-//             value: 265,
-//             rectText: 265,
-//             ratio: [265, 2479],
-//             descriptionMessage: "today we have good air quality in Alaska",
-//           },
-//           {
-//             x: xPoint[1],
-//             y: yPoint[0],
-//             value: 250,
-//             rectText: 250,
-//             ratio: [250, 2043],
-//             descriptionMessage: "a sudden rise of 150 units in Ohio today",
-//           },
-//           {
-//             x: xPoint[2],
-//             y: yPoint[0],
-//             value: 235,
-//             rectText: 235,
-//             ratio: [235, 2043],
-//             descriptionMessage:
-//               "air quality seems to have decreased by only 15 units from yesterday",
-//           },
-//           {
-//             x: xPoint[6],
-//             y: yPoint[2],
-//             value: 300,
-//             rectText: 300,
-//             ratio: [300, 2391],
-//             descriptionMessage:
-//               "air comes to control a little bit more than yesterday",
-//           },
-//           {
-//             x: xPoint[0],
-//             y: yPoint[3],
-//             value: 290,
-//             rectText: 290,
-//             ratio: [290, 2462],
-//             descriptionMessage:
-//               "1st day in the week, DC witnesses good air quality",
-//           },
-//           {
-//             x: xPoint[4],
-//             y: yPoint[4],
-//             value: 280,
-//             rectText: 280,
-//             ratio: [280, 2486],
-//             descriptionMessage: `Air quality index decreases by exactly 300 units,
-//             giving the people of NYC good hope`,
-//           },
-//           {
-//             x: xPoint[5],
-//             y: yPoint[3],
-//             value: 300,
-//             rectText: 300,
-//             ratio: [300, 2462],
-//             descriptionMessage: "60 units decreased from yesterday.",
-//           },
-//         ],
-//       },
-//       {
-//         value: 350,
-//         legend: "Medium (301-400)",
-//         data: [
-//           {
-//             x: xPoint[1],
-//             y: yPoint[1],
-//             value: 345,
-//             rectText: 345,
-//             ratio: [345, 2479],
-//             descriptionMessage:
-//               "Alaska has just reported nearly 100 units hike in air quality",
-//           },
-//           {
-//             x: xPoint[6],
-//             y: yPoint[1],
-//             value: 325,
-//             rectText: 325,
-//             ratio: [325, 2479],
-//             descriptionMessage: `Alaska to 300`,
-//           },
-//           {
-//             x: xPoint[5],
-//             y: yPoint[2],
-//             value: 390,
-//             rectText: 390,
-//             ratio: [390, 2391],
-//             descriptionMessage: "air comes to control a little bit",
-//           },
-//           {
-//             x: xPoint[1],
-//             y: yPoint[3],
-//             value: 385,
-//             rectText: 385,
-//             ratio: [385, 2462],
-//             descriptionMessage:
-//               "Washington DC witnesses a hike of nearly 100 units in air quality",
-//           },
-//           {
-//             x: xPoint[4],
-//             y: yPoint[3],
-//             value: 360,
-//             rectText: 360,
-//             ratio: [360, 2462],
-//             descriptionMessage: "a 200% hike in the air quality index",
-//           },
-//           {
-//             x: xPoint[1],
-//             y: yPoint[2],
-//             value: 400,
-//             rectText: 400,
-//             ratio: [400, 2391],
-//             descriptionMessage:
-//               "a sudden spike in the badness of the air quality",
-//           },
-//           {
-//             x: xPoint[3],
-//             y: yPoint[0],
-//             value: 400,
-//             rectText: 400,
-//             ratio: [400, 2043],
-//             descriptionMessage:
-//               "situation got worse in air quality due to industrial smoke",
-//           },
-//         ],
-//       },
-//       {
-//         value: 450,
-//         legend: "Danger (401-500)",
-//         data: [
-//           {
-//             x: xPoint[4],
-//             y: yPoint[0],
-//             value: 423,
-//             rectText: 423,
-//             ratio: [423, 2043],
-//             descriptionMessage: "we can see an increase of 23 units",
-//           },
-//           {
-//             x: xPoint[2],
-//             y: yPoint[1],
-//             value: 463,
-//             rectText: 463,
-//             ratio: [463, 2479],
-//             descriptionMessage:
-//               "day by day, situation is getting worse in Alaska",
-//           },
-//           {
-//             x: xPoint[3],
-//             y: yPoint[2],
-//             value: 480,
-//             rectText: 480,
-//             ratio: [480, 2391],
-//             descriptionMessage:
-//               "same story, today also air quality decreases. a bad day in Texas",
-//           },
-//           {
-//             x: xPoint[2],
-//             y: yPoint[3],
-//             value: 491,
-//             rectText: 491,
-//             ratio: [491, 2462],
-//             descriptionMessage:
-//               "Day by day, 100 units are increasing in air quality",
-//           },
-//           {
-//             x: xPoint[1],
-//             y: yPoint[4],
-//             value: 433,
-//             rectText: 433,
-//             ratio: [433, 2486],
-//             descriptionMessage: `They say good things stay for a short time, today
-//             this saying became reality. New York has witnessed nearly 300% bad air quality`,
-//           },
-//           {
-//             x: xPoint[5],
-//             y: yPoint[4],
-//             value: 473,
-//             rectText: 473,
-//             ratio: [473, 2486],
-//             descriptionMessage: `Today is the same fate as the 2nd day. still, air quality
-//             stays above 400`,
-//           },
-//         ],
-//       },
-//       {
-//         value: 550,
-//         legend: "Very Danger (501-600)",
-//         data: [
-//           {
-//             x: xPoint[5],
-//             y: yPoint[0],
-//             value: 600,
-//             rectText: 600,
-//             ratio: [600, 2043],
-//             descriptionMessage:
-//               "looks like god has cursed us with poisonous air. worst air quality index",
-//           },
-//           {
-//             x: xPoint[5],
-//             y: yPoint[1],
-//             value: 536,
-//             rectText: 536,
-//             ratio: [536, 2479],
-//             descriptionMessage: `shh!, all the hopes were washed away in the rain yesterday,
-//             with another hike of 400% in air quality`,
-//           },
-//           {
-//             x: xPoint[3],
-//             y: yPoint[1],
-//             value: 520,
-//             rectText: 520,
-//             ratio: [520, 2479],
-//             descriptionMessage:
-//               "Alaska planning to build air purifier to control the air quality",
-//           },
-//           {
-//             x: xPoint[4],
-//             y: yPoint[2],
-//             value: 525,
-//             rectText: 525,
-//             ratio: [525, 2391],
-//             descriptionMessage:
-//               "air worsens badly today due to farmers burning the harvest",
-//           },
-//           {
-//             x: xPoint[6],
-//             y: yPoint[3],
-//             value: 560,
-//             rectText: 560,
-//             ratio: [560, 2462],
-//             descriptionMessage: `Due to industrial pollution and the
-//             burning of harvest, it resulted in bad air quality in Washington DC`,
-//           },
-//           {
-//             x: xPoint[3],
-//             y: yPoint[4],
-//             value: 580,
-//             rectText: 580,
-//             ratio: [580, 2486],
-//             descriptionMessage: `Air quality index is becoming worse day by day, leaving the
-//             people of NYC in very bad medical conditions.`,
-//           },
-//           {
-//             x: xPoint[6],
-//             y: yPoint[4],
-//             value: 590,
-//             rectText: 590,
-//             ratio: [590, 2486],
-//             descriptionMessage: `finally, the weekend ends with very bad air quality in New York City`,
-//           },
-//         ],
-//       },
-//     ];
-
+let horizontalBarChartData = [
+    [
+        chartProp.chartTitle "one"
+        chartProp.chartData [
+            [
+                chartDataPoint.legend "One.One"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 1543
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color1))
+            ]
+            [
+                chartDataPoint.legend "One.Two"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 1000
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color2))
+            ]
+            [
+                chartDataPoint.legend "One.Three"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 547
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color3))
+            ]
+        ]
+    ]
+    [
+        chartProp.chartTitle "two"
+        chartProp.chartData [
+            [
+                chartDataPoint.legend "Two.One"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 987
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color4))
+            ]
+            [
+                chartDataPoint.legend "Two.Two"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 1987
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color5))
+            ]
+        ]
+    ]
+    [
+        chartProp.chartTitle "three"
+        chartProp.chartData [
+            [
+                chartDataPoint.legend "Three.One"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 872
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color6))
+            ]
+            [
+                chartDataPoint.legend "Three.Two"
+                chartDataPoint.horizontalBarChartdata [
+                    horizontalDataPoint.x 128
+                ]
+                chartDataPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color7))
+            ]
+        ]
+    ]
+]
 
 [<ReactComponent>]
 let TestChartsComponent () =
@@ -1344,6 +1134,12 @@ let TestChartsComponent () =
                     Fui.getColorFromToken Fui.dataVizPalette.highError
                 ]
                 heatMapChart.reflowProps.modeMinWidth
+            ]
+            Fui.horizontalBarChart [
+                horizontalBarChart.data horizontalBarChartData
+                horizontalBarChart.chartDataMode.default'
+                horizontalBarChart.className "hbcstacked"
+                horizontalBarChart.variant.partToWhole
             ]
         ]
     ]
@@ -1473,84 +1269,6 @@ let TestChartsComponent () =
                             //             verticalBarChartDataPoint.y 13
                             //             verticalBarChartDataPoint.color "purple"
                             //             verticalBarChartDataPoint.legend "legend5"
-                            //         ]
-                            //     ]
-                            // ]
-                            // Charts.horizontalBarChartWithAxis [
-                            //     horizontalBarChartWithAxis.chartTitle "title"
-                            //     horizontalBarChartWithAxis.data [
-                            //         Charts.horizontalBarWithAxisChartDataProp [
-                            //             horizontalBarChartWithAxisDataPoint.legend "test"
-                            //             horizontalBarChartWithAxisDataPoint.color "orange"
-                            //             horizontalBarChartWithAxisDataPoint.x 10
-                            //             horizontalBarChartWithAxisDataPoint.y 2
-                            //         ]
-                            //         Charts.horizontalBarWithAxisChartDataProp [
-                            //             horizontalBarChartWithAxisDataPoint.legend "test2"
-                            //             horizontalBarChartWithAxisDataPoint.color "green"
-                            //             horizontalBarChartWithAxisDataPoint.x 13
-                            //             horizontalBarChartWithAxisDataPoint.y 5
-                            //         ]
-                            //     ]
-                            // ]
-                            // Charts.horizontalBarChart [
-                            //     horizontalBarChart.chartDataMode.percentage
-                            //     horizontalBarChart.variant.AbsoluteScale
-                            //     horizontalBarChart.styles [ styles.root "" ]
-                            //     horizontalBarChart.color "green"
-                            //     horizontalBarChart.data [
-                            //         Charts.horizontalBarChartDataProp [
-                            //             chartProps.chartTitle "testing"
-                            //             chartProps.chartData [
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "test"
-                            //                     chartDataPoint.color "purple"
-                            //                     chartDataPoint.horizontalBarChartdata [
-                            //                         horizontalDataPoint.x 7.
-                            //                         horizontalDataPoint.total 11.
-                            //                     ]
-                            //                 ]
-                            //             ]
-                            //         ]
-                            //         Charts.horizontalBarChartDataProp [
-                            //             chartProps.chartTitle "test"
-                            //             chartProps.chartData [
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "test"
-                            //                     chartDataPoint.color "red"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 10. ]
-                            //                 ]
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "moreTest"
-                            //                     chartDataPoint.color "blue"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 2. ]
-                            //                 ]
-                            //             ]
-                            //         ]
-                            //         Charts.horizontalBarChartDataProp [
-                            //             chartProps.chartTitle "test3"
-                            //             chartProps.chartData [
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "moreTests"
-                            //                     chartDataPoint.color "yellow"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 10. ]
-                            //                 ]
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "evenMoreTest"
-                            //                     chartDataPoint.color "green"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 2. ]
-                            //                 ]
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "evenevenMoreTest"
-                            //                     chartDataPoint.color "purple"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 15 ]
-                            //                 ]
-                            //                 Charts.chartData [
-                            //                     chartDataPoint.legend "evenevenMoreTest"
-                            //                     chartDataPoint.color "orange"
-                            //                     chartDataPoint.horizontalBarChartdata [ horizontalDataPoint.x 3 ]
-                            //                 ]
-                            //             ]
                             //         ]
                             //     ]
                             // ]

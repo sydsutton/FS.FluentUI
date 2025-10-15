@@ -541,119 +541,25 @@ type [<Erase>] yAxis<'Property> =
 //     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IGVBarChartSeriesPoint> "callOutAccessibilityData" (value |> List.toArray)
 //     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IGVBarChartSeriesPoint> "useSecondaryYScale" value
 
-// type [<Erase>] horizontalDataPoint =
-//     /// Independent value of the data point, rendered along the x-axis.
-//     /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
-//     /// If x is a string, then the data is evenly spaced along the x-axis.
-//     static member inline x(value: int) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
-//     /// Independent value of the data point, rendered along the x-axis.
-//     /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
-//     /// If x is a string, then the data is evenly spaced along the x-axis.
-//     static member inline x(value: decimal) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
-//     /// Independent value of the data point, rendered along the x-axis.
-//     /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
-//     /// If x is a string, then the data is evenly spaced along the x-axis.
-//     static member inline x(value: float) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
-//     /// Total value of a single point bar chart.
-//     static member inline total(value: float) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
-//     /// Total value of a single point bar chart.
-//     static member inline total(value: int) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
-//     /// Total value of a single point bar chart.
-//     static member inline decimal(value: int) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
-
-// module horizontalBarChart =
-//     type [<Erase>] chartDataMode =
-//         static member inline ``default`` = Interop.mkProperty<IHorizontalBarChartProps> "chartDataMode" "default"
-//         static member inline fraction = Interop.mkProperty<IHorizontalBarChartProps> "chartDataMode" "fraction"
-//         static member inline percentage = Interop.mkProperty<IHorizontalBarChartProps> "chartDataMode" "percentage"
-//         static member inline hidden = Interop.mkProperty<IHorizontalBarChartProps> "chartDataMode" "hidden"
-
-//     type [<Erase>] variant =
-//         static member inline PartToWhole = Interop.mkProperty<IHorizontalBarChartProps> "PartToWhole" "part-to-whole"
-//         static member inline AbsoluteScale = Interop.mkProperty<IHorizontalBarChartProps> "AbsoluteScale" "absolute-scale"
-
-//     type [<Erase>] styles =
-//         static member inline root(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "root" value
-//         static member inline items(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "items" value
-//         static member inline chart(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chart" value
-//         static member inline chartTitle(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chartTitle" value
-//         static member inline barWrapper(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "barWrapper" value
-//         static member inline chartTitleLeft(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chartTitleLeft" value
-//         static member inline chartTitleRight(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chartTitleRight" value
-//         static member inline chartDataTextDenominator(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chartDataTextDenominator" value
-//         static member inline benchmarkContainer(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "benchmarkContainer" value
-//         static member inline triangle(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "triangle" value
-//         static member inline barLabel(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "barLabel" value
-//         static member inline chartWrapper(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "chartWrapper" value
-//         static member inline legendContainer(value: string) = Interop.mkProperty<IHorizontalBarChartStyles> "legendContainer" value
-
-// type [<Erase>] horizontalBarChart =
-//     static member inline data(value: IChartProps list) = Interop.mkProperty<IHorizontalBarChartProps> "data" (value |> List.toArray)
-//     static member inline width(value: float) = Interop.mkProperty<IHorizontalBarChartProps> "width" value
-//     static member inline barHeight(value: float) = Interop.mkProperty<IHorizontalBarChartProps> "barHeight" value
-//     static member inline className(value: string) = Interop.mkProperty<IHorizontalBarChartProps> "className" value
-//     static member inline hideRatio(value: bool list) = Interop.mkProperty<IHorizontalBarChartProps> "hideRatio" (value |> List.toArray)
-//     static member inline hideTooltip(value: bool) = Interop.mkProperty<IHorizontalBarChartProps> "hideTooltip" value
-//     static member inline styles(value: IHorizontalBarChartStyles list) = Interop.mkProperty<IHorizontalBarChartProps> "styles" (value |> List.toArray)
-//     static member inline calloutProps(value: IChartPopoverProps list) = Interop.mkProperty<IHorizontalBarChartProps> "calloutProps" (keyValueList CaseRules.LowerFirst value)
-//     static member inline culture(value: string) = Interop.mkProperty<IHorizontalBarChartProps> "culture" value
-//     static member inline hideLabels(value: bool) = Interop.mkProperty<IHorizontalBarChartProps> "hideLabels" value
-//     static member inline color(value: string) = Interop.mkProperty<IHorizontalBarChartProps> "color" value
-//     static member inline showTriangle(value: bool) = Interop.mkProperty<IHorizontalBarChartProps> "showTriangle" value
-//     static member inline legendsOverflowText(value: 'a) = Interop.mkProperty<IHorizontalBarChartProps> "showTriangle" value // TS any prop
-//     static member inline legendProps(value: legendProps) = Interop.mkProperty<IHorizontalBarChartProps> "legendProps" value
-
-//     // TODO how to return a type [<Erase>] that is defined through static members through an interface?
-//     // static member inline onRenderCallutPerHorizontalBar(props: ??) =
-//     // Interop.mkProperty<IHorizontalBarChartProp> "onRenderCalloutPerHorizontalBar" value
-
-//     // TODO how to return a type [<Erase>] that is defined through static members through an interface?
-//     // TODO calloutPropsPerDataPoint
-
-//     static member inline showLegendForSinglePointBar(value: bool) = Interop.mkProperty<IHorizontalBarChartProps> "showLegendForSinglePointBar" value
-
-// type [<Erase>] horizontalBarChartWithAxisDataPoint =
-//     static member inline x(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "x" value
-//     static member inline y(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "y" value
-//     static member inline y(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "y" value
-//     static member inline legend(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "legend" value
-//     static member inline color(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "color" value
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "xAxisCalloutData" value
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "yAxisCalloutData" value
-//     static member inline onClick(value: unit -> unit) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "onClick" value
-//     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPoint> "callOutAccessibilityData" (value |> List.toArray)
-
-// module horizontalBarChartWithAxis =
-//     type [<Erase>] styles =
-//         inherit cartesianChartStyles<IHorizontalBarChartWithAxisStyles>
-
-//         static member inline chartLabel(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "chartLabel" value
-//         static member inline xAxisDomain(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "xAxisDomain" value
-//         static member inline xAxisTicks(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "xAxisTicks" value
-//         static member inline xAxisText(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "xAxisText" value
-//         static member inline yAxisDomain(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "yAxisDomain" value
-//         static member inline yAxisTicks(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "yAxisTicks" value
-//         static member inline yAxisText(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "yAxisText" value
-//         static member inline opacityChangeOnHover(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStyles> "opacityChangeOnHover" value
-
-// type [<Erase>] horizontalBarChartWithAxis =
-//     inherit cartesianChartProps<IHorizontalBarChartWithAxisProps>
-
-//     static member inline data(value: IHorizontalBarChartWithAxisDataPoint list) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "data" (value |> List.toArray)
-
-//     // TODO onRenderCalloutPerDataPoint
-
-//     static member inline barHeight(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "barHeight" value
-//     static member inline colors(value: string list) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "colors" (value |> List.toArray)
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "chartTitle" value
-//     static member inline useSingleColor(value: bool) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "useSingleColor" value
-//     static member inline styles(value: IHorizontalBarChartStyles list) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "styles" (value |> List.toArray)
-//     static member inline culture(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "culture" value
-//     static member inline yAxisPadding(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "yAxisPadding" value
-//     static member inline showYAxisLablesTooltip(value: bool) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "showYAxisLablesTooltip" value
-//     static member inline showYAxisLables(value: bool) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "showYAxisLables" value
-//     static member inline enableGradient(value: bool) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "enableGradient" value
-//     static member inline roundCorners(value: bool) = Interop.mkProperty<IHorizontalBarChartWithAxisProps> "roundCorners" value
+type [<Erase>] horizontalDataPoint =
+    /// Independent value of the data point, rendered along the x-axis.
+    /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
+    /// If x is a string, then the data is evenly spaced along the x-axis.
+    static member inline x(value: int) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
+    /// Independent value of the data point, rendered along the x-axis.
+    /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
+    /// If x is a string, then the data is evenly spaced along the x-axis.
+    static member inline x(value: decimal) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
+    /// Independent value of the data point, rendered along the x-axis.
+    /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
+    /// If x is a string, then the data is evenly spaced along the x-axis.
+    static member inline x(value: float) = Interop.mkProperty<IHorizontalDataPointProp> "x" value
+    /// Total value of a single point bar chart.
+    static member inline total(value: int) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
+    /// Total value of a single point bar chart.
+    static member inline total(value: float) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
+    /// Total value of a single point bar chart.
+    static member inline total(value: decimal) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
 
 // type [<Erase>] verticalBarChartDataPoint =
 //     static member inline x(value: float) = Interop.mkProperty<IVerticalBarChartDataPoint> "x" value
@@ -1249,7 +1155,7 @@ type [<Erase>] chartDataPoint =
     /// data the datapoint in the chart
     static member inline data (value: decimal) = Interop.mkProperty<IChartDataPointProp> "data" value
     /// data the datapoint in the chart
-    static member inline horizontalBarChartdata (value: IHorizontalDataPointProp) = Interop.mkProperty<IChartDataPointProp> "horizontalBarChartdata" value
+    static member inline horizontalBarChartdata (value: IHorizontalDataPointProp list) = Interop.mkProperty<IChartDataPointProp> "horizontalBarChartdata" (!!value |> createObj |> unbox)
     /// onClick action for each datapoint in the chart
     static member inline onClick (value: unit -> unit) = Interop.mkProperty<IChartDataPointProp> "onClick" (System.Func<_,_> value)
     /// Color for the legend in the chart. If not provided, it will fallback on the default color palette.
@@ -2207,3 +2113,89 @@ type [<Erase>] heatMapChartStyles =
     static member inline root(value: string) = Interop.mkProperty<IHeatMapChartStylesProp> "root" value
     static member inline text(value: string) = Interop.mkProperty<IHeatMapChartStylesProp> "text" value
     static member inline calloutContentRoot(value: string) = Interop.mkProperty<IHeatMapChartStylesProp> "calloutContentRoot" value
+
+//----------------------------------------------------------------- HorizontalBarChart -------------------------------------------------
+type [<Erase>] horizontalBarChart =
+    /// An array of chart data points for the Horizontal bar chart
+    static member inline data(value: IChartPropProp list list) = Interop.mkProperty<IHorizontalBarChartProp> "data" (value |> createObjArray)
+    /// Width of bar chart
+    static member inline width(value: int) = Interop.mkProperty<IHorizontalBarChartProp> "width" value
+    /// Width of bar chart
+    static member inline width(value: float) = Interop.mkProperty<IHorizontalBarChartProp> "width" value
+    /// Width of bar chart
+    static member inline width(value: decimal) = Interop.mkProperty<IHorizontalBarChartProp> "width" value
+    /// Height of bar chart
+    static member inline barHeight(value: int) = Interop.mkProperty<IHorizontalBarChartProp> "barHeight" value
+    /// Height of bar chart
+    static member inline barHeight(value: float) = Interop.mkProperty<IHorizontalBarChartProp> "barHeight" value
+    /// Height of bar chart
+    static member inline barHeight(value: decimal) = Interop.mkProperty<IHorizontalBarChartProp> "barHeight" value
+    /// Additional CSS class(es) to apply to the StackedBarChart.
+    static member inline className(value: string) = Interop.mkProperty<IHorizontalBarChartProp> "className" value
+    /// This property tells whether to show ratio on top of stacked bar chart or not.
+    static member inline hideRatio(value: bool seq) = Interop.mkProperty<IHorizontalBarChartProp> "hideRatio" (value |> Seq.toArray)
+    /// Do not show tooltips in chart
+    static member inline hideTooltip(value: bool) = Interop.mkProperty<IHorizontalBarChartProp> "hideTooltip" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: IHorizontalBarChartStylesProp list) = Interop.mkProperty<IHorizontalBarChartProp> "styles" (!!value |> createObj |> unbox)
+    /// props for the callout in the chart
+    static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<IHorizontalBarChartProp> "calloutProps" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture(value: string) = Interop.mkProperty<IHorizontalBarChartProp> "culture" value
+    /// Prop to hide the bar labels
+    static member inline hideLabels(value: bool) = Interop.mkProperty<IHorizontalBarChartProp> "hideLabels" value
+    /// line color for callout
+    static member inline color(value: string) = Interop.mkProperty<IHorizontalBarChartProp> "color" value
+    /// prop to check if benchmark data is provided
+    static member inline showTriangle(value: bool) = Interop.mkProperty<IHorizontalBarChartProp> "showTriangle" value
+    static member inline legendsOverflowText(value: 'T) = Interop.mkProperty<IHorizontalBarChartProp> "legendsOverflowText" value
+    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IHorizontalBarChartProp> "legendProps" (!!value |> createObj |> unbox)
+    /// prop to render the custom callout
+    static member inline onRenderCalloutPerHorizontalBar(value: ChartDataPoint -> ReactElement option) = Interop.mkProperty<IHorizontalBarChartProp> "onRenderCalloutPerHorizontalBar" (System.Func<_,_> value)
+    /// Define a custom callout props override
+    static member inline calloutPropsPerDataPoint(handler: ChartDataPoint -> IChartPopoverProp list) = Interop.mkProperty<IHorizontalBarChartProp> "calloutPropsPerDataPoint" (System.Func<_,_> (fun _ value -> handler (!!value |> createObj |> unbox)))
+    /// When true, chart will display legends even if a bar ( row ) has only one data point.
+    static member inline showLegendForSinglePointBar(value: bool) = Interop.mkProperty<IHorizontalBarChartProp> "showLegendForSinglePointBar" value
+
+module horizontalBarChart =
+    /// Prop to define the variant of HorizontalBarChart to render
+    type [<Erase>] variant =
+        static member inline partToWhole = Interop.mkProperty<IHorizontalBarChartProp> "variant" "part-to-whole"
+        static member inline absoluteScale = Interop.mkProperty<IHorizontalBarChartProp> "variant" "absolute-scale"
+    /// This property tells how to show data text on top right of bar chart.
+    /// If barChartCustomData props added, then this props will be overrided.
+    type [<Erase>] chartDataMode =
+        static member inline default' = Interop.mkProperty<IHorizontalBarChartProp> "chartDataMode" "default"
+        static member inline fraction = Interop.mkProperty<IHorizontalBarChartProp> "chartDataMode" "fraction"
+        static member inline percentage = Interop.mkProperty<IHorizontalBarChartProp> "chartDataMode" "percentage"
+        static member inline hidden = Interop.mkProperty<IHorizontalBarChartProp> "chartDataMode" "hidden"
+
+//------------------------------------------------------------ HorizontalBarChartStyles ---------------------------------------------
+
+type [<Erase>] horizontalBarChartStyles =
+    /// Styling for the root container
+    static member inline root(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "root" value
+    /// Styling for each item in the container
+    static member inline items(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "items" value
+    /// Style for the chart.
+    static member inline chart(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chart" value
+    /// Style for the chart Title.
+    static member inline chartTitle(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chartTitle" value
+    /// Style for the bars.
+    static member inline barWrapper(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "barWrapper" value
+    /// Style for left side text of the chart title
+    static member inline chartTitleLeft(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chartTitleLeft" value
+    /// Style for right side text of the chart title
+    static member inline chartTitleRight(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chartTitleRight" value
+    /// Style for the chart data text denominator.
+    static member inline chartDataTextDenominator(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chartDataTextDenominator" value
+    /// Style for the benchmark container
+    static member inline benchmarkContainer(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "benchmarkContainer" value
+    /// Style for the benchmark triangle
+    static member inline triangle(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "triangle" value
+    /// Style for the bar labels
+    static member inline barLabel(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "barLabel" value
+    /// Style for the div containing the chart
+    static member inline chartWrapper(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "chartWrapper" value
+    /// Style for the legend container.
+    static member inline legendContainer(value: string) = Interop.mkProperty<IHorizontalBarChartStylesProp> "legendContainer" value
