@@ -62,6 +62,9 @@ type [<Erase>] IGaugeChartStylesProp = interface end
 type [<Erase>] IGroupedVerticalBarChartStylesProp = interface end
 type [<Erase>] IGroupedVerticalBarChartDataProp = interface end
 type [<Erase>] IGVBarChartSeriesPointProp = interface end
+type [<Erase>] IHeatMapChartDataProp = interface end
+type [<Erase>] IHeatMapChartDataPointProp = interface end
+type [<Erase>] IHeatMapChartStylesProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end
@@ -80,10 +83,6 @@ type [<Erase>] IGaugeChartStyles = interface end
 type [<Erase>] IScatterChartProps = interface end
 type [<Erase>] IScatterChartPoints = interface end
 type [<Erase>] IScatterChartStyles = interface end
-type [<Erase>] IHeatMapChartProps = interface end
-type [<Erase>] IHeatMapChartData = interface end
-type [<Erase>] IHeatMapChartDataPointProp = interface end
-type [<Erase>] IHeatMapChartStyles = interface end
 type [<Erase>] ISankeyChartProps = interface end
 type [<Erase>] ISankeyChartAccessibility = interface end
 type [<Erase>] ISparklineProps = interface end

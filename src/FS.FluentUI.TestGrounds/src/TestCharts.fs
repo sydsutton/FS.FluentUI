@@ -245,7 +245,7 @@ let ganttChartDataList = [
         ]
         ganttChartDataPoint.y "Job A"
         ganttChartDataPoint.legend "Alex"
-        ganttChartDataPoint.color Fui.dataVizPallete.color1
+        ganttChartDataPoint.color Fui.dataVizPalette.color1
         ganttChartDataPoint.gradient ("#4760D5", "#637CEF")
     ]
     [
@@ -255,7 +255,7 @@ let ganttChartDataList = [
         ]
         ganttChartDataPoint.y "Job B"
         ganttChartDataPoint.legend "Alex"
-        ganttChartDataPoint.color Fui.dataVizPallete.color1
+        ganttChartDataPoint.color Fui.dataVizPalette.color1
         ganttChartDataPoint.gradient ("#4760D5", "#637CEF")
     ]
     [
@@ -265,7 +265,7 @@ let ganttChartDataList = [
         ]
         ganttChartDataPoint.y "Job C"
         ganttChartDataPoint.legend "Max"
-        ganttChartDataPoint.color Fui.dataVizPallete.color2
+        ganttChartDataPoint.color Fui.dataVizPalette.color2
         ganttChartDataPoint.gradient ("#E61C99", "#EE5FB7")
     ]
 ]
@@ -646,7 +646,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series1"
                 gvBarChartSeriesPoint.data 33000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color3))
                 gvBarChartSeriesPoint.legend "2022"
                 gvBarChartSeriesPoint.xAxisCalloutData "2022/04/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "29%"
@@ -657,7 +657,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series2"
                 gvBarChartSeriesPoint.data 44000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color4))
                 gvBarChartSeriesPoint.legend "2023"
                 gvBarChartSeriesPoint.xAxisCalloutData "2023/04/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "44%"
@@ -668,7 +668,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series3"
                 gvBarChartSeriesPoint.data 54000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color5))
                 gvBarChartSeriesPoint.legend "2024"
                 gvBarChartSeriesPoint.xAxisCalloutData "2024/04/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "44%"
@@ -679,7 +679,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series4"
                 gvBarChartSeriesPoint.data 24000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color6))
                 gvBarChartSeriesPoint.legend "2021"
                 gvBarChartSeriesPoint.xAxisCalloutData "2021/04/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "44%"
@@ -695,7 +695,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series1"
                 gvBarChartSeriesPoint.data 33000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color3))
                 gvBarChartSeriesPoint.legend "2022"
                 gvBarChartSeriesPoint.xAxisCalloutData "2022/05/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "29%"
@@ -706,7 +706,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series2"
                 gvBarChartSeriesPoint.data 3000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color4))
                 gvBarChartSeriesPoint.legend "2023"
                 gvBarChartSeriesPoint.xAxisCalloutData "2023/05/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -717,7 +717,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series3"
                 gvBarChartSeriesPoint.data 9000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color5))
                 gvBarChartSeriesPoint.legend "2024"
                 gvBarChartSeriesPoint.xAxisCalloutData "2024/05/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -728,7 +728,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series4"
                 gvBarChartSeriesPoint.data 12000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color6))
                 gvBarChartSeriesPoint.legend "2021"
                 gvBarChartSeriesPoint.xAxisCalloutData "2021/05/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -744,7 +744,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series1"
                 gvBarChartSeriesPoint.data 14000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color3))
                 gvBarChartSeriesPoint.legend "2022"
                 gvBarChartSeriesPoint.xAxisCalloutData "2022/06/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "13%"
@@ -755,7 +755,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series2"
                 gvBarChartSeriesPoint.data 50000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color4))
                 gvBarChartSeriesPoint.legend "2023"
                 gvBarChartSeriesPoint.xAxisCalloutData "2023/06/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "50%"
@@ -766,7 +766,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series3"
                 gvBarChartSeriesPoint.data 60000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color5))
                 gvBarChartSeriesPoint.legend "2024"
                 gvBarChartSeriesPoint.xAxisCalloutData "2024/06/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "50%"
@@ -777,7 +777,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series4"
                 gvBarChartSeriesPoint.data 10000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color6))
                 gvBarChartSeriesPoint.legend "2021"
                 gvBarChartSeriesPoint.xAxisCalloutData "2021/06/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "50%"
@@ -793,7 +793,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series1"
                 gvBarChartSeriesPoint.data 14000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3, true))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color3, true))
                 gvBarChartSeriesPoint.legend "2022"
                 gvBarChartSeriesPoint.xAxisCalloutData "2022/07/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "29%"
@@ -804,7 +804,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series2"
                 gvBarChartSeriesPoint.data 50000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4, true))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color4, true))
                 gvBarChartSeriesPoint.legend "2023"
                 gvBarChartSeriesPoint.xAxisCalloutData "2023/07/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -815,7 +815,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series3"
                 gvBarChartSeriesPoint.data 60000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5, true))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color5, true))
                 gvBarChartSeriesPoint.legend "2024"
                 gvBarChartSeriesPoint.xAxisCalloutData "2024/07/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -826,7 +826,7 @@ let groupedVerticalBarChartData = [
             [
                 gvBarChartSeriesPoint.key "series4"
                 gvBarChartSeriesPoint.data 10000
-                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6, true))
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPalette.color6, true))
                 gvBarChartSeriesPoint.legend "2021"
                 gvBarChartSeriesPoint.xAxisCalloutData "2021/07/30"
                 gvBarChartSeriesPoint.yAxisCalloutData "3%"
@@ -837,6 +837,386 @@ let groupedVerticalBarChartData = [
         ]
     ]
 ]
+
+let heatChartMappings = [
+    "p1", "Ohio"
+    "p2", "Alaska"
+    "p3", "Texas"
+    "p4", "DC"
+    "p5", "NYC"
+]
+let yPointMapping (s: string) =
+    let (_, state) = heatChartMappings |> List.find (fun (yPoint, _) -> yPoint = s)
+    state
+
+let yPoint = heatChartMappings |> List.map fst
+
+let xPoint = [
+    DateOnly.Parse ("2020-03-03")
+    DateOnly.Parse ("2020-03-04")
+    DateOnly.Parse ("2020-03-05")
+    DateOnly.Parse ("2020-03-06")
+    DateOnly.Parse ("2020-03-07")
+    DateOnly.Parse ("2020-03-08")
+    DateOnly.Parse ("2020-03-09")
+    DateOnly.Parse ("2020-03-10")
+]
+
+let heatMapChartData = [
+    [
+        heatMapChartData.value 100
+        heatMapChartData.legend "Excellent (0-200)"
+        heatMapChartData.data [
+            [
+                heatMapChartDataPoint.x xPoint.[2]
+                heatMapChartDataPoint.y yPoint.[2]
+                heatMapChartDataPoint.value 46
+                heatMapChartDataPoint.rectText 46
+                heatMapChartDataPoint.ratio (46, 2391)
+                heatMapChartDataPoint.descriptionMessage "air quality seems to be excellent today"
+            ]
+        ]
+    ]
+    [
+        heatMapChartData.value 250
+        heatMapChartData.legend "Good (201-300)"
+        heatMapChartData.data [
+            [
+                heatMapChartDataPoint.x xPoint.[0]
+                heatMapChartDataPoint.y yPoint.[1]
+                heatMapChartDataPoint.value 265
+                heatMapChartDataPoint.rectText 265
+                heatMapChartDataPoint.ratio (265, 2479)
+                heatMapChartDataPoint.descriptionMessage "today we have good air quality in Alaska"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[1]
+                heatMapChartDataPoint.y yPoint.[0]
+                heatMapChartDataPoint.value 250
+                heatMapChartDataPoint.rectText 250
+                heatMapChartDataPoint.ratio (250, 2043)
+                heatMapChartDataPoint.descriptionMessage "a sudden rise of 150 units in Ohio today"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[2]
+                heatMapChartDataPoint.y yPoint.[0]
+                heatMapChartDataPoint.value 235
+                heatMapChartDataPoint.rectText 235
+                heatMapChartDataPoint.ratio (235, 2043)
+                heatMapChartDataPoint.descriptionMessage "air quality seems to have decreased by only 15 units from yesterday"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[6]
+                heatMapChartDataPoint.y yPoint.[2]
+                heatMapChartDataPoint.value 300
+                heatMapChartDataPoint.rectText 300
+                heatMapChartDataPoint.ratio (300, 2391)
+                heatMapChartDataPoint.descriptionMessage "air comes to control a little bit more than yesterday"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[0]
+                heatMapChartDataPoint.y yPoint.[3]
+                heatMapChartDataPoint.value 290
+                heatMapChartDataPoint.rectText 290
+                heatMapChartDataPoint.ratio (290, 2462)
+                heatMapChartDataPoint.descriptionMessage "1st day in the week, DC witnesses good air quality"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[4]
+                heatMapChartDataPoint.y yPoint.[4]
+                heatMapChartDataPoint.value 280
+                heatMapChartDataPoint.rectText 280
+                heatMapChartDataPoint.ratio (280, 2486)
+                heatMapChartDataPoint.descriptionMessage "Air quality index decreases by exactly 300 units, giving the people of NYC good hope"
+            ]
+            [
+                heatMapChartDataPoint.x xPoint.[5]
+                heatMapChartDataPoint.y yPoint.[3]
+                heatMapChartDataPoint.value 300
+                heatMapChartDataPoint.rectText 300
+                heatMapChartDataPoint.ratio (300, 2462)
+                heatMapChartDataPoint.descriptionMessage "60 units decreased from yesterday."
+            ]
+        ]
+    ]
+]
+
+//     const HeatMapData: HeatMapChartProps["data"] = [
+//       {
+//         value: 100,
+//         legend: "Excellent (0-200)",
+//         data: [
+//           {
+//             x: xPoint[2],
+//             y: yPoint[2],
+//             value: 46,
+//             rectText: 46,
+//             ratio: [46, 2391],
+//             descriptionMessage: "air quality seems to be excellent today",
+//           },
+//         ],
+//       },
+//       {
+//         value: 250,
+//         legend: "Good (201-300)",
+//         data: [
+//           {
+//             x: xPoint[0],
+//             y: yPoint[1],
+//             value: 265,
+//             rectText: 265,
+//             ratio: [265, 2479],
+//             descriptionMessage: "today we have good air quality in Alaska",
+//           },
+//           {
+//             x: xPoint[1],
+//             y: yPoint[0],
+//             value: 250,
+//             rectText: 250,
+//             ratio: [250, 2043],
+//             descriptionMessage: "a sudden rise of 150 units in Ohio today",
+//           },
+//           {
+//             x: xPoint[2],
+//             y: yPoint[0],
+//             value: 235,
+//             rectText: 235,
+//             ratio: [235, 2043],
+//             descriptionMessage:
+//               "air quality seems to have decreased by only 15 units from yesterday",
+//           },
+//           {
+//             x: xPoint[6],
+//             y: yPoint[2],
+//             value: 300,
+//             rectText: 300,
+//             ratio: [300, 2391],
+//             descriptionMessage:
+//               "air comes to control a little bit more than yesterday",
+//           },
+//           {
+//             x: xPoint[0],
+//             y: yPoint[3],
+//             value: 290,
+//             rectText: 290,
+//             ratio: [290, 2462],
+//             descriptionMessage:
+//               "1st day in the week, DC witnesses good air quality",
+//           },
+//           {
+//             x: xPoint[4],
+//             y: yPoint[4],
+//             value: 280,
+//             rectText: 280,
+//             ratio: [280, 2486],
+//             descriptionMessage: `Air quality index decreases by exactly 300 units,
+//             giving the people of NYC good hope`,
+//           },
+//           {
+//             x: xPoint[5],
+//             y: yPoint[3],
+//             value: 300,
+//             rectText: 300,
+//             ratio: [300, 2462],
+//             descriptionMessage: "60 units decreased from yesterday.",
+//           },
+//         ],
+//       },
+//       {
+//         value: 350,
+//         legend: "Medium (301-400)",
+//         data: [
+//           {
+//             x: xPoint[1],
+//             y: yPoint[1],
+//             value: 345,
+//             rectText: 345,
+//             ratio: [345, 2479],
+//             descriptionMessage:
+//               "Alaska has just reported nearly 100 units hike in air quality",
+//           },
+//           {
+//             x: xPoint[6],
+//             y: yPoint[1],
+//             value: 325,
+//             rectText: 325,
+//             ratio: [325, 2479],
+//             descriptionMessage: `Alaska to 300`,
+//           },
+//           {
+//             x: xPoint[5],
+//             y: yPoint[2],
+//             value: 390,
+//             rectText: 390,
+//             ratio: [390, 2391],
+//             descriptionMessage: "air comes to control a little bit",
+//           },
+//           {
+//             x: xPoint[1],
+//             y: yPoint[3],
+//             value: 385,
+//             rectText: 385,
+//             ratio: [385, 2462],
+//             descriptionMessage:
+//               "Washington DC witnesses a hike of nearly 100 units in air quality",
+//           },
+//           {
+//             x: xPoint[4],
+//             y: yPoint[3],
+//             value: 360,
+//             rectText: 360,
+//             ratio: [360, 2462],
+//             descriptionMessage: "a 200% hike in the air quality index",
+//           },
+//           {
+//             x: xPoint[1],
+//             y: yPoint[2],
+//             value: 400,
+//             rectText: 400,
+//             ratio: [400, 2391],
+//             descriptionMessage:
+//               "a sudden spike in the badness of the air quality",
+//           },
+//           {
+//             x: xPoint[3],
+//             y: yPoint[0],
+//             value: 400,
+//             rectText: 400,
+//             ratio: [400, 2043],
+//             descriptionMessage:
+//               "situation got worse in air quality due to industrial smoke",
+//           },
+//         ],
+//       },
+//       {
+//         value: 450,
+//         legend: "Danger (401-500)",
+//         data: [
+//           {
+//             x: xPoint[4],
+//             y: yPoint[0],
+//             value: 423,
+//             rectText: 423,
+//             ratio: [423, 2043],
+//             descriptionMessage: "we can see an increase of 23 units",
+//           },
+//           {
+//             x: xPoint[2],
+//             y: yPoint[1],
+//             value: 463,
+//             rectText: 463,
+//             ratio: [463, 2479],
+//             descriptionMessage:
+//               "day by day, situation is getting worse in Alaska",
+//           },
+//           {
+//             x: xPoint[3],
+//             y: yPoint[2],
+//             value: 480,
+//             rectText: 480,
+//             ratio: [480, 2391],
+//             descriptionMessage:
+//               "same story, today also air quality decreases. a bad day in Texas",
+//           },
+//           {
+//             x: xPoint[2],
+//             y: yPoint[3],
+//             value: 491,
+//             rectText: 491,
+//             ratio: [491, 2462],
+//             descriptionMessage:
+//               "Day by day, 100 units are increasing in air quality",
+//           },
+//           {
+//             x: xPoint[1],
+//             y: yPoint[4],
+//             value: 433,
+//             rectText: 433,
+//             ratio: [433, 2486],
+//             descriptionMessage: `They say good things stay for a short time, today
+//             this saying became reality. New York has witnessed nearly 300% bad air quality`,
+//           },
+//           {
+//             x: xPoint[5],
+//             y: yPoint[4],
+//             value: 473,
+//             rectText: 473,
+//             ratio: [473, 2486],
+//             descriptionMessage: `Today is the same fate as the 2nd day. still, air quality
+//             stays above 400`,
+//           },
+//         ],
+//       },
+//       {
+//         value: 550,
+//         legend: "Very Danger (501-600)",
+//         data: [
+//           {
+//             x: xPoint[5],
+//             y: yPoint[0],
+//             value: 600,
+//             rectText: 600,
+//             ratio: [600, 2043],
+//             descriptionMessage:
+//               "looks like god has cursed us with poisonous air. worst air quality index",
+//           },
+//           {
+//             x: xPoint[5],
+//             y: yPoint[1],
+//             value: 536,
+//             rectText: 536,
+//             ratio: [536, 2479],
+//             descriptionMessage: `shh!, all the hopes were washed away in the rain yesterday,
+//             with another hike of 400% in air quality`,
+//           },
+//           {
+//             x: xPoint[3],
+//             y: yPoint[1],
+//             value: 520,
+//             rectText: 520,
+//             ratio: [520, 2479],
+//             descriptionMessage:
+//               "Alaska planning to build air purifier to control the air quality",
+//           },
+//           {
+//             x: xPoint[4],
+//             y: yPoint[2],
+//             value: 525,
+//             rectText: 525,
+//             ratio: [525, 2391],
+//             descriptionMessage:
+//               "air worsens badly today due to farmers burning the harvest",
+//           },
+//           {
+//             x: xPoint[6],
+//             y: yPoint[3],
+//             value: 560,
+//             rectText: 560,
+//             ratio: [560, 2462],
+//             descriptionMessage: `Due to industrial pollution and the
+//             burning of harvest, it resulted in bad air quality in Washington DC`,
+//           },
+//           {
+//             x: xPoint[3],
+//             y: yPoint[4],
+//             value: 580,
+//             rectText: 580,
+//             ratio: [580, 2486],
+//             descriptionMessage: `Air quality index is becoming worse day by day, leaving the
+//             people of NYC in very bad medical conditions.`,
+//           },
+//           {
+//             x: xPoint[6],
+//             y: yPoint[4],
+//             value: 590,
+//             rectText: 590,
+//             ratio: [590, 2486],
+//             descriptionMessage: `finally, the weekend ends with very bad air quality in New York City`,
+//           },
+//         ],
+//       },
+//     ];
+
 
 [<ReactComponent>]
 let TestChartsComponent () =
@@ -930,7 +1310,7 @@ let TestChartsComponent () =
                     ]
                     [
                         gaugeChartSegment.size (100 - sliderValue)
-                        gaugeChartSegment.color Fui.dataVizPallete.color5
+                        gaugeChartSegment.color Fui.dataVizPalette.color5
                         gaugeChartSegment.legend "Available"
                     ]
                 ]
@@ -947,6 +1327,23 @@ let TestChartsComponent () =
                 groupedVerticalBarChart.width 500
                 groupedVerticalBarChart.hideLabels false
                 groupedVerticalBarChart.data groupedVerticalBarChartData
+            ]
+            Fui.heatMapChart [
+                heatMapChart.data heatMapChartData
+                heatMapChart.chartTitle "Heat map chart basic example"
+                heatMapChart.yAxisStringFormatter yPointMapping
+                heatMapChart.xAxisNumberFormatString ".7s"
+                heatMapChart.yAxisNumberFormatString ".3s"
+                heatMapChart.width 400
+                heatMapChart.height 400
+                heatMapChart.domainValuesForColorScale [0; 200; 400; 600]
+                heatMapChart.rangeValuesForColorScale [
+                    Fui.getColorFromToken Fui.dataVizPalette.success
+                    Fui.getColorFromToken Fui.dataVizPalette.warning
+                    Fui.getColorFromToken Fui.dataVizPalette.error
+                    Fui.getColorFromToken Fui.dataVizPalette.highError
+                ]
+                heatMapChart.reflowProps.modeMinWidth
             ]
         ]
     ]
@@ -1330,59 +1727,6 @@ let TestChartsComponent () =
                                             //         ]
                                             //     ]
                                             // ]
-
-                                    //         Charts.heatMapChart [
-                                    //             heatMapChart.legendProps [
-                                    //                 // TODO validate legends work
-                                    //                 legendProps.legends [
-                                    //                     Charts.legend [
-                                    //                         legend.color "red"
-                                    //                         legend.title "TestLegend"
-                                    //                         legend.shape.triangle
-                                    //                     ]
-                                    //                 ]
-                                    //             ]
-                                    //             heatMapChart.sortOrder.none
-                                    //             heatMapChart.chartTitle "Air Quality Heatmap"
-                                    //             heatMapChart.domainValuesForColorScale [
-                                    //                 0
-                                    //                 200
-                                    //                 400
-                                    //                 600
-                                    //             ]
-                                    //             heatMapChart.rangeValuesForColorScale [
-                                    //                 "#00FF00" // Bright green for excellent
-                                    //                 "#FFD700" // Golden yellow for good
-                                    //                 "#FF8C00" // Dark orange for medium
-                                    //                 "#FF0000" // Red for danger
-                                    //                 "#8B0000" // Dark red for very dangerous
-                                    //             ]
-                                    //             heatMapChart.data [
-                                    //                 yield!
-                                    //                     heatMapDataPointsList
-                                    //                     |> List.map (fun d ->
-                                    //                         Charts.heatMapChartData [
-                                    //                             heatMapChartData.legend d.Name
-                                    //                             heatMapChartData.value d.Value
-                                    //                             heatMapChartData.data [
-                                    //                                 yield!
-                                    //                                     d.Data
-                                    //                                     |> List.map (fun dd ->
-                                    //                                         Charts.heatMapChartDatapoint [
-                                    //                                             heatMapChartDataPoint.x dd.X
-                                    //                                             heatMapChartDataPoint.y dd.Y
-                                    //                                             heatMapChartDataPoint.value dd.Value
-                                    //                                             heatMapChartDataPoint.rectText
-                                    //                                                 dd.RectText
-                                    //                                             heatMapChartDataPoint.descriptionMessage
-                                    //                                                 dd.Description
-                                    //                                         ])
-                                    //                             ]
-                                    //                         ])
-                                    //             ]
-                                    //         ]
-                                    //     ]
-                                    // ]
                                     // Charts.scatterChart [
                                     //     scatterChart.data [
                                     //         chartProps.scatterChartData [
