@@ -28,6 +28,10 @@ type Fui =
     static member inline verticalStackedBarChart (props: IVerticalStackedBarChartProp list) = Helpers.createElement (import "VerticalStackedBarChart" "@fluentui/react-charts") props
     static member inline chartTable (props: IChartTableProp list) = Helpers.createElement (import "ChartTable" "@fluentui/react-charts") props
     static member inline dataVizPallete : DataVizPalette = import "DataVizPalette" "@fluentui/react-charts"
+    static member inline getColorFromToken (color: string) : string = color |> import "getColorFromToken" "@fluentui/react-charts"
+    static member inline getColorFromToken (color: string, isDarkTheme: bool) : string =
+                        let args = color, isDarkTheme
+                        import "getColorFromToken" "@fluentui/react-charts" (emitJsExpr args "$0[0], $0[1]")
 
     // static member ChartTableData(props: IChartTableDataProps list) = !! createObj props
 

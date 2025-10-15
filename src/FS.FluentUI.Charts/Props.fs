@@ -7,6 +7,38 @@ open FS.Charts
 open Feliz
 open Browser.Types
 
+type [<Erase>] sharedCartesianChartStyles<'Property> =
+    ///  Style for the root element
+    static member inline root (value: string) = Interop.mkProperty<'Property> "root" value
+    /// Style for the element containing the x-axis.
+    static member inline xAxis (value: string) = Interop.mkProperty<'Property> "xAxis" value
+    /// Style for the element containing the y-axis.
+    static member inline yAxis (value: string) = Interop.mkProperty<'Property> "yAxis" value
+    /// Style for legend container
+    static member inline legendContainer (value: string) = Interop.mkProperty<'Property> "legendContainer" value
+    /// line hover box css
+    static member inline hover (value: string) = Interop.mkProperty<'Property> "hover" value
+    /// styles for description message
+    static member inline descriptionMessage (value: string) = Interop.mkProperty<'Property> "descriptionMessage" value
+    /// styles for tooltip
+    static member inline tooltip (value: string) = Interop.mkProperty<'Property> "tooltip" value
+    /// styles for axis title
+    static member inline axisTitle (value: string) = Interop.mkProperty<'Property> "axisTitle" value
+    /// styles for axis annotation
+    static member inline axisAnnotation (value: string) = Interop.mkProperty<'Property> "axisAnnotation" value
+    /// Style for the chart Title.
+    static member inline chartTitle (value: string) = Interop.mkProperty<'Property> "chartTitle" value
+    /// Style to change the opacity of bars in dataviz when we hover on a single bar or legends
+    static member inline opacityChangeOnHover (value: string) = Interop.mkProperty<'Property> "opacityChangeOnHover" value
+    /// styles for the shape object in the callout
+    static member inline shapeStyles (value: string) = Interop.mkProperty<'Property> "shapeStyles" value
+    /// Styles for the chart wrapper div
+    static member inline chartWrapper (value: string) = Interop.mkProperty<'Property> "chartWrapper" value
+    /// Styles for the svg tooltip
+    static member inline svgTooltip (value: string) = Interop.mkProperty<'Property> "svgTooltip" value
+    /// Styles for the chart svg element
+    static member inline chart (value: string) = Interop.mkProperty<'Property> "chart" value
+
 type [<Erase>] baseDataPoint<'Property> =
 
     /// Defines the function that is executed on clicking  line
@@ -570,40 +602,6 @@ type [<Erase>] yAxis<'Property> =
 //     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IGVBarChartSeriesPoint> "callOutAccessibilityData" (value |> List.toArray)
 //     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IGVBarChartSeriesPoint> "useSecondaryYScale" value
 
-// type [<Erase>] groupedVerticalBarChartData =
-//     static member inline name(value: string) = Interop.mkProperty<IGroupedVerticalBarChartData> "name" value
-//     static member inline series(value: GVBarChartSeriesPoint list) = Interop.mkProperty<IGroupedVerticalBarChartData> "series" (value |> List.toArray)
-//     static member inline stackCallOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IGroupedVerticalBarChartData> "stackCallOutAccessibilityData" (value |> List.toArray)
-
-// module groupedVerticalBarChart =
-//     type [<Erase>] barWidth =
-//         static member inline ``default`` = Interop.mkProperty<ISGroupedVerticalBarChartProps> "barWidth" "default"
-//         static member inline auto = Interop.mkProperty<ISGroupedVerticalBarChartProps> "barWidth" "auto"
-
-//     type [<Erase>] mode =
-//         static member inline ``default`` = Interop.mkProperty<ISGroupedVerticalBarChartProps> "mode" "default"
-//         static member inline plotly = Interop.mkProperty<ISGroupedVerticalBarChartProps> "mode" "plotly"
-
-// type [<Erase>] groupedVerticalBarChartStyles =
-//     inherit cartesianChartStyles<IGroupedVerticalBarChartStyles>
-//     static member inline barLabel(value: string) = Interop.mkProperty<IGroupedVerticalBarChartStyles> "barLabel" value
-
-// type [<Erase>] groupedVerticalBarChart =
-//     inherit cartesianChartProps<ISGroupedVerticalBarChartProps>
-//     static member inline data(value: groupedVerticalBarChartData list) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "data" (value |> List.toArray)
-//     static member inline barWidth(value: float) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "barWidth" value
-//     static member inline colors(value: string list) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "colors" (value |> List.toArray)
-//     static member inline chartTitle(value: string) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "chartTitle" value
-//     static member inline useSingleColor(value: bool) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "useSingleColor" value
-//     static member inline culture(value: string) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "culture" value
-//     static member inline styles(value: IGroupedVerticalBarChartStyles list) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "styles" value
-//     static member inline isCalloutForStack(value: bool) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "isCalloutForStack" value
-//     static member inline hideLabels(value: bool) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "hideLabels" value
-//     static member inline maxBarWidth(value: float) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "maxBarWidth" value
-//     static member inline xAxisInnerPadding(value: float) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "xAxisInnerPadding" value
-//     static member inline xAxisOuterPadding(value: float) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "xAxisOuterPadding" value
-//     static member inline roundCorners(value: bool) = Interop.mkProperty<ISGroupedVerticalBarChartProps> "roundCorners" value
-
 // type [<Erase>] horizontalDataPoint =
 //     /// Independent value of the data point, rendered along the x-axis.
 //     /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
@@ -1166,37 +1164,7 @@ module dateTimeFormatOptions =
         static member inline h24 = Interop.mkProperty<IDateTimeFormatOptionsProp> "hourCycle" "h24"
 
 //----------------------------------------------------------------- CartesianChartStyles -------------------------------------------------
-type [<Erase>] cartesianChartStyles =
-    ///  Style for the root element
-    static member inline root (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "root" value
-    /// Style for the element containing the x-axis.
-    static member inline xAxis (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "xAxis" value
-    /// Style for the element containing the y-axis.
-    static member inline yAxis (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "yAxis" value
-    /// Style for legend container
-    static member inline legendContainer (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "legendContainer" value
-    /// line hover box css
-    static member inline hover (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "hover" value
-    /// styles for description message
-    static member inline descriptionMessage (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "descriptionMessage" value
-    /// styles for tooltip
-    static member inline tooltip (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "tooltip" value
-    /// styles for axis title
-    static member inline axisTitle (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "axisTitle" value
-    /// styles for axis annotation
-    static member inline axisAnnotation (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "axisAnnotation" value
-    /// Style for the chart Title.
-    static member inline chartTitle (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "chartTitle" value
-    /// Style to change the opacity of bars in dataviz when we hover on a single bar or legends
-    static member inline opacityChangeOnHover (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "opacityChangeOnHover" value
-    /// styles for the shape object in the callout
-    static member inline shapeStyles (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "shapeStyles" value
-    /// Styles for the chart wrapper div
-    static member inline chartWrapper (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "chartWrapper" value
-    /// Styles for the svg tooltip
-    static member inline svgTooltip (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "svgTooltip" value
-    /// Styles for the chart svg element
-    static member inline chart (value: string) = Interop.mkProperty<ICartesianChartStylesProp> "chart" value
+type [<Erase>] cartesianChartStyles = sharedCartesianChartStyles<ICartesianChartStylesProp>
 
 //----------------------------------------------------------------- ChartPopoverProps -------------------------------------------------
 type [<Erase>] chartPopoverProp =
@@ -1259,7 +1227,7 @@ type [<Erase>] yValueHover =
     static member inline callOutAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IYValueHoverProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
 
 //----------------------------------------------------------------- AccessibilityProp -------------------------------------------------
-type [<Erase>] accessibilityProp =
+type [<Erase>] accessibility =
     static member inline ariaLabel (value: string) = Interop.mkProperty<IAccessibilityProp> "ariaLabel" value
     static member inline ariaLabelledBy (value: string) = Interop.mkProperty<IAccessibilityProp> "ariaLabelledBy" value
     static member inline ariaDescribedBy (value: string) = Interop.mkProperty<IAccessibilityProp> "ariaDescribedBy" value
@@ -2081,3 +2049,120 @@ type [<Erase>] gaugeChartStyles =
     static member inline shapeStyles(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "shapeStyles" value
     /// Styles for the chart wrapper div
     static member inline chartWrapper(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "chartWrapper" value
+
+//----------------------------------------------------------------- GroupedVerticalBarChart -------------------------------------------------
+type [<Erase>] groupedVerticalBarChart =
+    inherit cartesianChart<IGroupedVerticalBarChartProp>
+    /// Data to render in the chart.
+    static member inline data(value: IGroupedVerticalBarChartDataProp list list) =
+                        let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                        Interop.mkProperty<IGroupedVerticalBarChartProp> "data" newValue
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: float) = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: decimal) = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" value
+    /// Colors from which to select the color of each bar.
+    static member inline colors(value: string list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "colors" (value |> List.toArray)
+    /// chart title for the chart
+    static member inline chartTitle(value: string) = Interop.mkProperty<IGroupedVerticalBarChartProp> "chartTitle" value
+    /// This prop makes sure that all the bars are of same color.
+    /// it will take the first color from the array of colors in
+    /// prop `colors` or if  `colors` prop is not given then default color is  palette.blueLight
+    static member inline useSingleColor(value: bool) = Interop.mkProperty<IGroupedVerticalBarChartProp> "useSingleColor" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: IGroupedVerticalBarChartStylesProp list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "styles" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture(value: string) = Interop.mkProperty<IGroupedVerticalBarChartProp> "culture" value
+    /// To display multi stack callout or single callout
+    static member inline isCalloutForStack(value: bool) = Interop.mkProperty<IGroupedVerticalBarChartProp> "isCalloutForStack" value
+    /// Prop to hide the bar labels
+    static member inline hideLabels(value: bool) = Interop.mkProperty<IGroupedVerticalBarChartProp> "hideLabels" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth(value: float) = Interop.mkProperty<IGroupedVerticalBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth(value: decimal) = Interop.mkProperty<IGroupedVerticalBarChartProp> "maxBarWidth" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding(value: float) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding(value: decimal) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisOuterPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding(value: float) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisOuterPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding(value: decimal) = Interop.mkProperty<IGroupedVerticalBarChartProp> "xAxisOuterPadding" value
+    /// The prop used to enable rounded corners for the chart.
+    static member inline roundCorners(value: bool) = Interop.mkProperty<IGroupedVerticalBarChartProp> "roundCorners" value
+
+module groupedVerticalBarChart =
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    type [<Erase>] barWidth =
+        static member inline default'  = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" "default"
+        static member inline auto  = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" "auto"
+    /// Specifies the mode of the chart.
+    type [<Erase>] mode =
+        static member inline default'  = Interop.mkProperty<IGroupedVerticalBarChartProp> "mode" "default"
+        static member inline plotly  = Interop.mkProperty<IGroupedVerticalBarChartProp> "mode" "plotly"
+
+//----------------------------------------------------------------- GroupedVerticalBarChartData -------------------------------------------------
+type [<Erase>] groupedVerticalBarChartData =
+    /// Data for X axis label
+    static member inline name(value: string) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "name" value
+    /// Data points for Grouped vertical bar chart
+    static member inline series(value: IGVBarChartSeriesPointProp list list) =
+                        let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                        Interop.mkProperty<IGroupedVerticalBarChartDataProp> "series" newValue
+    /// Accessibility data for Group Bars Stack Callout
+    static member inline stackCallOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "stackCallOutAccessibilityData" (!!value |> createObj |> unbox)
+
+//----------------------------------------------------------------- GVBarChartSeriesPoint -------------------------------------------------
+type [<Erase>] gvBarChartSeriesPoint =
+    /// Text for // need to check use of this
+    static member inline key(value: string) = Interop.mkProperty<IGVBarChartSeriesPointProp> "key" value
+    /// Data for bar height of Grouped vertical bar chart
+    static member inline data(value: int) = Interop.mkProperty<IGVBarChartSeriesPointProp> "data" value
+    /// Data for bar height of Grouped vertical bar chart
+    static member inline data(value: decimal) = Interop.mkProperty<IGVBarChartSeriesPointProp> "data" value
+    /// Data for bar height of Grouped vertical bar chart
+    static member inline data(value: float) = Interop.mkProperty<IGVBarChartSeriesPointProp> "data" value
+    /// Color for the legend in the chart
+    static member inline color(value: string) = Interop.mkProperty<IGVBarChartSeriesPointProp> "color" value
+    /// Legend text in the chart
+    static member inline legend(value: string) = Interop.mkProperty<IGVBarChartSeriesPointProp> "legend" value
+    /// Callout data for x axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IGVBarChartSeriesPointProp> "xAxisCalloutData" value
+    /// Callout data for y axis
+    /// This is an optional prop, If haven't given data will take
+    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IGVBarChartSeriesPointProp> "yAxisCalloutData" value
+    /// onClick action for each datapoint in the chart
+    static member inline onClick(value: unit -> unit) = Interop.mkProperty<IGVBarChartSeriesPointProp> "onClick" (System.Func<_,_> value)
+    /// Accessibility data for callout
+    static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IGVBarChartSeriesPointProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+    /// Whether to use the secondary y scale or not
+    static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IGVBarChartSeriesPointProp> "useSecondaryYScale" value
+
+//----------------------------------------------------------------- GroupedVerticalBarChartStyles -------------------------------------------------
+type [<Erase>] groupedVerticalBarChartStyles =
+    inherit sharedCartesianChartStyles<IGroupedVerticalBarChartStylesProp>
+    /// Style for the bar labels
+    static member inline barLabel(value: string) = Interop.mkProperty<IGroupedVerticalBarChartStylesProp> "barLabel" value

@@ -639,6 +639,205 @@ let funnelChartStackedData = [
     ]
 ]
 
+let groupedVerticalBarChartData = [
+    [
+        groupedVerticalBarChartData.name "Jan - Mar"
+        groupedVerticalBarChartData.series [
+            [
+                gvBarChartSeriesPoint.key "series1"
+                gvBarChartSeriesPoint.data 33000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.legend "2022"
+                gvBarChartSeriesPoint.xAxisCalloutData "2022/04/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "29%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jan - Mar 1 of 4, Bar series 1 of 2 2022, x value 2022/04/30, y value 29%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series2"
+                gvBarChartSeriesPoint.data 44000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.legend "2023"
+                gvBarChartSeriesPoint.xAxisCalloutData "2023/04/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "44%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jan - Mar 1 of 4, Bar series 2 of 2 2023, x value 2023/04/30, y value 44%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series3"
+                gvBarChartSeriesPoint.data 54000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.legend "2024"
+                gvBarChartSeriesPoint.xAxisCalloutData "2024/04/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "44%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jan - Mar 1 of 4, Bar series 3 of 4 2022, x value 2024/04/30, y value 44%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series4"
+                gvBarChartSeriesPoint.data 24000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.legend "2021"
+                gvBarChartSeriesPoint.xAxisCalloutData "2021/04/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "44%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jan - Mar 1 of 4, Bar series 4 of 4 2021, x value 2021/04/30, y value 44%"
+                ]
+            ]
+        ]
+    ]
+    [
+        groupedVerticalBarChartData.name "Apr - Jun"
+        groupedVerticalBarChartData.series [
+            [
+                gvBarChartSeriesPoint.key "series1"
+                gvBarChartSeriesPoint.data 33000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.legend "2022"
+                gvBarChartSeriesPoint.xAxisCalloutData "2022/05/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "29%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Apr - Jun 2 of 4, Bar series 1 of 2 2022, x value 2022/05/30, y value 29%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series2"
+                gvBarChartSeriesPoint.data 3000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.legend "2023"
+                gvBarChartSeriesPoint.xAxisCalloutData "2023/05/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Apr - Jun 2 of 4, Bar series 2 of 2 2023, x value 2023/05/30, y value 3%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series3"
+                gvBarChartSeriesPoint.data 9000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.legend "2024"
+                gvBarChartSeriesPoint.xAxisCalloutData "2024/05/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Apr - Jun 2 of 4, Bar series 3 of 4 2024, x value 2024/05/30, y value 3%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series4"
+                gvBarChartSeriesPoint.data 12000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.legend "2021"
+                gvBarChartSeriesPoint.xAxisCalloutData "2021/05/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Apr - Jun 2 of 4, Bar series 4 of 4 2021, x value 2021/05/30, y value 3%"
+                ]
+            ]
+        ]
+    ]
+    [
+        groupedVerticalBarChartData.name "Jul - Sep"
+        groupedVerticalBarChartData.series [
+            [
+                gvBarChartSeriesPoint.key "series1"
+                gvBarChartSeriesPoint.data 14000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3))
+                gvBarChartSeriesPoint.legend "2022"
+                gvBarChartSeriesPoint.xAxisCalloutData "2022/06/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "13%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jul - Sep 3 of 4, Bar series 1 of 2 2022, x value 2022/06/30, y value 13%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series2"
+                gvBarChartSeriesPoint.data 50000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4))
+                gvBarChartSeriesPoint.legend "2023"
+                gvBarChartSeriesPoint.xAxisCalloutData "2023/06/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "50%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jul - Sep 3 of 4, Bar series 2 of 2 2023, x value 2023/06/30, y value 50%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series3"
+                gvBarChartSeriesPoint.data 60000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5))
+                gvBarChartSeriesPoint.legend "2024"
+                gvBarChartSeriesPoint.xAxisCalloutData "2024/06/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "50%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jul - Sep 3 of 4, Bar series 3 of 4 2024, x value 2024/06/30, y value 50%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series4"
+                gvBarChartSeriesPoint.data 10000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6))
+                gvBarChartSeriesPoint.legend "2021"
+                gvBarChartSeriesPoint.xAxisCalloutData "2021/06/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "50%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Jul - Sep 3 of 4, Bar series 4 of 4 2021, x value 2021/06/30, y value 50%"
+                ]
+            ]
+        ]
+    ]
+    [
+        groupedVerticalBarChartData.name "Oct - Dec"
+        groupedVerticalBarChartData.series [
+            [
+                gvBarChartSeriesPoint.key "series1"
+                gvBarChartSeriesPoint.data 14000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color3, true))
+                gvBarChartSeriesPoint.legend "2022"
+                gvBarChartSeriesPoint.xAxisCalloutData "2022/07/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "29%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Oct - Dec 4 of 4, Bar series 1 of 2 2022, x value 2022/07/30, y value 29%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series2"
+                gvBarChartSeriesPoint.data 50000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color4, true))
+                gvBarChartSeriesPoint.legend "2023"
+                gvBarChartSeriesPoint.xAxisCalloutData "2023/07/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Oct - Dec 4 of 4, Bar series 2 of 2 2023, x value 2023/07/30, y value 3%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series3"
+                gvBarChartSeriesPoint.data 60000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color5, true))
+                gvBarChartSeriesPoint.legend "2024"
+                gvBarChartSeriesPoint.xAxisCalloutData "2024/07/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Oct - Dec 4 of 4, Bar series 3 of 4 2024, x value 2024/07/30, y value 3%"
+                ]
+            ]
+            [
+                gvBarChartSeriesPoint.key "series4"
+                gvBarChartSeriesPoint.data 10000
+                gvBarChartSeriesPoint.color (Fui.getColorFromToken(Fui.dataVizPallete.color6, true))
+                gvBarChartSeriesPoint.legend "2021"
+                gvBarChartSeriesPoint.xAxisCalloutData "2021/07/30"
+                gvBarChartSeriesPoint.yAxisCalloutData "3%"
+                gvBarChartSeriesPoint.callOutAccessibilityData [
+                    accessibility.ariaLabel "Group Oct - Dec 4 of 4, Bar series 4 of 4 2021, x value 2021/07/30, y value 3%"
+                ]
+            ]
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -741,6 +940,13 @@ let TestChartsComponent () =
                 gaugeChart.variant.singleSegment
                 gaugeChart.enableGradient true
                 gaugeChart.roundCorners true
+            ]
+            Fui.groupedVerticalBarChart [
+                groupedVerticalBarChart.chartTitle "Grouped vertical bar chart basic example"
+                groupedVerticalBarChart.height 400
+                groupedVerticalBarChart.width 500
+                groupedVerticalBarChart.hideLabels false
+                groupedVerticalBarChart.data groupedVerticalBarChartData
             ]
         ]
     ]
@@ -952,71 +1158,6 @@ let TestChartsComponent () =
                             //     ]
                             // ]
 
-                            // Charts.groupedVerticalBarChart [
-                            //     groupedVerticalBarChart.chartTitle "sd"
-                            //     groupedVerticalBarChart.colors [
-                            //         "red"
-                            //         "green"
-                            //         "blue"
-                            //         "gray"
-                            //         "cyan"
-                            //     ]
-                            //     groupedVerticalBarChart.data [
-                            //         Charts.groupedVerticalBarChartData [
-                            //             groupedVerticalBarChartData.name "Testing"
-                            //             groupedVerticalBarChartData.series [
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key1"
-                            //                     GVBarChartSeriesPoint.data 4.0
-                            //                     // GVBarChartSeriesPoint.color "red"
-                            //                     GVBarChartSeriesPoint.legend "redValue"
-                            //                 ]
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-
-                            //                     GVBarChartSeriesPoint.key "key1"
-                            //                     GVBarChartSeriesPoint.data 4.0
-                            //                     // GVBarChartSeriesPoint.color "red"
-                            //                     GVBarChartSeriesPoint.legend "redValue"
-                            //                 ]
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key2"
-                            //                     GVBarChartSeriesPoint.data 3.0
-                            //                     // GVBarChartSeriesPoint.color "blue"
-                            //                     GVBarChartSeriesPoint.legend "blueValue"
-                            //                 ]
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key3"
-                            //                     GVBarChartSeriesPoint.data 5.6
-                            //                     // GVBarChartSeriesPoint.color "green"
-                            //                     GVBarChartSeriesPoint.legend "greenValue"
-                            //                 ]
-                            //             ]
-                            //         ]
-                            //         Charts.groupedVerticalBarChartData [
-                            //             groupedVerticalBarChartData.name "Ship it"
-                            //             groupedVerticalBarChartData.series [
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key1"
-                            //                     GVBarChartSeriesPoint.data 7.7
-                            //                     // GVBarChartSeriesPoint.color "purple"
-                            //                     GVBarChartSeriesPoint.legend "purpleValue"
-                            //                 ]
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key2"
-                            //                     GVBarChartSeriesPoint.data 3.3
-                            //                     // GVBarChartSeriesPoint.color "yellow"
-                            //                     GVBarChartSeriesPoint.legend "yellowValue"
-                            //                 ]
-                            //                 Charts.groupedVerticalBarChartDataPoint [
-                            //                     GVBarChartSeriesPoint.key "key3"
-                            //                     GVBarChartSeriesPoint.data 4.45
-                            //                     // GVBarChartSeriesPoint.color "orange"
-                            //                     GVBarChartSeriesPoint.legend "orangeValue"
-                            //                 ]
-                            //             ]
-                            //         ]
-                            //     ]
-                            // ]
                             // Html.div [
                             //     prop.style [
                             //         style.display.flex
