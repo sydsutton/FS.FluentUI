@@ -1191,7 +1191,9 @@ type [<Erase>] chartPopoverProp =
     static member inline hoverXValue (value: int) = Interop.mkProperty<IChartPopoverProp> "hoverXValue" value
     static member inline hoverXValue (value: decimal) = Interop.mkProperty<IChartPopoverProp> "hoverXValue" value
     static member inline hoverXValue (value: float) = Interop.mkProperty<IChartPopoverProp> "hoverXValue" value
-    static member inline YValueHover (value: IYValueHoverProp list) = Interop.mkProperty<IChartPopoverProp> "YValueHover" (value |> List.toArray) //TODO maybe won't work?
+    static member inline YValueHover (value: IYValueHoverProp list list) =
+                        let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                        Interop.mkProperty<IChartPopoverProp> "YValueHover" newValue
     static member inline descriptionMessage (value: string) = Interop.mkProperty<IChartPopoverProp> "descriptionMessage" value
     static member inline ratio (value: list<int * int>) = Interop.mkProperty<IChartPopoverProp> "ratio" (value |> List.toArray)
     static member inline ratio (value: list<float * float>) = Interop.mkProperty<IChartPopoverProp> "ratio" (value |> List.toArray)
@@ -1255,8 +1257,6 @@ type [<Erase>] areaChart =
     inherit cartesianChart<IAreaChartProp>
     /// Data to render in the chart.
     static member inline data(value: IChartPropProp list) = Interop.mkProperty<IAreaChartProp> "data" (!!value |> createObj |> unbox)
-    // TODO static member inline onRenderCalloutPerDataPoint(value: 'a)
-    // TODO static member inline onRenderCalloutPerStack(value: 'a)
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
@@ -1305,9 +1305,9 @@ type [<Erase>] chartProp =
                     let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
                     Interop.mkProperty<IChartPropProp> "SankeyChartData" newValue
     /// data for the points in the line chart
-    static member inline pointOptions (value: obj) = Interop.mkProperty<IChartPropProp> "pointOptions" value //TODO
+    static member inline pointOptions (value: IReactProperty list) = Interop.mkProperty<IChartPropProp> "pointOptions" (!!value |> createObj |> unbox)
     /// data for the dotted line on hovering the point
-    static member inline pointLineOptions (value: obj) = Interop.mkProperty<IChartPropProp> "pointLineOptions" value //TODO
+    static member inline pointLineOptions (value: IReactProperty list) = Interop.mkProperty<IChartPropProp> "pointLineOptions" (!!value |> createObj |> unbox)
 
 //----------------------------------------------------------------- ChartDataPoint -------------------------------------------------
 type [<Erase>] chartDataPoint =
@@ -1647,7 +1647,7 @@ type [<Erase>] chartTable =
 //----------------------------------------------------------------- ChartTableStyles ----------------
 type [<Erase>] chartTableStyles =
     static member inline root(value: string) = Interop.mkProperty<IChartTableStylesProp> "root" value
-    static member inline root(value: IStyleAttribute list) = Interop.mkProperty<IChartTableStylesProp> "root" (!!value |> createObj |> unbox) //TODO ?
+    static member inline root(value: IStyleAttribute list) = Interop.mkProperty<IChartTableStylesProp> "root" (!!value |> createObj |> unbox)
     static member inline table(value: string) = Interop.mkProperty<IChartTableStylesProp> "table" value
     static member inline headerCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "headerCell" value
     static member inline bodyCell(value: string) = Interop.mkProperty<IChartTableStylesProp> "bodyCell" value
