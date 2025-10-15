@@ -43,6 +43,18 @@ type [<Erase>] sharedCartesianChartStyles<'Property> =
     /// Styles for the chart svg element
     static member inline chart (value: string) = Interop.mkProperty<'Property> "chart" value
 
+type [<Erase>] sharedShapes<'Property> =
+    static member inline default' = Interop.mkProperty<'Property> "shape" "default"
+    static member inline circle = Interop.mkProperty<'Property> "shape" "circle"
+    static member inline square = Interop.mkProperty<'Property> "shape" "square"
+    static member inline triangle = Interop.mkProperty<'Property> "shape" "triangle"
+    static member inline pyramid = Interop.mkProperty<'Property> "shape" "pyramid"
+    static member inline hexagon = Interop.mkProperty<'Property> "shape" "hexagon"
+    static member inline pentagon = Interop.mkProperty<'Property> "shape" "pentagon"
+    static member inline octagon = Interop.mkProperty<'Property> "shape" "octagon"
+    static member inline diamond = Interop.mkProperty<'Property> "shape" "diamond"
+    static member inline dottedLine = Interop.mkProperty<'Property> "shape" "dottedLine"
+
 type [<Erase>] baseDataPoint<'Property> =
 
     /// Defines the function that is executed on clicking  line
@@ -67,27 +79,27 @@ type [<Erase>] baseDataPoint<'Property> =
     static member inline markerSize (value: decimal) = Interop.mkProperty<'Property> "markerSize" value
 
 
-// type [<Erase>] legendsStyles =
-//     // Style set for the root of the legend component
-//     static member inline root(value: string) = Interop.mkProperty<ILegendsStylesProp> "root" value
-//     // Style set for Legend. This is a wrapping class for text of legend and the rectange box that represents a legend
-//     static member inline legend(value: string) = Interop.mkProperty<ILegendsStylesProp> "legend" value
-//     // Style set for the rectangle that represents a legend
-//     static member inline rect(value: string) = Interop.mkProperty<ILegendsStylesProp> "rect" value
-//     // styles set for the shape that represents a legend
-//     static member inline shape(value: string) = Interop.mkProperty<ILegendsStylesProp> "shape" value
-//     // Style set for the triangle that represents a legend
-//     static member inline triangle(value: string) = Interop.mkProperty<ILegendsStylesProp> "triangle" value
-//     // Style for the legend text
-//     static member inline text(value: string) = Interop.mkProperty<ILegendsStylesProp> "text" value
-//     // Style for the legend text
-//     static member inline hoverChange(value: string) = Interop.mkProperty<ILegendsStylesProp> "hoverChange" value
-//     // Style for the area that is resizable
-//     static member inline resizableArea(value: string) = Interop.mkProperty<ILegendsStylesProp> "resizableArea" value
+type [<Erase>] legendsStyles =
+    // Style set for the root of the legend component
+    static member inline root(value: string) = Interop.mkProperty<ILegendsStylesProp> "root" value
+    // Style set for Legend. This is a wrapping class for text of legend and the rectange box that represents a legend
+    static member inline legend(value: string) = Interop.mkProperty<ILegendsStylesProp> "legend" value
+    // Style set for the rectangle that represents a legend
+    static member inline rect(value: string) = Interop.mkProperty<ILegendsStylesProp> "rect" value
+    // styles set for the shape that represents a legend
+    static member inline shape(value: string) = Interop.mkProperty<ILegendsStylesProp> "shape" value
+    // Style set for the triangle that represents a legend
+    static member inline triangle(value: string) = Interop.mkProperty<ILegendsStylesProp> "triangle" value
+    // Style for the legend text
+    static member inline text(value: string) = Interop.mkProperty<ILegendsStylesProp> "text" value
+    // Style for the legend text
+    static member inline hoverChange(value: string) = Interop.mkProperty<ILegendsStylesProp> "hoverChange" value
+    // Style for the area that is resizable
+    static member inline resizableArea(value: string) = Interop.mkProperty<ILegendsStylesProp> "resizableArea" value
 
-//     static member inline legendContainer(value: string) = Interop.mkProperty<ILegendsStylesProp> "legendContainer" value
-//     // Style for the annotation that is used in the legend
-//     static member inline annotation(value: string) = Interop.mkProperty<ILegendsStylesProp> "annotation" value
+    static member inline legendContainer(value: string) = Interop.mkProperty<ILegendsStylesProp> "legendContainer" value
+    // Style for the annotation that is used in the legend
+    static member inline annotation(value: string) = Interop.mkProperty<ILegendsStylesProp> "annotation" value
 
 type [<Erase>] legend =
     // Defines the title of the legend
@@ -116,77 +128,58 @@ type [<Erase>] legend =
     static member inline legendAnnotation(value: unit -> ReactElement) = Interop.mkProperty<ILegendProp> "legendAnnotation" value
 
 module legend =
-    type [<Erase>] shape =
-        // The annotation for the legend, function returning a React node
-        static member inline default' = Interop.mkProperty<ILegendProp> "shape" "default"
-        static member inline circle = Interop.mkProperty<ILegendProp> "shape" "circle"
-        static member inline square = Interop.mkProperty<ILegendProp> "shape" "square"
-        static member inline triangle = Interop.mkProperty<ILegendProp> "shape" "triangle"
-        static member inline pyramid = Interop.mkProperty<ILegendProp> "shape" "pyramid"
-        static member inline hexagon = Interop.mkProperty<ILegendProp> "shape" "hexagon"
-        static member inline pentagon = Interop.mkProperty<ILegendProp> "shape" "pentagon"
-        static member inline octagon = Interop.mkProperty<ILegendProp> "shape" "octagon"
-        static member inline dottedLine = Interop.mkProperty<ILegendProp> "shape" "dottedLine"
-
-type [<Erase>] legendProp =
+    type [<Erase>] shape = sharedShapes<ILegendProp>
+//-------------------------------------------------------- Legends ---------------------------------------
+type [<Erase>] legends =
     /// Prop that takes list of legends
-    static member inline legends(value: ILegendProp list list) = Interop.mkProperty<ILegendPropProp> "legends" (value |> createObjArray)
+    static member inline legends(value: ILegendProp list list) = Interop.mkProperty<ILegendsProp> "legends" (value |> createObjArray)
     /// Additional CSS class(es) to apply to the legends component
-    static member inline className(value: string) = Interop.mkProperty<ILegendPropProp> "className" value
+    static member inline className(value: string) = Interop.mkProperty<ILegendsProp> "className" value
     /// Call to provide customized styling that will layer on top of the variant rules
-    static member inline styles(value: ILegendsStylesProp list) = Interop.mkProperty<ILegendPropProp> "styles" (!!value |> createObj |> unbox)
+    static member inline styles(value: ILegendsStylesProp list) = Interop.mkProperty<ILegendsProp> "styles" (!!value |> createObj |> unbox)
     /// This prop makes the legends component align itself to the center in the container
-    static member inline centerLegends(value: bool) = Interop.mkProperty<ILegendPropProp> "centerLegends" value
+    static member inline centerLegends(value: bool) = Interop.mkProperty<ILegendsProp> "centerLegends" value
     /// Enable the legends to wrap lines if there is not enough space to show all legends on a single line
-    static member inline enabledWrapLines(value: bool) = Interop.mkProperty<ILegendPropProp> "enabledWrapLines" value
+    static member inline enabledWrapLines(value: bool) = Interop.mkProperty<ILegendsProp> "enabledWrapLines" value
     /// Style for the overflow component
-    static member inline overflowStyles(value: IStyleAttribute list) = Interop.mkProperty<ILegendPropProp> "overflowStyles" (!!value |> createObj |> unbox)
+    static member inline overflowStyles(value: IStyleAttribute list) = Interop.mkProperty<ILegendsProp> "overflowStyles" (!!value |> createObj |> unbox)
     /// Text for overflow legends string
-    static member inline overflowText(value: string) = Interop.mkProperty<ILegendPropProp> "overflowText" value
+    static member inline overflowText(value: string) = Interop.mkProperty<ILegendsProp> "overflowText" value
     /// Prop that decides if legends are focusable
-    static member inline allowFocusOnLegends(value: bool) = Interop.mkProperty<ILegendPropProp> "allowFocusOnLegends" value
+    static member inline allowFocusOnLegends(value: bool) = Interop.mkProperty<ILegendsProp> "allowFocusOnLegends" value
     /// Prop that decides if we can select multiple legends or single legend at a time
-    static member inline canSelectMultipleLegends(value: bool) = Interop.mkProperty<ILegendPropProp> "canSelectMultipleLegends" value
+    static member inline canSelectMultipleLegends(value: bool) = Interop.mkProperty<ILegendsProp> "canSelectMultipleLegends" value
     // Callback issued when the selected option changes
-    static member inline onChange(value: string array -> MouseEvent -> Legend -> unit) = Interop.mkProperty<ILegendPropProp> "onChange" (System.Func<_,_,_,_> value)
+    static member inline onChange(value: string array -> MouseEvent -> Legend -> unit) = Interop.mkProperty<ILegendsProp> "onChange" (System.Func<_,_,_,_> value)
     /// Keys (title) that will be initially used to set selected items. This prop is used for multi-select scenarios when
     /// canSelectMultipleLegends is true; for single-select, use defaultSelectedLegend.
     ///
     /// Updating this prop does not change the selection after the component has been initialized. For controlled
     /// selections, use selectedLegends instead.
-    static member inline defaultSelectedLegends(value: string list) = Interop.mkProperty<ILegendPropProp> "defaultSelectedLegends" (value |> List.toArray)
+    static member inline defaultSelectedLegends(value: string list) = Interop.mkProperty<ILegendsProp> "defaultSelectedLegends" (value |> List.toArray)
     /// Key that will be initially used to set selected item. This prop is used for single-select scenarios when
     /// canSelectMultipleLegends is false or unspecified; for multi-select, use defaultSelectedLegends.
     ///
     /// Updating this prop does not change the selection after the component has been initialized. For controlled
     /// selections, use selectedLegend instead.
-    static member inline defaultSelectedLegend(value: string) = Interop.mkProperty<ILegendPropProp> "defaultSelectedLegend" value
+    static member inline defaultSelectedLegend(value: string) = Interop.mkProperty<ILegendsProp> "defaultSelectedLegend" value
     /// Keys (title) that will be used to set selected items in multi-select scenarios when canSelectMultipleLegends is
     /// true. For single-select, use selectedLegend.
     ///
     /// When this prop is provided, the component is controlled and does not automatically update the selection based on
     /// user interactions; the parent component must update the value passed to this property by handling the onChange event.
-    static member inline selectedLegends(value: string list) = Interop.mkProperty<ILegendPropProp> "selectedLegends" (value |> List.toArray)
+    static member inline selectedLegends(value: string list) = Interop.mkProperty<ILegendsProp> "selectedLegends" (value |> List.toArray)
     /// Key (title) that will be used to set the selected item in single-select scenarios when canSelectMultipleLegends is
     /// false or unspecified. For multi-select, use selectedLegends.
     ///
     /// When this prop is provided, the component is controlled and does not automatically update the selection based on
     /// user interactions; the parent component must update the value passed to this property by handling the onChange event.
-    static member inline selectedLegend(value: string) = Interop.mkProperty<ILegendPropProp> "selectedLegend" value
+    static member inline selectedLegend(value: string) = Interop.mkProperty<ILegendsProp> "selectedLegend" value
     /// Reference to access the public methods and properties of the component
-    static member inline legendRef(value: IRefValue<LegendContainer>) = Interop.mkProperty<ILegendPropProp> "legendRef" value
+    static member inline legendRef(value: IRefValue<LegendContainer>) = Interop.mkProperty<ILegendsProp> "legendRef" value
 
-module legendProp =
-    type [<Erase>] shape =
-        static member inline default' = Interop.mkProperty<ILegendProp> "shape" "default"
-        static member inline circle = Interop.mkProperty<ILegendProp> "shape" "circle"
-        static member inline square = Interop.mkProperty<ILegendProp> "shape" "square"
-        static member inline triangle = Interop.mkProperty<ILegendProp> "shape" "triangle"
-        static member inline pyramid = Interop.mkProperty<ILegendProp> "shape" "pyramid"
-        static member inline hexagon = Interop.mkProperty<ILegendProp> "shape" "hexagon"
-        static member inline pentagon = Interop.mkProperty<ILegendProp> "shape" "pentagon"
-        static member inline octagon = Interop.mkProperty<ILegendProp> "shape" "octagon"
-        static member inline dottedLine = Interop.mkProperty<ILegendProp> "shape" "dottedLine"
+module legends =
+    type [<Erase>] shape = sharedShapes<ILegendsProp>
 
 /// Props related to reflow behavior of the chart
 /// Determines the reflow behavior of the chart.
@@ -862,7 +855,7 @@ type [<Erase>] cartesianChart<'Property> =
     static member inline legendsOverflowText(value: 'T) = Interop.mkProperty<'Property> "legendsOverflowText" value
     /// Enable the legends to wrap lines if there is not enough space to show all legends on a single line
     static member inline enabledLegendsWrapLines(value: bool) = Interop.mkProperty<'Property> "enabledLegendsWrapLines" value
-    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<'Property> "legendProps" (!!value |> createObj |> unbox)
+    static member inline legendProps(value: ILegendsProp list) = Interop.mkProperty<'Property> "legendProps" (!!value |> createObj |> unbox)
     /// Used for to elipse x axis labes and show tooltip on x axis labels
     static member inline showXAxisLablesTooltip(value: bool) = Interop.mkProperty<'Property> "showXAxisLablesTooltip" value
     /// Used for X axis labels. While Giving showXAxisLablesTooltip prop, need to define after how many chars, we need to truncate the word.
@@ -1215,6 +1208,7 @@ module lineChartPoints =
         static member inline hexagon = Interop.mkProperty<ILineChartPointsProp> "legendShape" "hexagon"
         static member inline pentagon = Interop.mkProperty<ILineChartPointsProp> "legendShape" "pentagon"
         static member inline octagon = Interop.mkProperty<ILineChartPointsProp> "legendShape" "octagon"
+        static member inline diamond = Interop.mkProperty<ILineChartPointsProp> "legendShape" "diamond"
         static member inline dottedLine = Interop.mkProperty<ILineChartPointsProp> "legendShape" "dottedLine"
 
 //----------------------------------------------------------------- LineChartDataPoint -------------------------------------------------
@@ -1540,7 +1534,7 @@ type [<Erase>] donutChart =
     /// Additional CSS class(es) to apply to the Chart.
     static member inline legendsOverflowText(value: 'T) = Interop.mkProperty<IDonutChartProp> "legendsOverflowText" value
     /// Additional CSS class(es) to apply to the Chart.
-    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IDonutChartProp> "legendProps" (!!value |> createObj |> unbox)
+    static member inline legendProps(value: ILegendsProp list) = Interop.mkProperty<IDonutChartProp> "legendProps" (!!value |> createObj |> unbox)
     /// decides wether to show/hide legends
     static member inline hideLegend(value: bool) = Interop.mkProperty<IDonutChartProp> "hideLegend" value
     /// Url that the data-viz needs to redirect to upon clicking on it
@@ -1591,7 +1585,7 @@ type [<Erase>] funnelChart =
     /// Decides whether to show/hide legends
     static member inline hideLegend(value: bool) = Interop.mkProperty<IFunnelChartProp> "hideLegend" value
     /// Props for the legends in the chart
-    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IFunnelChartProp> "legendProps" (!!value |> createObj |> unbox)
+    static member inline legendProps(value: ILegendsProp list) = Interop.mkProperty<IFunnelChartProp> "legendProps" (!!value |> createObj |> unbox)
     /// Props for the callout in the chart
     static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<IFunnelChartProp> "calloutProps" (!!value |> createObj |> unbox)
     /// Call to provide customized styling that will layer on top of the variant rules
@@ -1787,7 +1781,7 @@ type [<Erase>] gaugeChart =
     static member inline chartValueFormat(value: int * int -> string) = Interop.mkProperty<IGaugeChartProp> "chartValueFormat" (System.Func<_,_> value)
     /// Decides whether to show/hide legends
     static member inline hideLegend(value: bool) = Interop.mkProperty<IGaugeChartProp> "hideLegend" value
-    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IGaugeChartProp> "legendProps" (!!value |> createObj |> unbox)
+    static member inline legendProps(value: ILegendsProp list) = Interop.mkProperty<IGaugeChartProp> "legendProps" (!!value |> createObj |> unbox)
     /// Do not show tooltips in chart
     static member inline hideTooltip(value: bool) = Interop.mkProperty<IGaugeChartProp> "hideTooltip" value
     /// Call to provide customized styling that will layer on top of the variant rules
@@ -2149,7 +2143,7 @@ type [<Erase>] horizontalBarChart =
     /// prop to check if benchmark data is provided
     static member inline showTriangle(value: bool) = Interop.mkProperty<IHorizontalBarChartProp> "showTriangle" value
     static member inline legendsOverflowText(value: 'T) = Interop.mkProperty<IHorizontalBarChartProp> "legendsOverflowText" value
-    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IHorizontalBarChartProp> "legendProps" (!!value |> createObj |> unbox)
+    static member inline legendProps(value: ILegendsProp list) = Interop.mkProperty<IHorizontalBarChartProp> "legendProps" (!!value |> createObj |> unbox)
     /// prop to render the custom callout
     static member inline onRenderCalloutPerHorizontalBar(value: ChartDataPoint -> ReactElement option) = Interop.mkProperty<IHorizontalBarChartProp> "onRenderCalloutPerHorizontalBar" (System.Func<_,_> value)
     /// Define a custom callout props override

@@ -1031,6 +1031,39 @@ let horizontalBarWithAxisData = [
     ]
 ]
 
+let legendsData = [
+    [
+        legend.title "Legend 1"
+        legend.color (Fui.getColorFromToken Fui.dataVizPalette.color1)
+        legend.action (fun _ -> printfn "click from legends pages")
+        legend.onMouseOutAction (fun _ -> printfn "on mouse out action")
+        legend.hoverAction (fun _ -> printfn "hover action")
+    ]
+    [
+        legend.title "Legend 2"
+        legend.color (Fui.getColorFromToken Fui.dataVizPalette.color2)
+        legend.action (fun _ -> printfn "click from legends pages")
+        legend.onMouseOutAction (fun _ -> printfn "on mouse out action")
+        legend.hoverAction (fun _ -> printfn "hover action")
+    ]
+    [
+        legend.title "Legend 3"
+        legend.color (Fui.getColorFromToken Fui.dataVizPalette.color3)
+        legend.action (fun _ -> printfn "click from legends pages")
+        legend.onMouseOutAction (fun _ -> printfn "on mouse out action")
+        legend.hoverAction (fun _ -> printfn "hover action")
+        legend.shape.diamond
+    ]
+    [
+        legend.title "Legend 4"
+        legend.color (Fui.getColorFromToken Fui.dataVizPalette.color4)
+        legend.action (fun _ -> printfn "click from legends pages")
+        legend.onMouseOutAction (fun _ -> printfn "on mouse out action")
+        legend.hoverAction (fun _ -> printfn "hover action")
+        legend.shape.triangle
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -1050,9 +1083,9 @@ let TestChartsComponent () =
                 areaChart.xAxis.tickStep 5
                 areaChart.xAxis.tick0 5
                 areaChart.legendProps [
-                    legendProp.allowFocusOnLegends true
-                    legendProp.canSelectMultipleLegends true
-                    legendProp.centerLegends true
+                    legends.allowFocusOnLegends true
+                    legends.canSelectMultipleLegends true
+                    legends.centerLegends true
                 ]
                 areaChart.data [
                     chartProp.chartTitle "Areachart"
@@ -1096,7 +1129,7 @@ let TestChartsComponent () =
                 funnelChart.hideLegend false
                 funnelChart.orientation.horizontal
                 funnelChart.legendProps [
-                    legendProp.canSelectMultipleLegends true
+                    legends.canSelectMultipleLegends true
                 ]
             ]
             Fui.ganttChart [
@@ -1175,6 +1208,12 @@ let TestChartsComponent () =
                 horizontalBarChartWithAxis.showYAxisLables true
                 horizontalBarChartWithAxis.enableGradient true
                 horizontalBarChartWithAxis.roundCorners true
+            ]
+            Html.div [
+                prop.style [ style.margin 32 ]
+                prop.children [
+                    Fui.legends [ legends.legends legendsData ]
+                ]
             ]
         ]
     ]

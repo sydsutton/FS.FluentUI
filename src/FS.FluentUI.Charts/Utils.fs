@@ -9,7 +9,6 @@ type Interop =
 type [<Erase>] IAreaChartProp = interface end
 type [<Erase>] IMarginProp = interface end
 type [<Erase>] ISecondaryYScaleOptionProp = interface end
-type [<Erase>] ILegendPropProp = interface end
 type [<Erase>] ILegendProp = interface end
 type [<Erase>] ILegendsStylesProp = interface end
 type [<Erase>] IDateTimeFormatOptionsProp = interface end
@@ -70,6 +69,7 @@ type [<Erase>] IHorizontalBarChartStylesProp = interface end
 type [<Erase>] IHorizontalBarChartVariantProp = interface end
 type [<Erase>] IHorizontalBarChartWithAxisDataPointProp = interface end
 type [<Erase>] IHorizontalBarChartWithAxisStylesProp = interface end
+type [<Erase>] ILegendsProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end

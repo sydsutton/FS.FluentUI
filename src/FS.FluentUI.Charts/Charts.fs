@@ -35,6 +35,6 @@ type Fui =
 
     // static member ChartTableData(props: IChartTableDataProps list) = !! createObj props
 
-    // static member legend(props: ILegend list) = !! createObj props
+    static member inline legends (props: ILegendsProp list) = Helpers.createElement (import "Legends" "@fluentui/react-charts") props
 // TODO DeclarativeChart ??
 // COMING? TreeChart
