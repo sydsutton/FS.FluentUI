@@ -410,142 +410,6 @@ type [<Erase>] yAxis<'Property> =
 //     static member inline culture(value: string) = Interop.mkProperty<ILineChartProps> "culture" value
 //     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<ILineChartProps> "enablePerfOptimization" value
 
-// type [<Erase>] gaugeChartStyles =
-//     /// Styles for the root element
-//     static member inline root(value: string) = Interop.mkProperty<IGaugeChartStyles> "root" value
-//     /// Styles for the chart
-//     static member inline chart(value: string) = Interop.mkProperty<IGaugeChartStyles> "chart" value
-//     /// Styles for the min and max values
-//     static member inline limits(value: string) = Interop.mkProperty<IGaugeChartStyles> "limits" value
-//     /// Styles for the chart value
-//     static member inline chartValue(value: string) = Interop.mkProperty<IGaugeChartStyles> "chartValue" value
-//     /// Styles for the sublabel
-//     static member inline sublabel(value: string) = Interop.mkProperty<IGaugeChartStyles> "sublabel" value
-//     /// Styles for the needle
-//     static member inline needle(value: string) = Interop.mkProperty<IGaugeChartStyles> "needle" value
-//     /// Styles for the chart title
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IGaugeChartStyles> "chartTitle" value
-//     /// Styles for the segments
-//     static member inline segment(value: string) = Interop.mkProperty<IGaugeChartStyles> "segment" value
-//     /// Styles for gradient segments
-//     static member inline gradientSegment(value: string) = Interop.mkProperty<IGaugeChartStyles> "gradientSegment" value
-//     /// Styles for the legends container
-//     static member inline legendsContainer(value: string) = Interop.mkProperty<IGaugeChartStyles> "legendsContainer" value
-//     /// Styles for callout root-content
-//     static member inline calloutContentRoot(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutContentRoot" value
-//     /// Styles for callout x-content
-//     static member inline calloutContentX(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutContentX" value
-//     /// Styles for callout y-content
-//     static member inline calloutContentY(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutContentY" value
-//     /// Styles for description message
-//     static member inline descriptionMessage(value: string) = Interop.mkProperty<IGaugeChartStyles> "descriptionMessage" value
-//     /// Styles for callout Date time container
-//     static member inline calloutDateTimeContainer(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutDateTimeContainer" value
-//     /// Styles for callout info container
-//     static member inline calloutInfoContainer(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutInfoContainer" value
-//     /// Styles for callout block container
-//     static member inline calloutBlockContainer(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutBlockContainer" value
-//     /// Styles for callout legend text
-//     static member inline calloutlegendText(value: string) = Interop.mkProperty<IGaugeChartStyles> "calloutlegendText" value
-//     /// Styles for the shape object in the callout
-//     static member inline shapeStyles(value: string) = Interop.mkProperty<IGaugeChartStyles> "shapeStyles" value
-//     /// Styles for the chart wrapper div
-//     static member inline chartWrapper(value: string) = Interop.mkProperty<IGaugeChartStyles> "chartWrapper" value
-
-// type [<Erase>] gaugeChartSegment =
-//     static member inline legend(value: string) =Interop.mkProperty<IGaugeChartSegment> "legend" value
-//     static member inline size(value: float) =Interop.mkProperty<IGaugeChartSegment> "size" value
-//     static member inline color(value: string) =Interop.mkProperty<IGaugeChartSegment> "color" value
-//     static member inline gradient(value: string list) =Interop.mkProperty<IGaugeChartSegment> "gradient" (value |> List.toArray)
-//     static member inline accessibilityData(value: IAccessibilityProps list) =Interop.mkProperty<IGaugeChartSegment> "accessibilityData" (value |> List.toArray)
-
-// module gaugeChart =
-//     type [<Erase>] variant =
-//         static member inline singleSegment = Interop.mkProperty<IGaugeChartProps> "variant" "single-segment"
-//         static member inline multipleSegment = Interop.mkProperty<IGaugeChartProps> "variant" "multiple-segment"
-
-//     type [<Erase>] chartValueFormat =
-//         static member inline percentage = Interop.mkProperty<IGaugeChartProps> "chartValueFormat" "percentage"
-//         static member inline fraction = Interop.mkProperty<IGaugeChartProps> "chartValueFormat" "fraction"
-
-// type [<Erase>] gaugeChart =
-//     static member inline width(value: float) =Interop.mkProperty<IGaugeChartProps> "width" value
-//     static member inline height(value: float) =Interop.mkProperty<IGaugeChartProps> "height" value
-//     static member inline chartTitle(value: float) =Interop.mkProperty<IGaugeChartProps> "chartTitle" value
-//     static member inline chartValue(value: float) =Interop.mkProperty<IGaugeChartProps> "chartValue" value
-//     static member inline segments(value: IGaugeChartSegment list) =Interop.mkProperty<IGaugeChartProps> "segments" (value |> List.toArray)
-//     static member inline minValue(value: float) =Interop.mkProperty<IGaugeChartProps> "minValue" value
-//     static member inline maxValue(value: float) =Interop.mkProperty<IGaugeChartProps> "maxValue" value
-//     static member inline subLabel(value: string) =Interop.mkProperty<IGaugeChartProps> "subLabel" value
-//     static member inline hideMinMax(value: bool) =Interop.mkProperty<IGaugeChartProps> "hideMinMax" value
-//     static member inline hideLegend(value: bool) =Interop.mkProperty<IGaugeChartProps> "hideLegend" value
-//     static member inline legendProps(value: legendProps) =Interop.mkProperty<ILineChartProps> "legendProps" value
-//     static member inline hideTooltip(value: bool) =Interop.mkProperty<IGaugeChartProps> "hideTooltip" value
-//     static member inline styles(value: IGaugeChartStyles list) =Interop.mkProperty<IGaugeChartProps> "styles" (value |> List.toArray)
-//     static member inline culture(value: string) =Interop.mkProperty<IGaugeChartProps> "culture" value
-//     static member inline calloutProps(value: IChartPopoverProps list) = Interop.mkProperty<IGaugeChartProps> "calloutProps" (keyValueList CaseRules.LowerFirst value)
-//     static member inline enableGradient(value: bool) =Interop.mkProperty<IGaugeChartProps> "enableGradient" value
-//     static member inline roundCorners(value: bool) =Interop.mkProperty<IGaugeChartProps> "roundCorners" value
-
-//     // TODO componentRef?: React.RefObject<Chart>;
-
-// type [<Erase>] ganttChartDataPoint =
-//     static member inline x(value: {| start: float; end': float |}) =
-//         let jsObj =
-//             createObj [
-//                 "start" ==> value.start
-//                 "end" ==> value.end' // end is reserved, therefore recreate object with correct key
-//             ]
-//         Interop.mkProperty<IGanttChartDataPoint> "x" jsObj
-
-//     // Dependent value of the data point, rendered along the x-axis.
-//     static member inline x(value: {| start: DateTime; end': DateTime |}) =
-//         let jsObj =
-//             createObj [
-//                 "start" ==> value.start
-//                 "end" ==> value.end'
-//             ]
-//         Interop.mkProperty<IGanttChartDataPoint> "x" jsObj
-
-//     /// Independent value of the data point, rendered along the y-axis.
-//     /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
-//     /// If y is a string, then the data is evenly spaced along the y-axis.
-//     static member inline y(value: float) = Interop.mkProperty<IGanttChartDataPoint> "y" value
-//     static member inline y(value: string) = Interop.mkProperty<IGanttChartDataPoint> "y" value
-//     /// Legend text for the datapoint in the chart
-//     static member inline legend(value: string) = Interop.mkProperty<IGanttChartDataPoint> "legend" value
-//     /// color for the legend in the chart
-//     static member inline color(value: string) = Interop.mkProperty<IGanttChartDataPoint> "color" value
-//     /// Gradient for the legend in the chart. If not provided, it will fallback on the default color palette.
-//     /// If provided, it will override the color prop. granted `enableGradient` is set to true for the chart.
-//     static member inline gradient(value: string list) = Interop.mkProperty<IGanttChartDataPoint> "gradient" (value |> List.toArray)
-//     /// Callout data for x axis
-//     /// This is an optional prop, If haven't given legend will take
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IGanttChartDataPoint> "xAxisCalloutData" value
-//     /// Callout data for y axis
-//     /// This is an optional prop, If haven't given data will take
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IGanttChartDataPoint> "yAxisCalloutData" value
-//     /// onClick action for each datapoint in the chart
-//     static member inline onClick(value: unit -> unit) = Interop.mkProperty<IGanttChartDataPoint> "onClick" value
-//     /// Accessibility data for callout
-//     static member inline accessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IGanttChartDataPoint> "accessibilityData" (value |> List.toArray)
-
-// type [<Erase>] ganttChart =
-//     inherit cartesianChartProps<IGanttChartProps>
-//     static member inline data(value: ganttChartDataPoint list) = Interop.mkProperty<IGanttChartProps> "data" (value |> List.toArray)
-
-//     // TODO onRenderCalloutPerDataPoint?: RenderFunction<GanttChartDataPoint>;
-
-//     static member inline barHeight(value: float) = Interop.mkProperty<IGanttChartProps> "barHeight" value
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IGanttChartProps> "chartTitle" value
-//     static member inline culture(value: string) = Interop.mkProperty<IGanttChartProps> "culture" value
-//     static member inline yAxisPadding(value: float) = Interop.mkProperty<IGanttChartProps> "yAxisPadding" value
-//     static member inline showYAxisLablesTooltip(value: bool) = Interop.mkProperty<IGanttChartProps> "showYAxisLablesTooltip" value
-//     static member inline showYAxisLables(value: bool) = Interop.mkProperty<IGanttChartProps> "showYAxisLables" value
-//     static member inline enableGradient(value: bool) = Interop.mkProperty<IGanttChartProps> "enableGradient" value
-//     static member inline roundCorners(value: bool) = Interop.mkProperty<IGanttChartProps> "roundCorners" value
-//     static member inline maxBarHeight(value: float) = Interop.mkProperty<IGanttChartProps> "maxBarHeight" value
-
 // module scatterChartPoint =
 //     type [<Erase>] legendShape =
 //         class
@@ -2085,3 +1949,135 @@ type [<Erase>] xDataPoint =
     static member inline end' (value: int) = Interop.mkProperty<IXDataPointProp> "end" value
     static member inline end' (value: decimal) = Interop.mkProperty<IXDataPointProp> "end" value
     static member inline end' (value: float) = Interop.mkProperty<IXDataPointProp> "end" value
+
+//----------------------------------------------------------------- GaugeChart -------------------------------------------------
+type [<Erase>] gaugeChart =
+    /// Width of the chart
+    static member inline width(value: int) = Interop.mkProperty<IGaugeChartProp> "width" value
+    /// Width of the chart
+    static member inline width(value: float) = Interop.mkProperty<IGaugeChartProp> "width" value
+    /// Width of the chart
+    static member inline width(value: decimal) = Interop.mkProperty<IGaugeChartProp> "width" value
+    /// Height of the chart
+    static member inline height(value: int) = Interop.mkProperty<IGaugeChartProp> "height" value
+    /// Height of the chart
+    static member inline height(value: float) = Interop.mkProperty<IGaugeChartProp> "height" value
+    /// Height of the chart
+    static member inline height(value: decimal) = Interop.mkProperty<IGaugeChartProp> "height" value
+    /// Title of the chart
+    static member inline chartTitle(value: string) = Interop.mkProperty<IGaugeChartProp> "chartTitle" value
+    /// Current value of the gauge
+    static member inline chartValue(value: int) = Interop.mkProperty<IGaugeChartProp> "chartValue" value
+    /// Current value of the gauge
+    static member inline chartValue(value: decimal) = Interop.mkProperty<IGaugeChartProp> "chartValue" value
+    /// Current value of the gauge
+    static member inline chartValue(value: float) = Interop.mkProperty<IGaugeChartProp> "chartValue" value
+    /// Sections of the gauge
+    static member inline segments(value: IGaugeChartSegmentProp list list) =
+                            let newValue = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
+                            Interop.mkProperty<IGaugeChartProp> "segments" newValue
+    /// Minimum value of the gauge
+    static member inline minValue(value: int) = Interop.mkProperty<IGaugeChartProp> "minValue" value
+    /// Minimum value of the gauge
+    static member inline minValue(value: decimal) = Interop.mkProperty<IGaugeChartProp> "minValue" value
+    /// Minimum value of the gauge
+    static member inline minValue(value: float) = Interop.mkProperty<IGaugeChartProp> "minValue" value
+    /// Maximum value of the gauge
+    static member inline maxValue(value: int) = Interop.mkProperty<IGaugeChartProp> "maxValue" value
+    /// Maximum value of the gauge
+    static member inline maxValue(value: decimal) = Interop.mkProperty<IGaugeChartProp> "maxValue" value
+    /// Maximum value of the gauge
+    static member inline maxValue(value: float) = Interop.mkProperty<IGaugeChartProp> "maxValue" value
+    /// Additional text to display below the chart value
+    static member inline sublabel(value: string) = Interop.mkProperty<IGaugeChartProp> "sublabel" value
+    /// Hide the min and max values of the gauge
+    static member inline hideMinMax(value: bool) = Interop.mkProperty<IGaugeChartProp> "hideMinMax" value
+    /// Format of the chart value
+    static member inline chartValueFormat(value: int * int -> string) = Interop.mkProperty<IGaugeChartProp> "chartValueFormat" (System.Func<_,_> value)
+    /// Decides whether to show/hide legends
+    static member inline hideLegend(value: bool) = Interop.mkProperty<IGaugeChartProp> "hideLegend" value
+    static member inline legendProps(value: ILegendPropProp list) = Interop.mkProperty<IGaugeChartProp> "legendProps" (!!value |> createObj |> unbox)
+    /// Do not show tooltips in chart
+    static member inline hideTooltip(value: bool) = Interop.mkProperty<IGaugeChartProp> "hideTooltip" value
+    /// Call to provide customized styling that will layer on top of the variant rules
+    static member inline styles(value: IGaugeChartStylesProp list) = Interop.mkProperty<IGaugeChartProp> "styles" (!!value |> createObj |> unbox)
+    /// Defines the culture to localize the numbers and dates
+    static member inline culture(value: string) = Interop.mkProperty<IGaugeChartProp> "culture" value
+    /// Props for the callout in the chart
+    static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<IGaugeChartProp> "calloutProps" (!!value |> createObj |> unbox)
+    /// Prop to enable the gradient in the chart
+    static member inline enableGradient(value: bool) = Interop.mkProperty<IGaugeChartProp> "enableGradient" value
+    /// Prop to enable the round corners in the chart
+    static member inline roundCorners(value: bool) = Interop.mkProperty<IGaugeChartProp> "roundCorners" value
+    /// Optional callback to access the Chart interface. Use this instead of ref for accessing
+    /// the public methods and properties of the component.
+    static member inline componentRef(value: RefObject<Chart>) = Interop.mkProperty<IGaugeChartProp> "componentRef" value
+
+module gaugeChart =
+    /// Specifies the variant of GaugeChart to be rendered
+    type [<Erase>] variant =
+        static member inline singleSegment = Interop.mkProperty<IGaugeChartProp> "variant" "single-segment"
+        static member inline multipleSegments = Interop.mkProperty<IGaugeChartProp> "variant" "multiple-segments"
+    /// Format of the chart value
+    type [<Erase>] chartValueFormat =
+        static member inline percentage = Interop.mkProperty<IGaugeChartProp> "chartValueFormat" "percentage"
+        static member inline fraction = Interop.mkProperty<IGaugeChartProp> "chartValueFormat" "fraction"
+//----------------------------------------------------------------- GaugeChartSegment -------------------------------------------------
+type [<Erase>] gaugeChartSegment =
+    /// Legend text for a segment
+    static member inline legend(value: string) = Interop.mkProperty<IGaugeChartSegmentProp> "legend" value
+    /// Size of the segment
+    static member inline size(value: int) = Interop.mkProperty<IGaugeChartSegmentProp> "size" value
+    /// Size of the segment
+    static member inline size(value: float) = Interop.mkProperty<IGaugeChartSegmentProp> "size" value
+    /// Size of the segment
+    static member inline size(value: decimal) = Interop.mkProperty<IGaugeChartSegmentProp> "size" value
+    /// Color of the segment
+    static member inline color(value: string) = Interop.mkProperty<IGaugeChartSegmentProp> "color" value
+    /// Gradient color of the segment
+    static member inline gradient(value: string * string) = Interop.mkProperty<IGaugeChartSegmentProp> "gradient" value
+    /// Accessibility data for the segment
+    static member inline accessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IGaugeChartSegmentProp> "accessibilityData" (!!value |> createObj |> unbox)
+
+//----------------------------------------------------------------- GaugeChartStyles -------------------------------------------------
+type [<Erase>] gaugeChartStyles =
+    /// Styles for the root element
+    static member inline root(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "root" value
+    /// Styles for the chart
+    static member inline chart(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "chart" value
+    /// Styles for the min and max values
+    static member inline limits(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "limits" value
+    /// Styles for the chart value
+    static member inline chartValue(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "chartValue" value
+    /// Styles for the sublabel
+    static member inline sublabel(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "sublabel" value
+    /// Styles for the needle
+    static member inline needle(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "needle" value
+    /// Styles for the chart title
+    static member inline chartTitle(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "chartTitle" value
+    /// Styles for the segments
+    static member inline segment(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "segment" value
+    /// Styles for gradient segments
+    static member inline gradientSegment(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "gradientSegment" value
+    /// Styles for the legends container
+    static member inline legendsContainer(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "legendsContainer" value
+    /// Styles for callout root-content
+    static member inline calloutContentRoot(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutContentRoot" value
+    /// Styles for callout x-content
+    static member inline calloutContentX(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutContentX" value
+    /// Styles for callout y-content
+    static member inline calloutContentY(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutContentY" value
+    /// Styles for description message
+    static member inline descriptionMessage(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "descriptionMessage" value
+    /// Styles for callout Date time container
+    static member inline calloutDateTimeContainer(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutDateTimeContainer" value
+    /// Styles for callout info container
+    static member inline calloutInfoContainer(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutInfoContainer" value
+    /// Styles for callout block container
+    static member inline calloutBlockContainer(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutBlockContainer" value
+    /// Styles for callout legend text
+    static member inline calloutlegendText(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "calloutlegendText" value
+    /// Styles for the shape object in the callout
+    static member inline shapeStyles(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "shapeStyles" value
+    /// Styles for the chart wrapper div
+    static member inline chartWrapper(value: string) = Interop.mkProperty<IGaugeChartStylesProp> "chartWrapper" value

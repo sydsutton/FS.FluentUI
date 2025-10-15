@@ -641,6 +641,7 @@ let funnelChartStackedData = [
 
 [<ReactComponent>]
 let TestChartsComponent () =
+    let sliderValue, setSliderValue = React.useState 50
     Html.div [
         prop.style [ style.width 600; style.margin 36 ]
         prop.children [
@@ -713,6 +714,33 @@ let TestChartsComponent () =
                 ganttChart.height 300
                 ganttChart.enableGradient true
                 ganttChart.roundCorners true
+            ]
+            Fui.slider [
+                slider.min 0
+                slider.max 100
+                slider.onChange (fun (prop: ValueProp<int>) -> setSliderValue prop.value)
+                slider.value sliderValue
+            ]
+            Fui.gaugeChart [
+                gaugeChart.width 500
+                gaugeChart.height 300
+                gaugeChart.segments [
+                    [
+                        gaugeChartSegment.size sliderValue
+                        gaugeChartSegment.legend "Used"
+                    ]
+                    [
+                        gaugeChartSegment.size (100 - sliderValue)
+                        gaugeChartSegment.color Fui.dataVizPallete.color5
+                        gaugeChartSegment.legend "Available"
+                    ]
+                ]
+                gaugeChart.chartValue sliderValue
+                gaugeChart.chartTitle "Storage capacity"
+                gaugeChart.sublabel "used"
+                gaugeChart.variant.singleSegment
+                gaugeChart.enableGradient true
+                gaugeChart.roundCorners true
             ]
         ]
     ]

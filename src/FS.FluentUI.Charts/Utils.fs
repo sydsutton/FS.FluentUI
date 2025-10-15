@@ -57,6 +57,8 @@ type [<Erase>] IFunnelChartDataPointSubValueProp = interface end
 type [<Erase>] IFunnelChartStylesProp = interface end
 type [<Erase>] IGanttChartDataPointProp = interface end
 type [<Erase>] IXDataPointProp = interface end
+type [<Erase>] IGaugeChartSegmentProp = interface end
+type [<Erase>] IGaugeChartStylesProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end
@@ -70,7 +72,6 @@ type [<Erase>] IAreaChartDataProp = interface end
 type [<Erase>] IDonutChartProps = interface end
 type [<Erase>] IChartDataPoint = interface end
 type [<Erase>] IFunnelChartProps = interface end
-type [<Erase>] IGaugeChartProps = interface end
 type [<Erase>] IGaugeChartSegment = interface end
 type [<Erase>] IGaugeChartStyles = interface end
 type [<Erase>] IScatterChartProps = interface end
