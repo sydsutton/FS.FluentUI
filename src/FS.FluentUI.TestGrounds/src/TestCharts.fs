@@ -1208,6 +1208,11 @@ let TestChartsComponent () =
                 horizontalBarChartWithAxis.showYAxisLables true
                 horizontalBarChartWithAxis.enableGradient true
                 horizontalBarChartWithAxis.roundCorners true
+                horizontalBarChartWithAxis.onRenderCalloutPerDataPoint (fun props ->
+                    match props with
+                    | Some p -> Fui.text $"{p.y}: {p.x}"
+                    | None -> Html.none
+                )
             ]
             Html.div [
                 prop.style [ style.margin 32 ]

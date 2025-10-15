@@ -1096,9 +1096,11 @@ type [<Erase>] areaChart =
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
-    static member inline onRenderCalloutPerDataPoint(value: RenderFunction<CustomizedCalloutData>) = Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> value)
+    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData option -> ReactElement) =
+                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
     /// Define a custom callout renderer for a stack; default is to render per data point
-    static member inline onRenderCalloutPerStack(value: RenderFunction<CustomizedCalloutData>) = Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> value)
+    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData option -> ReactElement) =
+                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
     /// The prop used to define the culture to localized the numbers
     static member inline culture(value: string) = Interop.mkProperty<IAreaChartProp> "culture" value
     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<IAreaChartProp> "enablePerfOptimization" value
@@ -1649,7 +1651,7 @@ type [<Erase>] ganttChart =
     /// An array of data points to be rendered in the chart.
     static member inline data(value: IGanttChartDataPointProp list list) = Interop.mkProperty<IGanttChartProp> "data" (value |> createObjArray)
     /// Callback function to render a custom callout for each data point.
-    static member inline onRenderCalloutPerDataPoint(value: RenderFunction<GanttChartDataPoint>) = Interop.mkProperty<IGanttChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> value)
+    static member inline onRenderCalloutPerDataPoint(handler: GanttChartDataPoint option -> ReactElement) = Interop.mkProperty<IGanttChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
     /// Height of each bar, in pixels.
     static member inline barHeight(value: int) = Interop.mkProperty<IGanttChartProp> "barHeight" value
     /// Height of each bar, in pixels.
@@ -2201,7 +2203,8 @@ type [<Erase>] horizontalBarChartWithAxis =
     /// Data to render in the chart.
     static member inline data(value: IHorizontalBarChartWithAxisDataPointProp list list) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "data" (value |> createObjArray)
     /// Define a custom callout renderer for a data point.
-    static member inline onRenderCalloutPerDataPoint(value: RenderFunction<IHorizontalBarChartWithAxisDataPointProp>) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> value)
+    static member inline onRenderCalloutPerDataPoint (handler: HorizontalBarChartWithAxisDataPoint option -> ReactElement) =
+                            Interop.mkProperty<IHorizontalBarChartWithAxisProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
     /// Width of each bar in the chart.
     static member inline barHeight(value: int) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "barHeight" value
     /// Width of each bar in the chart.

@@ -168,12 +168,6 @@ type [<RequireQualifiedAccess>] AxisScaleType =
     | ``default``
     | ``log``
 
-/// Translated from (props?: P, defaultRender?: (props?: P) => JSXElement | null) => JSXElement | null
-type RenderFunction<'P> =
-    'P option ->
-      (('P option -> ReactElement option) option) ->
-        ReactElement option
-
 type CustomizedCalloutDataPoint = {
     legend: string
     y: int
