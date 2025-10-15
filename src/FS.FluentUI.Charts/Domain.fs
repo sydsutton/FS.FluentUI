@@ -270,3 +270,14 @@ type DataVizPalette = {
     success: string
     highSuccess: string
 }
+
+type HorizontalBarChartWithAxisDataPoint = {
+    x: int
+    y: U2<int, string>
+    legend: string
+    color: string
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+    onClick: unit -> unit
+    callOutAccessibilityData: AccessibilityProps
+}

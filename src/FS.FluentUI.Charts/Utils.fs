@@ -68,6 +68,8 @@ type [<Erase>] IHeatMapChartStylesProp = interface end
 type [<Erase>] IChartDataModeProp = interface end
 type [<Erase>] IHorizontalBarChartStylesProp = interface end
 type [<Erase>] IHorizontalBarChartVariantProp = interface end
+type [<Erase>] IHorizontalBarChartWithAxisDataPointProp = interface end
+type [<Erase>] IHorizontalBarChartWithAxisStylesProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end

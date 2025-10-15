@@ -1008,6 +1008,29 @@ let horizontalBarChartData = [
     ]
 ]
 
+let horizontalBarWithAxisData = [
+    [
+        horizontalBarChartWithAxisDataPoint.y "String One"
+        horizontalBarChartWithAxisDataPoint.x 1000
+        horizontalBarChartWithAxisDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1)
+    ]
+    [
+        horizontalBarChartWithAxisDataPoint.y "String Two"
+        horizontalBarChartWithAxisDataPoint.x 5000
+        horizontalBarChartWithAxisDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2)
+    ]
+    [
+        horizontalBarChartWithAxisDataPoint.y "String Three"
+        horizontalBarChartWithAxisDataPoint.x 3000
+        horizontalBarChartWithAxisDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color3)
+    ]
+    [
+        horizontalBarChartWithAxisDataPoint.y "String Four"
+        horizontalBarChartWithAxisDataPoint.x 2000
+        horizontalBarChartWithAxisDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color4)
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -1140,6 +1163,18 @@ let TestChartsComponent () =
                 horizontalBarChart.chartDataMode.default'
                 horizontalBarChart.className "hbcstacked"
                 horizontalBarChart.variant.partToWhole
+            ]
+            Fui.horizontalBarChartWithAxis [
+                horizontalBarChartWithAxis.data horizontalBarWithAxisData
+                horizontalBarChartWithAxis.chartTitle "Horizontal bar chart axis tooltip example"
+                horizontalBarChartWithAxis.height 350
+                horizontalBarChartWithAxis.width 650
+                horizontalBarChartWithAxis.hideLegend true
+                horizontalBarChartWithAxis.hideTooltip false
+                horizontalBarChartWithAxis.showYAxisLablesTooltip false
+                horizontalBarChartWithAxis.showYAxisLables true
+                horizontalBarChartWithAxis.enableGradient true
+                horizontalBarChartWithAxis.roundCorners true
             ]
         ]
     ]
