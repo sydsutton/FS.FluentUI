@@ -81,25 +81,6 @@ type [<Erase>] ISankeyChartAccessibilityProp = interface end
 type [<Erase>] INumberFormatOptionsProp = interface end
 type [<Erase>] IScatterChartStylesProp = interface end
 type [<Erase>] ISparklineStylesProp = interface end
-
-// ---------
-type [<Erase>] ILegendShape = interface end
-type [<Erase>] IMargins = interface end
-type [<Erase>] ICartesianChartStyleProps = interface end
-type [<Erase>] IAreaChartDataProp = interface end
-type [<Erase>] IDonutChartProps = interface end
-type [<Erase>] IChartDataPoint = interface end
-type [<Erase>] IFunnelChartProps = interface end
-type [<Erase>] IGaugeChartSegment = interface end
-type [<Erase>] IGaugeChartStyles = interface end
-type [<Erase>] IVerticalBarChartProps = interface end
-type [<Erase>] IVerticalBarChartDataPoint = interface end
-type [<Erase>] IVerticalBarChartStyles = interface end
-type [<Erase>] IVerticalStackedBarChartProps = interface end
-type [<Erase>] IVerticalStackedChartProps = interface end
-type [<Erase>] IVSChartDataPoint = interface end
-type [<Erase>] ILineDataInVerticalStackedBarChart = interface end
-type [<Erase>] IVerticalStackedBarChartStyles = interface end
-type [<Erase>] IChartTableProps = interface end
-type [<Erase>] IChartTableDataProps = interface end
-
+type [<Erase>] IVerticalBarChartDataPointProp = interface end
+type [<Erase>] ILineDataInVerticalBarChartProp = interface end
+type [<Erase>] IVerticalBarChartStylesProp = interface end

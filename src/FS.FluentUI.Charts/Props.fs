@@ -11,6 +11,46 @@ open Browser.Types
 module Helpers =
     let createObjArray value = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
 
+type [<Erase>] sharedBarChartWithDataPoint<'Property> =
+  ///Dependent value of the data point, rendered along the x-axis.
+    static member inline x(value: int) = Interop.mkProperty<'Property> "x" value
+    ///Dependent value of the data point, rendered along the x-axis.
+    static member inline x(value: float) = Interop.mkProperty<'Property> "x" value
+    ///Dependent value of the data point, rendered along the x-axis.
+    static member inline x(value: decimal) = Interop.mkProperty<'Property> "x" value
+    ///Dependent value of the data point, rendered along the x-axis.
+    static member inline x(value: string) = Interop.mkProperty<'Property> "x" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y(value: int) = Interop.mkProperty<'Property> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y(value: float) = Interop.mkProperty<'Property> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y(value: decimal) = Interop.mkProperty<'Property> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
+    /// If y is a string, then the data is evenly spaced along the y-axis.
+    static member inline y(value: string) = Interop.mkProperty<'Property> "y" value
+    /// Legend text for the datapoint in the chart
+    static member inline legend(value: string) = Interop.mkProperty<'Property> "legend" value
+    /// color for the legend in the chart
+    static member inline color(value: string) = Interop.mkProperty<'Property> "color" value
+    /// Callout data for x axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<'Property> "xAxisCalloutData" value
+    /// Callout data for y axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<'Property> "yAxisCalloutData" value
+    /// onClick action for each datapoint in the chart
+    static member inline onClick(value: unit -> unit) = Interop.mkProperty<'Property> "onClick" (System.Func<_,_> value)
+    /// Accessibility data for callout
+    static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<'Property> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+
 type [<Erase>] sharedCartesianChartStyles<'Property> =
     ///  Style for the root element
     static member inline root (value: string) = Interop.mkProperty<'Property> "root" value
@@ -412,49 +452,6 @@ type [<Erase>] yAxis<'Property> =
     ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
     static member inline tick0 (value: DateTime) = Interop.mkProperty<'Property> "yAxis" {| tick0 = value|}
 
-// type [<Erase>] timeLocaleDefinition =
-//     static member inline dateTime(value: string) = Interop.mkProperty<ITimeLocaleDefinitionProp> "dateTime" value
-//     static member inline date(value: string) = Interop.mkProperty<ITimeLocaleDefinitionProp> "date" value
-//     static member inline time(value: string) = Interop.mkProperty<ITimeLocaleDefinitionProp> "time" value
-//     static member inline periods(value: string list) = Interop.mkProperty<ITimeLocaleDefinitionProp> "periods" (value |> List.toArray)
-//     /// The abbreviated names of the weekdays, starting with Sunday.
-//     /// [string, string, string, string, string, string, string]
-//     static member inline days(value: string list) = Interop.mkProperty<ITimeLocaleDefinitionProp> "days" (value |> List.toArray)
-//     /// shortDays: [string, string, string, string, string, string, string]
-//     /// The abbreviated names of the weekdays, starting with Sunday.
-//     static member inline shortDays(value: string list) = Interop.mkProperty<ITimeLocaleDefinitionProp> "shortDays" (value |> List.toArray)
-//     /// months: [string, string, string, string, string, string, string, string, string, string, string, string];
-//     /// the abbreviated names of the months (starting with January).
-//     static member inline months(value: string list) = Interop.mkProperty<ITimeLocaleDefinitionProp> "months" (value |> List.toArray)
-//     /// shortMonths: [string, string, string, string, string, string, string, string, string, string, string, string];
-//     static member inline shortMonths(value: string list) = Interop.mkProperty<ITimeLocaleDefinitionProp> "shortMonths" (value |> List.toArray)
-
-
-// type [<Erase>] lineChartStyles =
-//     inherit cartesianChartStyles<ILineChartStyles>
-//     static member inline lineBorder(value: string) = Interop.mkProperty<ILineChartStyles> "lineBorder" value
-//     static member inline markerLabel(value: string) = Interop.mkProperty<ILineChartStyles> "markerLabel" value
-
-// type [<Erase>] lineChart =
-//     inherit cartesianChartProps<ILineChartProps>
-//     static member inline data(datasets: IChartProps list) = Interop.mkProperty<ILineChartProps> "data" (createObj !!datasets)
-//     static member inline styles(value: ILineChartStyles list) = Interop.mkProperty<ILineChartProps> "styles" (value |> List.toArray)
-//     // TODO static member inline eventAnnotationProps(value: 'a)
-//     // TODO static member inline onRenderCalloutPerDataPoint(value: 'a)
-//     // TODO static member inline onRenderCalloutPerStack(value: 'a)
-//     // TODO static member inline getCalloutDescriptionMessage(value: 'a)
-//     // TODO static member inline colorFillBars(value: 'a)
-//     static member inline allowMultipleShapesForPoints(value: bool) = Interop.mkProperty<ILineChartProps> "allowMultipleShapesForPoints" value
-//     static member inline optimizeLargeData(value: bool) = Interop.mkProperty<ILineChartProps> "optimizeLargeData" value
-//     static member inline culture(value: string) = Interop.mkProperty<ILineChartProps> "culture" value
-//     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<ILineChartProps> "enablePerfOptimization" value
-
-// module scatterChartPoint =
-//     type [<Erase>] legendShape =
-//         class
-//             inherit legendShape<IScatterChartPoints>
-//         end
-
 type [<Erase>] scatterChartPoints =
     /// Legend text for the datapoint in the chart
     static member inline legend(value: string) = Interop.mkProperty<IScatterChartPointsProp> "legend" value
@@ -510,32 +507,6 @@ type [<Erase>] scatterChartDataPoint =
     /// text labels of marker points
     static member inline text(value: string) = Interop.mkProperty<IScatterChartDataPointProp> "text" value
 
-
-// type [<Erase>] sparklineStyles =
-//     static member inline inlineBlock(value: string) = Interop.mkProperty<ISankeyChartProps> "inlineBlock" value
-//     static member inline valueText(value: string) = Interop.mkProperty<ISankeyChartProps> "valueText" value
-
-// type [<Erase>] sparkline =
-//     static member inline data(value: IChartProps list) = Interop.mkProperty<ISparklineProps> "data" (createObj !!value)
-//     static member inline width(value: float) = Interop.mkProperty<ISparklineProps> "width" value
-//     static member inline height(value: float) = Interop.mkProperty<ISparklineProps> "height" value
-//     static member inline valueTextWidth(value: float) = Interop.mkProperty<ISparklineProps> "valueTextWidth" value
-//     static member inline className(value: string) = Interop.mkProperty<ISparklineProps> "className" value
-//     static member inline culture(value: string) = Interop.mkProperty<ISparklineProps> "culture" value
-//     static member inline showLegend(value: bool) = Interop.mkProperty<ISparklineProps> "showLegend" value
-//     static member inline styles(value: sparklineStyles list) = Interop.mkProperty<ISparklineProps> "styles" (value |> List.toArray)
-
-// type [<Erase>] GVBarChartSeriesPoint =
-//     static member inline key(value: string) = Interop.mkProperty<IGVBarChartSeriesPoint> "key" value
-//     static member inline data(value: float) = Interop.mkProperty<IGVBarChartSeriesPoint> "data" value
-//     static member inline color(value: string) = Interop.mkProperty<IGVBarChartSeriesPoint> "color" value
-//     static member inline legend(value: string) = Interop.mkProperty<IGVBarChartSeriesPoint> "legend" value
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IGVBarChartSeriesPoint> "xAxisCalloutData" value
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IGVBarChartSeriesPoint> "yAxisCalloutData" value
-//     static member inline onClick(value: unit -> unit) = Interop.mkProperty<IGVBarChartSeriesPoint> "onClick" value
-//     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IGVBarChartSeriesPoint> "callOutAccessibilityData" (value |> List.toArray)
-//     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IGVBarChartSeriesPoint> "useSecondaryYScale" value
-
 type [<Erase>] horizontalDataPoint =
     /// Independent value of the data point, rendered along the x-axis.
     /// If x is a number, then each y-coordinate is plotted at its x-coordinate.
@@ -555,173 +526,6 @@ type [<Erase>] horizontalDataPoint =
     static member inline total(value: float) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
     /// Total value of a single point bar chart.
     static member inline total(value: decimal) = Interop.mkProperty<IHorizontalDataPointProp> "total" value
-
-// type [<Erase>] verticalBarChartDataPoint =
-//     static member inline x(value: float) = Interop.mkProperty<IVerticalBarChartDataPoint> "x" value
-
-//     static member inline x(value: string) = Interop.mkProperty<IVerticalBarChartDataPoint> "x" value
-//     static member inline x(value: DateTime) = Interop.mkProperty<IVerticalBarChartDataPoint> "x" value
-//     static member inline y(value: float) = Interop.mkProperty<IVerticalBarChartDataPoint> "y" value
-//     static member inline legend(value: string) = Interop.mkProperty<IVerticalBarChartDataPoint> "legend" value
-//     static member inline color(value: string) = Interop.mkProperty<IVerticalBarChartDataPoint> "color" value
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVerticalBarChartDataPoint> "xAxisCalloutData" value
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IVerticalBarChartDataPoint> "yAxisCalloutData" value
-//     static member inline enableReflow(value: bool) = Interop.mkProperty "enableReflow" value
-//     static member inline onClick(value: unit -> unit) = Interop.mkProperty<IVerticalBarChartDataPoint> "onClick" value
-//     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IVerticalBarChartDataPoint> "callOutAccessibilityData" (value |> List.toArray)
-
-// module verticalBarChart =
-//     type [<Erase>] barWidth =
-//         static member inline ``default`` = Interop.mkProperty<IVerticalBarChartProps> "barWidth" "default"
-//         static member inline auto = Interop.mkProperty<IVerticalBarChartProps> "barWidth" "auto"
-
-//     type [<Erase>] mode =
-//         static member inline ``default`` = Interop.mkProperty<IVerticalBarChartProps> "mode" "default"
-//         static member inline plotly = Interop.mkProperty<IVerticalBarChartProps> "mode" "plotly"
-//         static member inline histogram = Interop.mkProperty<IVerticalBarChartProps> "mode" "histogram"
-
-//     type [<Erase>] style =
-//         inherit cartesianChartStyles<IVerticalBarChartStyles>
-//         static member inline barLabel(value: string) = Interop.mkProperty<IVerticalBarChartStyles> "barLabel" value
-//         static member inline lineBorder(value: string) = Interop.mkProperty<IVerticalBarChartStyles> "lineBorder" value
-
-// type [<Erase>] verticalBarChart =
-//     static member inline data(value: IVerticalBarChartDataPoint list) = Interop.mkProperty<IVerticalBarChartProps> "data" (value |> List.toArray)
-
-//     // TODO onRenderCalloutPerDataPoint
-
-//     static member inline colors(value: string list) = Interop.mkProperty<IVerticalBarChartProps> "colors" (value |> List.toArray)
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IVerticalBarChartProps> "chartTitle" value
-//     static member inline lineLegendText(value: string) = Interop.mkProperty<IVerticalBarChartProps> "lineLegendText" value
-//     static member inline lineLegendColor(value: string) = Interop.mkProperty<IVerticalBarChartProps> "lineLegendColor" value
-//     static member inline useSingleColor(value: string) = Interop.mkProperty<IVerticalBarChartProps> "useSingleColor" value
-//     static member inline styles(value: IVerticalBarChartStyles list) = Interop.mkProperty<IVerticalBarChartProps> "styles" (value |> List.toArray)
-//     static member inline culture(value: string) = Interop.mkProperty<IVerticalBarChartProps> "culture" value
-//     static member inline xAxisPadding(value: float) = Interop.mkProperty<IVerticalBarChartProps> "xAxisPadding" value
-//     static member inline lineOptions(value: ILineChartLineOptions list) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "lineOptions" (keyValueList CaseRules.LowerFirst value)
-//     static member inline hideLabels(value: bool) = Interop.mkProperty<IVerticalBarChartProps> "hideLabels" value
-//     static member inline maxBarWidth(value: float) = Interop.mkProperty<IVerticalBarChartProps> "maxBarWidth" value
-//     static member inline xAxisInnerPadding(value: float) = Interop.mkProperty<IVerticalBarChartProps> "xAxisInnerPadding" value
-//     static member inline xAxisOuterPadding(value: float) = Interop.mkProperty<IVerticalBarChartProps> "xAxisOuterPadding" value
-//     static member inline enableGradient(value: bool) = Interop.mkProperty<IVerticalBarChartProps> "enableGradient" value
-//     static member inline roundCorners(value: bool) = Interop.mkProperty<IVerticalBarChartProps> "roundCorners" value
-
-// type [<Erase>] VSChartDataPoint =
-//     /// data the datapoint in the chart
-//     static member inline data(value: float) = Interop.mkProperty<IVSChartDataPoint> "data" value
-//     /// data the datapoint in the chart
-//     static member inline data(value: string) = Interop.mkProperty<IVSChartDataPoint> "data" value
-//     /// Legend text for the datapoint in the chart
-//     static member inline legend(value: string) = Interop.mkProperty<IVSChartDataPoint> "legend" value
-//     /// color for the legend in the chart
-//     static member inline color(value: string) = Interop.mkProperty<IVSChartDataPoint> "color" value
-//     /// Callout data for x axis
-//     /// This is an optional prop, If haven't given legend will take
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVSChartDataPoint> "xAxisCalloutData" value
-//     /// Accessibility data for callout
-//     static member inline callOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IVSChartDataPoint> "callOutAccessibilityData" (value |> List.toArray)
-//     /// Callout data for y axis
-//     /// This is an optional prop, If haven't given data will take
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IVSChartDataPoint> "yAxisCalloutData" value
-//     /// The prop used to define the culture to localized the numbers
-//     static member inline culture(value: string) = Interop.mkProperty<IVSChartDataPoint> "culture" value
-
-// module lineDataInVerticalStackedBarChart =
-//     type [<Erase>] legendShape =
-//         class
-//             inherit legendShape<ILineDataInVerticalStackedBarChart>
-//         end
-
-// type [<Erase>] lineDataInVerticalStackedBarChart =
-//     static member inline y(value: float) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "y" value
-//     static member inline y(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "y" value
-//     static member inline legend(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "legend" value
-//     static member inline color(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "color" value
-//     static member inline data(value: float) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "data" value
-//     static member inline data(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "data" value
-//     static member inline yAxisCalloutData(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "yAxisCalloutData" value
-//     static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "useSecondaryYScale" value
-//     static member inline lineOptions(value: ILineChartLineOptions list) = Interop.mkProperty<ILineDataInVerticalStackedBarChart> "lineOptions" (keyValueList CaseRules.LowerFirst value)
-
-// type [<Erase>] verticalStackBarChartProps =
-//     static member inline chartData(value: IVSChartDataPoint list) = Interop.mkProperty<IVerticalStackedChartProps> "chartData" (value |> List.toArray)
-//     static member inline xAxisPoint(value: float) = Interop.mkProperty<IVerticalStackedChartProps> "xAxisPoint" value
-//     static member inline xAxisPoint(value: string) = Interop.mkProperty<IVerticalStackedChartProps> "xAxisPoint" value
-//     static member inline xAxisPoint(value: DateTime) = Interop.mkProperty<IVerticalStackedChartProps> "xAxisPoint" value
-//     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVerticalStackedChartProps> "xAxisCalloutData" value
-//     static member inline lineData(value: ILineDataInVerticalStackedBarChart list) = Interop.mkProperty<IVerticalStackedChartProps> "lineData" (value |> List.toArray)
-//     static member inline stackCallOutAccessibilityData(value: IAccessibilityProps list) = Interop.mkProperty<IVerticalStackedChartProps> "stackCallOutAccessibilityData" (value |> List.toArray)
-
-// module verticalStackedBarChart =
-//     type [<Erase>] barWidth =
-//         static member inline ``default`` = Interop.mkProperty<IVerticalStackedBarChartProps> "barWidth" "default"
-//         static member inline auto = Interop.mkProperty<IVerticalStackedBarChartProps> "barWidth" "auto"
-
-//     type [<Erase>] mode =
-//         static member inline ``default`` = Interop.mkProperty<IVerticalStackedBarChartProps> "mode" "default"
-//         static member inline plotly = Interop.mkProperty<IVerticalStackedBarChartProps> "mode" "plotly"
-
-//     type [<Erase>] styles =
-//         inherit cartesianChartStyles<IVerticalStackedBarChartStyles>
-//         static member inline opacityChangeOnHover(value: string) = Interop.mkProperty<IVerticalStackedBarChartStyles> "opacityChangeOnHover" value
-//         static member inline barLabel(value: string) = Interop.mkProperty<IVerticalStackedBarChartStyles> "barLabel" value
-
-//     type [<Erase>] reflowProps =
-//         static member inline none = Interop.mkProperty<IVerticalStackedBarChartProps> "mode" "none"
-//         static member inline minWidth = Interop.mkProperty<IVerticalStackedBarChartProps> "mode" "min-width"
-
-// type [<Erase>] verticalStackedBarChart =
-//     inherit cartesianChartProps<IVerticalStackedBarChartProps>
-//     static member inline data(value: IVerticalStackedChartProps list) = Interop.mkProperty<IVerticalStackedBarChartProps> "data" (value |> List.toArray)
-//     static member inline barGapMax(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "barGapMax" value
-//     static member inline barCornerRadius(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "barCornerRadius" value
-//     static member inline barMinimumHeight(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "barMinimumHeight" value //
-//     static member inline chartTitle(value: string) = Interop.mkProperty<IVerticalStackedBarChartProps> "chartTitle" value
-//     static member inline isCalloutForStack(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "isCalloutForStack" value
-//     static member inline styles(value: IVerticalStackedBarChartStyles list) = Interop.mkProperty<IVerticalStackedBarChartProps> "styles" (value |> List.toArray)
-
-//     // TODO onRenderCalloutPerStack
-//     // TODO onRenderCalloutPerDataPoint
-
-//     static member inline yMinValue(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "yMinValue" value
-//     static member inline allowHoverOnLegend(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "allowHoverOnLegend" value
-//     static member inline onBarClick(value: obj) =  Interop.mkProperty<IVerticalStackedBarChartProps> "onBarClick" value // TODO, use types instead of obj
-//     static member inline culture(value: string) = Interop.mkProperty<IVerticalStackedBarChartProps> "culture" value
-//     static member inline xAxisPadding(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "xAxisPadding" value
-//     static member inline lineOptions(value: ILineChartLineOptions list) = Interop.mkProperty<IVerticalStackedBarChartProps> "lineOptions" (keyValueList CaseRules.LowerFirst value)
-//     static member inline hideLabels(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "hideLabels" value
-//     static member inline xAxisInnerPadding(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "xAxisInnerPadding" value
-//     static member inline xAxisOuterPadding(value: float) = Interop.mkProperty<IVerticalStackedBarChartProps> "xAxisOuterPadding" value
-//     static member inline enableGradient(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "enableGradient" value
-//     static member inline roundCorners(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "roundCorners" value
-//     static member inline showYAxisLablesTooltip(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "showYAxisLablesTooltip" value
-//     static member inline showYAxisLables(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProps> "showYAxisLables" value
-
-// type [<Erase>] chartTableData =
-//     static member inline value(value: string) = Interop.mkProperty<IChartTableDataProps> "value" value
-//     static member inline value(value: float) = Interop.mkProperty<IChartTableDataProps> "value" value
-//     static member inline value(value: bool) = Interop.mkProperty<IChartTableDataProps> "value" value
-//     static member inline value() = Interop.mkProperty<IChartTableDataProps> "value" null
-//     static member inline style(properties: IStyleAttribute list) = Interop.mkProperty<IChartTableDataProps> "style" (createObj !!properties)
-
-// type [<Erase>] chartTable =
-//     static member inline headers(value: IChartTableDataProps list) = Interop.mkProperty<IChartTableProps> "headers" (value |> List.toArray)
-//     static member inline rows(value: List<IChartTableDataProps list>) =
-//         value
-//         |> List.map List.toArray
-//         |> Array.ofList
-//         |> Interop.mkProperty<IChartTableProps> "rows"
-
-//     static member inline width(value: string) = Interop.mkProperty<IChartTableProps> "width" value
-//     static member inline width(value: float) = Interop.mkProperty<IChartTableProps> "width" value
-//     static member inline height(value: string) = Interop.mkProperty<IChartTableProps> "height" value
-//     static member inline height(value: float) = Interop.mkProperty<IChartTableProps> "height" value
-//     static member inline className(value: string) = Interop.mkProperty<IChartTableProps> "className" value
-//     static member inline styles(value: IChartTableStyles list) = Interop.mkProperty<IChartTableProps> "headers" (value |> List.toArray)
-
-//     // TODO componentRef?: React_2.RefObject<Chart>; this correct?
-
-//     static member inline componentRef(value: IRefValue<FocusProp>) = Interop.mkProperty<IChartTableProps> "componentRef" value
 
 //------------------------------------------------------------------------- CartesianChart ----------------------------------------------------------------------
 type [<Erase>] cartesianChart<'Property> =
@@ -2224,43 +2028,7 @@ type [<Erase>] horizontalBarChartWithAxis =
 
 //-------------------------------------------------------- HorizontalBarChartWithAxisDataPoint ---------------------------------------
 
-type [<Erase>] horizontalBarChartWithAxisDataPoint =
-    ///Dependent value of the data point, rendered along the x-axis.
-    static member inline x(value: int) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "x" value
-    ///Dependent value of the data point, rendered along the x-axis.
-    static member inline x(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "x" value
-    ///Dependent value of the data point, rendered along the x-axis.
-    static member inline x(value: decimal) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "x" value
-    /// Independent value of the data point, rendered along the y-axis.
-    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
-    /// If y is a string, then the data is evenly spaced along the y-axis.
-    static member inline y(value: int) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "y" value
-    /// Independent value of the data point, rendered along the y-axis.
-    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
-    /// If y is a string, then the data is evenly spaced along the y-axis.
-    static member inline y(value: float) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "y" value
-    /// Independent value of the data point, rendered along the y-axis.
-    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
-    /// If y is a string, then the data is evenly spaced along the y-axis.
-    static member inline y(value: decimal) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "y" value
-    /// Independent value of the data point, rendered along the y-axis.
-    /// If y is a number, then each y-coordinate is plotted at its y-coordinate.
-    /// If y is a string, then the data is evenly spaced along the y-axis.
-    static member inline y(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "y" value
-    /// Legend text for the datapoint in the chart
-    static member inline legend(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "legend" value
-    /// color for the legend in the chart
-    static member inline color(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "color" value
-    /// Callout data for x axis
-    /// This is an optional prop, If haven't given legend will take
-    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "xAxisCalloutData" value
-    /// Callout data for y axis
-    /// This is an optional prop, If haven't given legend will take
-    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "yAxisCalloutData" value
-    /// onClick action for each datapoint in the chart
-    static member inline onClick(value: unit -> unit) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "onClick" (System.Func<_,_> value)
-    /// Accessibility data for callout
-    static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+type [<Erase>] horizontalBarChartWithAxisDataPoint = sharedBarChartWithDataPoint<IHorizontalBarChartWithAxisDataPointProp>
 
 //-------------------------------------------------------- HorizontalBarChartWithAxisStyles ---------------------------------------
 
@@ -2551,3 +2319,111 @@ type [<Erase>] sparkline =
 type [<Erase>] sparklineStyles =
     static member inline inlineBlock(value: string) = Interop.mkProperty<ISparklineStylesProp> "inlineBlock" value
     static member inline valueText(value: string) = Interop.mkProperty<ISparklineStylesProp> "valueText" value
+
+
+//-------------------------------------------------------- VerticalBarChart ---------------------------------------
+type [<Erase>] verticalBarChart =
+    inherit cartesianChart<IVerticalBarChartProp>
+    /// Data to render in the chart.
+    static member inline data(value: IVerticalBarChartDataPointProp list list) = Interop.mkProperty<IVerticalBarChartProp> "data" (value |> createObjArray)
+    /// Define a custom callout renderer for a data point.
+    static member inline onRenderCalloutPerDataPoint (handler: VerticalBarChartDataPoint option -> ReactElement) =
+                            Interop.mkProperty<IVerticalBarChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth (value: int) = Interop.mkProperty<IVerticalBarChartProp> "barWidth" value
+    /// Colors from which to select the color of each bar.
+    static member inline colors (value: string list) = Interop.mkProperty<IVerticalBarChartProp> "colors" (value |> List.toArray)
+    /// chart title for the chart
+    static member inline chartTitle (value: string) = Interop.mkProperty<IVerticalBarChartProp> "chartTitle" value
+    /// Legend text for the line datapoint in the chart
+    static member inline lineLegendText (value: string) = Interop.mkProperty<IVerticalBarChartProp> "lineLegendText" value
+    /// color for the legend  of the line in the chart
+    static member inline lineLegendColor (value: string) = Interop.mkProperty<IVerticalBarChartProp> "lineLegendColor" value
+    /// This prop makes sure that all the bars are of same color.
+    /// it will take the first color from the array of colors in
+    /// prop `colors` or if  `colors` prop is not given then default color is  palette.blueLight
+    static member inline useSingleColor (value: bool) = Interop.mkProperty<IVerticalBarChartProp> "useSingleColor" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles (value: IVerticalBarChartStylesProp list) = Interop.mkProperty<IVerticalBarChartProp> "styles" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture (value: string) = Interop.mkProperty<IVerticalBarChartProp> "culture" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: int) = Interop.mkProperty<IVerticalBarChartProp> "xAxisPadding" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: float) = Interop.mkProperty<IVerticalBarChartProp> "xAxisPadding" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: decimal) = Interop.mkProperty<IVerticalBarChartProp> "xAxisPadding" value
+    /// options for the line drawn
+    static member inline lineOptions (value: ILineChartLineOptionsProp list) = Interop.mkProperty<IVerticalBarChartProp> "lineOptions" (!!value |> createObj |> unbox)
+    /// Prop to hide the bar labels
+    static member inline hideLabels (value: bool) = Interop.mkProperty<IVerticalBarChartProp> "hideLabels" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: int) = Interop.mkProperty<IVerticalBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: float) = Interop.mkProperty<IVerticalBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: decimal) = Interop.mkProperty<IVerticalBarChartProp> "maxBarWidth" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: int) = Interop.mkProperty<IVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: float) = Interop.mkProperty<IVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: decimal) = Interop.mkProperty<IVerticalBarChartProp> "xAxisInnerPadding" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline xAxisOuterPadding (value: int) = Interop.mkProperty<IVerticalBarChartProp> "xAxisOuterPadding" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline xAxisOuterPadding (value: float) = Interop.mkProperty<IVerticalBarChartProp> "xAxisOuterPadding" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline xAxisOuterPadding (value: decimal) = Interop.mkProperty<IVerticalBarChartProp> "xAxisOuterPadding" value
+    /// The prop used to enable gradient fill color for the chart.
+    static member inline enableGradient (value: bool) = Interop.mkProperty<IVerticalBarChartProp> "enableGradient" value
+    /// The prop used to enable rounded corners for the chart.
+    static member inline roundCorners (value: bool) = Interop.mkProperty<IVerticalBarChartProp> "roundCorners" value
+
+module verticalBarChart =
+    /// Specifies the mode of the chart.
+    type [<Erase>] mode =
+        static member inline default' = Interop.mkProperty<IVerticalBarChartProp> "mode" "default"
+        static member inline plotly = Interop.mkProperty<IVerticalBarChartProp> "mode" "plotly"
+        static member inline histogram = Interop.mkProperty<IVerticalBarChartProp> "mode" "histogram"
+
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    type [<Erase>] barWidth =
+        static member inline default' = Interop.mkProperty<IVerticalBarChartProp> "barWidth" "default"
+        static member inline auto = Interop.mkProperty<IVerticalBarChartProp> "barWidth" "auto"
+
+//-------------------------------------------------------- VerticalBarChartDataPoint ---------------------------------------
+
+type [<Erase>] verticalBarChartDataPoint =
+    inherit sharedBarChartWithDataPoint<IVerticalBarChartDataPointProp>
+
+    static member inline lineData(value: ILineDataInVerticalBarChartProp list) = Interop.mkProperty<IVerticalBarChartDataPointProp> "lineData" (!!value |> createObj |> unbox)
+
+//-------------------------------------------------------- LineDataInVerticalBarChart ---------------------------------------
+
+type [<Erase>] lineDataInVerticalBarChart =
+    static member inline y(value: int) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "y" value
+    static member inline y(value: float) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "y" value
+    static member inline y(value: decimal) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "y" value
+    static member inline yAxisCalloutData (value: string) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "yAxisCalloutData " value
+    /// onClick action for each datapoint in the chart
+    static member inline onClick (value: unit -> unit) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "onClick " (System.Func<_,_> value)
+    /// Whether to use the secondary y scale or not
+    static member inline useSecondaryYScale (value: bool) = Interop.mkProperty<ILineDataInVerticalBarChartProp> "useSecondaryYScale " value
+
+//-------------------------------------------------------- VerticalBarChartStyles ---------------------------------------
+
+type [<Erase>] verticalBarChartStyles =
+    inherit sharedCartesianChartStyles<IVerticalBarChartStylesProp>
+    /// Style for the bar labels
+    static member inline barLabel(value: string) = Interop.mkProperty<IVerticalBarChartStylesProp> "barLabel" value
+    /// Styles for line border
+    static member inline lineBorder(value: string) = Interop.mkProperty<IVerticalBarChartStylesProp> "lineBorder" value

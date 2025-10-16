@@ -275,3 +275,22 @@ type HorizontalBarChartWithAxisDataPoint = {
     onClick: unit -> unit
     callOutAccessibilityData: AccessibilityProps
 }
+
+type LineDataInVerticalBarChart = {
+    y: int
+    yAxisCalloutData: string option
+    onClick: unit -> unit
+    useSecondaryYScale: bool
+}
+
+type VerticalBarChartDataPoint = {
+    x: U3<int, string, DateTime>
+    y: int
+    legend: string
+    color: string
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+    lineData: LineDataInVerticalBarChart
+    onClick: unit -> unit
+    callOutAccessibilityData: AccessibilityProps
+}

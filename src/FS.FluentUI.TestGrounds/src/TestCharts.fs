@@ -97,253 +97,6 @@ let ganttChartDataList = [
     ]
 ]
 
-type HeatMapChartDataPoint = {
-    X: float
-    Y: string
-    Value: float
-    RectText: float
-    Description: string
-}
-
-type HeatMapChartData = {
-    Name: string
-    Value: float
-    Data: HeatMapChartDataPoint list
-}
-
-let heatMapDataPointsList: HeatMapChartData list = [
-    {
-        Name = "Excellent (0-200)"
-        Value = 100.0
-        Data = [
-            {
-                X = 2.0
-                Y = "2"
-                Value = 46.0
-                RectText = 46.0
-                Description = "air quality seems to be excellent today"
-            }
-        ]
-    }
-    {
-        Name = "Good (201-300)"
-        Value = 250.0
-        Data = [
-            {
-                X = 0.0
-                Y = "1"
-                Value = 265.0
-                RectText = 265.0
-                Description = "today we have good air quality in Alaska"
-            }
-            {
-                X = 1.0
-                Y = "0"
-                Value = 250.0
-                RectText = 250.0
-                Description = "a sudden rise of 150 units in Ohio today"
-            }
-            {
-                X = 2.0
-                Y = "0"
-                Value = 235.0
-                RectText = 235.0
-                Description = "air quality seems to have decreased by only 15 units from yesterday"
-            }
-            {
-                X = 6.0
-                Y = "2"
-                Value = 300.0
-                RectText = 300.0
-                Description = "air comes to control a little bit more than yesterday"
-            }
-            {
-                X = 0.0
-                Y = "3"
-                Value = 290.0
-                RectText = 290.0
-                Description = "1st day in the week, DC witnesses good air quality"
-            }
-            {
-                X = 4.0
-                Y = "4"
-                Value = 280.0
-                RectText = 280.0
-                Description = "Air quality index decreases by exactly 300 units, giving the people of NYC good hope"
-            }
-            {
-                X = 5.0
-                Y = "3"
-                Value = 300.0
-                RectText = 300.0
-                Description = "60 units decreased from yesterday."
-            }
-        ]
-    }
-    {
-        Name = "Medium (301-400)"
-        Value = 350.0
-        Data = [
-            {
-                X = 1.0
-                Y = "1"
-                Value = 345.0
-                RectText = 345.0
-                Description = "Alaska has just reported nearly 100 units hike in air quality"
-            }
-            {
-                X = 6.0
-                Y = "1"
-                Value = 325.0
-                RectText = 325.0
-                Description = "Alaska to 300"
-            }
-            {
-                X = 5.0
-                Y = "2"
-                Value = 390.0
-                RectText = 390.0
-                Description = "air comes to control a little bit"
-            }
-            {
-                X = 1.0
-                Y = "3"
-                Value = 385.0
-                RectText = 385.0
-                Description = "Washington DC witnesses a hike of nearly 100 units in air quality"
-            }
-            {
-                X = 4.0
-                Y = "3"
-                Value = 360.0
-                RectText = 360.0
-                Description = "a 200% hike in the air quality index"
-            }
-            {
-                X = 1.0
-                Y = "2"
-                Value = 400.0
-                RectText = 400.0
-                Description = "a sudden spike in the badness of the air quality"
-            }
-            {
-                X = 3.0
-                Y = "0"
-                Value = 400.0
-                RectText = 400.0
-                Description = "situation got worse in air quality due to industrial smoke"
-            }
-        ]
-    }
-    {
-        Name = "Danger (401-500)"
-        Value = 450.0
-        Data = [
-            {
-                X = 4.0
-                Y = "0"
-                Value = 423.0
-                RectText = 423.0
-                Description = "we can see an increase of 23 units"
-            }
-            {
-                X = 2.0
-                Y = "1"
-                Value = 463.0
-                RectText = 463.0
-                Description = "day by day, situation is getting worse in Alaska"
-            }
-            {
-                X = 3.0
-                Y = "2"
-                Value = 480.0
-                RectText = 480.0
-                Description = "same story, today also air quality decreases. a bad day in Texas"
-            }
-            {
-                X = 2.0
-                Y = "3"
-                Value = 491.0
-                RectText = 491.0
-                Description = "Day by day, 100 units are increasing in air quality"
-            }
-            {
-                X = 1.0
-                Y = "4"
-                Value = 433.0
-                RectText = 433.0
-                Description =
-                    "They say good things stay for a short time, today this saying became reality. New York has witnessed nearly 300% bad air quality"
-            }
-            {
-                X = 5.0
-                Y = "4"
-                Value = 473.0
-                RectText = 473.0
-                Description = "Today is the same fate as the 2nd day. still, air quality stays above 400"
-            }
-        ]
-    }
-    {
-        Name = "Very Danger (501-600)"
-        Value = 550.0
-        Data = [
-            {
-                X = 5.0
-                Y = "0"
-                Value = 600.0
-                RectText = 600.0
-                Description = "looks like god has cursed us with poisonous air. worst air quality index"
-            }
-            {
-                X = 5.0
-                Y = "1"
-                Value = 536.0
-                RectText = 536.0
-                Description =
-                    "shh!, all the hopes were washed away in the rain yesterday, with another hike of 400% in air quality"
-            }
-            {
-                X = 3.0
-                Y = "1"
-                Value = 520.0
-                RectText = 520.0
-                Description = "Alaska planning to build air purifier to control the air quality"
-            }
-            {
-                X = 4.0
-                Y = "2"
-                Value = 525.0
-                RectText = 525.0
-                Description = "air worsens badly today due to farmers burning the harvest"
-            }
-            {
-                X = 6.0
-                Y = "3"
-                Value = 560.0
-                RectText = 560.0
-                Description =
-                    "Due to industrial pollution and the burning of harvest, it resulted in bad air quality in Washington DC"
-            }
-            {
-                X = 3.0
-                Y = "4"
-                Value = 580.0
-                RectText = 580.0
-                Description =
-                    "Air quality index is becoming worse day by day, leaving the people of NYC in very bad medical conditions."
-            }
-            {
-                X = 6.0
-                Y = "4"
-                Value = 590.0
-                RectText = 590.0
-                Description = "finally, the weekend ends with very bad air quality in New York City"
-            }
-        ]
-    }
-]
-
 let basicChartTableHeaders = [
     [ chartTableHeader.value "Product" ]
     [ chartTableHeader.value "Q1 Sales" ]
@@ -984,6 +737,29 @@ let sparklineData = [
     ]
 ]
 
+let verticalBarChartDataList = [
+    [
+        verticalBarChartDataPoint.x "This is a medium long label."
+        verticalBarChartDataPoint.y 3500
+        verticalBarChartDataPoint.color "#627CEF"
+    ]
+    [
+        verticalBarChartDataPoint.x "This is a long label This is a long label"
+        verticalBarChartDataPoint.y 2500
+        verticalBarChartDataPoint.color "#C19C00"
+    ]
+    [
+        verticalBarChartDataPoint.x "This label is as long as the previous one"
+        verticalBarChartDataPoint.y 1900
+        verticalBarChartDataPoint.color "#E650AF"
+    ]
+    [
+        verticalBarChartDataPoint.x "A short label"
+        verticalBarChartDataPoint.y 2800
+        verticalBarChartDataPoint.color "#0E7878"
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -1173,182 +949,13 @@ let TestChartsComponent () =
                 sparkline.data sparklineData
                 sparkline.showLegend true
             ]
+            Fui.verticalBarChart [
+                verticalBarChart.chartTitle "Vertical bar chart rotated labels example"
+                verticalBarChart.data verticalBarChartDataList
+                verticalBarChart.height 350
+                verticalBarChart.width 650
+                verticalBarChart.hideLegend true
+                verticalBarChart.rotateXAxisLables true
+            ]
         ]
     ]
-
-                            //         Charts.verticalStackedBarChart [
-                            //             verticalStackedBarChart.styles [ styles.barLabel "" ]
-                            //             verticalStackedBarChart.chartTitle "stacked title"
-                            //             verticalStackedBarChart.data [
-                            //                 Charts.verticalStackedBarChartProps [
-                            //                     verticalStackBarChartProps.xAxisPoint 2
-                            //                     verticalStackBarChartProps.chartData [
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 40
-                            //                             VSChartDataPoint.legend "Metadata1"
-                            //                             VSChartDataPoint.color
-                            //                                 Theme.tokens.colorStatusWarningForeground1
-                            //                         ]
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 4
-                            //                             VSChartDataPoint.legend "Metadata2"
-                            //                             VSChartDataPoint.color
-                            //                                 Theme.tokens.colorPalettePlatinumForeground2
-                            //                         ]
-                            //                     ]
-                            //                     verticalStackBarChartProps.lineData [
-                            //                         Charts.lineDataInVerticalStackedBarChart [
-                            //                             lineDataInVerticalStackedBarChart.y 25
-                            //                             lineDataInVerticalStackedBarChart.legend "Supported"
-                            //                         ]
-                            //                     ]
-                            //                 ]
-                            //                 Charts.verticalStackedBarChartProps [
-                            //                     verticalStackBarChartProps.xAxisPoint 3
-                            //                     verticalStackBarChartProps.chartData [
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 30
-                            //                             VSChartDataPoint.color Theme.tokens.colorBrandBackground2
-                            //                             VSChartDataPoint.legend "Metadata5"
-                            //                         ]
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 20
-                            //                             VSChartDataPoint.legend "Metadata6"
-                            //                             VSChartDataPoint.color Theme.tokens.colorBrandForegroundInverted
-                            //                         ]
-                            //                     ]
-                            //                     verticalStackBarChartProps.lineData [
-                            //                         Charts.lineDataInVerticalStackedBarChart [
-                            //                             lineDataInVerticalStackedBarChart.y 21
-                            //                             lineDataInVerticalStackedBarChart.color
-                            //                                 Theme.tokens.colorPalettePurpleBorderActive
-                            //                             lineDataInVerticalStackedBarChart.legend "Supported"
-                            //                         ]
-                            //                     ]
-                            //                 ]
-                            //                 Charts.verticalStackedBarChartProps [
-                            //                     verticalStackBarChartProps.xAxisPoint 4
-                            //                     verticalStackBarChartProps.chartData [
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 30
-                            //                             VSChartDataPoint.color
-                            //                                 Theme.tokens.colorStatusSuccessBackground3
-                            //                             VSChartDataPoint.legend "Metadata3"
-                            //                         ]
-                            //                         Charts.vsChartDataPoint [
-                            //                             VSChartDataPoint.data 20
-                            //                             VSChartDataPoint.legend "Metadata4"
-                            //                             VSChartDataPoint.color
-                            //                                 Theme.tokens.colorStatusWarningBackground3
-                            //                         ]
-                            //                     ]
-                            //                     verticalStackBarChartProps.lineData [
-                            //                         Charts.lineDataInVerticalStackedBarChart [
-                            //                             lineDataInVerticalStackedBarChart.lineOptions [
-                            //                                 lineChartLineOptions.lineBorderColor "red"
-                            //                             ]
-                            //                             lineDataInVerticalStackedBarChart.y 35
-                            //                             lineDataInVerticalStackedBarChart.color
-                            //                                 Theme.tokens.colorPalettePurpleBorderActive
-                            //                             lineDataInVerticalStackedBarChart.legend "Supported"
-
-                            //                         ]
-                            //                     ]
-                            //                 ]
-                            //             ]
-                            //             verticalStackedBarChart.height 200
-                            //             verticalStackedBarChart.width 350
-                            //             verticalStackedBarChart.lineOptions [
-                            //                 lineChartLineOptions.strokeWidth 2.0
-                            //                 lineChartLineOptions.strokeLinecap.square
-                            //                 lineChartLineOptions.lineBorderWidth 2
-                            //             ]
-                            //             verticalStackedBarChart.hideLabels true
-                            //             verticalStackedBarChart.roundCorners false
-                            //             verticalStackedBarChart.roundedTicks true
-                            //         ]
-                            //     ]
-                            // ]
-
-
-                            // Charts.verticalBarChart [
-                            //     verticalBarChart.chartTitle "vertical normal"
-                            //     verticalBarChart.enableGradient true
-                            //     verticalBarChart.data [
-                            //         Charts.verticalBarChartDataProp [
-                            //             verticalBarChartDataPoint.x 8.
-                            //             verticalBarChartDataPoint.y 2
-                            //             verticalBarChartDataPoint.legend "legend"
-                            //         ]
-                            //         Charts.verticalBarChartDataProp [
-                            //             verticalBarChartDataPoint.x 5.
-                            //             verticalBarChartDataPoint.y 7
-                            //             verticalBarChartDataPoint.legend "legend2"
-                            //         ]
-                            //         Charts.verticalBarChartDataProp [
-                            //             verticalBarChartDataPoint.x 7.
-                            //             verticalBarChartDataPoint.y 4
-                            //             verticalBarChartDataPoint.legend "legend3"
-                            //         ]
-                            //         Charts.verticalBarChartDataProp [
-                            //             verticalBarChartDataPoint.x 4.
-                            //             verticalBarChartDataPoint.y 15
-                            //             verticalBarChartDataPoint.color "red"
-                            //             verticalBarChartDataPoint.legend "legend4"
-                            //         ]
-                            //         Charts.verticalBarChartDataProp [
-                            //             verticalBarChartDataPoint.x 4.
-                            //             verticalBarChartDataPoint.y 13
-                            //             verticalBarChartDataPoint.color "purple"
-                            //             verticalBarChartDataPoint.legend "legend5"
-                            //         ]
-                            //     ]
-                            // ]
-                                    // Charts.gaugeChart [
-                                    //     gaugeChart.enableGradient true
-                                    //     gaugeChart.chartValue 67.7
-                                    //     gaugeChart.variant.multipleSegment
-                                    //     gaugeChart.segments [
-                                    //         Charts.gaugeChartSegment [
-                                    //             gaugeChartSegment.legend "test1"
-                                    //             gaugeChartSegment.color "green"
-                                    //             gaugeChartSegment.size 50
-                                    //         ]
-                                    //         Charts.gaugeChartSegment [
-                                    //             gaugeChartSegment.legend "test2"
-                                    //             gaugeChartSegment.color "blue"
-                                    //             gaugeChartSegment.size 10
-                                    //         ]
-                                    //         Charts.gaugeChartSegment [
-                                    //             gaugeChartSegment.legend "test3"
-                                    //             gaugeChartSegment.color "red"
-                                    //             gaugeChartSegment.size 40
-                                    //         ]
-                                    //     ]
-
-                                    // ]
-                            //         ]
-                            //     ]
-                            // ]
-                            // Charts.donutChart [
-                            //     donutChart.data [
-                            //         chartProps.chartTitle "Pai sjart"
-                            //         chartProps.chartData [
-                            //             Charts.chartData [
-                            //                 chartDataPoint.legend "test"
-                            //                 chartDataPoint.color "green"
-                            //                 chartDataPoint.data 65.
-                            //             ]
-                            //             Charts.chartData [
-                            //                 chartDataPoint.legend "test2"
-                            //                 chartDataPoint.color "blue"
-                            //                 chartDataPoint.data 35.
-                            //             ]
-                            //         ]
-                            //     ]
-                            // ]
-    //                 ]
-    //             ]
-    //         ]
-    //     ]
-    // ]
