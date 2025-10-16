@@ -2515,3 +2515,39 @@ type [<Erase>] scatterChartStyles =
     inherit sharedCartesianChartStyles<IScatterChartStylesProp>
     /// Style for the marker label
     static member inline markerLabel(value: string) = Interop.mkProperty<IScatterChartStylesProp> "markerLabel" value
+
+//-------------------------------------------------------- Sparkline ---------------------------------------
+type [<Erase>] sparkline =
+    /// An array of chart data points for the Sparkline chart
+    static member inline data(value: IChartProp list) = Interop.mkProperty<ISparklineProp> "data" (!!value |> createObj |> unbox)
+    /// Width of chart
+    static member inline width(value: int) = Interop.mkProperty<ISparklineProp> "width" value
+    /// Width of chart
+    static member inline width(value: float) = Interop.mkProperty<ISparklineProp> "width" value
+    /// Width of chart
+    static member inline width(value: decimal) = Interop.mkProperty<ISparklineProp> "width" value
+    /// Height of chart
+    static member inline height(value: int) = Interop.mkProperty<ISparklineProp> "height" value
+    /// Height of chart
+    static member inline height(value: float) = Interop.mkProperty<ISparklineProp> "height" value
+    /// Height of chart
+    static member inline height(value: decimal) = Interop.mkProperty<ISparklineProp> "height" value
+    /// Width of value text
+    static member inline valueTextWidth(value: int) = Interop.mkProperty<ISparklineProp> "valueTextWidth" value
+    /// Width of value text
+    static member inline valueTextWidth(value: float) = Interop.mkProperty<ISparklineProp> "valueTextWidth" value
+    /// Width of value text
+    static member inline valueTextWidth(value: decimal) = Interop.mkProperty<ISparklineProp> "valueTextWidth" value
+    /// Additional CSS class(es) to apply to the SparklineChart.
+    static member inline className(value: string) = Interop.mkProperty<ISparklineProp> "className" value
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture(value: string) = Interop.mkProperty<ISparklineProp> "culture" value
+    /// Prop used to determine whether to show the legend or not
+    static member inline showLegend(value: bool) = Interop.mkProperty<ISparklineProp> "showLegend" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: ISparklineStylesProp list) = Interop.mkProperty<ISparklineProp> "styles" (!!value |> createObj |> unbox)
+
+//-------------------------------------------------------- SparklineStyles ---------------------------------------
+type [<Erase>] sparklineStyles =
+    static member inline inlineBlock(value: string) = Interop.mkProperty<ISparklineStylesProp> "inlineBlock" value
+    static member inline valueText(value: string) = Interop.mkProperty<ISparklineStylesProp> "valueText" value

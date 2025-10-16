@@ -891,7 +891,7 @@ let legendsData = [
     ]
 ]
 
-let lineChartPoints = [
+let lineChartPointsData = [
     chart.chartTitle "Line Chart"
     chart.lineChartData [
         [
@@ -959,6 +959,26 @@ let scatterChartData = [
                 [ scatterChartDataPoint.x "Clothing"; scatterChartDataPoint.y 22000; scatterChartDataPoint.markerSize 16 ]
                 [ scatterChartDataPoint.x "Toys"; scatterChartDataPoint.y 12000; scatterChartDataPoint.markerSize 12 ]
                 [ scatterChartDataPoint.x "Books"; scatterChartDataPoint.y 8000; scatterChartDataPoint.markerSize 6 ]
+            ]
+        ]
+    ]
+]
+
+let sparklineData = [
+    chart.chartTitle "10.21"
+    chart.lineChartData [
+        [
+            lineChartPoints.legend "19.64"
+            lineChartPoints.color (Fui.getColorFromToken Fui.dataVizPalette.color1)
+            lineChartPoints.data [
+                [ lineChartDataPoint.x 1; lineChartDataPoint.y 58.13 ]
+                [ lineChartDataPoint.x 2; lineChartDataPoint.y 140.98 ]
+                [ lineChartDataPoint.x 3; lineChartDataPoint.y 20 ]
+                [ lineChartDataPoint.x 4; lineChartDataPoint.y 89.7 ]
+                [ lineChartDataPoint.x 5; lineChartDataPoint.y 99 ]
+                [ lineChartDataPoint.x 6; lineChartDataPoint.y 13.28 ]
+                [ lineChartDataPoint.x 7; lineChartDataPoint.y 31.32 ]
+                [ lineChartDataPoint.x 8; lineChartDataPoint.y 10.21 ]
             ]
         ]
     ]
@@ -1119,7 +1139,7 @@ let TestChartsComponent () =
                 ]
             ]
             Fui.lineChart [
-                lineChart.data lineChartPoints
+                lineChart.data lineChartPointsData
                 lineChart.strokeWidth 6
                 lineChart.yMaxValue 90
                 lineChart.showXAxisLablesTooltip true
@@ -1148,6 +1168,10 @@ let TestChartsComponent () =
                 scatterChart.styles [
                     scatterChartStyles.svgTooltip "test-svg-styles"
                 ]
+            ]
+            Fui.sparkline [
+                sparkline.data sparklineData
+                sparkline.showLegend true
             ]
         ]
     ]
