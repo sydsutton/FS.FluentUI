@@ -417,26 +417,26 @@ let funnelChartStackedData = [
     [
         funnelChartDataPoint.stage "Sign-Up"
         funnelChartDataPoint.subValues [
-            [
-                funnelChartDataPointSubValue.category "A"
-                funnelChartDataPointSubValue.value 60
-                funnelChartDataPointSubValue.color "red"
-            ]
-            [
-                funnelChartDataPointSubValue.category "B"
-                funnelChartDataPointSubValue.value 40
-                funnelChartDataPointSubValue.color "blue"
-            ]
-            [
-                funnelChartDataPointSubValue.category "C"
-                funnelChartDataPointSubValue.value 20
-                funnelChartDataPointSubValue.color "green"
-            ]
-            [
-                funnelChartDataPointSubValue.category "D"
-                funnelChartDataPointSubValue.value 10
-                funnelChartDataPointSubValue.color "pink"
-            ]
+            {|
+                category ="A"
+                value= 60
+                color ="red"
+            |}
+            {|
+                category= "B"
+                value= 40
+                color= "blue"
+            |}
+            {|
+                category= "C"
+                value= 20
+                color= "green"
+            |}
+            {|
+                category= "D"
+                value= 10
+                color= "pink"
+            |}
         ]
     ]
     [
