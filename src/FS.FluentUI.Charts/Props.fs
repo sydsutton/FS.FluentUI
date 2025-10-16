@@ -2427,3 +2427,225 @@ type [<Erase>] verticalBarChartStyles =
     static member inline barLabel(value: string) = Interop.mkProperty<IVerticalBarChartStylesProp> "barLabel" value
     /// Styles for line border
     static member inline lineBorder(value: string) = Interop.mkProperty<IVerticalBarChartStylesProp> "lineBorder" value
+
+//-------------------------------------------------------- VerticalStackedBarChart ---------------------------------------
+
+type [<Erase>] verticalStackedBarChart =
+    inherit cartesianChart<IVerticalStackedBarChartProp>
+    /// Data to render in the chart.
+    static member inline data(value: IVerticalStackedChartProp list list) = Interop.mkProperty<IVerticalStackedBarChartProp> "data" (value |> createObjArray)
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" value
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    static member inline barWidth(value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" value
+    /// Gap (max) between bars in a stack. When non-zero, the bars in a stack will
+    /// be separated by gaps. The actual size of each gap is calculated as 20% of
+    /// the height of that stack, with a minimum size of 1px and a maximum given by
+    /// this prop.
+    static member inline barGapMax(value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "barGapMax" value
+    /// Gap (max) between bars in a stack. When non-zero, the bars in a stack will
+    /// be separated by gaps. The actual size of each gap is calculated as 20% of
+    /// the height of that stack, with a minimum size of 1px and a maximum given by
+    /// this prop.
+    static member inline barGapMax(value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "barGapMax" value
+    /// Gap (max) between bars in a stack. When non-zero, the bars in a stack will
+    /// be separated by gaps. The actual size of each gap is calculated as 20% of
+    /// the height of that stack, with a minimum size of 1px and a maximum given by
+    /// this prop.
+    static member inline barGapMax(value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "barGapMax" value
+    /// Corner radius of the bars
+    static member inline barCornerRadius(value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "barCornerRadius" value
+    /// Corner radius of the bars
+    static member inline barCornerRadius(value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "barCornerRadius" value
+    /// Corner radius of the bars
+    static member inline barCornerRadius(value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "barCornerRadius" value
+    /// The minimum height of a bar; bars below this height will be displayed at
+    /// this height. Note that this setting will result in the height of these data
+    /// points not being to scale.
+    static member inline barMinimumHeight(value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "barMinimumHeight" value
+    /// The minimum height of a bar; bars below this height will be displayed at
+    /// this height. Note that this setting will result in the height of these data
+    /// points not being to scale.
+    static member inline barMinimumHeight(value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "barMinimumHeight" value
+    /// The minimum height of a bar; bars below this height will be displayed at
+    /// this height. Note that this setting will result in the height of these data
+    /// points not being to scale.
+    static member inline barMinimumHeight(value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "barMinimumHeight" value
+    /// chart title for the chart
+    static member inline chartTitle(value: string) = Interop.mkProperty<IVerticalStackedBarChartProp> "chartTitle" value
+    /// To display multi stack callout or single callout
+    static member inline isCalloutForStack(value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "isCalloutForStack" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: IVerticalStackedBarChartStylesProp list) = Interop.mkProperty<IVerticalStackedBarChartProp> "styles" (!!value |> createObj |> unbox)
+    /// Define a custom callout renderer for a stack; default is to render per data point
+    static member inline onRenderCalloutPerStack (handler: VerticalStackedChartProps option -> ReactElement) =
+                            Interop.mkProperty<IVerticalStackedBarChartStylesProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
+    /// Define a custom callout renderer for a data point
+    static member inline onRenderCalloutPerDataPoint (handler: VSChartDataPoint option -> ReactElement) =
+                            Interop.mkProperty<IVerticalStackedBarChartStylesProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    /// yMinValue is supported for bar charts that has only lines
+    static member inline yMinValue (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "yMinValue" value
+    /// yMinValue is supported for bar charts that has only lines
+    static member inline yMinValue (value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "yMinValue" value
+    /// yMinValue is supported for bar charts that has only lines
+    static member inline yMinValue (value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "yMinValue" value
+    /// Allow hover actions on the legend
+    static member inline allowHoverOnLegend (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "allowHoverOnLegend" value
+    /// Click handler for bars; type of data is dependant on isCalloutForStack
+    static member inline onBarClick (value: MouseEvent -> VerticalStackedChartProps -> unit) = Interop.mkProperty<IVerticalStackedBarChartProp> "onBarClick" (System.Func<_,_,_> value)
+    /// Click handler for bars; type of data is dependant on isCalloutForStack
+    static member inline onBarClick (value: MouseEvent -> VSChartDataPoint -> unit) = Interop.mkProperty<IVerticalStackedBarChartProp> "onBarClick" (System.Func<_,_,_> value)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture (value: string) = Interop.mkProperty<IVerticalStackedBarChartProp> "culture" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisPadding" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisPadding" value
+    /// it's padding between bar's or lines in the graph
+    static member inline xAxisPadding (value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisPadding" value
+    /// options for the line drawn
+    static member inline lineOptions (value: ILineChartLineOptionsProp list) = Interop.mkProperty<IVerticalStackedBarChartProp> "lineOptions" (!!value |> createObj |> unbox)
+    /// Prop to hide the bar labels
+    static member inline hideLabels (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "hideLabels" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "maxBarWidth" value
+    /// Maximum width of a bar, in pixels.
+    static member inline maxBarWidth (value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "maxBarWidth" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisInnerPadding" value
+    /// Padding between bars as a fraction of the [step](https://d3js.org/d3-scale/band#band_step).
+    /// Takes a number in the range [0, 1]. Only applicable to string x-axis.
+    static member inline xAxisInnerPadding (value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisInnerPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisOuterPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding (value: float) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisOuterPadding" value
+    /// Padding before the first bar and after the last bar as a fraction of
+    /// the [step](https://d3js.org/d3-scale/band#band_step). Takes a number in the range [0, 1].
+    /// Only applicable to string x-axis.
+    static member inline xAxisOuterPadding (value: decimal) = Interop.mkProperty<IVerticalStackedBarChartProp> "xAxisOuterPadding" value
+    /// The prop used to enable gradient fill color for the chart.
+    static member inline enableGradient (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "enableGradient" value
+    /// The prop used to enable rounded corners for the chart.
+    static member inline roundCorners (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "roundCorners" value
+    /// Used for to elipse y axis labes and show tooltip on x axis labels
+    static member inline showYAxisLablesTooltip (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "showYAxisLablesTooltip" value
+    /// Used for showing complete y axis lables
+    static member inline showYAxisLables (value: bool) = Interop.mkProperty<IVerticalStackedBarChartProp> "showYAxisLables" value
+
+module verticalStackedBarChart =
+    /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
+    /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
+    type [<Erase>] barWidth =
+        static member inline default' = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" "default"
+        static member inline auto = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" "auto"
+    /// Specifies the mode of the chart.
+    type [<Erase>] mode =
+        static member inline default' = Interop.mkProperty<IVerticalStackedBarChartProp> "mode" "default"
+        static member inline plotly = Interop.mkProperty<IVerticalStackedBarChartProp> "mode" "plotly"
+
+// ------------------------------------------------------------- VerticalStackedChart ------------------------------------------
+
+type [<Erase>] verticalStackedChart =
+    /// data for the points in the chart
+    static member inline chartData(value: IVSChartDataPointProp list list) = Interop.mkProperty<IVerticalStackedChartProp> "chartData" (value |> createObjArray)
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: int) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: float) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: decimal) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: string) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: DateTime) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Data for x axis label for multistacked Vertical bar chart
+    static member inline xAxisPoint(value: DateOnly) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
+    /// Callout data for x axis
+    /// This is an optional prop, If haven't given, legend will take
+    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisCalloutData" value
+    /// line data to render lines on stacked bar chart
+    static member inline lineData(value: ILineDataInVerticalStackedBarChartProp list list) = Interop.mkProperty<IVerticalStackedChartProp> "lineData" (value |> createObjArray)
+    /// Accessibility data for Whole stack callout
+    static member inline stackCallOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IVerticalStackedChartProp> "stackCallOutAccessibilityData" (!!value |> createObj |> unbox)
+
+// ------------------------------------------------------------- VSChartDataPoint ------------------------------------------
+
+type [<Erase>] vsChartDataPoint =
+    /// data the datapoint in the chart
+    static member inline data(value: int) = Interop.mkProperty<IVSChartDataPointProp> "data" value
+    /// data the datapoint in the chart
+    static member inline data(value: float) = Interop.mkProperty<IVSChartDataPointProp> "data" value
+    /// data the datapoint in the chart
+    static member inline data(value: decimal) = Interop.mkProperty<IVSChartDataPointProp> "data" value
+    /// data the datapoint in the chart
+    static member inline data(value: string) = Interop.mkProperty<IVSChartDataPointProp> "data" value
+    /// Legend text for the datapoint in the chart
+    static member inline legend(value: string) = Interop.mkProperty<IVSChartDataPointProp> "legend" value
+    /// color for the legend in the chart
+    static member inline color(value: string) = Interop.mkProperty<IVSChartDataPointProp> "color" value
+    /// Callout data for x axis
+    /// This is an optional prop, If haven't given legend will take
+    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVSChartDataPointProp> "xAxisCalloutData" value
+    /// Callout data for y axis
+    /// This is an optional prop, If haven't given data will take
+    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IVSChartDataPointProp> "yAxisCalloutData" value
+    /// Accessibility data for callout
+    static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IVSChartDataPointProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture(value: string) = Interop.mkProperty<IVSChartDataPointProp> "culture" value
+
+// ------------------------------------------------------------- LineDataInVerticalStackedBarChart ------------------------------------------
+
+type [<Erase>] lineDataInVerticalStackedBarChart =
+    /// data the datapoint in the chart
+    static member inline y(value: int) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "y" value
+    /// data the datapoint in the chart
+    static member inline y(value: float) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "y" value
+    /// data the datapoint in the chart
+    static member inline y(value: decimal) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "y" value
+    /// data the datapoint in the chart
+    static member inline y(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "y" value
+    static member inline color(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "color" value
+    static member inline legend(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "legend" value
+    /// Data to show in callout
+    static member inline data(value: int) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "data" value
+    /// Data to show in callout
+    static member inline data(value: float) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "data" value
+    /// Data to show in callout
+    static member inline data(value: decimal) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "data" value
+    /// Data to show in callout
+    static member inline data(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "data" value
+    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "yAxisCalloutData" value
+    /// Whether to use the secondary y scale or not
+    static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "useSecondaryYScale" value
+    /// options for the line drawn
+    static member inline lineOptions(value: ILineChartLineOptionsProp list) = Interop.mkProperty<ILineDataInVerticalStackedBarChartProp> "lineOptions" (!!value |> createObj |> unbox)
+
+module lineDataInVerticalStackedBarChart =
+    /// The shape for the legend
+    type [<Erase>] legendShape = sharedLegendShape<ILineDataInVerticalStackedBarChartProp>
+
+// ------------------------------------------------------------- VerticalStackedBarChartStyles ------------------------------------------
+
+type [<Erase>] verticalStackedBarChartStyles =
+    inherit sharedCartesianChartStyles<IVerticalStackedBarChartStylesProp>
+    /// Style to change the opacity of bars in dataviz when we hover on a single bar or legends
+    static member inline opacityChangeOnHover(value: string) = Interop.mkProperty<IVerticalStackedBarChartStylesProp> "opacityChangeOnHover" value
+    /// Style for the bar labels
+    static member inline barLabel(value: string) = Interop.mkProperty<IVerticalStackedBarChartStylesProp> "barLabel" value

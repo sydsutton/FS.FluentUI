@@ -84,3 +84,7 @@ type [<Erase>] ISparklineStylesProp = interface end
 type [<Erase>] IVerticalBarChartDataPointProp = interface end
 type [<Erase>] ILineDataInVerticalBarChartProp = interface end
 type [<Erase>] IVerticalBarChartStylesProp = interface end
+type [<Erase>] IVerticalStackedChartProp = interface end
+type [<Erase>] IVSChartDataPointProp = interface end
+type [<Erase>] ILineDataInVerticalStackedBarChartProp = interface end
+type [<Erase>] IVerticalStackedBarChartStylesProp = interface end

@@ -294,3 +294,43 @@ type VerticalBarChartDataPoint = {
     onClick: unit -> unit
     callOutAccessibilityData: AccessibilityProps
 }
+
+type LineChartLineOptions = {
+    strokeWidth: U2<int, string>
+    strokeDasharray: U2<string, int>
+    strokeDashoffset: U2<string, int>
+    strokeLinecap: string
+    lineBorderWidth: U2<string, int>
+    lineBorderColor: string
+    curve: string
+    mode: string
+}
+
+type LineDataInVerticalStackedBarChart = {
+    y: U2<int, string>
+    color: string
+    legend: string
+    legendShape: string
+    data: U2<int, string>
+    yAxisCalloutData: string
+    useSecondaryYScale: bool
+    lineOptions: LineChartLineOptions
+}
+
+type VSChartDataPoint = {
+    data: U2<int, string>
+    legend: string
+    color: string
+    xAxisCalloutData: string
+    yAxisCalloutData: string
+    callOutAccessibilityData: AccessibilityProps
+    culture: string
+}
+
+type VerticalStackedChartProps = {
+    chartData: VSChartDataPoint array
+    xAxisPoint: U3<int, string, DateTime>
+    xAxisCalloutData: string
+    lineData: LineDataInVerticalStackedBarChart array
+    stackCallOutAccessibilityData: AccessibilityProps
+}

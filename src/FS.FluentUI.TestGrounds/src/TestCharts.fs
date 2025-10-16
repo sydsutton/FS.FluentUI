@@ -760,6 +760,30 @@ let verticalBarChartDataList = [
     ]
 ]
 
+let firstChartPoints = [
+    [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 2; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
+    [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 0.5; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
+    [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 0; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
+]
+
+let secondChartPoints = [
+    [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 30; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
+    [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 3; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
+    [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 40; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
+]
+
+let thirdChartPoints = [
+    [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 10; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
+    [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 60; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
+    [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 30; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
+]
+
+let verticalStackedBarChartDataList = [
+    [ verticalStackedChart.chartData firstChartPoints; verticalStackedChart.xAxisPoint "Simple Data" ]
+    [ verticalStackedChart.chartData secondChartPoints; verticalStackedChart.xAxisPoint "Long text will disaply all text" ]
+    [ verticalStackedChart.chartData thirdChartPoints; verticalStackedChart.xAxisPoint "Data" ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -956,6 +980,20 @@ let TestChartsComponent () =
                 verticalBarChart.width 650
                 verticalBarChart.hideLegend true
                 verticalBarChart.rotateXAxisLables true
+            ]
+            Fui.verticalStackedBarChart [
+                verticalStackedBarChart.data verticalStackedBarChartDataList
+                verticalStackedBarChart.chartTitle "Vertical stacked bar chart axis tooltip example"
+                verticalStackedBarChart.height 400
+                verticalStackedBarChart.width 600
+                verticalStackedBarChart.showYAxisLablesTooltip true
+                verticalStackedBarChart.wrapXAxisLables true
+                verticalStackedBarChart.barWidth.auto
+                verticalStackedBarChart.maxBarWidth 50
+                verticalStackedBarChart.xAxisInnerPadding 0.25
+                verticalStackedBarChart.enableGradient true
+                verticalStackedBarChart.roundCorners true
+                verticalStackedBarChart.barGapMax 0.5
             ]
         ]
     ]
