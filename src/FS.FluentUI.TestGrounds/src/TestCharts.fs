@@ -912,11 +912,35 @@ let lineChartPoints = [
     ]
 ]
 
+let sankeyChartDataList = [
+    chart.chartTitle "Sankey Chart"
+    chart.sankeyChartData [
+        sankeyChartData.nodes [
+            [ sNode.nodeId 0; sNode.name "node0"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color3); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color23)]
+            [ sNode.nodeId 1; sNode.name "node1"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color22); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color2)]
+            [ sNode.nodeId 2; sNode.name "node2"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color1); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color21)]
+            [ sNode.nodeId 3; sNode.name "node3"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color27); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color7)]
+            [ sNode.nodeId 4; sNode.name "node4"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color28); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color8)]
+            [ sNode.nodeId 5; sNode.name "node5"; sNode.color (Fui.getColorFromToken Fui.dataVizPalette.color4); sNode.borderColor (Fui.getColorFromToken Fui.dataVizPalette.color24)]
+        ]
+        sankeyChartData.links [
+            [ sLink.source 0; sLink.target 2; sLink.value 2 ]
+            [ sLink.source 1; sLink.target 2; sLink.value 2 ]
+            [ sLink.source 1; sLink.target 3; sLink.value 2 ]
+            [ sLink.source 0; sLink.target 4; sLink.value 2 ]
+            [ sLink.source 2; sLink.target 3; sLink.value 2 ]
+            [ sLink.source 2; sLink.target 4; sLink.value 2 ]
+            [ sLink.source 3; sLink.target 4; sLink.value 4 ]
+            [ sLink.source 3; sLink.target 5; sLink.value 4 ]
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
     Html.div [
-        prop.style [ style.width 600; style.margin 36 ]
+        prop.style [ style.width 1000; style.margin 36 ]
         prop.children [
             Fui.areaChart [
                 areaChart.mode.tonexty
@@ -1080,6 +1104,13 @@ let TestChartsComponent () =
                 ]
                 lineChart.enablePerfOptimization true
             ]
+            Fui.sankeyChart [
+                sankeyChart.data sankeyChartDataList
+                sankeyChart.height 300
+                sankeyChart.width 600
+                sankeyChart.shouldResize 900
+                sankeyChart.reflowProps.modeMinWidth
+            ]
         ]
     ]
 
@@ -1212,92 +1243,6 @@ let TestChartsComponent () =
                             //     ]
                             // ]
 
-                            // Html.div [
-                            //     prop.style [ style.marginBottom 50 ]
-                            //     prop.children [
-                            //         Html.div [
-                            //             prop.children [
-                                            // Charts.sankeyChart [
-                                            //     sankeyChart.data [
-                                            //         chartProps.chartTitle "Sankey title"
-                                            //         chartProps.sankeyChartData [
-                                            //             sankeyChartPoint.nodes [
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 0
-                                            //                     sNode.name "node0"
-                                            //                     sNode.color "red"
-                                            //                 ]
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 1
-                                            //                     sNode.name "node1"
-                                            //                     sNode.color "blue"
-                                            //                 ]
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 2
-                                            //                     sNode.name "node2"
-                                            //                     sNode.color "green"
-                                            //                 ]
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 3
-                                            //                     sNode.name "node3"
-                                            //                     sNode.color "orange"
-                                            //                 ]
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 4
-                                            //                     sNode.name "node4"
-                                            //                     sNode.color "yellow"
-                                            //                 ]
-                                            //                 Charts.sankeyChartSNode [
-                                            //                     sNode.nodeId 5
-                                            //                     sNode.name "node5"
-                                            //                     sNode.color "pink"
-                                            //                 ]
-                                            //             ]
-                                            //             sankeyChartPoint.links [
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 0
-                                            //                     sLink.target 2
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 1
-                                            //                     sLink.target 2
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 1
-                                            //                     sLink.target 3
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 0
-                                            //                     sLink.target 4
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 2
-                                            //                     sLink.target 3
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 2
-                                            //                     sLink.target 4
-                                            //                     sLink.value 2
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 3
-                                            //                     sLink.target 4
-                                            //                     sLink.value 4
-                                            //                 ]
-                                            //                 Charts.sankeyChartSLink [
-                                            //                     sLink.source 3
-                                            //                     sLink.target 5
-                                            //                     sLink.value 4
-                                            //                 ]
-                                            //             ]
-                                            //         ]
-                                            //     ]
-                                            // ]
                                     // Charts.scatterChart [
                                     //     scatterChart.data [
                                     //         chartProps.scatterChartData [

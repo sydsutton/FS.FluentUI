@@ -1137,7 +1137,7 @@ type [<Erase>] chart =
     /// data for the points in the scatter chart
     static member inline scatterChartData (value: IScatterChartPointsProp list list) = Interop.mkProperty<IChartProp> "scatterChartData" (value |> createObjArray)
     /// data for the points in the line chart
-    static member inline sankeyChartData (value: ISankeyChartDataProp list list) = Interop.mkProperty<IChartProp> "SankeyChartData" (value |> createObjArray)
+    static member inline sankeyChartData (value: ISankeyChartDataProp list) = Interop.mkProperty<IChartProp> "SankeyChartData" (!!value |> createObj |> unbox)
     /// data for the points in the line chart
     static member inline pointOptions (value: IReactProperty list) = Interop.mkProperty<IChartProp> "pointOptions" (!!value |> createObj |> unbox)
     /// data for the dotted line on hovering the point
@@ -1353,8 +1353,8 @@ module lineChartLineOptions =
         static member inline ``lines+text`` = Interop.mkProperty<ILineChartLineOptionsProp> "mode" "lines+text"
         static member inline ``lines+markers+text`` = Interop.mkProperty<ILineChartLineOptionsProp> "mode" "lines+markers+text"
 
-//----------------------------------------------------------------- SankyChartData -------------------------------------------------
-type [<Erase>] sankyChartData =
+//----------------------------------------------------------------- SankeyChartData -------------------------------------------------
+type [<Erase>] sankeyChartData =
     /// Width of the line/stroke.
     static member inline nodes (value: ISNodeProp list list) = Interop.mkProperty<ISankeyChartDataProp> "nodes" (value |> createObjArray)
     static member inline links (value: ISLinkProp list list) = Interop.mkProperty<ISankeyChartDataProp> "links" (value |> createObjArray)
@@ -2399,3 +2399,120 @@ type [<Erase>] colorFillBarData =
     static member inline endX(value: decimal) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
     static member inline endX(value: DateTime) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
     static member inline endX(value: DateOnly) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
+
+//-------------------------------------------------------- SankeyChart ---------------------------------------
+type [<Erase>] sankeyChart =
+    /// Data to render in the chart.
+    static member inline data(value: IChartProp list) = Interop.mkProperty<ISankeyChartProp> "data" (!!value |> createObj |> unbox)
+    /// Width of the chart.
+    static member inline width(value: int) = Interop.mkProperty<ISankeyChartProp> "width" value
+    /// Width of the chart.
+    static member inline width(value: float) = Interop.mkProperty<ISankeyChartProp> "width" value
+    /// Width of the chart.
+    static member inline width(value: decimal) = Interop.mkProperty<ISankeyChartProp> "width" value
+    /// Height of the chart.
+    static member inline height(value: int) = Interop.mkProperty<ISankeyChartProp> "height" value
+    /// Height of the chart.
+    static member inline height(value: float) = Interop.mkProperty<ISankeyChartProp> "height" value
+    /// Height of the chart.
+    static member inline height(value: decimal) = Interop.mkProperty<ISankeyChartProp> "height" value
+    /// Additional CSS class(es) to apply to the SankeyChart.
+    static member inline className(value: string) = Interop.mkProperty<ISankeyChartProp> "className" value
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: ISankeyChartStylesProp list) = Interop.mkProperty<ISankeyChartProp> "styles" (!!value |> createObj |> unbox)
+    /// this prop takes its parent as a HTML element to define the width and height of the Sankey chart
+    static member inline parentRef(value: HTMLElement option) = Interop.mkProperty<ISankeyChartProp> "parentRef" value
+    /// should chart resize when parent resize.
+    static member inline shouldResize(value: int) = Interop.mkProperty<ISankeyChartProp> "shouldResize" value
+    /// should chart resize when parent resize.
+    static member inline shouldResize(value: float) = Interop.mkProperty<ISankeyChartProp> "shouldResize" value
+    /// should chart resize when parent resize.
+    static member inline shouldResize(value: decimal) = Interop.mkProperty<ISankeyChartProp> "shouldResize" value
+    /// Color for path
+    static member inline pathColor(value: string) = Interop.mkProperty<ISankeyChartProp> "pathColor" value
+    /// Colors for nodes
+    static member inline colorsForNodes(value: string list) = Interop.mkProperty<ISankeyChartProp> "colorsForNodes" (value |> List.toArray)
+    /// Colors for nodes border
+    static member inline borderColorsForNodes(value: string list) = Interop.mkProperty<ISankeyChartProp> "borderColorsForNodes" (value |> List.toArray)
+    /// Localized strings to show in the UX.
+    static member inline strings(value: ISankeyChartStringsProp list) = Interop.mkProperty<ISankeyChartProp> "strings" (!!value |> createObj |> unbox)
+    /// Localized strings to use for the chart's accessibility features.
+    static member inline accessibility(value: ISankeyChartAccessibilityProp list) = Interop.mkProperty<ISankeyChartProp> "accessibility" (!!value |> createObj |> unbox)
+    /// Format node and link values.
+    static member inline formatNumberOptions(value: INumberFormatOptionsProp list) = Interop.mkProperty<ISankeyChartProp> "formatNumberOptions" (!!value |> createObj |> unbox)
+    /// Prop to disable shrinking of the chart beyond a certain limit and enable scrolling when the chart overflows
+    /// @deprecated Use `reflowProps` instead.
+    static member inline enableReflow(value: bool) = Interop.mkProperty<ISankeyChartProp> "enableReflow" value
+    /// Optional callback to access the Chart interface. Use this instead of ref for accessing
+    /// the public methods and properties of the component.
+    static member inline componentRef(value: RefObject<Chart>) = Interop.mkProperty<ISankeyChartProp> "componentRef" value
+    /// props for the callout in the chart
+    static member inline calloutProps(value: IChartPopoverProp list) = Interop.mkProperty<ISankeyChartProp> "calloutProps" (!!value |> createObj |> unbox)
+    /// The prop used to define the culture to localize the numbers and date
+    static member inline culture(value: string) = Interop.mkProperty<ISankeyChartProp> "culture" value
+
+module sankeyChart =
+    type [<Erase>] reflowProps = reflowProps<ISankeyChartProp>
+
+//-------------------------------------------------------- SankeyChartStyles ---------------------------------------
+type [<Erase>] sankeyChartStyles =
+    /// Style for the root element.
+    static member inline root(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "root" value
+    /// Style for the nodes.
+    static member inline nodes(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "nodes" value
+    /// Style for the links.
+    static member inline links(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "links" value
+    /// Style for the text inside node.
+    static member inline nodeTextContainer(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "nodeTextContainer" value
+    /// Style for the tooltip ,when user hover over the truncated node detail.
+    static member inline toolTip(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "toolTip" value
+    /// Styles for the chart wrapper div
+    static member inline chartWrapper(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "chartWrapper" value
+    /// Styles for the chart svg element
+    static member inline chart(value: string) = Interop.mkProperty<ISankeyChartStylesProp> "chart" value
+
+//-------------------------------------------------------- SankeyChartStrings ---------------------------------------
+type [<Erase>] sankeyChartStrings =
+    /// A value similar to "from \{0\}" where \{0\} is the name of the source node for a link.
+    /// This is shown in the `ChartHoverCard` when the user hovers the mouse over a link.
+    static member inline linkFrom(value: string) = Interop.mkProperty<ISankeyChartStringsProp> "linkFrom" value
+
+
+//-------------------------------------------------------- SankeyChartAccessibility ---------------------------------------
+type [<Erase>] sankeyChartAccessibility =
+    /// Aria label for when the chart is empty.
+    static member inline emptyAriaLabel(value: string) = Interop.mkProperty<ISankeyChartAccessibilityProp> "emptyAriaLabel" value
+    /// A value similar to "node \{0\} with weight \{1\}".
+    /// \{0\} is the name of the node.
+    /// \{1\} is the weight of the node (as computed by the sankey layout engine via the links to or from this node).
+    static member inline nodeAriaLabel(value: string) = Interop.mkProperty<ISankeyChartAccessibilityProp> "nodeAriaLabel" value
+    /// A value similar to "link from \{0\} to $\{1\} with weight $\{2\}".
+    /// \{0\} is the source node, \{1\} is the target node, and \{2\} is the value of the link.
+    static member inline linkAriaLabel(value: string) = Interop.mkProperty<ISankeyChartAccessibilityProp> "linkAriaLabel" value
+
+//-------------------------------------------------------- NumberFormatOptions ---------------------------------------
+type [<Erase>] numberFormatOptions =
+    static member inline currency(value: string) = Interop.mkProperty<INumberFormatOptionsProp> "currency" value
+    static member inline minimumIntegerDigits(value: int) = Interop.mkProperty<INumberFormatOptionsProp> "minimumIntegerDigits" value
+    static member inline minimumIntegerDigits(value: float) = Interop.mkProperty<INumberFormatOptionsProp> "minimumIntegerDigits" value
+    static member inline minimumIntegerDigits(value: decimal) = Interop.mkProperty<INumberFormatOptionsProp> "minimumIntegerDigits" value
+    static member inline minimumFractionDigits(value: int) = Interop.mkProperty<INumberFormatOptionsProp> "minimumIntegerDigits" value
+    static member inline minimumFractionDigits(value: float) = Interop.mkProperty<INumberFormatOptionsProp> "minimumFractionDigits" value
+    static member inline minimumFractionDigits(value: decimal) = Interop.mkProperty<INumberFormatOptionsProp> "minimumFractionDigits" value
+    static member inline maximumFractionDigits(value: int) = Interop.mkProperty<INumberFormatOptionsProp> "maximumFractionDigits" value
+    static member inline maximumFractionDigits(value: float) = Interop.mkProperty<INumberFormatOptionsProp> "maximumFractionDigits" value
+    static member inline maximumFractionDigits(value: decimal) = Interop.mkProperty<INumberFormatOptionsProp> "maximumFractionDigits" value
+    static member inline minimumSignificantDigits(value: int) = Interop.mkProperty<INumberFormatOptionsProp> "minimumSignificantDigits" value
+    static member inline minimumSignificantDigits(value: float) = Interop.mkProperty<INumberFormatOptionsProp> "minimumSignificantDigits" value
+    static member inline minimumSignificantDigits(value: decimal) = Interop.mkProperty<INumberFormatOptionsProp> "minimumSignificantDigits" value
+    static member inline maximumSignificantDigits(value: int) = Interop.mkProperty<INumberFormatOptionsProp> "maximumSignificantDigits" value
+    static member inline maximumSignificantDigits(value: float) = Interop.mkProperty<INumberFormatOptionsProp> "maximumSignificantDigits" value
+    static member inline maximumSignificantDigits(value: decimal) = Interop.mkProperty<INumberFormatOptionsProp> "maximumSignificantDigits" value
+    static member inline style(value: obj) = Interop.mkProperty<INumberFormatOptionsProp> "style" value
+    static member inline currencyDisplay(value: obj) = Interop.mkProperty<INumberFormatOptionsProp> "currencyDisplay" value
+    static member inline useGrouping(value: obj) = Interop.mkProperty<INumberFormatOptionsProp> "useGrouping" value
+
+module numberFormatOptions =
+    type [<Erase>] localeMatcher =
+        static member inline lookup = Interop.mkProperty<INumberFormatOptionsProp> "localeMatcher" "lookup"
+        static member inline bestFit = Interop.mkProperty<INumberFormatOptionsProp> "localeMatcher" "best fit"

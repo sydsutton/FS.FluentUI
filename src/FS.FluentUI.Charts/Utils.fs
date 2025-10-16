@@ -75,6 +75,10 @@ type [<Erase>] IEventsAnnotationProp = interface end
 type [<Erase>] IEventAnnotationProp = interface end
 type [<Erase>] IColorFillBarsProp = interface end
 type [<Erase>] IColorFillBarDataProp = interface end
+type [<Erase>] ISankeyChartStringsProp = interface end
+type [<Erase>] ISankeyChartStylesProp = interface end
+type [<Erase>] ISankeyChartAccessibilityProp = interface end
+type [<Erase>] INumberFormatOptionsProp = interface end
 
 // ---------
 type [<Erase>] ILegendShape = interface end
@@ -89,8 +93,6 @@ type [<Erase>] IGaugeChartStyles = interface end
 type [<Erase>] IScatterChartProps = interface end
 type [<Erase>] IScatterChartPoints = interface end
 type [<Erase>] IScatterChartStyles = interface end
-type [<Erase>] ISankeyChartProps = interface end
-type [<Erase>] ISankeyChartAccessibility = interface end
 type [<Erase>] ISparklineProps = interface end
 type [<Erase>] IVerticalBarChartProps = interface end
 type [<Erase>] IVerticalBarChartDataPoint = interface end
