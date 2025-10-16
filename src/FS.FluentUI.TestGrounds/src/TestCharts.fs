@@ -417,26 +417,26 @@ let funnelChartStackedData = [
     [
         funnelChartDataPoint.stage "Sign-Up"
         funnelChartDataPoint.subValues [
-            {|
-                category ="A"
-                value= 60
-                color ="red"
-            |}
-            {|
-                category= "B"
-                value= 40
-                color= "blue"
-            |}
-            {|
-                category= "C"
-                value= 20
-                color= "green"
-            |}
-            {|
-                category= "D"
-                value= 10
-                color= "pink"
-            |}
+            [
+                funnelChartDataPointSubValue.category "A"
+                funnelChartDataPointSubValue.value 60
+                funnelChartDataPointSubValue.color "red"
+            ]
+            [
+                funnelChartDataPointSubValue.category "B"
+                funnelChartDataPointSubValue.value 40
+                funnelChartDataPointSubValue.color "blue"
+            ]
+            [
+                funnelChartDataPointSubValue.category "C"
+                funnelChartDataPointSubValue.value 20
+                funnelChartDataPointSubValue.color "green"
+            ]
+            [
+                funnelChartDataPointSubValue.category "D"
+                funnelChartDataPointSubValue.value 10
+                funnelChartDataPointSubValue.color "pink"
+            ]
         ]
     ]
     [
@@ -936,6 +936,34 @@ let sankeyChartDataList = [
     ]
 ]
 
+let scatterChartData = [
+    chart.chartTitle "Sales Performance by Category"
+    chart.scatterChartData [
+        [
+            scatterChartPoints.legend "Region 1"
+            scatterChartPoints.color Fui.dataVizPalette.color3
+            scatterChartPoints.data [
+                [ scatterChartDataPoint.x "Electronics"; scatterChartDataPoint.y 50000; scatterChartDataPoint.markerSize 25 ]
+                [ scatterChartDataPoint.x "Furniture"; scatterChartDataPoint.y 30000; scatterChartDataPoint.markerSize 20 ]
+                [ scatterChartDataPoint.x "Clothing"; scatterChartDataPoint.y 20000; scatterChartDataPoint.markerSize 15 ]
+                [ scatterChartDataPoint.x "Toys"; scatterChartDataPoint.y 15000; scatterChartDataPoint.markerSize 10 ]
+                [ scatterChartDataPoint.x "Books"; scatterChartDataPoint.y 10000; scatterChartDataPoint.markerSize 8 ]
+            ]
+        ]
+        [
+            scatterChartPoints.legend "Region 2"
+            scatterChartPoints.color Fui.dataVizPalette.color4
+            scatterChartPoints.data [
+                [ scatterChartDataPoint.x "Electronics"; scatterChartDataPoint.y 60000; scatterChartDataPoint.markerSize 30 ]
+                [ scatterChartDataPoint.x "Furniture"; scatterChartDataPoint.y 25000; scatterChartDataPoint.markerSize 18 ]
+                [ scatterChartDataPoint.x "Clothing"; scatterChartDataPoint.y 22000; scatterChartDataPoint.markerSize 16 ]
+                [ scatterChartDataPoint.x "Toys"; scatterChartDataPoint.y 12000; scatterChartDataPoint.markerSize 12 ]
+                [ scatterChartDataPoint.x "Books"; scatterChartDataPoint.y 8000; scatterChartDataPoint.markerSize 6 ]
+            ]
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -1111,6 +1139,16 @@ let TestChartsComponent () =
                 sankeyChart.shouldResize 900
                 sankeyChart.reflowProps.modeMinWidth
             ]
+            Fui.scatterChart [
+                scatterChart.data scatterChartData
+                scatterChart.height 400
+                scatterChart.width 500
+                scatterChart.xAxisTitle "Product Category"
+                scatterChart.yAxisTitle "Revenue in dollars"
+                scatterChart.styles [
+                    scatterChartStyles.svgTooltip "test-svg-styles"
+                ]
+            ]
         ]
     ]
 
@@ -1242,126 +1280,6 @@ let TestChartsComponent () =
                             //         ]
                             //     ]
                             // ]
-
-                                    // Charts.scatterChart [
-                                    //     scatterChart.data [
-                                    //         chartProps.scatterChartData [
-                                    //             Charts.scatterChartData [
-                                    //                 scatterChartPoint.legend "Testing"
-                                    //                 scatterChartPoint.legendShape.hexagon
-                                    //                 scatterChartPoint.data [
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 1
-                                    //                         scatterChartDataPoint.y 2
-                                    //                         scatterChartDataPoint.markerSize 3
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 2
-                                    //                         scatterChartDataPoint.y 6
-                                    //                         scatterChartDataPoint.markerSize 1
-                                    //                         scatterChartDataPoint.text "testPoint"
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 3
-                                    //                         scatterChartDataPoint.y 7
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 4
-                                    //                         scatterChartDataPoint.y 5
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 5
-                                    //                         scatterChartDataPoint.y 11
-                                    //                     ]
-                                    //                 ]
-                                    //             ]
-                                    //             Charts.scatterChartData [
-                                    //                 scatterChartPoint.legend "Other"
-                                    //                 scatterChartPoint.color "green"
-                                    //                 scatterChartPoint.legendShape.pyramid
-                                    //                 scatterChartPoint.data [
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 1
-                                    //                         scatterChartDataPoint.y 5
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 12
-                                    //                         scatterChartDataPoint.y 23
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 10
-                                    //                         scatterChartDataPoint.y 7
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 14
-                                    //                         scatterChartDataPoint.y 5
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.text "max point"
-                                    //                         scatterChartDataPoint.x 17
-                                    //                         scatterChartDataPoint.y 11
-                                    //                     ]
-                                    //                 ]
-                                    //             ]
-                                    //             Charts.scatterChartData [
-                                    //                 scatterChartPoint.legend "Performance A"
-                                    //                 scatterChartPoint.color "magenta"
-                                    //                 scatterChartPoint.legendShape.pentagon
-                                    //                 scatterChartPoint.data [
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 1
-                                    //                         scatterChartDataPoint.y 1
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 2
-                                    //                         scatterChartDataPoint.y 4
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 3
-                                    //                         scatterChartDataPoint.y 9
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 4
-                                    //                         scatterChartDataPoint.y 16
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 5
-                                    //                         scatterChartDataPoint.y 25
-                                    //                         scatterChartDataPoint.text "peak"
-                                    //                     ]
-                                    //                 ]
-                                    //             ]
-                                    //             Charts.scatterChartData [
-                                    //                 scatterChartPoint.legend "Performance B"
-                                    //                 scatterChartPoint.color "orange"
-                                    //                 scatterChartPoint.legendShape.pentagon
-                                    //                 scatterChartPoint.data [
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 1
-                                    //                         scatterChartDataPoint.y 2
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 2
-                                    //                         scatterChartDataPoint.y 3.5
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 3
-                                    //                         scatterChartDataPoint.y 5.2
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 4
-                                    //                         scatterChartDataPoint.y 6.1
-                                    //                     ]
-                                    //                     Charts.scatterChartDataPoint [
-                                    //                         scatterChartDataPoint.x 5
-                                    //                         scatterChartDataPoint.y 7.3
-                                    //                         scatterChartDataPoint.text "stable growth"
-                                    //                     ]
-                                    //                 ]
-                                    //             ]
-                                    //         ]
-                                    //     ]
-                                    // ]
                                     // Charts.gaugeChart [
                                     //     gaugeChart.enableGradient true
                                     //     gaugeChart.chartValue 67.7
