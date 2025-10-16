@@ -778,6 +778,10 @@ type [<Erase>] cartesianChart<'Property> =
     /// this prop takes values that you want the chart to render on x-axis
     /// This is a optional parameter if not specified D3 will decide which values appear on the x-axis for you
     /// Please look at https://github.com/d3/d3-scale for more information on how D3 decides what data to appear on the axis of chart
+    static member inline tickValues(value: DateOnly list) = Interop.mkProperty<'Property> "tickValues" (value |> List.toArray)
+    /// this prop takes values that you want the chart to render on x-axis
+    /// This is a optional parameter if not specified D3 will decide which values appear on the x-axis for you
+    /// Please look at https://github.com/d3/d3-scale for more information on how D3 decides what data to appear on the axis of chart
     static member inline tickValues(value: string list) = Interop.mkProperty<'Property> "tickValues" (value |> List.toArray)
     /// the format for the data on x-axis. For date object this can be specified to your requirement. Eg: '%m/%d', '%d'
     /// Please look at https://github.com/d3/d3-time-format for all the formats supported for date axis
@@ -1092,7 +1096,7 @@ type [<Erase>] popoverComponentStyles =
 type [<Erase>] areaChart =
     inherit cartesianChart<IAreaChartProp>
     /// Data to render in the chart.
-    static member inline data(value: IChartPropProp list) = Interop.mkProperty<IAreaChartProp> "data" (!!value |> createObj |> unbox)
+    static member inline data(value: IChartProp list) = Interop.mkProperty<IAreaChartProp> "data" (!!value |> createObj |> unbox)
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
@@ -1118,26 +1122,26 @@ module areaChart =
         static member inline tozeroy = Interop.mkProperty<IAreaChartProp> "mode" "tozeroy"
         static member inline tonexty = Interop.mkProperty<IAreaChartProp> "mode" "tonexty"
 
-//----------------------------------------------------------------- ChartProp -------------------------------------------------
-type [<Erase>] chartProp =
+//----------------------------------------------------------------- Chart -------------------------------------------------
+type [<Erase>] chart =
     /// Chart title for the chart
-    static member inline chartTitle (value: string) = Interop.mkProperty<IChartPropProp> "chartTitle" value
+    static member inline chartTitle (value: string) = Interop.mkProperty<IChartProp> "chartTitle" value
     /// Accessibility data for chart title
-    static member inline chartTitleAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartPropProp> "chartTitleAccessibilityData" (!!value |> createObj |> unbox)
+    static member inline chartTitleAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartProp> "chartTitleAccessibilityData" (!!value |> createObj |> unbox)
     /// data for the points in the chart
-    static member inline chartData (value: IChartDataPointProp list list) = Interop.mkProperty<IChartPropProp> "chartData" (value |> createObjArray)
+    static member inline chartData (value: IChartDataPointProp list list) = Interop.mkProperty<IChartProp> "chartData" (value |> createObjArray)
     /// Accessibility data for chart data
-    static member inline chartDataAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartPropProp> "chartDataAccessibilityData" (!!value |> createObj |> unbox)
+    static member inline chartDataAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartProp> "chartDataAccessibilityData" (!!value |> createObj |> unbox)
     /// data for the points in the line chart
-    static member inline lineChartData (value: ILineChartPointsProp list list) = Interop.mkProperty<IChartPropProp> "lineChartData" (value |> createObjArray)
+    static member inline lineChartData (value: ILineChartPointsProp list list) = Interop.mkProperty<IChartProp> "lineChartData" (value |> createObjArray)
     /// data for the points in the scatter chart
-    static member inline scatterChartData (value: IScatterChartPointsProp list list) = Interop.mkProperty<IChartPropProp> "scatterChartData" (value |> createObjArray)
+    static member inline scatterChartData (value: IScatterChartPointsProp list list) = Interop.mkProperty<IChartProp> "scatterChartData" (value |> createObjArray)
     /// data for the points in the line chart
-    static member inline sankeyChartData (value: ISankeyChartDataProp list list) = Interop.mkProperty<IChartPropProp> "SankeyChartData" (value |> createObjArray)
+    static member inline sankeyChartData (value: ISankeyChartDataProp list list) = Interop.mkProperty<IChartProp> "SankeyChartData" (value |> createObjArray)
     /// data for the points in the line chart
-    static member inline pointOptions (value: IReactProperty list) = Interop.mkProperty<IChartPropProp> "pointOptions" (!!value |> createObj |> unbox)
+    static member inline pointOptions (value: IReactProperty list) = Interop.mkProperty<IChartProp> "pointOptions" (!!value |> createObj |> unbox)
     /// data for the dotted line on hovering the point
-    static member inline pointLineOptions (value: IReactProperty list) = Interop.mkProperty<IChartPropProp> "pointLineOptions" (!!value |> createObj |> unbox)
+    static member inline pointLineOptions (value: IReactProperty list) = Interop.mkProperty<IChartProp> "pointLineOptions" (!!value |> createObj |> unbox)
 
 //----------------------------------------------------------------- ChartDataPoint -------------------------------------------------
 type [<Erase>] chartDataPoint =
@@ -1224,6 +1228,8 @@ type [<Erase>] lineChartDataPoint =
     static member inline x (value: float) = Interop.mkProperty<ILineChartDataPointProp> "x" value
     /// Independent value of the data point, rendered along the x-axis.
     static member inline x (value: DateTime) = Interop.mkProperty<ILineChartDataPointProp> "x" value
+    /// Independent value of the data point, rendered along the x-axis.
+    static member inline x (value: DateOnly) = Interop.mkProperty<ILineChartDataPointProp> "x" value
     /// Independent value of the data point, rendered along the y-axis.
     static member inline y (value: int) = Interop.mkProperty<ILineChartDataPointProp> "y" value
     /// Independent value of the data point, rendered along the y-axis.
@@ -1232,6 +1238,8 @@ type [<Erase>] lineChartDataPoint =
     static member inline y (value: float) = Interop.mkProperty<ILineChartDataPointProp> "y" value
     /// Independent value of the data point, rendered along the y-axis.
     static member inline y (value: DateTime) = Interop.mkProperty<ILineChartDataPointProp> "y" value
+    /// Independent value of the data point, rendered along the y-axis.
+    static member inline y (value: DateOnly) = Interop.mkProperty<ILineChartDataPointProp> "y" value
     /// text labels of marker points
     static member inline text (value: string) = Interop.mkProperty<ILineChartDataPointProp> "text" value
 
@@ -1476,7 +1484,7 @@ type [<Erase>] chartTableStyles =
 type [<Erase>] donutChart =
     inherit cartesianChart<IDonutChartProp>
     /// Data to render in the chart.
-    static member inline data(value: IChartPropProp list) = Interop.mkProperty<IDonutChartProp> "data" (!!value |> createObj |> unbox)
+    static member inline data(value: IChartProp list) = Interop.mkProperty<IDonutChartProp> "data" (!!value |> createObj |> unbox)
     /// inner radius for donut size
     static member inline innerRadius(value: int) = Interop.mkProperty<IDonutChartProp> "innerRadius" value
     /// inner radius for donut size
@@ -2113,7 +2121,7 @@ type [<Erase>] heatMapChartStyles =
 //----------------------------------------------------------------- HorizontalBarChart -------------------------------------------------
 type [<Erase>] horizontalBarChart =
     /// An array of chart data points for the Horizontal bar chart
-    static member inline data(value: IChartPropProp list list) = Interop.mkProperty<IHorizontalBarChartProp> "data" (value |> createObjArray)
+    static member inline data(value: IChartProp list list) = Interop.mkProperty<IHorizontalBarChartProp> "data" (value |> createObjArray)
     /// Width of bar chart
     static member inline width(value: int) = Interop.mkProperty<IHorizontalBarChartProp> "width" value
     /// Width of bar chart
@@ -2278,7 +2286,6 @@ type [<Erase>] horizontalBarChartWithAxisDataPoint =
     /// Accessibility data for callout
     static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IHorizontalBarChartWithAxisDataPointProp> "callOutAccessibilityData" (!!value |> createObj |> unbox)
 
-
 //-------------------------------------------------------- HorizontalBarChartWithAxisStyles ---------------------------------------
 
 type [<Erase>] horizontalBarChartWithAxisStyles =
@@ -2299,3 +2306,96 @@ type [<Erase>] horizontalBarChartWithAxisStyles =
     static member inline yAxisText(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStylesProp> "yAxisText" value
     /// Style to change the opacity of bars in dataviz when we hover on a single bar or legends
     static member inline opacityChangeOnHover(value: string) = Interop.mkProperty<IHorizontalBarChartWithAxisStylesProp> "opacityChangeOnHover" value
+
+//-------------------------------------------------------- LineChart ---------------------------------------
+
+type [<Erase>] lineChart =
+    inherit cartesianChart<ILineChartProp>
+
+    /// Data to render in the chart.
+    static member inline data(value: IChartProp list) = Interop.mkProperty<ILineChartProp> "data" (!!value |> createObj |> unbox)
+    /// Call to provide customized styling that will layer on top of the variant rules.
+    static member inline styles(value: ILineChartStylesProp list) = Interop.mkProperty<ILineChartProp> "styles" (!!value |> createObj |> unbox)
+    /// Show event annotation
+    static member inline eventAnnotationProps(value: IEventsAnnotationProp list) = Interop.mkProperty<ILineChartProp> "eventAnnotationProps" (!!value |> createObj |> unbox)
+    /// Define a custom callout renderer for a data point
+    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData option -> ReactElement) =
+                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    /// Define a custom callout renderer for a stack; default is to render per data point
+    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData option -> ReactElement) =
+                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
+    /// Callback for getting callout description message
+    static member inline getCalloutDescriptionMessage (value: CustomizedCalloutData -> string option) = Interop.mkProperty<ILineChartProp> "getCalloutDescriptionMessage" (System.Func<_,_> value)
+    /// Callback for getting callout description message
+    static member inline colorFillBars (value: IColorFillBarsProp list list) = Interop.mkProperty<ILineChartProp> "colorFillBars" (value |> createObjArray)
+    /// if this is set to true, then for each line there will be a unique shape assigned to the point,
+    /// there are total 8 shapes which are as follow circle, square, triangele, diamond, pyramid,
+    ///  hexagon, pentagon and octagon, which will get assigned as respectively, if there are more
+    /// than 8 lines in the line chart then it will again start from cicle to octagon.
+    /// setting this flag to true will also change the behavior of the points, like for a
+    /// line, last point shape and first point shape will be visible all the times, and all
+    /// other points will get enlarge only when hovered over them
+    /// if set to false default shape will be circle, with the existing behavior
+    static member inline allowMultipleShapesForPoints (value: bool) = Interop.mkProperty<ILineChartProp> "allowMultipleShapesForPoints" value
+    static member inline optimizeLargeData (value: bool) = Interop.mkProperty<ILineChartProp> "optimizeLargeData" value
+    /// The prop used to define the culture to localized the numbers
+    static member inline culture (value: string) = Interop.mkProperty<ILineChartProp> "culture" value
+    /// The prop used to enable the perf optimization
+    static member inline enablePerfOptimization (value: bool) = Interop.mkProperty<ILineChartProp> "enablePerfOptimization" value
+    /// To enable callout for individual line or complete stack.
+    static member inline isCalloutForStack (value: bool) = Interop.mkProperty<ILineChartProp> "isCalloutForStack" value
+
+//-------------------------------------------------------- LineChartStyles ---------------------------------------
+type [<Erase>] lineChartStyles =
+    inherit sharedCartesianChartStyles<ILineChartStylesProp>
+
+    /// styles for line border
+    static member inline lineBorder(value: string) = Interop.mkProperty<ILineChartStylesProp> "lineBorder" value
+    /// styles for marker label
+    static member inline markerLabel(value: string) = Interop.mkProperty<ILineChartStylesProp> "markerLabel" value
+
+//-------------------------------------------------------- EventsAnnotation ---------------------------------------
+
+type [<Erase>] eventsAnnotation =
+    static member inline events(value: IEventAnnotationProp list list) = Interop.mkProperty<IEventsAnnotationProp> "events" (value |> createObjArray)
+    static member inline strokeColor(value: string) = Interop.mkProperty<IEventsAnnotationProp> "strokeColor" value
+    static member inline labelColor(value: string) = Interop.mkProperty<IEventsAnnotationProp> "labelColor" value
+    static member inline labelHeight(value: int) = Interop.mkProperty<IEventsAnnotationProp> "labelHeight" value
+    static member inline labelHeight(value: float) = Interop.mkProperty<IEventsAnnotationProp> "labelHeight" value
+    static member inline labelHeight(value: decimal) = Interop.mkProperty<IEventsAnnotationProp> "labelHeight" value
+    static member inline labelWidth(value: int) = Interop.mkProperty<IEventsAnnotationProp> "labelWidth" value
+    static member inline labelWidth(value: float) = Interop.mkProperty<IEventsAnnotationProp> "labelWidth" value
+    static member inline labelWidth(value: decimal) = Interop.mkProperty<IEventsAnnotationProp> "labelWidth" value
+    static member inline mergedLabel(value: int -> string) = Interop.mkProperty<IEventsAnnotationProp> "mergedLabel" (System.Func<_,_> value)
+    static member inline mergedLabel(value: float -> string) = Interop.mkProperty<IEventsAnnotationProp> "mergedLabel" (System.Func<_,_> value)
+    static member inline mergedLabel(value: decimal -> string) = Interop.mkProperty<IEventsAnnotationProp> "mergedLabel" (System.Func<_,_> value)
+
+//-------------------------------------------------------- EventAnnotation ---------------------------------------
+
+type [<Erase>] eventAnnotation =
+    static member inline date(value: DateTime) = Interop.mkProperty<IEventAnnotationProp> "date" value
+    static member inline date(value: DateOnly) = Interop.mkProperty<IEventAnnotationProp> "date" value
+    static member inline event(value: string) = Interop.mkProperty<IEventAnnotationProp> "event" value
+    static member inline onRenderCard(value: unit -> ReactElement) = Interop.mkProperty<IEventAnnotationProp> "onRenderCard" (System.Func<_,_> value)
+
+//-------------------------------------------------------- ColorFillBars ---------------------------------------
+type [<Erase>] colorFillBars =
+    static member inline legend(value: string) = Interop.mkProperty<IColorFillBarsProp> "legend" value
+    static member inline color(value: string) = Interop.mkProperty<IColorFillBarsProp> "color" value
+    static member inline data(value: IColorFillBarDataProp list list) = Interop.mkProperty<IColorFillBarsProp> "data" (value |> createObjArray)
+    static member inline applyPattern(value: bool) = Interop.mkProperty<IColorFillBarsProp> "applyPattern" value
+    static member inline onLegendClick(value: string -> unit) = Interop.mkProperty<IColorFillBarsProp> "onLegendClick" value
+    static member inline onLegendClick(value: string array -> unit) = Interop.mkProperty<IColorFillBarsProp> "onLegendClick" value
+
+//-------------------------------------------------------- ColorFillBarData ---------------------------------------
+type [<Erase>] colorFillBarData =
+    static member inline startX(value: int) = Interop.mkProperty<IColorFillBarDataProp> "startX" value
+    static member inline startX(value: float) = Interop.mkProperty<IColorFillBarDataProp> "startX" value
+    static member inline startX(value: decimal) = Interop.mkProperty<IColorFillBarDataProp> "startX" value
+    static member inline startX(value: DateTime) = Interop.mkProperty<IColorFillBarDataProp> "startX" value
+    static member inline startX(value: DateOnly) = Interop.mkProperty<IColorFillBarDataProp> "startX" value
+    static member inline endX(value: int) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
+    static member inline endX(value: float) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
+    static member inline endX(value: decimal) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
+    static member inline endX(value: DateTime) = Interop.mkProperty<IColorFillBarDataProp> "endX" value
+    static member inline endX(value: DateOnly) = Interop.mkProperty<IColorFillBarDataProp> "endX" value

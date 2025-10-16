@@ -5,179 +5,6 @@ open Feliz
 open FS.FluentUI
 open FS.Charts
 
-type LineChartDataPoint = { x: float; y: float }
-
-type LineChartData = {
-    Name: string
-    Opacity: float
-    Color: string
-    Data: LineChartDataPoint list
-}
-
-let lineChartDataList: LineChartData list = [
-    {
-        Name = "Testing"
-        Opacity = 0.3
-        Color = "orange"
-        Data = [
-            { x = 0.0; y = 1000.0 }
-            { x = 1.0; y = 1200.0 }
-            { x = 2.0; y = 1400.0 }
-            { x = 4.0; y = 1600.0 }
-            { x = 5.0; y = 1800.0 }
-            { x = 6.0; y = 1500.0 }
-        ]
-    }
-    {
-        Name = "Protein Intake"
-        Opacity = 0.5
-        Color = "#0078D4"
-        Data = [
-            { x = 0.0; y = 500.0 }
-            { x = 1.0; y = 750.0 }
-            { x = 2.0; y = 800.0 }
-            { x = 3.0; y = 700.0 }
-            { x = 4.0; y = 900.0 }
-            { x = 5.0; y = 950.0 }
-            { x = 6.0; y = 1000.0 }
-        ]
-    }
-    {
-        Name = "Water Consumption"
-        Opacity = 1.0 // Default opacity since it wasn't specified in the original
-        Color = "red" // You'll need to replace this with the actual color value from Theme.tokens.colorStatusDangerBackground2
-        Data = [
-            { x = 0.0; y = 1500.0 }
-            { x = 1.0; y = 1600.0 }
-            { x = 2.0; y = 1550.0 }
-            { x = 3.0; y = 1650.0 }
-            { x = 4.0; y = 1700.0 }
-            { x = 6.0; y = 1750.0 }
-            { x = 7.0; y = 1800.0 }
-        ]
-    }
-]
-
-// let lineChartDataSet = [
-//     Charts.lineChartData [
-//         lineChartData.legendShape.triangle
-//         lineChartData.opacity 0.3
-//         lineChartData.data [
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 0.0
-//                 lineChartDataPoint.y 1000.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 1.0
-//                 lineChartDataPoint.y 1200.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 2.0
-//                 lineChartDataPoint.y 1400.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 4.0
-//                 lineChartDataPoint.y 1600.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 5.0
-//                 lineChartDataPoint.y 1800.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 6.0
-//                 lineChartDataPoint.y 1500.0
-//             ]
-//         ]
-//
-//     ]
-//     Charts.lineChartData [
-//         lineChartData.legendShape.triangle
-//         lineChartData.legend "Protein Intake"
-//         lineChartData.color "#0078D4"
-//         lineChartData.opacity 0.5
-//
-//         lineChartData.data [
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 0.0
-//                 lineChartDataPoint.y 500.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 1.0
-//                 lineChartDataPoint.y 750.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 2.0
-//                 lineChartDataPoint.y 800.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 3.0
-//                 lineChartDataPoint.y 700.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 4.0
-//                 lineChartDataPoint.y 900.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 5.0
-//                 lineChartDataPoint.y 950.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 6.0
-//                 lineChartDataPoint.y 1000.0
-//             ]
-//         ]
-//
-//         lineChartData.lineOptions [
-//             lineChartLineOptions.strokeWidth 2.0
-//             lineChartLineOptions.lineBorderWidth 2.0
-//             lineChartLineOptions.strokeLinecap.square
-//         ]
-//     ]
-//     Charts.lineChartData [
-//         lineChartData.onLineCLick (fun _ -> printfn "test")
-//         lineChartData.onLegendClick (fun s -> printfn $"TESTING: {s}")
-//         lineChartData.legend "Water Consumption"
-//         lineChartData.color Theme.tokens.colorStatusDangerBackground2
-//         lineChartData.gaps [
-//             { startIndex = 4.0; endIndex = 5.0 } // simulate missing data
-//         ]
-//         lineChartData.data [
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 0.0
-//                 lineChartDataPoint.y 1500.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 1.0
-//                 lineChartDataPoint.y 1600.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 2.0
-//                 lineChartDataPoint.y 1550.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 3.0
-//                 lineChartDataPoint.y 1650.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 4.0
-//                 lineChartDataPoint.y 1700.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 6.0
-//                 lineChartDataPoint.y 1750.0
-//             ]
-//             Charts.lineChartDataPoint [
-//                 lineChartDataPoint.x 7.0
-//                 lineChartDataPoint.y 1800.0
-//             ]
-//         ]
-//         lineChartData.lineOptions [
-//             lineChartLineOptions.strokeWidth 2.0
-//             lineChartLineOptions.strokeLinecap.square
-//         ]
-//     ]
-// ]
-
 let areaChartDataList = [
     [
         lineChartPoints.opacity 1.0
@@ -943,8 +770,8 @@ let heatMapChartData = [
 
 let horizontalBarChartData = [
     [
-        chartProp.chartTitle "one"
-        chartProp.chartData [
+        chart.chartTitle "one"
+        chart.chartData [
             [
                 chartDataPoint.legend "One.One"
                 chartDataPoint.horizontalBarChartdata [
@@ -969,8 +796,8 @@ let horizontalBarChartData = [
         ]
     ]
     [
-        chartProp.chartTitle "two"
-        chartProp.chartData [
+        chart.chartTitle "two"
+        chart.chartData [
             [
                 chartDataPoint.legend "Two.One"
                 chartDataPoint.horizontalBarChartdata [
@@ -988,8 +815,8 @@ let horizontalBarChartData = [
         ]
     ]
     [
-        chartProp.chartTitle "three"
-        chartProp.chartData [
+        chart.chartTitle "three"
+        chart.chartData [
             [
                 chartDataPoint.legend "Three.One"
                 chartDataPoint.horizontalBarChartdata [
@@ -1064,6 +891,27 @@ let legendsData = [
     ]
 ]
 
+let lineChartPoints = [
+    chart.chartTitle "Line Chart"
+    chart.lineChartData [
+        [
+            lineChartPoints.data [
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/06"); lineChartDataPoint.y 10; lineChartDataPoint.xAxisCalloutData "Appointment 1" ]
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/16"); lineChartDataPoint.y 18; lineChartDataPoint.xAxisCalloutData "Appointment 2" ]
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/20"); lineChartDataPoint.y 24; lineChartDataPoint.xAxisCalloutData "Appointment 3" ]
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/24"); lineChartDataPoint.y 35; lineChartDataPoint.xAxisCalloutData "Appointment 4" ]
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/26"); lineChartDataPoint.y 35; lineChartDataPoint.xAxisCalloutData "Appointment 5" ]
+                [ lineChartDataPoint.x (DateOnly.Parse "2018/01/29"); lineChartDataPoint.y 90; lineChartDataPoint.xAxisCalloutData "Appointment 6" ]
+            ]
+            lineChartPoints.legend "first legend"
+            lineChartPoints.lineOptions [
+                lineChartLineOptions.lineBorderWidth "4"
+            ]
+            lineChartPoints.color Fui.dataVizPalette.color10
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
@@ -1088,10 +936,8 @@ let TestChartsComponent () =
                     legends.centerLegends true
                 ]
                 areaChart.data [
-                    chartProp.chartTitle "Areachart"
-                    chartProp.lineChartData [
-                        yield! areaChartDataList
-                    ]
+                    chart.chartTitle "Areachart"
+                    chart.lineChartData areaChartDataList
                 ]
             ]
             Fui.chartTable [
@@ -1104,8 +950,8 @@ let TestChartsComponent () =
                 donutChart.valueInsideDonut 65
                 donutChart.innerRadius 50
                 donutChart.data [
-                    chartProp.chartTitle "Pai sjart"
-                    chartProp.chartData [
+                    chart.chartTitle "Donut Chart"
+                    chart.chartData [
                         [
                             chartDataPoint.legend "legend 1"
                             chartDataPoint.color "green"
@@ -1219,6 +1065,20 @@ let TestChartsComponent () =
                 prop.children [
                     Fui.legends [ legends.legends legendsData ]
                 ]
+            ]
+            Fui.lineChart [
+                lineChart.data lineChartPoints
+                lineChart.strokeWidth 6
+                lineChart.yMaxValue 90
+                lineChart.showXAxisLablesTooltip true
+                lineChart.height 400
+                lineChart.width 400
+                lineChart.tickFormat "%m/%d"
+                lineChart.tickValues [
+                    DateOnly.Parse "2018-01-01"
+                    DateOnly.Parse "2018-02-09"
+                ]
+                lineChart.enablePerfOptimization true
             ]
         ]
     ]
@@ -1352,92 +1212,6 @@ let TestChartsComponent () =
                             //     ]
                             // ]
 
-                            // Html.div [
-                            //     prop.style [
-                            //         style.display.flex
-                            //         style.gap 10
-                            //     ]
-                            //     prop.children [
-                            //         Charts.sparkLine [
-                            //             sparkline.height 200
-                            //             sparkline.width 250
-                            //             sparkline.showLegend true
-                            //             sparkline.data [
-                            //                 chartProps.chartTitle "sparkline 34"
-                            //                 chartProps.lineChartData (
-                            //                     lineChartDataList
-                            //                     |> List.map (fun d ->
-                            //                         Charts.lineChartData [
-                            //                             lineChartData.legendShape.triangle
-                            //                             lineChartData.opacity d.Opacity
-                            //                             lineChartData.color d.Color
-                            //                             lineChartData.data [
-                            //                                 yield!
-                            //                                     d.Data
-                            //                                     |> List.map (fun dd ->
-                            //                                         Charts.lineChartDataPoint [
-                            //                                             lineChartDataPoint.x dd.x
-                            //                                             lineChartDataPoint.y dd.y
-                            //                                         ])
-                            //                             ]
-                            //                         ])
-                            //                 )
-                            //             ]
-                            //         ]
-                            //         Charts.sparkLine [
-                            //             sparkline.height 200
-                            //             sparkline.width 250
-                            //             sparkline.showLegend true
-                            //             sparkline.data [
-                            //                 chartProps.chartTitle "sparkline 34"
-                            //                 chartProps.lineChartData (
-                            //                     lineChartDataList
-                            //                     |> List.map (fun d ->
-                            //                         Charts.lineChartData [
-                            //                             lineChartData.legendShape.triangle
-                            //                             lineChartData.opacity d.Opacity
-                            //                             lineChartData.color Theme.tokens.colorStatusSuccessBackground3
-                            //                             lineChartData.data [
-                            //                                 yield!
-                            //                                     d.Data
-                            //                                     |> List.map (fun dd ->
-                            //                                         Charts.lineChartDataPoint [
-                            //                                             lineChartDataPoint.x dd.x
-                            //                                             lineChartDataPoint.y dd.y
-                            //                                         ])
-                            //                             ]
-                            //                         ])
-                            //                 )
-                            //             ]
-                            //         ]
-                            //         Charts.sparkLine [
-                            //             sparkline.height 200
-                            //             sparkline.width 250
-                            //             sparkline.showLegend true
-                            //             sparkline.data [
-                            //                 chartProps.chartTitle "sparkline title123"
-                            //                 chartProps.lineChartData (
-                            //                     lineChartDataList
-                            //                     |> List.map (fun d ->
-                            //                         Charts.lineChartData [
-                            //                             lineChartData.legendShape.triangle
-                            //                             lineChartData.opacity d.Opacity
-                            //                             lineChartData.color Theme.tokens.colorBrandBackground2Pressed
-                            //                             lineChartData.data [
-                            //                                 yield!
-                            //                                     d.Data
-                            //                                     |> List.map (fun dd ->
-                            //                                         Charts.lineChartDataPoint [
-                            //                                             lineChartDataPoint.x dd.x
-                            //                                             lineChartDataPoint.y dd.y
-                            //                                         ])
-                            //                             ]
-                            //                         ])
-                            //                 )
-                            //             ]
-                            //         ]
-                            //     ]
-                            // ]
                             // Html.div [
                             //     prop.style [ style.marginBottom 50 ]
                             //     prop.children [
@@ -1684,38 +1458,6 @@ let TestChartsComponent () =
                             //                 chartDataPoint.data 35.
                             //             ]
                             //         ]
-                            //     ]
-                            // ]
-                            // Charts.lineChart [
-                            //     lineChart.legendProps [
-                            //         legendProps.centerLegends true
-                            //         legendProps.canSelectMultipleLegends true
-                            //     ]
-                            //     lineChart.customDateTimeFormatter (fun dt -> "")
-                            //     lineChart.height 200
-                            //     lineChart.width 250
-                            //     lineChart.styles [ lineChartStyles.lineBorder "" ]
-                            //     lineChart.data [
-                            //         chartProps.chartTitle "Linechart"
-                            //         chartProps.lineChartData (
-                            //             lineChartDataList
-                            //             |> List.map (fun d ->
-                            //                 Charts.lineChartData [
-                            //                     lineChartData.legendShape.triangle
-                            //                     lineChartData.opacity d.Opacity
-                            //                     lineChartData.legend d.Name
-                            //                     lineChartData.color d.Color
-                            //                     lineChartData.data [
-                            //                         yield!
-                            //                             d.Data
-                            //                             |> List.map (fun dd ->
-                            //                                 Charts.lineChartDataPoint [
-                            //                                     lineChartDataPoint.x dd.x
-                            //                                     lineChartDataPoint.y dd.y
-                            //                                 ])
-                            //                     ]
-                            //                 ])
-                            //         )
                             //     ]
                             // ]
     //                 ]
