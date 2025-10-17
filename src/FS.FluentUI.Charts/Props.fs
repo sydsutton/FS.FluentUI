@@ -9,7 +9,7 @@ open Browser.Types
 open System
 
 [<AutoOpen>]
-module Helpers =
+module Helper =
     let createObjArray value = value |> List.map (fun props -> !!props |> createObj |> unbox) |> List.toArray
 
 type [<Erase>] sharedBarChartWithDataPoint<'Property> =
