@@ -1,4 +1,4 @@
-# FS.FullCalendar
+# FS.FluentUI.Charts
 
 ## [FluentUI V9 Charts (React)](https://storybooks.fluentui.dev/react/?path=/docs/charts_introduction--docs) made for F# in the style of Feliz
 
@@ -12,6 +12,7 @@
 
 ### An example of a Charting component implementation:
 
+<img width="1042" height="387" alt="image" src="https://github.com/user-attachments/assets/3148fbf9-1a60-4581-bb16-a0235ba1d64a" />
 
 ```fsharp
 open FS.FluentUI.Charts
