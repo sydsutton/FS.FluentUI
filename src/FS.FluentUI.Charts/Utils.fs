@@ -1,4 +1,4 @@
-namespace FS.Charts
+namespace FS.FluentUI.Charts
 
 open Fable.Core
 

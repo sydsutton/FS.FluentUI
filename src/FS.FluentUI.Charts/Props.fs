@@ -1,9 +1,9 @@
-namespace FS.Charts
+namespace FS.FluentUI.Charts
 
 open System
 open Fable.Core
 open Fable.Core.JsInterop
-open FS.Charts
+open FS.FluentUI.Charts
 open Feliz
 open Browser.Types
 open System

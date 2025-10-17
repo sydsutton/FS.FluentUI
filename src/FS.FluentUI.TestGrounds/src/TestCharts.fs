@@ -3,7 +3,7 @@ module TestCharts
 open System
 open Feliz
 open FS.FluentUI
-open FS.Charts
+open FS.FluentUI.Charts
 
 let areaChartDataList = [
     [
