@@ -6,6 +6,7 @@ open Fable.Core.JsInterop
 open FS.Charts
 open Feliz
 open Browser.Types
+open System
 
 [<AutoOpen>]
 module Helpers =
@@ -185,6 +186,25 @@ module legend =
 type [<Erase>] legends =
     /// Prop that takes list of legends
     static member inline legends(value: ILegendProp list list) = Interop.mkProperty<ILegendsProp> "legends" (value |> createObjArray)
+    /// Prop that takes list of legends
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type Legend = {
+    ///     title: string
+    ///     action: unit -> unit
+    ///     hoverAction: unit -> unit
+    ///     onMouseOutAction: bool -> unit
+    ///     color: string
+    ///     opacity: float
+    ///     shape: string
+    ///     stripePattern: bool
+    ///     isLineLegendInBarChart: bool
+    ///     nativeButtonProps: obj
+    ///     legendAnnotation: unit -> ReactElement
+    /// }
+    /// </code></pre>
+    static member inline legends(value: 'T list) = Interop.mkProperty<ILegendsProp> "legends" (value |> List.toArray)
     /// Additional CSS class(es) to apply to the legends component
     static member inline className(value: string) = Interop.mkProperty<ILegendsProp> "className" value
     /// Call to provide customized styling that will layer on top of the variant rules
@@ -456,6 +476,25 @@ type [<Erase>] scatterChartPoints =
     /// Legend text for the datapoint in the chart
     static member inline legend(value: string) = Interop.mkProperty<IScatterChartPointsProp> "legend" value
     static member inline data(value: IScatterChartDataPointProp list list) = Interop.mkProperty<IScatterChartPointsProp> "data" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type ScatterChartDataPoint = {
+    ///     x: number | Date | string;
+    ///     y: number;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     onDataPointClick?: () => void;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string | {
+    ///         [id: string]: number;
+    ///     };
+    ///     hideCallout?: boolean;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     xAxisCalloutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IScatterChartPointsProp> "data" (value |> List.toArray)
     /// color for the legend in the chart
     static member inline color(value: string) = Interop.mkProperty<IScatterChartPointsProp> "color" value
     /// opacity for chart fill color
@@ -840,6 +879,20 @@ type [<Erase>] chartPopoverProp =
     static member inline hoverXValue (value: decimal) = Interop.mkProperty<IChartPopoverProp> "hoverXValue" value
     static member inline hoverXValue (value: float) = Interop.mkProperty<IChartPopoverProp> "hoverXValue" value
     static member inline YValueHover (value: IYValueHoverProp list list) = Interop.mkProperty<IChartPopoverProp> "YValueHover" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type YValueHover = {
+    ///     legend: string
+    ///     y: U2<int, string>
+    ///     color: string
+    ///     data: U2<int, string>
+    ///     shouldDrawBorderBottom: bool
+    ///     yAxisCalloutData: U2<string, obj>
+    ///     index: int
+    ///     callOutAccessibilityData: AccessibilityProps
+    /// }
+    /// </code></pre>
+    static member inline YValueHover (value: 'T list) = Interop.mkProperty<IChartPopoverProp> "YValueHover" (value |> List.toArray)
     static member inline descriptionMessage (value: string) = Interop.mkProperty<IChartPopoverProp> "descriptionMessage" value
     static member inline ratio (value: list<int * int>) = Interop.mkProperty<IChartPopoverProp> "ratio" (value |> List.toArray)
     static member inline ratio (value: list<float * float>) = Interop.mkProperty<IChartPopoverProp> "ratio" (value |> List.toArray)
@@ -936,12 +989,64 @@ type [<Erase>] chart =
     static member inline chartTitleAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartProp> "chartTitleAccessibilityData" (!!value |> createObj |> unbox)
     /// data for the points in the chart
     static member inline chartData (value: IChartDataPointProp list list) = Interop.mkProperty<IChartProp> "chartData" (value |> createObjArray)
+    /// data for the points in the chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type ChartDataPoint = {
+    ///     legend: string
+    ///     data: int
+    ///     horizontalBarChartdata: HorizontalDataPoint
+    ///     onClick: unit -> unit
+    ///     color: string
+    ///     placeHolder: bool
+    ///     xAxisCalloutData: string
+    ///     yAxisCalloutData: string
+    ///     callOutAccessibilityData: AccessibilityProps
+    /// }
+    /// </code></pre>
+    static member inline chartData (value: 'T list) = Interop.mkProperty<IChartProp> "chartData" (value |> List.toArray)
     /// Accessibility data for chart data
     static member inline chartDataAccessibilityData (value: IAccessibilityProp list) = Interop.mkProperty<IChartProp> "chartDataAccessibilityData" (!!value |> createObj |> unbox)
     /// data for the points in the line chart
     static member inline lineChartData (value: ILineChartPointsProp list list) = Interop.mkProperty<IChartProp> "lineChartData" (value |> createObjArray)
+    /// data for the points in the line chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type LineChartPoints = {
+    ///     legend: string;
+    ///     legendShape?: LegendShape;
+    ///     data: LineChartDataPoint[] | ScatterChartDataPoint[];
+    ///     gaps?: LineChartGap[];
+    ///     color?: string;
+    ///     opacity?: number;
+    ///     lineOptions?: LineChartLineOptions;
+    ///     hideNonActiveDots?: boolean;
+    ///     onLegendClick?: (selectedLegend: string | null | string[]) => void;
+    ///     onLineClick?: () => void;
+    ///     useSecondaryYScale?: boolean;
+    /// }
+    /// </code></pre>
+    static member inline lineChartData (value: 'T list) = Interop.mkProperty<IChartProp> "lineChartData" (value |> List.toArray)
     /// data for the points in the scatter chart
     static member inline scatterChartData (value: IScatterChartPointsProp list list) = Interop.mkProperty<IChartProp> "scatterChartData" (value |> createObjArray)
+    /// data for the points in the scatter chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type ScatterChartPoints = {
+    ///     legend: string;
+    ///     legendShape?: LegendShape;
+    ///     data: ScatterChartDataPoint[];
+    ///     color?: string;
+    ///     opacity?: number;
+    ///     hideNonActiveDots?: boolean;
+    ///     onLegendClick?: (selectedLegend: string | null | string[]) => void;
+    ///     useSecondaryYScale?: boolean;
+    /// }
+    /// </code></pre>
+    static member inline scatterChartData (value: 'T list) = Interop.mkProperty<IChartProp> "scatterChartData" (value |> List.toArray)
     /// data for the points in the line chart
     static member inline sankeyChartData (value: ISankeyChartDataProp list) = Interop.mkProperty<IChartProp> "SankeyChartData" (!!value |> createObj |> unbox)
     /// data for the points in the line chart
@@ -982,9 +1087,37 @@ type [<Erase>] lineChartPoints =
     /// dataPoints for the line chart
     static member inline data (value: ILineChartDataPointProp list list) = Interop.mkProperty<ILineChartPointsProp> "data" (value |> createObjArray)
     /// dataPoints for the line chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type ScatterChartDataPoint = {
+    ///     x: number | Date | string;
+    ///     y: number;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     onDataPointClick?: () => void;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string | {
+    ///         [id: string]: number;
+    ///     };
+    ///     hideCallout?: boolean;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     xAxisCalloutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    /// }
+    /// </code></pre>
+    static member inline data (value: 'T list) = Interop.mkProperty<ILineChartPointsProp> "data" (value |> List.toArray)
+    /// dataPoints for the line chart
     static member inline data (value: IScatterChartDataPointProp list list) = Interop.mkProperty<ILineChartPointsProp> "data" (value |> createObjArray)
     /// Legend text for the datapoint in the chart
     static member inline gaps (value: ILineChartGapProp list list) = Interop.mkProperty<ILineChartPointsProp> "gaps" (value |> createObjArray)
+    /// Legend text for the datapoint in the chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type LineChartGap = { startIndex: float; endIndex: float }
+    /// </code></pre>
+    static member inline gaps (value: 'T list) = Interop.mkProperty<ILineChartPointsProp> "gaps" (value |> List.toArray)
     /// color for the legend in the chart
     static member inline color (value: string) = Interop.mkProperty<ILineChartPointsProp> "color" value
     /// opacity for chart fill color
@@ -1137,7 +1270,44 @@ module lineChartLineOptions =
 type [<Erase>] sankeyChartData =
     /// Width of the line/stroke.
     static member inline nodes (value: ISNodeProp list list) = Interop.mkProperty<ISankeyChartDataProp> "nodes" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type SNode = {
+    ///     nodeId: number | string
+    ///     name: string
+    ///     color: string
+    ///     borderColor: string
+    ///     actualValue: number
+    ///     layer: number
+    ///     sourceLinks: Array<\SankeyLink<N, L>> | undefined
+    ///     targetLinks: Array<\SankeyLink<N, L>> | undefined
+    ///     value: number | undefined
+    ///     fixedValue: number | undefined
+    ///     index: number | undefined
+    ///     depth: number | undefined
+    ///     height: number | undefined
+    ///     x0: number | undefined
+    ///     x1: number | undefined
+    ///     y0: number | undefined
+    ///     y1: number | undefined
+    /// }
+    /// </code></pre>
+    static member inline nodes (value: 'T list) = Interop.mkProperty<ISankeyChartDataProp> "nodes" (value |> List.toArray)
     static member inline links (value: ISLinkProp list list) = Interop.mkProperty<ISankeyChartDataProp> "links" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type SLink = {
+    ///     value: number;
+    ///     unnormalizedValue?: number;
+    ///     source: number | string | SankeyNode<N, L>;
+    ///     target: number | string | SankeyNode<N, L>;
+    ///     y0?: number | undefined;
+    ///     y1?: number | undefined;
+    ///     width?: number | undefined;
+    ///     index?: number | undefined;
+    /// }
+    /// </code></pre>
+    static member inline links (value: 'T list) = Interop.mkProperty<ISankeyChartDataProp> "links" (value |> List.toArray)
 
 //----------------------------------------------------------------- SNode -------------------------------------------------
 type [<Erase>] sNode =
@@ -1147,6 +1317,8 @@ type [<Erase>] sNode =
     static member inline nodeId (value: float) = Interop.mkProperty<ISNodeProp> "nodeId" value
     ///  A unique identifier for this node.
     static member inline nodeId (value: decimal) = Interop.mkProperty<ISNodeProp> "nodeId" value
+    ///  A unique identifier for this node.
+    static member inline nodeId (value: string) = Interop.mkProperty<ISNodeProp> "nodeId" value
     /// The display name for this node in the UX.
     static member inline name (value: string) = Interop.mkProperty<ISNodeProp> "name" value
     static member inline color (value: string) = Interop.mkProperty<ISNodeProp> "color" value
@@ -1157,6 +1329,73 @@ type [<Erase>] sNode =
     static member inline layer (value: int) = Interop.mkProperty<ISNodeProp> "layer" value
     static member inline layer (value: float) = Interop.mkProperty<ISNodeProp> "layer" value
     static member inline layer (value: decimal) = Interop.mkProperty<ISNodeProp> "layer" value
+    /// Array of outgoing links which have this node as their source.
+    /// This property is calculated internally by the Sankey layout generator.
+    static member inline sourceLinks (value: ISLinkProp list list) = Interop.mkProperty<ISNodeProp> "sourceLinks" (value |> createObjArray)
+    /// Array of outgoing links which have this node as their source.
+    ///
+    /// This property is calculated internally by the Sankey layout generator.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type SLink = {
+    ///     value: number;
+    ///     unnormalizedValue?: number;
+    ///     source: number | string | SankeyNode<N, L>;
+    ///     target: number | string | SankeyNode<N, L>;
+    ///     y0?: number | undefined;
+    ///     y1?: number | undefined;
+    ///     width?: number | undefined;
+    ///     index?: number | undefined;
+    /// }
+    /// </code></pre>
+    static member inline sourceLinks (value: 'T list) = Interop.mkProperty<ISNodeProp> "sourceLinks" (value |> List.toArray)
+    /// Array of incoming links which have this node as their target.
+    /// This property is calculated internally by the Sankey layout generator.
+    static member inline targetLinks (value: ISLinkProp list list) = Interop.mkProperty<ISNodeProp> "targetLinks" (value |> createObjArray)
+    /// Array of incoming links which have this node as their target.
+    /// This property is calculated internally by the Sankey layout generator.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type SLink = {
+    ///     value: number;
+    ///     unnormalizedValue?: number;
+    ///     source: number | string | SankeyNode<N, L>;
+    ///     target: number | string | SankeyNode<N, L>;
+    ///     y0?: number | undefined;
+    ///     y1?: number | undefined;
+    ///     width?: number | undefined;
+    ///     index?: number | undefined;
+    /// }
+    /// </code></pre>
+    static member inline targetLinks (value: 'T list) = Interop.mkProperty<ISNodeProp> "targetLinks" (value |> List.toArray)
+    static member inline value (value: int) = Interop.mkProperty<ISNodeProp> "value" value
+    static member inline value (value: decimal) = Interop.mkProperty<ISNodeProp> "value" value
+    static member inline value (value: float) = Interop.mkProperty<ISNodeProp> "value" value
+    static member inline fixedValue (value: int) = Interop.mkProperty<ISNodeProp> "fixedValue" value
+    static member inline fixedValue (value: decimal) = Interop.mkProperty<ISNodeProp> "fixedValue" value
+    static member inline fixedValue (value: float) = Interop.mkProperty<ISNodeProp> "fixedValue" value
+    static member inline index (value: int) = Interop.mkProperty<ISNodeProp> "index" value
+    static member inline index (value: decimal) = Interop.mkProperty<ISNodeProp> "index" value
+    static member inline index (value: float) = Interop.mkProperty<ISNodeProp> "index" value
+    static member inline depth (value: int) = Interop.mkProperty<ISNodeProp> "depth" value
+    static member inline depth (value: decimal) = Interop.mkProperty<ISNodeProp> "depth" value
+    static member inline depth (value: float) = Interop.mkProperty<ISNodeProp> "depth" value
+    static member inline height (value: int) = Interop.mkProperty<ISNodeProp> "height" value
+    static member inline height (value: decimal) = Interop.mkProperty<ISNodeProp> "height" value
+    static member inline height (value: float) = Interop.mkProperty<ISNodeProp> "height" value
+    static member inline x0 (value: int) = Interop.mkProperty<ISNodeProp> "x0" value
+    static member inline x0 (value: decimal) = Interop.mkProperty<ISNodeProp> "x0" value
+    static member inline x0 (value: float) = Interop.mkProperty<ISNodeProp> "x0" value
+    static member inline x1 (value: int) = Interop.mkProperty<ISNodeProp> "x1" value
+    static member inline x1 (value: decimal) = Interop.mkProperty<ISNodeProp> "x1" value
+    static member inline x1 (value: float) = Interop.mkProperty<ISNodeProp> "x1" value
+    static member inline y0 (value: int) = Interop.mkProperty<ISNodeProp> "y0" value
+    static member inline y0 (value: decimal) = Interop.mkProperty<ISNodeProp> "y0" value
+    static member inline y0 (value: float) = Interop.mkProperty<ISNodeProp> "y0" value
+    static member inline y1 (value: int) = Interop.mkProperty<ISNodeProp> "y1" value
+    static member inline y1 (value: decimal) = Interop.mkProperty<ISNodeProp> "y1" value
+    static member inline y1 (value: float) = Interop.mkProperty<ISNodeProp> "y1" value
 
 //----------------------------------------------------------------- SLink -------------------------------------------------
 type [<Erase>] sLink =
@@ -1166,12 +1405,16 @@ type [<Erase>] sLink =
     static member inline source (value: float) = Interop.mkProperty<ISLinkProp> "source" value
     ///  The index within `ISankeyChartData.nodes` of the source node.
     static member inline source (value: decimal) = Interop.mkProperty<ISLinkProp> "source" value
+    ///  The index within `ISankeyChartData.nodes` of the source node.
+    static member inline source (value: ISNodeProp list) = Interop.mkProperty<ISLinkProp> "source" (!!value |> createObj |> unbox)
     /// The index within `ISankeyChartData.nodes` of the target node.
     static member inline target (value: int) = Interop.mkProperty<ISLinkProp> "target" value
     /// The index within `ISankeyChartData.nodes` of the target node.
     static member inline target (value: float) = Interop.mkProperty<ISLinkProp> "target" value
     /// The index within `ISankeyChartData.nodes` of the target node.
     static member inline target (value: decimal) = Interop.mkProperty<ISLinkProp> "target" value
+    /// The index within `ISankeyChartData.nodes` of the target node.
+    static member inline target (value: ISNodeProp list) = Interop.mkProperty<ISLinkProp> "target" (!!value |> createObj |> unbox)
     /// The weight of this link between the two nodes.
     static member inline value (value: int) = Interop.mkProperty<ISLinkProp> "value" value
     /// The weight of this link between the two nodes.
@@ -1181,6 +1424,18 @@ type [<Erase>] sLink =
     static member inline unnormalizedValue (value: int) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
     static member inline unnormalizedValue (value: float) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
     static member inline unnormalizedValue (value: decimal) = Interop.mkProperty<ISLinkProp> "unnormalizedValue" value
+    static member inline y0 (value: int) = Interop.mkProperty<ISLinkProp> "y0" value
+    static member inline y0 (value: decimal) = Interop.mkProperty<ISLinkProp> "y0" value
+    static member inline y0 (value: float) = Interop.mkProperty<ISLinkProp> "y0" value
+    static member inline y1 (value: int) = Interop.mkProperty<ISLinkProp> "y1" value
+    static member inline y1 (value: decimal) = Interop.mkProperty<ISLinkProp> "y1" value
+    static member inline y1 (value: float) = Interop.mkProperty<ISLinkProp> "y1" value
+    static member inline width (value: int) = Interop.mkProperty<ISLinkProp> "width" value
+    static member inline width (value: decimal) = Interop.mkProperty<ISLinkProp> "width" value
+    static member inline width (value: float) = Interop.mkProperty<ISLinkProp> "width" value
+    static member inline index (value: int) = Interop.mkProperty<ISLinkProp> "index" value
+    static member inline index (value: decimal) = Interop.mkProperty<ISLinkProp> "index" value
+    static member inline index (value: float) = Interop.mkProperty<ISLinkProp> "index" value
 
 //----------------------------------------------------------------- ChartTableHeader -------------------------------------------------
 type [<Erase>] chartTableHeader =
@@ -1216,6 +1471,17 @@ type [<Erase>] chartTableRow =
 type [<Erase>] chartTable =
     /// 1d or 2d Array of header values.
     static member inline headers (value: IChartTableHeaderProp list list) = Interop.mkProperty<IChartTableProp> "headers" (value |> createObjArray)
+    /// 1d or 2d Array of header values.
+    ///
+    /// This property is calculated internally by the Sankey layout generator.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// {
+    ///     value: string | number | boolean | null;
+    ///     style?: React_2.CSSProperties;
+    /// }
+    /// </code></pre>
+    static member inline headers (value: 'T list) = Interop.mkProperty<IChartTableProp> "headers" (value |> List.toArray)
     /// Array of rows. Each row corresponds to one data entry under each column.
     static member inline rows (value: IChartTableRowProp list list list) =
                             let newValue =
@@ -1225,6 +1491,22 @@ type [<Erase>] chartTable =
                                     |> List.map (fun props -> !!props |> createObj |> unbox)
                                     |> List.toArray
                                 )
+                                |> List.toArray
+                            Interop.mkProperty<IChartTableProp> "rows" newValue
+    /// Array of rows. Each row corresponds to one data entry under each column.
+    ///
+    /// This property is calculated internally by the Sankey layout generator.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// {
+    ///     value: string | number | boolean | null;
+    ///     style?: React_2.CSSProperties;
+    /// }
+    /// </code></pre>
+    static member inline rows (value: 'T list list) =
+                            let newValue =
+                                value
+                                |> List.map (fun rows -> rows |> List.toArray)
                                 |> List.toArray
                             Interop.mkProperty<IChartTableProp> "rows" newValue
     /// Optional width for the table
@@ -1358,6 +1640,24 @@ type [<Erase>] donutChartStyles =
 type [<Erase>] funnelChart =
     /// Data points for the funnel chart
     static member inline data(value: IFunnelChartDataPointProp list list) = Interop.mkProperty<IFunnelChartProp> "data" (value |> createObjArray)
+    /// Data points for the funnel chart
+    /// This property is calculated internally by the Sankey layout generator.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type FunnelChartDataPoint = {
+    ///    stage: string | number;
+    ///    subValues?: Array<{
+    ///        category: string;
+    ///        value: number;
+    ///        color: string;
+    ///    }>;
+    ///    value?: number;
+    ///    color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IFunnelChartProp> "data" (value |> List.toArray)
     /// Title for the chart
     static member inline chartTitle(value: string) = Interop.mkProperty<IFunnelChartProp> "chartTitle" value
     /// Width of the chart
@@ -1404,6 +1704,18 @@ type [<Erase>] funnelChartDataPoint =
     static member inline stage(value: float) = Interop.mkProperty<IFunnelChartDataPointProp> "stage" value
     /// Stage name or identifier
     static member inline subValues(value: IFunnelChartDataPointSubValueProp list list) = Interop.mkProperty<IFunnelChartDataPointProp> "subValues" (value |> createObjArray)
+    /// Stage name or identifier
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    ///{
+    ///    category: string;
+    ///    value: number;
+    ///    color: string;
+    ///}
+    /// </code></pre>
+    static member inline subValues(value: 'T list) = Interop.mkProperty<IFunnelChartDataPointProp> "subValues" (value |> List.toArray)
     /// Value for the stage (used for non-stacked funnel charts)
     static member inline value(value: int) = Interop.mkProperty<IFunnelChartDataPointProp> "value" value
     /// Value for the stage (used for non-stacked funnel charts)
@@ -1438,6 +1750,27 @@ type [<Erase>] ganttChart =
     inherit cartesianChart<IGanttChartProp>
     /// An array of data points to be rendered in the chart.
     static member inline data(value: IGanttChartDataPointProp list list) = Interop.mkProperty<IGanttChartProp> "data" (value |> createObjArray)
+    /// An array of data points to be rendered in the chart.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type GanttChartDataPoint = {
+    ///     x: {
+    ///         start: Date | number;
+    ///         end: Date | number;
+    ///     };
+    ///     y: number | string;
+    ///     legend?: string;
+    ///     color?: string;
+    ///     gradient?: [string, string];
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     onClick?: VoidFunction;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IGanttChartProp> "data" (value |> List.toArray)
     /// Callback function to render a custom callout for each data point.
     static member inline onRenderCalloutPerDataPoint(handler: GanttChartDataPoint option -> ReactElement) = Interop.mkProperty<IGanttChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
     /// Height of each bar, in pixels.
@@ -1551,6 +1884,20 @@ type [<Erase>] gaugeChart =
     static member inline chartValue(value: float) = Interop.mkProperty<IGaugeChartProp> "chartValue" value
     /// Sections of the gauge
     static member inline segments(value: IGaugeChartSegmentProp list list) = Interop.mkProperty<IGaugeChartProp> "segments" (value |> createObjArray)
+    /// Sections of the gauge
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type GaugeChartSegment = {
+    ///     legend: string;
+    ///     size: number;
+    ///     color?: string;
+    ///     gradient?: [string, string];
+    ///     accessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline segments(value: 'T list) = Interop.mkProperty<IGaugeChartProp> "segments" (value |> List.toArray)
     /// Minimum value of the gauge
     static member inline minValue(value: int) = Interop.mkProperty<IGaugeChartProp> "minValue" value
     /// Minimum value of the gauge
@@ -1662,6 +2009,18 @@ type [<Erase>] groupedVerticalBarChart =
     inherit cartesianChart<IGroupedVerticalBarChartProp>
     /// Data to render in the chart.
     static member inline data(value: IGroupedVerticalBarChartDataProp list list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "data" (value |> createObjArray)
+    /// Data to render in the chart.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type GroupedVerticalBarChartData = {
+    ///     name: string;
+    ///     series: GVBarChartSeriesPoint[];
+    ///     stackCallOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "data" (value |> List.toArray)
     /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
     /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
     static member inline barWidth(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" value
@@ -1737,6 +2096,24 @@ type [<Erase>] groupedVerticalBarChartData =
     static member inline name(value: string) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "name" value
     /// Data points for Grouped vertical bar chart
     static member inline series(value: IGVBarChartSeriesPointProp list list) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "series" (value |> createObjArray)
+    /// Data points for Grouped vertical bar chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type GVBarChartSeriesPoint = {
+    ///     key: string;
+    ///     data: number;
+    ///     color: string;
+    ///     legend: string;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     onClick?: VoidFunction;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     useSecondaryYScale?: boolean;
+    /// }
+    /// </code></pre>
+    static member inline series(value: 'T list) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "series" (value |> List.toArray)
     /// Accessibility data for Group Bars Stack Callout
     static member inline stackCallOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IGroupedVerticalBarChartDataProp> "stackCallOutAccessibilityData" (!!value |> createObj |> unbox)
 
@@ -1780,6 +2157,18 @@ type [<Erase>] heatMapChart =
     static member inline chartTitle(value: string) = Interop.mkProperty<IHeatMapChartProp> "chartTitle" value
     /// data to provide for Heat Map
     static member inline data(value: IHeatMapChartDataProp list list) = Interop.mkProperty<IHeatMapChartProp> "data" (value |> createObjArray)
+    /// data to provide for Heat Map
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type HeatMapChartData = {
+    ///     legend: string;
+    ///     data: HeatMapChartDataPoint[];
+    ///     value: number;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IHeatMapChartProp> "data" (value |> List.toArray)
     /// The domain value for the color scale
     static member inline domainValuesForColorScale(value: int list) = Interop.mkProperty<IHeatMapChartProp> "domainValuesForColorScale" (value |> List.toArray)
     /// The domain value for the color scale
@@ -1847,8 +2236,22 @@ module heatMapChart =
 type [<Erase>] heatMapChartData =
     /// name of the legend
     static member inline legend(value: string) = Interop.mkProperty<IHeatMapChartDataProp> "legend" value
-    /// name of the legend
     static member inline data(value: IHeatMapChartDataPointProp list list) = Interop.mkProperty<IHeatMapChartDataProp> "data" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type HeatMapChartDataPoint = {
+    ///     x: string | Date | number;
+    ///     y: string | Date | number;
+    ///     value: number;
+    ///     rectText?: string | number;
+    ///     ratio?: [number, number];
+    ///     descriptionMessage?: string;
+    ///     onClick?: VoidFunction;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IHeatMapChartDataProp> "data" (value |> List.toArray)
     /// This  number will be used to get the color for the legend
     static member inline value(value: int) = Interop.mkProperty<IHeatMapChartDataProp> "value" value
     /// This  number will be used to get the color for the legend
@@ -1902,6 +2305,24 @@ type [<Erase>] heatMapChartStyles =
 type [<Erase>] horizontalBarChart =
     /// An array of chart data points for the Horizontal bar chart
     static member inline data(value: IChartProp list list) = Interop.mkProperty<IHorizontalBarChartProp> "data" (value |> createObjArray)
+    /// An array of chart data points for the Horizontal bar chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type ChartProps = {
+    ///     chartTitle?: string;
+    ///     chartTitleAccessibilityData?: AccessibilityProps;
+    ///     chartData?: ChartDataPoint[];
+    ///     chartDataAccessibilityData?: AccessibilityProps;
+    ///     lineChartData?: LineChartPoints[];
+    ///     scatterChartData?: ScatterChartPoints[];
+    ///     SankeyChartData?: SankeyChartData;
+    ///     pointOptions?: SVGProps<SVGCircleElement>;
+    ///     pointLineOptions?: SVGProps<SVGLineElement>;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IHorizontalBarChartProp> "data" (value |> List.toArray)
     /// Width of bar chart
     static member inline width(value: int) = Interop.mkProperty<IHorizontalBarChartProp> "width" value
     /// Width of bar chart
@@ -1990,6 +2411,23 @@ type [<Erase>] horizontalBarChartWithAxis =
     inherit cartesianChart<IHorizontalBarChartWithAxisProp>
     /// Data to render in the chart.
     static member inline data(value: IHorizontalBarChartWithAxisDataPointProp list list) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "data" (value |> createObjArray)
+    /// Data to render in the chart.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type HorizontalBarChartWithAxisDataPoint = {
+    ///     x: number;
+    ///     y: number | string;
+    ///     legend?: string;
+    ///     color?: string;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     onClick?: VoidFunction;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "data" (value |> List.toArray)
     /// Define a custom callout renderer for a data point.
     static member inline onRenderCalloutPerDataPoint (handler: HorizontalBarChartWithAxisDataPoint option -> ReactElement) =
                             Interop.mkProperty<IHorizontalBarChartWithAxisProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
@@ -2072,6 +2510,20 @@ type [<Erase>] lineChart =
     static member inline getCalloutDescriptionMessage (value: CustomizedCalloutData -> string option) = Interop.mkProperty<ILineChartProp> "getCalloutDescriptionMessage" (System.Func<_,_> value)
     /// Callback for getting callout description message
     static member inline colorFillBars (value: IColorFillBarsProp list list) = Interop.mkProperty<ILineChartProp> "colorFillBars" (value |> createObjArray)
+    /// Callback for getting callout description message
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type ColorFillBarsProps = {
+    ///     legend: string;
+    ///     color: string;
+    ///     data: ColorFillBarData[];
+    ///     applyPattern?: boolean;
+    ///     onLegendClick?: (selectedLegend: string | string[] | null) => void | undefined;
+    /// }
+    /// </code></pre>
+    static member inline colorFillBars (value: 'T list) = Interop.mkProperty<ILineChartProp> "colorFillBars" (value |> List.toArray)
     /// if this is set to true, then for each line there will be a unique shape assigned to the point,
     /// there are total 8 shapes which are as follow circle, square, triangele, diamond, pyramid,
     ///  hexagon, pentagon and octagon, which will get assigned as respectively, if there are more
@@ -2102,6 +2554,17 @@ type [<Erase>] lineChartStyles =
 
 type [<Erase>] eventsAnnotation =
     static member inline events(value: IEventAnnotationProp list list) = Interop.mkProperty<IEventsAnnotationProp> "events" (value |> createObjArray)
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type EventAnnotation = {
+    ///     date: Date;
+    ///     event: string;
+    ///     onRenderCard?: () => React_2.ReactNode;
+    /// }
+    /// </code></pre>
+    static member inline events(value: 'T list) = Interop.mkProperty<IEventsAnnotationProp> "events" (value |> List.toArray)
     static member inline strokeColor(value: string) = Interop.mkProperty<IEventsAnnotationProp> "strokeColor" value
     static member inline labelColor(value: string) = Interop.mkProperty<IEventsAnnotationProp> "labelColor" value
     static member inline labelHeight(value: int) = Interop.mkProperty<IEventsAnnotationProp> "labelHeight" value
@@ -2127,6 +2590,16 @@ type [<Erase>] colorFillBars =
     static member inline legend(value: string) = Interop.mkProperty<IColorFillBarsProp> "legend" value
     static member inline color(value: string) = Interop.mkProperty<IColorFillBarsProp> "color" value
     static member inline data(value: IColorFillBarDataProp list list) = Interop.mkProperty<IColorFillBarsProp> "data" (value |> createObjArray)
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type ColorFillBarData = {
+    ///     startX: number | Date;
+    ///     endX: number | Date;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IColorFillBarsProp> "data" (value |> List.toArray)
     static member inline applyPattern(value: bool) = Interop.mkProperty<IColorFillBarsProp> "applyPattern" value
     static member inline onLegendClick(value: string -> unit) = Interop.mkProperty<IColorFillBarsProp> "onLegendClick" value
     static member inline onLegendClick(value: string array -> unit) = Interop.mkProperty<IColorFillBarsProp> "onLegendClick" value
@@ -2326,6 +2799,24 @@ type [<Erase>] verticalBarChart =
     inherit cartesianChart<IVerticalBarChartProp>
     /// Data to render in the chart.
     static member inline data(value: IVerticalBarChartDataPointProp list list) = Interop.mkProperty<IVerticalBarChartProp> "data" (value |> createObjArray)
+    /// Data to render in the chart.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type VerticalBarChartDataPoint = {
+    ///     x: number | string | Date;
+    ///     y: number;
+    ///     legend?: string;
+    ///     color?: string;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     lineData?: LineDataInVerticalBarChart;
+    ///     onClick?: VoidFunction;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IVerticalBarChartProp> "data" (value |> List.toArray)
     /// Define a custom callout renderer for a data point.
     static member inline onRenderCalloutPerDataPoint (handler: VerticalBarChartDataPoint option -> ReactElement) =
                             Interop.mkProperty<IVerticalBarChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
@@ -2434,6 +2925,20 @@ type [<Erase>] verticalStackedBarChart =
     inherit cartesianChart<IVerticalStackedBarChartProp>
     /// Data to render in the chart.
     static member inline data(value: IVerticalStackedChartProp list list) = Interop.mkProperty<IVerticalStackedBarChartProp> "data" (value |> createObjArray)
+    /// Data to render in the chart.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type VerticalStackedChartProps = {
+    ///     chartData: VSChartDataPoint[];
+    ///     xAxisPoint: number | string | Date;
+    ///     xAxisCalloutData?: string;
+    ///     lineData?: LineDataInVerticalStackedBarChart[];
+    ///     stackCallOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IVerticalStackedBarChartProp> "data" (value |> List.toArray)
     /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
     /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
     static member inline barWidth(value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "barWidth" value
@@ -2564,6 +3069,23 @@ module verticalStackedBarChart =
 type [<Erase>] verticalStackedChart =
     /// data for the points in the chart
     static member inline chartData(value: IVSChartDataPointProp list list) = Interop.mkProperty<IVerticalStackedChartProp> "chartData" (value |> createObjArray)
+    /// data for the points in the chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type VSChartDataPoint = {
+    ///     data: number | string;
+    ///     legend: string;
+    ///     color?: string;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     culture?: string;
+    /// }
+
+    /// </code></pre>
+    static member inline chartData(value: 'T list) = Interop.mkProperty<IVerticalStackedChartProp> "chartData" (value |> List.toArray)
     /// Data for x axis label for multistacked Vertical bar chart
     static member inline xAxisPoint(value: int) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisPoint" value
     /// Data for x axis label for multistacked Vertical bar chart
@@ -2581,6 +3103,23 @@ type [<Erase>] verticalStackedChart =
     static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IVerticalStackedChartProp> "xAxisCalloutData" value
     /// line data to render lines on stacked bar chart
     static member inline lineData(value: ILineDataInVerticalStackedBarChartProp list list) = Interop.mkProperty<IVerticalStackedChartProp> "lineData" (value |> createObjArray)
+    /// line data to render lines on stacked bar chart
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type LineDataInVerticalStackedBarChart = {
+    ///     y: number | string;
+    ///     color: string;
+    ///     legend: string;
+    ///     legendShape?: LegendShape;
+    ///     data?: number | string;
+    ///     yAxisCalloutData?: string;
+    ///     useSecondaryYScale?: boolean;
+    ///     lineOptions?: LineChartLineOptions;
+    /// }
+    /// </code></pre>
+    static member inline lineData(value: 'T list) = Interop.mkProperty<IVerticalStackedChartProp> "lineData" (value |> List.toArray)
     /// Accessibility data for Whole stack callout
     static member inline stackCallOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IVerticalStackedChartProp> "stackCallOutAccessibilityData" (!!value |> createObj |> unbox)
 

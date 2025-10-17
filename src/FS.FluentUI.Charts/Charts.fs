@@ -32,9 +32,5 @@ type Fui =
     static member inline getColorFromToken (color: string, isDarkTheme: bool) : string =
                         let args = color, isDarkTheme
                         import "getColorFromToken" "@fluentui/react-charts" (emitJsExpr args "$0[0], $0[1]")
-
-    // static member ChartTableData(props: IChartTableDataProps list) = !! createObj props
-
     static member inline legends (props: ILegendsProp list) = Helpers.createElement (import "Legends" "@fluentui/react-charts") props
-// TODO DeclarativeChart ??
-// COMING? TreeChart
+
