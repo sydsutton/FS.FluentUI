@@ -16,22 +16,31 @@
 ```fsharp
 open FS.FluentUI.Charts
 
+type ChartPoints = {
+    legend: string
+    data: float
+    color: string
+}
+
+/// You can `.` into specific properties
 let firstChartPoints = [
     [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 2; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
     [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 0.5; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
     [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 0; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
 ]
 
+// You can use anonymous types that include specific fields
 let secondChartPoints = [
-    [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 30; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
-    [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 3; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
-    [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 40; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
+    {| legend = "MetaData1"; data = 30; color = Fui.getColorFromToken Fui.dataVizPalette.color1 |}
+    {| legend = "MetaData2"; data = 3; color = Fui.getColorFromToken Fui.dataVizPalette.color2 |}
+    {| legend = "MetaData3"; data = 40; color = Fui.getColorFromToken Fui.dataVizPalette.color6 |}
 ]
 
+// Or you can use custom data types
 let thirdChartPoints = [
-    [ vsChartDataPoint.legend "MetaData1"; vsChartDataPoint.data 10; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color1) ]
-    [ vsChartDataPoint.legend "MetaData2"; vsChartDataPoint.data 60; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color2) ]
-    [ vsChartDataPoint.legend "MetaData3"; vsChartDataPoint.data 30; vsChartDataPoint.color (Fui.getColorFromToken Fui.dataVizPalette.color6) ]
+    { legend = "MetaData1"; data = 10; color = Fui.getColorFromToken Fui.dataVizPalette.color1 }
+    { legend = "MetaData2"; data = 60; color = Fui.getColorFromToken Fui.dataVizPalette.color2 }
+    { legend = "MetaData3"; data = 30; color = Fui.getColorFromToken Fui.dataVizPalette.color6 }
 ]
 
 let verticalStackedBarChartDataList = [
