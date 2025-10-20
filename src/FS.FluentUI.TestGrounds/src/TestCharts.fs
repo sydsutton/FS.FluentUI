@@ -947,10 +947,7 @@ let TestChartsComponent () =
                 horizontalBarChartWithAxis.enableGradient true
                 horizontalBarChartWithAxis.roundCorners true
                 horizontalBarChartWithAxis.onRenderCalloutPerDataPoint (fun props ->
-                    match props with
-                    | Some p -> Fui.text $"{p.y}: {p.x}"
-                    | None -> Html.none
-                )
+                    Fui.text $"{props.y}: {props.x}")
             ]
             Html.div [
                 prop.style [ style.margin 32 ]
@@ -1002,6 +999,8 @@ let TestChartsComponent () =
                 verticalBarChart.rotateXAxisLables true
             ]
             Fui.verticalStackedBarChart [
+                verticalStackedBarChart.onRenderCalloutPerDataPoint (fun (props: VSChartDataPoint) ->
+                    Fui.text $"Test Render: {props.data} - {props.color}")
                 verticalStackedBarChart.data verticalStackedBarChartDataList
                 verticalStackedBarChart.chartTitle "Vertical stacked bar chart axis tooltip example"
                 verticalStackedBarChart.height 400

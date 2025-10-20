@@ -959,11 +959,19 @@ type [<Erase>] areaChart =
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: ICartesianChartStylesProp list) = Interop.mkProperty<IAreaChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
-    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData option -> ReactElement) =
-                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData -> ReactElement) =
+                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<CustomizedCalloutData>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Define a custom callout renderer for a stack; default is to render per data point
-    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData option -> ReactElement) =
-                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData -> ReactElement) =
+                            Interop.mkProperty<IAreaChartProp> "onRenderCalloutPerStack"
+                                                        (System.Func<_,_,_> (fun (value: option<CustomizedCalloutData>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// The prop used to define the culture to localized the numbers
     static member inline culture(value: string) = Interop.mkProperty<IAreaChartProp> "culture" value
     static member inline enablePerfOptimization(value: bool) = Interop.mkProperty<IAreaChartProp> "enablePerfOptimization" value
@@ -1743,7 +1751,7 @@ type [<Erase>] funnelChartStyles =
     static member inline text(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "text" value
     /// Styles for the callout root element
     static member inline calloutContentRoot(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "calloutContentRoot" value
-    static member inline color(value: string) = Interop.mkProperty<IFunnelChartDataPointSubValueProp> "color" value
+    static member inline color(value: string) = Interop.mkProperty<IFunnelChartStylesProp> "color" value
 
 //----------------------------------------------------------------- GanttChart -------------------------------------------------
 type [<Erase>] ganttChart =
@@ -1772,7 +1780,13 @@ type [<Erase>] ganttChart =
     /// </code></pre>
     static member inline data(value: 'T list) = Interop.mkProperty<IGanttChartProp> "data" (value |> List.toArray)
     /// Callback function to render a custom callout for each data point.
-    static member inline onRenderCalloutPerDataPoint(handler: GanttChartDataPoint option -> ReactElement) = Interop.mkProperty<IGanttChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint(handler: GanttChartDataPoint -> ReactElement) =
+                                                Interop.mkProperty<IGanttChartProp>
+                                                        "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<GanttChartDataPoint>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Height of each bar, in pixels.
     static member inline barHeight(value: int) = Interop.mkProperty<IGanttChartProp> "barHeight" value
     /// Height of each bar, in pixels.
@@ -2429,8 +2443,13 @@ type [<Erase>] horizontalBarChartWithAxis =
     /// </code></pre>
     static member inline data(value: 'T list) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "data" (value |> List.toArray)
     /// Define a custom callout renderer for a data point.
-    static member inline onRenderCalloutPerDataPoint (handler: HorizontalBarChartWithAxisDataPoint option -> ReactElement) =
-                            Interop.mkProperty<IHorizontalBarChartWithAxisProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: HorizontalBarChartWithAxisDataPoint -> ReactElement) =
+                            Interop.mkProperty<IHorizontalBarChartWithAxisProp>
+                                                        "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<HorizontalBarChartWithAxisDataPoint>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Width of each bar in the chart.
     static member inline barHeight(value: int) = Interop.mkProperty<IHorizontalBarChartWithAxisProp> "barHeight" value
     /// Width of each bar in the chart.
@@ -2501,11 +2520,19 @@ type [<Erase>] lineChart =
     /// Show event annotation
     static member inline eventAnnotationProps(value: IEventsAnnotationProp list) = Interop.mkProperty<ILineChartProp> "eventAnnotationProps" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
-    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData option -> ReactElement) =
-                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData -> ReactElement) =
+                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<CustomizedCalloutData>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Define a custom callout renderer for a stack; default is to render per data point
-    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData option -> ReactElement) =
-                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerStack (handler: CustomizedCalloutData -> ReactElement) =
+                            Interop.mkProperty<ILineChartProp> "onRenderCalloutPerStack"
+                                                        (System.Func<_,_,_> (fun (value: option<CustomizedCalloutData>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Callback for getting callout description message
     static member inline getCalloutDescriptionMessage (value: CustomizedCalloutData -> string option) = Interop.mkProperty<ILineChartProp> "getCalloutDescriptionMessage" (System.Func<_,_> value)
     /// Callback for getting callout description message
@@ -2742,8 +2769,12 @@ type [<Erase>] scatterChart =
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: IScatterChartStylesProp list) = Interop.mkProperty<IScatterChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a data point
-    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData option -> ReactElement) =
-                            Interop.mkProperty<IScatterChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: CustomizedCalloutData -> ReactElement) =
+                            Interop.mkProperty<IScatterChartProp> "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<CustomizedCalloutData>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Callback for getting callout description message
     static member inline getCalloutDescriptionMessage (value: CustomizedCalloutData -> string option) = Interop.mkProperty<IScatterChartProp> "getCalloutDescriptionMessage" (System.Func<_,_> value)
     /// The prop used to define the culture to localized the numbers
@@ -2818,8 +2849,12 @@ type [<Erase>] verticalBarChart =
     /// </code></pre>
     static member inline data(value: 'T list) = Interop.mkProperty<IVerticalBarChartProp> "data" (value |> List.toArray)
     /// Define a custom callout renderer for a data point.
-    static member inline onRenderCalloutPerDataPoint (handler: VerticalBarChartDataPoint option -> ReactElement) =
-                            Interop.mkProperty<IVerticalBarChartProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: VerticalBarChartDataPoint -> ReactElement) =
+                            Interop.mkProperty<IVerticalBarChartProp> "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<VerticalBarChartDataPoint>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
     /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
     static member inline barWidth (value: int) = Interop.mkProperty<IVerticalBarChartProp> "barWidth" value
@@ -2988,11 +3023,19 @@ type [<Erase>] verticalStackedBarChart =
     /// Call to provide customized styling that will layer on top of the variant rules.
     static member inline styles(value: IVerticalStackedBarChartStylesProp list) = Interop.mkProperty<IVerticalStackedBarChartProp> "styles" (!!value |> createObj |> unbox)
     /// Define a custom callout renderer for a stack; default is to render per data point
-    static member inline onRenderCalloutPerStack (handler: VerticalStackedChartProps option -> ReactElement) =
-                            Interop.mkProperty<IVerticalStackedBarChartStylesProp> "onRenderCalloutPerStack" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerStack (handler: VerticalStackedChartProps -> ReactElement) =
+                            Interop.mkProperty<IVerticalStackedBarChartProp> "onRenderCalloutPerStack"
+                                                        (System.Func<_,_,_> (fun (value: option<VerticalStackedChartProps>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// Define a custom callout renderer for a data point
-    static member inline onRenderCalloutPerDataPoint (handler: VSChartDataPoint option -> ReactElement) =
-                            Interop.mkProperty<IVerticalStackedBarChartStylesProp> "onRenderCalloutPerDataPoint" (System.Func<_,_,_> (fun value _ -> handler value))
+    static member inline onRenderCalloutPerDataPoint (handler: VSChartDataPoint -> ReactElement) =
+                            Interop.mkProperty<IVerticalStackedBarChartProp> "onRenderCalloutPerDataPoint"
+                                                        (System.Func<_,_,_> (fun (value: option<VSChartDataPoint>) defaultRender ->
+                                                            match value with
+                                                            | Some v -> handler v
+                                                            | None -> defaultRender))
     /// yMinValue is supported for bar charts that has only lines
     static member inline yMinValue (value: int) = Interop.mkProperty<IVerticalStackedBarChartProp> "yMinValue" value
     /// yMinValue is supported for bar charts that has only lines
