@@ -745,3 +745,12 @@ type ResourceMountArg = {
     view: ViewApi
     el: HTMLElement
 }
+
+type DatesSetArg = {
+    start: DateTime
+    ``end``: DateTime
+    startStr: string
+    endStr: string
+    timeZone: string
+    view: ViewApi
+}

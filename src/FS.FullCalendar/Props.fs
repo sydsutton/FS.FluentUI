@@ -246,6 +246,9 @@ type calendar =
     /// In, dayGrid view, the max number of events within a given day, not counting the +more link. The rest will show up in a popover.
     static member inline dayMaxEvents(value: bool) =
         Interop.mkProperty<ICalendarProp> "dayMaxEvents" value
+    /// Called after the calendar’s date range has been initially set or changed in some way and the DOM has been updated.
+    static member inline datesSet (value: DatesSetArg -> unit) =
+        Interop.mkProperty<ICalendarProp> "datesSet" (System.Func<_,_> value)
 
     /// Triggered when the user clicks an event.
     static member inline eventClick(value: EventClickArg -> unit) =
