@@ -9,6 +9,7 @@
 
 ### Please check [all Charts docs](https://storybooks.fluentui.dev/react/?path=/docs/charts_introduction--docs) for further component usage and properties
 
+### Please see all F# component examples in the [FS.FluentUI Wiki](https://github.com/sydsutton/FS.FluentUI/wiki)
 
 ### An example of a Charting component implementation:
 
