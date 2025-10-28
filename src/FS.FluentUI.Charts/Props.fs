@@ -2035,6 +2035,25 @@ type [<Erase>] groupedVerticalBarChart =
     /// }
     /// </code></pre>
     static member inline data(value: 'T list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "data" (value |> List.toArray)
+    /// New flexible data prop - supports both bar and line series.
+    /// Use `dataV2` instead of `data` when line series are included.
+    static member inline dataV2(value: IBarSeriesProp list list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "dataV2" (value |> createObjArray)
+    /// New flexible data prop - supports both bar and line series.
+    /// Use `dataV2` instead of `data` when line series are included.
+    static member inline dataV2(value: ILineSeriesProp list list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "dataV2" (value |> createObjArray)
+    /// New flexible data prop - supports both bar and line series.
+    /// Use `dataV2` instead of `data` when line series are included.
+    ///
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// type GroupedVerticalBarChartData = {
+    ///     name: string;
+    ///     series: GVBarChartSeriesPoint[];
+    ///     stackCallOutAccessibilityData?: AccessibilityProps;
+    /// }
+    /// </code></pre>
+    static member inline dataV2(value: 'T list) = Interop.mkProperty<IGroupedVerticalBarChartProp> "dataV2" (value |> List.toArray)
     /// Width of each bar in the chart. When set to `undefined` or `'default'`, the bar width defaults to 16px,
     /// which may decrease to prevent overlap. When set to `'auto'`, the bar width is calculated from padding values.
     static member inline barWidth(value: int) = Interop.mkProperty<IGroupedVerticalBarChartProp> "barWidth" value
@@ -3231,3 +3250,170 @@ type [<Erase>] verticalStackedBarChartStyles =
     static member inline opacityChangeOnHover(value: string) = Interop.mkProperty<IVerticalStackedBarChartStylesProp> "opacityChangeOnHover" value
     /// Style for the bar labels
     static member inline barLabel(value: string) = Interop.mkProperty<IVerticalStackedBarChartStylesProp> "barLabel" value
+
+// ------------------------------------------------------------- BarSeries ------------------------------------------
+
+type [<Erase>] barSeries =
+    /// Optional group identifier for the series.
+    static member inline key(value: string) = Interop.mkProperty<IBarSeriesProp> "key" value
+    /// Array of data points for the series.
+    static member inline data(value: IDataPointV2Prop list list) = Interop.mkProperty<IBarSeriesProp> "data" (value |> createObjArray)
+    /// Array of data points for the series.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// export declare interface DataPointV2<X extends string | number | Date, Y extends string | number | Date> {
+    ///     x: X;
+    ///     y: Y;
+    ///     onClick?: () => void;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IBarSeriesProp> "data" (value |> List.toArray)
+    /// Name of the series to be displayed in the legend.
+    static member inline legend(value: string) = Interop.mkProperty<IBarSeriesProp> "legend" value
+    /// Color of the series.
+    static member inline color(value: string) = Interop.mkProperty<IBarSeriesProp> "color" value
+    /// Opacity of the series.
+    static member inline opacity(value: int) = Interop.mkProperty<IBarSeriesProp> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: decimal) = Interop.mkProperty<IBarSeriesProp> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: float) = Interop.mkProperty<IBarSeriesProp> "opacity" value
+    /// Gradient fill for the series (start and end colors).
+    static member inline gradient(value: string * string) = Interop.mkProperty<IBarSeriesProp> "gradient" value
+    /// Whether this series should be plotted against a secondary Y-axis.
+    static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<IBarSeriesProp> "useSecondaryYScale" value
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string -> unit) = Interop.mkProperty<IBarSeriesProp> "onLegendClick" (System.Func<_,_> value)
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string array -> unit) = Interop.mkProperty<IBarSeriesProp> "onLegendClick" (System.Func<_,_> value)
+
+module barSeries =
+    /// Type discriminator: always 'bar' for this series.
+    type [<Erase>] type' =
+        static member inline bar = Interop.mkProperty<IBarSeriesProp> "type" "bar"
+    /// Shape used in the legend (e.g., circle, square).
+    type [<Erase>] legendShape = sharedLegendShape<IBarSeriesProp>
+
+// ------------------------------------------------------------- DataPointV2 ------------------------------------------
+type [<Erase>] dataPointV2 =
+    /// X-axis value of the data point.
+    static member inline x(value: string) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// X-axis value of the data point.
+    static member inline x(value: int) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// X-axis value of the data point.
+    static member inline x(value: float) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// X-axis value of the data point.
+    static member inline x(value: decimal) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// X-axis value of the data point.
+    static member inline x(value: DateTime) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// X-axis value of the data point.
+    static member inline x(value: DateOnly) = Interop.mkProperty<IDataPointV2Prop> "x" value
+    /// Y-axis value of the data point.
+    static member inline y(value: string) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Y-axis value of the data point.
+    static member inline y(value: int) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Y-axis value of the data point.
+    static member inline y(value: float) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Y-axis value of the data point.
+    static member inline y(value: decimal) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Y-axis value of the data point.
+    static member inline y(value: DateTime) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Y-axis value of the data point.
+    static member inline y(value: DateOnly) = Interop.mkProperty<IDataPointV2Prop> "y" value
+    /// Optional click handler for the data point.
+    static member inline onClick(value: unit -> unit) = Interop.mkProperty<IDataPointV2Prop> "onClick" (System.Func<_,_> value)
+    /// Custom text to show in the callout in place of the x-axis value.
+    static member inline xAxisCalloutData(value: string) = Interop.mkProperty<IDataPointV2Prop> "xAxisCalloutData" value
+    /// Custom text to show in the callout in place of the y-axis value.
+    static member inline yAxisCalloutData(value: string) = Interop.mkProperty<IDataPointV2Prop> "yAxisCalloutData" value
+    /// Accessibility properties for the data point.
+    static member inline callOutAccessibilityData(value: IAccessibilityProp list) = Interop.mkProperty<IDataPointV2Prop> "callOutAccessibilityData" (!!value |> createObj |> unbox)
+    /// Custom marker size for the data point.
+    static member inline markerSize(value: int) = Interop.mkProperty<IDataPointV2Prop> "markerSize" value
+    /// Custom marker size for the data point.
+    static member inline markerSize(value: float) = Interop.mkProperty<IDataPointV2Prop> "markerSize" value
+    /// Custom marker size for the data point.
+    static member inline markerSize(value: decimal) = Interop.mkProperty<IDataPointV2Prop> "markerSize" value
+    /// Optional text to annotate or label the data point.
+    static member inline text(value: string) = Interop.mkProperty<IDataPointV2Prop> "text" value
+    /// Color of the data point. If not provided, it will inherit the series color.
+    static member inline color(value: string) = Interop.mkProperty<IDataPointV2Prop> "color" value
+
+// ------------------------------------------------------------- LineSeries ------------------------------------------
+
+type [<Erase>] lineSeries =
+    /// Array of data points for the series.
+    static member inline data(value: IDataPointV2Prop list list) = Interop.mkProperty<ILineSeriesProp> "data" (value |> createObjArray)
+    /// Array of data points for the series.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// export declare interface DataPointV2<X extends string | number | Date, Y extends string | number | Date> {
+    ///     x: X;
+    ///     y: Y;
+    ///     onClick?: () => void;
+    ///     xAxisCalloutData?: string;
+    ///     yAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<ILineSeriesProp> "data" (value |> List.toArray)
+    /// Optional gaps to render in the line.
+    static member inline gaps(value: ILineChartGapProp list list) = Interop.mkProperty<ILineSeriesProp> "gaps" (value |> createObjArray)
+    /// Optional gaps to render in the line.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    // export declare interface LineChartGap {
+    //     /**
+    //     * Starting index of the gap.
+    //     */
+    //     startIndex: number;
+    //     /**
+    //     * Ending index of the gap.
+    //     */
+    //     endIndex: number;
+    // }
+    /// </code></pre>
+    static member inline gaps(value: 'T list) = Interop.mkProperty<ILineSeriesProp> "gaps" (value |> List.toArray)
+    /// Additional line rendering options (e.g., stroke width, curve type).
+    static member inline lineOptions(value: ILineChartLineOptionsProp list) = Interop.mkProperty<ILineSeriesProp> "lineOptions" (!!value |> createObj |> unbox)
+    /// If true, hides dots for inactive (unfocused/unhovered) data points.
+    static member inline hideInactiveDots(value: bool) = Interop.mkProperty<ILineSeriesProp> "hideInactiveDots" value
+    /// Callback invoked when the line itself is clicked.
+    static member inline onLineClick(value: unit -> unit) = Interop.mkProperty<ILineSeriesProp> "onLineClick" (System.Func<_,_> value)
+    /// Name of the series to be displayed in the legend.
+    static member inline legend(value: string) = Interop.mkProperty<ILineSeriesProp> "legend" value
+    /// Color of the series.
+    static member inline color(value: string) = Interop.mkProperty<ILineSeriesProp> "color" value
+    /// Opacity of the series.
+    static member inline opacity(value: int) = Interop.mkProperty<ILineSeriesProp> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: decimal) = Interop.mkProperty<ILineSeriesProp> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: float) = Interop.mkProperty<ILineSeriesProp> "opacity" value
+    /// Gradient fill for the series (start and end colors).
+    static member inline gradient(value: string * string) = Interop.mkProperty<ILineSeriesProp> "gradient" value
+    /// Whether this series should be plotted against a secondary Y-axis.
+    static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<ILineSeriesProp> "useSecondaryYScale" value
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string -> unit) = Interop.mkProperty<ILineSeriesProp> "onLegendClick" (System.Func<_,_> value)
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string array -> unit) = Interop.mkProperty<ILineSeriesProp> "onLegendClick" (System.Func<_,_> value)
+
+module lineSeries =
+    /// Type discriminator: always 'line' for this series.
+    type [<Erase>] type' =
+        static member inline line = Interop.mkProperty<ILineSeriesProp> "type" "line"
+    /// Shape used in the legend (e.g., circle, square).
+    type [<Erase>] legendShape = sharedLegendShape<ILineSeriesProp>

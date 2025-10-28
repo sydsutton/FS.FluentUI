@@ -88,3 +88,6 @@ type [<Erase>] IVerticalStackedChartProp = interface end
 type [<Erase>] IVSChartDataPointProp = interface end
 type [<Erase>] ILineDataInVerticalStackedBarChartProp = interface end
 type [<Erase>] IVerticalStackedBarChartStylesProp = interface end
+type [<Erase>] IBarSeriesProp = interface end
+type [<Erase>] ILineSeriesProp = interface end
+type [<Erase>] IDataPointV2Prop = interface end
