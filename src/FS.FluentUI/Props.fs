@@ -2914,6 +2914,9 @@ type [<Erase>] dialog =
     /// Enables standard behavior according to the HTML dialog spec where the focus trap involves setting outside elements inert.
     static member inline inertTrapFocus (value: bool) = Interop.mkProperty<IDialogProp> "inertTrapFocus" value
     static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDialogProp> "surfaceMotion" (!!value |> createObj |> unbox)
+   /// Decides whether the dialog should be removed from the DOM tree when it is closed.
+   /// This can be useful when dealing with components that may contain state that should not be reset when the dialog is closed.
+    static member inline unmountOnClose (value: bool) = Interop.mkProperty<IDialogProp> "unmountOnClose" (!!value |> createObj |> unbox)
 
 module dialog =
     /// Dialog variations.
