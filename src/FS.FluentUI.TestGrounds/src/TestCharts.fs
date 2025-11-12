@@ -997,6 +997,16 @@ let TestChartsComponent () =
                 verticalBarChart.width 650
                 verticalBarChart.hideLegend true
                 verticalBarChart.rotateXAxisLables true
+                verticalBarChart.annotations [
+                    [
+                        annotation.text "Test Annotation"
+                        annotation.coordinates [
+                            chartAnnotationCoordinate.x 100
+                            chartAnnotationCoordinate.y 100
+                            chartAnnotationCoordinate.type'.pixel
+                        ]
+                    ]
+                ]
             ]
             Fui.verticalStackedBarChart [
                 verticalStackedBarChart.onRenderCalloutPerDataPoint (fun (props: VSChartDataPoint) ->

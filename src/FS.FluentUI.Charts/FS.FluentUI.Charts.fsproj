@@ -38,7 +38,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-charts" Version="gte 9.3.3" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-charts" Version="gte 9.3.6" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

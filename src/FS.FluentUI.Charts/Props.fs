@@ -83,6 +83,8 @@ type [<Erase>] sharedCartesianChartStyles<'Property> =
     static member inline svgTooltip (value: string) = Interop.mkProperty<'Property> "svgTooltip" value
     /// Styles for the chart svg element
     static member inline chart (value: string) = Interop.mkProperty<'Property> "chart" value
+    static member inline annotationLayer (value: string) = Interop.mkProperty<'Property> "annotationLayer" value
+    static member inline plotContainer (value: string) = Interop.mkProperty<'Property> "plotContainer" value
 
 type [<Erase>] sharedShapes<'Property> =
     static member inline default' = Interop.mkProperty<'Property> "shape" "default"
@@ -787,6 +789,21 @@ type [<Erase>] cartesianChart<'Property> =
     static member inline yAxisTickValues (value: string list) = Interop.mkProperty<'Property> "yAxisTickValues" (value |> List.toArray)
     /// If provided, these values override automatic tick generation.
     static member inline xAxis (value: string list) = Interop.mkProperty<'Property> "xAxis" (value |> List.toArray)
+    static member inline annotations (value: IAnnotationProp list list) = Interop.mkProperty<'Property> "annotations" (value |> createObjArray)
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    /// <pre><code>
+    /// type ChartAnnotation {
+    ///     accessibility?: ChartAnnotationAccessibilityProps;
+    ///     connector?: ChartAnnotationConnectorProps;
+    ///     coordinates: ChartAnnotationCoordinate;
+    ///     data?: Record<string, unknown>;
+    ///     id?: string;
+    ///     layout?: ChartAnnotationLayoutProps;
+    ///     style?: ChartAnnotationStyleProps;
+    ///     text: string;
+    /// }
+    /// </code></pre>
+    static member inline annotations (value: 'T list) = Interop.mkProperty<'Property> "annotations" (!!value |> createObj |> unbox)
 
 //----------------------------------------------------------------- Margins -------------------------------------------------
 type [<Erase>] margin =
@@ -3417,3 +3434,118 @@ module lineSeries =
         static member inline line = Interop.mkProperty<ILineSeriesProp> "type" "line"
     /// Shape used in the legend (e.g., circle, square).
     type [<Erase>] legendShape = sharedLegendShape<ILineSeriesProp>
+
+// ------------------------------------------------------------- Annotation ------------------------------------------
+
+type [<Erase>] annotation =
+    static member inline accessibility(value: IChartAnnotationAccessibilityProp list) = Interop.mkProperty<IAnnotationProp> "accessibility" (!!value |> createObj |> unbox)
+    static member inline connector(value: IChartAnnotationConnectorProp list) = Interop.mkProperty<IAnnotationProp> "connector" (!!value |> createObj |> unbox)
+    static member inline coordinates(value: IChartAnnotationCoordinateProp list) = Interop.mkProperty<IAnnotationProp> "coordinates" (!!value |> createObj |> unbox)
+    static member inline data(value: obj) = Interop.mkProperty<IAnnotationProp> "data" value
+    static member inline id(value: string) = Interop.mkProperty<IAnnotationProp> "id" value
+    static member inline layout (value: IChartAnnotationLayoutProp list) = Interop.mkProperty<IAnnotationProp> "layout" (!!value |> createObj |> unbox)
+    static member inline text (value: string) = Interop.mkProperty<IAnnotationProp> "text" value
+
+// ------------------------------------------------------------- ChartAnnotationAccessibility ------------------------------------------
+
+type [<Erase>] chartAnnotationAccessibility =
+    static member inline ariaDescribedBy(value: string) = Interop.mkProperty<IChartAnnotationAccessibilityProp> "ariaDescribedBy" value
+    static member inline ariaLabel(value: string) = Interop.mkProperty<IChartAnnotationAccessibilityProp> "ariaLabel" value
+    static member inline role(value: string) = Interop.mkProperty<IChartAnnotationAccessibilityProp> "role" value
+
+// ------------------------------------------------------------- ChartAnnotationConnector ------------------------------------------
+
+type [<Erase>] chartAnnotationConnector =
+    static member inline dashArray(value: string) = Interop.mkProperty<IChartAnnotationConnectorProp> "dashArray" value
+    static member inline endPadding(value: int) = Interop.mkProperty<IChartAnnotationConnectorProp> "endPadding" value
+    static member inline endPadding(value: float) = Interop.mkProperty<IChartAnnotationConnectorProp> "endPadding" value
+    static member inline endPadding(value: decimal) = Interop.mkProperty<IChartAnnotationConnectorProp> "endPadding" value
+    static member inline startPadding(value: int) = Interop.mkProperty<IChartAnnotationConnectorProp> "startPadding" value
+    static member inline startPadding(value: float) = Interop.mkProperty<IChartAnnotationConnectorProp> "startPadding" value
+    static member inline startPadding(value: decimal) = Interop.mkProperty<IChartAnnotationConnectorProp> "startPadding" value
+    static member inline strokeColor(value: string) = Interop.mkProperty<IChartAnnotationConnectorProp> "strokeColor" value
+    static member inline strokeWidth(value: int) = Interop.mkProperty<IChartAnnotationConnectorProp> "strokeWidth" value
+    static member inline strokeWidth(value: float) = Interop.mkProperty<IChartAnnotationConnectorProp> "strokeWidth" value
+    static member inline strokeWidth(value: decimal) = Interop.mkProperty<IChartAnnotationConnectorProp> "strokeWidth" value
+
+module chartAnnotationConnector =
+    type [<Erase>] arrow =
+        static member inline none = Interop.mkProperty<IChartAnnotationConnectorProp> "arrow" "none"
+        static member inline start = Interop.mkProperty<IChartAnnotationConnectorProp> "arrow" "start"
+        static member inline end' = Interop.mkProperty<IChartAnnotationConnectorProp> "arrow" "end"
+        static member inline both = Interop.mkProperty<IChartAnnotationConnectorProp> "arrow" "both"
+
+// ------------------------------------------------------------- ChartAnnotationCoordinate ------------------------------------------
+
+type [<Erase>] chartAnnotationCoordinate =
+    static member inline x(value: string) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline x(value: int) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline x(value: float) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline x(value: decimal) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline x(value: DateTime) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline x(value: DateOnly) = Interop.mkProperty<IChartAnnotationCoordinateProp> "x" value
+    static member inline y(value: string) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+    static member inline y(value: int) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+    static member inline y(value: float) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+    static member inline y(value: decimal) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+    static member inline y(value: DateTime) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+    static member inline y(value: DateOnly) = Interop.mkProperty<IChartAnnotationCoordinateProp> "y" value
+
+module chartAnnotationCoordinate =
+    type [<Erase>] type' =
+        static member inline data= Interop.mkProperty<IChartAnnotationCoordinateProp> "type" "data"
+        static member inline relative= Interop.mkProperty<IChartAnnotationCoordinateProp> "type" "relative"
+        static member inline pixel= Interop.mkProperty<IChartAnnotationCoordinateProp> "type" "pixel"
+    type [<Erase>] yAxis =
+        static member inline primary= Interop.mkProperty<IChartAnnotationCoordinateProp> "yAxis" "primary"
+        static member inline secondary= Interop.mkProperty<IChartAnnotationCoordinateProp> "yAxis" "secondary"
+
+// ------------------------------------------------------------- ChartAnnotationLayout ------------------------------------------
+
+type [<Erase>] chartAnnotationLayout =
+    static member inline className(value: string) = Interop.mkProperty<IChartAnnotationLayoutProp> "className" value
+    static member inline clipToBounds(value: bool) = Interop.mkProperty<IChartAnnotationLayoutProp> "clipToBounds" value
+    static member inline maxWidth(value: int) = Interop.mkProperty<IChartAnnotationLayoutProp> "maxWidth" value
+    static member inline maxWidth(value: float) = Interop.mkProperty<IChartAnnotationLayoutProp> "maxWidth" value
+    static member inline maxWidth(value: decimal) = Interop.mkProperty<IChartAnnotationLayoutProp> "maxWidth" value
+    static member inline offsetX(value: int) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetX" value
+    static member inline offsetX(value: float) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetX" value
+    static member inline offsetX(value: decimal) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetX" value
+    static member inline offsetY(value: int) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetY" value
+    static member inline offsetY(value: float) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetY" value
+    static member inline offsetY(value: decimal) = Interop.mkProperty<IChartAnnotationLayoutProp> "offsetY" value
+
+module chartAnnotationLayout =
+    type [<Erase>] align =
+        static member inline start = Interop.mkProperty<IChartAnnotationLayoutProp> "align" "start"
+        static member inline center = Interop.mkProperty<IChartAnnotationLayoutProp> "align" "center"
+        static member inline end' = Interop.mkProperty<IChartAnnotationLayoutProp> "align" "end"
+    type [<Erase>] verticalAlign =
+        static member inline top = Interop.mkProperty<IChartAnnotationLayoutProp> "verticalAlign" "top"
+        static member inline middle = Interop.mkProperty<IChartAnnotationLayoutProp> "verticalAlign" "middle"
+        static member inline bottom = Interop.mkProperty<IChartAnnotationLayoutProp> "verticalAlign" "bottom"
+
+// ------------------------------------------------------------- ChartAnnotationStyle ------------------------------------------
+
+type [<Erase>] chartAnnotationStyle =
+    static member inline textColor(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "textColor" value
+    static member inline backgroundColor(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "backgroundColor" value
+    static member inline borderColor(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "borderColor" value
+    static member inline borderWidth(value: int) = Interop.mkProperty<IChartAnnotationStyleProp> "borderWidth" value
+    static member inline borderWidth(value: float) = Interop.mkProperty<IChartAnnotationStyleProp> "borderWidth" value
+    static member inline borderWidth(value: decimal) = Interop.mkProperty<IChartAnnotationStyleProp> "borderWidth" value
+    /// Border style (solid, dashed, etc.)
+    static member inline borderStyle(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "borderStyle" value
+    /// Border style (solid, dashed, etc.)
+    static member inline borderStyle(value: Feliz.borderStyle) = Interop.mkProperty<IChartAnnotationStyleProp> "borderStyle" value
+    static member inline borderRadius(value: int) = Interop.mkProperty<IChartAnnotationStyleProp> "borderRadius" value
+    static member inline borderRadius(value: decimal) = Interop.mkProperty<IChartAnnotationStyleProp> "borderRadius" value
+    static member inline borderRadius(value: float) = Interop.mkProperty<IChartAnnotationStyleProp> "borderRadius" value
+    static member inline boxShadow(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "boxShadow" value
+    static member inline fontSize(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "fontSize" value
+    static member inline fontWeight(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "fontWeight" value
+    static member inline padding(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "padding" value
+    static member inline opacity(value: int) = Interop.mkProperty<IChartAnnotationStyleProp> "opacity" value
+    static member inline opacity(value: float) = Interop.mkProperty<IChartAnnotationStyleProp> "opacity" value
+    static member inline opacity(value: decimal) = Interop.mkProperty<IChartAnnotationStyleProp> "opacity" value
+    static member inline className(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "className" value
