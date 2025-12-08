@@ -956,6 +956,9 @@ type [<Erase>] drawer =
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode"
     static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "backdropMotion" (!!value |> createObj |> unbox)
     static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
+    /// Decides whether the drawer should be removed from the DOM tree when it is closed.
+    /// This can be useful when dealing with components that may contain state that should not be reset when the drawer is closed.
+    static member inline unmountOnClose (value: bool) = Interop.mkProperty<IDrawerProp> "unmountOnClose" value
 
 
 module drawer =
@@ -1020,6 +1023,9 @@ type [<Erase>] overlayDrawer =
     static member inline mountNode (value: MountNode) = Interop.mkProperty<IOverlayDrawerProp> "mountNode" value
     static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IOverlayDrawerProp> "backdropMotion" (!!value |> createObj |> unbox)
     static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IOverlayDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
+    /// Decides whether the drawer should be removed from the DOM tree when it is closed.
+    /// This can be useful when dealing with components that may contain state that should not be reset when the drawer is closed.
+    static member inline unmountOnClose (value: bool) = Interop.mkProperty<IOverlayDrawerProp> "unmountOnClose" value
 
 module overlayDrawer =
 
@@ -1061,6 +1067,9 @@ type [<Erase>] inlineDrawer =
     /// Whether the drawer has a separator line.
     static member inline separator (value: bool) = Interop.mkProperty<IInlineDrawerProp> "separator" value
     static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IInlineDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
+    /// Decides whether the drawer should be removed from the DOM tree when it is closed.
+    /// This can be useful when dealing with components that may contain state that should not be reset when the drawer is closed.
+    static member inline unmountOnClose (value: bool) = Interop.mkProperty<IInlineDrawerProp> "unmountOnClose" value
 
 module inlineDrawer =
 
@@ -2617,6 +2626,7 @@ type [<Erase>] teachingPopoverBody =
     /// Optional Media Content.
     static member inline media (value: IReactProperty list) = Interop.mkProperty<ITeachingPopoverBodyProp> "media" (!!value |> createObj |> unbox<ITeachingPopoverBodyProp>)
 
+module teachingPopoverBody =
     type [<Erase>] mediaLength =
         static member inline short = Interop.mkProperty<ITeachingPopoverBodyProp> "mediaLength" "short"
         static member inline medium = Interop.mkProperty<ITeachingPopoverBodyProp> "mediaLength" "medium"
