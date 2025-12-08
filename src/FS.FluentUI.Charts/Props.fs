@@ -671,6 +671,12 @@ type [<Erase>] cartesianChart<'Property> =
     static member inline xMaxValue(value: decimal) = Interop.mkProperty<'Property> "xMaxValue" value
     /// maximum  data value point in x-axis
     static member inline xMaxValue(value: float) = Interop.mkProperty<'Property> "xMaxValue" value
+    /// minumum data value point in x-axis
+    static member inline xMinValue(value: int) = Interop.mkProperty<'Property> "xMinValue" value
+    /// minumum data value point in x-axis
+    static member inline xMinValue(value: decimal) = Interop.mkProperty<'Property> "xMinValue" value
+    /// minumum data value point in x-axis
+    static member inline xMinValue(value: float) = Interop.mkProperty<'Property> "xMinValue" value
     /// Number of ticks on the y-axis.
     /// Tick count should be factor of difference between (yMinValue, yMaxValue)?
     static member inline yAxisTickCount(value: int) = Interop.mkProperty<'Property> "yAxisTickCount" value
