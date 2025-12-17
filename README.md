@@ -129,3 +129,5 @@ cd ./{path to your project}
 dotnet add package FS.FluentUI
 npm install @fluentui/react-components @fluentui/react-datepicker-compat @fluentui/react-calendar-compat @fluentui/react-timepicker-compat @fluentui-contrib/react-data-grid-react-window @fluentui/react-icons @fluentui/react-charts react-window
 ```
+## Known Bug
+* Segoe UI fonts are not automatically loaded with V9 of FluentUI. If you are NOT using FS.FluentUI.V8toV9, and notice that FluentUI components do not have Segoe UI fonts, then please see [this issue](https://github.com/microsoft/fluentui/issues/27673) for an idea of how to fix it.
