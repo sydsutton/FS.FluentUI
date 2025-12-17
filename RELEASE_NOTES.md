@@ -1,6 +1,17 @@
 Release Notes
 =========
 
+### 3.0.0 (12-17-2025)
+
+* Update @fluentui/react-components to 9.72.9
+* Add unmountOnClose props to Drawer components
+* Add size prop to Switch component
+* Add appearance property to Carousel component
+* Update list of Icons and add @fluentui/react-icons to list of necessary NPM packages
+* Update secondary NPM deps
+* BREAKING CHANGE: Update react-window dependency to 2.2.3 and change `Fui.fixedSizeList` component to `Fui.virtualized.list`
+* BREAKING CHANGE: Change virtualized list properties to match react-window properties
+
 ### 2.5.1 (7-30-2025)
 
 * Update @fluentui/react-components to 9.68.1

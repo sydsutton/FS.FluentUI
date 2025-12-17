@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.5.2</Version>
+        <Version>3.0.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,9 +12,14 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.69.0
-            - Add clearButton and clearIcon props to Dropdown and Combobox components
-            - Add disabledSelection prop to ListItem component
+            - Update @fluentui/react-components to 9.72.9
+            - Add unmountOnClose props to Drawer components
+            - Add size prop to Switch component
+            - Add appearance property to Carousel component
+            - Update list of Icons and add @fluentui/react-icons to list of necessary NPM packages
+            - Update secondary NPM deps
+            - BREAKING CHANGE: Update react-window dependency to 2.2.3 and change `Fui.fixedSizeList` component to `Fui.virtualized.list`
+            - BREAKING CHANGE: Change virtualized list properties to match react-window properties
         </PackageReleaseNotes>
     </PropertyGroup>
 
