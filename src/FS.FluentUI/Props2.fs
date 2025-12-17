@@ -3329,6 +3329,10 @@ module carousel =
         static member inline start = Interop.mkProperty<ICarouselProp> "align" "start"
         static member inline end' = Interop.mkProperty<ICarouselProp> "align" "end"
 
+    type [<Erase>] appearance =
+        static member inline flat = Interop.mkProperty<ICarouselProp> "appearance" "flat"
+        static member inline elevated = Interop.mkProperty<ICarouselProp> "appearance" "elevated"
+
     /// Controls the number of carousel cards per navigation element, will default to 'auto'
     /// Recommended to set to '1' when using full page carousel cards.
     type [<Erase>] groupSize =

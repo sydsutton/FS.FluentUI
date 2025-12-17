@@ -3990,6 +3990,7 @@ let CarouselTest () =
     Fui.carousel [
         carousel.groupSize 1
         carousel.align.center
+        carousel.appearance.elevated
         carousel.motion.slideWithDuration 50
         carousel.announcement (fun index totalSlides slideGroupList -> $"Carousel {index + 1} of {totalSlides}")
         carousel.children [
