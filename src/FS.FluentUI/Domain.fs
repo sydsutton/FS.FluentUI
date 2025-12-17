@@ -1773,3 +1773,20 @@ type TagSelectData = {
     value: string
     selectedValues: string array
 }
+
+type AriaAttributes = { ``aria-posinset``: int; ``aria-setsize``: int; role: string }
+type RowComponentProps = {
+    index: int
+    ariaAttributes: AriaAttributes
+    style: obj
+}
+
+type OnResize = {
+    height: int
+    width: int
+}
+
+type OnRowsRendered =  {
+    startIndex: int
+    stopIndex: int
+}

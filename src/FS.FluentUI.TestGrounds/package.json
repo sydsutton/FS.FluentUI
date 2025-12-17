@@ -34,7 +34,7 @@
     "bootswatch": "^5.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-window": "^1.8.11",
+    "react-window": "^2.2.3",
     "use-sync-external-store": "^1.2.0"
   },
   "devDependencies": {

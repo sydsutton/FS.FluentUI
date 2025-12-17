@@ -1102,8 +1102,6 @@ type [<Erase>] Fui =
     static member inline list (props: ReactElement list) = Interop.reactElementWithChildren (import "List" FluentUIv9) props
     static member inline listItem (props: IListItemProp list) = createElement (import "ListItem" FluentUIv9) props
     static member inline listItem (props: ReactElement list) = Interop.reactElementWithChildren (import "ListItem" FluentUIv9) props
-    /// A virtualized List that's leveraging the react-window package.
-    static member inline fixedSizeList (props: IFixedSizeListProp list) = createElement (import "FixedSizeList" ReactWindow) props
     static member inline colorPicker (props: IColorPickerProp list) = createElement (import "ColorPicker" FluentUIv9) props
     static member inline colorArea (props: IColorAreaProp list) = createElement (import "ColorArea" FluentUIv9) props
     static member inline colorSlider (props: IColorSliderProp list) = createElement (import "ColorSlider" FluentUIv9) props
@@ -1143,7 +1141,8 @@ module Fui =
         static member inline dataGridCell (props: ReactElement list) = Interop.reactElementWithChildren (import "DataGridCell" ReactDataGridWindow) props
         static member inline dataGridCell (props: IDataGridCellProp list) = createElement (import "DataGridCell" ReactDataGridWindow) props
         static member inline dataGridSelectionCell (props: IDataGridSelectionCellProp list) = createElement (import "DataGridSelectionCell" ReactDataGridWindow) props
-
+        /// A virtualized List that's leveraging the react-window package.
+        static member inline list (props: IVirtualizedListProp list) = createElement (import "List" ReactWindow) props
     type [<Erase>] text =
         static member inline body1 (text: string) = createElement (import "Body1" FluentUIv9) [prop.text text]
         static member inline body1 (props: ITextProp list) = createElement (import "Body1" FluentUIv9) props

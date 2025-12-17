@@ -49,7 +49,7 @@
             <NpmPackage Name="@fluentui/react-timepicker-compat" Version="gte 0.4.26" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui-contrib/react-data-grid-react-window" Version="gte 1.4.2" ResolutionStrategy="Max" />
             <NpmPackage Name="@fluentui/react-icons" Version="gte 2.0.316" ResolutionStrategy="Max" />
-            <NpmPackage Name="react-window" Version="gte 1.8.11" ResolutionStrategy="Max" />
+            <NpmPackage Name="react-window" Version="gte 2.2.3" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

@@ -3832,65 +3832,54 @@ module list =
         static member inline single = Interop.mkProperty<IListProp> "selectionMode" "single"
         static member inline multiselect = Interop.mkProperty<IListProp> "selectionMode" "multiselect"
 
-// -------------------------------------------------------------------------- FixedSizeList --------------------------------------------------------------------------------------
-type [<Erase>] fixedSizeList =
-    inherit FelizProps.prop<IFixedSizeListProp>
-    /// Contextual data to be passed to the item renderer as a data prop. This is a light-weight alternative to React's built-in context API. Item data is useful for item renderers that are class components.
-    static member inline itemData (value: 'T seq)= Interop.mkProperty<IFixedSizeListProp> "itemData" (value |> Seq.toArray)
-    /// Size of a item in the direction being windowed. For vertical lists, this is the row height. For horizontal lists, this is the column width.
-    static member inline itemSize (value: int)= Interop.mkProperty<IFixedSizeListProp> "itemSize" value
-    /// Total number of items in the list. Note that only a few items will be rendered and displayed at a time.
-    static member inline itemCount (value: int)= Interop.mkProperty<IFixedSizeListProp> "itemCount" value
-    /// Height of the list. For vertical lists, this must be a number. It affects the number of rows that will be rendered (and displayed) at any given time.
-    /// For horizontal lists, this can be a number or a string (e.g. "50%").
-    static member inline height (value: string)= Interop.mkProperty<IFixedSizeListProp> "height" value
-    /// Width of the list. For horizontal lists, this must be a number. It affects the number of columns that will be rendered (and displayed) at any given time.
-    /// For vertical lists, this can be a number or a string (e.g. "50%").
-    static member inline width (value: string)= Interop.mkProperty<IFixedSizeListProp> "width" value
-    /// Adds an additional isScrolling parameter to the children render function. This parameter can be used to show a placeholder row or column while the list is being scrolled.
-    /// Note that using this parameter will result in an additional render call after scrolling has stopped (when isScrolling changes from true to false).
-    static member inline useIsScrolling (value: bool)= Interop.mkProperty<IFixedSizeListProp> "useIsScrolling" value
-    /// Scroll offset for initial render.
-    /// For vertical lists, this affects scrollTop. For horizontal lists, this affects scrollLeft.
-    static member inline initialScrollOffset (value: int)= Interop.mkProperty<IFixedSizeListProp> "initialScrollOffset" value
-    /// Scroll offset for initial render.
-    /// For vertical lists, this affects scrollTop. For horizontal lists, this affects scrollLeft.
-    static member inline initialScrollOffset (value: float)= Interop.mkProperty<IFixedSizeListProp> "initialScrollOffset" value
-    /// Scroll offset for initial render.
-    /// For vertical lists, this affects scrollTop. For horizontal lists, this affects scrollLeft.
-    static member inline initialScrollOffset (value: decimal)= Interop.mkProperty<IFixedSizeListProp> "initialScrollOffset" value
-    /// React component responsible for rendering the individual item specified by an index prop. This component also receives a style prop (used for positioning).
-    /// If useIsScrolling is enabled for the list, the component also receives an additional isScrolling boolean prop.
-
-    static member inline children (value: FixedSizeListRenderProps<'T> -> ReactElement)= Interop.mkProperty<IFixedSizeListProp> "children" (System.Func<_,_> value)
-    /// By default, lists will use an item's index as its key. This is okay if:
-    /// Your collections of items is never sorted or modified.
-    /// Your item renderer is not stateful and does not extend PureComponent
-    static member inline itemKey (value: int -> 'T array -> string)= Interop.mkProperty<IFixedSizeListProp> "itemKey" (System.Func<_,_,_> value)
-    static member inline itemKey (value: int -> 'T array -> int)= Interop.mkProperty<IFixedSizeListProp> "itemKey" (System.Func<_,_,_> value)
-    static member inline itemKey (value: int -> 'T array -> float)= Interop.mkProperty<IFixedSizeListProp> "itemKey" (System.Func<_,_,_> value)
-    static member inline itemKey (value: int -> 'T array -> decimal)= Interop.mkProperty<IFixedSizeListProp> "itemKey" (System.Func<_,_,_> value)
-    /// Called when the range of items rendered by the list changes.
-    /// This callback will only be called when item indices change. It will not be called if items are re-rendered for other reasons (e.g. a change in isScrolling or data params).
-    static member inline onItemsRendered (value: OnFixedSizeListItemsRendered -> unit)= Interop.mkProperty<IFixedSizeListProp> "onItemsRendered" (System.Func<_,_> value)
-    /// Called when the list scroll positions changes, as a result of user scrolling or scroll-to method calls.
-    static member inline onScroll (value: OnFixedSizeListScroll -> unit)= Interop.mkProperty<IFixedSizeListProp> "onScroll" (System.Func<_,_> value)
-    /// The number of items (rows or columns) to render outside of the visible area. This property can be important for two reasons:
-    /// Overscanning by one row or column allows the tab key to focus on the next (not yet visible) item.
-    /// Overscanning slightly can reduce or prevent a flash of empty space when a user first starts scrolling.
-    /// Note that overscanning too much can negatively impact performance. By default, List overscans by one item.
-    static member inline overscanCount (value: int)= Interop.mkProperty<IFixedSizeListProp> "overscanCount" value
-
-module fixedSizeList =
-    /// Layout/orientation of the list.
-    type [<Erase>] layout =
-        static member inline horizontal = Interop.mkProperty<IFixedSizeListProp> "layout" "horizontal"
-        static member inline vertical = Interop.mkProperty<IFixedSizeListProp> "layout" "vertical"
-
-    /// Determines the direction of text and horizontal scrolling.
-    type [<Erase>] direction =
-        static member inline ltr = Interop.mkProperty<IFixedSizeListProp> "direction" "ltr"
-        static member inline rtl = Interop.mkProperty<IFixedSizeListProp> "direction" "rtl"
+// -------------------------------------------------------------------------- VirtualizedList --------------------------------------------------------------------------------------
+type [<Erase>] virtualizedList =
+    inherit FelizProps.prop<IVirtualizedListProp>
+    /// React component responsible for rendering a row. This component will receive an index and style prop by default. Additionally it will receive prop values passed to rowProps. The prop types for this component are exported as RowComponentProps
+    static member inline rowComponent (value: RowComponentProps -> ReactElement)= Interop.mkProperty<IVirtualizedListProp> "rowComponent" (System.Func<_,_> value)
+    /// Number of items to be rendered in the list.
+    static member inline rowCount (value: int)= Interop.mkProperty<IVirtualizedListProp> "rowCount" value
+    /// Row height; the following formats are supported:
+    ///
+    /// number of pixels (number)
+    /// percentage of the grid's current height (string)
+    /// function that returns the row height (in pixels) given an index and cellProps
+    /// dynamic row height cache returned by the useDynamicRowHeight hook
+    static member inline rowHeight (value: int)= Interop.mkProperty<IVirtualizedListProp> "rowHeight" value
+    /// Row height; the following formats are supported:
+    ///
+    /// number of pixels (number)
+    /// percentage of the grid's current height (string)
+    /// function that returns the row height (in pixels) given an index and cellProps
+    /// dynamic row height cache returned by the useDynamicRowHeight hook
+    static member inline rowHeight (value: string)= Interop.mkProperty<IVirtualizedListProp> "rowHeight" value
+    /// Row height; the following formats are supported:
+    ///
+    /// number of pixels (number)
+    /// percentage of the grid's current height (string)
+    /// function that returns the row height (in pixels) given an index and cellProps
+    /// dynamic row height cache returned by the useDynamicRowHeight hook
+    static member inline rowHeight (value: int -> obj -> int)= Interop.mkProperty<IVirtualizedListProp> "rowHeight" (System.Func<_,_,_> value)
+    /// Additional props to be passed to the row-rendering component. List will automatically re-render rows when values in this object change.
+    static member inline rowProps (value: obj)= Interop.mkProperty<IVirtualizedListProp> "rowProps" value
+    /// CSS class name.
+    static member inline className (value: string)= Interop.mkProperty<IVirtualizedListProp> "className" value
+    /// Optional CSS properties. The list of rows will fill the height defined by this style.
+    static member inline style (value: obj)= Interop.mkProperty<IVirtualizedListProp> "style" value
+    /// Additional content to be rendered within the list (above cells). This property can be used to render things like overlays or tooltips.
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizedListProp> "children" (Interop.reactApi.Children.toArray elems)
+    /// Default height of list for initial render. This value is important for server rendering.
+    static member inline defaultHeight (value: int) = Interop.mkProperty<IVirtualizedListProp> "defaultHeight" value
+    /// Ref used to interact with this component's imperative API. This API has imperative methods for scrolling and a getter for the outermost DOM element.
+    static member inline listRef (value: MutableRefObject<HTMLElement option>) = Interop.mkProperty<IVirtualizedListProp> "listRef" value
+    /// Callback notified when the List's outermost HTMLElement resizes. This may be used to (re)scroll a row into view.
+    static member inline onResize (value: OnResize -> unit) = Interop.mkProperty<IVirtualizedListProp> "onResize" (System.Func<_,_> value)
+    /// Callback notified when the range of visible rows changes.
+    static member inline onRowsRendered (value: OnRowsRendered -> unit) = Interop.mkProperty<IVirtualizedListProp> "onRowsRendered" (System.Func<_,_> value)
+    /// How many additional rows to render outside of the visible area. This can reduce visual flickering near the edges of a list when scrolling.
+    static member inline overscanCount (value: int) = Interop.mkProperty<IVirtualizedListProp> "overscanCount" value
+    /// Can be used to override the root HTML element rendered by the List component. The default value is "div", meaning that List renders an HTMLDivElement as its root.
+    static member inline tagName (value: string) = Interop.mkProperty<IVirtualizedListProp> "tagName" value
 
 // -------------------------------------------------------------------------- ListItem --------------------------------------------------------------------------------------
 type [<Erase>] listItem =

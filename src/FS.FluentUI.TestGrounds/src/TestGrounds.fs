@@ -4473,59 +4473,231 @@ let CustomListItem (title: string) (value: string) =
         ]
     ]
 
-type Country = { Name: string; Id: int }
-
 let countries = [
-    { Name = "Afghanistan"; Id = 1 }
-    { Name = "Albania"; Id = 2 }
-    { Name = "Algeria"; Id = 3 }
-    { Name = "Andorra"; Id = 4 }
-    { Name = "Angola"; Id = 5 }
-    { Name = "Antigua & Deps"; Id = 6 }
-    { Name = "Argentina"; Id = 7 }
-    { Name = "Armenia"; Id = 8 }
-    { Name = "Australia"; Id = 9 }
-    { Name = "Austria"; Id = 10 }
-    { Name = "Azerbaijan"; Id = 11 }
-    { Name = "Bahamas"; Id = 12 }
-    { Name = "Bahrain"; Id = 13 }
-    { Name = "Bangladesh"; Id = 14 }
-    { Name = "Barbados"; Id = 15 }
-    { Name = "Belarus"; Id = 16 }
+    "Afghanistan"
+    "Albania"
+    "Algeria"
+    "Andorra"
+    "Angola"
+    "Antigua & Deps"
+    "Argentina"
+    "Armenia"
+    "Australia"
+    "Austria"
+    "Azerbaijan"
+    "Bahamas"
+    "Bahrain"
+    "Bangladesh"
+    "Barbados"
+    "Belarus"
+    "Belgium"
+    "Belize"
+    "Benin"
+    "Bhutan"
+    "Bolivia"
+    "Bosnia Herzegovina"
+    "Botswana"
+    "Brazil"
+    "Brunei"
+    "Bulgaria"
+    "Burkina"
+    "Burundi"
+    "Cambodia"
+    "Cameroon"
+    "Canada"
+    "Cape Verde"
+    "Central African Rep"
+    "Chad"
+    "Chile"
+    "China"
+    "Colombia"
+    "Comoros"
+    "Congo"
+    "Congo {Democratic Rep}"
+    "Costa Rica"
+    "Croatia"
+    "Cuba"
+    "Cyprus"
+    "Czech Republic"
+    "Denmark"
+    "Djibouti"
+    "Dominica"
+    "Dominican Republic"
+    "East Timor"
+    "Ecuador"
+    "Egypt"
+    "El Salvador"
+    "Equatorial Guinea"
+    "Eritrea"
+    "Estonia"
+    "Ethiopia"
+    "Fiji"
+    "Finland"
+    "France"
+    "Gabon"
+    "Gambia"
+    "Georgia"
+    "Germany"
+    "Ghana"
+    "Greece"
+    "Grenada"
+    "Guatemala"
+    "Guinea"
+    "Guinea-Bissau"
+    "Guyana"
+    "Haiti"
+    "Honduras"
+    "Hungary"
+    "Iceland"
+    "India"
+    "Indonesia"
+    "Iran"
+    "Iraq"
+    "Ireland {Republic}"
+    "Israel"
+    "Italy"
+    "Ivory Coast"
+    "Jamaica"
+    "Japan"
+    "Jordan"
+    "Kazakhstan"
+    "Kenya"
+    "Kiribati"
+    "Korea North"
+    "Korea South"
+    "Kosovo"
+    "Kuwait"
+    "Kyrgyzstan"
+    "Laos"
+    "Latvia"
+    "Lebanon"
+    "Lesotho"
+    "Liberia"
+    "Libya"
+    "Liechtenstein"
+    "Lithuania"
+    "Luxembourg"
+    "Macedonia"
+    "Madagascar"
+    "Malawi"
+    "Malaysia"
+    "Maldives"
+    "Mali"
+    "Malta"
+    "Marshall Islands"
+    "Mauritania"
+    "Mauritius"
+    "Mexico"
+    "Micronesia"
+    "Moldova"
+    "Monaco"
+    "Mongolia"
+    "Montenegro"
+    "Morocco"
+    "Mozambique"
+    "Myanmar {Burma}"
+    "Namibia"
+    "Nauru"
+    "Nepal"
+    "Netherlands"
+    "New Zealand"
+    "Nicaragua"
+    "Niger"
+    "Nigeria"
+    "Norway"
+    "Oman"
+    "Pakistan"
+    "Palau"
+    "Panama"
+    "Papua New Guinea"
+    "Paraguay"
+    "Peru"
+    "Philippines"
+    "Poland"
+    "Portugal"
+    "Qatar"
+    "Romania"
+    "Russian Federation"
+    "Rwanda"
+    "St Kitts & Nevis"
+    "St Lucia"
+    "Saint Vincent & the Grenadines"
+    "Samoa"
+    "San Marino"
+    "Sao Tome & Principe"
+    "Saudi Arabia"
+    "Senegal"
+    "Serbia"
+    "Seychelles"
+    "Sierra Leone"
+    "Singapore"
+    "Slovakia"
+    "Slovenia"
+    "Solomon Islands"
+    "Somalia"
+    "South Africa"
+    "South Sudan"
+    "Spain"
+    "Sri Lanka"
+    "Sudan"
+    "Suriname"
+    "Swaziland"
+    "Sweden"
+    "Switzerland"
+    "Syria"
+    "Taiwan"
+    "Tajikistan"
+    "Tanzania"
+    "Thailand"
+    "Togo"
+    "Tonga"
+    "Trinidad & Tobago"
+    "Tunisia"
+    "Turkey"
+    "Turkmenistan"
+    "Tuvalu"
+    "Uganda"
+    "Ukraine"
+    "United Arab Emirates"
+    "United Kingdom"
+    "United States"
+    "Uruguay"
+    "Uzbekistan"
+    "Vanuatu"
+    "Vatican City"
+    "Venezuela"
+    "Vietnam"
+    "Yemen"
+    "Zambia"
+    "Zimbabwe"
 ]
 
 [<ReactComponent>]
 let ListTest () =
-    Fui.fixedSizeList [
-        fixedSizeList.width 400
-        fixedSizeList.height 100
-        fixedSizeList.itemData countries
-        fixedSizeList.itemSize 100
-        fixedSizeList.itemCount countries.Length
-        fixedSizeList.layout.horizontal
-        fixedSizeList.useIsScrolling true
-        fixedSizeList.itemKey (fun index (data: Country array) ->
-            let country = data.[index]
-            country.Id
-        )
-        fixedSizeList.onItemsRendered (fun (oir: OnFixedSizeListItemsRendered) ->
-                printfn "oir %A" (oir.overscanStartIndex, oir.overscanStopIndex, oir.visibleStartIndex, oir.visibleStopIndex)
-        )
-        fixedSizeList.onScroll (fun (os: OnFixedSizeListScroll) ->
-                printfn "os %A" (os.scrollDirection, os.scrollOffset)
-        )
-        fixedSizeList.overscanCount 3
-        fixedSizeList.children (fun (props: FixedSizeListRenderProps<Country>) ->
-            let country = props.data[props.index]
+    Fui.virtualized.list [
+        virtualizedList.style [
+            style.maxHeight 300
+            style.width 400
+            style.backgroundColor "pink"
+        ]
+        virtualizedList.rowComponent (fun (props: RowComponentProps) ->
+            let country = countries[props.index]
             Fui.listItem [
                 listItem.style props.style
+                listItem.key country
                 listItem.ariaSetSize countries.Length
                 listItem.ariaPosInSet (props.index + 1)
                 listItem.children [
-                    Fui.text country.Name
+                    Fui.text country
                 ]
             ]
         )
+        virtualizedList.rowHeight 20
+        virtualizedList.rowCount countries.Length
+        virtualizedList.rowProps {||}
+        virtualizedList.onRowsRendered (fun (oir: OnRowsRendered ) -> printfn "orr %A" (oir.startIndex, oir.stopIndex)
+        )
+        virtualizedList.overscanCount 3
     ]
 
 type Event =
