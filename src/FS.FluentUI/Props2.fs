@@ -953,7 +953,7 @@ type [<Erase>] drawer =
     /// Where the portal children are mounted on DOM
     static member inline mountNode (value: HTMLElement option) = Interop.mkProperty<IDrawerProp> "mountNode" value
     /// Where the portal children are mounted on DOM
-    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode"
+    static member inline mountNode (value: MountNode) = Interop.mkProperty<IDrawerProp> "mountNode" value
     static member inline backdropMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "backdropMotion" (!!value |> createObj |> unbox)
     static member inline surfaceMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<IDrawerProp> "surfaceMotion" (!!value |> createObj |> unbox)
     /// Decides whether the drawer should be removed from the DOM tree when it is closed.
@@ -1435,16 +1435,16 @@ type [<Erase>] positioning =
     static member inline overflowBoundary (value: Element option) = Interop.mkProperty<IPositioningProp> "overflowBoundary" value
     /// The element which will define the boundaries of the positioned element for the overflow behavior.
     static member inline overflowBoundary (value: (Element array) option) = Interop.mkProperty<IPositioningProp> "overflowBoundary" value
-    /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
+    /// Applies a padding to the overflow boundary, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
     static member inline overflowBoundaryPadding (value: IOverflowBoundaryPaddingProp list) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" (!!value |> createObj |> unbox<OverflowBoundaryPadding>)
-    /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
+    /// Applies a padding to the overflow boundary, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
     static member inline overflowBoundaryPadding (value: int) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" value
-    /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
+    /// Applies a padding to the overflow boundary, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
     static member inline overflowBoundaryPadding (value: float) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" value
-    /// Applies a padding to the overflow bounadry, so that overflow is detected earlier before the
+    /// Applies a padding to the overflow boundary, so that overflow is detected earlier before the
     /// positioned surface hits the overflow boundary.
     static member inline overflowBoundaryPadding (value: decimal) = Interop.mkProperty<IPositioningProp> "overflowBoundaryPadding" value
     /// Enables the position element to be positioned with 'fixed' (default value is position: 'absolute')
@@ -2981,7 +2981,7 @@ type [<Erase>] tagPicker =
     static member inline onOpenChange (value: KeyboardEvent -> TagPickerOnOpenChangeData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> value)
     static member inline onOptionSelect (handler: TagPickerOnOptionSelectData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
     static member inline onOptionSelect (handler: TagPickerOnOptionSelectData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> (fun _ value -> handler value))
-    static member inline onOptionSelect (value: MouseEvent -> TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> value)
+    static member inline onOptionSelect (value: MouseEvent -> TagPickerOnOptionSelectData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> value)
     static member inline onOptionSelect (value: KeyboardEvent -> TagPickerOnOptionSelectData<KeyboardEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOptionSelect" (System.Func<_,_,_> value)
     /// Can contain two children including a trigger and a popover.
     static member inline children (value: ReactElement) = Interop.mkProperty<ITagPickerProp> "children" value
@@ -3602,7 +3602,7 @@ type [<Erase>] navCategoryItem =
     static member inline expandIconMotion (value: IPresenceMotionSlotProp list) = Interop.mkProperty<INavCategoryItemProp> "expandIconMotion" (!!value |> createObj |> unbox)
 
 // -------------------------------------------------------------------------- NavDivider --------------------------------------------------------------------------------------
-type [<Erase>] navDivier =
+type [<Erase>] navDivider =
     inherit FelizProps.prop<INavDividerProp>
     /// Root of the component that renders as a `<div>` tag.
     static member inline root (value: IReactProperty list) = Interop.mkProperty<INavDividerProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
