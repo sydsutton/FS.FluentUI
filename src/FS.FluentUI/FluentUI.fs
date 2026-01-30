@@ -6873,4 +6873,3 @@ module Fui =
         static member inline backpackAddFilled (props: IIconProp list) = createElement (import "BackpackAddFilled" FluentIcons) props
         static member inline backpackRegular (props: IIconProp list) = createElement (import "BackpackRegular" FluentIcons) props
         static member inline backpackFilled (props: IIconProp list) = createElement (import "BackpackFilled" FluentIcons) props
-
