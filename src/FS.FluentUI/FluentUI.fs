@@ -1194,18 +1194,9 @@ module Fui =
             fun (props: IIconProp list) -> createElement icon props
 
         /// Use this function to create new icons from SVG paths. <br/>
-        /// See <link>https://github.com/microsoft/fluentui-system-icons/blob/main/packages/react-icons/src/utils/createFluentIcon.ts</link.
-        ///
-        /// Example:
-        /// <code>
-        /// type [<Erase>] CustomIcons =
-        ///     static member inline microsoft (props : IIconProp list) =
-        ///         createElement (Fui.icon.createIconType("microsoft", "1em", [|
-        ///             "M1.0 1.0h7.5v7.5H1.0V1.0m9.0 0.0h7.5v7.5h-7.5V1.0m-9.0 9.0h7.5v7.5H1.0v-7.5m9.0 0.0h7.5v7.5h-7.5v-7.5"
-        ///         |])) props
-        /// </code>
-        [<Import("createFluentIcon", FluentIcons)>]
-        static member inline createIconType(displayName : string, width : string, paths : string array) : ReactElementType = jsNative
+        /// See <link>https://github.com/microsoft/fluentui-system-icons/blob/main/packages/react-icons/src/utils/createFluentIcon.ts</link>.
+        static member inline createFluentIcon (displayName : string, width : string, paths : string array) : ReactElementType =
+            JSTuple.from3Args (displayName, width, paths) |> import "createFluentIcon" FluentIcons
         static member inline xrayRegular (props: IIconProp list) = createElement (import "XrayRegular" FluentIcons) props
         static member inline xrayFilled (props: IIconProp list) = createElement (import "XrayFilled" FluentIcons) props
         static member inline usbStickRegular (props: IIconProp list) = createElement (import "UsbStickRegular" FluentIcons) props
