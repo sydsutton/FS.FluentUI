@@ -1,6 +1,11 @@
 Release Notes
 =========
 
+### 3.0.1 (2-4-2026)
+
+* Update @fluentui/react-components to 9.72.10
+* Add createFluentIcon function
+
 ### 3.0.0 (12-17-2025)
 
 * Update @fluentui/react-components to 9.72.9
