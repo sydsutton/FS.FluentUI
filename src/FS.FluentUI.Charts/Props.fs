@@ -3555,3 +3555,418 @@ type [<Erase>] chartAnnotationStyle =
     static member inline opacity(value: float) = Interop.mkProperty<IChartAnnotationStyleProp> "opacity" value
     static member inline opacity(value: decimal) = Interop.mkProperty<IChartAnnotationStyleProp> "opacity" value
     static member inline className(value: string) = Interop.mkProperty<IChartAnnotationStyleProp> "className" value
+
+// ------------------------------------------------------------- AxisProp ------------------------------------------
+
+type [<Erase>] axisProp<'T> =
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    ///
+    static member inline tickStep(value: string) = Interop.mkProperty<'T> "tickStep" value
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    ///
+    static member inline tickStep(value: int) = Interop.mkProperty<'T> "tickStep" value
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    ///
+    static member inline tickStep(value: float) = Interop.mkProperty<'T> "tickStep" value
+    /// Defines the step between tick marks on the axis.
+    /// Works in combination with `tick0`.
+    /// Must be a positive number.
+    /// - **Log scale**:
+    ///   - Ticks are placed at `10^(n * tickStep)` where `n` is the tick index.
+    ///     - Example: `tickStep = 2` → ticks at 1, 100, 10,000...
+    ///     - Example: `tickStep = log10(5)` → ticks at 1, 5, 25, 125...
+    ///   - Special format `"L<f>"`: Creates ticks that are linearly spaced in value (not position).
+    ///     - Example: `tick0 = 0.1`, `tickStep = "L0.5"` → ticks at 0.1, 0.6, 1.1, 1.6...
+    /// - **Date axis**:
+    ///   - Must be in milliseconds.
+    ///     - Example: one day = `tickStep = 86400000`.
+    ///   - Special format `"M<n>"`: Places ticks every `n` months.
+    ///     - Example: `tick0 = "2000-01-15"`, `tickStep = "M3"` → ticks on the 15th every third month.
+    ///     - Example: `tickStep = "M48"` → ticks every 4 years.
+    ///
+    static member inline tickStep(value: decimal) = Interop.mkProperty<'T> "tickStep" value
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///     - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    ///
+    static member inline tick0(value: int) = Interop.mkProperty<'T> "tick0" value
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///     - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    ///
+    static member inline tick0(value: float) = Interop.mkProperty<'T> "tick0" value
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///     - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    ///
+    static member inline tick0(value: decimal) = Interop.mkProperty<'T> "tick0" value
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///     - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    ///
+    static member inline tick0(value: DateTime) = Interop.mkProperty<'T> "tick0" value
+    /// Sets the reference value for axis ticks.
+    /// Works in combination with `tickStep`.
+    ///     - **Log scale**:
+    ///   - `tick0` must be given as the logarithm of the reference tick.
+    ///     - Example: to align ticks with 100, use `tick0 = 2`.
+    ///   - Exception: when `tickStep` uses `"L<f>"`, you can specify the raw value directly.
+    ///
+    static member inline tick0(value: DateOnly) = Interop.mkProperty<'T> "tick0" value
+    /// Sets the text displayed at each tick position specified by `tickValues`. Used with `tickValues`.
+    static member inline tickText(value: string list) = Interop.mkProperty<'T> "tickText" (value |> List.toArray)
+
+// ------------------------------------------------------------- PolarAxisProp ------------------------------------------
+
+type [<Erase>] polarAxisProp =
+    inherit axisProp<IPolarAxisProp>
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: string list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: int list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: float list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: decimal list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: DateTime list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Values at which ticks should be placed on the axis.
+    static member inline tickValues(value: DateOnly list) = Interop.mkProperty<IPolarAxisProp> "tickValues" (value |> List.toArray)
+    /// Format string for the axis ticks.
+    static member inline tickFormat(value: string) = Interop.mkProperty<IPolarAxisProp> "tickFormat" value
+    /// Number of ticks to display on the axis.
+    static member inline tickCount(value: int) = Interop.mkProperty<IPolarAxisProp> "tickCount" value
+    /// Number of ticks to display on the axis.
+    static member inline tickCount(value: float) = Interop.mkProperty<IPolarAxisProp> "tickCount" value
+    /// Number of ticks to display on the axis.
+    static member inline tickCount(value: decimal) = Interop.mkProperty<IPolarAxisProp> "tickCount" value
+    /// Defines the order of categories on the axis.
+    static member inline categoryOrder(value: AxisCategoryOrder) = Interop.mkProperty<IPolarAxisProp> "categoryOrder" value
+    /// Scale type for the axis.
+    static member inline scaleType(value: AxisScaleType) = Interop.mkProperty<IPolarAxisProp> "scaleType" value
+    /// Start value of the axis range.
+    static member inline rangeStart(value: int) = Interop.mkProperty<IPolarAxisProp> "rangeStart" value
+    /// Start value of the axis range.
+    static member inline rangeStart(value: float) = Interop.mkProperty<IPolarAxisProp> "rangeStart" value
+    /// Start value of the axis range.
+    static member inline rangeStart(value: decimal) = Interop.mkProperty<IPolarAxisProp> "rangeStart" value
+    /// Start value of the axis range.
+    static member inline rangeStart(value: DateTime) = Interop.mkProperty<IPolarAxisProp> "rangeStart" value
+    /// Start value of the axis range.
+    static member inline rangeStart(value: DateOnly) = Interop.mkProperty<IPolarAxisProp> "rangeStart" value
+    /// End value of the axis range.
+    static member inline rangeEnd(value: int) = Interop.mkProperty<IPolarAxisProp> "rangeEnd" value
+    /// End value of the axis range.
+    static member inline rangeEnd(value: float) = Interop.mkProperty<IPolarAxisProp> "rangeEnd" value
+    /// End value of the axis range.
+    static member inline rangeEnd(value: decimal) = Interop.mkProperty<IPolarAxisProp> "rangeEnd" value
+    /// End value of the axis range.
+    static member inline rangeEnd(value: DateTime) = Interop.mkProperty<IPolarAxisProp> "rangeEnd" value
+    /// End value of the axis range.
+    static member inline rangeEnd(value: DateOnly) = Interop.mkProperty<IPolarAxisProp> "rangeEnd" value
+
+module polarAxisProp =
+    type [<Erase>] unit =
+        /// Format unit for angular values.
+        static member inline radians = Interop.mkProperty<IPolarAxisProp> "unit" "radians"
+        static member inline degrees = Interop.mkProperty<IPolarAxisProp> "unit" "degrees"
+
+// ------------------------------------------------------------- PolarChartStyles ------------------------------------------
+
+type [<Erase>] polarChartStyles =
+    /// Style for the root element.
+    static member inline root(value: string) = Interop.mkProperty<IPolarChartStylesProp> "root" value
+    /// Style for the chart wrapper element.
+    static member inline chartWrapper(value: string) = Interop.mkProperty<IPolarChartStylesProp> "chartWrapper" value
+    /// Style for the chart element.
+    static member inline chart(value: string) = Interop.mkProperty<IPolarChartStylesProp> "chart" value
+    /// Style for the inner grid lines.
+    static member inline gridLineInner(value: string) = Interop.mkProperty<IPolarChartStylesProp> "gridLineInner" value
+    /// Style for the outer grid lines.
+    static member inline gridLineOuter(value: string) = Interop.mkProperty<IPolarChartStylesProp> "gridLineOuter" value
+    /// Style for the tick labels.
+    static member inline tickLabel(value: string) = Interop.mkProperty<IPolarChartStylesProp> "tickLabel" value
+    /// Style for the legend container.
+    static member inline legendContainer(value: string) = Interop.mkProperty<IPolarChartStylesProp> "legendContainer" value
+
+
+// ------------------------------------------------------------- DataSeries ------------------------------------------
+
+type [<Erase>] dataSeries<'T> =
+    /// Name of the series to be displayed in the legend.
+    static member inline legend(value: string) = Interop.mkProperty<'T> "legend" value
+    /// Color of the series.
+    static member inline color(value: string) = Interop.mkProperty<'T> "color" value
+    /// Opacity of the series.
+    static member inline opacity(value: int) = Interop.mkProperty<'T> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: float) = Interop.mkProperty<'T> "opacity" value
+    /// Opacity of the series.
+    static member inline opacity(value: decimal) = Interop.mkProperty<'T> "opacity" value
+    /// Gradient fill for the series (start and end colors).
+    static member inline gradient(value: string * string) = Interop.mkProperty<'T> "gradient" value
+    /// Whether this series should be plotted against a secondary Y-axis.
+    static member inline useSecondaryYScale(value: bool) = Interop.mkProperty<'T> "useSecondaryYScale" value
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string -> unit) = Interop.mkProperty<'T> "onLegendClick" (System.Func<_,_> value)
+    /// Callback invoked when the legend item is clicked.
+    static member inline onLegendClick(value: string array -> unit) = Interop.mkProperty<'T> "onLegendClick" (System.Func<_,_> value)
+
+module dataSeries =
+    type legendShape<'T> = sharedLegendShape<'T>
+
+// ------------------------------------------------------------- ScatterPolarSeries ------------------------------------------
+
+type [<Erase>] scatterPolarSeries =
+    inherit dataSeries<IScatterPolarSeriesProp>
+    /// Array of data points for the series.
+    static member inline data(value: IPolarDataPointProp list list) = Interop.mkProperty<IScatterPolarSeriesProp> "data" (value |> createObjArray)
+    /// Array of data points for the series.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// export declare interface PolarDataPoint {
+    ///     r: string | number | Date;
+    ///     theta: string | number;
+    ///     onClick?: () => void;
+    ///     radialAxisCalloutData?: string;
+    ///     angularAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data(value: 'T list) = Interop.mkProperty<IScatterPolarSeriesProp> "data" (value |> List.toArray)
+
+module scatterPolarSeries =
+    type [<Erase>] type' =
+        /// Type discriminator: always 'scatterpolar' for this series.
+        static member inline scatterpolar = Interop.mkProperty<IScatterPolarSeriesProp> "type" "scatterpolar"
+
+
+// ------------------------------------------------------------- PolarDataPoint ------------------------------------------
+
+type [<Erase>] polarDataPoint =
+    /// Radial value of the data point.
+    static member inline r (value: string) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Radial value of the data point.
+    static member inline r (value: int) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Radial value of the data point.
+    static member inline r (value: float) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Radial value of the data point.
+    static member inline r (value: decimal) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Radial value of the data point.
+    static member inline r (value: DateTime) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Radial value of the data point.
+    static member inline r (value: DateOnly) = Interop.mkProperty<IPolarDataPointProp> "r" value
+    /// Angular value of the data point, specified as a category or in degrees.
+    static member inline theta (value: string) = Interop.mkProperty<IPolarDataPointProp> "theta" value
+    /// Angular value of the data point, specified as a category or in degrees.
+    static member inline theta (value: int) = Interop.mkProperty<IPolarDataPointProp> "theta" value
+    /// Angular value of the data point, specified as a category or in degrees.
+    static member inline theta (value: float) = Interop.mkProperty<IPolarDataPointProp> "theta" value
+    /// Angular value of the data point, specified as a category or in degrees.
+    static member inline theta (value: decimal) = Interop.mkProperty<IPolarDataPointProp> "theta" value
+    /// Optional click handler for the data point.
+    static member inline onClick (value: unit -> unit) = Interop.mkProperty<IPolarDataPointProp> "onClick" (System.Func<_,_> value)
+    /// Custom text to show in the callout in place of the radial axis value.
+    static member inline radialAxisCalloutData (value: string) = Interop.mkProperty<IPolarDataPointProp> "radialAxisCalloutData" value
+    /// Custom text to show in the callout in place of the angular axis value.
+    static member inline angularAxisCalloutData (value: string) = Interop.mkProperty<IPolarDataPointProp> "angularAxisCalloutData" value
+    /// Accessibility properties for the data point.
+    static member inline callOutAccessibilityData (value: AccessibilityProps) = Interop.mkProperty<IPolarDataPointProp> "callOutAccessibilityData" value
+    /// Custom marker size for the data point.
+    static member inline markerSize (value: int) = Interop.mkProperty<IPolarDataPointProp> "markerSize" value
+    /// Custom marker size for the data point.
+    static member inline markerSize (value: float) = Interop.mkProperty<IPolarDataPointProp> "markerSize" value
+    /// Custom marker size for the data point.
+    static member inline markerSize (value: decimal) = Interop.mkProperty<IPolarDataPointProp> "markerSize" value
+    /// Optional text to annotate or label the data point.
+    static member inline text (value: string) = Interop.mkProperty<IPolarDataPointProp> "text" value
+    /// Color of the data point. If not provided, it will inherit the series color.
+    static member inline color (value: string) = Interop.mkProperty<IPolarDataPointProp> "color" value
+
+// ------------------------------------------------------------- LinePolarSeries ------------------------------------------
+
+type [<Erase>] linePolarSeries =
+    inherit dataSeries<ILinePolarSeriesProp>
+    /// Array of data points for the series.
+    static member inline data (value: IPolarDataPointProp list list) = Interop.mkProperty<ILinePolarSeriesProp> "data" (value |> createObjArray)
+    /// Array of data points for the series.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// export declare interface PolarDataPoint {
+    ///     r: string | number | Date;
+    ///     theta: string | number;
+    ///     onClick?: () => void;
+    ///     radialAxisCalloutData?: string;
+    ///     angularAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data (value: 'T list) = Interop.mkProperty<ILinePolarSeriesProp> "data" (value |> List.toArray)
+    static member inline lineOptions(value: ILineChartLineOptionsProp list) = Interop.mkProperty<ILinePolarSeriesProp> "lineOptions" (!!value |> createObj |> unbox)
+
+module linePolarSeries =
+    type [<Erase>] type' =
+        /// Type discriminator: always 'linepolar' for this series.
+        static member inline linepolar = Interop.mkProperty<ILinePolarSeriesProp> "type" "linepolar"
+
+
+// ------------------------------------------------------------- AreaPolarSeries ------------------------------------------
+
+type [<Erase>] areaPolarSeries =
+    inherit dataSeries<IAreaPolarSeriesProp>
+    /// Array of data points for the series.
+    static member inline data (value: IPolarDataPointProp list list) = Interop.mkProperty<IAreaPolarSeriesProp> "data" (value |> createObjArray)
+    /// Array of data points for the series.
+    /// This generic overload is meant for a custom data type or object that partially resembles this type:
+    ///
+    /// <pre><code>
+    /// export declare interface PolarDataPoint {
+    ///     r: string | number | Date;
+    ///     theta: string | number;
+    ///     onClick?: () => void;
+    ///     radialAxisCalloutData?: string;
+    ///     angularAxisCalloutData?: string;
+    ///     callOutAccessibilityData?: AccessibilityProps;
+    ///     markerSize?: number;
+    ///     text?: string;
+    ///     color?: string;
+    /// }
+    /// </code></pre>
+    static member inline data (value: 'T list) = Interop.mkProperty<IAreaPolarSeriesProp> "data" (value |> List.toArray)
+    static member inline lineOptions(value: ILineChartLineOptionsProp list) = Interop.mkProperty<IAreaPolarSeriesProp> "lineOptions" (!!value |> createObj |> unbox)
+
+module areaPolarSeries =
+    type [<Erase>] type' =
+        /// Type discriminator: always 'areapolar' for this series.
+        static member inline areapolar = Interop.mkProperty<IAreaPolarSeriesProp> "type" "areapolar"
+
+
+// ------------------------------------------------------------- PolarChart ------------------------------------------
+
+type [<Erase>] polarChart =
+    /// Data series to be rendered in the polar chart.
+    static member inline data (value: IAreaPolarSeriesProp list list) = Interop.mkProperty<IPolarChartProp> "data" (value |> createObjArray)
+    /// Data series to be rendered in the polar chart.
+    static member inline data (value: ILinePolarSeriesProp list list) = Interop.mkProperty<IPolarChartProp> "data" (value |> createObjArray)
+    /// Data series to be rendered in the polar chart.
+    static member inline data (value: IScatterPolarSeriesProp list list) = Interop.mkProperty<IPolarChartProp> "data" (value |> createObjArray)
+    /// Width of the polar chart.
+    static member inline width (value: int) = Interop.mkProperty<IPolarChartProp> "width" value
+    /// Width of the polar chart.
+    static member inline width (value: float) = Interop.mkProperty<IPolarChartProp> "width" value
+    /// Width of the polar chart.
+    static member inline width (value: decimal) = Interop.mkProperty<IPolarChartProp> "width" value
+    /// Height of the polar chart.
+    static member inline height (value: int) = Interop.mkProperty<IPolarChartProp> "height" value
+    /// Height of the polar chart.
+    static member inline height (value: float) = Interop.mkProperty<IPolarChartProp> "height" value
+    /// Height of the polar chart.
+    static member inline height (value: decimal) = Interop.mkProperty<IPolarChartProp> "height" value
+    /// Margins around the chart area.
+    static member inline margins (value: IMarginProp list) = Interop.mkProperty<IPolarChartProp> "margins" (!!value |> createObj |> unbox)
+    /// If true, hides the legend.
+    static member inline hideLegend (value: bool) = Interop.mkProperty<IPolarChartProp> "hideLegend" value
+    /// If true, hides the tooltip.
+    static member inline hideTooltip (value: bool) = Interop.mkProperty<IPolarChartProp> "hideTooltip" value
+    static member inline legendProps (value: ILegendProp list) = Interop.mkProperty<IPolarChartProp> "legendProps" (!!value |> createObj |> unbox)
+    /// Style properties for the polar chart.
+    static member inline styles (value: IPolarChartStylesProp list) = Interop.mkProperty<IPolarChartProp> "styles" (!!value |> createObj |> unbox)
+    /// Title of the chart.
+    static member inline chartTitle (value: string) = Interop.mkProperty<IPolarChartProp> "chartTitle" value
+    /// Fraction of the radius to cut out from the center of the chart.
+    /// Accepts values in the range [0, 1].
+    static member inline hole (value: int) = Interop.mkProperty<IPolarChartProp> "hole" value
+    /// Fraction of the radius to cut out from the center of the chart.
+    /// Accepts values in the range [0, 1].
+    static member inline hole (value: decimal) = Interop.mkProperty<IPolarChartProp> "hole" value
+    /// Fraction of the radius to cut out from the center of the chart.
+    /// Accepts values in the range [0, 1].
+    static member inline hole (value: float) = Interop.mkProperty<IPolarChartProp> "hole" value
+    /// Configuration options for the radial axis.
+    static member inline radialAxis (value: IPolarAxisProp list) = Interop.mkProperty<IPolarChartProp> "radialAxis" (!!value |> createObj |> unbox)
+    /// Configuration options for the angular axis.
+    static member inline angularAxis (value: IPolarAxisProp list) = Interop.mkProperty<IPolarChartProp> "angularAxis" (!!value |> createObj |> unbox)
+    /// Optional callback to access the Chart interface. Use this instead of ref for accessing
+    /// the public methods and properties of the component.
+    static member inline componentRef (value: RefObject<Chart>) = Interop.mkProperty<IPolarChartProp> "componentRef" value
+    /// Locale identifier string used to format numbers and dates according to the specified culture.
+    /// Example: 'en-US', 'fr-FR'.
+    static member inline culture (value: string) = Interop.mkProperty<IPolarChartProp> "culture" value
+    /// Options for localizing date values.
+    static member inline dateLocalizeOptions (value: IDateTimeFormatOptionsProp list) = Interop.mkProperty<IPolarChartProp> "dateLocalizeOptions" (!!value |> createObj |> unbox)
+    /// If true, date values are treated as UTC dates.
+    static member inline useUTC (value: bool) = Interop.mkProperty<IPolarChartProp> "useUTC" value
+
+module polarChart =
+    type [<Erase>] shape =
+        /// Shape of the polar chart: 'circle'.
+        static member inline circle = Interop.mkProperty<IPolarChartProp> "shape" "circle"
+        /// Shape of the polar chart: 'polygon'.
+        static member inline polygon = Interop.mkProperty<IPolarChartProp> "shape" "polygon"
+    type [<Erase>] direction =
+        /// Shape of the polar chart: 'circle'.
+        static member inline clockwise = Interop.mkProperty<IPolarChartProp> "direction" "clockwise"
+        /// Direction in which the chart is drawn.
+        static member inline counterclockwise = Interop.mkProperty<IPolarChartProp> "direction" "counterclockwise"

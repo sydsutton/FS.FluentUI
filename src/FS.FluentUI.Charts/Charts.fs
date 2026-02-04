@@ -26,6 +26,7 @@ type Fui =
     static member inline horizontalBarChartWithAxis (props: IHorizontalBarChartWithAxisProp list) = Helpers.createElement (import "HorizontalBarChartWithAxis" "@fluentui/react-charts") props
     static member inline verticalBarChart (props: IVerticalBarChartProp list) = Helpers.createElement (import "VerticalBarChart" "@fluentui/react-charts") props
     static member inline verticalStackedBarChart (props: IVerticalStackedBarChartProp list) = Helpers.createElement (import "VerticalStackedBarChart" "@fluentui/react-charts") props
+    static member inline polarChart (props: IPolarChartProp list) = Helpers.createElement (import "PolarChart" "@fluentui/react-charts") props
     static member inline chartTable (props: IChartTableProp list) = Helpers.createElement (import "ChartTable" "@fluentui/react-charts") props
     static member inline dataVizPalette : DataVizPalette = import "DataVizPalette" "@fluentui/react-charts"
     static member inline getColorFromToken (color: string) : string = color |> import "getColorFromToken" "@fluentui/react-charts"

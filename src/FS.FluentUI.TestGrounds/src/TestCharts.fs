@@ -804,12 +804,48 @@ let verticalStackedBarChartDataList = [
     [ verticalStackedChart.chartData thirdChartPoints; verticalStackedChart.xAxisPoint "Data" ]
 ]
 
+let polarChartData = [
+    [
+        areaPolarSeries.type'.areapolar
+        areaPolarSeries.legend "Mike"
+        areaPolarSeries.color "#8884d8"
+        areaPolarSeries.data [
+            [ polarDataPoint.r 120;  polarDataPoint.theta "Math"]
+            [ polarDataPoint.r 98; polarDataPoint.theta "Chinese"]
+            [ polarDataPoint.r 86; polarDataPoint.theta "English" ]
+            [ polarDataPoint.r 99; polarDataPoint.theta "Geography" ]
+            [ polarDataPoint.r 85; polarDataPoint.theta "Physics" ]
+            [ polarDataPoint.r 65; polarDataPoint.theta "History" ]
+        ]
+    ]
+    [
+        areaPolarSeries.type'.areapolar
+        areaPolarSeries.legend "Lily"
+        areaPolarSeries.color "#82ca9d"
+        areaPolarSeries.data [
+            [ polarDataPoint.r 110;  polarDataPoint.theta "Math"]
+            [ polarDataPoint.r 130; polarDataPoint.theta "Chinese"]
+            [ polarDataPoint.r 130; polarDataPoint.theta "English" ]
+            [ polarDataPoint.r 100; polarDataPoint.theta "Geography" ]
+            [ polarDataPoint.r 90; polarDataPoint.theta "Physics" ]
+            [ polarDataPoint.r 85; polarDataPoint.theta "History" ]
+        ]
+    ]
+]
+
 [<ReactComponent>]
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
     Html.div [
         prop.style [ style.width 1000; style.margin 36 ]
         prop.children [
+            Fui.polarChart [
+                polarChart.data polarChartData
+                polarChart.width 300
+                polarChart.height 300
+                polarChart.shape.polygon
+                polarChart.direction.clockwise
+            ]
             Fui.areaChart [
                 areaChart.mode.tonexty
                 areaChart.height 300
