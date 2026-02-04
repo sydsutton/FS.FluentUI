@@ -1195,6 +1195,19 @@ module Fui =
 
         /// Use this function to create new icons from SVG paths. <br/>
         /// See <link>https://github.com/microsoft/fluentui-system-icons/blob/main/packages/react-icons/src/utils/createFluentIcon.ts</link>.
+        /// Use this function to create new icons from SVG paths. <br/>
+        /// See <link>https://github.com/microsoft/fluentui-system-icons/blob/main/packages/react-icons/src/utils/createFluentIcon.ts</link>.
+        ///
+        /// Example:
+        /// <code>
+        ///     let microsoftIcon =
+        ///         Fui.icon.createIconType(
+        ///             "microsoft",
+        ///             "1em",
+        ///              [| "M1.0 1.0h7.5v7.5H1.0V1.0m9.0 0.0h7.5v7.5h-7.5V1.0m-9.0 9.0h7.5v7.5H1.0v-7.5m9.0 0.0h7.5v7.5h-7.5v-7.5" |],
+        ///             [ icon.size.``20`` ]
+        ///         )
+        /// </code>
         static member inline createFluentIcon (displayName : string, width : string, paths : string array) : ReactElementType =
             JSTuple.from3Args (displayName, width, paths) |> import "createFluentIcon" FluentIcons
         static member inline xrayRegular (props: IIconProp list) = createElement (import "XrayRegular" FluentIcons) props
