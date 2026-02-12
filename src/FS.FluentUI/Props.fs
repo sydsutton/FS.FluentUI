@@ -2968,6 +2968,10 @@ type [<Erase>] dialogSurface =
 module dialogSurface =
     type [<Erase>] as' =
         static member inline div = Interop.mkProperty<IDialogSurfaceProp> "as" "div"
+
+    type [<Erase>] backdrop =
+        static member inline transparentAppearance = Interop.mkProperty<IDialogSurfaceProp> "backdrop" { appearance = "transparent" }
+        static member inline dimmedAppearance = Interop.mkProperty<IDialogSurfaceProp> "backdrop" { appearance = "dimmed" }
 // -------------------------------------------------------------------------- DialogTitle --------------------------------------------------------------------------------------
 type [<Erase>] dialogTitle =
     inherit FelizProps.prop<IDialogTitleProp>

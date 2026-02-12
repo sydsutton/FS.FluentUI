@@ -1790,3 +1790,7 @@ type OnRowsRendered =  {
     startIndex: int
     stopIndex: int
 }
+
+type DialogBackdrop = {
+    appearance: string
+}

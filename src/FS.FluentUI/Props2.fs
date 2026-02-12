@@ -78,6 +78,8 @@ type [<Erase>] overflowItem  =
     static member inline priority (value: decimal) = Interop.mkProperty<IOverflowItemProp> "priority" value
     /// The single child that has overflow item behavior attached.
     static member inline children (value: ReactElement) = Interop.mkProperty<IOverflowItemProp> "children" value
+    /// If true, the item will never overflow and will always be visible. Mutually exclusive with priority.
+    static member inline pinned (value: bool) = Interop.mkProperty<IOverflowItemProp> "pinned" value
 
 // -------------------------------------------------------------------------- OverflowDivider --------------------------------------------------------------------------------------
 type [<Erase>] overflowDivider  =

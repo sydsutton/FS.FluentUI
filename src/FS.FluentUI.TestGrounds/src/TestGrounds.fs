@@ -1640,6 +1640,7 @@ let DialogTest () =
                     presenceMotionSlot.onMotionFinish (fun (d: OnMotionData) ->
                         printfn "backdropMotion finish %A" d.direction)
                 ]
+                dialogSurface.backdrop.dimmedAppearance
                 dialogSurface.children [
                     Fui.dialogBody [
                         Fui.dialogTitle [
