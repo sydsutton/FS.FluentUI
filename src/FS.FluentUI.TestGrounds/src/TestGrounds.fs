@@ -611,6 +611,12 @@ let UseArrowNavigationGroup () =
 let PopoverTest () =
     let visible, setVisible = React.useState false
     let target, setTarget = React.useState None
+    let positioningRef = React.useRef None
+
+    let updatePosition = React.useCallback (fun (_: MouseEvent) ->
+        match positioningRef.current with
+        | Some positioning -> positioning.updatePosition ()
+        | None -> ())
 
     Fui.stack [
         stack.horizontal true
@@ -625,6 +631,7 @@ let PopoverTest () =
                     positioning.target target
                     positioning.coverTarget true
                     positioning.offset [ offset.crossAxis 25 ]
+                    positioning.onPositioningEnd (fun (d: CustomPositioningEvent) -> printfn "positioning ended with data: %A" d.detail.placement)
                 ]
                 popover.onOpenChange (fun (data: OpenProp) ->
                     if data.``open`` = false then
@@ -632,7 +639,7 @@ let PopoverTest () =
                 popover.children [
                     Fui.popoverTrigger [
                         popoverTrigger.disableButtonEnhancement true
-                        popoverTrigger.children (Fui.button [ button.text "Toggle Popover" ])
+                        popoverTrigger.children (Fui.button [ button.text "Toggle Popover"; button.onClick updatePosition ])
                     ]
                     Fui.popoverSurface [
                         popoverSurface.style [

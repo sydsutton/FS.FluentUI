@@ -1794,3 +1794,23 @@ type OnRowsRendered =  {
 type DialogBackdrop = {
     appearance: string
 }
+
+type CustomPositioningEventDetail = {
+    placement: string
+}
+
+type CustomPositioningEvent = {
+    isTrusted: bool
+    bubbles: bool
+    cancelBubble: bool
+    cancelable: bool
+    composed: bool
+    currentTarget: Browser.Types.HTMLElement option
+    defaultPrevented: bool
+    detail: CustomPositioningEventDetail
+    eventPhase: int
+    returnValue: bool
+    target: Browser.Types.HTMLElement
+    timeStamp: float
+    ``type``: string
+}

@@ -1470,7 +1470,7 @@ type [<Erase>] positioning =
     static member inline unstable_disableTether (value: bool) = Interop.mkProperty<IPositioningProp> "unstable_disableTether" value
     static member inline autoSize (value: bool) = Interop.mkProperty<IPositioningProp> "autoSize" value
     /// Called when a position update has finished. Multiple position updates can happen in a single render, since positioning happens outside of the React lifecycle.
-    static member inline onPositioningEnd (value: unit -> unit) = Interop.mkProperty<IPositioningProp> "onPositioningEnd" (System.Func<_,_> value)
+    static member inline onPositioningEnd (value: CustomPositioningEvent -> unit) = Interop.mkProperty<IPositioningProp> "onPositioningEnd" (System.Func<_,_> value)
     /// Disables the resize observer that updates position on target or dimension change
     static member inline disableUpdateOnResize (value: bool) = Interop.mkProperty<IPositioningProp> "disableUpdateOnResize" value
     /// When true, the positioned element will shift to cover the target element when there's not enough space.
@@ -2966,6 +2966,8 @@ type [<Erase>] tagPicker =
     static member inline defaultOpen (value: bool) = Interop.mkProperty<ITagPickerProp> "defaultOpen" value
     /// An array of selected option keys. Use this with `onOptionSelect` to directly control the selected option(s). If this is set, the `value` prop MUST also be controlled.
     static member inline selectedOptions (value: string list) = Interop.mkProperty<ITagPickerProp> "selectedOptions" (value |> List.toArray)
+    /// For an uncontrolled component, sets the initial selection. If this is set, the defaultValue prop MUST also be set.
+    static member inline defaultSelectedOptions (value: string list) = Interop.mkProperty<ITagPickerProp> "defaultSelectedOptions" (value |> List.toArray)
     /// Sets the open/closed state of the dropdown.
     /// Use together with onOpenChange to fully control the dropdown's visibility
     static member inline open' (value: bool) = Interop.mkProperty<ITagPickerProp> "open" value
@@ -2973,6 +2975,8 @@ type [<Erase>] tagPicker =
     static member inline inline' (value: bool) = Interop.mkProperty<ITagPickerProp> "inline" value
     /// By default, when a single children is provided, the TagPicker will assume that the children is a popover. By setting this prop to true, the children will be treated as a trigger instead.
     static member inline noPopover (value: bool) = Interop.mkProperty<ITagPickerProp> "noPopover" value
+    /// Disable auto-focusing on the first item when mounting.
+    static member inline disableAutoFocus (value: bool) = Interop.mkProperty<ITagPickerProp> "disableAutoFocus" value
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (handler: TagPickerOnOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<ITagPickerProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
