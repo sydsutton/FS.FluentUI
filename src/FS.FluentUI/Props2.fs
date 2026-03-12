@@ -3213,6 +3213,11 @@ module swatchPicker =
         static member inline small = Interop.mkProperty<ISwatchPickerProp> "spacing" "small"
         static member inline medium = Interop.mkProperty<ISwatchPickerProp> "spacing" "medium"
 
+    /// Swatch shape
+    type [<Erase>] focusMode =
+        static member inline arrow = Interop.mkProperty<ISwatchPickerProp> "focusMode" "arrow"
+        static member inline tab = Interop.mkProperty<ISwatchPickerProp> "focusMode" "tab"
+
 // -------------------------------------------------------------------------- SwatchPickerRow --------------------------------------------------------------------------------------
 type [<Erase>] swatchPickerRow = FelizProps.prop<ISwatchPickerRowProp>
 

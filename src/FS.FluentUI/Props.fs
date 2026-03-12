@@ -3272,7 +3272,30 @@ module skeleton  =
     type [<Erase>] appearance =
         static member inline opaque = Interop.mkProperty<ISkeletonProp> "appearance" "opaque"
         static member inline translucent = Interop.mkProperty<ISkeletonProp> "appearance" "translucent"
+    /// Sets the size of the Skeleton.
+    type [<Erase>] size =
+        static member inline ``8`` = Interop.mkProperty<ISkeletonProp> "size" "8"
+        static member inline ``12`` = Interop.mkProperty<ISkeletonProp> "size" "12"
+        static member inline ``16`` = Interop.mkProperty<ISkeletonProp> "size" "16"
+        static member inline ``20`` = Interop.mkProperty<ISkeletonProp> "size" "20"
+        static member inline ``24`` = Interop.mkProperty<ISkeletonProp> "size" "24"
+        static member inline ``28`` = Interop.mkProperty<ISkeletonProp> "size" "28"
+        static member inline ``32`` = Interop.mkProperty<ISkeletonProp> "size" "32"
+        static member inline ``36`` = Interop.mkProperty<ISkeletonProp> "size" "36"
+        static member inline ``40`` = Interop.mkProperty<ISkeletonProp> "size" "40"
+        static member inline ``48`` = Interop.mkProperty<ISkeletonProp> "size" "48"
+        static member inline ``56`` = Interop.mkProperty<ISkeletonProp> "size" "56"
+        static member inline ``64`` = Interop.mkProperty<ISkeletonProp> "size" "64"
+        static member inline ``72`` = Interop.mkProperty<ISkeletonProp> "size" "72"
+        static member inline ``96`` = Interop.mkProperty<ISkeletonProp> "size" "96"
+        static member inline ``120`` = Interop.mkProperty<ISkeletonProp> "size" "120"
+        static member inline ``128`` = Interop.mkProperty<ISkeletonProp> "size" "128"
 
+    /// Sets the shape of the Skeleton.
+    type [<Erase>] shape =
+        static member inline circle = Interop.mkProperty<ISkeletonProp> "shape" "circle"
+        static member inline square = Interop.mkProperty<ISkeletonProp> "shape" "square"
+        static member inline rectangle = Interop.mkProperty<ISkeletonProp> "shape" "rectangle"
 // -------------------------------------------------------------------------- SkeletonItem --------------------------------------------------------------------------------------
 type [<Erase>] skeletonItem  =
     inherit FelizProps.prop<ISkeletonItemProp>
