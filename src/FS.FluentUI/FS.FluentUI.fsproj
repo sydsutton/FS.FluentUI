@@ -34,10 +34,11 @@
 
     <ItemGroup>
         <PackageReference Update="FSharp.Core" Version="6.0.1" />
+        <PackageReference Include="Fable.Core" Version="4.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Feliz" Version="2.9.0" />
+        <PackageReference Include="Feliz" Version="3.2.0" />
     </ItemGroup>
 
     <PropertyGroup>
