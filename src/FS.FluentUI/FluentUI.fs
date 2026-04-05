@@ -1195,7 +1195,8 @@ module Fui =
         /// let icon = Fui.icon.import "BlockBusterLogoFilled" []
         /// </code>
         static member inline import (iconName: string) =
-            let icon = import $"{iconName}" FluentIcons
+            let icons : obj = importAll FluentIcons
+            let icon : ReactElementType = emitJsExpr (icons, iconName) "$0[$1]"
             fun (props: IIconProp list) -> createElement icon props
 
         /// Use this function to create new icons from SVG paths. <br/>
