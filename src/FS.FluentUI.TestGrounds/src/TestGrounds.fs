@@ -2961,7 +2961,7 @@ type ButtonItem = {
 
 [<ReactComponent>]
 let RenderButton (button: ButtonItem) (isLastItem: bool) =
-    React.fragment [
+    React.Fragment [
         Fui.overflowItem [
             overflowItem.key (button.key |> string)
             overflowItem.priority (if isLastItem then button.key else 0)
