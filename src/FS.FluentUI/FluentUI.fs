@@ -174,7 +174,12 @@ module FuiHelpers =
 
     let inline reactElement (el: ReactElementType) (props: 'a) : ReactElement = import "createElement" "react"
 
-    let inline createElement (el: ReactElementType) (props: 'ControlProperty list) : ReactElement = reactElement el (!!props |> createObj)
+    let inline createElement (el: ReactElementType) (props: 'ControlProperty list) : ReactElement =
+        match unbox<(string * obj) list> props |> Feliz.HtmlHelper.extractByKeyFast "children" with
+        | rest, Some (_, c) ->
+            emitJsExpr (import "createElement" "react", el, createObj rest, c)
+                "Array.isArray($3) ? $0($1, $2, ...$3) : $0($1, $2, $3)"
+        | rest, None -> reactElement el (createObj rest)
 
     let [<Literal>] FluentUIv9 = "@fluentui/react-components"
     let [<Literal>] FluentIcons = "@fluentui/react-icons"
