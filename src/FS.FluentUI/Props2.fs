@@ -516,7 +516,7 @@ type [<Erase>] virtualizer =
     /// WARNING: Virtualizer only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerProp> "children" value
     /// WARNING: Virtualizer only takes a render function as children. Using this will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerProp> "children" (Array.ofSeq elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -663,7 +663,7 @@ type [<Erase>] virtualizerScrollView =
     /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" value
     /// WARNING: VirtualizerScrollView only takes a render function as children. Using this will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewProp> "children" (Array.ofSeq elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -793,7 +793,7 @@ type [<Erase>] virtualizerScrollViewDynamic =
     /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" value
     /// WARNING: VirtualizerScrollViewDynamic only takes a render function as children. Using this will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizerScrollViewDynamicProp> "children" (Array.ofSeq elems)
     /// Child render function.
     /// Iteratively called to return current virtualizer DOM children.
     /// Will act as a row or column indexer depending on Virtualizer settings.
@@ -1924,7 +1924,7 @@ type [<Erase>] searchBox =
     /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
     /// WARNING: Searchbox doesn't support children. Using this prop will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ICheckboxProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ICheckboxProp> "children" (Array.ofSeq elems)
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ISearchBoxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
     /// Hidden input that handles the checkbox's functionality.
     /// This is the PRIMARY slot: all native properties specified directly on <Input> will be applied to this slot, except className and style, which remain on the root slot.
@@ -2523,7 +2523,7 @@ type [<Erase>] teachingPopover =
             match elems |> Seq.length with
             | l when l <= 2 -> elems
             | _ -> elems |> Seq.take 2
-        Interop.mkProperty<ITeachingPopoverProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<ITeachingPopoverProp> "children" (Array.ofSeq elemsToUse)
     /// Close when scroll outside of it
     static member inline closeOnScroll (value: bool) = Interop.mkProperty<ITeachingPopoverProp> "closeOnScroll" value
     /// Used to set the initial open state of the Popover in uncontrolled mode
@@ -2740,7 +2740,7 @@ type [<Erase>] teachingPopoverCarouselNav =
     /// WARNING: TeachingPopoverCarouselNav only takes a render function as children. Using this will cause runtime errors.
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselNavProp> "children" value
     /// WARNING: TeachingPopoverCarouselNav only takes a render function as children. Using this will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<ITeachingPopoverCarouselNavProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<ITeachingPopoverCarouselNavProp> "children" (Array.ofSeq elems)
     /// WARNING: TeachingPopoverCarouselNav only takes a render function as children. Using this will cause runtime errors.
     static member inline children (value: string -> ReactElement) = Interop.mkProperty<ITeachingPopoverCarouselNavProp> "children" (System.Func<_,_> value)
 
@@ -2998,7 +2998,7 @@ type [<Erase>] tagPicker =
             match elems |> Seq.length with
             | l when l <= 2 -> elems
             | _ -> elems |> Seq.take 2
-        Interop.mkProperty<ITagPickerProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<ITagPickerProp> "children" (Array.ofSeq elemsToUse)
 
 module tagPicker =
     type [<Erase>] size =
@@ -3050,7 +3050,7 @@ type [<Erase>] tagPickerInput =
     /// WARNING: TagPickerInput doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ITagPickerInputProp> "children" value
     /// WARNING: TagPickerInput doesn't support children. Using this prop will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ITagPickerInputProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ITagPickerInputProp> "children" (Array.ofSeq elems)
 
 module tagPickerInput =
 
@@ -3084,7 +3084,7 @@ type [<Erase>] tagPickerOption =
             match elems |> Seq.length with
             | l when l = 1 -> elems
             | _ -> elems |> Seq.take 1
-        Interop.mkProperty<ITagPickerOptionProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<ITagPickerOptionProp> "children" (Array.ofSeq elemsToUse)
 
 // -------------------------------------------------------------------------- TagPickerOptionGroup --------------------------------------------------------------------------------------
 type [<Erase>] tagPickerOptionGroup =
@@ -3468,7 +3468,7 @@ type [<Erase>] carouselNav =
     /// CarouselNav's children only takes an int -> ReactElement function
     [<Obsolete>] static member inline children (value: Fable.React.ReactElement) = Interop.mkProperty<'Property> "children" value
     /// CarouselNav's children only takes an int -> ReactElement function
-    [<Obsolete>] static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Interop.reactApi.Children.toArray (Array.ofSeq elems))
+    [<Obsolete>] static member inline children (elems: Fable.React.ReactElement seq) = Interop.mkProperty<'Property> "children" (Array.ofSeq elems)
     /// The total number of slides available. Users may override if using the component without a Carousel wrapper or implementing custom functionality.
     static member inline totalSlides (value: int) = Interop.mkProperty<ICarouselNavProp> "totalSlides" value
     /// The total number of slides available. Users may override if using the component without a Carousel wrapper or implementing custom functionality.
@@ -3882,7 +3882,7 @@ type [<Erase>] virtualizedList =
     /// Optional CSS properties. The list of rows will fill the height defined by this style.
     static member inline style (value: obj)= Interop.mkProperty<IVirtualizedListProp> "style" value
     /// Additional content to be rendered within the list (above cells). This property can be used to render things like overlays or tooltips.
-    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizedListProp> "children" (Interop.reactApi.Children.toArray elems)
+    static member inline children ([<ParamList>] elems: Fable.React.ReactElement seq) = Interop.mkProperty<IVirtualizedListProp> "children" (Array.ofSeq elems)
     /// Default height of list for initial render. This value is important for server rendering.
     static member inline defaultHeight (value: int) = Interop.mkProperty<IVirtualizedListProp> "defaultHeight" value
     /// Ref used to interact with this component's imperative API. This API has imperative methods for scrolling and a getter for the outermost DOM element.

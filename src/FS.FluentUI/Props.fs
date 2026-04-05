@@ -381,7 +381,7 @@ type [<Erase>] checkbox =
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<ICheckboxProp> "children" value
     /// WARNING: Checkbox doesn't support children. Using this prop will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ICheckboxProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<ICheckboxProp> "children" (Array.ofSeq elems)
     /// The root element of the Checkbox.
     /// The root slot receives the className and style specified directly on the <Checkbox>. All other native props will be applied to the primary slot: input
     static member inline root (value: IReactProperty list) = Interop.mkProperty<ICheckboxProp> "root" (!!value |> createObj |> unbox<IReactProperty>)
@@ -986,7 +986,7 @@ type [<Erase>] menu =
             match elems |> Seq.length with
             | l when l <= 2 -> elems
             | _ -> elems |> Seq.take 2
-        Interop.mkProperty<IMenuProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<IMenuProp> "children" (Array.ofSeq elemsToUse)
     /// Sets the delay for mouse open/close for the popover one mouse enter/leave
     static member inline hoverDelay (value: int) = Interop.mkProperty<IMenuProp> "hoverDelay" value
     /// Root menus are rendered out of DOM order on document.body, use this to render the menu in DOM order This option is disregarded for submenus
@@ -1300,7 +1300,7 @@ type [<Erase>] popover =
             match elems |> Seq.length with
             | l when l <= 2 -> elems
             | _ -> elems |> Seq.take 2
-        Interop.mkProperty<IPopoverProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<IPopoverProp> "children" (Array.ofSeq elemsToUse)
     /// Close when scroll outside of it
     static member inline closeOnScroll (value: bool) = Interop.mkProperty<IPopoverProp> "closeOnScroll" value
     /// Used to set the initial open state of the Popover in uncontrolled mode
@@ -1501,7 +1501,7 @@ type [<Erase>] input =
     /// WARNING: Input doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<IInputProp> "children" value
     /// WARNING: Input doesn't support children. Using this prop will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<IInputProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<IInputProp> "children" (Array.ofSeq elems)
     /// Wrapper element which visually appears to be the input and is used for borders, focus styling, etc.
     /// (A wrapper is needed to properly position contentBefore and contentAfter relative to input.)
     /// The root slot receives the className and style specified directly on the <Input>. All other top-level native props will be applied to the primary slot, input.
@@ -2906,7 +2906,7 @@ type [<Erase>] dialog =
             match elems |> Seq.length with
             | l when l <= 2 -> elems
             | _ -> elems |> Seq.take 2
-        Interop.mkProperty<IDialogProp> "children" (Interop.reactApi.Children.toArray elemsToUse)
+        Interop.mkProperty<IDialogProp> "children" (Array.ofSeq elemsToUse)
     /// Callback fired when the component changes value from open state.
     static member inline onOpenChange (handler: DialogOpenChangeData<MouseEvent> -> unit) = Interop.mkProperty<IDialogProp> "onOpenChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Callback fired when the component changes value from open state.
@@ -3362,7 +3362,7 @@ type [<Erase>] datePicker  =
     /// WARNING: DatePicker doesn't support children. Using this prop will cause runtime errors.
     [<Obsolete>] static member inline children (value: ReactElement) = Interop.mkProperty<IDatePickerProp> "children" value
     /// WARNING: DatePicker doesn't support children. Using this prop will cause runtime errors.
-    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<IDatePickerProp> "children" (Interop.reactApi.Children.toArray elems)
+    [<Obsolete>] static member inline children ([<ParamList>] elems: ReactElement seq) = Interop.mkProperty<IDatePickerProp> "children" (Array.ofSeq elems)
     /// Called when the user changes the input's value.
     static member inline onChange (handler: ValueProp<string> -> unit) = Interop.mkProperty<IDatePickerProp> "onChange" (System.Func<_,_,_> (fun _ value -> handler value))
     /// Called when the user changes the input's value.

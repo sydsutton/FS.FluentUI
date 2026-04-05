@@ -1,6 +1,8 @@
 namespace FS.FluentUI
 
 open Fable.Core
+open Fable.Core.JsInterop
+open Fable.React
 
 type [<Erase>] IFluentProviderProp = interface end
 type [<Erase>] IAvatarProp = interface end
@@ -276,3 +278,5 @@ type [<RequireQualifiedAccess>] BundleIcons = { Filled: BundleIcon; Regular: Bun
 [<RequireQualifiedAccess>]
 type Interop =
     static member inline mkProperty<'ControlProperty> (key:string) (value:obj) : 'ControlProperty = unbox (key, value)
+    static member inline reactElementWithChildren (el: ReactElementType) (children: #seq<ReactElement>) : ReactElement =
+        ReactBindings.React.createElement (el, createObj [], children)
