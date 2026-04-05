@@ -4,6 +4,7 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
+        <NoWarn>$(NoWarn);NU1605</NoWarn>
     </PropertyGroup>
     <ItemGroup>
         <Compile Include="../../FS.FluentUI.Charts/Utils.fs" />
@@ -40,8 +41,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Feliz" Version="2.9.0" />
-        <PackageReference Include="Feliz.UseElmish" Version="2.4.0" />
+        <PackageReference Include="Fable.Core" Version="4.5.0" />
+        <PackageReference Include="Feliz" Version="3.2.0" />
+        <PackageReference Include="Feliz.CompilerPlugins" Version="2.2.0" />
+        <PackageReference Include="Feliz.UseElmish" Version="2.5.0" />
     </ItemGroup>
 
 </Project>
