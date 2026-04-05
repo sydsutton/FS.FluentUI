@@ -851,7 +851,7 @@ let TestChartsComponent () =
                 areaChart.height 300
                 areaChart.width 600
                 areaChart.legendsOverflowText "Overflow Items"
-                areaChart.yAxisTickFormat (fun (s:string) -> $"${s}")
+                areaChart.yAxisTickFormat (fun (s:string) -> "$" + s)
                 areaChart.svgProps [ prop.ariaLabel "This is another test?!"]
                 areaChart.enableGradient true
                 areaChart.enablePerfOptimization true

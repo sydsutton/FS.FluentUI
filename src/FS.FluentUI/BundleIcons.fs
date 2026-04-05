@@ -6,8 +6,9 @@ open FS.FluentUI
 
 type [<Erase>] bundleHelper =
     static member inline expandImport (value : string) =
-        let filled = import $"{value}Filled" FluentIcons |> unbox<BundleIcon>
-        let regular = import $"{value}Regular" FluentIcons |> unbox<BundleIcon>
+        let icons : obj = importAll FluentIcons
+        let filled : BundleIcon = emitJsExpr (icons, value) "$0[$1 + 'Filled']"
+        let regular : BundleIcon = emitJsExpr (icons, value) "$0[$1 + 'Regular']"
 
         { BundleIcons.Filled = filled; BundleIcons.Regular = regular }
 
@@ -28,7 +29,9 @@ type [<Erase>] bundleIcons =
     ///}
     ///
     /// Fui.bundleIcon customBundleIcons</code></pre>
-    static member inline import (iconName: string) = import $"{iconName}" FluentIcons |> unbox<BundleIcon>
+    static member inline import (iconName: string) : BundleIcon =
+        let icons : obj = importAll FluentIcons
+        emitJsExpr (icons, iconName) "$0[$1]"
     static member inline xray = bundleHelper.expandImport "Xray"
     static member inline usbStick = bundleHelper.expandImport "UsbStick"
     static member inline usbPlug = bundleHelper.expandImport "UsbPlug"
