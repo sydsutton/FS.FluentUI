@@ -14,7 +14,7 @@
     "@fluentui/react-components": "^9.73.7",
     "@fluentui/react-datepicker-compat": "^0.6.30",
     "@fluentui/react-icons": "^2.0.323",
-    "@fluentui/react-migration-v8-v9": "^9.6.34",
+    "@fluentui/react-migration-v8-v9": "^9.10.9",
     "@fluentui/react-timepicker-compat": "^0.4.33",
     "@fullcalendar/adaptive": "^6.1.17",
     "@fullcalendar/bootstrap": "^6.1.15",
