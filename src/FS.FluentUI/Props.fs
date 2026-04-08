@@ -262,6 +262,7 @@ type [<Erase>] toggleButton =
     /// This should only be used if the checked state is to be controlled at a higher level and there is a plan to pass the correct value
     /// based on handling onClick events and re-rendering.
     static member inline checked' (value: bool) = Interop.mkProperty<IToggleButtonProp> "checked" value
+    static member inline isAccessible (value: bool) = Interop.mkProperty<IToggleButtonProp> "isAccessible" value
 
 module toggleButton =
 
@@ -3319,17 +3320,21 @@ module skeletonItem =
     type [<Erase>] size =
         static member inline ``8`` = Interop.mkProperty<ISkeletonItemProp> "size" 8
         static member inline ``12`` = Interop.mkProperty<ISkeletonItemProp> "size" 12
+        static member inline ``14`` = Interop.mkProperty<ISkeletonItemProp> "size" 14
         static member inline ``16`` = Interop.mkProperty<ISkeletonItemProp> "size" 16
         static member inline ``20`` = Interop.mkProperty<ISkeletonItemProp> "size" 20
+        static member inline ``22`` = Interop.mkProperty<ISkeletonItemProp> "size" 22
         static member inline ``24`` = Interop.mkProperty<ISkeletonItemProp> "size" 24
         static member inline ``28`` = Interop.mkProperty<ISkeletonItemProp> "size" 28
         static member inline ``32`` = Interop.mkProperty<ISkeletonItemProp> "size" 32
         static member inline ``36`` = Interop.mkProperty<ISkeletonItemProp> "size" 36
         static member inline ``40`` = Interop.mkProperty<ISkeletonItemProp> "size" 40
         static member inline ``48`` = Interop.mkProperty<ISkeletonItemProp> "size" 48
+        static member inline ``52`` = Interop.mkProperty<ISkeletonItemProp> "size" 52
         static member inline ``56`` = Interop.mkProperty<ISkeletonItemProp> "size" 56
         static member inline ``64`` = Interop.mkProperty<ISkeletonItemProp> "size" 64
         static member inline ``72`` = Interop.mkProperty<ISkeletonItemProp> "size" 72
+        static member inline ``92`` = Interop.mkProperty<ISkeletonItemProp> "size" 92
         static member inline ``96`` = Interop.mkProperty<ISkeletonItemProp> "size" 96
         static member inline ``120`` = Interop.mkProperty<ISkeletonItemProp> "size" 120
         static member inline ``128`` = Interop.mkProperty<ISkeletonItemProp> "size" 128
