@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
-        <Version>1.0.3</Version>
+        <Version>2.0.0-prerelease-001</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +12,8 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Charts Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-charts to 9.3.10
-            - Add PolarChart component
+            - Migrate to Feliz 3.2.0
+            - Update @fluentui/react-charts to 9.3.17
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -40,7 +40,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fluentui/react-charts" Version="gte 9.3.10" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fluentui/react-charts" Version="gte 9.3.17" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 

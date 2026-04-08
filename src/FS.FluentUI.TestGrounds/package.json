@@ -10,7 +10,7 @@
   "dependencies": {
     "@fluentui-contrib/react-data-grid-react-window": "^1.4.2",
     "@fluentui/react-calendar-compat": "^0.3.21",
-    "@fluentui/react-charts": "^9.3.10",
+    "@fluentui/react-charts": "^9.3.17",
     "@fluentui/react-components": "^9.73.7",
     "@fluentui/react-datepicker-compat": "^0.6.30",
     "@fluentui/react-icons": "^2.0.323",
