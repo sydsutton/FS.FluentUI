@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>1.0.0</Version>
+        <Version>2.0.0-prerelease-001</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Change UIEvent to MouseEvent in all Domain types.
+            - Migrate to Feliz 3.2.0
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -39,22 +39,22 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fullcalendar/react" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/daygrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/interaction" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/timegrid" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/timeline" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/bootstrap5" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/bootstrap" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/multimonth" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/list" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/moment" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/resource-timeline" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/adaptive" Version="gte 6.1.17" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/resource" Version="gte 6.1.15" ResolutionStrategy="Max" />
-            <NpmPackage Name="@fullcalendar/resource-daygrid" Version="gte 6.1.17" ResolutionStrategy="Max" />
-            <NpmPackage Name="bootswatch" Version="gte 5.3.3" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/react" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/daygrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/interaction" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/timegrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/timeline" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/bootstrap5" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/bootstrap" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/multimonth" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/list" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/moment" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-timeline" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/adaptive" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/resource-daygrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="bootswatch" Version="gte 5.3.8" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>
 
