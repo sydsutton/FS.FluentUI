@@ -1,6 +1,10 @@
 Release Notes
 =========
 
+### 4.0.0-prerelease-001 (4-8-2026)
+
+* Migrate Feliz to 3.2.0 and Fable 5 prerelease
+
 ### 3.0.2 (4-8-2026)
 
 * Update @fluentui/react-components to 9.73.7

@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>3.0.2</Version>
+        <Version>4.0.0-prerelease-001</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,13 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-components to 9.73.7
-            - Add backdrop appearance props for DialogSurface
-            - Add pinned prop for OverflowItems
-            - Add size and shape props for Skeleton component
-            - Add focusMode prop for SwatchPicker component
-            - Add missing SkeleonItem sizes
-            - Add isAccessible prop to ToggleButton
+            - Migrate Feliz to 3.2.0 and Fable 5 prerelease
         </PackageReleaseNotes>
     </PropertyGroup>
 
