@@ -1,6 +1,16 @@
 Release Notes
 =========
 
+### 3.0.2 (4-8-2026)
+
+* Update @fluentui/react-components to 9.73.7
+* Add backdrop appearance props for DialogSurface
+* Add pinned prop for OverflowItems
+* Add size and shape props for Skeleton component
+* Add focusMode prop for SwatchPicker component
+* Add missing SkeleonItem sizes
+* Add isAccessible prop to ToggleButton
+
 ### 3.0.1 (2-4-2026)
 
 * Update @fluentui/react-components to 9.72.10
