@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>4.0.0-prerelease-001</Version>
+        <Version>4.0.0-prerelease-002</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Migrate Feliz to 3.2.0 and Fable 5 prerelease
+            - Revert FuiHelpers.createElement function to fix runtime error.
         </PackageReleaseNotes>
     </PropertyGroup>
 

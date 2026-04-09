@@ -1,6 +1,10 @@
 Release Notes
 =========
 
+### 4.0.0-prerelease-002 (4-9-2026)
+
+* Revert FuiHelpers.createElement function to fix runtime error.
+
 ### 4.0.0-prerelease-001 (4-8-2026)
 
 * Migrate Feliz to 3.2.0 and Fable 5 prerelease
