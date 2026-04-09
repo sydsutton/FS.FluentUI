@@ -173,7 +173,17 @@ module internal DateFormat =
 module FuiHelpers =
 
     let inline reactElement (el: ReactElementType) (props: 'a) : ReactElement = import "createElement" "react"
-    let inline createElement (el: ReactElementType) (props: 'ControlProperty list) : ReactElement = reactElement el (!!props |> createObj)
+
+    let inline createElement (el: ReactElementType) (props: 'ControlProperty list) : ReactElement =
+        let reactCreateElement: obj = import "createElement" "react"
+
+        match unbox<(string * obj) list> props |> HtmlHelper.extractByKeyFast "children" with
+        | rest, Some (_, c) ->
+            emitJsExpr (reactCreateElement, el, createObj rest, c)
+                "Array.isArray($3) ? $0($1, $2, ...$3) : $0($1, $2, $3)"
+        | rest, None ->
+            emitJsExpr (reactCreateElement, el, createObj rest)
+                "$0($1, $2)"
 
     let [<Literal>] FluentUIv9 = "@fluentui/react-components"
     let [<Literal>] FluentIcons = "@fluentui/react-icons"

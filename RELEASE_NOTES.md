@@ -1,6 +1,10 @@
 Release Notes
 =========
 
+### 4.0.0-prerelease-003 (4-9-2026)
+
+* Try different approach for FuiHelpers.createElement.
+
 ### 4.0.0-prerelease-002 (4-9-2026)
 
 * Revert FuiHelpers.createElement function to fix runtime error.
