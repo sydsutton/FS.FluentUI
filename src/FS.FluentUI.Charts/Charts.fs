@@ -34,4 +34,5 @@ type Fui =
                         let args = color, isDarkTheme
                         import "getColorFromToken" "@fluentui/react-charts" (emitJsExpr args "$0[0], $0[1]")
     static member inline legends (props: ILegendsProp list) = Helpers.createElement (import "Legends" "@fluentui/react-charts") props
+    static member inline responsiveContainer (props : IResponsiveContainerProp list) = Helpers.createElement (import "ResponsiveContainer" "@fluentui/react-charts") props
 

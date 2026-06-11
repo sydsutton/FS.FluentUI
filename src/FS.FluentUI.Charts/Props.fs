@@ -3970,3 +3970,15 @@ module polarChart =
         static member inline clockwise = Interop.mkProperty<IPolarChartProp> "direction" "clockwise"
         /// Direction in which the chart is drawn.
         static member inline counterclockwise = Interop.mkProperty<IPolarChartProp> "direction" "counterclockwise"
+
+
+// ------------------------------------------------------------- ResponsiveContainer ------------------------------------------
+
+type [<Erase>] responsiveContainer =
+    static member inline aspect (value: float) = Interop.mkProperty<IResponsiveContainerProp> "aspect" value
+    static member inline children (value: ReactElement) = Interop.mkProperty<IResponsiveContainerProp> "children" value
+    static member inline children (values: ReactElement seq) = Interop.mkProperty<IResponsiveContainerProp> "children" values
+    static member inline height (value: int) = Interop.mkProperty<IResponsiveContainerProp> "height" value
+    static member inline minWidth (value: int) = Interop.mkProperty<IResponsiveContainerProp> "minWidth" value
+    static member inline minHeight (value: int) = Interop.mkProperty<IResponsiveContainerProp> "minHeight" value
+    static member inline width (value: int) = Interop.mkProperty<IResponsiveContainerProp> "width" value

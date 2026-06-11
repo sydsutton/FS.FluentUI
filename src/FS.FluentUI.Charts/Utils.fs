@@ -106,3 +106,4 @@ type [<Erase>] IScatterPolarSeriesProp = interface end
 type [<Erase>] IPolarChartStylesProp = interface end
 type [<Erase>] IPolarAxisProp = interface end
 type [<Erase>] IAxisProp = interface end
+type [<Erase>] IResponsiveContainerProp = interface end
