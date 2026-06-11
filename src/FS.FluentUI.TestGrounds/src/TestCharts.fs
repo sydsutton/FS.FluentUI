@@ -837,7 +837,10 @@ let polarChartData = [
 let TestChartsComponent () =
     let sliderValue, setSliderValue = React.useState 50
     Html.div [
-        prop.style [ style.width 1000; style.margin 36 ]
+        prop.style [
+            style.width (length.perc 100)
+            style.margin 36
+        ]
         prop.children [
             Fui.polarChart [
                 polarChart.data polarChartData
@@ -845,6 +848,33 @@ let TestChartsComponent () =
                 polarChart.height 300
                 polarChart.shape.polygon
                 polarChart.direction.clockwise
+            ]
+            Fui.responsiveContainer [
+                responsiveContainer.children [
+
+                    Fui.areaChart [
+                        areaChart.mode.tonexty
+                        areaChart.height 300
+                        areaChart.width 600
+                        areaChart.legendsOverflowText "Overflow Items"
+                        areaChart.yAxisTickFormat (fun (s:string) -> "$" + s)
+                        areaChart.svgProps [ prop.ariaLabel "This is another test?!"]
+                        areaChart.enableGradient true
+                        areaChart.enablePerfOptimization true
+                        areaChart.reflowProps.modeNone
+                        areaChart.xAxis.tickStep 5
+                        areaChart.xAxis.tick0 5
+                        areaChart.legendProps [
+                            legends.allowFocusOnLegends true
+                            legends.canSelectMultipleLegends true
+                            legends.centerLegends true
+                        ]
+                        areaChart.data [
+                            chart.chartTitle "Areachart in responsive container"
+                            chart.lineChartData areaChartDataList
+                        ]
+                    ]
+                ]
             ]
             Fui.areaChart [
                 areaChart.mode.tonexty
