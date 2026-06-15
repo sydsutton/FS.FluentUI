@@ -1,6 +1,12 @@
 Release Notes
 =========
 
+### 4.0.0 (6-15-2026)
+
+* Bump to 4.0.0
+* Add missing PresenceMotionSlotProps
+* Add OverflowReorderObserver component
+
 ### 4.0.0-prerelease-003 (4-9-2026)
 
 * Try different approach for FuiHelpers.createElement.
