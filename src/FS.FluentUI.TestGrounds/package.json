@@ -10,7 +10,7 @@
   "dependencies": {
     "@fluentui-contrib/react-data-grid-react-window": "^1.4.2",
     "@fluentui/react-calendar-compat": "^0.3.21",
-    "@fluentui/react-charts": "^9.3.17",
+    "@fluentui/react-charts": "^9.3.19",
     "@fluentui/react-components": "^9.74.1",
     "@fluentui/react-datepicker-compat": "^0.6.32",
     "@fluentui/react-icons": "^2.0.323",
@@ -34,14 +34,14 @@
     "@fullcalendar/timegrid": "^6.1.20",
     "@fullcalendar/timeline": "^6.1.20",
     "bootswatch": "^5.3.8",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-window": "^2.2.3",
     "use-sync-external-store": "^1.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
-    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react": "^4.7.0",
     "braces": "^3.0.3",
     "copy-webpack-plugin": "^14.0.0",
     "css-loader": "^6.8.1",
