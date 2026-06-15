@@ -1115,6 +1115,7 @@ type [<Erase>] Fui =
     static member inline colorArea (props: IColorAreaProp list) = createElement (import "ColorArea" FluentUIv9) props
     static member inline colorSlider (props: IColorSliderProp list) = createElement (import "ColorSlider" FluentUIv9) props
     static member inline alphaSlider (props: IAlphaSliderProp list) = createElement (import "AlphaSlider" FluentUIv9) props
+    static member inline overflowReorderObserver (props: 'T list) = Interop.reactElementWithChildren (import "OverflowReorderObserver" FluentUIv9) props
 
 type [<Erase>] Theme =
     static member inline teamsLightTheme : Tokens = import "teamsLightTheme" FluentUIv9

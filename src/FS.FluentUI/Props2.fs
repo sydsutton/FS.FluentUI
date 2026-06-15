@@ -3272,12 +3272,93 @@ type [<Erase>] presenceMotionSlot =
     static member inline items (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "items" value
     /// The number of items in the NavSubItemGroup
     static member inline items (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "items" value
+    /// Size for the out state (collapsed). Defaults to `'0px'`. */
+    static member inline outSize (value: string) = Interop.mkProperty<IPresenceMotionSlotProp> "outSize" value
+    /// Time (ms) to delay the inner stagger between size and opacity animations. On enter this delays the opacity after size; on exit this delays the size after opacity.
+    static member inline staggerDelay (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "staggerDelay" value
+    /// Time (ms) to delay the inner stagger between size and opacity animations. On enter this delays the opacity after size; on exit this delays the size after opacity.
+    static member inline staggerDelay (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "staggerDelay" value
+    /// Time (ms) to delay the inner stagger between size and opacity animations. On enter this delays the opacity after size; on exit this delays the size after opacity.
+    static member inline staggerDelay (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "staggerDelay" value
+    /// Time (ms) to delay the inner stagger during exit. Defaults to the `staggerDelay` param for symmetry.
+    static member inline exitStaggerDelay (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "exitStaggerDelay" value
+    /// Time (ms) to delay the inner stagger during exit. Defaults to the `staggerDelay` param for symmetry.
+    static member inline exitStaggerDelay (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "exitStaggerDelay" value
+    /// Time (ms) to delay the inner stagger during exit. Defaults to the `staggerDelay` param for symmetry.
+    static member inline exitStaggerDelay (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "exitStaggerDelay" value
+    /// Time (ms) for the enter transition.
+    static member inline duration (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "duration" value
+    /// Time (ms) for the enter transition.
+    static member inline duration (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "duration" value
+    /// Time (ms) for the enter transition.
+    static member inline duration (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "duration" value
+    /// Time (ms) for the exit transition. Defaults to the `duration` param for symmetry.
+    static member inline exitDuration (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "exitDuration" value
+    /// Time (ms) for the exit transition. Defaults to the `duration` param for symmetry.
+    static member inline exitDuration (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "exitDuration" value
+    /// Time (ms) for the exit transition. Defaults to the `duration` param for symmetry.
+    static member inline exitDuration (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "exitDuration" value
+    /// Easing curve for the enter transition.
+    static member inline easing (value: string) = Interop.mkProperty<IPresenceMotionSlotProp> "easing" value
+    /// Easing curve for the exit transition. Defaults to the `easing` param for symmetry.
+    static member inline exitEasing (value: string) = Interop.mkProperty<IPresenceMotionSlotProp> "exitEasing" value
+    /// Time (ms) to delay the enter transition.
+    static member inline delay (value: string) = Interop.mkProperty<IPresenceMotionSlotProp> "delay" value
+    /// Time (ms) to delay the exit transition. Defaults to the `delay` param for symmetry.
+    static member inline exitDelay (value: string) = Interop.mkProperty<IPresenceMotionSlotProp> "exitDelay" value
+    /// Scale for the out state (exited). Defaults to `0.9`.
+    static member inline outScale (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "outScale" value
+    /// Scale for the out state (exited). Defaults to `0.9`.
+    static member inline outScale (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "outScale" value
+    /// Scale for the out state (exited). Defaults to `0.9`.
+    static member inline outScale (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "outScale" value
+    /// Scale for the in state (entered). Defaults to `1`.
+    static member inline inScale (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "inScale" value
+    /// Scale for the in state (entered). Defaults to `1`.
+    static member inline inScale (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "inScale" value
+    /// Scale for the in state (entered). Defaults to `1`.
+    static member inline inScale (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "inScale" value
+    /// Whether to animate the opacity. Defaults to `true`.
+    static member inline animateOpacity (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "animateOpacity" value
+    /// Opacity for the out state (exited). Defaults to 0.
+    static member inline outOpacity (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "outOpacity" value
+    /// Opacity for the out state (exited). Defaults to 0.
+    static member inline outOpacity (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "outOpacity" value
+    /// Opacity for the out state (exited). Defaults to 0.
+    static member inline outOpacity (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "outOpacity" value
+    /// Opacity for the in state (entered). Defaults to 1.
+    static member inline inOpacity (value: int) = Interop.mkProperty<IPresenceMotionSlotProp> "inOpacity" value
+    /// Opacity for the in state (entered). Defaults to 1.
+    static member inline inOpacity (value: float) = Interop.mkProperty<IPresenceMotionSlotProp> "inOpacity" value
+    /// Opacity for the in state (entered). Defaults to 1.
+    static member inline inOpacity (value: decimal) = Interop.mkProperty<IPresenceMotionSlotProp> "inOpacity" value
 
 module presenceMotionSlotWithCollapseMotion =
     /// The density of the NavItem
     type density =
         static member inline small = Interop.mkProperty<IPresenceMotionSlotProp> "density" "small"
         static member inline medium = Interop.mkProperty<IPresenceMotionSlotProp> "density" "medium"
+
+    type size =
+        static member inline small = Interop.mkProperty<IPresenceMotionSlotProp> "size" "small"
+        static member inline medium = Interop.mkProperty<IPresenceMotionSlotProp> "size" "medium"
+        static member inline large = Interop.mkProperty<IPresenceMotionSlotProp> "size" "large"
+        static member inline full = Interop.mkProperty<IPresenceMotionSlotProp> "size" "full"
+
+    type position =
+        static member inline start = Interop.mkProperty<IPresenceMotionSlotProp> "position" "start"
+        static member inline bottom = Interop.mkProperty<IPresenceMotionSlotProp> "position" "bottom"
+        static member inline end' = Interop.mkProperty<IPresenceMotionSlotProp> "position" "end"
+
+    type dir =
+        static member inline ltr = Interop.mkProperty<IPresenceMotionSlotProp> "dir" "ltr"
+        static member inline rtl = Interop.mkProperty<IPresenceMotionSlotProp> "dir" "rtl"
+
+    type orientation =
+        static member inline vertical = Interop.mkProperty<IPresenceMotionSlotProp> "orientation" "vertical"
+        static member inline horizontal = Interop.mkProperty<IPresenceMotionSlotProp> "orientation" "horizontal"
+
+
 // -------------------------------------------------------------------------- AtomMotion --------------------------------------------------------------------------------------
 type [<Erase>] atomMotion =
     static member inline keyframes (value: IStyleAttribute list list) = Interop.mkProperty<IAtomMotionProp> "keyframes" (value |> List.map (fun kf -> !!kf |> createObj |> unbox))
@@ -3774,7 +3855,6 @@ type [<Erase>] navSubItem =
     static member inline href (value: string)= Interop.mkProperty<INavSubItemProp> "href" value
     /// The value that identifies this navCategoryItem when selected.
     static member inline value (value: string)= Interop.mkProperty<INavSubItemProp> "value" value
-    static member inline collapseMotion (value: IPresenceMotionSlotProp list)= Interop.mkProperty<INavSubItemProp> "collapseMotion" (!!value |> createObj |> unbox)
 
 // -------------------------------------------------------------------------- NavSubItemGroup --------------------------------------------------------------------------------------
 type [<Erase>] navSubItemGroup = FelizProps.prop<INavSubItemGroupProp>

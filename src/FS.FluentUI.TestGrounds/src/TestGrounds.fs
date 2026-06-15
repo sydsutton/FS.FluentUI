@@ -180,7 +180,15 @@ let Accordion () =
                         accordionHeader.expandIconPosition.end'
                         accordionHeader.children [ Fui.text "Header 1" ]
                     ]
-                    Fui.accordionPanel [ Fui.text "Panel 1" ]
+                    Fui.accordionPanel [
+                        accordionPanel.collapseMotion [
+                            presenceMotionSlot.duration 2000
+                            presenceMotionSlot.exitDelay "1000"
+                        ]
+                        accordionPanel.children [
+                            Fui.text "Panel 1"
+                        ]
+                    ]
                 ]
             ]
             Fui.accordionItem [
@@ -2101,7 +2109,7 @@ type GroupVisibility = {
 
 [<ReactComponent>]
 let OverflowTest () =
-    let itemIds = [
+    let itemIds, setItemIds = React.useState ([
         "0"
         "1"
         "2"
@@ -2110,7 +2118,7 @@ let OverflowTest () =
         "5"
         "6"
         "7"
-    ]
+    ])
 
     let (overflowState: (ItemVisibility option)), setOverflowState =
         React.useState (None)
@@ -2128,6 +2136,7 @@ let OverflowTest () =
                     Html.div [
                         prop.className styles.overflow
                         prop.children [
+                            yield Fui.overflowReorderObserver []
                             yield!
                                 itemIds
                                 |> List.map (fun i ->
@@ -2141,7 +2150,10 @@ let OverflowTest () =
                     ]
                 )
             ]
-
+            Fui.button [
+                button.onClick (fun _ -> itemIds |> List.rev |> setItemIds)
+                button.text "Reverse"
+            ]
         ]
     ]
 
