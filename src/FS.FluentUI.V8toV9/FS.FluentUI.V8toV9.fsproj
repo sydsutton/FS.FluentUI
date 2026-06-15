@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <Version>2.0.0-prerelease-001</Version>
+        <Version>2.0.0</Version>
         <Authors>Andrew Sutton</Authors>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -12,8 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FSharp FS FluentUI Feliz Fable dotnet .NET V8 V9 migration</PackageTags>
         <PackageReleaseNotes>
-            - Update @fluentui/react-migration-v8-v9 to 9.10.9
-            - Migrate to Feliz 3.2.0
+            - Update @fluentui/react-migration-v8-v9 to 9.10.12
         </PackageReleaseNotes>
     </PropertyGroup>
 
