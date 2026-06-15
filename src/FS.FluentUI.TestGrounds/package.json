@@ -49,7 +49,7 @@
     "html-webpack-plugin": "^5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
     "remotedev": "^0.2.9",
-    "rollup": "^4.24.0",
+    "rollup": "^4.62.0",
     "sass": "^1.66.1",
     "sass-loader": "^13.3.2",
     "source-map-loader": "^4.0.1",
