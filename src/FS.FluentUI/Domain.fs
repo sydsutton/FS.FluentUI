@@ -287,7 +287,7 @@ module TempSeq =
     let mkOnChangeData (v: TempSeq<'T>)=
         { selectedItems = v.selectedItems |> List.ofSeq }
 
-type [<RequireQualifiedAccess>] SortDirection = | ascending | descending
+type [<RequireQualifiedAccess>] [<StringEnum>] SortDirection = | ascending | descending
 
 type TableColumnSizingOptions = {
     minWidth: int
