@@ -22,16 +22,17 @@ jobs:
         with:
           dotnet-version: '10.0.x'
 
-      # Restore dependencies
       - name: Restore
         run: dotnet restore ./src/FS.FluentUI/FS.FluentUI.fsproj
 
-      # Build package
+      - name: Build
+        run: dotnet build ./src/FS.FluentUI/FS.FluentUI.fsproj --configuration Release --no-restore
+
       - name: Pack
         run: |
           dotnet pack ./src/FS.FluentUI/FS.FluentUI.fsproj \
             --configuration Release \
-            --no-restore \
+            --no-build \
             --output ./artifacts
 
       # Authenticate with NuGet
