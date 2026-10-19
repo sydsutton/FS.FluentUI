@@ -24,12 +24,12 @@ jobs:
 
       # Restore dependencies
       - name: Restore
-        run: dotnet restore ./FS.FluentUI/FS.FluentUI.fsproj
+        run: dotnet restore ./src/FS.FluentUI/FS.FluentUI.fsproj
 
       # Build package
       - name: Pack
         run: |
-          dotnet pack ./FS.FluentUI/FS.FluentUI.fsproj \
+          dotnet pack ./src/FS.FluentUI/FS.FluentUI.fsproj \
             --configuration Release \
             --no-restore \
             --output ./artifacts
