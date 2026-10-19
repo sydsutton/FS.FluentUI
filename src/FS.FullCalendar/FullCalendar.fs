@@ -67,6 +67,9 @@ module Plugin =
     [<ImportDefault("@fullcalendar/timeline")>]
     let timelinePlugin: IPlugin = jsNative
 
+    [<ImportDefault("@fullcalendar/scrollgrid")>]
+    let scrollGridPlugin: IPlugin = jsNative
+
 type FullCalendar =
     static member inline Calendar(props: ICalendarProp list) =
         Helpers.createElement Helpers.FullCalendar props

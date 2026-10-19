@@ -12,7 +12,7 @@
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageTags>F# FullCalendar React FSharp FS Feliz Fable dotnet .NET</PackageTags>
         <PackageReleaseNotes>
-            - Bump to 2.0.0
+            - Add missing scrollGrid plugin
         </PackageReleaseNotes>
     </PropertyGroup>
 
@@ -39,7 +39,7 @@
 
     <PropertyGroup>
         <NpmDependencies>
-            <NpmPackage Name="@fullcalendar/react" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/react" Version="gte 6.1.21" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/daygrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/interaction" Version="gte 6.1.20" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/timegrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
@@ -54,6 +54,7 @@
             <NpmPackage Name="@fullcalendar/resource-timegrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/resource" Version="gte 6.1.20" ResolutionStrategy="Max" />
             <NpmPackage Name="@fullcalendar/resource-daygrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
+            <NpmPackage Name="@fullcalendar/scrollgrid" Version="gte 6.1.20" ResolutionStrategy="Max" />
             <NpmPackage Name="bootswatch" Version="gte 5.3.8" ResolutionStrategy="Max" />
         </NpmDependencies>
     </PropertyGroup>

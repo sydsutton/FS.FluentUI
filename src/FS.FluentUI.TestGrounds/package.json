@@ -26,7 +26,7 @@
     "@fullcalendar/moment": "^6.1.20",
     "@fullcalendar/moment-timezone": "^6.1.20",
     "@fullcalendar/multimonth": "^6.1.20",
-    "@fullcalendar/react": "^6.1.20",
+    "@fullcalendar/react": "^6.1.21",
     "@fullcalendar/resource": "^6.1.20",
     "@fullcalendar/resource-daygrid": "^6.1.20",
     "@fullcalendar/resource-timegrid": "^6.1.20",
