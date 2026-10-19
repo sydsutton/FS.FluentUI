@@ -1,6 +1,12 @@
 Release Notes
 =========
 
+### 4.0.1 (10-19-2026)
+
+* Update @fluentui/react-components to 9.74.10
+* Update secondary npm deps
+* Fix DataGrid sorting bug
+
 ### 4.0.0 (6-15-2026)
 
 * Bump to 4.0.0
