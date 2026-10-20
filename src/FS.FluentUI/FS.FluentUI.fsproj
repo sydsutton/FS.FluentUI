@@ -25,6 +25,7 @@
         <Compile Include="FelizProps.fs" />
         <Compile Include="Props.fs" />
         <Compile Include="Props2.fs" />
+        <Compile Include="GenerateIcons.fs" />
         <Compile Include="FluentUI.fs" />
         <Compile Include="BundleIcons.fs" />
     </ItemGroup>

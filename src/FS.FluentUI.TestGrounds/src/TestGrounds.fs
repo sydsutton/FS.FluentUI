@@ -5102,9 +5102,6 @@ let ColorPickerTest () =
     ]
 
 let mainContent model dispatch =
-
-    // findIconsWithoutFilledOrRegularVersions IconsToTest.icons
-
     Force.toRun
 
     let newTokens = {
