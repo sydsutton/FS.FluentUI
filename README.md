@@ -1,6 +1,6 @@
 # FS.FluentUI
 
-## [V9 of Microsoft's FluentUI (React)](https://react.fluentui.dev/?path=/docs/concepts-introduction--page) made for F# in the style of Feliz
+## [V9 of Microsoft's FluentUI (React)](https://storybooks.fluentui.dev/react/?path=/docs/concepts-introduction--docs) made for F# in the style of Feliz
 
 [![NuGet version (FS.FluentUI)](https://img.shields.io/nuget/v/FS.FluentUI.svg?style=flat-square)](https://www.nuget.org/packages/FS.FluentUI/)
 [![NuGet Downloads](https://img.shields.io/nuget/dt/FS.FluentUI.svg)](https://www.nuget.org/packages/FS.FluentUI/)
